@@ -11,34 +11,36 @@
 \documentclass[12pt]{report}
 \usepackage[letterpaper]{geometry}
 \geometry{verbose,tmargin=1.25in,bmargin=1.25in,lmargin=1.4in,rmargin=1.15in}
- \usepackage[doublespacing]{setspace}
- \usepackage{tocloft}
- \usepackage[rm, tiny,center, compact]{titlesec}
- \usepackage{indentfirst}
- \usepackage{etoolbox}
+\usepackage[doublespacing]{setspace}
+\usepackage{tocloft}
+\usepackage[rm, tiny,center, compact]{titlesec}
+\usepackage{indentfirst}
+\usepackage{etoolbox}
 \usepackage{tocvsec2}
- \usepackage[titletoc]{appendix}
- \usepackage{appendix}
- \usepackage{tamuconfig}
+\usepackage[titletoc]{appendix}
+\usepackage{appendix}
+\usepackage{tamuconfig}
 \usepackage{rotating}
 
 % Added to fix issues with pdf searching in some versions of LaTeX
 %\usepackage[T1]{fontenc}\usepackage{lmodern}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{hyperref}
+
 % Hyperref setup below.  You should be able to get away with using uncommenting just the first line.
-%\usepackage[hidelinks]{hyperref}
+% \usepackage[hidelinks]{hyperref}
 
 % if \usepackage[hidelinks]{hyperref} doesn't work try this.
 % \usepackage{hyperref}  % Hidelinks is an option that removes link visiability.  TAMU Thesis Offices prefers to not see the links. But often doesn't work.  
 % 
-% \hypersetup{
-%     colorlinks=true,
-%     linkcolor=black,
-%     citecolor=black,
-%     filecolor=black,
-%     urlcolor=black,
-% }
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    citecolor=black,
+    filecolor=black,
+    urlcolor=black,
+}
 %%%%%%%  End of hyperref setup.  One of these two options should work, but my motto with hyperref is when in doubt, comment it out!
 %%%%%%%%%  This hopefully fixes the problem with vertical spacing of section headings at the top of the page..
 % \preto\section{%
@@ -52,23 +54,23 @@
 
 \begin{document}
 
-\renewcommand{\tamumanuscripttitle}{Type in your default title here: You may need to change the spacing if the title is too long and pushes the copyright off of the titlepage }
+\renewcommand{\tamumanuscripttitle}{Humanlike Bipedal Robotic Walking}
 \renewcommand{\tamupapertype}{Dissertation}
-\renewcommand{\tamufullname}{First Middle Lastname}
+\renewcommand{\tamufullname}{Ryan Wesley Sinnet}
 \renewcommand{\tamudegree}{Doctor of Philosophy}
-\renewcommand{\tamuchairone}{Chair Name}
+\renewcommand{\tamuchairone}{Chair Aaron Ames}
 % Uncomment out the next line if you have co-chairs.  You will also need to edit the titlepage.tex file.
 %\newcommand{\tamuchairtwo}{Additional Chair Name}
-\renewcommand{\tamumemberone}{Committee Member1}
-\newcommand{\tamumembertwo}{Committee Member2}
-\newcommand{\tamumemberthree}{Committee Member3}
-\renewcommand{\tamudepthead}{Head of Department}
-\renewcommand{\tamugradmonth}{December}
-\renewcommand{\tamugradyear}{2012}
-\renewcommand{\tamudepartment}{Department Name}
+\renewcommand{\tamumemberone}{Reza Langari}
+\newcommand{\tamumembertwo}{Richard Malak}
+\newcommand{\tamumemberthree}{Dylan Shell}
+\renewcommand{\tamudepthead}{Andreas Polycarpou}
+\renewcommand{\tamugradmonth}{May}
+\renewcommand{\tamugradyear}{2013}
+\renewcommand{\tamudepartment}{Mechanical Engineering}
 
 
-\include{titlepage} % This is simply a file that formats and adds your titlepage, please do not edit this unless you have a specific need. .
+\include{titlepage} % This is simply a file that formats and adds your titlepage, please do not edit this unless you have a specific need.
 \include{abstract}
 \include{dedication}
 \include{acknowledgements}
