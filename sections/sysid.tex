@@ -1,25 +1,57 @@
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\chapter{\uppercase{Model Identification Methods}}
+
+The basic problem of system identification boils down to using measured data
+along with a model of appropriate complexity, typically a gray-box model, to
+determine parameters for a system which can accurately predict a system's
+dynamics with respect to observable behaviors of the system.
 %
-%  New template code for TAMU Theses and Dissertations starting Fall 2012.  
-%  For more info about this template or the 
-%  TAMU LaTeX User's Group, see http://www.howdy.me/.
+This can be accomplished in a number of ways and, given accurate and
+reasonably unbiased sensing information, can be result in models which
+account for a very high percentage of the measurement data.
 %
-%  Author: Wendy Lynn Turner 
-%	 Version 1.0 
-%  Last updated 8/5/2012
+
+\section{Fundamentals}
+When viewed in a certain light, all model identification methods for mechanical
+systems involve identifying the fundamental relationship between force and
+acceleration described by Newton's Second Law (see \cite{feynman1963}), namely,
+that
+\begin{align}
+  \label{eq:newtons-second}
+  F = m a,
+\end{align}
+which expresses the basic property of physics that applying a force to a massive
+object induces a particular acceleration.
 %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%                           SECTION III
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+Through the property of superposition, this relationship eventually leads to
+standard dynamic model of a robot as expressed in \ref{eq:robot-dynamics}, but
+at its core, model identification is merely using this relationship to identify
+a system's mass configuration.
+
+Like most problems, there is a variety of approaches, each of which has its own
+merits.
+%
+Perhaps one of the more straightforward of the methods leverages the fact that
+the dynamics of a rigid kinematic chain is a affine with respect to certain
+inertial parameters such as the math.
+%
+This leads to a relationship of the form
+\begin{align}
+  \label{eq:regressor}
+  \tau = \regressorargs \regressorparam
+\end{align}
+where $\tau$ represents the experienced torque, $\regressorargs$ is known as the
+{\em regressor} (see \cite{spong1989}), and $\regressorparam$ represents a set
+of parameters, sometimes called the {\em base parameter set}.
+
+\section{Offline Identification}
+
+\section{Online Identification}
 
 
-
-\chapter{\uppercase{Last Chapter: The Importance of Research}}
-
-Text goes here \cite{Agrawal1986}.
-
-\section{New Section}
+\begin{enumerate}
+  \item Offline vs. Online -- advantages of each
+  \item Sources of error
+\end{enumerate}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure}[H]
@@ -29,9 +61,9 @@ Text goes here \cite{Agrawal1986}.
 %\label{fig:tamu-fig3}
 %\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Another Section}
+%\section{Another Section}
 
-Text between the figures.  Text between the figures. Text between the figures. Text between the figures.  Text between the figures. Text between the figures. Text between the figures.  Text between the figures. Text between the figures. Text between the figures.  Text between the figures. Text between the figures.
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure}[H]
 %\centering
@@ -41,7 +73,7 @@ Text between the figures.  Text between the figures. Text between the figures. T
 %\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\subsection{Subsection}
+%\subsection{Subsection}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %\begin{figure}[H]
@@ -51,25 +83,25 @@ Text between the figures.  Text between the figures. Text between the figures. T
 %\label{fig:tamu-fig4-2}
 %\end{figure}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\subsection{Subsection}
+%\subsection{Subsection}
 
-A table example is going to follow.
+%A table example is going to follow.
 
-\begin{table}[H]
-\centering
-\caption{This is a table template}
-\begin{tabular}{|l|c|c|c|c|c|}
-\hline
-Product & 1 & 2 & 3 & 4 & 5\\
-\hline
-Price & 124.- & 136.- & 85.- & 156.- & 23.-\\
-Guarantee [years] & 1 & 2 & - & 3 & 1\\
-Rating & 89\% & 84\% & 51\% & & 45\%\\
-\hline
-\hline
-Recommended & yes & yes & no & no & no\\
-\hline
-\end{tabular}
-\label{tab:template2}
-\end{table}
-\section{Another Section}
+%\begin{table}[H]
+%\centering
+%\caption{This is a table template}
+%\begin{tabular}{|l|c|c|c|c|c|}
+%\hline
+%Product & 1 & 2 & 3 & 4 & 5\\
+%\hline
+%Price & 124.- & 136.- & 85.- & 156.- & 23.-\\
+%Guarantee [years] & 1 & 2 & - & 3 & 1\\
+%Rating & 89\% & 84\% & 51\% & & 45\%\\
+%\hline
+%\hline
+%Recommended & yes & yes & no & no & no\\
+%\hline
+%\end{tabular}
+%\label{tab:template2}
+%\end{table}
+%\section{Another Section}

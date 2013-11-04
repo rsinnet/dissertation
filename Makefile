@@ -11,7 +11,7 @@ $(PROJNAME).ps: $(PROJNAME).dvi
 $(PROJNAME).dvi: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex section1.tex section2.tex section3.tex \
-titlepage.tex tamuconfig.sty references.bib sections/sysid.tex
+titlepage.tex tamuconfig.sty rsinnet.sty references.bib sections/sysid.tex
 	latex $(PROJNAME)
 	bibtex $(PROJNAME)
 	latex $(PROJNAME)

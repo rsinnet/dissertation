@@ -21,6 +21,7 @@
 \usepackage{appendix}
 \usepackage{tamuconfig}
 \usepackage{rotating}
+\usepackage{amsmath,amssymb,amsthm}
 
 % Added to fix issues with pdf searching in some versions of LaTeX
 %\usepackage[T1]{fontenc}\usepackage{lmodern}
@@ -52,6 +53,8 @@
 % } 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\usepackage{rsinnet}
+
 \begin{document}
 
 \renewcommand{\tamumanuscripttitle}{Humanlike Bipedal Robotic Walking}
@@ -78,11 +81,16 @@
 
 \include{lists}  % This is simply a file that formats and adds your toc, lof, and lot, please do not edit this unless you have a specific need. .
 
-\include{section1}
-\include{section2}
-\include{section3}
+\pagestyle{plain} % No headers, just page numbers
+\pagenumbering{arabic} % Arabic numerals
+\setcounter{page}{1}
 
-fix spacing in bibliography, if any...
+\include{sections/sysid}
+
+%\include{section2}
+%\include{section3}
+
+% fix spacing in bibliography, if any...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \let\oldbibitem\bibitem
 \renewcommand{\bibitem}{\setlength{\itemsep}{0pt}\oldbibitem}
