@@ -10,12 +10,12 @@ git stash --quiet --keep-index --include-untracked
 
 make clean
 make
+RESULT=$?
 
 git stash pop --quiet
 
-if [ $? -ne 0 ] ; then
-    echo "make command failed. Ensure that there are no errors in the project and try again."
-    exit 1
+if [ $RESULT -ne 0 ] ; then
+    echo "ERROR: Commit failed! Ensure that there are no errors in the project and try again. See log files for additional details."
 fi
 
-exit 0
+exit $RESULT
