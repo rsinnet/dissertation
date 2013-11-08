@@ -1,4 +1,5 @@
-PROJNAME = dissertation
+PROJNAME=dissertation
+LATEX_CMD=latex -interaction=nonstopmode
 
 all: $(PROJNAME).pdf
 
@@ -10,12 +11,12 @@ $(PROJNAME).ps: $(PROJNAME).dvi
 
 $(PROJNAME).dvi: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
-lists.tex nomenclature.tex section1.tex section2.tex section3.tex \
-titlepage.tex tamuconfig.sty rsinnet.sty references.bib sections/sysid.tex
-	latex $(PROJNAME)
+lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
+references.bib sections/sysid.tex
+	$(LATEX_CMD) $(PROJNAME)
 	bibtex $(PROJNAME)
-	latex $(PROJNAME)
-	latex $(PROJNAME)
+	$(LATEX_CMD) $(PROJNAME)
+	$(LATEX_CMD) $(PROJNAME)
 
 .PHONY: clean
 

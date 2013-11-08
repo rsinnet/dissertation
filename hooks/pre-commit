@@ -1,0 +1,21 @@
+#!/bin/bash
+#
+
+# pre-commit hook
+# Ensure that the document can be built before allowing a commit.
+
+cd $(git rev-parse --show-toplevel)
+
+git stash --quiet --keep-index --include-untracked
+
+make clean
+make
+
+git stash pop --quiet
+
+if [ $? -ne 0] ; then
+    echo "make command failed. Ensure that there are no errors in the project and try again."
+    exit 1
+fi
+
+exit 0
