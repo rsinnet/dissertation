@@ -1,6 +1,8 @@
 #!/bin/bash
 #
 
+# Creates symlinks for git hooks.
+
 REPO_TOPLEVEL=$(dirname $(realpath $0))
 
 HOOKS=(pre-commit)
