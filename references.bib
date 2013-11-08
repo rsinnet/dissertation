@@ -1,13 +1,1087 @@
-@BOOK{feynman1963,
-  title={The Feynman Lectures on Physics},
-  author={R. P. Feynman and R. B. Leighton and M. L. Sands and M. A. Gottlieb},
-  year=1963,
-  publisher={Pearson/Addison--Wesley},
+@string{AW   = {Addison-Wesley}}
+@string{CRC  = {CRC Press}}
+@string{MGHS = {WCB/McGraw-Hill}}
+@string{JW   = {John Wiley \& Sons}}
+@string{SP   = {Springer}}
+@string{SPV  = {Springer-Verlag}}
+@string{WI   = {Wiley-Interscience}}
+
+@string{BR   = {Boca Raton, FL}}
+@string{NY   = {New York, NY}}
+@string{SF   = {San Francisco, CA}}
+
+@string{CSM  = {IEEE Control Systems Magazine}}
+@string{IJRR = {International Journal of Robotics Research}}
+@string{TAC  = {IEEE Transactions on Automatic Control}}
+@string{TRO  = {IEEE Transactions on Robotics}}
+
+@INPROCEEDINGS{AG07,
+  AUTHOR      = {A.~D. Ames and R.~D. Gregg},
+  TITLE       = {Stably Extending Two-Dimensional Bipedal Walking to Three Dimensions},
+  BOOKTITLE   = {Proc. of the 26th American Control Conference},
+  MONTH       = jul,
+  YEAR        = 2007,
+  ADDRESS     = NY,
 }
 
-@BOOK{spong1989,
-  title={Robot Dynamics and Control},
-  author={M. W. Spong and M. Vidyasagar},
-  year={1989},
-  publisher={Wiley},
+@INPROCEEDINGS{AGS06,
+  AUTHOR      = {A.~D. Ames and R.~D. Gregg and M.~W. Spong},
+  TITLE       = {A Geometric Approach to Three-Dimensional Hipped Bipedal Robotic Walking},
+  BOOKTITLE   = {Proc. of the 45th IEEE Conference on Decision and Control},
+  MONTH       = dec,
+  YEAR        = 2006,
+  ADDRESS     = {San Diego, CA},
+}
+
+@INPROCEEDINGS{AGWS06,
+  AUTHOR      = {A.~D. Ames and R.~D. Gregg and E.~D.~B. Wendel and S.~S. Sastry},
+  TITLE       = {Towards the Geometric Reduction of Controlled Three-Dimensional Robotic Bipedal Walkers},
+  BOOKTITLE   = {3rd IFAC Workshop on Lagrangian and Hamiltonian Methods for Nonlinear Control},
+  MONTH       = jul,
+  YEAR        = 2006,
+  ADDRESS     = {Nagoya, Japan},
+}
+
+@INPROCEEDINGS{ASW09,
+  AUTHOR      = {A.~D. Ames and R.~W. Sinnet and E.~D.~B. Wendel},
+  TITLE       = {Three-Dimensional Kneed Bipedal Walking: A Hybrid Geometric Approach},
+  BOOKTITLE   = {12th ACM International Conference on Hybrid Systems: Computation and Control, Lecture Notes in Computer Science---HSCC 2009},
+  EDITOR      = {R. Majumdar and P. Tabuada},
+  ADDRESS     = {San Francisco, CA},
+  PUBLISHER   = SPV,
+  MONTH       = apr,
+  YEAR        = 2009,
+  VOLUME      = 5469,
+  PAGES       = {16--30},
+}
+
+@INPROCEEDINGS{AVB11,
+  AUTHOR      = {A.~D. Ames and R. Vasudevan and R. Bajcsy},
+  TITLE       = {Human-Data Based Cost of Bipedal Robotic Walking},
+  BOOKTITLE   = {14th ACM International Conference on Hybrid Systems: Computation and Control},
+  ADDRESS     = {Chicago, IL},
+  MONTH       = apr,
+  YEAR        = 2011,
+  PAGES       = {153--162},
+}
+
+@INPROCEEDINGS{AWAHZM05,
+  AUTHOR      = {S.~O. Anderson and M. Wisse and C.~G. Atkeson and J.~K. Hodgins and G.~J. Zeglin and B. Moyer},
+  TITLE       = {Powered bipeds based on passive dynamic principles},
+  BOOKTITLE   = {5th IEEE/RAS International Conference on Humanoid Robots},
+  MONTH       = dec,
+  YEAR        = 2005,
+  PAGES       = {110--116},
+}
+
+@INPROCEEDINGS{CCNPW86,
+  AUTHOR      = {J.~H. Conway and R.~T. Curtis and S.~P. Norton and R.~A. Parker and R.~A. Wilson},
+  TITLE       = {The groups {$\mathbf{GO}_n(q)$, $\mathbf{SO}_n(q)$, $\mathbf{PGO}_n(q)$, $\mathbf{PSO}_n(q)$, and $\mathbf{O}_n(q)$}},
+  BOOKTITLE   = {Atlas of Finite Groups: Maximal Subgroups and Ordinary Characters for Simple Groups},
+  ADDRESS     = {Oxford, England},
+  PUBLISHER   = {Clarendon Press},
+  MONTH       = jan,
+  YEAR        = 1986,
+  PAGES       = {xi--xii},
+}
+
+@INPROCEEDINGS{Goswami90,
+  AUTHOR      = {A. Goswami},
+  TITLE       = {Foot Rotation Indicator {(FRI)} point: A New Gait Planning Tool to Evaluate Postural Stability of Biped Robots},
+  BOOKTITLE   = {Proc. of the 1990 IEEE International Conference on Robotics \& Automation},
+  MONTH       = may,
+  YEAR        = 1990,
+  PAGES       = {47--52},
+  ADDRESS     = {Tsukuba, Japan},
+}
+
+@INPROCEEDINGS{GCAS10,
+  AUTHOR      = {J.~W. Grizzle and C. Chevallereau and A.~D. Ames and R.~W. Sinnet},
+  TITLE       = {{3D} Bipedal Robotic Walking: Models, Feedback Control, and Open Problems},
+  BOOKTITLE   = {Proc. of the 8th IFAC Symposium on Nonlinear Control Systems---NOLCOS 2010},
+  ADDRESS     = {Bologna, Italy},
+  MONTH       = sep,
+  YEAR        = 2010,
+}
+
+@INPROCEEDINGS{GCS08,
+  AUTHOR      = {J.~W. Grizzle and C. Chevallereau and {Chih-Long} Shih},
+  TITLE       = {{HZD}-Based Control of a Five-Link Underactuated {3D} Bipedal Robot},
+  BOOKTITLE   = {Proc. of the 47th IEEE Conference on Decision and Control},
+  MONTH       = dec,
+  YEAR        = 2008,
+  ADDRESS     = {Canc{\'u}n, M{\'e}xico},
+}
+
+@INPROCEEDINGS{HHHT98,
+  AUTHOR      = {K. Hirai and M. Hirose and Y. Haikawa and T. Takenaka},
+  TITLE       = {The Development of {H}onda Humanoid Robot},
+  BOOKTITLE   = {Proc. of the 1998 IEEE International Conference on Robotics \& Automation},
+  MONTH       = may,
+  YEAR        = 1998,
+  PAGES       = {1321--1326},
+  ADDRESS     = {Leuven, Belgium},
+}
+
+@CONFERENCE{KKKFHYH06,
+  AUTHOR      = {S. Kajita and F. Kanehiro and K. Kaneko and K. Fujiwara and K. Harada and K. Yokoi and H. Hirukawa},
+  TITLE       = {Biped Walking Pattern Generator Allowing Auxiliary {ZMP} Control},
+  BOOKTITLE   = {Proc. of the 2006 IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  MONTH       = oct,
+  YEAR        = 2006,
+  PAGES       = {2993--2999},
+  ADDRESS     = {Beijing, P.~R. China},
+}
+
+@INPROCEEDINGS{KMHKKFH03,
+  AUTHOR      = {S. Kajita and M. Morisawa and K. Harada and K. Kaneko and F. Kanehiro and K. Fujiwara and H. Hirukawa},
+  TITLE       = {Biped walking pattern generation by using preview control of zero-moment point},
+  BOOKTITLE   = {Proc. of the 2003 IEEE International Conference on Robotics \& Automation},
+  MONTH       = sep,
+  YEAR        = 2003,
+  VOLUME      = 2,
+  PAGES       = {1620--1626},
+  ADDRESS     = {Taipei, Taiwan},
+}
+
+@INPROCEEDINGS{LA08,
+  AUTHOR      = {A. Lamperski and A.~D. Ames},
+  TITLE       = {On the Existence of {Z}eno Behavior in Hybrid Systems with Non-Isolated {Z}eno Equilibria},
+  BOOKTITLE   = {Proc. of the 47th IEEE Conference on Decision and Control},
+  MONTH       = dec,
+  YEAR        = 2008,
+  PAGES       = {2776--2781},
+  ADDRESS     = {Canc{\'u}n, M{\'e}xico},
+}
+
+@INPROCEEDINGS{MG05,
+  AUTHOR      = {B. Morris and J.~W. Grizzle},
+  TITLE       = {A Restricted {P}oincar{\'e} Map for Determining Exponentially Stable Periodic Orbits in Systems with Impulse Effects: Application to Bipedal Robots},
+  BOOKTITLE   = {Proc. of the 44th IEEE Conference on Decision and Control and European Control Conference},
+  MONTH       = dec,
+  YEAR        = 2005,
+  ADDRESS     = {Seville, Spain},
+  PAGES       = {4199--4206},
+}
+
+@INPROCEEDINGS{OA08,
+  AUTHOR      = {Y. Or and A.~D. Ames},
+  TITLE       = {Stability of {Z}eno equlibria in {L}agrangian hybrid systems},
+  BOOKTITLE   = {Proc. of the 47th IEEE Conference on Decision and Control},
+  MONTH       = dec,
+  YEAR        = 2008,
+  ADDRESS     = {Canc{\'u}n, M{\'e}xico},
+}
+
+@INPROCEEDINGS{OA09,
+  AUTHOR      = {Y. Or and \hspace{0mm}A.~D. Ames},
+  TITLE       = {Existence of Periodic Orbits in Completed Lagrangian Hybrid Systems with Non-Plastic Impacts},
+  BOOKTITLE   = {Hybrid Systems: Computation and Control 2009, Lecture Notes in Computer Science---HSCC 2009},
+  EDITOR      = {R. Majumdar and P. Tabuada},
+  ADDRESS     = {San Francisco, CA},
+  PUBLISHER   = SPV,
+  MONTH       = apr,
+  YEAR        = 2009,
+  VOLUME      = 5469,
+  PAGES       = {291--305},
+}
+
+@INPROCEEDINGS{PAM07,
+  AUTHOR      = {D. Pekarek and A.~D. Ames and J.~E. Marsden},
+  TITLE       = {Discrete Mechanics and Optimal Control Applied to the Compass Gait Biped},
+  MONTH       = dec,
+  YEAR        = 2007,
+  BOOKTITLE   = {Proc. of the 46th IEEE Conference on Decision and Control},
+  ADDRESS     = {New Orleans, LA},
+  PAGES       = {5376--5382}
+}
+
+@INPROCEEDINGS{SB01,
+  AUTHOR      = {P. Saradin and G. Bessonet},
+  TITLE       = {Gait analysis of a human walker wearing robot feet as shoes},
+  BOOKTITLE   = {Proc. of the 2001 IEEE International Conference on Robotics \& Automation},
+  MONTH       = may,
+  YEAR        = 2001,
+  ADDRESS     = {Seoul, Korea},
+  PAGES       = {2285--2292},
+}
+
+@INPROCEEDINGS{SGC07,
+  AUTHOR      = {{Ching-Long} Shih and J.~W. Grizzle and C. Chevallereau},
+  TITLE       = {Asymptotically Stable Walking of a Simple Underactuated {3D} Bipedal Robot},
+  BOOKTITLE   = {Proc. of the 33rd Annual Conference of IEEE Industrial Electronics  (IECON 2007)},
+  ADDRESS     = {Taipei, Taiwan},
+  MONTH       = nov,
+  YEAR        = 2007,
+}
+
+@INPROCEEDINGS{SA09a,
+  AUTHOR      = {R.~W. Sinnet and A.~D. Ames},
+  TITLE       = {{2D} Bipedal Walking with Knees and Feet: A Hybrid Control Approach},
+  BOOKTITLE   = {Proc. of the Joint 48th IEEE Conference on Decision and Control and 28th Chinese Control Conference},
+  ADDRESS     = {Shanghai, P. R. China},
+  MONTH       = dec,
+  YEAR        = 2009,
+  PAGES       = {3200--3207},
+}
+
+@INPROCEEDINGS{SA09b,
+  AUTHOR      = {R.~W. Sinnet and A.~D. Ames},
+  TITLE       = {{3D} Bipedal Walking with Knees and Feet: A Hybrid Geometric Approach},
+  BOOKTITLE   = {Proc. of the Joint 48th IEEE Conference on Decision and Control and 28th Chinese Control Conference},
+  ADDRESS     = {Shanghai, P.~R. China},
+  MONTH       = dec,
+  YEAR        = 2009,
+  PAGES       = {3208--3213},
+}
+
+@INPROCEEDINGS{SB02,
+  AUTHOR      = {M.~W. Spong and F. Bullo},
+  TITLE       = {Controlled Symmetries and Passive Walking},
+  BOOKTITLE   = {Proc. of the 2002 IFAC World Congress},
+  MONTH       = jul,
+  YEAR        = 2002,
+  ADDRESS     = {Barcelona, Spain},
+}
+
+@INPROCEEDINGS{Suprunenko01,
+  AUTHOR      = {D.~A. Suprunenko},
+  TITLE       = {Skew-Symmetric Matrix},
+  BOOKTITLE   = {Encyclopaedia of Mathematics},
+  PUBLISHER   = SP,
+  MONTH       = jul,
+  YEAR        = 1995,
+  EDITOR      = {M. Hazewinkel},
+  EDITION     = 1,
+  ADDRESS     = {Berlin, Germany},
+}
+
+@INPROCEEDINGS{TK01,
+  AUTHOR      = {T. Takahashi and A. Kawamura},
+  TITLE       = {Posture control for biped robot walk with foot toe and sole},
+  BOOKTITLE   = {Proc. of the 27th Annual Conference of the IEEE Industrial Electronics Society},
+  MONTH       = dec,
+  YEAR        = 2001,
+  PAGES       = {329--334},
+  ADDRESS     = {Denver, CO},
+}
+
+@INPROCEEDINGS{Vapnyarskii01,
+  AUTHOR      = {I.~B. Vapnyarskii},
+  TITLE       = {Lagrange multipliers},
+  BOOKTITLE   = {Encyclopaedia of Mathematics},
+  PUBLISHER   = SP,
+  MONTH       = jul,
+  YEAR        = 1995,
+  EDITOR      = {M. Hazewinkel},
+  EDITION     = 1,
+  ADDRESS     = {Berlin, Germany},
+}
+
+@INPROCEEDINGS{WKD93,
+  AUTHOR      = {Q.~F. Wei and P.~S. Krishnaprasad and W.~P. Dayawansa},
+  TITLE       = {Modeling of impact on a flexible beam},
+  BOOKTITLE   = {Proc. of the 32nd IEEE Conference on Decision and Control},
+  MONTH       = dec,
+  YEAR        = 1993,
+  ADDRESS     = {San Antonio, TX},
+  VOLUME      = {2},
+  PAGES       = {1377--1382},
+}
+
+@INPROCEEDINGS{WA10,
+  TITLE       = {Rank Properties of {P}oincar\'{e} maps for hybrid systems with applications to bipedal walking},
+  AUTHOR      = {E.~D.~B. Wendel and A.~D. Ames},
+  BOOKTITLE   = {13th ACM International Conference on Hybrid Systems: Computation and Control},
+  ADDRESS     = {Stockholm, Sweden},
+  MONTH       = apr,
+  YEAR        = 2010,
+  PAGES       = {151--160},
+}
+
+@INPROCEEDINGS{WGK02,
+  AUTHOR      = {E.~R. Westervelt and J.~W. Grizzle and D.~E. Koditschek},
+  TITLE       = {Zero Dynamics of Underactuated Planar Biped Walkers},
+  BOOKTITLE   = {Proc. of the 2002 IFAC World Congress},
+  MONTH       = jul,
+  YEAR        = 2002,
+  ADDRESS     = {Barcelona, Spain},
+}
+
+
+@BOOK{Ball1876,
+  AUTHOR      = {R.~S. Ball},
+  TITLE       = {The Theory of Screws: A Study in the Dynamics of a Rigid Body},
+  PUBLISHER   = {Hodges, Foster, and co.},
+  YEAR        = 1876,
+  ADDRESS     = {Dublin, Ireland},
+}
+
+@BOOK{Baruh98,
+  AUTHOR      = {H. Baruh},
+  TITLE       = {Analytical Dynamics},
+  PUBLISHER   = MGHS,
+  YEAR        = 1998,
+  ADDRESS     = NY,
+}
+
+@BOOK{Brogliato96,
+  AUTHOR      = {B. Brogliato},
+  TITLE       = {Nonsmooth Impact Mechanics: Models, Dynamics, and Control},
+  SERIES      = {Lecture Notes in Control and Information Sciences},
+  YEAR        = 1996,
+  PUBLISHER   = SP,
+  EDITION     = 1,
+  ADDRESS     = NY,
+}
+
+@BOOK{CBAA09,
+  AUTHOR      = {C. Chevallereau and G. Bessonnet and G. Abba and Y. Aoustin},
+  TITLE       = {Bipedal Robots: Modeling, Design and Walking Synthesis},
+  PUBLISHER   = {Wiley-ISTE},
+  ADDRESS     = NY,
+  YEAR        = 2009,
+}
+
+
+@BOOK{Childs10,
+  AUTHOR      = {D.~W. Childs},
+  TITLE       = {Dynamics in Engineering Practice (Computation Mechanics and Applied Analysis)},
+  PUBLISHER   = CRC,
+  ADDRESS     = BR,
+  YEAR        = 2010,
+  EDITION     = 10,
+}
+
+@BOOK{CH89,
+  AUTHOR      = {R. Courant and D. Hilbert},
+  TITLE       = {Methods of Mathematical Physics},
+  PUBLISHER   = WI,
+  EDITION     = 1,
+  VOLUME      = 1,
+  ADDRESS     = NY,
+  YEAR        = 1989,
+}
+
+@BOOK{FE08,
+  AUTHOR      = {R. Featherstone},
+  TITLE       = {Rigid Body Dynamics Algorithms},
+  PUBLISHER   = SP,
+  YEAR        = 2007,
+  ADDRESS     = NY,
+}
+
+@BOOK{Fuzhen05,
+  AUTHOR      = {{Fuzhen} Z.},
+  TITLE       = {The Schur Complement and Its Applications},
+  ADDRESS     = NY,
+  PUBLISHER   = SP,
+  SERIES      = {Numerical Methods and Algorithms Series},
+  VOLUME      = 4,
+  YEAR        = 2005,
+}
+
+
+@BOOK{GPS01,
+  AUTHOR      = {H. Goldstein and C.~P. Poole and J.~L. Safko},
+  TITLE       = {Classical Mechanics},
+  PUBLISHER   = AW,
+  YEAR        = 2001,
+  EDITION     = 3,
+  ADDRESS     = SF,
+}
+
+@BOOK{GFS98,
+  AUTHOR      = {D.~M. Gorinevsky and A.~M. Formal'sky and A.~{Yu.} Schneider},
+  TITLE       = {Force control of robotic systems},
+  PUBLISHER   = CRC,
+  EDITION     = 1,
+  ADDRESS     = BR,
+  YEAR        = 1998,
+}
+
+@BOOK{Jazar07,
+  AUTHOR      = {R.~N. Jazar},
+  TITLE       = {Theory of Applied Robotics: Kinematics, Dynamics, and Control},
+  PUBLISHER   = SP,
+  EDITION     = 1,
+  YEAR        = 2007,
+  ADDRESS     = NY,
+}
+
+@BOOK{KD02,
+  AUTHOR      = {W. Khalil and E. Dombre},
+  TITLE       = {Modeling, Identification and Control of Robots},
+  PUBLISHER   = {Hermes Penton Ltd},
+  ADDRESS     = {London, England},
+  YEAR        = 2002,
+}
+
+@BOOK{KT91,
+  AUTHOR      = {V.~V. Kozlov and D.~V. Treschev},
+  TITLE       = {Billiards: A Genetic Introduction to the Dynamics of Systems with Impacts},
+  PUBLISHER   = {American Mathematical Society},
+  YEAR        = 1991,
+  VOLUME      = 89,
+  SERIES      = {Translations of Mathematical Monographs},
+  ADDRESS     = {Providence, RI},
+}
+
+@BOOK{MR99,
+  AUTHOR      = {J.~E. Marsden and T.~S. Ratiu},
+  TITLE       = {Introduction to Mechanics and Symmetry: A Basic Exposition of Classical Mechanical Systems},
+  YEAR        = 1999,
+  PUBLISHER   = SP,
+  EDITION     = 2,
+  SERIES      = {Texts in Applied Mathematics},
+  ADDRESS     = NY,
+}
+
+@INPROCEEDINGS{MWCBG05,
+  BOOKTITLE   = {Achieving Bipedal Running with {RABBIT}: Six Steps toward Infinity},
+  PAGES       = {277--297},
+  TITLE       = {Fast Motions Symposium on Biomechanics and Robotics},
+  PUBLISHER   = SPV,
+  YEAR        = 2006,
+  EDITOR      = {K. Mombaur and M. Dheil},
+  AUTHOR      = {B. Morris and E.~R. Westervelt and C. Chevallereau and G. Buche and J.~W. Grizzle},
+  SERIES     = {Lecture Notes in Control and Information Sciences},
+  ADDRESS    = {Heidelberg, Germany},
+}
+
+@BOOK{MLS94,
+  AUTHOR      = {R.~M. Murray and {Zexiang} Li and S.~S. Sastry},
+  TITLE       = {A Mathematical Introduction to Robotic Manipulation},
+  PUBLISHER   = CRC,
+  YEAR        = 1994,
+  ADDRESS     = BR,
+}
+
+@BOOK{Muybridge55,
+  AUTHOR      = {E. Muybridge},
+  TITLE       = {The Human Figure in Motion},
+  PUBLISHER   = {Dover Publications},
+  EDITION     = 1,
+  YEAR        = 1955,
+  ADDRESS     = NY,
+}
+
+@BOOK{PC89,
+  TITLE       = {Practical numerical algorithms for chaotic systems},
+  AUTHOR      = {T.~S. Parker and L.~O. Chua},
+  YEAR        = 1989,
+  ADDRESS     = NY,
+  PUBLISHER   = SPV,
+}
+
+@INPROCEEDINGS{SKM05,
+  AUTHOR      = {D.~H. Sutherland and K.~R. Kaufman and J.~R. Moitoza},
+  TITLE       = {Human Walking},
+  BOOKTITLE   = {Kinematics of Normal Human Walking},
+  PUBLISHER   = {Lippincott Williams \& Wilkins},
+  EDITION     = 3,
+  YEAR        = 2005,
+  ADDRESS     = {Baltimore, MD},
+  PAGES       = {23--44},
+}
+
+@BOOK{RG05,
+  AUTHOR      = {J. Rose and J.~G. Gamble},
+  TITLE       = {Human Walking},
+  PUBLISHER   = {Lippincott Williams \& Wilkins},
+  EDITION     = 3,
+  YEAR        = 2005,
+  ADDRESS     = {Baltimore, MD},
+}    
+
+
+
+@BOOK{Sastry99,
+  AUTHOR      = {S. S. Sastry},
+  TITLE       = {Nonlinear Systems: Analysis, Stability, and Control},
+  PUBLISHER   = SP,
+  EDITION     = 1,
+  YEAR        = 1999,
+  ADDRESS     = NY,
+}
+
+@BOOK{SB00,
+  AUTHOR      = {R.~A. Serway and R.~J. Beichner},
+  TITLE       = {Physics for Scientists and Engineers with Modern Physics},
+  PUBLISHER   = {Harcourt College Publishers},
+  EDITION     = 5,
+  YEAR        = 1999,
+  ADDRESS     = {Orlando, FL},
+}
+
+@BOOK{SSVO08,
+  AUTHOR      = {B. Siciliano and L. Sciavicco and L. Villani and G. Oriolo},
+  TITLE       = {Robotics: Modelling, Planning and Control},
+  PUBLISHER   = SP,
+  YEAR        = 2008,
+  ADDRESS     = {London, England},
+}
+
+@BOOK{SV00,
+  AUTHOR      = {B. Siciliano and L. Villani},
+  TITLE       = {Robot Force Control},
+  EDITION     = 1,
+  PUBLISHER   = SP,
+  ADDRESS     = NY,
+  SERIES      = {The Springer International Series in Engineering and Computer Science},
+  YEAR        = 2000,
+}
+
+@BOOK{SV89,
+  AUTHOR      = {M.~W. Spong and M. Vidyasagar},
+  TITLE       = {Robot Dynamics and Control},
+  PUBLISHER   = JW,
+  YEAR        = 1989,
+  ADDRESS     = NY,
+}
+
+@BOOK{SHV05,
+  AUTHOR      = {M.~W. Spong and S. Hutchinson and M. Vidyasagar},
+  TITLE       = {Robot Modeling and Control},
+  PUBLISHER   = JW,
+  YEAR        = 2005,
+  ADDRESS     = NY,
+}
+
+@BOOK{Torby84,
+  AUTHOR      = {B. Torby},
+  TITLE       = {Advanced Dynamics for Engineers},
+  PUBLISHER   = {Holt, Rinehart, and Winston},
+  YEAR        = 1984,
+  ADDRESS     = NY,
+}
+
+@BOOK{VBSS90,
+  AUTHOR      = {M. Vukobratovi{\'c} and B. Borovac and D. Surla and D. Stokic},
+  TITLE       = {Biped Locomotion},
+  PUBLISHER   = SPV,
+  YEAR       = 1990,
+  ADDRESS     = {Berlin, Germany},
+}
+
+@BOOK{WGCCM07,
+  AUTHOR      = {E.~R. Westervelt and J.~W. Grizzle and C. Chevallereau and {J.-H.} Choi and B. Morris},
+  TITLE       = {Feedback Control of Dynamic Bipedal Robot Locomotion},
+  PUBLISHER   = CRC,
+  YEAR        = {2007},
+  ADDRESS     = BR,
+}
+
+@BOOK{Whittle05,
+  AUTHOR      = {M.~W. Whittle},
+  TITLE       = {An Introduction to Gait Analysis},
+  PUBLISHER   = {Butterworth-Heinemann},
+  YEAR        = 2005,
+  ADDRESS     = {Oxford, England},
+}
+
+@BOOK{WI90,
+  AUTHOR      = {D.~A. Winter},
+  TITLE       = {Biomechanics and Motor Control of Human Movement},
+  EDITION     = 2,
+  ADDRESS     = NY,
+  YEAR        = 1990,
+  PUBLISHER   = WI,
+}
+
+@BOOK{WV07,
+  AUTHOR      = {M. Wisse and R.~Q. {van der Linde}},
+  TITLE       = {Delft Pneumatic Bipeds},
+  PUBLISHER   = SPV,
+  YEAR        = 2007,
+  VOLUME      = 34,
+  SERIES      = {Springer Tracts in Advanced Robotics},
+  ADDRESS     = {Berlin, Germany},
+}
+
+@ARTICLE{CAAPWCG02,
+  AUTHOR    = {C. Chevallereau and G. Abba and Y. Aoustin and F. Plestan and E.~R. Westervelt and C. {Canudas-de-Wit} and J.~W. Grizzle},
+  TITLE       = {{RABBIT}: A Testbed for Advanced Control Theory},
+  JOURNAL     = CSM,
+  MONTH       = oct,
+  YEAR        = 2003,
+  VOLUME      = 23,
+  NUMBER      = 5,
+  PAGES       = {57--79},
+}
+
+@ARTICLE{CDG08,
+  AUTHOR      = {C. Chevallereau and D. Djoudi and J.~W. Grizzle},
+  TITLE       = {Stable Bipedal Walking with Foot Rotation through Direct Regulation of the Zero Moment Point},
+  JOURNAL     = TRO,
+  MONTH       = apr,
+  YEAR        = 2008,
+  VOLUME      = 25,
+  NUMBER      = 2,
+  PAGES       = {390--401},
+}
+
+@ARTICLE{CGS09,
+  AUTHOR      = {C. Chevallereau and J.~W. Grizzle and {Chih-Long} Shih},
+  TITLE       = {Asymptotically Stable Walking of a Five-Link Underactuated {3D} Bipedal Robot},
+  JOURNAL     = TRO,
+  MONTH       = feb,
+  YEAR        = 2009,
+  VOLUME      = 25,
+  NUMBER      = 1,
+  PAGES       = {37--50},
+}
+
+@ARTICLE{CRTW05,
+  AUTHOR      = {S.~H. Collins and A. Ruina and R. Tedrake and M. Wisse},
+  TITLE       = {Efficient bipedal robots based on passive-dynamic walkers},
+  JOURNAL     = {Science},
+  MONTH       = FEB,
+  YEAR        = 2005,
+  VOLUME      = 307,
+  PAGES       = {1082--1085},
+}
+
+@ARTICLE{JLSZS03,
+  AUTHOR      = {K.~H. Johansson and J. Lygeros and S. N. Simi{\'c} and J. Zhang and S. S. Sastry},
+  TITLE       = {Dynamical Properties of Hybrid Automata},
+  MONTH       = jan,
+  YEAR        = 2003,
+  JOURNAL     = TAC,
+  VOLUME      = 48,
+  NUMBER      = 1,
+  PAGES       = {2--18},
+}
+
+@ARTICLE{GST09,
+  AUTHOR      = {R. Goebel and R. Sanfelice and A. Teel},
+  TITLE       = {Hybrid Dynamical Systems},
+  JOURNAL     = CSM,
+  MONTH       = apr,
+  YEAR        = 2009,
+  VOLUME      = 29,
+  NUMBER      = 2,
+  PAGES       = {28--93},
+}
+
+@ARTICLE{Goswami99,
+  AUTHOR      = {A. \hspace{0mm}Goswami},
+  TITLE       = {Postural stability of biped robots and the foot-rotation indicator ({FRI}) point},
+  JOURNAL     = IJRR,
+  YEAR        = 1999,
+  VOLUME      = 18,
+  NUMBER      = 6,
+  PAGES       = {523--533},
+  MONTH       = jun,
+}
+
+@ARTICLE{GTE98,
+  AUTHOR      = {A. Goswami and B. Thuilot and B. Espiau},
+  TITLE       = {A study of the passive gait of a compass-like biped robot: {S}ymmetry and chaos},
+  JOURNAL     = IJRR,
+  VOLUME      = 17,
+  NUMBER      = 12,
+  PAGES       = {1282--1301},
+  MONTH       = dec,
+  YEAR        = 1998,
+}
+
+@ARTICLE{GAP01,
+  AUTHOR      = {J.~W. Grizzle and G. Abba and F. Plestan},
+  TITLE       = {Asymptotically Stable Walking for Biped Robots: Analysis via Systems with Impulse Effects},
+  MONTH       = jan,
+  YEAR        = 2001,
+  JOURNAL     = TAC,
+  VOLUME      = 46,
+  NUMBER      = 1,
+  PAGES       = {51--64},
+}
+
+@ARTICLE{GP08,
+  AUTHOR      = {J.~W. Grizzle and I. Poulakakis},
+  TITLE       = {Book Review: Delft Pneumatic Bipeds},
+  JOURNAL     = CSM,
+  VOLUME      = 28,
+  NUMBER      = 4,
+  PAGES       = {99--101},
+  MONTH       = aug,
+  YEAR        = 2008,
+}
+
+@ARTICLE{HM94,
+  AUTHOR      = {Y. H{\"u}rm{\"u}zl{\"u} and D.~B. Marghitu},
+  TITLE       = {Rigid body collions of planar kinematic chains with multiple contact points},
+  JOURNAL     = IJRR,
+  YEAR        = 1994,
+  VOLUME      = 13,
+  NUMBER      = 1,
+  PAGES       = {82--92},
+}
+
+@ARTICLE{Kuo99,
+  AUTHOR      = {A.~D. Kuo},
+  TITLE       = {Stabilization of lateral motion in passive dynamic walking},
+  JOURNAL     = IJRR,
+  MONTH       = sep,
+  YEAR        = 1999,
+  VOLUME      = 18,
+  NUMBER      = 9,
+  PAGES       = {917--930},
+}
+
+@ARTICLE{Kuo02,
+  AUTHOR      = {A.~D. \hspace{0mm}Kuo},
+  TITLE       = {Energetics of actively powered locomotion using the simplest walking model},
+  JOURNAL     = {ASME Journal of Biomechanical Engineering},
+  YEAR        = {2002},
+  VOLUME      = {124},
+  PAGES       = {113-120},
+}
+
+@ARTICLE{McGeer90,
+  AUTHOR      = {T. McGeer},
+  TITLE       = {Passive dynamic walking},
+  JOURNAL     = IJRR,
+  VOLUME      = 9,
+  NUMBER      = 2,
+  PAGES       = {62--82},
+  MONTH       = apr,
+  YEAR        = 1990,
+}
+
+@ARTICLE{PGWA03,
+  AUTHOR      = {F. Plestan and J.~W. Grizzle and E.~R. Westervelt and G. Abba},
+  TITLE       = {Stable walking of a 7-{DOF} biped robot},
+  JOURNAL     = TRO,
+  MONTH       = aug,
+  YEAR        = 2003,
+  VOLUME      = 19,
+  NUMBER      = 4,
+  PAGES       = {653--668},
+}
+
+@ARTICLE{SB05,
+  AUTHOR      = {M.~W. Spong and F. Bullo},
+  TITLE       = {Controlled Symmetries and Passive Walking},
+  JOURNAL     = TAC,
+  MONTH       = jul,
+  YEAR        = 2005,
+  VOLUME      = 50,
+  NUMBER      = 7,
+  PAGES       = {1025--1031},
+}
+
+@ARTICLE{Tucker75,
+  AUTHOR      = {V.~A. Tucker},
+  TITLE       = {The energetic cost of moving about},
+  JOURNAL     = {American Scientist},
+  VOLUME      = 63,
+  NUMBER      = 4,
+  PAGES       = {413--419},
+  MONTH       = jul,
+  YEAR        = 1975,
+}
+
+@ARTICLE{VBP06,
+  AUTHOR      = {M. Vukobratovi{\'c} and B. Borovac and V. Potkonjak},
+  TITLE       = {{ZMP}: A Review of Some Basic Misunderstandings},
+  JOURNAL     = {International Journal of Humanoid Robotics},
+  MONTH       = jun,
+  YEAR        = 2006,
+  VOLUME      = 3,
+  PAGES       = {153--175},
+  NUMBER      = 2,
+}
+
+@ARTICLE{WGK03,
+  AUTHOR      = {E.~R. Westervelt and J.~W. Grizzle and D.~E. Koditschek},
+  TITLE       = {Hybrid Zero Dynamics of Planar Biped Walkers},
+  JOURNAL     = TAC,
+  VOLUME      = 48,
+  NUMBER      = 1,
+  MONTH       = jan,
+  YEAR        = 2003,
+  PAGES       = {42--56},
+}
+
+@MASTERSTHESIS{Chen07,
+  AUTHOR      = {V.~F.~H. Chen},
+  TITLE       = {Passive Dynamic Walking with Knees: A Point Foot Model},
+  MONTH       = feb,
+  YEAR        = {2007},
+  SCHOOL      = {Massachusetts Institute of Technology},
+  ADDRESS     = {Cambridge, MA},
+}
+
+@PHDTHESIS{ACK07,
+  AUTHOR      = {M. Ackermann},
+  TITLE       = {Dynamics and Energetics of Walking with Prostheses},
+  MONTH       = mar,
+  YEAR        = 2007,
+  SCHOOL      = {University of Stuttgart},
+  ADDRESS     = {Stuttgart, Germany},
+}
+
+@PHDTHESIS{AmesPhD,
+  AUTHOR      = {A.~D. Ames},
+  TITLE       = {A categorical theory of hybrid systems},
+  SCHOOL      = {University of California, Berkeley},
+  YEAR        = 2006,
+  MONTH       = may,
+  ADDRESS     = {Berkeley, CA},
+ }
+
+@TECHREPORT{McGeer88,
+  AUTHOR      = {T. McGeer},
+  TITLE       = {Stability and control of two-dimensional biped walking},
+  INSTITUTION = {Center for Systems Science},
+  MONTH       = sep,
+  YEAR        = 1988,
+  ADDRESS     = {Simon Fraser University, Burnaby, B.C., Canada},
+}
+
+@BOOK{MatrixCookbook,
+  AUTHOR      = {K.~B. Petersen and M.~S. Pedersen},
+  TITLE       = {The Matrix Cookbook},
+  YEAR        = 2008,
+  PUBLISHER   = {Technical University of Denmark},
+  ADDRESS     = {Copenhagen, Denmark},
+}
+
+@MISC{url:msthesis,
+  AUTHOR      = {R.~W. Sinnet},
+  TITLE       = {{Ryan Sinnet - Texas A\&M M.S. tjhesis}},
+  KEY         = {msthesis},
+  NOTE        = {\url{http://people.tamu.edu/~rsinnet/msthesis/}},
+  MONTH       = may,
+  YEAR        = 2011,
+}
+
+
+@ARTICLE{VB04,
+  AUTHOR      = {M. Vukobratovi{\'c} and B. Borovac},
+  TITLE       = {Zero-Moment Point---Thirty-Five Years of Its Life},
+  JOURNAL     = {International Journal of Humanoid Robotics},
+  VOLUME      = 1,
+  NUMBER      = 1,
+  MONTH       = {mar},
+  YEAR        = 2005,
+  PAGES       = {157--173},
+}
+
+@ARTICLE{RH02,
+  AUTHOR      = {T. Reil and P. Husbands},
+  TITLE       = {Evolution of Central Pattern Generators for Bipedal Walking in a Real-Time Physics Environment},
+  JOURNAL     = {IEEE Transactions on Evolutionary Computation},
+  PAGES       = {159--168},
+  VOLUME      = 6,
+  NUMBER      = 2,
+  MONTH       = apr,
+  YEAR        = 2002,
+}
+
+@INPROCEEDINGS{TAT03,
+  AUTHOR      = {K Tsuchiya and S. Aoi and K. Tsujita},
+  TITLE       = {Locomotion Control of a Biped Locomotion Robot Using Nonlinear Oscillators},
+  BOOKTITLE   = {IEEE/RSJ International Conference on Intelligent Robots and Systems},
+  PAGES       = {1745--1750},
+  MONTH       = oct,
+  YEAR        = 2003,
+  ADDRES      = {Las Vegas, NV},
+}
+
+@INPROCEEDINGS{PDP97,
+  AUTHOR      = {J. Pratt and P. Dilworth and G. Pratt},
+  TITLE       = {Virtual Model Control of a Bipedal Walking Robot},
+  BOOKTITLE   = {IEEE International Conference on Robotics and Automation},
+  PAGES       = {193--198},
+  MONTH       = apr,
+  YEAR        = 1997,
+  ADDRESS     = {Albuquerque, NM},
+}
+
+@INPROCEEDINGS{SPSA11,
+  AUTHOR      = {R.~W. Sinnet and M.~J. Powell and R.~P. Shah and A.~D. Ames},
+  TITLE       = {A Human-Inspired Hybrid Control Approach to Bipedal Robotic Walking},
+  BOOKTITLE   = {IFAC World Congress},
+  MONTH       = aug,
+  YEAR        = 2011,
+  ADDRESS     = {Milano, Italy},
+  NOTE        = {Preprint available online: \url{http://people.tamu.edu/~rsinnet/papers/ifac_2011_spsa_01.pdf}},
+}
+
+@INPROCEEDINGS{SA11,
+  AUTHOR      = {R.~W. Sinnet and \hspace{0mm}A.~D. Ames},
+  TITLE       = {Human-Inspired Autonomous Feedback Control of Bipedal Robots},
+  BOOKTITLE   = {Submitted to 50th IEEE Conference on Decision and Control},
+  MONTH       = dec,
+  YEAR        = 2011,
+  ADDRESS     = {Orlando, FL},
+  NOTE        = {Initial submission available online: \url{http://people.tamu.edu/~rsinnet/msthesis/}},
+}
+
+@ARTICLE{SRW08,
+  AUTHOR      = {S. Srinivasan and I.~A. Raptis and E.~R. Westervelt},
+  TITLE       = {Low-Dimensional Sagittal Plane Model of Normal Human Walking},
+  JOURNAL     = {ASME Journal of Biomechanical Engineering},
+  VOLUME      = 130,
+  NUMBER      = 5,
+  MONTH       = oct,
+  YEAR        = 2008,
+}
+
+@ARTICLE{DH55,
+    AUTHOR  = {J. Denavit and R.~S. Hartenberg},
+    TITLE   = {A kinematic notation for lower-pair mechanisms based on matrices},
+    JOURNAL = {ASME Journal of Applied Mechanics},
+    VOLUME  = 23,
+    PAGES   = {215--221},
+    YEAR    = 1955,
+}
+
+
+@ARTICLE{BGR92,
+  AUTHOR      = {G. Bergmann and F. Graichen and A. Rohlmann},
+  TITLE       = {Hip joint loading during walking and running, measured in two patients},
+  JOURNAL     = {ASME Journal of Biomechanics},
+  VOLUME      = 26,
+  NUMBER      = 8,
+  PAGES       = {969--990},
+  MONTH       = aug,
+  YEAR        = 1993,
+}
+
+@ARTICLE{SA75,
+  AUTHOR      = {A. Seireg and R.~J. Arvikar},
+  TITLE       = {The prediction of muscular load sharing and joint forces in the lower extremities during walking},
+  JOURNAL     = {ASME Journal of Biomechanics},
+  VOLUME      = 8,
+  ISSUE       = 2,
+  PAGES       = {89--102},
+  MONTH       = mar,
+  YEAR        = 1975,
+}
+
+@ARTICLE{Rodgers88,
+  AUTHOR      = {M.~M. Rodgers},
+  TITLE       = {Dynamic Biomechanics of the Normal Foot and Ankle During Walking and Running},
+  JOURNAL     = {Physical Therapy},
+  VOLUME      = 68,
+  NUMBER      = 12,
+  PAGES       = {1822--1830},
+  MONTH       = dec,
+  YEAR        = 1988,
+}
+
+@INPROCEEDINGS{ADH06,
+  AUTHOR      = {S.~K. Au and P. Dilworth and H. Herr},
+  TITLE       = {An ankle-foot emulation system for the study of human walking biomechanics},
+  BOOKTITLE   = {IEEE International Conference Robotics and Automation},
+  PAGES       = {2939--2945},
+  MONTH       = may,
+  YEAR        = 2006,
+  ADDRESS     = {Orlando},
+}
+
+@ARTICLE{HBDDPCHD01,
+  AUTHOR      = {M.~O. Heller and G. Bergmann and G. Deuretzbacher and L. D{\"u}rselen and M. Pohl and L. Claes and N.~P. Haas and G.~N. Duda},
+  TITLE       = {Musculo-skeletal loading conditions at the hip during walking and stair climbing},
+  JOURNAL     = {ASME Journal of Biomechanics},
+  VOLUME      = 34,
+  NUMBER      = 1,
+  PAGES       = {883--893},
+  MONTH       = jul,
+  YEAR        = 2001,
+}
+
+@INPROCEEDINGS{BDPQA94,
+  AUTHOR      = {A.~G. Bharatkumar and K.~E. Daigle and M.~G. Pandy and {Qin} Cai and J.~K. Aggarwal},
+  TITLE       = {Lower Limb Kinematics of Human Walking with the Medial Axis Transformation},
+  BOOKTITLE   = {IEEE Workshop on Motion of Non-Rigid and Articulated Objects},
+  MONTH       = nov,
+  YEAR        = 1994,
+  PAGES       = {70--76},
+  ADDRESS     = {Austin},
+}
+
+@ARTICLE{SW93,
+  AUTHOR      = {S.~H. Scott and D.~A. Winter},
+  TITLE       = {Biomechanical model of the human foot: Kinematics and kinetics during the stance phase of walking},
+  JOURNAL     = {ASME Journal of Biomechanics},
+  VOLUME      = 26,
+  NUMBER      = 9,
+  PAGES       = {1091--1104},
+  MONTH       = sep,
+  YEAR        = 1993,
+}
+
+@BOOK{Zatsiorsky97,
+  AUTHOR      = {V.~M.Zatsiorsky},
+  TITLE       = {Kinematics of Human Motion},
+  YEAR        = 1997,
+  PUBLISHER   = {Human Kinetics},
+  EDITION     = 1,
+  ADDRESS     = {Champaign, IL},
+}
+
+@ARTICLE{GB97,
+  AUTHOR      = {U. Glitsch and W. Baumann},
+  TITLE       = {The Three-Dimensional Determination of Internal Loads in the Lower Extremity},
+  JOURNAL     = {ASME J. of Biomech. Eng.},
+  VOLUME      = 30,
+  NUMBER      = 11,
+  PAGES       = {1123--1131},
+  MONTH       = nov,
+  YEAR        = 1997,
+}
+
+@INPROCEEDINGS{SL97,
+  AUTHOR      = {S. Siegler and W. Liu},
+  TITLE       = {Three-Dimensional Analysis of Human Locomotion},
+  BOOKTITLE   = {Inverse Dynamics in Human Locomotion},
+  PUBLISHER   = {John Wiley \& Sons},
+  EDITION     = 1,
+  YEAR        = 1997,
+  ADDRESS     = NY,
+  PAGES       = {191--209},
+}
+
+@ARTICLE{AP01,
+  AUTHOR      = {F.~C. Anderson and M.~G. Pandy},
+  TITLE       = {Dynamic Optimization of Human Walking},
+  JOURNAL     = {ASME J. of Biomech. Eng.},
+  VOLUME      = 123,
+  NUMBER      = 5,
+  PAGES       = {381--390},
+  MONTH       = oct,
+  YEAR        = 2001,
+}
+
+@ARTICLE{NKZ01,
+  AUTHOR      = {R.~R. Neptune and S.~A. Kautz and F.~E. Zajac},
+  TITLE       = {Contributions of the Individual Ankle Plantar Flexors to Support, Forward Progression and Swing Initiation during Walking},
+  JOURNAL     = {J. of Biomech.},
+  VOLUME      = 34,
+  NUMBER      = 11,
+  PAGES       = {1387--1398},
+  MONTH       = nov,
+  YEAR        = 2001,
+}
+
+@ARTICLE{PB88,
+  AUTHOR      = {M.~G. Pandy and N. Berme},
+  TITLE       = {A Numerical Method for Simulating the Dynamics of Human Walking},
+  JOURNAL     = {J. of Biomech.},
+  VOLUME      = 21,
+  NUMBER      = 12,
+  PAGES       = {1043--1051},
+  MONTH       = apr,
+  YEAR        = 1988,
+}
+
+@BOOK{feynman1963,
+  TITLE       = {The Feynman Lectures on Physics},
+  AUTHOR      = {R. P. Feynman and R. B. Leighton and M. L. Sands and M. A. Gottlieb},
+  YEAR        = 1963,
+  PUBLISHER={Pearson/Addison--Wesley},
 }

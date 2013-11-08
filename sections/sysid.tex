@@ -1,14 +1,19 @@
 \chapter{\uppercase{Model Identification Methods}}
 
-The basic problem of system identification boils down to using measured data
-along with a model of appropriate complexity, typically a gray-box model, to
-determine parameters for a system which can accurately predict a system's
-dynamics with respect to observable behaviors of the system.
+The basic problem of system identification boils down to using measured data along with a model of appropriate complexity, typically a gray-box model, to determine parameters for a system which can accurately predict a system's dynamics with respect to observable behaviors of the system.
 %
-This can be accomplished in a number of ways and, given accurate and
-reasonably unbiased sensing information, can be result in models which
-account for a very high percentage of the measurement data.
+This can be accomplished in a number of ways and, given accurate and reasonably unbiased sensing information, can be result in models which account for a very high percentage of the measurement data.
 %
+In order to design model-based controllers, it is beneficial if not necessary to have an accurate model of the system one hopes to control.
+
+
+It is important to make a distinction, in the context of system identification, between kinematics and dynamics.
+%
+Specifically, in this work (and, for that matter, in much of the literature), model identification is typically understood to mean identification of the inertial properties of a model.
+%
+
+\section{Motivation}
+
 
 \section{Fundamentals}
 When viewed in a certain light, all model identification methods for mechanical
@@ -27,6 +32,42 @@ standard dynamic model of a robot as expressed in \ref{eq:robot-dynamics}, but
 at its core, model identification is merely using this relationship to identify
 a system's mass configuration.
 
+Consider a three-dimensional rigid body with no contact assumptions; i.e., the body is free to move in space.
+%
+With the dynamics of the system being dominated by Newton's laws of motion \cite{feynman1963}, the state of the system can be expressed by associating a reference frame to a fix pointed on the body and using coordinates which express the position and orientation of this point with respect to a global frame or the world frame.
+%
+In three-dimensional space, this transformation between world frame and robot frame can be parameterized with six coordinates: three representing the Euclidean position and three respresenting, for example, an Euler angle--based derivation, namely, the product of three rotation matrices \cite{Baruh98}.
+%
+Newton's laws eventually lead to the understanding the motion of such a system can be captured by the following dynamic model:
+\begin{align}
+  \nonumber
+  I_{x} \dot{\omega}_{x} + (I_{z} - I_{y}) \omega_{y} \omega_{z} &= M_{x}\\
+  \nonumber
+  I_{y} \dot{\omega}_{y} + (I_{x} - I_{z}) \omega_{z} \omega_{x} &= M_{y}\\
+  \nonumber
+  I_{z} \dot{\omega}_{z} + (I_{y} - I_{x}) \omega_{x} \omega_{y} &= M_{z}\\
+  \nonumber
+  m \dot{v}_{x} &= F_{x},\\
+  \nonumber
+  m \dot{v}_{y} &= F_{y},\\
+  m \dot{v}_{z} &= F_{z},
+\end{align}
+where linear and angular velocity are represented by $v$ and $\omega$, respectively, and the corresponding accelerations are shown as time derivatives.
+%
+The applied forces and moments are shown as $F$ and $M$, respectively, and the $I_{x}$, $I_{y}$, and $I_{z}$ terms are the principal moments of inertia about the appropriate axes.
+%
+As one might guess, this requires that the fixed frame be located at the center of mass and oriented along the principal axes of inertia; it is straightforward to redefine the base coordinates but this form -- the simplest form -- is given for clarity of presentation.
+
+Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for
+simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact.
+%
+At the end of the day, system identification can be thought of as {\em finding the appropriate model parameters such that when one applies a known wrench (force and moment) to a system, the resulting measured acceleration is as close as possible to that which is predicted by the model.}
+%
+Thus, with perfect sensing information, one can perfectly identify any rigid body model through any of a number of a identification procedures, all of which operate on this basic principal.
+%
+In this manner, the procedure can be extended to identify rigid body robots with series elastic actuators or electromechanical systems, though the algorithms are naturally more complex as such systems operate with more complex dynamics as the reader will come to understand later in this chapter.
+
+\section{Newtonian Mechanical Systems}
 Like most problems, there is a variety of approaches, each of which has its own
 merits.
 %
@@ -40,13 +81,16 @@ This leads to a relationship of the form
   \tau = \regressorargs \regressorparam
 \end{align}
 where $\tau$ represents the experienced torque, $\regressorargs$ is known as the
-{\em regressor} (see \cite{spong1989}), and $\regressorparam$ represents a set
+{\em regressor} (see \cite{SV89}), and $\regressorparam$ represents a set
 of parameters, sometimes called the {\em base parameter set}.
 
 \section{Offline Identification}
 
 \section{Online Identification}
 
+\section{Series Elastic Actuators}
+
+\section{Electromechanical Systems}
 
 \begin{enumerate}
   \item Offline vs. Online -- advantages of each
