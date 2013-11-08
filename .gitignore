@@ -1,0 +1,11 @@
+*.aux
+dissertation.bbl
+dissertation.blg
+dissertation.log
+dissertation.dvi
+dissertation.lof
+dissertation.lot
+dissertation.out
+dissertation.pdf
+dissertation.ps
+dissertation.toc
