@@ -12,7 +12,7 @@ $(PROJNAME).ps: $(PROJNAME).dvi
 $(PROJNAME).dvi: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
-references.bib sections/sysid.tex
+references.bib sections/modeling.tex sections/sysid.tex
 	$(LATEX_CMD) $(PROJNAME)
 	bibtex $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
@@ -27,4 +27,4 @@ clean:
 	titlepage.aux acknowledgements.aux \
 	abstract.aux dedication.aux bibliography.aux lists.aux \
 	nomenclature.aux section1.aux section2.aux section3.aux \
-	sections/sysid.aux
+	sections/modeling.aux sections/sysid.aux
