@@ -14,7 +14,7 @@ appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
 references.bib sections/introduction.tex sections/literature.tex \
 sections/modeling.tex sections/human_inspired_control.tex sections/sysid.tex \
-sections/implementation.tex sections/conclusion.tex
+sections/implementation.tex sections/conclusion.tex sections/reduction.tex
 	$(LATEX_CMD) $(PROJNAME)
 	bibtex $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)

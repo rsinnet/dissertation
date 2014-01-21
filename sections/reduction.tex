@@ -1,0 +1,18 @@
+\chapter{\uppercase{Functional Routhian Reduction}}
+
+Classical Routhian reduction \cite{} is a method which takes advantages of symmetries inherent in a dynamical system and utilizes conserved momentum to eliminate cyclic variables, thereby reducing the dimensionality of the system and simplifying controller design. Functional Routhian reduction (first introduced in \cite{}) is a variant in which the conserved momentum is set to a function rather than a constant. This scheme has enjoyed success in migrating 2D gaits to 3D. By decoupling the sagittal and coronal dynamics, functional Routhian reduction provides insight into the decoupled nature of human walking and allows for sagittal control design to be conducted on a reduced-order model while simultaneously providing coronal stabilization. This remarkable relationship between dynamics, while only providing a slight reduction in dimensionality, shifts the control problem from designing complicated 3D walking gaits to the much more tractable challenge of designing 2D gaits. Thus, stable walking is obtained in 3D by simply applying control laws which give stable walking in the sagittally-restricted counterpart in 2D (which has a Lagrangian of the form given in \eqref{}).
+
+
+\section{Almost-Cyclic Lagrangians}
+Consider a system with configuration space $\Q = \Shape \times \T$, where $\Shape$ is called the shape space. Let the coordinates be represented by $\q = (\varphi^T, \theta^T)^T$ with $\theta \in \Shape$ and almost-cyclic variable $\varphi \in \mathbb{T}^{\ncv}$. A Lagrangian $\Lag_{\lambda} : T\Shape \times T\T \to \R$ is almost-cyclic if it takes the form in \eqref{} from \cite{} for some $\lambda : \T \to \R$.
+
+\section{Momentum Maps}
+As alluded to earlier, functional Routhian reduction utilizes a momentum map, $J : T\Q \to \R$, which specifies conserved quantities:
+\begin{align*}
+  J(\varphi, \theta, \dot \varphi, \dot \theta) = 
+\end{align*}
+This map is equal to a function, $\lambda(\varphi)$.
+
+\section{Functional Routhians}
+
+\section{Reduction Theorem}
