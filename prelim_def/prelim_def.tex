@@ -3,6 +3,8 @@
 
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\sQ}{\mathcal{Q}}
+\newcommand{\nc}{\mathit{nc}}
+
 %\usetheme{PaloAlto}
 \usetheme{Szeged}
 %\usecolortheme{beaver}
@@ -52,16 +54,31 @@
   \item Kinetic energy, $T : T\sQ \to \R^+$,\\
   \item  Potential energy, $U : \sQ \to \R$,
   \end{itemize}
-which together comprise the total energy,
-\begin{align*}
-  E(q, \dot q) = T(q, \dot q) + U(q).
-\end{align*}
-In a Hamiltonian system, energy is conserved and thus the dynamics illustrate the flow of energy between $T(q, \dot q)$ and $U(q)$.
+  which together comprise the total energy,
+  \begin{align*}
+    E(q, \dot q) = T(q, \dot q) + U(q).
+  \end{align*}
+  In a Hamiltonian system, energy is conserved and thus the dynamics reflect the flow of energy between $T(q, \dot q)$ and $U(q)$.
 \end{frame}
 
 \begin{frame}
   \frametitle{The Simplest Example}
   compass gait
+\end{frame}
+
+\begin{frame}
+  \frametitle{Nonconservative Systems}
+  For a nonconservative system, energy flows out of the system at a rate of $F_{\nc} \cdot dq$. Thus, the following quantity is conserved:
+  \begin{align*}
+    E_{c} &= T(q, \dot q) + U(q) - \int_{t_{0}}^{t_{1}} \! F_{\nc} \cdot dq\\
+    &= E(q(0), \dot q(0))
+  \end{align*}
+  This equation expresses the interplay between kinetic and potential energy and the flow of energy into and out of the system.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Example: 3-Link Biped}
+  3-link
 \end{frame}
 
 \section{Orbital Stabilization}
@@ -85,7 +102,7 @@ In a Hamiltonian system, energy is conserved and thus the dynamics illustrate th
 
 \begin{frame}
   \frametitle{Nonconservative Systems}
-  ncsys
+  nconsys
 \end{frame}
 
 \begin{frame}
