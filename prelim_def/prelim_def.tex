@@ -4,6 +4,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\sQ}{\mathcal{Q}}
 \newcommand{\nc}{\mathit{nc}}
+\DeclareMathOperator*{\argmin}{arg\,min}
 
 %\usetheme{PaloAlto}
 \usetheme{Szeged}
@@ -83,6 +84,20 @@
 
 \section{Orbital Stabilization}
 \begin{frame}
+  \frametitle{Solutions to Dynamical Systems}
+  dsys
+\end{frame}
+
+\begin{frame}
+  \frametitle{Periodic Orbits}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Conservative Systems}
+  csys
+\end{frame}
+
+\begin{frame}
   \frametitle{Orbital Stability}
   \begin{itemize}
   \item Periodic orbits have associated energy levels which define a hypersurface.
@@ -90,9 +105,29 @@
   \end{itemize}
 \end{frame}
 
+
 \begin{frame}
-  \frametitle{Conservative Systems}
-  csys
+  \frametitle{Energy Shaping}
+  Define the output $\eta = E_{c}(q, \dot q) - E0$.
+  Control Lyapunov Function
+\end{frame}
+
+\begin{frame}
+  \frametitle{Quadratic Programming}
+  \begin{align}
+    \nonumber
+    \argmin_{v = (\delta, u)}  \, &v^T \! H(q, \dot q) \, v\\
+    \label{clf} \tag{clf}
+    \mbox{s.t. } & A_{\mathit{clf}}(q, \dot q) v \leq b_{\mathit{clf}}(q, \dot q)\\
+    \label{lim} \tag{lim}
+    & A_{\mathit{lim}} v \leq b_{\mathit{lim}}
+  \end{align}
+  where
+  \begin{itemize}
+  \item\eqref{clf} imposes the control Lyapunv function
+  \item\eqref{lim} imposes torque limits
+  \end{itemize}
+  The above acts to stabilize the energy of the system while attempting to obey te nominal system dynamics.
 \end{frame}
 
 \begin{frame}
