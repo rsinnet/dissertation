@@ -1,7 +1,6 @@
 \documentclass{beamer}
-\usepackage{amssymb}
+\usepackage{amssymb,amsmath,mathrsfs}
 
-\newcommand{\R}{\mathbb{R}}
 \newcommand{\sQ}{\mathcal{Q}}
 \newcommand{\nc}{\mathit{nc}}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -9,6 +8,12 @@
 %\usetheme{PaloAlto}
 \usetheme{Szeged}
 %\usecolortheme{beaver}
+
+\usepackage{graphicx}
+\graphicspath{{./figures/}}
+\DeclareGraphicsExtensions{.pdf}
+
+\usepackage{prelim_def}
 
 \title[Energy Shaping]{A Lyapunov Approach to Orbital \\Stabilization through Energy Shaping}
 \subtitle{Applications to Bipedal Walking\\--- Preliminary Results ---}
@@ -49,6 +54,42 @@
 \end{frame}
 
 \begin{frame}
+  \frametitle{Hybrid Systems}
+  \begin{columns}[t]
+    \begin{column}{.63\textwidth}
+      \begin{definition}
+        A \alert{hybrid control system} is a tuple \vspace{-.3cm}
+        $$\HCS = \hcsystem, \vspace{-.4cm}$$
+        where
+        \begin{itemize}
+        \item
+          $\Domain \subset \mathcal{X}$ is the {\em domain of admissiblity} with state space $\mathcal{X}$,
+        \item
+          $\ControlSet$ is a set of {\em admissible controls},
+        \item
+          $\Guard$ is a {\em guard} or {\em switching surface},
+        \item
+          $\ResetMap$ is a smooth {\em reset map}
+        \item
+          $(f, g)$ is a control system on $\Domain$: \vspace{-3mm}
+          \begin{align*}
+            \dot{x} = f(x) + g(x) \, u.
+        \end{align*}
+        \end{itemize}
+      \end{definition}
+    \end{column}
+    \begin{column}{.4\textwidth}
+      \begin{figure}
+        \centering
+        \includegraphics[width=.9\textwidth]{hsystem}\\
+      \end{figure}
+      A \textcolor{blue}{simple hybrid system}:\vspace{-.3cm}
+      $$\HS = \hsystem$$
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
   \frametitle{Lagrangian Systems}
   Mechanical systems are defined by:
   \begin{itemize}
@@ -63,8 +104,18 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{The Simplest Example}
-  compass gait
+  \frametitle{The Simplest Example---Passive Compass-Gait Biped}
+
+  \begin{columns}[l]
+    \column{1.5in}
+    Dynamic Model:
+    \begin{align*}
+      M(q) \ddot q + H(q, \dot q) = 0
+    \end{align*}
+    \column{1.5in}
+    whoa
+  \end{columns}
+  yip
 \end{frame}
 
 \begin{frame}
@@ -79,7 +130,9 @@
 
 \begin{frame}
   \frametitle{Example: 3-Link Biped}
-  3-link
+  \begin{align*}
+    u = -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}) - k_{d} (\dot \vartheta_{T}^{a})
+  \end{align*}
 \end{frame}
 
 \section{Orbital Stabilization}

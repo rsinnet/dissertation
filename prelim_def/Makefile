@@ -1,15 +1,9 @@
 PROJNAME=prelim_def
-LATEX_CMD=latex -interaction=nonstopmode
+LATEX_CMD=pdflatex -interaction=nonstopmode
 
 all: $(PROJNAME).pdf
 
-$(PROJNAME).pdf: $(PROJNAME).ps
-	ps2pdf $(PROJNAME).ps
-
-$(PROJNAME).ps: $(PROJNAME).dvi
-	dvips $(PROJNAME)
-
-$(PROJNAME).dvi: $(PROJNAME).tex
+$(PROJNAME).pdf: $(PROJNAME).tex figures/*.pdf
 	$(LATEX_CMD) $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
 
