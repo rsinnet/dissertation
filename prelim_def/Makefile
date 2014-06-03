@@ -3,7 +3,7 @@ LATEX_CMD=pdflatex -interaction=nonstopmode
 
 all: $(PROJNAME).pdf
 
-$(PROJNAME).pdf: $(PROJNAME).tex figures/*.pdf
+$(PROJNAME).pdf: $(PROJNAME).tex figures/*.pdf $(PROJNAME).sty
 	$(LATEX_CMD) $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
 

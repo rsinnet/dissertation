@@ -15,6 +15,8 @@
 
 \usepackage{prelim_def}
 
+\newtheorem{massump}{Modeling Assumptions}
+
 \title[Energy Shaping]{A Lyapunov Approach to Orbital \\Stabilization through Energy Shaping}
 \subtitle{Applications to Bipedal Walking\\--- Preliminary Results ---}
 \author{R. W. Sinnet}
@@ -48,6 +50,11 @@
 \end{frame}
 
 \section{Mechanics of Bipeds}
+\begin{frame}
+  \frametitle{Overview}
+  \tableofcontents[sectionstyle=show/shaded,subsectionstyle=hide]
+\end{frame}
+
 \begin{frame}
   \frametitle{Hybrid Modeling}
   hybr
@@ -101,6 +108,70 @@
     E(q, \dot q) = T(q, \dot q) + U(q).
   \end{align*}
   In a Hamiltonian system, energy is conserved and thus the dynamics reflect the flow of energy between $T(q, \dot q)$ and $U(q)$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Swing-Phase Dynamics}
+  \begin{columns}[t]
+    \begin{column}{.55\textwidth}
+      For Lagrangian $\Lagrangian$ with coordinates
+      \begin{align*}
+        (\q^{T}, \dq^{T})^{T} \in T\ConfigurationSpace,
+      \end{align*}
+      the principal of least action allows one to construct a dynamic model:
+      \begin{align*}
+        \D(\q) \, \ddq + \C(\q, \dq) \, \dq + \G(\q) = B(\q) \, u,
+      \end{align*}
+      which can also be written
+      \begin{align*}
+        f(\q, \dq) &= \left(\!\!\begin{array}{c}
+        \dq\\
+        \D^{-1}(\q) (-\C(\q, \dq) \, \dq - \G(\q))
+        \end{array}\!\!\right),\\
+        g(\q) &= \left(\!\!\begin{array}{c}
+        \mathbf{0}_{m \times m}\\
+        \D^{-1}(\q) B(\q)
+        \end{array}\!\!\right).
+      \end{align*}
+    \end{column}\!\!
+    \begin{column}{.45\textwidth}
+      \begin{figure}
+        \centering
+        \vspace{-10mm}
+        \caption{Physical configuration}
+        \includegraphics[width = 1.0\columnwidth]{robot_config}
+      \end{figure}
+    \end{column}
+  \end{columns}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Impact Dynamics}
+  Introduce extended coordinates $\qe = (p_{x}, p_{y}, p_{z}, \q^{T})^{T} \in \R^{3} \times \ConfigurationSpace$. Angular momentum balance based on H{\"u}rm{\"u}zl{\"u} and Marghitu:
+  \begin{massump}
+    \begin{itemize}
+    \item Rigid-body plastic impacts
+    \item Enough friction to prevent slipping
+    \item Impact points do not rebound
+    \item Motors do not produce impulses
+    \item No instantaneous change in configuration, i.e., $\qe^{-} = \qe^{+}$
+    \end{itemize}
+  \end{massump}
+  Under these assumptions, the short-time-scale dynamics satisfies
+  \begin{align*}
+    \left[\begin{array}{c c}
+        \D_{e}(\qe) & -\Jacobian^{T}(\qe)\\
+        \Jacobian(\qe) & \mathbf{0}_{3 \times 3}
+      \end{array}\right]
+    \left[\begin{array}{c}
+        \dq^{+}\\
+        \delta F(\qe, \dqe)
+      \end{array}\right]
+    = \left[\begin{array}{c c}
+        \D_{e}(\qe) \, \dqe^{-}\\
+        \mathbf{0}_{3}
+      \end{array}\right].
+  \end{align*}
 \end{frame}
 
 \begin{frame}
