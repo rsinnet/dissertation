@@ -45,8 +45,42 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{History of Bipeds}
-  history
+  \frametitle{History}
+  \begin{columns}[T]
+
+    \begin{column}{.24\textwidth}
+      \textcolor{blue}{Passive Walking:}
+      \begin{figure}
+        \centering
+        \includegraphics[height=4.5cm]{bipeds_ruina}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.24\textwidth}
+      \textcolor{blue}{Passivity-Based Control:}
+      \begin{figure}
+        \centering
+        \includegraphics[height=4.5cm]{bipeds_collins}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.24\textwidth}
+      \textcolor{blue}{Hybrid Zero Dynamics:}
+      \begin{figure}
+        \centering
+        \includegraphics[height=4.5cm]{figures/bipeds_grizzle}
+      \end{figure}
+    \end{column}
+
+    \begin{column}{.24\textwidth}
+      \textcolor{blue}{Human-Inspired Control:}
+      \begin{figure}
+        \centering
+        \includegraphics[height=4.5cm]{figures/bipeds_ames}
+      \end{figure}
+    \end{column}
+
+  \end{columns}
 \end{frame}
 
 \section{Mechanics of Bipeds}
@@ -56,8 +90,16 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Hybrid Modeling}
-  hybr
+  \frametitle{Bipedal Models}
+  \begin{figure}
+    \centering
+    \includegraphics[width=.9\textwidth]{biped-models}
+  \end{figure}
+  \begin{itemize}
+    \item Bipedal locomotion has been studied with a variety of models.
+    \item Pendulum models consider massless legs with no impacts.
+    \item Kinematic chains are markedly more complex than pendula.
+  \end{itemize}
 \end{frame}
 
 \begin{frame}
@@ -107,22 +149,22 @@
   \begin{align*}
     E(q, \dot q) = T(q, \dot q) + U(q).
   \end{align*}
-  In a Hamiltonian system, energy is conserved and thus the dynamics reflect the flow of energy between $T(q, \dot q)$ and $U(q)$.
+  In a Hamiltonian system, energy is conserved and thus the dynamics reflects the flow of energy between $T(q, \dot q)$ and $U(q)$.
 \end{frame}
 
 \begin{frame}
-  \frametitle{Swing-Phase Dynamics}
+  \frametitle{Swing Phase Dynamics}
   \begin{columns}[t]
     \begin{column}{.55\textwidth}
       For Lagrangian $\Lagrangian$ with coordinates
       \begin{align*}
-        (\q^{T}, \dq^{T})^{T} \in T\ConfigurationSpace,
+        x = (\q^{T}, \dq^{T})^{T} \in T\ConfigurationSpace,
       \end{align*}
       the principal of least action allows one to construct a dynamic model:
       \begin{align*}
         \D(\q) \, \ddq + \C(\q, \dq) \, \dq + \G(\q) = B(\q) \, u,
       \end{align*}
-      which can also be written
+      or $\dot x = f(q, \dot q) + g(q) \, u,$ with
       \begin{align*}
         f(\q, \dq) &= \left(\!\!\begin{array}{c}
         \dq\\
@@ -157,7 +199,7 @@
     \item No instantaneous change in configuration, i.e., $\qe^{-} = \qe^{+}$
     \end{itemize}
   \end{massump}
-  Under these assumptions, the short-time-scale dynamics satisfies
+  Under these assumptions, the discrete dynamics satisfies
   \begin{align*}
     \left[\begin{array}{c c}
         \D_{e}(\qe) & -\Jacobian^{T}(\qe)\\
@@ -194,7 +236,7 @@
   For a nonconservative system, energy flows out of the system at a rate of $F_{\nc} \cdot dq$. Thus, the following quantity is conserved:
   \begin{align*}
     E_{c} &= T(q, \dot q) + U(q) - \int_{t_{0}}^{t_{1}} \! F_{\nc} \cdot dq\\
-    &= E(q(0), \dot q(0))
+    &= E(q(0), \dot q(0)) = E_{0}
   \end{align*}
   This equation expresses the interplay between kinetic and potential energy and the flow of energy into and out of the system.
 \end{frame}
@@ -232,7 +274,7 @@
 
 \begin{frame}
   \frametitle{Energy Shaping}
-  Define the output $\eta = E_{c}(q, \dot q) - E0$.
+  Define the output $\eta = E_{c}(q, \dot q) - E_{0}$.
   Control Lyapunov Function
 \end{frame}
 
@@ -240,18 +282,22 @@
   \frametitle{Quadratic Programming}
   \begin{align}
     \nonumber
-    \argmin_{v = (\delta, u)}  \, &v^T \! H(q, \dot q) \, v\\
+    \argmin_{v = (\delta, u)}  \, & v^T \! H \, v + h^T(q, \dot q) v\\
     \label{clf} \tag{clf}
     \mbox{s.t. } & A_{\mathit{clf}}(q, \dot q) v \leq b_{\mathit{clf}}(q, \dot q)\\
     \label{lim} \tag{lim}
     & A_{\mathit{lim}} v \leq b_{\mathit{lim}}
   \end{align}
   where
+  \begin{align*}
+    H = \left(\begin{array}{c c}\epsilon & 0\\ 0 & I\end{array}\right), \qquad h(q, \dot q) = -2 \, \bar u(q, \dot q)
+  \end{align*}
+  and
   \begin{itemize}
   \item\eqref{clf} imposes the control Lyapunv function
   \item\eqref{lim} imposes torque limits
   \end{itemize}
-  The above acts to stabilize the energy of the system while attempting to obey te nominal system dynamics.
+  %The above acts to stabilize the energy of the system while attempting to obey the nominal system dynamics.
 \end{frame}
 
 \begin{frame}
