@@ -1,6 +1,8 @@
 \documentclass{beamer}
 \usepackage{amssymb,amsmath,mathrsfs}
 
+\usepackage{epsfig,psfrag,epstopdf}
+
 \newcommand{\sQ}{\mathcal{Q}}
 \newcommand{\nc}{\mathit{nc}}
 \DeclareMathOperator*{\argmin}{arg\,min}
@@ -11,7 +13,7 @@
 
 \usepackage{graphicx}
 \graphicspath{{./figures/}}
-\DeclareGraphicsExtensions{.pdf}
+\DeclareGraphicsExtensions{.pdf,.eps}
 
 \usepackage{prelim_def}
 
@@ -118,7 +120,7 @@
         \item
           $\Guard$ is a {\em guard} or {\em switching surface},
         \item
-          $\ResetMap$ is a smooth {\em reset map}
+          $\ResetMap$ is a smooth {\em reset map},
         \item
           $(f, g)$ is a control system on $\Domain$: \vspace{-3mm}
           \begin{align*}
@@ -217,18 +219,31 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{The Simplest Example---Passive Compass-Gait Biped}
-
-  \begin{columns}[l]
-    \column{1.5in}
-    Dynamic Model:
-    \begin{align*}
-      M(q) \ddot q + H(q, \dot q) = 0
-    \end{align*}
-    \column{1.5in}
-    whoa
-  \end{columns}
-  yip
+  \frametitle{The Simplest Example: Passive Compass-Gait Biped}
+  \only<1>{
+    \begin{columns}[l]
+      \column{1.5in}
+      Dynamic Model:
+      \begin{align*}
+        M(q) \ddot q + H(q, \dot q) = 0
+      \end{align*}
+      \column{1.5in}
+      \begin{figure}
+        \centering
+        \def\svgwidth{1.0\columnwidth}
+        \input{figures/cg2d-slope-model.eps_tex}
+        \vspace{-2em}
+        \caption{Compass-gait biped falling down a slope.}
+      \end{figure}
+    \end{columns}
+  }
+  \only<2>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_cg2d_slope_model}
+      \caption{Energy is exchanged between kinetic and potential in form.}
+    \end{figure}    
+  }
 \end{frame}
 
 \begin{frame}
@@ -243,9 +258,37 @@
 
 \begin{frame}
   \frametitle{Example: 3-Link Biped}
-  \begin{align*}
-    u = -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}) - k_{d} (\dot \vartheta_{T}^{a})
-  \end{align*}
+  \only<1>{
+    \begin{columns}[l]
+      \column{1.5in}
+      Dynamic Model:
+      \begin{align*}
+        M(q) \ddot q + H(q, \dot q) = 0
+      \end{align*}
+      Control Law:
+      \begin{align*}
+        u_1 &=-k_{d} (\dot \vartheta_{T}^{a})\\
+        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}),\\
+        u_2 &= G(q) - G(\Psi(q)).
+      \end{align*}
+      \column{1.5in}
+      \begin{figure}
+        \centering
+        \def\svgwidth{1.0\columnwidth}
+        \input{figures/cg2d-3link-model.eps_tex}
+        \vspace{-2em}
+        \caption{3-link biped configuration.}
+      \end{figure}
+    \end{columns}
+  }
+
+  \only<2>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_cg2d_3link}
+      \caption{Energy is not conserved as the controller injects energy.}
+    \end{figure}
+  }
 \end{frame}
 
 \section{Orbital Stabilization}
@@ -312,7 +355,13 @@
 
 \begin{frame}
   \frametitle{Example: 3-Link Biped}
-  3-link
+  \only<2>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_conserved_cg2d_3link}
+      \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{0}^{t} F_{nc} \cdot dq$, is conserved.}
+    \end{figure}
+  }
 \end{frame}
 
 \section{Functional Routhian Reduction}
