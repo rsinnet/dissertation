@@ -25,5 +25,6 @@ for file_prefix in data['files']:
                     out_line = m.group(1) + out_text + m.group(6)
                 else:
                     out_line = line.rstrip()
-                    ofile.write(out_line + "\n")
+
+                ofile.write(out_line + "\n")
 

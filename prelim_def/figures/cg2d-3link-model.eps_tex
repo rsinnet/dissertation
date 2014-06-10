@@ -50,10 +50,11 @@
   \makeatother%
   \begin{picture}(1,1.21528015)%
     \put(0,0){\includegraphics[width=\unitlength]{cg2d-3link-model.eps}}%
-    \put(0.21873992,0.32735304){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$q_1$}}}%
-    \put(0.50416311,1.17877863){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$M$}}}%
-    \put(0.54244922,0.23742968){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$m$}}}%
-    \put(0.66700884,0.84842806){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$q_2$}}}%
-    \put(0.34957759,0.84665784){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{$q_3$}}}%
+    \put(0.04137532,0.2097927){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q1}}}%
+    \put(0.50416311,1.17877863){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{M}}}%
+    \put(0.51308985,0.16600065){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mc}}}%
+    \put(0.66700884,0.84842806){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q2}}}%
+    \put(0.33956351,0.84665784){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q3}}}%
+    \put(0.51324693,0.41757345){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mt}}}%
   \end{picture}%
 \endgroup%

@@ -10,7 +10,7 @@ $(PROJNAME).pdf: $(PROJNAME).tex figures/*.pdf figures/*.eps $(EPS_LATEX) $(PROJ
 	$(LATEX_CMD) $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
 
-figures/%.eps_latex: figures/%.eps_tex figures/%.eps
+figures/%.eps_latex: figures/%.eps_tex figures/%.eps do_latex_subs.py
 	./do_latex_subs.py $(basename $(notdir $<))
 
 

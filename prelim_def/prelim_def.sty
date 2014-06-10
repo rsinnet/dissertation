@@ -1,3 +1,23 @@
+\definecolor[named]{a-green}{RGB}{107,230,58}
+\definecolor[named]{ua-red}{RGB}{255,124,128}
+
+
+\definecolor[named]{berkeleydarkyellow}{RGB}{242,204,76}
+\definecolor[named]{berkeleylightyellow}{RGB}{255,255,255}
+\definecolor[named]{white}{RGB}{255,255,255}
+\definecolor[named]{black}{RGB}{0,0,0}
+\definecolor[named]{berkeleydarkblue}{RGB}{0,0,102}
+\definecolor[named]{berkeleymiddleblue}{RGB}{38,38,134}
+\definecolor[named]{berkeleylightblue}{RGB}{77,77,148}
+\definecolor[named]{gray}{RGB}{204,204,204}
+\definecolor[named]{darkgray}{RGB}{118,118,118}
+\definecolor[named]{berkeleygold}{RGB}{199,136,18}
+
+\definecolor[named]{blue}{RGB}{38,38,134}
+\definecolor[named]{darkblue}{RGB}{0,0,102}
+\definecolor[named]{lightblue}{RGB}{77,77,148}
+
+
 \newcommand{\la}{CG}
 \newcommand{\lb}{K2}
 \newcommand{\lc}{K3}
@@ -62,6 +82,7 @@
 
 % real numbers
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
+\renewcommand{\S}{\ensuremath{\mathbb{S}}}
 
 % natural numbers
 \newcommand{\Nat}{\ensuremath{\mathbb{N}}}
@@ -154,3 +175,35 @@
 
 % DEPRECATED - Lagrangian
 \newcommand{\lahc}{\Lagrangian}
+
+\newcommand{\Lt}{\Lagrangian_{\mathrm{fct}}}
+\newcommand{\Vt}{V_{\mathrm{fct}}}
+\newcommand{\fLt}{f_{\Lt}}
+\newcommand{\fLg}{f_{\Llambda}}
+\newcommand{\Jfcn}{\ensuremath{J(\theta,\varphi,\dot{\theta},\dot{\varphi})}}
+
+
+\newcommand{\Vd}{V_d}
+\newcommand{\Vlambda}{V_{\lambda}}
+\newcommand{\Llambda}{\Lagrangian_{\lambda}}
+\newcommand{\Wlambda}{W_{\lambda}}
+\newcommand{\Mlambda}{M_{\lambda}}
+
+\newcommand{\thetadot}{\dot{\theta}}
+\newcommand{\thetadotdot}{\ddot{\theta}}
+\newcommand{\phidotdot}{\ddot{\phi}}
+\newcommand{\phidot}{\dot{\phi}}
+
+\newcommand{\Mtheta}{\ensuremath{M_{\theta}}}
+\newcommand{\Mphi}{\ensuremath{m_{\varphi}}}
+\newcommand{\Mphitheta}{\ensuremath{M_{\varphi,\theta}}}
+
+\newcommand{\EL}[2]{\ensuremath{\mathcal{E\!L}_{#1} (#2)}}
+\newcommand{\ddt}{\ensuremath{\frac{d}{dt}}}
+\newcommand{\cq}[1]{\ensuremath{q_{#1}}}
+\newcommand{\cdq}[1]{\ensuremath{\dot{q}_{#1}}}
+\newcommand{\cddq}[1]{\ensuremath{\ddot{q}_{#1}}}
+\newcommand{\Fext}{\ensuremath{\Upsilon(\cq{},\cdq{})}}
+\newcommand{\Fextt}{\ensuremath{\Upsilon(\theta,\dot{\theta})}}
+\newcommand{\mMlI}{\ensuremath{M^{-1}_\lambda(\cq{})}}
+\newcommand{\mMl}{\ensuremath{M_\lambda(\cq{})}}
