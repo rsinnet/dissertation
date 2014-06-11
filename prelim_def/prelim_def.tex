@@ -44,7 +44,7 @@
 
 \begin{frame}
   \frametitle{Overview}
-  \tableofcontents
+  \tableofcontents[sectionstyle=show,subsectionstyle=hide]
 \end{frame}
 
 \section{Introduction}
@@ -313,27 +313,26 @@
 
   \only<2>{
     \begin{figure}
-      \centering
-      \includegraphics[width=1.0\columnwidth]{energy_cg2d_slope_model}
-      \caption{Energy is exchanged between kinetic and potential in form.}
-    \end{figure}    
-  }
-
-  \only<3>{
-    \begin{figure}
       \includemedia[
         %width=1.0\columnwidth,
         %height=0.5625\columnwidth,
-        width=0.5\columnwidth,
-        height=0.28125\columnwidth,
-        addresource=amber2d.mp4,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=cg2d_2link_simulation.mp4,
         activate=pageopen,
-        flashvars={source=amber2d.mp4&loop=true&autoPlay=true}
+        flashvars={source=cg2d_2link_simulation.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
       \caption{Stable passive gaits can be found for a range of slopes.}
     \end{figure}    
   }
 
+  \only<3>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_cg2d_slope_model}
+      \caption{Energy is exchanged between kinetic and potential in form.}
+    \end{figure}    
+  }
 \end{frame}
 
 \begin{frame}
@@ -362,11 +361,25 @@
   }
   \only<2>{
     \begin{figure}
+      \includemedia[
+        %width=1.0\columnwidth,
+        %height=0.5625\columnwidth,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=cg2d_2link_simulation.mp4,
+        activate=pageopen,
+        flashvars={source=cg2d_2link_simulation.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+      \caption{Passive downhill gaits can be translated to flat ground with Controlled Symmetries.}
+    \end{figure}    
+  }
+  \only<3>{
+    \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_cg2d_slope_model}
       \caption{Energy of the shaped system is conserved.}
     \end{figure}    
-  }  
+  }
 \end{frame}
 
 \begin{frame}
@@ -417,10 +430,10 @@
     \begin{figure}
       \includemedia[
         width=1.0\columnwidth,
-        height=0.25\columnwidth,
-        addresource=cg2d_3link.mp4,
+        height=0.5\columnwidth,
+        addresource=cg2d_3link_simulation.mp4,
         activate=pageopen,
-        flashvars={source=cg2d_3link.mp4&loop=true&autoPlay=true}
+        flashvars={source=cg2d_3link_simulation.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
       \caption{Stable passive gaits can be found for a range of slopes.}
     \end{figure}
