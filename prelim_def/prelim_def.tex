@@ -8,7 +8,7 @@
   }
 }
 
-\usepackage{diagrams}
+\usepackage[PostScript]{diagrams}
 
 \usepackage{epsfig,psfrag,epstopdf}
 
@@ -50,11 +50,13 @@
 \section{Introduction}
 \showtoc
 
+\subsection{Motivation}
 \begin{frame}
   \frametitle{Goal}
   goal
 \end{frame}
 
+%\subsection{History}
 \begin{frame}[t]
   \only<1> {
     {\Large \bf Biomechanics}
@@ -104,7 +106,7 @@
 
 \begin{frame}
   \frametitle{History}
-  \begin{columns}[T]
+  \begin{columns}
 
     \begin{column}{.24\textwidth}
       \textcolor{blue}{Passive Walking:}
@@ -141,9 +143,14 @@
   \end{columns}
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Mechanics}
 \showtoc
 
+\subsection{Hybrid Systems}
 \begin{frame}
   \frametitle{Bipedal Models}
   \begin{figure}
@@ -158,8 +165,8 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Hybrid Systems}
-  \begin{columns}[t]
+  \frametitle{Modeling Hybrid Systems}
+  \begin{columns}
     \begin{column}{.63\textwidth}
       \begin{definition}
         A \alert{hybrid control system} is a tuple \vspace{-.3cm}
@@ -209,7 +216,7 @@
 
 \begin{frame}
   \frametitle{Swing Phase Dynamics}
-  \begin{columns}[t]
+  \begin{columns}
     \begin{column}{.55\textwidth}
       For Lagrangian $\Lagrangian$ with coordinates
       \begin{align*}
@@ -271,6 +278,7 @@
   \end{align*}
 \end{frame}
 
+\subsection{Solutions to Hybrid Systems}
 \begin{frame}
   \frametitle{Solutions to Dynamical Systems}
   dsys
@@ -444,6 +452,7 @@
 \section{Orbital Stabilization}
 \showtoc
 
+\subsection{Orbital Stabilization with Control Lyapunov Functions}
 \begin{frame}
   \frametitle{Orbital Stability}
   \begin{itemize}
@@ -578,6 +587,7 @@
   diagram
 \end{frame}
 
+\subsection{Functional Routhian Reduction}
 \begin{frame}
   \frametitle{History}
   \begin{description}[D]
@@ -684,7 +694,7 @@
 
 
 %%%%
-
+\subsection{Reduction Control Laws}
 \frame[t] {
   \frametitle{Sagittal Control Law: Reduced Dynamics Controller}
 
@@ -695,7 +705,7 @@
       \begin{column}{0.3\textwidth}
         \begin{figure}
           \centering
-          \includegraphics[height=4.5cm]{bodyplanes}
+          \includegraphics[height=4cm]{bodyplanes}
         \end{figure}
       \end{column}
       \begin{column}{0.6\textwidth}
@@ -724,56 +734,55 @@
           \textcolor{black}{\fbox{$\begin{array}{c}$2D Biped$\\$walking stably$\end{array}$}} && \\
     \end{diagram}}}
   }
-}
 
-%  \only<3> {
-%    \begin{itemize}
-%    \item  The Lagrangian of the 3D biped has the general form:
-%      \begin{eqnarray}
-%        \label{eq:submats}
-%        \lefteqn{\Lfd(\cq{},\cdq{}) = -\Vu \ + }\\
-%        \nonumber
-%        &&\frac{1}{2}
-%        \left(\begin{array}{c c}
-%          \dot{\theta}^T & \dot{\varphi}
-%        \end{array}\right)
-%        \underbrace{\left(\begin{array}{c c}
-%            \Mth & \Mphitheta^T(\theta,\varphi)\\
-%            \Mphitheta(\theta,\varphi) & \Mphi(\theta,\varphi)
-%          \end{array}\right)}_{\mMu}
-%        \left(\begin{array}{c}
-%          \dot{\theta}\\
-%          \dot{\varphi}
-%        \end{array}\right), \nonumber
-%      \end{eqnarray}
-%      \vspace{-5mm}
-%
-%    \item The Lagrangian of the sagittal restriction is given by:
-%      \begin{align*}
-%        \Lrd(\theta,\dot{\theta}) = \frac{1}{2} \dot{\theta}^T \Mth \dot{\theta} - \left.\Vu\right\vert_{\varphi=0},
-%      \end{align*}
-%
-%    \end{itemize}
-%  }
-%
-%  \only<4> {
-%    \vspace{-.1cm}
-%    \begin{itemize}
-%
-%    \item The Lagrangian of the sagittal restriction is given by:
-%      \begin{align*}
-%        \Lrd(\theta,\dot{\theta}) = \frac{1}{2} \dot{\theta}^T \Mth \dot{\theta} - \left.\Vu\right\vert_{\varphi=0},
-%      \end{align*}
-%
-%    \item This yields a control system: $(\fr,\gr)$.
-%
-%    \item \alert{Assume} there exists a control law (HIC), $\usagarg$, that results in stable 2D walking for the dynamical system:
-%      $$
-%      \flt = \fr(\theta, \dot{\theta}) + \gr(\theta) \usagarg.
-%      $$
-%
-%    \end{itemize}
-%  }
+  \only<3> {
+    \begin{itemize}
+    \item  The Lagrangian of the 3D biped has the general form:
+      \begin{eqnarray}
+        \label{eq:submats}
+        \lefteqn{\Lfd(\cq{},\cdq{}) = -\Vu \ + }\\
+        \nonumber
+        &&\frac{1}{2}
+        \left(\begin{array}{c c}
+          \dot{\theta}^T & \dot{\varphi}
+        \end{array}\right)
+        \underbrace{\left(\begin{array}{c c}
+            \Mth & \Mphitheta^T(\theta,\varphi)\\
+            \Mphitheta(\theta,\varphi) & \Mphi(\theta,\varphi)
+          \end{array}\right)}_{\mMu}
+        \left(\begin{array}{c}
+          \dot{\theta}\\
+          \dot{\varphi}
+        \end{array}\right), \nonumber
+      \end{eqnarray}
+      \vspace{-5mm}
+
+    \item The Lagrangian of the sagittal restriction is given by:
+      \begin{align*}
+        \Lrd(\theta,\dot{\theta}) = \frac{1}{2} \dot{\theta}^T \Mth \dot{\theta} - \left.\Vu\right\vert_{\varphi=0},
+      \end{align*}
+
+    \end{itemize}
+  }
+
+  \only<4> {
+    \vspace{-.1cm}
+    \begin{itemize}
+
+    \item The Lagrangian of the sagittal restriction is given by:
+      \begin{align*}
+        \Lrd(\theta,\dot{\theta}) = \frac{1}{2} \dot{\theta}^T \Mth \dot{\theta} - \left.\Vu\right\vert_{\varphi=0},
+      \end{align*}
+
+    \item This yields a control system: $(\fr,\gr)$.
+
+    \item \alert{Assume} there exists a control law, $\usagarg$, that results in stable 2D waking for the dynamical system:
+      \begin{align*}
+      \flt = \fr(\theta, \dot{\theta}) + \gr(\theta) \usagarg.
+      \end{align*}
+
+    \end{itemize}
+  }
 
 %\only<5> {
 %  \begin{figure}
@@ -785,6 +794,7 @@
 %  \end{figure}
 %}
 %
+}
 
 \frame[t] {
   \frametitle{$1^{\mathsf{st}}$ Reduction Control Law: Lagrangian Shaping Controller}
@@ -829,14 +839,137 @@
   }}
 }
 
-%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \section{Human-Inspired Control}
 \showtoc
 
+\subsection{Human-Inspired Control Framework}
+\frame{
+  \frametitle{Human Data Experiment}
+  \begin{columns}
+    \begin{column}{0.65\textwidth}
+      \begin{figure}
+        \centering
+        \vspace{-1cm}
+        \caption{Experimental setup showing sensor placement for human data acquisition}
+        \includegraphics[width=1.0\columnwidth]{labeled_diagram}
+      \end{figure}
+    \end{column}
+    \begin{column}{0.35\textwidth}
+      \begin{figure} \centering
+        \vspace{-1cm}
+        \caption{Human outputs}
+        \includegraphics[width=0.8\columnwidth]{robot_const}
+      \end{figure}
+    \end{column}
+  \end{columns}
+}
+
+\frame[t]{
+  \frametitle{Canonical Walking Functions}
+  The following function, termed a {\em canonical walking function}, fits human kinematics data quite accurately:
+  \begin{align}
+    \nonumber
+    y(t) &= e^{-\zeta \omega_{n} t} (c_{1} \cos (\omega_{d} t) + c_{2} \sin (\omega_{d} t)) + \hat{g}\\
+    \tag{CWF}
+    \label{eq:cwf}
+    y^{H}(t, A)&= e^{-a_{3} t} (a_{1} \cos (a_{2} t) + a_{4} \sin (a_{2} t)) + a_{5}
+  \end{align}
+  where,
+  \begin{itemize}
+  \item
+    $\zeta$ is the damping ratio,
+  \item
+    $\omega_{n}$, $\omega_{d}$ are the natural and damped natural frequencies, resp.,
+  \item
+    $c_{1}$ and $c_{2}$ are initial conditions,
+  \item
+    and $\alpha$ and $\hat{g}$ are from a particular solution for certain forcing.
+  \end{itemize}
+  Parameterize time using hip position:
+  \begin{align*}
+    \tau(\theta) := \frac{p_\mathit{hip}^{x}(\theta) - p_\mathit{hip}^{x}(\theta^{-})}{v_\mathit{hip}}
+  \end{align*}
+}
+
+\frame{
+  \frametitle{Selecting Human Outputs}
+  The following human kinematics outputs were selected:
+  \begin{enumerate}
+    {
+    \item[\HF{1}:] $\Oa$, {\em forward hip velocity}, i.e., the velocity of the $x$-position of the hip,
+    \item[\HF{2}:] $\Ob$, {\em swing leg slope}, i.e., the tangent of the angle between the $z$-axis and the projection of the line connecting the swing ankle and hip,
+    \item[\HF{3}:] $\Oc$, {\em stance knee relative angle},
+    \item[\HF{4}:] $\Od$, {\em swing knee relative angle},
+    \item[\HF{5}:] $\Oe$, {\em vertical torso angle}, the angle of the torso measured with respect to the vertical axis of the world frame.
+    }
+  \end{enumerate}
+
+  \vspace{1mm}
+  For convenience, define the actual and desired outputs:
+  \vspace{-1mm}
+  \begin{align*}
+    y_{1}^{a} = \Oa, \ y_{2}^{a} = \Ob, \ y_{3}^{a} = \Oc, \ y_{4}^{a} = \Od, \ y_{5}^{a} = \Oe,
+  \end{align*}
+  \vspace{-8mm}
+  \begin{align*}
+    y_{1}^{d} = y^{H}(\tau(\theta), A_1), \ \ldots, \ y_{5}^{d} = y^{H}(\tau(\theta), A_5)
+  \end{align*}
+}
+
+\frame{
+  \frametitle{Human-Inspired Optimization}
+  The form of \eqref{eq:cwf} allows it to encode certain outputs:
+\vspace{-4mm}
+  \begin{figure}
+    \centering
+    \caption{Canonical walking functions with parameters from \eqref{eq:opt}}
+    \vspace{-2mm}
+    \includegraphics[width=1.0\textwidth]{human_function_fits}
+    \vspace{-2mm}
+  \end{figure}
+  These outputs can be used to construct a {\em partial hybrid zero dynamics} parameterized by matrix A where outputs \textcolor{blue}{\HF{2}}--\textcolor{blue}{\HF{5}} of the robot and their derivatives are equal to the desired outputs for all time. The optimal parameters $A^*$ are found by solving
+  \begin{align}
+    \label{eq:opt}
+    \tag{$\mathcal{O}$}
+    A^{*} = \underset{A \in \R^{5 \times 5}}{\operatorname{argmin}} &  \:\: \mathrm{Cost}_{\mathrm{HD}}(A)  \\[-1mm]
+    \nonumber
+    \mathrm{s.t.} \quad & \ResetMapReduced(\GuardReduced \cap \HZD_{A}) \subset \PHZD_{A}
+  \end{align}
+}
+
+\frame {
+  \frametitle{Tracking the Partial Hybrid Zero Dynamics}
+  Instead of feedback linearization, use PD control as this will allow the reduction scheme posed in this paper to work properly:
+  \begin{align*}
+    \mathcal{K}_{2D}(\theta, \dot{\theta}) \! = \! k_p \left(\!\!
+    \begin{array}{c}
+      0\\
+      y_{d,2} - y_{a,2}\\
+      y_{d,3} - y_{a,3}\\
+      y_{d,4} - y_{a,4}\\
+      y_{d,5} - y_{a,5}
+    \end{array}\!\!\right)  + 
+    \blkdiag (k_p, k_d I_4)\left(\!\!
+    \begin{array}{c}
+      y_{d,1} - y_{a,1}\\
+      \dot{y}_{d,2} - \dot{y}_{a,2}\\
+      \dot{y}_{d,3} - \dot{y}_{a,3}\\
+      \dot{y}_{d,4} - \dot{y}_{a,4}\\
+      \dot{y}_{d,5} - \dot{y}_{a,5}
+    \end{array}\!\!\right)
+  \end{align*}
+
+  This control law will result in walking in simulation (and in experiment in other works) and will satisfy assumptions made by functional Routhian reduction (introduced later).
+}
+
+%%%%%%%%%%%%%%%%%%%%%%%
+
 \section{Conclusions}
 \showtoc
 
+\subsection{Remaining Work and Concluding Remarks}
 \begin{frame}
   \frametitle{Current Results}
   \begin{itemize}
@@ -844,15 +977,16 @@
   \item 2D 3-link
   \item 3D 3-link
   \item 2D 7-link
+  \item 2D 5-link with HIC
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Remaining Work}
   \begin{itemize}
-  \item 3D 7-link
-  \item Combine ES + HIC + FRR 
+  \item 3D 5-link ES+HIC+FRR
   \item Formal proof of energy shaping
+  \item 3D 7-link
   \end{itemize}
 \end{frame}
 

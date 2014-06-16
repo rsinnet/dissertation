@@ -27,4 +27,3 @@ for file_prefix in data['files']:
                     out_line = line.rstrip()
 
                 ofile.write(out_line + "\n")
-
