@@ -174,15 +174,15 @@
         where
         \begin{itemize}
         \item
-          $\Domain \subset \mathcal{X}$ is the {\em domain of admissiblity} with state space $\mathcal{X}$,
+          $\Domain \subset \mathcal{X}$ is the \blue{domain of admissiblity} with state space $\mathcal{X}$,
         \item
-          $\ControlSet$ is a set of {\em admissible controls},
+          $\ControlSet$ is a set of \blue{admissible controls},
         \item
-          $\Guard$ is a {\em guard} or {\em switching surface},
+          $\Guard$ is a \blue{guard} or \blue{switching surface},
         \item
-          $\ResetMap$ is a smooth {\em reset map},
+          $\ResetMap$ is a smooth \blue{reset map},
         \item
-          $(f, g)$ is a control system on $\Domain$: \vspace{-3mm}
+          $(f, g)$ is a \blue{control system} on $\Domain$: \vspace{-3mm}
           \begin{align*}
             \dot{x} = f(x) + g(x) \, u.
           \end{align*}
@@ -194,7 +194,7 @@
         \centering
         \includegraphics[width=.9\textwidth]{hsystem}\\
       \end{figure}
-      A \textcolor{blue}{simple hybrid system}:\vspace{-.3cm}
+      A \alert{simple hybrid system}:\vspace{-.3cm}
       $$\HS = \hsystem$$
     \end{column}
   \end{columns}
@@ -282,10 +282,28 @@
 \end{frame}
 
 \subsection{Solutions to Hybrid Systems}
-\begin{frame}
-  \frametitle{Solutions to Dynamical Systems}
-  dsys
+\begin{frame}[t]
+  \frametitle{Hybrid Flows}
+  A \alert{hybrid flow} of $\HS$ is a tuple
+  \begin{align*}
+    \chi^{\HS} = \left( \Delta, \mathscr{I}, \mathscr{C} \right),
+  \end{align*}
+  \vspace{-2em}
+  \begin{itemize}
+    \item $\Delta = \{0, 1, 2, \ldots\} \subseteq \Nat$ is a finite or infinite \blue{indexing set},
+    \item $\mathscr{I} = \{I_{i} \}_{i \in \Delta}$ is a \blue{hybrid interval} where $I_{i} = [\tau_{i}, \tau_{i + 1}]$,
+    \item $\mathscr{C} = \{c_{i} \}_{i \in \Delta}$ is a \blue{collection of solutions} of $f$, i.e., ${\dot c}_{i}(t) = f(c_{i}(t))$ $\forall i \in \Delta$.
+  \end{itemize}
+
+  \only<2>{
+    In addition, for every $i, i + 1 \in \Delta$, it is required that
+    \begin{enumerate}
+    \item $c_{i}(\tau_{i+1}) \in G$ and
+    \item $\Delta(c_{i}(\tau_{i+1})) = c_{i+1}(\tau_{i+1})$
+    \end{enumerate}
+  }
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Periodic Orbits}
