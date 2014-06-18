@@ -205,13 +205,16 @@
   Mechanical systems are defined by:
   \begin{itemize}
   \item Kinetic energy, $T : T\sQ \to \R^+$,\\
-  \item  Potential energy, $U : \sQ \to \R$,
+  \item Potential energy, $U : \sQ \to \R$,
   \end{itemize}
-  which together comprise the total energy,
+  which together comprise the Lagrangian,
   \begin{align*}
-    E(q, \dot q) = T(q, \dot q) + U(q).
+    \Lagrangian(q, \dot q) = T(q, \dot q) - U(q).
   \end{align*}
-  In a Hamiltonian system, energy is conserved and thus the dynamics reflects the flow of energy between $T(q, \dot q)$ and $U(q)$.
+  Dynamical motion in such a system with external forcing $F = B(q) u$ is governed by the Euler--Lagrange equation:
+  \begin{align*}
+    \frac{d}{dt} \pd{\Lagrangian}{\dq} - \pd{\Lagrangian}{\q} = B(q) u.
+  \end{align*}
 \end{frame}
 
 \begin{frame}
@@ -222,7 +225,7 @@
       \begin{align*}
         x = (\q^{T}, \dq^{T})^{T} \in T\ConfigurationSpace,
       \end{align*}
-      the principal of least action allows one to construct a dynamic model:
+      the dynamic model has the form
       \begin{align*}
         \D(\q) \, \ddq + \C(\q, \dq) \, \dq + \G(\q) = B(\q) \, u,
       \end{align*}
@@ -290,7 +293,15 @@
 
 \begin{frame}
   \frametitle{Conservative Systems}
-  csys
+  For a conservative system, total energy is conserved; i.e.:
+  \begin{align*}
+    E_{c} &= T(q, \dot q) + U(q)\\
+    &= E(q(0), \dot q(0)) = E_{0}
+  \end{align*}
+  Dynamical motion for such a system relies on the interplay between kinetic and potential energy, which is expressed in the Euler-Lagrange equation,
+  \begin{align*}
+    \frac{d}{dt} \pd{\Lagrangian}{\dq} - \pd{\Lagrangian}{\q} = 0.
+  \end{align*}
 \end{frame}
 
 
@@ -343,6 +354,18 @@
   }
 \end{frame}
 
+
+\begin{frame}
+  \frametitle{Nonconservative Systems}
+  For a nonconservative system, energy flows out of the system at a rate of $F_{\nc} \cdot dq$. Thus, the following quantity is conserved:
+  \begin{align*}
+    E_{c} &= T(q, \dot q) + U(q) - \int_{t_{0}}^{t_{1}} \! F_{\nc} \cdot dq\\
+    &= E(q(0), \dot q(0)) = E_{0}
+  \end{align*}
+  This equation expresses the interplay between kinetic and potential energy and the flow of energy into and out of the system.
+\end{frame}
+
+
 \begin{frame}
   \frametitle{Example: Active Compass-Gait Biped}
   \only<1>{
@@ -350,12 +373,13 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = 0
+        M(q) \ddot q + H(q, \dot q) = 0.
       \end{align*}
-      Control Law:
+      Controlled Symmetries:
       \begin{align*}
-        u &= G(q) - G(\Psi(q)).
+        u &= G(q) - G(\Psi_{\gamma}(q))
       \end{align*}
+      where $\Psi : \S \times \R \to \sQ$ rotates the frame of gravity by $\gamma$.
 
       \column{1.5in}
       \begin{figure}
@@ -388,16 +412,6 @@
       \caption{Energy of the shaped system is conserved.}
     \end{figure}    
   }
-\end{frame}
-
-\begin{frame}
-  \frametitle{Nonconservative Systems}
-  For a nonconservative system, energy flows out of the system at a rate of $F_{\nc} \cdot dq$. Thus, the following quantity is conserved:
-  \begin{align*}
-    E_{c} &= T(q, \dot q) + U(q) - \int_{t_{0}}^{t_{1}} \! F_{\nc} \cdot dq\\
-    &= E(q(0), \dot q(0)) = E_{0}
-  \end{align*}
-  This equation expresses the interplay between kinetic and potential energy and the flow of energy into and out of the system.
 \end{frame}
 
 \begin{frame}
