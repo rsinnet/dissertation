@@ -584,6 +584,29 @@
 
 \begin{frame}
   \frametitle{Example: 3-Link Biped}
+  \only<1>{
+        \begin{columns}
+      \column{1.5in}
+      Dynamic Model:
+      \begin{align*}
+        M(q) \ddot q + H(q, \dot q) = 0
+      \end{align*}
+      Control Law:
+      \begin{align*}
+        u_1 &=-k_{d} (\dot \vartheta_{T}^{a})\\
+        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}),\\
+        u_2 &= G(q) - G(\Psi(q)).
+      \end{align*}
+      \column{1.5in}
+      \begin{figure}
+        \centering
+        \def\svgwidth{1.0\columnwidth}
+        \input{figures/cg2d-3link-model.eps_latex}
+        \vspace{-2em}
+        \caption{3-link biped configuration.}
+      \end{figure}
+    \end{columns}
+  }
   \only<2>{
     \begin{figure}
       \centering
@@ -907,9 +930,28 @@
   \end{align*}
 }
 
+\begin{frame}
+  \frametitle{Example: 5-Link Biped}
+  \begin{columns}
+    \column{1.5in}
+    Dynamic Model:
+    \begin{align*}
+      M(q) \ddot q + H(q, \dot q) = 0
+    \end{align*}
+    \column{1.5in}
+    \begin{figure}
+      \centering
+      \def\svgwidth{1.0\columnwidth}
+      \input{figures/cg2d-5link-model.eps_latex}
+      \vspace{-2em}
+      \caption{5-link biped configuration.}
+    \end{figure}
+  \end{columns}
+\end{frame}
+
 \frame{
   \frametitle{Selecting Human Outputs}
-  The following human kinematics outputs were selected:
+  The following human kinematics outputs are viable:
   \begin{enumerate}
     {
     \item[\HF{1}:] $\Oa$, {\em forward hip velocity}, i.e., the velocity of the $x$-position of the hip,
