@@ -558,7 +558,7 @@
   \begin{align*}
     2 \eta(x) \left(L_f \eta(x) + L_g \eta(x) \, \mu(x) \right) + \epsilon \eta^2(x) \leq \nu \delta(x)
   \end{align*}
-  where $\nu$ is used to weight the relaxation.
+  where the real constant $\nu > 0$ is used to weight the relaxation.
 \end{frame}
 
 \begin{frame}[t]
@@ -575,11 +575,11 @@
   where \eqref{clf} imposes the control Lyapunv function. To encode the dynamics of the system under control input ${\bar u}(x)$, select
   \begin{align*}
     H = \left(\begin{array}{c c}\nu & 0\\ 0 & I\end{array}\right), & \qquad
-      h(q, \dot q) = \left(\begin{array}{c} 0\\ -2 \, \bar u(q, \dot q) \end{array}\right),\\
+      h(x) = \left(\begin{array}{c} 0\\ -2 \, \bar u(x) \end{array}\right),\\
       \Aclf = \left(\begin{array}{c c}
-        -1 & 2 \eta L_{g} \eta
+        -1 & 2 \eta(x) \, L_{g} \eta(x)
       \end{array}\right), & \qquad
-      \bclf = -\epsilon \eta^{2} - 2\eta L_{f} \eta.
+      \bclf = -\epsilon \eta^{2}(x) - 2\eta(x) \, L_{f} \eta(x).
   \end{align*}
 \end{frame}
 
@@ -977,7 +977,7 @@
 
 \frame[t]{
   \frametitle{Canonical Walking Functions}
-  The following function, termed a {\em canonical walking function}, fits human kinematics data quite accurately:
+  The following function, termed the \blue{canonical walking function}, fits human kinematics data quite accurately:
   \begin{align}
     \nonumber
     y(t) &= e^{-\zeta \omega_{n} t} (c_{1} \cos (\omega_{d} t) + c_{2} \sin (\omega_{d} t)) + \hat{g}\\
@@ -994,7 +994,7 @@
   \item
     $c_{1}$ and $c_{2}$ are initial conditions,
   \item
-    and $\alpha$ and $\hat{g}$ are from a particular solution for certain forcing.
+    and $\hat{g}$ is from a particular solution for constant forcing.
   \end{itemize}
   Parameterize time using hip position:
   \begin{align*}
@@ -1026,11 +1026,11 @@
   The following human kinematics outputs are viable:
   \begin{enumerate}
     {
-    \item[\HF{1}:] $\Oa$, {\em forward hip velocity}, i.e., the velocity of the $x$-position of the hip,
-    \item[\HF{2}:] $\Ob$, {\em swing leg slope}, i.e., the tangent of the angle between the $z$-axis and the projection of the line connecting the swing ankle and hip,
-    \item[\HF{3}:] $\Oc$, {\em stance knee relative angle},
-    \item[\HF{4}:] $\Od$, {\em swing knee relative angle},
-    \item[\HF{5}:] $\Oe$, {\em vertical torso angle}, the angle of the torso measured with respect to the vertical axis of the world frame.
+    \item[\HF{1}:] $\Oa$, \blue{forward hip velocity}, i.e., the velocity of the $x$-position of the hip,
+    \item[\HF{2}:] $\Ob$, \blue{swing leg slope}, i.e., the tangent of the angle between the $z$-axis and the projection of the line connecting the swing ankle and hip,
+    \item[\HF{3}:] $\Oc$, \blue{stance knee relative angle},
+    \item[\HF{4}:] $\Od$, \blue{swing knee relative angle},
+    \item[\HF{5}:] $\Oe$, \blue{vertical torso angle}, the angle of the torso measured with respect to the vertical axis of the world frame.
     }
   \end{enumerate}
 
@@ -1057,7 +1057,7 @@
     \includegraphics[width=1.0\textwidth]{human_function_fits}
     \vspace{-2mm}
   \end{figure}
-  These outputs can be used to construct a {\em partial hybrid zero dynamics} parameterized by matrix A where outputs \textcolor{blue}{\HF{2}}--\textcolor{blue}{\HF{5}} of the robot and their derivatives are equal to the desired outputs for all time. The optimal parameters $A^*$ are found by solving
+  These outputs can be used to construct a \blue{partial hybrid zero dynamics} parameterized by matrix A where outputs \textcolor{blue}{\HF{2}}--\textcolor{blue}{\HF{5}} of the robot and their derivatives are equal to the desired outputs for all time. The optimal parameters $A^*$ are found by solving
   \begin{align}
     \label{eq:opt}
     \tag{$\mathcal{O}$}
