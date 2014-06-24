@@ -6,7 +6,7 @@ EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 
 all: $(PROJNAME).pdf
 
-$(PROJNAME).pdf: $(PROJNAME).tex figures/*.pdf figures/*.eps $(EPS_LATEX) $(PROJNAME).sty
+$(PROJNAME).pdf: $(PROJNAME).tex sections/*.tex figures/*.pdf figures/*.eps $(EPS_LATEX) $(PROJNAME).sty
 	$(LATEX_CMD) $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
 
