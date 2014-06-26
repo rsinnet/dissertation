@@ -73,9 +73,8 @@
   \end{align*}
   We can relax this condition by augmenting the optimization space with $\delta \in \R$ and requiring
   \begin{align*}
-    2 \eta(x) \left(L_f \eta(x) + L_g \eta(x) \, \mu(x) \right) + \epsilon \eta^2(x) \leq \nu \delta(x)
+    2 \eta(x) \left(L_f \eta(x) + L_g \eta(x) \, \mu(x) \right) + \epsilon \eta^2(x) \leq \delta(x).
   \end{align*}
-  where the real constant $\nu > 0$ is used to weight the relaxation.
 \end{frame}
 
 \begin{frame}[t]
@@ -91,15 +90,23 @@
   \end{align}
   where \eqref{clf} imposes the control Lyapunv function. To encode the dynamics of the system under control input ${\bar u}(x)$, select
   \begin{align*}
-    H = \left(\begin{array}{c c}\nu & 0\\ 0 & I\end{array}\right), & \qquad
+    H = \left(\begin{array}{c c}\nu & 0\\ 0 & I\end{array}\right), & \quad
       h(x) = \left(\begin{array}{c} 0\\ -2 \, \bar u(x) \end{array}\right),\\
       \Aclf = \left(\begin{array}{c c}
         -1 & 2 \eta(x) \, L_{g} \eta(x)
-      \end{array}\right), & \qquad
+      \end{array}\right), & \quad
       \bclf = -\epsilon \eta^{2}(x) - 2\eta(x) \, L_{f} \eta(x).
   \end{align*}
+  with positive weighting coefficient $\nu \in \R$.
 \end{frame}
 
+\begin{frame}
+  \frametitle{Conservative Systems}
+  For non-dissipative systems, total energy functions as the necessary conserved energy function,
+  \begin{align*}
+    E_{c}(x) = T(x) + U(x).
+  \end{align*}
+\end{frame}
 
 \begin{frame}
   \frametitle{Example: Compass Gait as a Shaped System}

@@ -105,7 +105,7 @@
     \includegraphics[width=1.0\textwidth]{human_function_fits}
     \vspace{-2mm}
   \end{figure}
-  These outputs can be used to construct a \blue{partial hybrid zero dynamics} parameterized by matrix A where outputs \textcolor{blue}{\HF{2}}--\textcolor{blue}{\HF{5}} of the robot and their derivatives are equal to the desired outputs for all time. The optimal parameters $A^*$ are found by solving
+  These outputs can be used to construct a \blue{partial hybrid zero dynamics} parameterized by matrix $A$ where outputs \textcolor{blue}{\HF{2}}--\textcolor{blue}{\HF{5}} of the robot are equal to the desired outputs for all time. The optimal parameters $A^*$ are found by solving
   \begin{align}
     \label{eq:opt}
     \tag{$\mathcal{O}$}
@@ -115,9 +115,9 @@
   \end{align}
 }
 
-\frame {
+\begin{frame}
   \frametitle{Tracking the Partial Hybrid Zero Dynamics}
-  Instead of feedback linearization, use PD control as this will allow the reduction scheme posed in this paper to work properly:
+  Tracking can be accomplished with a variety of control schemes. PD control is interesting due to its model-independent nature:
   \begin{align*}
     \mathcal{K}_{2D}(\theta, \dot{\theta}) \! = \! k_p \left(\!\!
     \begin{array}{c}
@@ -138,4 +138,18 @@
   \end{align*}
 
   This control law will result in walking in simulation (and in experiment in other works) and will satisfy assumptions made by functional Routhian reduction (introduced later).
-}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Procedure Summary}
+   \begin{figure}
+      \includemedia[
+        width=0.8\columnwidth,
+        height=0.45\columnwidth,
+        addresource=human_experiment.mp4,
+        activate=pageopen,
+        flashvars={source=human_experiment.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+      \caption{Human-inspired control produces robotic gaits from human data.}
+    \end{figure}
+\end{frame}
