@@ -27,9 +27,9 @@
       \end{align*}
       Assume there exists a control law ${\bar u}(x)$ which creates a limit cycle in the closed-loop dynamics,
       \begin{align*}
-        {\bar f}(x) = f(x) + g(x) {\bar u}(x).
+        {\bar f}(x) = f(\q, \dq) + g(\q) {\bar u}(\q, \dq).
       \end{align*}
-      Also assume there exists an energy function $E_{c}(x)$ which is conserved, i.e., $E(x) \equiv E_{0}$ on the limit cycle.
+      Also assume there exists an energy function $E_{c} : T\ConfigurationSpace \to \R$ which is conserved, i.e., $E_{c}(\q, \dq) \equiv E_{0}$ on the limit cycle.
     \end{block}
   }
 
@@ -39,13 +39,13 @@
     \end{block}
     
     \begin{block}{Control Objective}
-      Choose control input $\mu(x)$ such that $\| \mu(x) - {\bar u}(x) \|$ is minimized and $E_{c}(x(t)) \to E_0$ as $t \to \infty$.
+      Choose control input $\mu(\q, \dq)$ such that $\| \mu(\q, \dq) - {\bar u}(\q, \dq) \|$ is minimized and $E_{c}(\q(t), \dq(t)) \to E_0$ as $t \to \infty$.
     \end{block}
 
     \begin{block}{Exponential Convergence}
       To achieve exponential stabilization, $E_{c}(x(t))$ should satifisy
       \begin{align*}
-        E_{c}(x(t)) \leq E_{c}(x(t_{0})) e^{\beta t} \mbox{ for } t \geq t_{0}.
+        E_{c}(\q(t), \dq(t)) \leq E_{c}(\q(t_{0}), \dq(t_{0})) e^{-\beta t} \mbox{ for } t \geq t_{0}, \beta > 0.
       \end{align*}
     \end{block}
   }
@@ -100,12 +100,14 @@
   with positive weighting coefficient $\nu \in \R$.
 \end{frame}
 
+\subsection{Types of Systems}
 \begin{frame}
   \frametitle{Conservative Systems}
-  For non-dissipative systems, total energy functions as the necessary conserved energy function,
+  For hybrid systems with non-dissipative continuous dynamics, the total energy functions as the necessary conserved energy function,
   \begin{align*}
     E_{c}(x) = T(x) + U(x).
   \end{align*}
+  This ties in with the method of \blue{Controlled Lagrangians}, increasing the robustness of Lagrangian shaping.
 \end{frame}
 
 \begin{frame}
@@ -115,7 +117,7 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = 0
+        M(q) \ddot q + H(q, \dot q) = B(q) u
       \end{align*}
       Control Law:
       \begin{align*}
@@ -170,12 +172,24 @@
       \bclf = -\epsilon \eta^{2} - 2\eta L_{f} \eta
     \end{align*}
   }
+
+  \only<4>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.8\columnwidth]{es_comparison_3link}
+      \caption{Demonstration of energy shaping on 3-link biped.}
+    \end{figure}
+  }
 \end{frame}
 
 
 \begin{frame}
   \frametitle{Nonconservative Systems}
-  nconsys
+  For hybrid systems with nonconservative continuous dynamics, the energy exchange must be considered, leading to the conserved energy function
+  \begin{align*}
+    E_{c}(\q, \dq) = T(\q, \dq) + U(q) + \int_{t_{0}}^{t} \! F \cdot \frac{d\q}{d\tau} \ d\tau.
+  \end{align*}
+  Since the energy dynamics is captured in its entirety, this function can be used for any forced mechanical system.
 \end{frame}
 
 \begin{frame}
@@ -207,7 +221,62 @@
     \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_conserved_cg2d_3link}
-      \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{0}^{t} F_{nc} \cdot dq$, is conserved.}
+      \caption{The quantity, $E_{0}(\q, \dq) = T(\q, \dq) + V(\q) + \int_{t_{0}}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
+    \end{figure}
+  }
+  \only<3>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=0.8\columnwidth]{es_comparison_3link}
+      \caption{Demonstration of energy shaping on 3-link biped.}
+    \end{figure}
+  }
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Multi-Domain Hybrid Systems}
+  \begin{itemize}
+  \item Complex hybrid systems are made by stitching together domains.
+  \item Conserved energy is unique to each domain, i.e.,
+    \begin{align*}
+      E_0^{1} \to E_{0}^{2} \to \cdots \to E_{0}^{n-1} \to E_{0}^{n} \to E_{0}^{1} \to \cdots
+    \end{align*}
+  \item Each domain shapes to a specific conserved energy level.
+  \end{itemize}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Example: 7-Link Biped with Feet}
+  \only<1>{
+    \begin{columns}
+      \column{1.5in}
+      Dynamic Model:
+      \begin{align*}
+        M(q) \ddot q + H(q, \dot q) = J^{T}(q) \lambda + B(q) u
+      \end{align*}
+      Control Law:
+      \begin{align*}
+        u_1 &=-k_{d} (\dot \vartheta_{T}^{a})\\
+        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}),\\
+        u_2 &= G(q) - G(\Psi(q)).
+      \end{align*}
+      \column{1.5in}
+      \begin{figure}
+        \centering
+        \def\svgwidth{1.0\columnwidth}
+        \input{figures/cg2d-3link-model.eps_latex}
+        \vspace{-2em}
+        \caption{3-link biped configuration.}
+      \end{figure}
+    \end{columns}
+  }
+  \only<2>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_conserved_cg2d_3link}
+      \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{t_0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
     \end{figure}
   }
 \end{frame}
