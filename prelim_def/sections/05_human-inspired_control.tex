@@ -142,14 +142,35 @@
 
 \begin{frame}
   \frametitle{Procedure Summary}
-   \begin{figure}
-      \includemedia[
-        width=0.8\columnwidth,
-        height=0.45\columnwidth,
-        addresource=human_experiment.mp4,
-        activate=pageopen,
-        flashvars={source=human_experiment.mp4&loop=true&autoPlay=true}
-      ]{}{VPlayer9.swf}
-      \caption{Human-inspired control produces robotic gaits from human data.}
+  \begin{figure}
+    \includemedia[
+      width=0.8\columnwidth,
+      height=0.45\columnwidth,
+      addresource=human_experiment.mp4,
+      activate=pageopen,
+      flashvars={source=human_experiment.mp4&loop=true&autoPlay=true}
+    ]{}{VPlayer9.swf}
+    \caption{Human-inspired control produces robotic gaits from human data.}
+  \end{figure}
+\end{frame}
+
+\begin{frame}
+  \frametitle{3D Simulation Results}
+  \only<1>{
+    \begin{figure}
+      \centering
+      \caption{Walking gait for 3D model with $v_\mathit{hip} = .6$ m/s}
+      \includegraphics[width=.9\textwidth]{hic_frr_tiles_3d}
     \end{figure}
+  }
+  \only<2>{
+    \begin{figure}
+      \centering
+      \caption{Phase portraits, human outputs, and actuator torques}
+      \includegraphics[width=.4\textwidth]{hic_frr_pp_3d_theta}\quad
+      \includegraphics[width=.25\textwidth]{hic_frr_pp_3d_phi}\\[.3em]
+      \includegraphics[width=.4\textwidth]{hic_frr_outputs_3d}\quad
+      \includegraphics[width=.4\textwidth]{hic_frr_torques_3d}
+    \end{figure}
+  }
 \end{frame}
