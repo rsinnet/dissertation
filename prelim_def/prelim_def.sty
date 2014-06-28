@@ -1,3 +1,15 @@
+\newcommand{\newgetenv}[2][]{%
+  \CatchFileEdef{\temp}{"|kpsewhich --var-value #2"}{\endlinechar=-1\relax}
+  \if\relax\detokenize{#1}\relax\temp\else\edef#1{\temp}\fi%
+}%
+
+\newgetenv[\PRELIMSECA]{PRELIMSECA}%
+\newgetenv[\PRELIMSECB]{PRELIMSECB}%
+\newgetenv[\PRELIMSECC]{PRELIMSECC}%
+\newgetenv[\PRELIMSECD]{PRELIMSECD}%
+\newgetenv[\PRELIMSECE]{PRELIMSECE}%
+\newgetenv[\PRELIMSECF]{PRELIMSECF}%
+
 % Show the table of contents for the current section.
 \newcommand{\showtoc}{
   \frame{

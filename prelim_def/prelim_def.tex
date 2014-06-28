@@ -1,6 +1,6 @@
 \documentclass{beamer}
 \usepackage{amssymb,amsmath,mathrsfs}
-
+\usepackage{catchfile,etoolbox}
 \usepackage[PostScript]{diagrams}
 
 \usepackage{epsfig,psfrag,epstopdf}
@@ -36,11 +36,17 @@
   \tableofcontents[sectionstyle=show,subsectionstyle=hide]
 \end{frame}
 
-\input{sections/01_intro}
-\input{sections/02_mechanics}
-\input{sections/03_orbital_stabilization}
-\input{sections/04_geometric_reduction}
-\input{sections/05_human-inspired_control}
-\input{sections/06_conclusions}
+\ifdefstring{\PRELIMSECA}{1}{\input{sections/01_intro}}{}
+\ifdefstring{\PRELIMSECB}{1}{\input{sections/02_mechanics}}{}
+\ifdefstring{\PRELIMSECC}{1}{\input{sections/03_orbital_stabilization}}{}
+\ifdefstring{\PRELIMSECD}{1}{\input{sections/04_geometric_reduction}}{}
+\ifdefstring{\PRELIMSECE}{1}{\input{sections/05_human-inspired_control}}{}
+\ifdefstring{\PRELIMSECF}{1}{\input{sections/06_conclusions}}{}
+
+%\input{sections/02_mechanics}
+%\input{sections/03_orbital_stabilization}
+%\input{sections/04_geometric_reduction}
+%\input{sections/05_human-inspired_control}
+%\input{sections/06_conclusions}
 
 \end{document}
