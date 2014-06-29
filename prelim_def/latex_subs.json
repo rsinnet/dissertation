@@ -1,6 +1,21 @@
 {
     "files": [
 	{
+	    "cg2d-7link-model":
+	    {
+		"q1": "$q_1$",
+		"q2": "$q_2$",
+		"q3": "$q_3$",
+		"q4": "$q_4$",
+		"q5": "$q_5$",
+		"q7": "$q_6$",
+		"q6": "$q_7$",
+		"M": "$\mathcal{M}_T$",
+		"mc": "$\mathcal{M}_c$",
+		"mt": "$\mathcal{M}_t$",
+		"mf": "$\mathcal{M}_f$"
+	    }
+	},
 	    "cg2d-5link-model":
 	    {
 		"q1": "$q_1$",
