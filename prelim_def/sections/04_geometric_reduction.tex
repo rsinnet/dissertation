@@ -1,12 +1,141 @@
 \section{Geometric Reduction}
 \showtoc
 
-\begin{frame}
-  \frametitle{Overview}
-  diagram
-\end{frame}
-
 \subsection{Functional Routhian Reduction}
+\frame[t]{ \frametitle{Overview---How to Walk in Five Easy Steps}
+  \only<1>{
+
+    \begin{description}[D]
+
+    \item[ Step 1:]  Consider a 2D biped.
+    \end{description}
+
+
+    {\scriptsize
+      \begin{diagram}[width=5em,height=5em]
+        && \\
+        && \\
+        \fbox{$\begin{array}{c}$2D Biped$\end{array}$}  &   & \hspace{2cm}\\
+      \end{diagram}
+    }
+
+
+  }
+
+  \only<2>{
+
+
+    \begin{description}[D]
+
+    \item[ Step 2:]  Use human-inspired control to obtain stable walking gaits.
+
+    \end{description}
+
+    {\scriptsize
+      \begin{diagram}[width=5em,height=5em]
+        && \\
+        && \\
+        \fbox{$\begin{array}{c}$2D Biped$\end{array}$} &
+        \rTo^{\mathsf{Sagittal}}_{\mathsf{Control}} &
+        \fbox{$\begin{array}{c}$2D Biped$\\$walking stably$\end{array}$} \\
+      \end{diagram}
+    }
+
+
+
+  }
+
+  \only<3>{
+
+    \begin{description}[D]
+    \item[ Step 3:]  For a 3D biped, utilize \alert{energy shaping} so that hybrid reduction can be applied.
+    \end{description}
+
+    {\scriptsize
+      \begin{diagram}[width=5em,height=5em]
+        \fbox{$\begin{array}{c}$3D Biped$ \end{array}$} &
+        \rTo^{\mathsf{Energy}}_{\mathsf{Shaping}} &
+        \fbox{$\begin{array}{c}$3D Biped$\\$amenable to$\\$reduction$\end{array}$} \\
+        && \\
+        \fbox{$\begin{array}{c}$2D Biped$\end{array}$} &
+        \rTo^{\mathsf{Sagittal}}_{\mathsf{Control}} &
+        \fbox{$\begin{array}{c}$2D Biped$\\$walking stably$\end{array}$} \\
+      \end{diagram}
+    }
+
+
+
+  }
+
+  \only<4>{
+
+    \begin{description}[D]
+    \item[ Step 4:]  Apply \alert{hybrid reduction}---the reduced system is the 2D biped
+      with walking gaits.
+    \end{description}
+
+
+    {\scriptsize
+      \begin{diagram}[width=5em,height=5em]
+        \fbox{$\begin{array}{c}$3D Biped$ \end{array}$} &
+        \rTo^{\mathsf{Energy}}_{\mathsf{Shaping}} &
+        \fbox{$\begin{array}{c}$3D Biped$\\$amenable to$\\$reduction$\end{array}$}\\ &&
+        \uTo  \dTo_{\begin{array}{c}$Hybrid$\\$Reduction$\end{array}} \\
+        \fbox{$\begin{array}{c}$2D Biped$\end{array}$} &
+        \rTo^{\mathsf{Sagittal}}_{\mathsf{Control}}  &  \fbox{$\begin{array}{c}$2D Biped$\\$walking stably$\end{array}$}\\
+      \end{diagram}
+    }
+
+
+  }
+
+  \only<5>{
+
+    \begin{description}[D]
+    \item[ Step 5:]  Utilize \alert{feedback linearization} and \alert{hybrid zero dynamics} to stabilize
+      the unstable walking gaits.
+    \end{description}
+
+
+    {\scriptsize
+      \begin{diagram}[width=5em,height=5em]
+        \fbox{$\begin{array}{c}$3D Biped$ \end{array}$} &
+        \rTo^{\mathsf{Energy}}_{\mathsf{Shaping}} &
+        \fbox{$\begin{array}{c}$3D Biped$\\$amenable to$\\$reduction$\end{array}$} &
+        \rTo^{\mathsf{Hybrid}}_{\mathsf{Zero \:\:  Dynamics}} &
+        \fbox{$\begin{array}{c}$3D Biped$\\$walking stably$\end{array}$}\\ &&
+        \uTo \dTo_{\begin{array}{c}$Hybrid$\\$Reduction$\end{array}} && \\
+        \fbox{$\begin{array}{c}$2D Biped$\end{array}$} &
+        \rTo^{\mathsf{Sagittal}}_{\mathsf{Control}} &
+        \fbox{$\begin{array}{c}$2D Biped$\\$walking stably$\end{array}$} && \\
+      \end{diagram}
+    }
+
+
+
+  }
+
+  \only<6>{
+    \begin{block}{The End Result}
+      A control law that that yields stable walking gaits for a 3D biped, given stable walking gaits for a planar equivalent 2D biped.
+    \end{block}
+           {\scriptsize
+             \begin{diagram}[width=5em,height=5em]
+               \fbox{$\begin{array}{c}$3D Biped$ \end{array}$} &
+               \rTo^{\mathsf{Energy}}_{\mathsf{Shaping}} &
+               \fbox{$\begin{array}{c}$3D Biped$\\$amenable to$\\$reduction$\end{array}$} &
+               \rTo^{\mathsf{Hybrid}}_{\mathsf{Zero \:\:  Dynamics}} &
+               \fbox{$\begin{array}{c}$3D Biped$\\$walking stably$\end{array}$}\\ &&
+               \uTo \dTo_{\begin{array}{c}$Hybrid$\\$Reduction$\end{array}} && \\
+               \fbox{$\begin{array}{c}$2D Biped$\end{array}$} &
+               \rTo^{\mathsf{Sagittal}}_{\mathsf{Control}} &
+               \fbox{$\begin{array}{c}$2D Biped$\\$walking stably$\end{array}$} && \\
+             \end{diagram}
+           }
+  }
+
+}
+
 \begin{frame}
   \frametitle{Setup}
   \begin{description}[D]
