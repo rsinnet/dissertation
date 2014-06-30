@@ -54,4 +54,4 @@ clean:
 	$(PROJNAME).log $(PROJNAME).blg $(PROJNAME).out $(PROJNAME).nav \
 	$(PROJNAME).snm figures/*-eps-converted-to.pdf figures/*.eps_latex
 
-.PHONY: all clean all-files
+.PHONY: all clean all-files 1 2 3 4 5 6 sec-1 sec-2 sec-3 sec-4 sec-5 sec-6

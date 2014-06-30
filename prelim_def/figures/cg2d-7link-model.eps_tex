@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{161.35090037bp}%
+    \setlength{\unitlength}{172.8183076bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,18 +48,18 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,1.31544913)%
+  \begin{picture}(1,1.29247246)%
     \put(0,0){\includegraphics[width=\unitlength]{cg2d-7link-model.eps}}%
-    \put(0.41215171,0.25770363){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mf}}}%
-    \put(0.27767554,0.27482273){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q2}}}%
-    \put(0.43433956,1.27930411){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{M}}}%
-    \put(0.57159863,0.28378575){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mc}}}%
-    \put(0.59559479,0.95218004){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q4}}}%
-    \put(0.27134759,0.95042711){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q5}}}%
-    \put(0.49196248,0.55942571){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mt}}}%
-    \put(0.26850522,0.61708691){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q3}}}%
-    \put(0.70314287,0.64292694){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q6}}}%
-    \put(-0.00273569,0.16219441){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q1}}}%
-    \put(0.82224485,0.37139536){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q7}}}%
+    \put(0.41342078,0.25173416){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mf}}}%
+    \put(0.29776181,0.27761132){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q2}}}%
+    \put(0.4514507,1.25872585){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{M}}}%
+    \put(0.59196926,0.25382454){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mc}}}%
+    \put(0.63168749,0.88899787){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q4}}}%
+    \put(0.3289558,0.88736125){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q5}}}%
+    \put(0.4842255,0.49757016){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{mt}}}%
+    \put(0.22736309,0.58108694){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q3}}}%
+    \put(0.74446653,0.65715524){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q6}}}%
+    \put(-0.00255416,0.21203218){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q1}}}%
+    \put(0.85937565,0.38756369){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{q7}}}%
   \end{picture}%
 \endgroup%

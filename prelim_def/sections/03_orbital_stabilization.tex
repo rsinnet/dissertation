@@ -176,8 +176,24 @@
   \only<4>{
     \begin{figure}
       \centering
-      \includegraphics[width=1.0\columnwidth]{es_comparison_3link}
-      \caption{Demonstration of energy shaping on 3-link biped.}
+      \includegraphics[width=1.0\columnwidth]{es_comparison_2link_conservative}
+      \caption{Demonstration of energy shaping on 2-link biped.}
+    \end{figure}
+  }
+
+  \only<5>{
+    \begin{figure}
+      \centering
+      \includemedia[
+        %width=1.0\columnwidth,
+        %height=0.5625\columnwidth,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=cg2d_es.mp4,
+        activate=pageopen,
+        flashvars={source=cg2d_es.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+      \caption{Energy shaping to stabilize to a gait from distant initial condition.}
     \end{figure}
   }
 \end{frame}
@@ -232,6 +248,23 @@
     \end{figure}
   }
 
+
+  \only<4>{
+    \begin{figure}
+      \centering
+      \includemedia[
+        %width=1.0\columnwidth,
+        %height=0.5625\columnwidth,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=3link_es.mp4,
+        activate=pageopen,
+        flashvars={source=3link_es.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+      \caption{Energy shaping to stabilize to a gait from distant initial condition.}
+    \end{figure}
+  }
+
 \end{frame}
 
 \begin{frame}
@@ -266,17 +299,89 @@
       \begin{figure}
         \centering
         \def\svgwidth{1.0\columnwidth}
-        \input{figures/cg2d-3link-model.eps_latex}
+        \input{figures/cg2d-7link-model.eps_latex}
         \vspace{-2em}
-        \caption{3-link biped configuration.}
+        \caption{7-link biped configuration.}
       \end{figure}
     \end{columns}
   }
+
   \only<2>{
+    \begin{block}{Spring--Damper Controller}
+      \begin{align*}
+        u(\q) = -\beta e^{-\rho \, h_{\mathrm{nst}}(\q)}
+      \end{align*}
+      where $\beta, \rho \in \R^{+}$ and $h_{\mathrm{nst}} : \ConfigurationSpace \to \R$ is the height of the Nonstance toe.
+      Used on
+      \begin{itemize}
+      \item Stance ankle\\
+      \item Nonstance ankle\\
+      \item Absolute torso angle\\
+      \item Non-stance knee spring (only first domain)
+      \end{itemize}
+    \end{block}
+  }
+
+  \only<3>{
+    \begin{block}{Scuffing Prevention Controller}
+      \begin{align*}
+        u(\q) = k_p \theta(\q) - k_d \dot \theta(\dq)
+      \end{align*}
+      Used on
+      \begin{itemize}
+      \item Stance ankle
+      \item Nonstance ankle
+      \item Absolute torso angle
+      \item Non-stance knee (only first domain)
+      \end{itemize}
+    \end{block}
+  }
+
+  \only<4>{
     \begin{figure}
       \centering
-      \includegraphics[width=1.0\columnwidth]{energy_conserved_cg2d_3link}
+      \includemedia[
+        %width=1.0\columnwidth,
+        %height=0.5625\columnwidth,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=7link_es.mp4,
+        activate=pageopen,
+        flashvars={source=7link_es.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+      \caption{Energy shaping to stabilize to a gait.}
+    \end{figure}
+  }
+
+
+  \only<5>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_conserved_7link}
       \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{t_0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
+    \end{figure}
+  }
+
+  \only<6>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_conserved_7link_outline}
+      \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{t_0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
+    \end{figure}
+  }
+  \only<7>{
+    \begin{figure}
+      \centering
+      \includemedia[
+        %width=1.0\columnwidth,
+        %height=0.5625\columnwidth,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=7link_noes.mp4,
+        activate=pageopen,
+        flashvars={source=7link_noes.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+      \caption{Many steps on the limit cycle.}
     \end{figure}
   }
 \end{frame}

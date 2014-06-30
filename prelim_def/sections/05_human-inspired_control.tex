@@ -180,7 +180,48 @@
   \begin{figure}
     \centering
     \caption{Experimental validation of HIC/FRR scheme}
-    \includegraphics[height=2cm]{nao_tiles}\\[.3em]
-    \includegraphics[height=3.25cm]{exp_angles}
+    \only<1>{
+      \includegraphics[height=2cm]{nao_tiles}\\[.3em]
+      \includegraphics[height=3.25cm]{exp_angles}
+    }
+    \only<2>{
+      \includemedia[
+        %width=1.0\columnwidth,
+        %height=0.5625\columnwidth,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=nao_reduction.mp4,
+        activate=pageopen,
+        flashvars={source=nao_reduction.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+    }
   \end{figure}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Combining ES and HIC}
+  \only<1>{
+    \begin{figure}
+      \centering
+      \includegraphics[width=1.0\columnwidth]{energy_conserved_5link}
+      \caption{Demonstration of Energy Shaping and Human-Inspired Control.}
+    \end{figure}
+  }
+
+  \only<2>{
+    \begin{figure}
+      \centering
+      \includemedia[
+        %width=1.0\columnwidth,
+        %height=0.5625\columnwidth,
+        width=1.0\columnwidth,
+        height=0.5\columnwidth,
+        addresource=3link_es.mp4,
+        activate=pageopen,
+        flashvars={source=3link_es.mp4&loop=true&autoPlay=true}
+      ]{}{VPlayer9.swf}
+      \caption{Energy shaping to stabilize to a gait from distant initial condition.}
+    \end{figure}
+  }
+\end{frame}
+
