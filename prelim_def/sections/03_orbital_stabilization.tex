@@ -283,17 +283,12 @@
 \begin{frame}
   \frametitle{Example: 7-Link Biped with Feet}
   \only<1>{
+    \blue{Appeared in {\bf Automatica}, Jun. 2014}
     \begin{columns}
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
         M(q) \ddot q + H(q, \dot q) = J^{T}(q) \lambda + B(q) u
-      \end{align*}
-      Control Law:
-      \begin{align*}
-        u_1 &=-k_{d} (\dot \vartheta_{T}^{a})\\
-        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}),\\
-        u_2 &= G(q) - G(\Psi(q)).
       \end{align*}
       \column{1.5in}
       \begin{figure}
@@ -317,8 +312,9 @@
       \item Stance ankle\\
       \item Nonstance ankle\\
       \item Absolute torso angle\\
-      \item Non-stance knee spring (only first domain)
+      \item Non-stance knee spring (only in double support)
       \end{itemize}
+      \blue{Provides passivity-based control and toe-off.}
     \end{block}
   }
 
@@ -327,17 +323,23 @@
       \begin{align*}
         u(\q) = k_p \theta(\q) - k_d \dot \theta(\dq)
       \end{align*}
-      Used on
+      where $k_{p}, k_{d} \in \R^{+}$. Used on
       \begin{itemize}
-      \item Stance ankle
       \item Nonstance ankle
-      \item Absolute torso angle
-      \item Non-stance knee (only first domain)
       \end{itemize}
+      \blue{Prevents the nonstance toe from colliding with the ground prematurely.}
     \end{block}
   }
 
-  \only<4>{
+\only<4>{
+  \begin{figure}
+    \centering
+      \includegraphics[height=.7\textheight]{domaingraph}
+      \caption{The resulting gait traverses a four-domain directed graph.}
+    \end{figure}
+  }
+
+  \only<5>{
     \begin{figure}
       \centering
       \includemedia[
@@ -353,8 +355,7 @@
     \end{figure}
   }
 
-
-  \only<5>{
+  \only<6>{
     \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_conserved_7link}
@@ -362,14 +363,14 @@
     \end{figure}
   }
 
-  \only<6>{
+  \only<7>{
     \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_conserved_7link_outline}
       \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{t_0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
     \end{figure}
   }
-  \only<7>{
+  \only<8>{
     \begin{figure}
       \centering
       \includemedia[

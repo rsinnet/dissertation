@@ -45,7 +45,7 @@ $(PROJNAME).pdf: $(PROJNAME).tex sections/*.tex figures/*.pdf figures/*.eps $(EP
 	$(subst $\",,$(EVARS)) $(LATEX_CMD) $(PROJNAME)
 	echo $(EVARS) $(LATEX_CMD) $(PROJNAME)
 
-figures/%.eps_latex: figures/%.eps_tex figures/%.eps do_latex_subs.py
+figures/%.eps_latex: figures/%.eps_tex figures/%.eps do_latex_subs.py latex_subs.json
 	./do_latex_subs.py $(basename $(notdir $<))
 
 clean:

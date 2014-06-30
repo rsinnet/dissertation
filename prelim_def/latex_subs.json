@@ -1,6 +1,16 @@
 {
     "files": [
 	{
+	    "hybrid_periodic_orbit":
+	    {
+		"D": "$\\mathcal{D}$",
+		"G": "$\\mathcal{G}$",
+		"Dx": "$\\Delta(x^*)$",
+		"xstar": "$x^* = f(x)$",
+		"xdot": "$\\dot x$"
+	    }
+	},
+	{
 	    "cg2d-7link-model":
 	    {
 		"q1": "$q_1$",
