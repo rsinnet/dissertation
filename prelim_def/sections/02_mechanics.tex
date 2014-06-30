@@ -25,7 +25,7 @@
         where
         \begin{itemize}
         \item
-          $\Domain \subset \mathcal{X}$ is the \blue{domain of admissiblity} with state space $\mathcal{X}$,
+          $\Domain \subset \mathcal{X}$ is the \blue{domain of admissibility} with state space $\mathcal{X}$,
         \item
           $\ControlSet$ is a set of \blue{admissible controls},
         \item
@@ -105,12 +105,11 @@
 
 \begin{frame}
   \frametitle{Impact Dynamics}
-  Introduce extended coordinates $\qe = (p_{x}, p_{y}, p_{z}, \q^{T})^{T} \in \R^{3} \times \ConfigurationSpace$. Angular momentum balance based on H{\"u}rm{\"u}zl{\"u} and Marghitu:
+  Introduce extended coordinates $\qe = (X, \q^{T})^{T} \in \mathrm{SE}(3) \times \ConfigurationSpace$ which contains the kinematics of a reference point on the robot. Angular momentum balance based on H{\"u}rm{\"u}zl{\"u} and Marghitu:
   \begin{massump}
     \begin{itemize}
     \item Rigid-body plastic impacts
     \item Enough friction to prevent slipping
-    \item Impact points do not rebound
     \item Motors do not produce impulses
     \item No instantaneous change in configuration, i.e., $\qe^{-} = \qe^{+}$
     \end{itemize}
@@ -257,7 +256,7 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = 0.
+        M(q) \ddot q + H(q, \dot q) = B(q) u.
       \end{align*}
       Controlled Symmetries:
       \begin{align*}
@@ -305,13 +304,13 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = 0
+        M(q) \ddot q + H(q, \dot q) = B(q) u
       \end{align*}
       Control Law:
       \begin{align*}
-        u_1 &=-k_{d} (\dot \vartheta_{T}^{a})\\
-        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}),\\
-        u_2 &= G(q) - G(\Psi(q)).
+        u &= G(q) - G(\Psi(q))\\
+        u_3 &=-k_{d} (\dot \vartheta_{T}^{a})\\
+        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d})
       \end{align*}
       \column{1.5in}
       \begin{figure}

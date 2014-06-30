@@ -121,7 +121,7 @@
       \end{align*}
       Control Law:
       \begin{align*}
-        \bar u(q) &= G(q) - G(\Psi(q)).
+        \bar u(q) &= G(q) - G(\Psi(q))
       \end{align*}
 
       \column{1.5in}
@@ -215,13 +215,13 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = 0
+        M(q) \ddot q + H(q, \dot q) = B(q) u
       \end{align*}
       Control Law:
       \begin{align*}
-        u_1 &=-k_{d} (\dot \vartheta_{T}^{a})\\
-        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d}),\\
-        u_2 &= G(q) - G(\Psi(q)).
+        {\bar u} &= G(q) - G(\Psi(q))\\
+        {\bar u}_3 &=-k_{d} (\dot \vartheta_{T}^{a})\\
+        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d})
       \end{align*}
       \column{1.5in}
       \begin{figure}

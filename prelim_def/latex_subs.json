@@ -6,8 +6,8 @@
 		"D": "$\\mathcal{D}$",
 		"G": "$\\mathcal{G}$",
 		"Dx": "$\\Delta(x^*)$",
-		"xstar": "$x^* = f(x)$",
-		"xdot": "$\\dot x$"
+		"xstar": "$x^*$",
+		"xdot": "$\\dot x  = f(x)$"
 	    }
 	},
 	{

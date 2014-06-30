@@ -53,7 +53,7 @@
     \put(0.20018569,0.92427135){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{Dx}}}%
     \put(0.18134691,0.0804247){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{xdot}}}%
     \put(0.89750225,0.80390651){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{G}}}%
-    \put(0.56222842,0.46305442){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{xstar}}}%
+    \put(0.7241775,0.42931503){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{xstar}}}%
     \put(0.15321001,0.57536331){\color[rgb]{0,0,0}\makebox(0,0)[lb]{\smash{D}}}%
   \end{picture}%
 \endgroup%
