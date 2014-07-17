@@ -1,0 +1,27 @@
+\chapter{\uppercase{Energy Shaping}}
+
+\section{Development}
+
+\begin{align}
+  \label{eq:thm-qp} \tag {QP}
+  \mu(x) = \argmin_{u(x) \in \R^{n}} & \left(u(x) - {\bar u}(x)\right)^T \left(u(x) - {\bar u}(x) \right)\\
+  \nonumber
+  \mbox{s.t. } & L_{f} V(x) + L_{g} V(x) u(x) + \epsilon V(x) \leq 0.
+\end{align}
+
+Clearly, the energy function, $V(x)$, of the system ${\dot x} = f(x) + g(x) \mu(x)$ converges to zero at an exponential rate. In order to prove that \eqref{eq:thm-qp} is a stable controller, it must be shown that $\mu(x)$ converges to ${\bar u}(x)$ for trajectories tangential to the stable energy level.
+
+Consider the cost function as a Lypunov candidate, i.e.,
+\begin{align*}
+  U(x) = \left(\mu(x) - {\bar u}(x)\right)^T \left(\mu(x) - {\bar u}(x) \right).
+\end{align*}
+
+This function is positive definite everywhere except $U(\mathbf{0}) = 0$.
+
+The time derivative is
+\begin{align*}
+  {\dot U}(x) &= \left(\mu(x) - {\bar u}(x)\right)^T \left(\pd{\mu(x)}{x} - \pd{{\bar u}(x)}{x}\right) \left(f(x) + g(x) \mu(x)\right).\\
+  &= \left(\mu(x) - {\bar u}(x)\right)^T \left(L_{f} \mu(x) + L_{g} \mu(x) \mu(x)
+  - L_{f} {\bar u}(x) - L_{g} {\bar u}(x) \mu(x) \right).
+\end{align*}
+If it can be shown that this quantity satisfies ${\dot U}(x) < 0$, then stability of \eqref{eq:thm-qp} is implied.

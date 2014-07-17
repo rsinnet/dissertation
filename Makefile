@@ -12,20 +12,16 @@ $(PROJNAME).ps: $(PROJNAME).dvi
 $(PROJNAME).dvi: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
-references.bib sections/introduction.tex sections/literature.tex \
-sections/modeling.tex sections/human_inspired_control.tex sections/sysid.tex \
-sections/implementation.tex sections/conclusion.tex sections/reduction.tex
-	$(LATEX_CMD) $(PROJNAME)
-	bibtex $(PROJNAME)
+references.bib sections/*.tex
+#	$(LATEX_CMD) $(PROJNAME)
+#	bibtex $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
 
-.PHONY: clean
+.PHONY: clean all
 
 clean:
 	rm -f $(PROJNAME).pdf $(PROJNAME).ps $(PROJNAME).lot $(PROJNAME).lof \
 	$(PROJNAME).bbl $(PROJNAME).aux $(PROJNAME).dvi $(PROJNAME).toc \
 	$(PROJNAME).log $(PROJNAME).blg $(PROJNAME).out \
-	titlepage.aux acknowledgements.aux \
-	abstract.aux dedication.aux bibliography.aux lists.aux \
-	nomenclature.aux sections/*.aux
+	*.aux sections/*.aux
