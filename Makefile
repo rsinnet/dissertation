@@ -1,7 +1,12 @@
 PROJNAME=dissertation
 LATEX_CMD=latex -interaction=nonstopmode
 
-all: $(PROJNAME).pdf
+all: $(PROJNAME).pdf outline.pdf
+
+outline: outline.pdf
+
+outline.pdf: outline.rst
+	rst2pdf outline.rst
 
 $(PROJNAME).pdf: $(PROJNAME).ps
 	ps2pdf $(PROJNAME).ps
@@ -18,10 +23,10 @@ references.bib sections/*.tex
 	$(LATEX_CMD) $(PROJNAME)
 	$(LATEX_CMD) $(PROJNAME)
 
-.PHONY: clean all
+.PHONY: clean all outline
 
 clean:
 	rm -f $(PROJNAME).pdf $(PROJNAME).ps $(PROJNAME).lot $(PROJNAME).lof \
 	$(PROJNAME).bbl $(PROJNAME).aux $(PROJNAME).dvi $(PROJNAME).toc \
 	$(PROJNAME).log $(PROJNAME).blg $(PROJNAME).out \
-	*.aux sections/*.aux
+	*.aux sections/*.aux outline.pdf
