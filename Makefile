@@ -18,10 +18,10 @@ $(PROJNAME).dvi: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
 references.bib sections/*.tex
-#	$(LATEX_CMD) $(PROJNAME)
-#	bibtex $(PROJNAME)
-	$(LATEX_CMD) $(PROJNAME)
-	$(LATEX_CMD) $(PROJNAME)
+	$(LATEX_CMD) $(PROJNAME).tex
+	bibtex $(PROJNAME).aux
+	$(LATEX_CMD) $(PROJNAME).tex
+	$(LATEX_CMD) $(PROJNAME).tex
 
 .PHONY: clean all outline
 

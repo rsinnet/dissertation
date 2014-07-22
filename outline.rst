@@ -11,8 +11,6 @@ Dissertation Outline
     #. Discrete Dynamics
     #. Solutions to Hybrid Systems
 
-#. Human-Inspired Control
-#. Functional Routhian Reduction
 #. Energy Shaping
 
     #. Motivation
@@ -24,11 +22,12 @@ Dissertation Outline
     #. Formulation
     #. Simple example - Spring--damper cart system
 
+#. Human-Inspired Control
+#. Functional Routhian Reduction
 #. Examples
 
     - Compass Gait
     - Compass Gait - 3-Link
     - 5-Link biped with Human-Inspired Control
     - 7-Link biped from Automatica
-
-#. References
+    - 3D biped with functional Routhian reduction

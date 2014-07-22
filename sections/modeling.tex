@@ -1,10 +1,67 @@
-\chapter{\uppercase{Modeling Robots}}
+\chapter{\uppercase{Hybrid Systems}}
+
+Though the methods presented in this thesis may be useful on a variety of control systems, the primary application used for expositional purposes is bipedal robotic walking.
+%
+This phenomenon demonstrates two mathematically similar dynamics which operate at vastly different time scales.
+%
+In particular, nominal motion can be modeled as a continuous dynamics and impact behavior can be treated as a discrete dynamics.
+%
+The development of the dynamic models for these two dynamics is parallel but a dichotomy arises in the application of constraining forces.
+
+This chapter presents the development of the necessary dynamics for modeling hybrid mechanical systems and discusses some of the tools available for modeling and simulation.
+
+
+\section{Rigid Kinematic Chains}
+At its core, the modeling of complex mechanical systems involves a straightforward, if often complicated, application of Newton's Second Law (see \cite{feynman1963}), namely,
+that
+\begin{align}
+  \label{eq:newtons-second}
+  F = m a,
+\end{align}
+which expresses the basic property of physics that applying a force to a massive object induces a particular acceleration.
+%
+Through the property of superposition, this relationship eventually leads to standard dynamic model of a robot as expressed in \ref{eq:robot-dynamics}, but fundamentally, all physics-based models demonstrate Newton's Second Law.
+
+Consider a three-dimensional rigid body with no contact assumptions; i.e., the body is free to move in space.
+%
+With the dynamics of the system being dominated by Newton's laws of motion \cite{feynman1963}, the state of the system can be expressed by associating a reference frame to a fix pointed on the body and using coordinates which express the position and orientation of this point with respect to a global frame or the world frame.
+%
+In three-dimensional space, this transformation between world frame and robot frame can be parameterized with six coordinates: three representing the Euclidean position and three respresenting, for example, an Euler angle--based derivation, namely, the product of three rotation matrices \cite{Baruh98}.
+%
+Newton's laws eventually lead to the understanding the motion of such a system can be captured by the following dynamic model:
+\begin{align}
+  \nonumber
+  I_{x} \dot{\omega}_{x} + (I_{z} - I_{y}) \omega_{y} \omega_{z} &= M_{x}\\
+  \nonumber
+  I_{y} \dot{\omega}_{y} + (I_{x} - I_{z}) \omega_{z} \omega_{x} &= M_{y}\\
+  \nonumber
+  I_{z} \dot{\omega}_{z} + (I_{y} - I_{x}) \omega_{x} \omega_{y} &= M_{z}\\
+  \nonumber
+  m \dot{v}_{x} &= F_{x},\\
+  \nonumber
+  m \dot{v}_{y} &= F_{y},\\
+  m \dot{v}_{z} &= F_{z},
+\end{align}
+where linear and angular velocity are represented by $v$ and $\omega$, respectively, and the corresponding accelerations are shown as time derivatives.
+%
+The applied forces and moments are shown as $F$ and $M$, respectively, and the $I_{x}$, $I_{y}$, and $I_{z}$ terms are the principal moments of inertia about the appropriate axes.
+%
+As one might guess, this requires that the fixed frame be located at the center of mass and oriented along the principal axes of inertia; it is straightforward to redefine the base coordinates but this form -- the simplest form -- is given for clarity of presentation.
+
+Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact.
+
 
 \section{Langrangian Formulation}
 
-\section{Spatial Vector Algebra}
-While a Lagrangian-based approach to modeling is useful for theoretical applications and smaller systems, its shortcomings quickly emerge as systems grow in complexity.
+%\section{Spatial Vector Algebra}
+%While a Lagrangian-based approach to modeling is useful for theoretical applications and smaller systems, its shortcomings quickly emerge as systems grow in complexity.
 %
-Perhaps more than anything else, this poor scalability stems from the need to successively multiply rotation matrices in symbolic form resulting in progressively larger expressions.
+%Perhaps more than anything else, this poor scalability stems from the need to successively multiply rotation matrices in symbolic form resulting in progressively larger expressions.
 %
-Moreover, as complexity grows, it becomes is increasingly difficult to glean any useful bit of intuition from examining the expressions in symbolic form.
+%Moreover, as complexity grows, it becomes is increasingly difficult to glean any useful bit of intuition from examining the expressions in symbolic form.
+
+\section{Continuous Dynamics}
+
+\section{Discrete Dynamics}
+
+\section{Solutions to Hybrid Systems}
