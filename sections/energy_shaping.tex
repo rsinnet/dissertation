@@ -8,6 +8,37 @@ This chapter presents the method of energy shaping
 
 \section{Overview}
 
+Periodic behaviors in mechanical systems have specific energy signatures that evolves over time.
+%
+The energy dynamics of a conservative system can be understood as an interplay between kinetic and potential energy, with energy transfer occuring between these two quantities.
+%
+Indeed for conservative systems, the energy is constant, i.e.,
+\begin{align}
+  E_{0} \equiv E(\q, \dq) = T(\q, \dq) + U(\q).
+\end{align}
+%
+In a non-conservative system, this relationship does not hold, but the dynamics of energy can still be understood as
+\begin{align}
+  \label{eq:ncsys-nrg-cons}
+  E_{0} \equiv E_{c}(\q(t), \dq(t)) = T(\q(t), \dq(t)) + U(\q(t)) - \int_{0}^{t} \! \Fnc \cdot \frac{dq(\tau)}{d\tau} \ d\tau.
+\end{align}
+where $\Fnc$ represents conservative forcing. Typically this represents an autonomous feedback control law and so $\Fnc : T\Q \to \R^m$ where $m$ is the number of actuators in the system.
+%
+As for many other control systems, the forcing from control under an autonomous feedback control is then written
+\begin{align}
+  \Fnc = B(q) \, u(\q, \dq).
+\end{align}
+
+From the relationship stated in \eqref{eq:ncsys-nrg-cons}, it is clear that the total energy present in the system plus the energy removed by non-conservative forcing is constant.
+%
+This phenomenom is well understood and it holds for all motion in mechanical systems, not just for periodic behaviors.
+
+Understanding the energy dynamics of a system is key to the method of energy shaping.
+%
+By taking advantage of the presence of energy level sets in periodic behaviors, energy shaping seeks to add robustness to certain types of controllers do not necessarily have an intrinsic notion of stabilizing to a zero dynamics.
+%
+
+
 \section{Development}
 
 \begin{align}
@@ -17,19 +48,39 @@ This chapter presents the method of energy shaping
   \mbox{s.t. } & L_{f} V(x) + L_{g} V(x) u(x) + \epsilon V(x) \leq 0.
 \end{align}
 
-Clearly, the energy function, $V(x)$, of the system ${\dot x} = f(x) + g(x) \mu(x)$ converges to zero at an exponential rate. In order to prove that \eqref{eq:thm-qp} is a stable controller, it must be shown that $\mu(x)$ converges to ${\bar u}(x)$ for trajectories tangential to the stable energy level.
+\begin{lemma}
+  Applying the energy shaping controller \eqref{eq:thm-qp} to a control system \eqref{} results in a closed loop system that demonstrates a periodic orbit which is identical to the unshaped system.
+\end{lemma}
+
+\begin{proof}
+  For states on the periodic orbit, i.e., $(\qst, \dqst) \in \orbit$, the energy is a known constant, $E(\qst, \dqst) = E_{0}$.
+%
+  Therefore, the limit cycle induced by control law ${\bar u}(\q, \dq)$ represents an invariant level set of the energy.
+%
+  By construction of the Lypanuov function $V : T\Q \to \R$, it is clear that $V(\qst, \dqst) = 0$ and, moreover, that $\min_{(\q, \dq) \in T\Q} V(\q, \dq) = 0$.
+%
+  The solution to the optimization \eqref{eq:thm-qp} has cost $J = 0$ and argument $u(\q, \dq) = {\bar u}(\q, \dq)$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\qst, \dqst) = 0$.
+%
+  Thus, the periodic orbits are equivalent.
+\end{proof}
+
+
+Clearly, the energy function, $V(x)$, of the system ${\dot x} = f(x) + g(x) \mu(x)$ converges to zero at an exponential rate.
+%
+In order to prove that \eqref{eq:thm-qp} is a stable controller, it must be shown that $\mu(x)$ converges to ${\bar u}(x)$ for trajectories tangential to the stable energy level.
 
 Consider the cost function as a Lypunov candidate, i.e.,
-\begin{align*}
+\begin{align}
   U(x) = \left(\mu(x) - {\bar u}(x)\right)^T \left(\mu(x) - {\bar u}(x) \right).
-\end{align*}
+\end{align}
 
 This function is positive definite everywhere except $U(\mathbf{0}) = 0$.
 
 The time derivative is
-\begin{align*}
+\begin{align}
   {\dot U}(x) &= \left(\mu(x) - {\bar u}(x)\right)^T \left(\pd{\mu(x)}{x} - \pd{{\bar u}(x)}{x}\right) \left(f(x) + g(x) \mu(x)\right).\\
+  \nonumber
   &= \left(\mu(x) - {\bar u}(x)\right)^T \left(L_{f} \mu(x) + L_{g} \mu(x) \mu(x)
   - L_{f} {\bar u}(x) - L_{g} {\bar u}(x) \mu(x) \right).
-\end{align*}
+\end{align}
 If it can be shown that this quantity satisfies ${\dot U}(x) < 0$, then stability of \eqref{eq:thm-qp} is implied.

@@ -11,7 +11,8 @@ The development of the dynamic models for these two dynamics is parallel but a d
 This chapter presents the development of the necessary dynamics for modeling hybrid mechanical systems and discusses some of the tools available for modeling and simulation.
 
 
-\section{Rigid Kinematic Chains}
+\section{Rigid Body Kinematics}
+
 At its core, the modeling of complex mechanical systems involves a straightforward, if often complicated, application of Newton's Second Law (see \cite{feynman1963}), namely,
 that
 \begin{align}
@@ -28,6 +29,15 @@ With the dynamics of the system being dominated by Newton's laws of motion \cite
 %
 In three-dimensional space, this transformation between world frame and robot frame can be parameterized with six coordinates: three representing the Euclidean position and three respresenting, for example, an Euler angle--based derivation, namely, the product of three rotation matrices \cite{Baruh98}.
 %
+The set of all admissible configurations for such a body represents a specific topological space referred to as the {\em special Euclidean group}, $\SE(3)$.
+%
+This group can be thought of as the Cartesian product of the position and orientation of a body, i.e., $\SE(3) = \R^3 \times \SO(3)$, where $\SO(3)$ is the {\em special orthogonal group} which can be understood as
+\begin{align*}
+  \SO(n) = \left\{ R \in \R^{n \times n} : R R^T = I, \det R = 1 \right\}.
+\end{align*}
+For more information on these topological spaces, consult \cite{MLS94}.
+
+
 Newton's laws eventually lead to the understanding the motion of such a system can be captured by the following dynamic model:
 \begin{align}
   \nonumber
@@ -48,7 +58,13 @@ The applied forces and moments are shown as $F$ and $M$, respectively, and the $
 %
 As one might guess, this requires that the fixed frame be located at the center of mass and oriented along the principal axes of inertia; it is straightforward to redefine the base coordinates but this form -- the simplest form -- is given for clarity of presentation.
 
+\section{Kinematic Chains}
+
 Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact.
+%
+For robotic motion, holonomic constraints act to reduce the allowable motion and, as a consequence, there exists a minimal set of coordinates which can be used to describe a robot's dynamics.
+%
+This minimal set is referred to as the {\em generalized coordinates}.
 
 
 \section{Langrangian Formulation}

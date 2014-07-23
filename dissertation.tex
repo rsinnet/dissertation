@@ -22,6 +22,7 @@
 \usepackage{tamuconfig}
 \usepackage{rotating}
 \usepackage{amsmath,amssymb,amsthm}
+\usepackage{mathrsfs}
 
 % Added to fix issues with pdf searching in some versions of LaTeX
 %\usepackage[T1]{fontenc}\usepackage{lmodern}
@@ -85,18 +86,15 @@
 \pagenumbering{arabic} % Arabic numerals
 \setcounter{page}{1}
 
-%\include{sections/introduction}
-%\include{sections/literature}
+\include{sections/introduction}
+\include{sections/literature}
 \include{sections/modeling}
 \include{sections/energy_shaping}
-%\include{sections/human_inspired_control}
+\include{sections/human_inspired_control}
 %\include{sections/reduction}
 
 %\include{sections/implementation}
-%\include{sections/conclusion}
-
-%\include{section2}
-%\include{section3}
+\include{sections/conclusion}
 
 % fix spacing in bibliography, if any...
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -104,6 +102,6 @@
 \renewcommand{\bibitem}{\setlength{\itemsep}{0pt}\oldbibitem}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \include{bibliography}
- \include{appendices}
+%\include{appendices}
 
 \end{document}
