@@ -1,7 +1,7 @@
 PROJNAME=dissertation
 LATEX_CMD=latex -interaction=nonstopmode
 
-all: $(PROJNAME).pdf outline.pdf
+all: $(PROJNAME).pdf cg-energy es-stability
 
 cg-energy: notes/cg-energy.pdf
 
@@ -14,7 +14,7 @@ notes/%.pdf: notes/%.tex rsinnet.sty
 outline: outline.pdf
 
 outline.pdf: outline.rst
-	rst2pdf $<
+	rst2pdf outline.rst
 
 $(PROJNAME).pdf: $(PROJNAME).ps
 	ps2pdf $<
