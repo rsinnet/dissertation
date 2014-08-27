@@ -7,7 +7,7 @@ cg-energy: notes/cg-energy.pdf
 
 es-stabiity: notes/es-stability.pdf
 
-notes/%.pdf: notes/%.tex
+notes/%.pdf: notes/%.tex rsinnet.sty
 	pdflatex -output-directory=notes $<
 	pdflatex -output-directory=notes $<
 

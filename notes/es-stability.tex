@@ -1,0 +1,77 @@
+\documentclass[twocolumn]{article}
+
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage[cm]{fullpage}
+
+\usepackage{../rsinnet}
+
+\author{R.~W.~Sinnet}
+\title{On the Stability of Energy Shaping}
+
+\begin{document}
+\maketitle
+
+\section*{Overview}
+The goal is to show that the energy shaping control law does not locally destabilize the system.
+%
+Formally, this means that, given an exponentially-stable limit cycle in a dynamical system, application of energy shaping results in a closed-loop system which is exponentially stable.
+%
+An attempt will be made to show this using an $\epsilon$-$\delta$ proof and by looking at vector field perturbations.
+
+\section{Setup}
+
+Consider a dynamical system with total energy
+\begin{align*}
+  E(q, \dot q) = \frac{1}{2} {\dot q}^{T} M(q) {\dot q} + U(q).
+\end{align*}
+where the first term represents the kinetic energy and the second term represents the potential energy.
+%
+The system has coordinates $x = (\q^T, \dq^T)^T \in T\Q$.
+%
+The vector field of the uncontrolled system can be written
+\begin{align}
+  {\dot x} = f(\q, \dq).
+  \label{eq:vfield}
+\end{align}
+Under the action of control effort $u(\q, \dq)$, the corresponding control system has the form
+\begin{align}
+  {\dot x} = f(\q, \dq) + g(\q) \, u(\q, \dq).
+  \label{eq:csys}
+\end{align}
+Construct a Lyapunov function $V : T\Q \to \R^{+}$ of the form
+\begin{align}
+  \label{eq:lyap}
+  V(\q, \dq) = \frac{1}{2} E(\q, \dq)^2.
+\end{align}
+Consider the energy shaping controller
+\begin{align}
+  \label{eq:es-qp} \tag {QP}
+  \mu(x) = \argmin_{u(x) \in \R^{n}} \ & u(x)^T u(x)\\
+  \nonumber
+  \mbox{s.t. } & L_{f} V(x) + L_{g} V(x) u(x) + \epsilon V(x) \leq 0.
+\end{align}
+Applying this to the system \eqref{eq:vfield} results in the closed-loop dynamics
+\begin{align*}
+  {\dot x} = f(x) + g(x) \mu(x).
+\end{align*}
+
+\section{Equivalence of Invariant Orbits}
+In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:
+
+\begin{lemma}
+  Applying the energy shaping controller \eqref{eq:es-qp} to a control system \eqref{eq:csys} results in a closed loop system that demonstrates a periodic orbit which is identical to the unshaped system \eqref{eq:vfield}.
+\end{lemma}
+
+\begin{proof}
+  For states on the periodic orbit, i.e., $(\qst, \dqst) \in \orbit$, the energy is a known constant, $E(\qst, \dqst) = E_{0}$.
+  %
+  Therefore, the limit cycle represents an invariant level set of the energy.
+  %
+  By construction of the Lyapunov function \eqref{eq:lyap} used in the the controller \eqref{eq:es-qp}, it is clear that $V(\qst, \dqst) = 0$ and, moreover, that $$\min_{(\q, \dq) \in T\Q} V(\q, \dq) = 0.$$
+  %
+  The solution to the optimization problem \eqref{eq:es-qp} has cost $J = 0$ and argument $u(\q, \dq) = 0$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\qst, \dqst) = 0$ since the energy does not change if no external forcing is appliedx.
+  %
+  Thus, the periodic orbits are equivalent.
+\end{proof}
+
+\end{document}
