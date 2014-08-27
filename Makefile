@@ -14,13 +14,13 @@ notes/%.pdf: notes/%.tex
 outline: outline.pdf
 
 outline.pdf: outline.rst
-	rst2pdf outline.rst
+	rst2pdf $<
 
 $(PROJNAME).pdf: $(PROJNAME).ps
-	ps2pdf $(PROJNAME).ps
+	ps2pdf $<
 
 $(PROJNAME).ps: $(PROJNAME).dvi
-	dvips $(PROJNAME)
+	dvips $<
 
 $(PROJNAME).dvi: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
