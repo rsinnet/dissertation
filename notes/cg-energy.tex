@@ -1,0 +1,86 @@
+\documentclass{article}
+
+\usepackage{amsmath,amssymb}
+\usepackage{fullpage}
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Q}{\mathcal{Q}}
+
+\author{R.~W.~Sinnet}
+\title{Energy of the Compass Gait}
+
+\begin{document}
+\maketitle
+
+The total energy of the system is given by
+\begin{align*}
+  E(q, \dot q) = \frac{1}{2} {\dot q}^{T} M(q) {\dot q} + V(q).
+\end{align*}
+%
+Impacts satisfy the following dynamics:
+%
+\begin{align*}
+  \left[\begin{array}{c c}
+      M(q^{-}) & -J^{T}(q^{-})\\
+      J(q^{-}) & \mathbf{0}
+    \end{array}\right]
+  \left[\begin{array}{c}
+      {\dot q}^{+}\\
+      F_{\mathrm{imp}}
+    \end{array}\right]
+  = \left[\begin{array}{c}
+      M(q^{-}) {\dot q}^{-}\\
+      \mathbf{0}
+      \end{array}\right]
+\end{align*}
+%
+Under the assumption that the positions do not change through impact, the above reduces to
+%
+\begin{align*}
+  \left[\begin{array}{c c}
+      M(q) & J^{T}(q)\\
+      J(q) & \mathbf{0}
+    \end{array}\right]
+  \left[\begin{array}{c}
+      {\dot q^{+}}\\
+      F_{\mathrm{imp}}
+    \end{array}\right]
+  = \left[\begin{array}{c}
+      M(q) {\dot q}^{-}\\
+      \mathbf{0}
+    \end{array}\right].
+\end{align*}
+%
+Using the Schur complement, the post-impact velocity can be expressed as a map $P : T\Q \to \R$ given by
+\begin{align}
+  \label{eq:reset-map}
+  P(q, {\dot q}) = \left( I - M^{1}(q) J^{T}(q) \left( J(q) M^{-1}(q) J^{T}(q) \right)^{-1} J(q) \right) {\dot q}
+\end{align}
+
+In addition, positions on the guard must satisfy the constraint that
+\begin{align}
+  \label{eq:guard-constraint}
+  \tan \gamma = \frac{p_{\mathit{nsf}}^{z}}{p_{\mathit{nsf}}^{x}}.
+\end{align}
+
+{\large Questions}
+\begin{enumerate}
+\item Is the image of the energy level set (corresponding to the fixed point) under the reset map invariant anywhere other than for the fixed point?
+\item Do there exist other energy level sets which are invariant under the reset map?
+\end{enumerate}
+
+In order to obtain energy invariance through impact, the following condition must be satisfied:
+\begin{align*}
+  T(q, {\dot q}^{+}) - T(q^{-}, {\dot q}^{-}) = \Sigma m \ g h_{\mathit{nsf}}(q).
+\end{align*}
+where we assume that no adjustment is performed on the potential energy reference level.
+%
+Using \eqref{eq:reset-map}, we can write the energy-invariance relationship as
+\begin{align}
+  \label{eq:energy-conservation}
+  \frac{1}{2} P^{T}(q, {\dot q}) M(q) P(q, \dot q) - \frac{1}{2} {\dot q}^{T} M(q) {\dot q} = \Sigma m \ g h_{\mathit{nsf}}(q).
+\end{align}
+%
+It is important to note that $P(q, {\dot q})$ is affine in ${\dot q}$. This means the above equation can be solved rather easily for coordinates on an embedded submanifold.
+
+In order to answer question 2, we must perturb along the codimension-2 manifold which results from the imposition of the two above constraints, namely, \eqref{eq:guard-constraint} and \eqref{eq:energy-conservation}.
+\end{document}

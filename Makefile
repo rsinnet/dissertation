@@ -3,6 +3,14 @@ LATEX_CMD=latex -interaction=nonstopmode
 
 all: $(PROJNAME).pdf outline.pdf
 
+cg-energy: notes/cg-energy.pdf
+
+es-stabiity: notes/es-stability.pdf
+
+notes/%.pdf: notes/%.tex
+	pdflatex -output-directory=notes $<
+	pdflatex -output-directory=notes $<
+
 outline: outline.pdf
 
 outline.pdf: outline.rst
@@ -29,4 +37,5 @@ clean:
 	rm -f $(PROJNAME).pdf $(PROJNAME).ps $(PROJNAME).lot $(PROJNAME).lof \
 	$(PROJNAME).bbl $(PROJNAME).aux $(PROJNAME).dvi $(PROJNAME).toc \
 	$(PROJNAME).log $(PROJNAME).blg $(PROJNAME).out \
-	*.aux sections/*.aux outline.pdf
+	*.aux sections/*.aux outline.pdf notes/cg-energy.log notes/cg-energy.aux \
+	notes/cg-energy.pdf
