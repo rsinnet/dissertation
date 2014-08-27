@@ -69,7 +69,7 @@ In order to achieve the stated goal, it is necessary to show that, given a syste
   %
   By construction of the Lyapunov function \eqref{eq:lyap} used in the the controller \eqref{eq:es-qp}, it is clear that $V(\qst, \dqst) = 0$ and, moreover, that $$\min_{(\q, \dq) \in T\Q} V(\q, \dq) = 0.$$
   %
-  The solution to the optimization problem \eqref{eq:es-qp} has cost $J = 0$ and argument $u(\q, \dq) = 0$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\qst, \dqst) = 0$ since the energy does not change if no external forcing is appliedx.
+  The solution to the optimization problem \eqref{eq:es-qp} has cost $u(x)^T u(x) = 0$ (which implies that all elements of $u(x)$ are zero) and argument $u(\q, \dq) = 0$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\qst, \dqst) = 0$ since the energy does not change without external forcing.
   %
   Thus, the periodic orbits are equivalent.
 \end{proof}
