@@ -37,5 +37,6 @@ clean:
 	rm -f $(PROJNAME).pdf $(PROJNAME).ps $(PROJNAME).lot $(PROJNAME).lof \
 	$(PROJNAME).bbl $(PROJNAME).aux $(PROJNAME).dvi $(PROJNAME).toc \
 	$(PROJNAME).log $(PROJNAME).blg $(PROJNAME).out \
-	*.aux sections/*.aux outline.pdf notes/cg-energy.log notes/cg-energy.aux \
-	notes/cg-energy.pdf
+	*.aux sections/*.aux outline.pdf \
+	notes/cg-energy.log notes/cg-energy.aux notes/cg-energy.pdf \
+	notes/es-stability.log notes/es-stability.aux notes/es-stability.pdf

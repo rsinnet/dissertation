@@ -4,6 +4,7 @@
 \usepackage[cm]{fullpage}
 
 \usepackage{../rsinnet}
+\newcommand{\limeps}{\lim_{\epsilon \to 0}}
 
 \author{R.~W.~Sinnet}
 \title{On the Stability of Energy Shaping}
@@ -51,9 +52,10 @@ Consider the energy shaping controller
   \mbox{s.t. } & L_{f} V(x) + L_{g} V(x) u(x) + \epsilon V(x) \leq 0.
 \end{align}
 Applying this to the system \eqref{eq:vfield} results in the closed-loop dynamics
-\begin{align*}
+\begin{align}
+  \label{eq:vfield-cl}
   {\dot x} = f(x) + g(x) \mu(x).
-\end{align*}
+\end{align}
 
 \section{Equivalence of Invariant Orbits}
 In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:
@@ -74,4 +76,34 @@ In order to achieve the stated goal, it is necessary to show that, given a syste
   Thus, the periodic orbits are equivalent.
 \end{proof}
 
+\section{Stability of the Shaped System}
+
+The next step is to prove the main idea, namely, that stability of a system is maintained when energy shaping is applied.
+
+\begin{theorem}
+  Given an exponentially-stable limit cycle in a dynamical system of the form \eqref{eq:vfield}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:csys} results in the closed-loop system \eqref{eq:vfield-cl}, which is exponentially stable.
+\end{theorem}
+
+\begin{proof}
+  Considering the energy shaping controller \eqref{eq:es-qp} with a strict equality constraint, it can be seen that the time evolution of the Lyapunov function \eqref{eq:lyap} is given by
+  \begin{align*}
+    V(x, t) = V(x_{0}, 0) \, e^{-\epsilon t}.
+  \end{align*}
+  From this, the limiting behavior can be examined:
+  \begin{align*}
+    \limeps V(x, t) &= \limeps V(x_{0}, 0) e^{-\epsilon t}\\
+    &= V(x_{0}, 0)\\
+    &= V_0.
+  \end{align*}
+  The above implies that
+  \begin{align*}
+    {\dot V}(x, t) = L_{f} V(x, t) + L_{g} V(x, t) = 0,
+  \end{align*}
+  but $L_{f} V(x, t) = 0$ for passive systems so it follows that
+  \begin{align*}
+    \limeps L_{g} V(x, t) \, \mu(x) = 0 \Rightarrow \limeps \mu(x) = 0.
+  \end{align*}
+
+  It now remains to be shown that small perturbations in the input to \eqref{eq:csys} do not destabilize the system.
+\end{proof}
 \end{document}
