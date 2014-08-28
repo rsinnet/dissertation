@@ -34,35 +34,35 @@ An attempt will be made to show this using an $\epsilon$-$\delta$ proof and by l
 
 Consider a hybrid dynamical system with total energy
 \begin{align*}
-  E(x) &= E(q, \dot q) = \frac{1}{2} {\dot q}^{T} M(q) {\dot q} + U(q).
+  E(x) &= E(\q, \dq = \frac{1}{2} \dq^{T} M(\q) \dq + U(\q).
 \end{align*}
 where the first term represents the kinetic energy and the second term represents the potential energy.
 %
-The system has coordinates $x = (\q^T, \dq^T)^T \in T\Q = D$ which take values in the {\em domain of admissibility}, $D$.
+The system has coordinates $x = (\q^T, \dq^T)^T \in T\Q = \D$ which take values in the {\em domain of admissibility}, $\D$.
 
-The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \R^{+}$, which leads to a transverse plane, $S \subset D$, called the {\em switching surface}.
+The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \R^{+}$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
 %
 The uncontrolled hybrid system can be written
 \begin{align}
   \Sigma = \left\{
   \begin{array}{l l}
-    {\dot x} = f(x), & x \in D \setminus S,\\
-    x^{+} = \Delta(x^{-}), &x \in D \cap S,
+    {\dot x} = f(x), & x \in \D \setminus \S,\\
+    x^{+} = \Delta(x^{-}), &x \in \D \cap \S,
   \end{array}\right.
-  \label{eq:vfield}
+  \label{eq:hsys}
 \end{align}
 Under the action of control effort $u$, the corresponding hybrid control system has the form
 \begin{align}
   \Sigma_{c} = \left\{
   \begin{array}{l l}
-    {\dot x} = f(x) + g(x) \, u, & x \in D \setminus S,\\
-    x^{+} = \Delta(x^{-}), &x \in D \cap S,
+    {\dot x} = f(x) + g(x) \, u, & x \in \D \setminus \S,\\
+    x^{+} = \Delta(x^{-}), &x \in \D \cap \S,
   \end{array}\right.
   \label{eq:csys}
 \end{align}
 for control values in a set $\U \subseteq \R^{m}$.
 %
-For the continuous dynamics, construct a Lyapunov function, $V : D \to \R^{+}$, of the form
+For the continuous dynamics, construct a Lyapunov function, $V : \D \to \R^{+}$, of the form
 \begin{align}
   \label{eq:lyap}
   V(x) = \frac{1}{2} E(x)^2.
@@ -74,13 +74,13 @@ Consider the energy shaping controller
   \nonumber
   \mbox{s.t. } & L_{f} V(x) + L_{g} V(x) u(x) + \epsilon V(x) \leq 0.
 \end{align}
-Applying this to the system \eqref{eq:vfield} results in the closed-loop dynamics
+Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
 \begin{align}
-  \label{eq:vfield-cl}
+  \label{eq:hsys-cl}
   \Sigma = \left\{
   \begin{array}{l l}
-    {\dot x} = f(x) + g(x) \, \mu(x), & x \in D \setminus S,\\
-    x^{+} = \Delta(x^{-}), &x \in D \cap S.
+    {\dot x} = f(x) + g(x) \, \mu(x), & x \in \D \setminus \S,\\
+    x^{+} = \Delta(x^{-}), &x \in \D \cap \S.
   \end{array}\right.
 \end{align}
 
@@ -88,17 +88,17 @@ Applying this to the system \eqref{eq:vfield} results in the closed-loop dynamic
 In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:
 
 \begin{lemma}
-  Applying the energy shaping controller \eqref{eq:es-qp} to a control system \eqref{eq:csys} results in a closed loop system that demonstrates a periodic orbit which is identical to the unshaped system \eqref{eq:vfield}.
+  Applying the energy shaping controller \eqref{eq:es-qp} to a control system \eqref{eq:csys} results in a closed loop system that demonstrates a periodic orbit which is identical to the unshaped system \eqref{eq:hsys}.
 \end{lemma}
 
 \begin{proof}
-  For states on the periodic orbit, i.e., $(\qst, \dqst) \in \orbit$, the energy is a known constant, $E(\qst, \dqst) = E_{0}$.
+  For states on the periodic orbit, i.e., $\xst \in \orbit$, the energy is a known constant, $E(\xst) = E_{0}$.
   %
   Therefore, the limit cycle represents an invariant level set of the energy.
   %
-  By construction of the Lyapunov function \eqref{eq:lyap} used in the the controller \eqref{eq:es-qp}, it is clear that $V(\qst, \dqst) = 0$ and, moreover, that $$\min_{(\q, \dq) \in T\Q} V(\q, \dq) = 0.$$
+  By construction of the Lyapunov function \eqref{eq:lyap} used in the the controller \eqref{eq:es-qp}, it is clear that $V(\xst) = 0$ and, moreover, that $$\min_{x \in \D} V(x) = 0.$$
   %
-  The solution to the optimization problem \eqref{eq:es-qp} has cost $u(x)^T u(x) = 0$ (which implies that all elements of $u(x)$ are zero) and argument $u(\q, \dq) = 0$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\qst, \dqst) = 0$ since the energy does not change without external forcing.
+  The solution to the optimization problem \eqref{eq:es-qp} has cost $u(x)^T u(x) = 0$ (which implies that all elements of $u(x)$ are zero) and argument $u(x) = 0$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\xst) = 0$ since the energy does not change without external forcing.
   %
   Thus, the periodic orbits are equivalent.
 \end{proof}
@@ -108,7 +108,7 @@ In order to achieve the stated goal, it is necessary to show that, given a syste
 The next step is to prove the main idea, namely, that stability of a system is maintained when energy shaping is applied.
 
 \begin{theorem}
-  Given an exponentially-stable limit cycle in a dynamical system of the form \eqref{eq:vfield}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:csys} results in the closed-loop system \eqref{eq:vfield-cl}, which is exponentially stable.
+  Given an exponentially-stable limit cycle in a hybrid dynamical system of the form \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:csys} results in the closed-loop hybrid system \eqref{eq:hsys-cl}, which is exponentially stable.
 \end{theorem}
 
 \begin{proof}
@@ -131,10 +131,10 @@ The next step is to prove the main idea, namely, that stability of a system is m
     \limeps L_{g} V(x, t) \, \mu(x) = 0 \Rightarrow \limeps \mu(x) = 0.
   \end{align*}
 
-  It now remains to be shown that small perturbations in the input to \eqref{eq:csys} do not destabilize the system. By the discrete converse Lyapunov Theorem, exponential stability of the discrete-time system \eqref{} implies the existence of a Lyapunov function $V_{P}$ satisfying
+  It now remains to be shown that small perturbations in the input to \eqref{eq:csys} do not destabilize the system. By the discrete converse Lyapunov Theorem, exponential stability of the discrete-time component of the hybrid system \eqref{eq:hsys} implies the existence of a discrete Lyapunov function $V_{P}$ satisfying
 \begin{align*}
-  c_{1} \| x \|^{2}_{\A} \leq V(x) \leq c_{2} \| x \|_{\A}^2\\
-  V(P(x)) - V(x) \leq c_{3} \| x \|^{2}_{\A}
+  c_{1} \| x \|^{2}_{\D} \leq V(x) \leq c_{2} \| x \|_{\D}^2\\
+  V(P(x)) - V(x) \leq c_{3} \| x \|^{2}_{\D}
 \end{align*}
 
 The rest of the proof should proceed something like the following:
