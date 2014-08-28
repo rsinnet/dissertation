@@ -9,7 +9,7 @@ es-stability: notes/es-stability.pdf
 
 notes/%.latex: notes/%.tex
 	cp $< $(basename $<).latex
-	sed -i 's/%%HASH%%/\\lfoot[]{$(shell sha256sum notes/es-stability.tex | sed 's/^\(.\{20\}\).*/\1/')}/' $(basename $<).latex
+	sed -i 's/%%HASH%%/\\lfoot[]{$(shell $(basename $<).latex | sed 's/^\(.\{20\}\).*/\1/')}/' $(basename $<).latex
 
 notes/%.pdf: notes/%.latex rsinnet.sty
 	pdflatex -output-directory=notes $<
