@@ -32,28 +32,40 @@ An attempt will be made to show this using an $\epsilon$-$\delta$ proof and by l
 
 \section{Setup}
 
-Consider a dynamical system with total energy
+Consider a hybrid dynamical system with total energy
 \begin{align*}
-  E(q, \dot q) = \frac{1}{2} {\dot q}^{T} M(q) {\dot q} + U(q).
+  E(x) &= E(q, \dot q) = \frac{1}{2} {\dot q}^{T} M(q) {\dot q} + U(q).
 \end{align*}
 where the first term represents the kinetic energy and the second term represents the potential energy.
 %
-The system has coordinates $x = (\q^T, \dq^T)^T \in T\Q$.
+The system has coordinates $x = (\q^T, \dq^T)^T \in T\Q = D$ which take values in the {\em domain of admissibility}, $D$.
+
+The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \R^{+}$, which leads to a transverse plane, $S \subset D$, called the {\em switching surface}.
 %
-The vector field of the uncontrolled system can be written
+The uncontrolled hybrid system can be written
 \begin{align}
-  {\dot x} = f(\q, \dq).
+  \Sigma = \left\{
+  \begin{array}{l l}
+    {\dot x} = f(x), & x \in D \setminus S,\\
+    x^{+} = \Delta(x^{-}), &x \in D \cap S,
+  \end{array}\right.
   \label{eq:vfield}
 \end{align}
-Under the action of control effort $u(\q, \dq)$, the corresponding control system has the form
+Under the action of control effort $u$, the corresponding hybrid control system has the form
 \begin{align}
-  {\dot x} = f(\q, \dq) + g(\q) \, u(\q, \dq).
+  \Sigma_{c} = \left\{
+  \begin{array}{l l}
+    {\dot x} = f(x) + g(x) \, u, & x \in D \setminus S,\\
+    x^{+} = \Delta(x^{-}), &x \in D \cap S,
+  \end{array}\right.
   \label{eq:csys}
 \end{align}
-Construct a Lyapunov function $V : T\Q \to \R^{+}$ of the form
+for control values in a set $\U \subseteq \R^{m}$.
+%
+For the continuous dynamics, construct a Lyapunov function, $V : D \to \R^{+}$, of the form
 \begin{align}
   \label{eq:lyap}
-  V(\q, \dq) = \frac{1}{2} E(\q, \dq)^2.
+  V(x) = \frac{1}{2} E(x)^2.
 \end{align}
 Consider the energy shaping controller
 \begin{align}
@@ -65,7 +77,11 @@ Consider the energy shaping controller
 Applying this to the system \eqref{eq:vfield} results in the closed-loop dynamics
 \begin{align}
   \label{eq:vfield-cl}
-  {\dot x} = f(x) + g(x) \mu(x).
+  \Sigma = \left\{
+  \begin{array}{l l}
+    {\dot x} = f(x) + g(x) \, \mu(x), & x \in D \setminus S,\\
+    x^{+} = \Delta(x^{-}), &x \in D \cap S.
+  \end{array}\right.
 \end{align}
 
 \section{Equivalence of Invariant Orbits}
