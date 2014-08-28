@@ -1,7 +1,10 @@
 \documentclass[twocolumn]{article}
 
 \usepackage{amsmath,amssymb,amsthm,mathrsfs}
-\usepackage[cm]{fullpage}
+\usepackage[top=1.25in, bottom=1.25in, left=.75in, right=.75in]{geometry}
+
+\usepackage[english]{babel}
+\usepackage{fancyhdr,lastpage}
 
 \usepackage{../rsinnet}
 \newcommand{\limeps}{\lim_{\epsilon \to 0}}
@@ -9,8 +12,16 @@
 \author{R.~W.~Sinnet}
 \title{On the Stability of Energy Shaping}
 
+\pagestyle{fancy} \fancyhf{}
+\lhead[]{On the Stability of Energy Shaping}
+\rhead[]{R. W. Sinnet}
+%%HASH%%
+\cfoot[]{-\thepage\ of \pageref{LastPage}-}
+\rfoot[]{Revised \today}
+
 \begin{document}
 \maketitle
+\thispagestyle{fancy}
 
 \section*{Overview}
 The goal is to show that the energy shaping control law does not locally destabilize the system.

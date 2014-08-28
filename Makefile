@@ -7,7 +7,11 @@ cg-energy: notes/cg-energy.pdf
 
 es-stability: notes/es-stability.pdf
 
-notes/%.pdf: notes/%.tex rsinnet.sty
+notes/%.latex: notes/%.tex
+	cp $< $(basename $<).latex
+	sed -i 's/%%HASH%%/\\lfoot[]{$(shell sha256sum notes/es-stability.tex | sed 's/^\(.\{20\}\).*/\1/')}/' $(basename $<).latex
+
+notes/%.pdf: notes/%.latex rsinnet.sty
 	pdflatex -output-directory=notes $<
 	pdflatex -output-directory=notes $<
 
