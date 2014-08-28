@@ -104,6 +104,19 @@ The next step is to prove the main idea, namely, that stability of a system is m
     \limeps L_{g} V(x, t) \, \mu(x) = 0 \Rightarrow \limeps \mu(x) = 0.
   \end{align*}
 
-  It now remains to be shown that small perturbations in the input to \eqref{eq:csys} do not destabilize the system.
+  It now remains to be shown that small perturbations in the input to \eqref{eq:csys} do not destabilize the system. By the discrete converse Lyapunov Theorem, exponential stability of the discrete-time system \eqref{} implies the existence of a Lyapunov function $V_{P}$ satisfying
+\begin{align*}
+  c_{1} \| x \|^{2}_{\A} \leq V(x) \leq c_{2} \| x \|_{\A}^2\\
+  V(P(x)) - V(x) \leq c_{3} \| x \|^{2}_{\A}
+\end{align*}
+
+The rest of the proof should proceed something like the following:
+\begin{enumerate}
+\item Exponential stability of the discrete system implies the existence of a Lyapunov function by the converse Lyapunov theorem.
+\item Show that control law \eqref{eq:es-qp} produces values within a compact set for states within a certain $\epsilon$ distance of the periodic orbit.
+\item Show that the effect of control (disturbance) on the Poincar{\'e} return map is bounded.
+\item Show somehow that a slight perturbation to the Lyapunov function through disturbances does not result in instability.
+\end{enumerate}
+
 \end{proof}
 \end{document}
