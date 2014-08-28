@@ -5,7 +5,7 @@ all: $(PROJNAME).pdf cg-energy es-stability
 
 cg-energy: notes/cg-energy.pdf
 
-es-stabiity: notes/es-stability.pdf
+es-stability: notes/es-stability.pdf
 
 notes/%.pdf: notes/%.tex rsinnet.sty
 	pdflatex -output-directory=notes $<
