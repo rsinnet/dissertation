@@ -119,7 +119,7 @@ The next step is to prove the main idea, namely, that stability is maintained wh
   From this, the limiting behavior can be examined:
   \begin{align*}
     \limeps \Ve(x, t) &= \limeps \Ve(x_{0}, 0) \, e^{-\epsilon t}\\
-    &= V(x_{0}, 0, \epsilon)\\
+    &= \Ve(x_{0}, 0)\\
     &= V_0.
   \end{align*}
   The above implies that
@@ -133,11 +133,11 @@ The next step is to prove the main idea, namely, that stability is maintained wh
 
   It now remains to be shown that small perturbations in the input to \eqref{eq:csys} do not destabilize the system.
   %
-  By the discrete converse Lyapunov Theorem, exponential stability of the discrete-time component of the hybrid system \eqref{eq:hsys} implies the existence of a discrete Lyapunov function $V_{P} : \D \cap \S \times \R^{+} \to \R^{+}$ satisfying
+  By the discrete converse Lyapunov Theorem, exponential stability of the discrete-time component of the hybrid system \eqref{eq:hsys} implies the existence of a discrete Lyapunov function $V : \D \cap \S \times \R^{+} \to \R^{+}$ satisfying
   %
   \begin{align*}
     c_{1} \| x \|^{2}_{\D} \leq \Vebar(x) \leq c_{2} \| x \|_{\D}^2\\
-    \Vebar(P(x)) - \Vebar(x) \leq c_{3} \| x \|^{2}_{\D}
+    \Vebar(\Pe(x)) - \Vebar(x) \leq c_{3} \| x \|^{2}_{\D}
   \end{align*}
 
 \end{proof}
