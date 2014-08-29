@@ -150,5 +150,20 @@ The rest of the proof should proceed something like the following:
 \item Show somehow that a slight perturbation to the Lyapunov function through disturbances does not result in instability.
 \end{enumerate}
 
+\section{Sketch of the Proof}
+
+Exponential stability of the unperturbed system \eqref{eq:hsys} implies that there exists a region round the fixed point $\xst$ in which the state will converge to the limit cycle.
+%
+For simplicity, let's consider a ball of radius $\delta$, $\mathcal{B}\delta$, within this region and centered about the fixed point.
+%
+Because energy is smooth, there exists a level set of energy within this ball corresponding to the energy of the limit cycle, $E(x) = \xst$, and the guard condition applies as well, so this is a codimension-two submanifold, $\left.\S\right|_{\Es} = \{ x \in \D \cap \S | E(x) = \Es \}$.
+%
+If the system is stable within this this submanifold and the convergence of the discrete dynamics is sufficiently large to overcome divergence in the continuous dynamics due to the energy shaping controller, the exponential stability is guaranteed.
+
+
+Additionally, it should be noted that, as the perturbations approach zero, the divergence from the fixed point due the continuous dynamics approaches zero.
+%
+Thus it seems logical to assume that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
+
 
 \end{document}
