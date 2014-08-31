@@ -1,36 +1,62 @@
-\documentclass[twocolumn]{article}
+\chapter*{\uppercase{Introduction}}
 
-\usepackage{amsmath,amssymb,amsthm,mathrsfs}
-\usepackage[top=1.25in, bottom=1.25in, left=.75in, right=.75in]{geometry}
-
-\usepackage[english]{babel}
-\usepackage{fancyhdr,lastpage}
-
-\usepackage{../rsinnet}
-
-\author{R.~W.~Sinnet}
-\title{On the Stability of Energy Shaping}
-
-\pagestyle{fancy} \fancyhf{}
-\lhead[]{On the Stability of Energy Shaping}
-\rhead[]{R. W. Sinnet}
-%%HASH%%
-\cfoot[]{-\thepage\ of \pageref{LastPage}-}
-\rfoot[]{Revised \today}
-
-\begin{document}
-\maketitle
-\thispagestyle{fancy}
-
-\section*{Overview}
-The goal is to show that the energy shaping control law does not locally destabilize the system.
+Bipedal robotic walking has been well-studied for over three decades---a variety of models ranging in complexity have been studied with numerous control strategies applied in an attempt to achieve stable walking \cite{aut_2014_gcsa_01,Hurmuzlu20041647,WGCCM07}.
 %
-Formally, this means that, given an exponentially-stable limit cycle in a dynamical system, application of energy shaping results in a closed-loop system which is exponentially stable.
+Gait generation is a common theme: some of the approaches involve passivity-based control \cite{CRTW05,SB05}, control of zero-moment point \cite{FAA10,KKKFHYH06,VB04}, hybrid zero dynamics \cite{CDG08,WGCCM07,WGK03}, central pattern generators \cite{RH02,TAT03}, and compliance-based control \cite{PDP97}.
 %
-An attempt will be made to show this using an $\epsilon$-$\delta$ proof and by looking at vector field perturbations.
+The hybrid nature of bipedal walking suggest the use of the hybrid systems modeling paradigm to understand the dynamics of walking.
+%
+A hybrid system is a type of dynamical system which combines both continuous dynamics, treated wtih the standard equations of motion of a mechanical system operating on a normal time scale, and discrete dynamics like foot-strike which begin with a similar treatment but operate on much faster time scales.
+%
+The stability of solutions to traditional continuous-time systems can be understood through the use of continuous-time Lyapunov functions whereas hybrid systems are generally examined using discrete-time Lyapunov analysis in order to take into account discontinuities arising from plastic impacts.
 
-\section{Setup}
+This thesis will present a framework for improving robustness properties of hybrid systems with a special focus on bipedal robots.
+%
+By shaping the energy of a system to that of an associated stable limit cycle, energy shaping provides a means for improving the robustness properties of systems.
+%
+Due to the complex nonlinear nature of bipedal walking, the benefit of energy shaping varies from model to model.
+%
+It will be proven that the resulting system will be stable and that the gait will be unchanged.
 
+The implementation utilizes the notion of control Lyapunov functions which are satisfied by construction of the proposed controller.
+%
+In addition, the controllers will be formulated as optimization problems using quadratic programming.
+%
+As a practical extension, by the nature of the formulation, the conditions of convergence can sometimes be relaxed to impose additional constraints such as torque bounding and Zero Moment Point conditions \cite{VB04}.
+
+\section*{Overview of Energy Shaping}
+Periodic behaviors in hybrid mechanical systems have specific energy signatures that evolves over time.
+%
+The energy dynamics of a conservative system can be understood as an interplay between kinetic and potential energy, with energy transfer occuring between these two quantities.
+%
+Indeed for conservative systems, the energy is constant, i.e.,
+\begin{align}
+  E_{0} \equiv E(\q, \dq) = T(\q, \dq) + U(\q).
+\end{align}
+%
+In a non-conservative system, this relationship does not hold, but the dynamics of energy can still be understood as
+\begin{align}
+  \label{eq:ncsys-nrg-cons}
+  E_{0} \equiv E_{c}(\q(t), \dq(t)) = T(\q(t), \dq(t)) + U(\q(t)) - \int_{0}^{t} \! \Fnc \cdot \frac{dq(\tau)}{d\tau} \ d\tau.
+\end{align}
+where $\Fnc$ represents conservative forcing. Typically this represents an autonomous feedback control law and so $\Fnc : T\Q \to \R^m$ where $m$ is the number of actuators in the system.
+%
+As for many other control systems, the forcing from control under an autonomous feedback control is then written
+\begin{align}
+  \Fnc = B(q) \, u(\q, \dq).
+\end{align}
+
+From the relationship stated in \eqref{eq:ncsys-nrg-cons}, it is clear that the total energy present in the system plus the energy removed by non-conservative forcing is constant.
+%
+This phenomenom is well understood and it holds for all motion in mechanical systems, not just for periodic behaviors.
+
+Understanding the energy dynamics of a system is key to the method of energy shaping.
+%
+By taking advantage of the presence of energy level sets in periodic behaviors, energy shaping seeks to add robustness to certain types of controllers do not necessarily have an intrinsic notion of stabilizing to a zero dynamics.
+%
+
+
+\section*{Hybrid Setup}
 Consider a hybrid dynamical system with total energy
 \begin{align*}
   E(x) &= E(\q, \dq = \frac{1}{2} \dq^{T} M(\q) \dq + U(\q).
@@ -83,7 +109,7 @@ Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
   \end{array}\right.
 \end{align}
 
-\section{Equivalence of Invariant Orbits}
+\section*{Equivalence of Invariant Orbits}
 In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:
 
 \begin{lemma}
@@ -102,7 +128,7 @@ In order to achieve the stated goal, it is necessary to show that, given a syste
   Thus, the periodic orbits are equivalent.
 \end{proof}
 
-\section{Stability of the Shaped System}
+\section*{Stability of the Shaped System}
 
 The next step is to prove the main idea, namely, that stability is maintained when energy shaping is applied.
 
@@ -111,7 +137,7 @@ The next step is to prove the main idea, namely, that stability is maintained wh
 \end{theorem}
 
 \begin{proof}
-  Considering the energy shaping controller \eqref{eq:es-qp} with a strict equality constraint, it can be seen that the time evolution of the Lyapunov function \eqref{eq:lyap} is given by
+  {\em (Sketch)} Considering the energy shaping controller \eqref{eq:es-qp} with a strict equality constraint, it can be seen that the time evolution of the Lyapunov function \eqref{eq:lyap} is given by
   \begin{align*}
     \Ve(x, t) = \Ve(x_{0}, 0) \, e^{-\epsilon t}.
   \end{align*}
@@ -139,18 +165,6 @@ The next step is to prove the main idea, namely, that stability is maintained wh
     \Vebar(\Pe(x)) - \Vebar(x) \leq c_{3} \| x \|^{2}_{\D}
   \end{align*}
 
-\end{proof}
-
-The rest of the proof should proceed something like the following:
-\begin{enumerate}
-\item Exponential stability of the discrete system implies the existence of a Lyapunov function by the converse Lyapunov theorem.
-\item Show that control law \eqref{eq:es-qp} produces values within a compact set for states within a certain $\epsilon$ distance of the periodic orbit.
-\item Show that the effect of control (disturbance) on the Poincar{\'e} return map is bounded.
-\item Show somehow that a slight perturbation to the Lyapunov function through disturbances does not result in instability.
-\end{enumerate}
-
-\section{Sketch of the Proof}
-
 Exponential stability of the unperturbed system \eqref{eq:hsys} implies that there exists a region round the fixed point $\xst$ in which the state will converge to the limit cycle.
 %
 For simplicity, let's consider a ball of radius $\delta$, $\mathcal{B}\delta$, within this region and centered about the fixed point.
@@ -162,7 +176,11 @@ If the system is stable within this this submanifold and the convergence of the 
 
 Additionally, it should be noted that, as the perturbations approach zero, the divergence from the fixed point due the continuous dynamics approaches zero.
 %
-Thus it seems logical to assume that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
+Thus it can be shown that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
 
+\section{Simulation Results}
+Simulations will be used to demonstrate the usefulness of the proposed control scheme.
+%
+As an example, consider the compass-gait biped with knees.
 
-\end{document}
+\end{proof}
