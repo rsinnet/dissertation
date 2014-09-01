@@ -201,14 +201,32 @@ McGeer showed the compass-gait biped can walk down slopes stably in \cite{McGeer
 Later Spong and Bullo showed in \cite{SB02} that these downhill gaits can be reproduced on a fully-acutated compass-gait biped using a method styled controlled symmetries which acts to essentially rotate the frame of gravity through control.
 %
 As a result the compass-gait biped walking on flat ground can be modeled as a Lagrangian system of the form \eqref{eq:consys-nrg}.
+%
+The interplay between the kinetic energy and the shaped potential energy plays a key role in energy shaping: energy is exchanged between potential and kinetic as the robot moves, but the total energy is always conserved as can be seen in \figref{fig:nrg-cons}.
+
 
 \begin{figure}
   \centering
   \includegraphics[width=0.85\columnwidth]{energy_cg2d_slope_model}
-  \caption{The unforced cart--spring system exhibits periodic behavior.}
+  \caption{Total energy of the compass-gait biped is conserved.}
+  \label{fig:nrg-cons}
 \end{figure}
 
-Simulations have shown that, using other forms of energy shaping, the domain of attraction is increased \cite{SpBh03}.
+\begin{figure}
+  \centering
+  \includegraphics[width=0.85\columnwidth]{es_comparison_2link_conservative}
+  \caption{Energy shaping}
+  \label{fig:nrg-comp}
+\end{figure}
+
+
+Simulations in the research have shown that, using other forms of energy shaping, the domain of attraction is increased \cite{SpBh03}.
 %
-Using the energy shaping controller \eqref{eqes-qp}, the robustness of the biped can be improved.
+Using the proposed energy shaping controller \eqref{eq:es-qp}, the robustness of the biped can also be improved.
+%
+One qualitative indication of the improved robustness comes from examining the convergence of the energy to the nominal energy level.
+%
+\figref{fig:nrg-comp} shows that the energy convergences faster for the compass-gait biped with energy shaping applied.
+%
+Additionally, the convergence appears to be more uniform.
 %
