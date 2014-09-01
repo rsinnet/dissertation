@@ -21,7 +21,7 @@ $(PROJNAME).aux: *.tex ../rsinnet.sty ../tamuconfig.sty ../references.bib $(EPS_
 ../figs/%.eps_latex: ../figs/%.eps_tex ../figs/%.eps ../figs/do_latex_subs.py ../figs/latex_subs.json
 	$(MAKE) -C ../ figs/$(notdir $@)
 
-.PHONY: clean all proposal
+.PHONY: clean
 
 clean:
 	rm -f $(PROJNAME).pdf $(PROJNAME).ps $(PROJNAME).lot $(PROJNAME).lof \
