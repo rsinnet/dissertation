@@ -55,7 +55,13 @@ Understanding the energy dynamics of a system is key to the method of energy sha
 %
 By taking advantage of the presence of energy level sets in periodic behaviors, energy shaping seeks to add robustness to certain types of controllers do not necessarily have an intrinsic notion of stabilizing to a zero dynamics.
 %
-
+\begin{figure}
+  \centering
+  \def\svgwidth{0.8\columnwidth}
+  \input{../figs/hybrid_periodic_orbit.eps_latex}
+  \caption{A periodic orbit of a typical single-domain hybrid system.}
+  \label{fig:hsys}
+\end{figure}
 
 \section*{Hybrid Setup}
 Consider a hybrid dynamical system with total energy
@@ -77,6 +83,8 @@ The uncontrolled hybrid system can be written
   \end{array}\right.
   \label{eq:hsys}
 \end{align}
+and can be understood graphically from \figref{fig:hsys}.
+%
 Under the action of control effort $u$, the corresponding hybrid control system has the form
 \begin{align}
   \Sigma_{c} = \left\{
