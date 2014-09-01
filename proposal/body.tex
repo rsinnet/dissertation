@@ -165,22 +165,29 @@ The next step is to prove the main idea, namely, that stability is maintained wh
     \Vebar(\Pe(x)) - \Vebar(x) \leq c_{3} \| x \|^{2}_{\D}
   \end{align*}
 
-Exponential stability of the unperturbed system \eqref{eq:hsys} implies that there exists a region round the fixed point $\xst$ in which the state will converge to the limit cycle.
-%
-For simplicity, let's consider a ball of radius $\delta$, $\mathcal{B}\delta$, within this region and centered about the fixed point.
-%
-Because energy is smooth, there exists a level set of energy within this ball corresponding to the energy of the limit cycle, $E(x) = \xst$, and the guard condition applies as well, so this is a codimension-two submanifold, $\left.\S\right|_{\Es} = \{ x \in \D \cap \S | E(x) = \Es \}$.
-%
-If the system is stable within this this submanifold and the convergence of the discrete dynamics is sufficiently large to overcome divergence in the continuous dynamics due to the energy shaping controller, the exponential stability is guaranteed.
+  Exponential stability of the unperturbed system \eqref{eq:hsys} implies that there exists a region round the fixed point $\xst$ in which the state will converge to the limit cycle.
+  %
+  For simplicity, let's consider a ball of radius $\delta$, $\mathcal{B}\delta$, within this region and centered about the fixed point.
+  %
+  Because energy is smooth, there exists a level set of energy within this ball corresponding to the energy of the limit cycle, $E(x) = \xst$, and the guard condition applies as well, so this is a codimension-two submanifold, $\left.\S\right|_{\Es} = \{ x \in \D \cap \S | E(x) = \Es \}$.
+  %
+  If the system is stable within this this submanifold and the convergence of the discrete dynamics is sufficiently large to overcome divergence in the continuous dynamics due to the energy shaping controller, the exponential stability is guaranteed.
 
 
-Additionally, it should be noted that, as the perturbations approach zero, the divergence from the fixed point due the continuous dynamics approaches zero.
-%
-Thus it can be shown that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
-
-\section{Simulation Results}
-Simulations will be used to demonstrate the usefulness of the proposed control scheme.
-%
-As an example, consider the compass-gait biped with knees.
-
+  Additionally, it should be noted that, as the perturbations approach zero, the divergence from the fixed point due the continuous dynamics approaches zero.
+  %
+  Thus it can be shown that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
 \end{proof}
+
+\section*{Simulation Results}
+Simulations will  used to demonstrate the usefulness of the proposed control scheme.
+%
+As an example, consider the compass-gait biped as shown in \figref{fig:cg2d-model}.
+
+\begin{figure}
+  \centering
+  \def\svgwidth{0.5\columnwidth}
+  \input{../figs/cg2d-2link-model.eps_latex}
+  \caption{Compass-gait biped with Controlled Symmetries.}
+  \label{fig:cg2d-model}
+\end{figure}

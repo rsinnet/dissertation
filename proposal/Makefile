@@ -1,23 +1,30 @@
 PROJNAME=proposal
 LATEX_CMD=latex -interaction=nonstopmode
 
-$(PROJNAME).pdf: $(PROJNAME).ps
+EPS_TEX := $(wildcard ../figs/*.eps_tex)
+EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
+
+(PROJNAME).pdf: $(PROJNAME).ps
 	ps2pdf $< $(PROJNAME).pdf
 
 $(PROJNAME).ps: $(PROJNAME).dvi
 	dvips -o $(PROJNAME).ps $<
 
-$(PROJNAME).dvi: $(PROJNAME).aux
+$(PROJNAME).dvi: $(PROJNAME).aux 
 	$(LATEX_CMD) $(PROJNAME).tex
 	$(LATEX_CMD) $(PROJNAME).tex
 
-$(PROJNAME).aux: $(PROJNAME).tex body.tex ../rsinnet.sty ../tamuconfig.sty ../references.bib
+$(PROJNAME).aux: *.tex ../rsinnet.sty ../tamuconfig.sty ../references.bib $(EPS_LATEX)
 	$(LATEX_CMD) $(PROJNAME).tex
 	bibtex $(PROJNAME).aux
+
+../figs/%.eps_latex: ../figs/%.eps_tex ../figs/%.eps ../figs/do_latex_subs.py ../figs/latex_subs.json
+	$(MAKE) -C ../ figs/$(notdir $@)
 
 .PHONY: clean all proposal
 
 clean:
 	rm -f $(PROJNAME).pdf $(PROJNAME).ps $(PROJNAME).lot $(PROJNAME).lof \
-	$(PROJNAME).bbl $(PROJNAME).aux $(PROJNAME).dvi $(PROJNAME).toc \
+	$(PROJNAME).bbl *.aux $(PROJNAME).dvi $(PROJNAME).toc \
 	$(PROJNAME).log $(PROJNAME).blg $(PROJNAME).out
+	$(MAKE) -C ../figs/ clean
