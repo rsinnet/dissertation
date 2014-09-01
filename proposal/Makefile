@@ -4,7 +4,7 @@ LATEX_CMD=latex -interaction=nonstopmode
 EPS_TEX := $(wildcard ../figs/*.eps_tex)
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 
-(PROJNAME).pdf: $(PROJNAME).ps
+$(PROJNAME).pdf: $(PROJNAME).ps
 	ps2pdf $< $(PROJNAME).pdf
 
 $(PROJNAME).ps: $(PROJNAME).dvi
