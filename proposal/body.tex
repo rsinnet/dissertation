@@ -1,8 +1,10 @@
 \chapter*{\uppercase{Introduction}}
 
-Bipedal robotic walking has been well-studied for over three decades---a variety of models ranging in complexity have been studied with numerous control strategies applied in an attempt to achieve stable walking \cite{aut_2014_gcsa_01,Hurmuzlu20041647,WGCCM07}.
+Bipedal robotic walking has been well-studied for over three decades---a variety of models ranging in complexity have been studied with numerous control strategies applied in an attempt to achieve stable walking \cite{aut_2014_gcsa_01,Hurmuzlu20041647,WGCCM07}.\let\thefootnote\relax\footnote{The journal model is {\em IEEE Transactions on Automatic Control}.}
+
+
 %
-Gait generation is a common theme: some of the approaches involve passivity-based control \cite{CRTW05,SB05}, control of zero-moment point \cite{FAA10,KKKFHYH06,VB04}, hybrid zero dynamics \cite{CDG08,WGCCM07,WGK03}, central pattern generators \cite{RH02,TAT03}, and compliance-based control \cite{PDP97}.
+Gait generation is a common theme: some of the approaches involve passivity-based control \cite{CRTW05,aut_2014_gcsa_01,cdc_2009_sa_01,SB05}, control of zero-moment point \cite{FAA10,KKKFHYH06,VB04}, hybrid zero dynamics \cite{CDG08,WGCCM07,WGK03}, human-inspired control \cite{ijbbr_2014_sja_01,ifac_2011_spsa_01}, functional Routhian reduction \cite{AGS06,nolcos_2010_gcas_01,cdc_2009_sa_02}, central pattern generators \cite{RH02,TAT03}, and compliance-based control \cite{PDP97}.
 %
 The hybrid nature of bipedal walking suggest the use of the hybrid systems modeling paradigm to understand the dynamics of walking.
 %
@@ -12,7 +14,7 @@ The stability of solutions to traditional continuous-time systems can be underst
 
 This thesis will present a framework for improving robustness properties of hybrid systems with a special focus on bipedal robots.
 %
-By shaping the energy of a system to that of an associated stable limit cycle, energy shaping provides a means for improving the robustness properties of systems.
+By shaping the energy of a system to that of an associated stable limit cycle, {\em energy shaping} provides a means for improving the robustness properties of systems.
 %
 Due to the complex nonlinear nature of bipedal walking, the benefit of energy shaping varies from model to model.
 %
@@ -27,9 +29,13 @@ As a practical extension, by the nature of the formulation, the conditions of co
 \section*{Overview of Energy Shaping}
 Periodic behaviors in hybrid mechanical systems have specific energy signatures that evolves over time.
 %
+The main idea behind energy shaping is to exploit these systems by constructing a controller which attempts to follow the natural dynamics or nominal control law while modifying it slightly to achieve convergence to an energy level which is known to be stable.
+%
+Denote the generalized coordinates of the system as $(\q^{T}, \dq^{T})^{T} \in T\Q = \X$ where $\dim \Q = n$.
+%x
 The energy dynamics of a conservative system can be understood as an interplay between kinetic and potential energy, with energy transfer occuring between these two quantities.
 %
-Indeed for conservative systems, the energy is constant, i.e.,
+Indeed, for conservative systems, the total energy is constant, i.e.,
 \begin{align}
   \label{eq:consys-nrg}
   E_{0} \equiv E(\q, \dq) = T(\q, \dq) + U(\q).
@@ -40,12 +46,17 @@ In a non-conservative system, this relationship does not hold, but the dynamics 
   \label{eq:ncsys-nrg-cons}
   E_{0} \equiv E_{c}(\q(t), \dq(t)) = T(\q(t), \dq(t)) + U(\q(t)) - \int_{0}^{t} \! \Fnc \cdot \frac{dq(\tau)}{d\tau} \ d\tau.
 \end{align}
-where $\Fnc$ represents conservative forcing. Typically this represents an autonomous feedback control law and so $\Fnc : T\Q \to \R^m$ where $m$ is the number of actuators in the system.
+where $\Fnc$ represents non-conservative forcing.
+%
+Typically this represents an autonomous feedback control law and so one might consider $\Fnc : T\Q \to \R^{m}$ where $m$ is the number of actuators in the system.
 %
 As for many other control systems, the forcing from control under an autonomous feedback control is then written
 \begin{align}
-  \Fnc = B(q) \, u(\q, \dq).
+  \Fnc = B(q) \, u(\q, \dq),
 \end{align}
+where $B : \Q \to \R^{n \times m}$.
+%
+When $n = m$, a system is said to be fully actuated and when $n > m$, a system is said to be underactuated.
 
 From the relationship stated in \eqref{eq:ncsys-nrg-cons}, it is clear that the total energy present in the system plus the energy removed by non-conservative forcing is constant.
 %
@@ -55,9 +66,11 @@ Understanding the energy dynamics of a system is key to the method of energy sha
 %
 By taking advantage of the presence of energy level sets in periodic behaviors, energy shaping seeks to add robustness to certain types of controllers do not necessarily have an intrinsic notion of stabilizing to a zero dynamics.
 %
+
+
 \begin{figure}
   \centering
-  \def\svgwidth{0.8\columnwidth}
+  \def\svgwidth{0.6\columnwidth}
   \input{../figs/hybrid_periodic_orbit.eps_latex}
   \caption{A periodic orbit of a typical single-domain hybrid system.}
   \label{fig:hsys}
@@ -71,7 +84,7 @@ Consider a hybrid dynamical system with total energy
 where the first term represents the kinetic energy and the second term represents the potential energy.
 %
 The system has coordinates $x = (\q^T, \dq^T)^T \in T\Q = \D$ which take values in the {\em domain of admissibility}, $\D$.
-
+%
 The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \R^{+}$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
 %
 The uncontrolled hybrid system can be written
@@ -180,7 +193,9 @@ The next step is to prove the main idea, namely, that stability is maintained wh
   %
   Because energy is smooth, there exists a level set of energy within this ball corresponding to the energy of the limit cycle, $E(x) = \xst$, and the guard condition applies as well, so this is a codimension-two submanifold, $\left.\S\right|_{\Es} = \{ x \in \D \cap \S | E(x) = \Es \}$.
   %
-  If the system is stable within this this submanifold and the convergence of the discrete dynamics is sufficiently large to overcome divergence in the continuous dynamics due to the energy shaping controller, the exponential stability is guaranteed.
+  If the system is stable within this this submanifold and the convergence of the discrete dynamics is sufficiently large to overcome divergence in the continuous dynamics due to the energy shaping controller, then exponential stability is guaranteed.
+  %
+  Since on the energy level, the shaped dynamics is equivalent to the nominal dynamics, if convergence to the energy level is sufficiently fast, the system should maintain stability.
 
 
   Additionally, it should be noted that, as the perturbations approach zero, the divergence from the fixed point due the continuous dynamics approaches zero.
@@ -196,7 +211,7 @@ The next step is to prove the main idea, namely, that stability is maintained wh
   \label{fig:cg2d-model}
 \end{figure}
 
-\section*{Simulation Results}
+\section*{Simulation Results and Conclusions}
 
 Simulations will used to demonstrate the usefulness of the proposed control scheme.
 %
@@ -238,3 +253,7 @@ One qualitative indication of the improved robustness comes from examining the c
 %
 Additionally, the convergence appears to be more uniform.
 %
+
+For simplicity of exposition, only the compass-gait biped is presented in this proposal but results have been achieved on more complicated models including bipedal walkers with as many as four discrete domains.
+%
+The domain of applicability seems to be rather large based on the applications tested.
