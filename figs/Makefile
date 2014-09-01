@@ -11,4 +11,4 @@ all: $(EPS_LATEX)
 .PHONY: all clean
 
 clean:
-	rm -rf *.eps_latex
+	rm -f *.eps_latex
