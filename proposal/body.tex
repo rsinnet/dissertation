@@ -31,6 +31,7 @@ The energy dynamics of a conservative system can be understood as an interplay b
 %
 Indeed for conservative systems, the energy is constant, i.e.,
 \begin{align}
+  \label{eq:consys-nrg}
   E_{0} \equiv E(\q, \dq) = T(\q, \dq) + U(\q).
 \end{align}
 %
@@ -179,11 +180,6 @@ The next step is to prove the main idea, namely, that stability is maintained wh
   Thus it can be shown that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
 \end{proof}
 
-\section*{Simulation Results}
-Simulations will  used to demonstrate the usefulness of the proposed control scheme.
-%
-As an example, consider the compass-gait biped as shown in \figref{fig:cg2d-model}.
-
 \begin{figure}
   \centering
   \def\svgwidth{0.5\columnwidth}
@@ -191,3 +187,22 @@ As an example, consider the compass-gait biped as shown in \figref{fig:cg2d-mode
   \caption{Compass-gait biped with Controlled Symmetries.}
   \label{fig:cg2d-model}
 \end{figure}
+
+\section*{Simulation Results}
+
+Simulations will used to demonstrate the usefulness of the proposed control scheme.
+%
+As an example, consider the compass-gait biped as shown in \figref{fig:cg2d-model}.
+%
+This model consists of two links with five point masses and has a zero-width hip.
+%
+McGeer showed the compass-gait biped can walk down slopes stably in \cite{McG90}.
+%
+Later Spong and Bullo showed in \cite{SB05} that these downhill gaits can be reproduced on a fully-acutated compass-gait biped using a method styled controlled symmetries which acts to essentially rotate the frame of gravity through control.
+%
+As a result the compass-gait biped walking on flat ground can be modeled as a Lagrangian system of the form \eqref{eq:consys-nrg}.
+
+Simulations have shown that, using other forms of energy shaping, the domain of attraction is increased \cite{SpBh03}.
+%
+Using the energy shaping controller \eqref{eqes-qp}, the robustness of the biped can be improved.
+%
