@@ -64,7 +64,7 @@ for control values in a set $\U \subseteq \R^{m}$.
 For the continuous dynamics, construct a Lyapunov function, $V : \D \to \R^{+}$, of the form
 \begin{align}
   \label{eq:lyap}
-  V(x) = \frac{1}{2} E(x)^2.
+  V(x) = \frac{1}{2} (E(x) - \Eref)^2.
 \end{align}
 Consider the energy shaping controller
 \begin{align}
@@ -164,5 +164,102 @@ Additionally, it should be noted that, as the perturbations approach zero, the d
 %
 Thus it seems logical to assume that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
 
+\newpage
+
+\section{Zero Dynamics Formulation}
+
+In order to understand the nature of energy shaping, consider breaking up the system into two sets of coordinates.
+%
+By considering level sets of energy, the continuous dynamics can be expressed as
+\begin{align}
+  \nonumber
+  {\dot \eta} &= f(\eta, \zeta) + g(\eta, \zeta) \, u,\\
+  {\dot \zeta} &= q(\eta, \zeta),
+  \label{eq:zd-vfield}
+\end{align}
+%
+with states $\eta \in \Eta$ and $\zeta \in \Zeta$ and control inputs $u \in \U$.
+%
+The vector fields $f$, $g$, and $q$ are assumed to be locally Lipschitz.
+%
+The natural choice of transformation to convert the continuous dynamics of \eqref{eq:csys} to \eqref{eq:zd-vfield} will be based on energy.
+
+Under the transformation
+\begin{align}
+  \eta = E(x) - \Eref,
+\end{align}
+it is clear that $f(0, \zeta) = 0$.
+%
+In other words, the zero dynamics manifold $\Zeta$ is the restricted subset of $X$ such that $x = 0$.
+%
+This is used to express the control Lyapunov function as
+\begin{align}
+  V(\eta) = \frac{1}{2} \eta^{2}.
+\end{align}
+
+Exponential stability is guaranteed if a {\em control Lyapunv function} exists satisfying
+\begin{align}
+  c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
+  L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) = 0.
+  \label{eq:lyap-cond-nrg-es}
+\end{align}
+
+
+\section{Proof of Main Result}
+
+Consider the 
+
+First, let us define the domain and switching surface of the system:
+\begin{align}
+  \nonumber
+  \D &= \left\{ x \in \X : h(x) \geq 0 \right\},\\
+  \S &= \left\{ x \in \X : h(x) = 0 \mbox{ and } {\dot h}(x) < 0 \right\}.
+\end{align}
+
+Now Theorem 1 can be proven:
+\begin{proof}
+  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
+  %
+  \begin{align}
+    \nonumber
+    r_{1} \| x \|^{2} \leq \Vn(x) \leq r_{2} \| x \|^2\\
+    \Vn(\Pe(x)) - \Vn(x) \leq -r_{3} \| x \|^{2}
+    \label{eq:lyap-cond-nom}
+  \end{align}
+for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
+%
+In addition, consider the control Lyapunov function associated with \eqref{eq:es-qp} which is $\Ve : \X \to \Rnn < 0$.
+%
+Denote by $\Vee = \VeS$ its restriction to the switching surface $\S$.
+%
+Using these Lyapunov functions, define the candidate Lyapunov function
+\begin{align}
+  \VP(x) = \Vn(x) + \sigma \Vee(x).
+\end{align}
+
+From \eqref{} and \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(x)$ is bounded as follows:
+\begin{align}
+  \left( r_{1} + \sigma c_{1} \right) \| x \|^{2} \leq \VP(x) \leq \left( r_{2} + \sigma \frac{c_{2}}{\epsilon^{2}}  \right) \| x \|^{2}.
+\end{align}
+
+It must be shown that
+\begin{align}
+  \VP(\Pe(x)) - \VP(x) \leq -\alpha \| x \|^{2}.
+\end{align}
+
+First note that
+\begin{align}
+  \VP(\Pe(x)) - \VP(x) = \Vn(\Pe(x)) - \Vn(x) \hspace{1.2cm}\\
+  \nonumber
+  \mbox{} + \sigma(\Vee(\Pe(x)) - \Vee(x))
+\end{align}
+
+Thus, it remains to be shown that
+\begin{align}
+  \sigma(\Vee(\Pe(x)) - \Vee(x)) \leq -\beta \| x \|^{2}.
+\end{align}
+for $\beta \in \Rpd$.
+
+\end{proof}
 
 \end{document}
