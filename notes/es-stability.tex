@@ -190,18 +190,47 @@ Under the transformation
 \end{align}
 it is clear that $f(0, \zeta) = 0$.
 %
-In other words, the zero dynamics manifold $\Zeta$ is the restricted subset of $X$ such that $x = 0$.
+In other words, the zero dynamics manifold $\Zeta$ is the restricted subset of $X$ such that $\eta = 0$.
 %
 This is used to express the control Lyapunov function as
 \begin{align}
   V(\eta) = \frac{1}{2} \eta^{2}.
 \end{align}
 
-Exponential stability is guaranteed if a {\em control Lyapunv function} exists satisfying
+Exponential stability of the $\eta$ dynamics is guaranteed if a {\em control Lyapunv function} exists satisfying
 \begin{align}
-  c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
-  L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) = 0.
   \label{eq:lyap-cond-nrg-es}
+  &c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
+  \nonumber
+  &\inf_{u \in \U} \left( L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \right) \leq 0,
+\end{align}
+for all $(\eta, \zeta) \in \Eta \times \Zeta$.
+%
+It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{1}{2}$.
+%
+Define the set
+\begin{align}
+  \K = \left\{ u \in \U : L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \leq 0 \right\}.
+\end{align}
+For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \Eta \times \Zeta \to \K$, it follows that solutions satisfy
+\begin{align*}
+  \| \eta(t) \| \leq \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2} t} \| \eta(0) \|.
+\end{align*}
+
+Now consider the hybrid control system
+\begin{align}
+  \label{eq:hcsys}
+  {\bar \Sigma}_{c} = \left\{
+  \begin{array}{l l}
+    \begin{array}{r c l}
+      {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
+      {\dot \zeta} &=& q(\eta, \zeta)
+    \end{array} & \mbox{ if } (\eta, \zeta) \in \D \setminus \S,\\
+    \begin{array}{r c l}
+      \eta^{+} &=& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
+      \zeta^{+} &=& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
+    \end{array} & \mbox{ if } (\eta, \zeta) \in \S,
+  \end{array}\right.
 \end{align}
 
 
@@ -218,7 +247,7 @@ First, let us define the domain and switching surface of the system:
 
 Now Theorem 1 can be proven:
 \begin{proof}
-  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
+  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\V : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
   %
   \begin{align}
     \nonumber
