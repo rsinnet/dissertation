@@ -228,7 +228,7 @@ For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\et
 %
 The Poincar{\'e} map has a form like
 \begin{align}
-  \Pe(\eta, \zeta) = \phi_{T_{I}(\eta, \zeta)}(\Delta(\eta, \zeta)
+  \Pe(\eta, \zeta) = \phi_{T_{I}(\eta, \zeta)}(\Delta(\eta, \zeta)),
 \end{align}
 where $T_{I}(\eta, \zeta)$ is the time to impact.
 
@@ -244,6 +244,8 @@ Now Theorem 1 can be proven:
   \end{align}
   for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
   %
+  {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$?}
+  
   In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \Eta \to \Rnn$.
   %
   Denote by $\Vee = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
@@ -258,9 +260,9 @@ Now Theorem 1 can be proven:
   From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(\eta, \zeta)$ is bounded as follows:
   %
   \begin{align}
-    \sigma c_{1} \| \eta \|^{2} + r_{1} \| (\eta, \zeta) \| &\leq \VP(\eta, \zeta)\\
+    \sigma c_{1} \| \eta \|^{2} + r_{1} \| (\eta, \zeta) \|^{2} &\leq \VP(\eta, \zeta)\\
     \nonumber
-    &\leq \sigma c_{2} \| \eta \|^{2} + r_{2} \| (\eta, \zeta) \|
+    &\leq \sigma c_{2} \| \eta \|^{2} + r_{2} \| (\eta, \zeta) \|^{2}
   \end{align}
   %
   It must be shown that
