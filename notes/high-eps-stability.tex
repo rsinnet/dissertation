@@ -137,6 +137,8 @@ Thus consider the coordinate transformation
 \end{align}
 which is a local diffeomorphism.
 %
+By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = \mathbf{0}$.
+%
 Applying the control law \eqref{eq:es-qp}, the dynamics becomes
 \begin{align}
   \nonumber
@@ -294,29 +296,29 @@ Now Theorem 1 can be proven:
     \nonumber
     \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \| \Delta_{\zdx}(\zdx, \zdz) \|^{2}.
   \end{align}
-  {\bf If the reset map is locally Lipschitz about the fixed point $(\zdxst, \zdzst)$, then
+  {\bf If the reset map is locally Lipschitz about the fixed point $(\zdx, \zdz) = \mathbf{0}$, then
     \begin{align}
       \label{eq:Veh-bound}
-      \| \Delta(\zdx, \zdz) - \Delta(\zdx + \gamma, \zdz + \gamma) \| \leq L_{\Delta} \| (\delta\zdx, \delta\zdz) \|
+      \| \Delta(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp) \| \leq L_{\Delta} \| (\zdxp, \zdzp) \|
     \end{align}
-    in some conservative ball $\B_{\gamma}(\zdxst, \zdzst)$ for some $(\delta\zdx, \delta\zdz) \in \B_{\gamma}(\zdxst, \zdzst)$.}
-
+    for some $(\zdxp, \zdzp) \in \B_{\gamma}(\mathbf{0})$ with $\gamma \in \Rpd$.}
+  
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
     \nonumber
     \Vee&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(\zdx - \delta \zdx, \zdz + \delta \zdz)\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp)\\
     \nonumber
-    & \hspace{3.5cm}  + \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\|^{2}\\
+    & \hspace{3.5cm}  + \Delta(\zdx + \zdxp, \zdz + \zdzp)\big\|^{2}\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz) \big\|^{2}\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp) \big\|\\
     \nonumber
-    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\|^{2} \Big)\\
+    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\| \Big)^{2}\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( L_{\Delta}^{2} \| (\delta \zdx, \delta \zdz) \|^{2}\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( L_{\Delta} \| (\delta \zdx, \delta \zdz) \|\\
     \nonumber
-    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\|^{2} \Big)
+    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz) \big\| \Big)^{2}.
   \end{align}
   One thing that must be shown:
   %
