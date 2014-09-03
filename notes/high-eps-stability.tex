@@ -11,6 +11,8 @@
 \author{R.~W.~Sinnet}
 \title{On the Stability of Energy Shaping}
 
+\usepackage{times}
+
 \pagestyle{fancy} \fancyhf{}
 \lhead[]{On the Stability of Energy Shaping}
 \rhead[]{R. W. Sinnet}
@@ -29,13 +31,9 @@ Formally, this means that, given an exponentially-stable limit cycle in a dynami
 
 \section{Setup}
 
-Consider a hybrid dynamical system ith total energy
-\begin{align*}
-  E(x) &= E(\q, \dq = \frac{1}{2} \dq^{T} M(\q) \dq + U(\q).
-\end{align*}
-where the first term represents the kinetic energy and the second term represents the potential energy.
+Consider a hybrid dynamical system with total energy $E(x)$.
 %
-The system has coordinates $x = (\q^T, \dq^T)^T \in T\Q = \D$ which take values in the {\em domain of admissibility}, $\D$.
+The system has coordinates $x \in \D$ which take values in the {\em domain of admissibility}, $\D$.
 
 The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \R^{+}$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
 %
@@ -44,7 +42,7 @@ The uncontrolled hybrid system can be written
   \Sigma = \left\{
   \begin{array}{l l}
     {\dot x} = f(x), & x \in \D \setminus \S,\\
-    x^{+} = \Delta(x^{-}), &x \in \D \cap \S,
+    x^{+} = \Delta(x^{-}), &x \in \S,
   \end{array}\right.
   \label{eq:hsys}
 \end{align}
@@ -53,7 +51,7 @@ Under the action of control effort $u$, the corresponding hybrid control system 
   \Sigma_{c} = \left\{
   \begin{array}{l l}
     {\dot x} = f(x) + g(x) \, u, & x \in \D \setminus \S,\\
-    x^{+} = \Delta(x^{-}), &x \in \D \cap \S,
+    x^{+} = \Delta(x^{-}), &x \in \S,
   \end{array}\right.
   \label{eq:csys}
 \end{align}
@@ -67,7 +65,7 @@ For the continuous dynamics, construct a Lyapunov function, $V : \D \to \R^{+}$,
 Consider the energy shaping controller
 \begin{align}
   \label{eq:es-qp} \tag {QP}
-  \mu(x, \epsilon) = \argmin_{u(x) \in \R^{n}} \ & u(x)^T u(x)\\
+  \mu_{\epsilon}(x) = \argmin_{u(x) \in \R^{n}} \ & u(x)^T u(x)\\
   \nonumber
   \mbox{s.t. } & L_{f} V(x) + L_{g} V(x) u(x) + \epsilon V(x) \leq 0.
 \end{align}
@@ -81,20 +79,37 @@ Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
   \end{array}\right.
 \end{align}
 
-\section{Sketch of the Proof}
-
-Exponential stability of the unperturbed system \eqref{eq:hsys} implies that there exists a region round the fixed point $\xst$ in which the state will converge to the limit cycle.
-%
-For simplicity, let's consider a ball of radius $\delta$, $\mathcal{B}\delta$, within this region and centered about the fixed point.
-%
-Because energy is smooth, there exists a level set of energy within this ball corresponding to the energy of the limit cycle, $E(x) = \xst$, and the guard condition applies as well, so this is a codimension-two submanifold, $\left.\S\right|_{\Es} = \{ x \in \D \cap \S | E(x) = \Es \}$.
-%
-If the system is stable within this this submanifold and the convergence of the discrete dynamics is sufficiently large to overcome divergence in the continuous dynamics due to the energy shaping controller, the exponential stability is guaranteed.
 
 
-Additionally, it should be noted that, as the perturbations approach zero, the divergence from the fixed point due the continuous dynamics approaches zero.
-%
-Thus it seems logical to assume that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
+\section{Stability of the Shaped System}
+
+The main idea is stated as follows:
+\begin{theorem}
+  Given an exponentially-stable limit cycle in a hybrid dynamical system of the form \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:csys} results in the closed-loop hybrid system \eqref{eq:hsys-cl}, which is exponentially stable.
+\end{theorem}
+
+The proof is given later.
+
+
+
+\section{Equivalence of Invariant Orbits}
+In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:
+
+\begin{lemma}
+  Applying the energy shaping controller \eqref{eq:es-qp} to a hybrid control system \eqref{eq:csys} results in a closed-loop system that demonstrates a periodic orbit which is identical to the unshaped system \eqref{eq:hsys}.
+\end{lemma}
+
+\begin{proof}
+  For states on the periodic orbit, i.e., $\xst \in \orbit$, the energy is a known constant, $E(\xst) = E_{0}$.
+  %
+  Therefore, the limit cycle represents an invariant level set of the energy.
+  %
+  By construction of the Lyapunov function \eqref{eq:lyap} used in the the controller \eqref{eq:es-qp}, it is clear that $V(\xst) = 0$ and, moreover, that $$\min_{x \in \D} V(x) = 0.$$
+  %
+  The solution to the optimization problem \eqref{eq:es-qp} has cost $u(x)^T u(x) = 0$ (which implies that all elements of $u(x)$ are zero) and argument $u(x) = 0$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\xst) = 0$ since the energy does not change without external forcing.
+  %
+  Thus, the periodic orbits are equivalent.
+\end{proof}
 
 \section{Zero Dynamics Formulation}
 
@@ -103,21 +118,29 @@ In order to understand the nature of energy shaping, consider breaking up the sy
 By considering level sets of energy, the continuous dynamics can be expressed as
 \begin{align}
   \nonumber
-  {\dot \eta} &= f(\eta, \zeta) + g(\eta, \zeta) \, u,\\
-  {\dot \zeta} &= q(\eta, \zeta),
+  \dot \eta &= f(\eta, \zeta) + g(\eta, \zeta) \, u,\\
+  \dot \zeta &= q(\eta, \zeta) + w(\eta, \zeta) \, u,
   \label{eq:zd-vfield}
 \end{align}
 %
 with states $\eta \in \Eta$ and $\zeta \in \Zeta$ and control inputs $u \in \U$.
 %
-The vector fields $f$, $g$, and $q$ are assumed to be locally Lipschitz.
+The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz.
 %
-The natural choice of transformation to convert the continuous dynamics of \eqref{eq:csys} to \eqref{eq:zd-vfield} will be based on energy.
+The natural choice of transformation to convert the continuous dynamics of \eqref{eq:csys} to \eqref{eq:zd-vfield} is through energy.
 
+Applying the control law \eqref{eq:cs-qp}, the dynamics becomes
+\begin{align}
+  \nonumber
+  \dot \eta &= f(\eta, \zeta) + g(\eta, \zeta) \, \mueps(x),\\
+  \dot \zeta &= q(\eta, \zeta) + w(\eta, \zeta) \, \mueps(x),
+  \label{eq:zd-vfield-cl}
+\end{align}
 Under the transformation
 \begin{align}
-  \eta = E(x) - \Eref,
+  \eta := E(x) - \Eref,
 \end{align}
+
 it is clear that $f(0, \zeta) = 0$.
 %
 In other words, the zero dynamics manifold $\Zeta$ is the restricted subset of $X$ such that $\eta = 0$.
@@ -150,19 +173,18 @@ For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback cont
 Now consider the hybrid control system
 \begin{align}
   \label{eq:hcsys}
-  {\bar \Sigma}_{c} = \left\{
-  \begin{array}{l l}
-    \begin{array}{r c l}
-      {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
-      {\dot \zeta} &=& q(\eta, \zeta)
-    \end{array} & \mbox{ if } (\eta, \zeta) \in \D \setminus \S,\\
-    \begin{array}{r c l}
-      \eta^{+} &=& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
-      \zeta^{+} &=& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
-    \end{array} & \mbox{ if } (\eta, \zeta) \in \S,
-  \end{array}\right.
+        {\bar \Sigma}_{c} = \left\{
+        \begin{array}{l l}
+          \begin{array}{r c l}
+            {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
+            {\dot \zeta} &=& q(\eta, \zeta)
+          \end{array} & \mbox{ if } (\eta, \zeta) \in \D \setminus \S,\\
+          \begin{array}{r c l}
+            \eta^{+} &=& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
+            \zeta^{+} &=& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
+          \end{array} & \mbox{ if } (\eta, \zeta) \in \S,
+        \end{array}\right.
 \end{align}
-
 
 \section{Proof of Main Result}
 
@@ -185,39 +207,39 @@ Now Theorem 1 can be proven:
     \Vn(\Pe(x)) - \Vn(x) \leq -r_{3} \| x \|^{2}
     \label{eq:lyap-cond-nom}
   \end{align}
-for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
-%
-In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \X \to \Rnn < 0$.
-%
-Denote by $\Vee = \VeS$ its restriction to the switching surface $\S$.
-%
-Using these Lyapunov functions, define the candidate Lyapunov function
-\begin{align}
-  \VP(x) = \Vn(x) + \sigma \Vee(x).
-\end{align}
+  for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
+  %
+  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \X \to \Rnn < 0$.
+  %
+  Denote by $\Vee = \VeS$ its restriction to the switching surface $\S$.
+  %
+  Using these Lyapunov functions, define the candidate Lyapunov function
+  \begin{align}
+    \VP(x) = \Vn(x) + \sigma \Vee(x).
+  \end{align}
 
-From \eqref{} and \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(x)$ is bounded as follows:
-\begin{align}
-  \left( r_{1} + \sigma c_{1} \right) \| x \|^{2} \leq \VP(x) \leq \left( r_{2} + \sigma \frac{c_{2}}{\epsilon^{2}}  \right) \| x \|^{2}.
-\end{align}
+  From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(x)$ is bounded as follows:
+  \begin{align}
+    \left( r_{1} + \sigma c_{1} \right) \| x \|^{2} \leq \VP(x) \leq \left( r_{2} + \sigma \frac{c_{2}}{\epsilon^{2}}  \right) \| x \|^{2}.
+  \end{align}
 
-It must be shown that
-\begin{align}
-  \VP(\Pe(x)) - \VP(x) \leq -\alpha \| x \|^{2}.
-\end{align}
+  It must be shown that
+  \begin{align}
+    \VP(\Pe(x)) - \VP(x) \leq -\alpha \| x \|^{2}.
+  \end{align}
 
-First note that
-\begin{align}
-  \VP(\Pe(x)) - \VP(x) = \Vn(\Pe(x)) - \Vn(x) \hspace{1.2cm}\\
-  \nonumber
-  \mbox{} + \sigma(\Vee(\Pe(x)) - \Vee(x))
-\end{align}
+  First note that
+  \begin{align}
+    \VP(\Pe(x)) - \VP(x) = \Vn(\Pe(x)) - \Vn(x) \hspace{1.2cm}\\
+    \nonumber
+    \mbox{} + \sigma(\Vee(\Pe(x)) - \Vee(x))
+  \end{align}
 
-Thus, it remains to be shown that
-\begin{align}
-  \sigma(\Vee(\Pe(x)) - \Vee(x)) \leq -\beta \| x \|^{2}.
-\end{align}
-for $\beta \in \Rpd$.
+  Thus, it remains to be shown that
+  \begin{align}
+    \sigma(\Vee(\Pe(x)) - \Vee(x)) \leq -\beta \| x \|^{2}.
+  \end{align}
+  for $\beta \in \Rpd$.
 
 \end{proof}
 
