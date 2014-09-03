@@ -242,7 +242,7 @@ Now Theorem 1 can be proven:
     \Vn(\P(\eta, \zeta)) - \Vn(\eta, \zeta) \leq -r_{3} \| (\eta, \zeta) \|^{2},
     \label{eq:lyap-cond-nom}
   \end{align}
-  for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
+  for some $r_{1}, r_{2}, r_{3} \in \Rpd$.
   %
   {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$? If so, then it would follow that
   \begin{align}
@@ -269,10 +269,10 @@ Now Theorem 1 can be proven:
   \begin{align}
     \sigma c_{1} \| \eta \|^{2} + r_{1} \| (\eta, \zeta) \|^{2} &\leq \VP(\eta, \zeta)\\
     \nonumber
-    &\leq \sigma c_{2} \| \eta \|^{2} + r_{2} \| (\eta, \zeta) \|^{2}
+    &\leq \sigma c_{2} \| \eta \|^{2} + r_{2} \| (\eta, \zeta) \|^{2}.
   \end{align}
   %
-  It must be shown that
+  It must be shown that, for some real $\alpha > 0$,
   %
   \begin{align}
     \VP(\Pe(\eta, \zeta)) - \VP(\eta, \zeta) \leq -\alpha \| (\eta, \zeta) \|^{2}.
@@ -294,6 +294,11 @@ Now Theorem 1 can be proven:
     \nonumber
     \Vee(\Pe^{\eta}(\eta, \zeta)) &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \| \Delta_{\eta}(\eta, \zeta) \|^{2}.
   \end{align}
+  {\bf If the reset map is locally Lipschitz about the fixed point $(\etast, \zetast)$, then
+    \begin{align*}
+      \| \Delta(\eta, \zeta) - \Delta(\eta + \gamma, \zeta + \gamma) \| \leq L_{\Delta} \| (\delta\eta, \delta\zeta) \|
+    \end{align*}
+    in some conservative ball $\B_{\gamma}(\etast, \zetast)$ for some $(\delta\eta, \delta\zeta) \in \B_{\gamma}(\etast, \zetast)$.}
 
   One thing that must be shown:
   %
