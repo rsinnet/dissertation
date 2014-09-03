@@ -244,8 +244,15 @@ Now Theorem 1 can be proven:
   \end{align}
   for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
   %
-  {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$?}
-  
+  {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$? If so, then it would follow that
+  \begin{align}
+    \nonumber
+    r_{1} \| (\eta, \zeta) \|^{2} \leq \Vn(\eta, \zeta) \leq r_{2} \| (\eta, \zeta) \|^2,\\
+    \Vn(\P_{\epsilon}(\eta, \zeta)) - \Vn(\eta, \zeta) \leq -r_{3} \| (\eta, \zeta) \|^{2},
+    \label{eq:lyap-cond-nom}
+  \end{align}
+  holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\eta, \zeta)$; to wit, $\limeps \Pe(\eta, \zeta)$.}
+
   In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \Eta \to \Rnn$.
   %
   Denote by $\Vee = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
