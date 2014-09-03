@@ -128,37 +128,40 @@ with states $\eta \in \Eta$ and $\zeta \in \Zeta$ and control inputs $u \in \U$.
 The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz.
 %
 The natural choice of transformation to convert the continuous dynamics of \eqref{eq:csys} to \eqref{eq:zd-vfield} is through energy.
-
-Applying the control law \eqref{eq:cs-qp}, the dynamics becomes
-\begin{align}
-  \nonumber
-  \dot \eta &= f(\eta, \zeta) + g(\eta, \zeta) \, \mueps(x),\\
-  \dot \zeta &= q(\eta, \zeta) + w(\eta, \zeta) \, \mueps(x),
-  \label{eq:zd-vfield-cl}
-\end{align}
-Under the transformation
+%
+Thus consider the coordinate transformation
 \begin{align}
   \eta := E(x) - \Eref,
 \end{align}
+which is a local diffeomorphism.
+%
+Applying the control law \eqref{eq:es-qp}, the dynamics becomes
+\begin{align}
+  \nonumber
+  \dot \eta &= f(\eta, \zeta) + g(\eta, \zeta) \, \mueps(\eta, \zeta),\\
+  \dot \zeta &= q(\eta, \zeta) + w(\eta, \zeta) \, \mueps(\eta, \zeta).
+  \label{eq:zd-vfield-cl}
+\end{align}
 
-it is clear that $f(0, \zeta) = 0$.
+By the construction of the control law \eqref{eq:es-qp}, it is clear that $\mueps(0, \zeta) = 0$ and thus it follows that $f(0, \zeta) = 0$.
 %
 In other words, the zero dynamics manifold $\Zeta$ is the restricted subset of $X$ such that $\eta = 0$.
 %
-This is used to express the control Lyapunov function as
+Consider the candidate Lyapunov function
 \begin{align}
   V(\eta) = \frac{1}{2} \eta^{2}.
 \end{align}
 
-Exponential stability of the $\eta$ dynamics is guaranteed if a {\em control Lyapunov function (CLF)} exists satisfying
-\begin{align}
-  \label{eq:lyap-cond-nrg-es}
-  &c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
-  \nonumber
-  &\inf_{u \in \U} \left[ L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \right] \leq 0,
-\end{align}
-for all $(\eta, \zeta) \in \Eta \times \Zeta$.
-%
+\begin{proposition}  
+  Exponential stability of the $\eta$ dynamics is guaranteed if a {\em control Lyapunov function (CLF)} exists satisfying
+  \begin{align}
+    \label{eq:lyap-cond-nrg-es}
+    &c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
+    \nonumber
+    &\inf_{u \in \U} \left[ L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \right] \leq 0,
+  \end{align}
+  for all $(\eta, \zeta) \in \Eta \times \Zeta$.
+\end{proposition}
 It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{1}{2}$.
 %
 Define the set
@@ -177,7 +180,7 @@ Now consider the hybrid control system
         \begin{array}{l l}
           \begin{array}{r c l}
             {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
-            {\dot \zeta} &=& q(\eta, \zeta)
+            {\dot \zeta} &=& q(\eta, \zeta) + w(\eta, \zeta) \, u
           \end{array} & \mbox{ if } (\eta, \zeta) \in \D \setminus \S,\\
           \begin{array}{r c l}
             \eta^{+} &=& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
