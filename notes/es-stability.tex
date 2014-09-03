@@ -69,7 +69,7 @@ For the continuous dynamics, construct a Lyapunov function, $V : \D \to \R^{+}$,
 Consider the energy shaping controller
 \begin{align}
   \label{eq:es-qp} \tag {QP}
-  \mu(x, \epsilon) = \argmin_{u(x) \in \R^{n}} \ & u(x)^T u(x)\\
+  \mu_{\epsilon}(x) = \argmin_{u(x) \in \R^{n}} \ & u(x)^T u(x)\\
   \nonumber
   \mbox{s.t. } & L_{f} V(x) + L_{g} V(x) u(x) + \epsilon V(x) \leq 0.
 \end{align}
@@ -78,7 +78,7 @@ Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
   \label{eq:hsys-cl}
   \Sigma = \left\{
   \begin{array}{l l}
-    {\dot x} = f(x) + g(x) \, \mu(x, \epsilon), & x \in \D \setminus \S,\\
+    {\dot x} = f(x) + g(x) \, \mu_{\epsilon}(x), & x \in \D \setminus \S,\\
     x^{+} = \Delta(x^{-}), &x \in \D \cap \S.
   \end{array}\right.
 \end{align}
