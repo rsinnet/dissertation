@@ -295,11 +295,29 @@ Now Theorem 1 can be proven:
     \Vee(\Pe^{\eta}(\eta, \zeta)) &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \| \Delta_{\eta}(\eta, \zeta) \|^{2}.
   \end{align}
   {\bf If the reset map is locally Lipschitz about the fixed point $(\etast, \zetast)$, then
-    \begin{align*}
+    \begin{align}
+      \label{eq:Veh-bound}
       \| \Delta(\eta, \zeta) - \Delta(\eta + \gamma, \zeta + \gamma) \| \leq L_{\Delta} \| (\delta\eta, \delta\zeta) \|
-    \end{align*}
+    \end{align}
     in some conservative ball $\B_{\gamma}(\etast, \zetast)$ for some $(\delta\eta, \delta\zeta) \in \B_{\gamma}(\etast, \zetast)$.}
 
+  Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
+  \begin{align}
+    \nonumber
+    \Vee&(\Pe^{\eta}(\eta, \zeta))\\
+    \nonumber
+    &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \big\| \Delta_{\eta}(\eta, \zeta) - \Delta_{\eta}(\eta - \delta \eta, \zeta + \delta \zeta)\\
+    \nonumber
+    & \hspace{3.5cm}  + \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta)\big\|^{2}\\
+    \nonumber
+    &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \Big( \big\| \Delta_{\eta}(\eta, \zeta) - \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta) \big\|^{2}\\
+    \nonumber
+    & \hspace{3.5cm} + \big\| \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta)\big\|^{2} \Big)\\
+    \nonumber
+    &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \Big( L_{\Delta}^{2} \| (\delta \eta, \delta \zeta) \|^{2}\\
+    \nonumber
+    & \hspace{3.5cm} + \big\| \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta)\big\|^{2} \Big)
+  \end{align}
   One thing that must be shown:
   %
   \begin{align}
