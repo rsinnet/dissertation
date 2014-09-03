@@ -222,9 +222,15 @@ Define the domain and switching surface of the system:
   \nonumber
   \S &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) = 0 \mbox{ and } {\dot h}(\eta, \zeta) < 0 \right\}.
 \end{align}
-Let the Poincar{\'e} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$.
+Let the Poincar{\'e} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\phi_{t}(\eta, \zeta)$ represent a flow of the vector field for time $t$ starting from state $(\eta, \zeta)$.
 %
 For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\eta, \zeta) = \P(\eta, \zeta)$.
+%
+The Poincar{\'e} map has a form like
+\begin{align}
+  \Pe(x, z) = \phi_{T_{I}(\eta, \zeta)}(\Delta(\eta, \zeta)
+\end{align}
+where $T_{I}(\eta, \zeta)$ is the time to impact.
 
 Now Theorem 1 can be proven:
 \begin{proof}
@@ -238,7 +244,7 @@ Now Theorem 1 can be proven:
   \end{align}
   for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
   %
-  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \Eta \to \Rnn < 0$.
+  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \Eta \to \Rnn$.
   %
   Denote by $\Vee = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
   %
