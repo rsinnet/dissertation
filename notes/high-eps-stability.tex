@@ -35,7 +35,7 @@ Consider a hybrid dynamical system with total energy $E(x)$.
 %
 The system has coordinates $x \in \D$ which take values in the {\em domain of admissibility}, $\D$.
 
-The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \R^{+}$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
+The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \Rnn$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
 %
 The uncontrolled hybrid system can be written
 \begin{align}
@@ -57,7 +57,7 @@ Under the action of control effort $u$, the corresponding hybrid control system 
 \end{align}
 for control values in a set $\U \subseteq \R^{m}$.
 %
-For the continuous dynamics, construct a Lyapunov function, $V : \D \to \R^{+}$, of the form
+For the continuous dynamics, construct a Lyapunov function, $V : \D \to \Rnn$, of the form
 \begin{align}
   \label{eq:lyap}
   V(x) = \frac{1}{2} (E(x) - \Eref)^2.
@@ -172,6 +172,7 @@ Consider the candidate Lyapunov function
   Define the set
   \begin{align}
     \K = \left\{ u \in \U : L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \leq 0 \right\}.
+    \label{eq:control-set}
   \end{align}
   For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \Eta \times \Zeta \to \K$, it follows that solutions satisfy
   \begin{align*}
@@ -186,69 +187,100 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
         \HCSbar= \left\{
         \begin{array}{l l}
           \begin{array}{r c l}
-            {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
-            {\dot \zeta} &=& q(\eta, \zeta) + w(\eta, \zeta) \, u
-          \end{array} & \mbox{ if } (\eta, \zeta) \in \D \setminus \S,\\
+            {\dot \eta} &\!\!=\!\!& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
+            {\dot \zeta} &\!\!=\!\!& q(\eta, \zeta) + w(\eta, \zeta) \, u
+          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \D \setminus \S,\\
           \begin{array}{r c l}
-            \eta^{+} &=& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
-            \zeta^{+} &=& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
-          \end{array} & \mbox{ if } (\eta, \zeta) \in \S.
+            \eta^{+} &\!\!=\!\!& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
+            \zeta^{+} &\!\!=\!\!& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
+          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \S.
+        \end{array}\right.
+\end{align}
+%
+Applying the a valid Lipschitz control law which takes values in \eqref{eq:control-set} to \eqref{eq:hcsys} results in the closed loop hybrid system
+%
+\begin{align}
+  \label{eq:hsys-cl}
+        \HSbar_{\epsilon} = \left\{\!\!\!\!
+        \begin{array}{l l}
+          \begin{array}{r c l}
+            {\dot \eta} &\!\!=\!\!& f(\eta, \zeta) + g(\eta, \zeta) \, \mueps(\eta, \zeta)\\
+            {\dot \zeta} &\!\!=\!\!& q(\eta, \zeta) + w(\eta, \zeta) \, \mueps(\eta, \zeta)
+          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \D \setminus \S,\\
+          \begin{array}{r c l}
+            \eta^{+} &\!\!=\!\!& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
+            \zeta^{+} &\!\!=\!\!& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
+          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \S.
         \end{array}\right.
 \end{align}
 
 \section{Proof of Main Result}
 
-First, let us define the domain and switching surface of the system:
+Define the domain and switching surface of the system:
 \begin{align}
   \D &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) \geq 0 \right\},\\
   \nonumber
   \S &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) = 0 \mbox{ and } {\dot h}(\eta, \zeta) < 0 \right\}.
 \end{align}
+Let the Poincar{\'e} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$.
+%
+For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\eta, \zeta) = \P(\eta, \zeta)$.
 
 Now Theorem 1 can be proven:
 \begin{proof}
-  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\V : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
+  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
   %
   \begin{align}
     \nonumber
-    r_{1} \| x \|^{2} \leq \Vn(x) \leq r_{2} \| x \|^2,\\
-    \Vn(\Pe(x)) - \Vn(x) \leq -r_{3} \| x \|^{2},
+    r_{1} \| (\eta, \zeta) \|^{2} \leq \Vn(\eta, \zeta) \leq r_{2} \| (\eta, \zeta) \|^2,\\
+    \Vn(\P(\eta, \zeta)) - \Vn(\eta, \zeta) \leq -r_{3} \| (\eta, \zeta) \|^{2},
     \label{eq:lyap-cond-nom}
   \end{align}
   for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
   %
-  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \X \to \Rnn < 0$.
+  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \Eta \to \Rnn < 0$.
   %
   Denote by $\Vee = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
   %
   Using these Lyapunov functions, define the candidate Lyapunov function
   \begin{align}
-    \VP(x) = \Vn(x) + \sigma \Vee(x).
+    \VP(\eta, \zeta) = \Vn(\eta, \zeta) + \sigma \Vee(\zeta).
   \end{align}
 
+  {\bf What exactly is $\Vn(\eta, \zeta)$?}
+  %
   From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(x)$ is bounded as follows:
+  %
   \begin{align}
-    \left( r_{1} + \sigma c_{1} \right) \| x \|^{2} \leq \VP(x) \leq \left( r_{2} + \sigma \frac{c_{2}}{\epsilon^{2}}  \right) \| x \|^{2}.
+    \sigma c_{1} \| \eta \|^{2} + r_{1} \| (\eta, \zeta) \| &\leq \VP(\eta, \zeta)\\
+    \nonumber
+    &\leq \sigma c_{2} \| \eta \|^{2} + r_{2} \| (\eta, \zeta) \|
   \end{align}
-
+  %
   It must be shown that
+  %
   \begin{align}
     \VP(\Pe(x)) - \VP(x) \leq -\alpha \| x \|^{2}.
   \end{align}
-
+  %
+      {\bf This may be a bit tricky because the second condition of \eqref{eq:lyap-cond-nom} does not apply since $\P$ must be replaced with $\Pe$.}
   First note that
+  %
   \begin{align}
     \VP(\Pe(x)) - \VP(x) = \Vn(\Pe(x)) - \Vn(x) \hspace{1.2cm}\\
     \nonumber
     \mbox{} + \sigma(\Vee(\Pe(x)) - \Vee(x)).
   \end{align}
-
-  Thus, it remains to be shown that
+  %
+  One thing that must be shown:
+  %
   \begin{align}
-    \sigma(\Vee(\Pe(x)) - \Vee(x)) \leq -\beta \| x \|^{2}.
+    \sigma(\Vee(\Pe^{\eta}(\eta, \zeta)) - \Vee(\eta)) \leq -\beta \| \eta \|^{2}.
   \end{align}
+  %
   for $\beta \in \Rpd$.
-
+  %
+  In the above, $\Pe^{\eta}(\eta, \zeta)$ represents the $\eta$ coordinate returned by the Poincar{\'e} map $\Pe(\eta, \zeta)$.
 \end{proof}
 
 \end{document}
