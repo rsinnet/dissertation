@@ -84,15 +84,17 @@ Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
 \section{Stability of the Shaped System}
 
 The main idea is stated as follows:
+%
 \begin{theorem}
   Given an exponentially-stable limit cycle in a hybrid dynamical system of the form \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:csys} results in the closed-loop hybrid system \eqref{eq:hsys-cl}, which is exponentially stable.
 \end{theorem}
-
+%
 The proof is given later.
 
 
 
 \section{Equivalence of Invariant Orbits}
+
 In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:
 
 \begin{lemma}
@@ -162,21 +164,26 @@ Consider the candidate Lyapunov function
   \end{align}
   for all $(\eta, \zeta) \in \Eta \times \Zeta$.
 \end{proposition}
-It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{1}{2}$.
-%
-Define the set
-\begin{align}
-  \K = \left\{ u \in \U : L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \leq 0 \right\}.
-\end{align}
-For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \Eta \times \Zeta \to \K$, it follows that solutions satisfy
-\begin{align*}
-  \| \eta(t) \| \leq \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2} t} \| \eta(0) \|.
-\end{align*}
 
-Now consider the hybrid control system
+
+\begin{proof}
+  It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{1}{2}$.
+  %
+  Define the set
+  \begin{align}
+    \K = \left\{ u \in \U : L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \leq 0 \right\}.
+  \end{align}
+  For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \Eta \times \Zeta \to \K$, it follows that solutions satisfy
+  \begin{align*}
+    \| \eta(t) \| \leq \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2} t} \| \eta(0) \|. & \qedhere
+  \end{align*}
+  
+\end{proof}
+
+Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtain the hybrid control system
 \begin{align}
   \label{eq:hcsys}
-        {\bar \Sigma}_{c} = \left\{
+        \HCS= \left\{
         \begin{array}{l l}
           \begin{array}{r c l}
             {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
