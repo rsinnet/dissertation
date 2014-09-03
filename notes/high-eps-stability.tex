@@ -120,12 +120,12 @@ In order to understand the nature of energy shaping, consider breaking up the sy
 By considering level sets of energy, the continuous dynamics can be expressed as
 \begin{align}
   \nonumber
-  \dot \eta &= f(\eta, \zeta) + g(\eta, \zeta) \, u,\\
-  \dot \zeta &= q(\eta, \zeta) + w(\eta, \zeta) \, u,
+  \dot \zdx &= f(\zdx, \zdz) + g(\zdx, \zdz) \, u,\\
+  \dot \zdz &= q(\zdx, \zdz) + w(\zdx, \zdz) \, u,
   \label{eq:zd-vfield}
 \end{align}
 %
-with states $\eta \in \Eta$ and $\zeta \in \Zeta$ and control inputs $u \in \U$.
+with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $u \in \U$.
 %
 The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz.
 %
@@ -133,36 +133,36 @@ The natural choice of transformation to convert the continuous dynamics of \eqre
 %
 Thus consider the coordinate transformation
 \begin{align}
-  \eta := E(x) - \Eref,
+  \zdx := E(x) - \Eref,
 \end{align}
 which is a local diffeomorphism.
 %
 Applying the control law \eqref{eq:es-qp}, the dynamics becomes
 \begin{align}
   \nonumber
-  \dot \eta &= f(\eta, \zeta) + g(\eta, \zeta) \, \mueps(\eta, \zeta),\\
-  \dot \zeta &= q(\eta, \zeta) + w(\eta, \zeta) \, \mueps(\eta, \zeta).
+  \dot \zdx &= f(\zdx, \zdz) + g(\zdx, \zdz) \, \mueps(\zdx, \zdz),\\
+  \dot \zdz &= q(\zdx, \zdz) + w(\zdx, \zdz) \, \mueps(\zdx, \zdz).
   \label{eq:zd-vfield-cl}
 \end{align}
 
-By the construction of the control law \eqref{eq:es-qp}, it is clear that $\mueps(0, \zeta) = 0$ and thus it follows that $f(0, \zeta) = 0$.
+By the construction of the control law \eqref{eq:es-qp}, it is clear that $\mueps(0, \zdz) = 0$ and thus it follows that $f(0, \zdz) = 0$.
 %
-In other words, the zero dynamics manifold $\Zeta$ is the restricted subset of $X$ such that $\eta = 0$.
+In other words, the zero dynamics manifold $\zdZ$ is the restricted subset of $X$ such that $\zdx = 0$.
 %
 Consider the candidate Lyapunov function
 \begin{align}
-  V(\eta) = \frac{1}{2} \eta^{2}.
+  V(\zdx) = \frac{1}{2} \zdx^{2}.
 \end{align}
 
 \begin{proposition}  
-  Exponential stability of the continuous $\eta$ dynamics is guaranteed if a {\em control Lyapunov function (CLF)} exists satisfying
+  Exponential stability of the continuous $\zdx$ dynamics is guaranteed if a {\em control Lyapunov function (CLF)} exists satisfying
   \begin{align}
     \label{eq:lyap-cond-nrg-es}
-    &c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
+    &c_{1} \| \zdx \|^{2} \leq \V(\zdx) \leq c_{2} \| \zdx \|^2,\\
     \nonumber
-    &\inf_{u \in \U} \left[ L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \right] \leq 0,
+    &\inf_{u \in \U} \left[ L_{f} \V(\zdx, \zdz) + L_{g} \V(\zdx, \zdz) \, u + c_{3} \V(\zdx) \right] \leq 0,
   \end{align}
-  for all $(\eta, \zeta) \in \Eta \times \Zeta$.
+  for all $(\zdx, \zdz) \in \zdX \times \zdZ$.
 \end{proposition}
 
 
@@ -171,12 +171,12 @@ Consider the candidate Lyapunov function
   %
   Define the set
   \begin{align}
-    \K = \left\{ u \in \U : L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \leq 0 \right\}.
+    \K = \left\{ u \in \U : L_{f} \V(\zdx, \zdz) + L_{g} \V(\zdx, \zdz) \, u + c_{3} \V(\zdx) \leq 0 \right\}.
     \label{eq:control-set}
   \end{align}
-  For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \Eta \times \Zeta \to \K$, it follows that solutions satisfy
+  For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
   \begin{align*}
-    \| \eta(t) \| \leq \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2} t} \| \eta(0) \|. & \qedhere
+    \| \zdx(t) \| \leq \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2} t} \| \zdx(0) \|. & \qedhere
   \end{align*}
   
 \end{proof}
@@ -187,13 +187,13 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
         \HCSbar= \left\{
         \begin{array}{l l}
           \begin{array}{r c l}
-            {\dot \eta} &\!\!=\!\!& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
-            {\dot \zeta} &\!\!=\!\!& q(\eta, \zeta) + w(\eta, \zeta) \, u
-          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \D \setminus \S,\\
+            {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, u\\
+            {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, u
+          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
           \begin{array}{r c l}
-            \eta^{+} &\!\!=\!\!& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
-            \zeta^{+} &\!\!=\!\!& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
-          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \S.
+            \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
+            \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
+          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
         \end{array}\right.
 \end{align}
 %
@@ -204,13 +204,13 @@ Applying the a valid Lipschitz control law which takes values in \eqref{eq:contr
         \HSbar_{\epsilon} = \left\{\!\!\!\!
         \begin{array}{l l}
           \begin{array}{r c l}
-            {\dot \eta} &\!\!=\!\!& f(\eta, \zeta) + g(\eta, \zeta) \, \mueps(\eta, \zeta)\\
-            {\dot \zeta} &\!\!=\!\!& q(\eta, \zeta) + w(\eta, \zeta) \, \mueps(\eta, \zeta)
-          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \D \setminus \S,\\
+            {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, \mueps(\zdx, \zdz)\\
+            {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, \mueps(\zdx, \zdz)
+          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
           \begin{array}{r c l}
-            \eta^{+} &\!\!=\!\!& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
-            \zeta^{+} &\!\!=\!\!& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
-          \end{array} \!\! & \!\! \mbox{if } (\eta, \zeta) \in \S.
+            \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
+            \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
+          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
         \end{array}\right.
 \end{align}
 
@@ -218,19 +218,19 @@ Applying the a valid Lipschitz control law which takes values in \eqref{eq:contr
 
 Define the domain and switching surface of the system:
 \begin{align}
-  \D &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) \geq 0 \right\},\\
+  \D &= \left\{ (\zdx, \zdz) \in \zdX \times \zdZ : h(\zdx, \zdz) \geq 0 \right\},\\
   \nonumber
-  \S &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) = 0 \mbox{ and } {\dot h}(\eta, \zeta) < 0 \right\}.
+  \S &= \left\{ (\zdx, \zdz) \in \zdX \times \zdZ : h(\zdx, \zdz) = 0 \mbox{ and } {\dot h}(\zdx, \zdz) < 0 \right\}.
 \end{align}
-Let the Poincar{\'e} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\phi_{t}(\eta, \zeta)$ represent a flow of the vector field for time $t$ starting from state $(\eta, \zeta)$.
+Let the Poincar{\'e} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\phi_{t}(\zdx, \zdz)$ represent a flow of the vector field for time $t$ starting from state $(\zdx, \zdz)$.
 %
-For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\eta, \zeta) = \P(\eta, \zeta)$.
+For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\zdx, \zdz) = \P(\zdx, \zdz)$.
 %
 The Poincar{\'e} map has a form like
 \begin{align}
-  \Pe(\eta, \zeta) = \phi_{T_{I}(\eta, \zeta)}(\Delta(\eta, \zeta)),
+  \Pe(\zdx, \zdz) = \phi_{T_{I}(\zdx, \zdz)}(\Delta(\zdx, \zdz)),
 \end{align}
-where $T_{I}(\eta, \zeta)$ is the time to impact.
+where $T_{I}(\zdx, \zdz)$ is the time to impact.
 
 Now Theorem 1 can be proven:
 \begin{proof}
@@ -238,8 +238,8 @@ Now Theorem 1 can be proven:
   %
   \begin{align}
     \nonumber
-    r_{1} \| (\eta, \zeta) \|^{2} \leq \Vn(\eta, \zeta) \leq r_{2} \| (\eta, \zeta) \|^2,\\
-    \Vn(\P(\eta, \zeta)) - \Vn(\eta, \zeta) \leq -r_{3} \| (\eta, \zeta) \|^{2},
+    r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
+    \Vn(\P(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
     \label{eq:lyap-cond-nom}
   \end{align}
   for some $r_{1}, r_{2}, r_{3} \in \Rpd$.
@@ -247,86 +247,86 @@ Now Theorem 1 can be proven:
   {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$? If so, then it would follow that
   \begin{align}
     \nonumber
-    r_{1} \| (\eta, \zeta) \|^{2} \leq \Vn(\eta, \zeta) \leq r_{2} \| (\eta, \zeta) \|^2,\\
-    \Vn(\P_{\epsilon}(\eta, \zeta)) - \Vn(\eta, \zeta) \leq -r_{3} \| (\eta, \zeta) \|^{2},
+    r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
+    \Vn(\P_{\epsilon}(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
     \label{eq:lyap-cond-nom}
   \end{align}
-  holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\eta, \zeta)$; to wit, $\limeps \Pe(\eta, \zeta)$.}
+  holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\zdx, \zdz)$; to wit, $\limeps \Pe(\zdx, \zdz)$.}
 
-  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \Eta \to \Rnn$.
+  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \zdX \to \Rnn$.
   %
   Denote by $\Vee = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
   %
   Using these Lyapunov functions, define the candidate Lyapunov function
   \begin{align}
-    \VP(\eta, \zeta) = \Vn(\eta, \zeta) + \sigma \Vee(\zeta).
+    \VP(\zdx, \zdz) = \Vn(\zdx, \zdz) + \sigma \Vee(\zdz).
   \end{align}
 
-  {\bf What exactly is $\Vn(\eta, \zeta)$?}
+  {\bf What exactly is $\Vn(\zdx, \zdz)$?}
   %
-  From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(\eta, \zeta)$ is bounded as follows:
+  From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(\zdx, \zdz)$ is bounded as follows:
   %
   \begin{align}
-    \sigma c_{1} \| \eta \|^{2} + r_{1} \| (\eta, \zeta) \|^{2} &\leq \VP(\eta, \zeta)\\
+    \sigma c_{1} \| \zdx \|^{2} + r_{1} \| (\zdx, \zdz) \|^{2} &\leq \VP(\zdx, \zdz)\\
     \nonumber
-    &\leq \sigma c_{2} \| \eta \|^{2} + r_{2} \| (\eta, \zeta) \|^{2}.
+    &\leq \sigma c_{2} \| \zdx \|^{2} + r_{2} \| (\zdx, \zdz) \|^{2}.
   \end{align}
   %
   It must be shown that, for some real $\alpha > 0$,
   %
   \begin{align}
-    \VP(\Pe(\eta, \zeta)) - \VP(\eta, \zeta) \leq -\alpha \| (\eta, \zeta) \|^{2}.
+    \VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) \leq -\alpha \| (\zdx, \zdz) \|^{2}.
   \end{align}
   %
       {\bf This may be a bit tricky because the second condition of \eqref{eq:lyap-cond-nom} does not apply since $\P$ must be replaced with $\Pe$.}
   First note that
   %
   \begin{align}
-    \lefteqn{\VP(\Pe(\eta, \zeta)) - \VP(\eta, \zeta) = \Vn(\Pe(\eta, \zeta)) - \Vn(\eta, \zeta)}\\
+    \lefteqn{\VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) = \Vn(\Pe(\zdx, \zdz)) - \Vn(\zdx, \zdz)}\\
     \nonumber
-    &&\hspace{3.2cm}\mbox{} + \sigma(\Vee(\Pe(\eta, \zeta)) - \Vee(\zeta)).
+    &&\hspace{3.2cm}\mbox{} + \sigma(\Vee(\Pe(\zdx, \zdz)) - \Vee(\zdz)).
   \end{align}
   %
 
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
-    \Vee(\zeta) &\leq c_{2} \| \zeta \|^{2},\\
+    \Vee(\zdz) &\leq c_{2} \| \zdz \|^{2},\\
     \nonumber
-    \Vee(\Pe^{\eta}(\eta, \zeta)) &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \| \Delta_{\eta}(\eta, \zeta) \|^{2}.
+    \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \| \Delta_{\zdx}(\zdx, \zdz) \|^{2}.
   \end{align}
-  {\bf If the reset map is locally Lipschitz about the fixed point $(\etast, \zetast)$, then
+  {\bf If the reset map is locally Lipschitz about the fixed point $(\zdxst, \zdzst)$, then
     \begin{align}
       \label{eq:Veh-bound}
-      \| \Delta(\eta, \zeta) - \Delta(\eta + \gamma, \zeta + \gamma) \| \leq L_{\Delta} \| (\delta\eta, \delta\zeta) \|
+      \| \Delta(\zdx, \zdz) - \Delta(\zdx + \gamma, \zdz + \gamma) \| \leq L_{\Delta} \| (\delta\zdx, \delta\zdz) \|
     \end{align}
-    in some conservative ball $\B_{\gamma}(\etast, \zetast)$ for some $(\delta\eta, \delta\zeta) \in \B_{\gamma}(\etast, \zetast)$.}
+    in some conservative ball $\B_{\gamma}(\zdxst, \zdzst)$ for some $(\delta\zdx, \delta\zdz) \in \B_{\gamma}(\zdxst, \zdzst)$.}
 
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
     \nonumber
-    \Vee&(\Pe^{\eta}(\eta, \zeta))\\
+    \Vee&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \big\| \Delta_{\eta}(\eta, \zeta) - \Delta_{\eta}(\eta - \delta \eta, \zeta + \delta \zeta)\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(\zdx - \delta \zdx, \zdz + \delta \zdz)\\
     \nonumber
-    & \hspace{3.5cm}  + \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta)\big\|^{2}\\
+    & \hspace{3.5cm}  + \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\|^{2}\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \Big( \big\| \Delta_{\eta}(\eta, \zeta) - \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta) \big\|^{2}\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz) \big\|^{2}\\
     \nonumber
-    & \hspace{3.5cm} + \big\| \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta)\big\|^{2} \Big)\\
+    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\|^{2} \Big)\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \Big( L_{\Delta}^{2} \| (\delta \eta, \delta \zeta) \|^{2}\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( L_{\Delta}^{2} \| (\delta \zdx, \delta \zdz) \|^{2}\\
     \nonumber
-    & \hspace{3.5cm} + \big\| \Delta_{\eta}(\eta + \delta \eta, \zeta + \delta \zeta)\big\|^{2} \Big)
+    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\|^{2} \Big)
   \end{align}
   One thing that must be shown:
   %
   \begin{align}
-    \sigma(\Vee(\Pe^{\eta}(\eta, \zeta)) - \Vee(\eta)) \leq -\beta \| \eta \|^{2}.
+    \sigma(\Vee(\Pe^{\zdx}(\zdx, \zdz)) - \Vee(\zdx)) \leq -\beta \| \zdx \|^{2}.
   \end{align}
   %
   for $\beta \in \Rpd$.
   %
-  In the above, $\Pe^{\eta}(\eta, \zeta)$ represents the $\eta$ coordinate returned by the Poincar{\'e} map $\Pe(\eta, \zeta)$.
+  In the above, $\Pe^{\zdx}(\zdx, \zdz)$ represents the $\zdx$ coordinate returned by the Poincar{\'e} map $\Pe(\zdx, \zdz)$.
 \end{proof}
 
 \end{document}
