@@ -197,12 +197,12 @@ This is used to express the control Lyapunov function as
   V(\eta) = \frac{1}{2} \eta^{2}.
 \end{align}
 
-Exponential stability of the $\eta$ dynamics is guaranteed if a {\em control Lyapunv function} exists satisfying
+Exponential stability of the $\eta$ dynamics is guaranteed if a {\em control Lyapunov function (CLF)} exists satisfying
 \begin{align}
   \label{eq:lyap-cond-nrg-es}
   &c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
   \nonumber
-  &\inf_{u \in \U} \left( L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \right) \leq 0,
+  &\inf_{u \in \U} \left[ L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \right] \leq 0,
 \end{align}
 for all $(\eta, \zeta) \in \Eta \times \Zeta$.
 %
@@ -240,9 +240,9 @@ Consider the
 
 First, let us define the domain and switching surface of the system:
 \begin{align}
+  \D &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) \geq 0 \right\},\\
   \nonumber
-  \D &= \left\{ x \in \X : h(x) \geq 0 \right\},\\
-  \S &= \left\{ x \in \X : h(x) = 0 \mbox{ and } {\dot h}(x) < 0 \right\}.
+  \S &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) = 0 \mbox{ and } {\dot h}(\eta, \zeta) < 0 \right\}.
 \end{align}
 
 Now Theorem 1 can be proven:
@@ -257,7 +257,7 @@ Now Theorem 1 can be proven:
   \end{align}
 for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
 %
-In addition, consider the control Lyapunov function associated with \eqref{eq:es-qp} which is $\Ve : \X \to \Rnn < 0$.
+In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \X \to \Rnn < 0$.
 %
 Denote by $\Vee = \VeS$ its restriction to the switching surface $\S$.
 %
