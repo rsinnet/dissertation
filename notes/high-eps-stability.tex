@@ -301,7 +301,7 @@ Now Theorem 1 can be proven:
       \label{eq:Veh-bound}
       \| \Delta(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp) \| \leq L_{\Delta} \| (\zdxp, \zdzp) \|
     \end{align}
-    for some $(\zdxp, \zdzp) \in \B_{\gamma}(\mathbf{0})$ with $\gamma \in \Rpd$.}
+    for some $(\zdx + \zdxp, \zdz + \zdzp) \in \B_{\gamma}(\mathbf{0})$ with $\gamma \in \Rpd$.}
   
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
@@ -310,15 +310,15 @@ Now Theorem 1 can be proven:
     \nonumber
     &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp)\\
     \nonumber
-    & \hspace{3.5cm}  + \Delta(\zdx + \zdxp, \zdz + \zdzp)\big\|^{2}\\
+    & \hspace{4cm}  + \Delta(\zdx + \zdxp, \zdz + \zdzp)\big\|^{2}\\[1em]
     \nonumber
     &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp) \big\|\\
     \nonumber
-    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz)\big\| \Big)^{2}\\
+    & \hspace{4cm} + \big\| \Delta(\zdx + \zdxp, \zdz + \zdzp) \big\| \Big)^{2}\\[1em]
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( L_{\Delta} \| (\delta \zdx, \delta \zdz) \|\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( L_{\Delta} \| (\zdxp, \zdzp) \|\\
     \nonumber
-    & \hspace{3.5cm} + \big\| \Delta_{\zdx}(\zdx + \delta \zdx, \zdz + \delta \zdz) \big\| \Big)^{2}.
+    & \hspace{4cm} + \big\| \Delta(\zdx + \zdxp, \zdz + \zdzp) \big\| \Big)^{2}.
   \end{align}
   One thing that must be shown:
   %
