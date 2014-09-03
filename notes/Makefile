@@ -1,6 +1,6 @@
 PDFLATEX_CMD=pdflatex -interaction=nonstopmode
 
-all: es-stability.pdf cg-energy.pdf
+all: es-stability.pdf cg-energy.pdf high-eps-stability.pdf
 
 %.latex: %.tex
 	cp $< $(basename $<).latex

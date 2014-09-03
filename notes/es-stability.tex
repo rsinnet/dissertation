@@ -111,184 +111,45 @@ The next step is to prove the main idea, namely, that stability is maintained wh
 \end{theorem}
 
 \begin{proof}
-  Considering the energy shaping controller \eqref{eq:es-qp} with a strict equality constraint, it can be seen that the time evolution of the Lyapunov function \eqref{eq:lyap} is given by
+  Considering the energy shaping controller \eqref{eq:es-qp} with a strict equality constraint, it can be seen that the time evolution of the continuous-time Lyapunov function \eqref{eq:lyap} is given by
   \begin{align*}
-    \Ve(x, t) = \Ve(x_{0}, 0) \, e^{-\epsilon t}.
+    \Ve(x(t)) = \Ve(x(0)) \, e^{-\epsilon t}.
   \end{align*}
   From this, the limiting behavior can be examined:
   \begin{align*}
-    \limeps \Ve(x, t) &= \limeps \Ve(x_{0}, 0) \, e^{-\epsilon t}\\
-    &= \Ve(x_{0}, 0)\\
+    \limeps \Ve(x(t)) &= \limeps \Ve(x(0)) \, e^{-\epsilon t}\\
+    &= \Ve(x(0))\\
     &= V_0.
   \end{align*}
   The above implies that
   \begin{align*}
-    \dVe(x, t) = L_{f} \Ve(x, t) + L_{g} \Ve(x, t) = 0,
+    \dVe(x(t)) = L_{f} \Ve(x(t)) + L_{g} \Ve(x(t)) \, \mu_{\epsilon}(x(t)) = 0,
   \end{align*}
-  but $L_{f} \Ve(x, t) = 0$ for passive systems so it follows that
+  but $L_{f} \Ve(x(t)) = 0$ for passive systems so it follows that
   \begin{align*}
-    \limeps L_{g} \Ve(x, t) \, \mu(x, \epsilon) = 0 \Rightarrow \limeps \mu(x, \epsilon) = 0.
+    \limeps L_{g} \Ve(x(t)) \, \mu_{\epsilon}(x(t)) = 0 \Rightarrow \limeps \mu_{\epsilon}(x(t)) = 0.
   \end{align*}
 
   It now remains to be shown that small perturbations in the input to \eqref{eq:csys} do not destabilize the system.
   %
-  By the discrete converse Lyapunov Theorem, exponential stability of the discrete-time component of the hybrid system \eqref{eq:hsys} implies the existence of a discrete Lyapunov function $V : \D \cap \S \times \R^{+} \to \R^{+}$ satisfying
-  %
-  \begin{align*}
-    c_{1} \| x \|^{2}_{\D} \leq \Vebar(x) \leq c_{2} \| x \|_{\D}^2\\
-    \Vebar(\Pe(x)) - \Vebar(x) \leq c_{3} \| x \|^{2}_{\D}
-  \end{align*}
 
-\end{proof}
-
-The rest of the proof should proceed something like the following:
-\begin{enumerate}
-\item Exponential stability of the discrete system implies the existence of a Lyapunov function by the converse Lyapunov theorem.
-\item Show that control law \eqref{eq:es-qp} produces values within a compact set for states within a certain $\epsilon$ distance of the periodic orbit.
-\item Show that the effect of control (disturbance) on the Poincar{\'e} return map is bounded.
-\item Show somehow that a slight perturbation to the Lyapunov function through disturbances does not result in instability.
-\end{enumerate}
-
-\section{Sketch of the Proof}
-
-Exponential stability of the unperturbed system \eqref{eq:hsys} implies that there exists a region round the fixed point $\xst$ in which the state will converge to the limit cycle.
-%
-For simplicity, let's consider a ball of radius $\delta$, $\mathcal{B}\delta$, within this region and centered about the fixed point.
-%
-Because energy is smooth, there exists a level set of energy within this ball corresponding to the energy of the limit cycle, $E(x) = \xst$, and the guard condition applies as well, so this is a codimension-two submanifold, $\left.\S\right|_{\Es} = \{ x \in \D \cap \S | E(x) = \Es \}$.
-%
-If the system is stable within this this submanifold and the convergence of the discrete dynamics is sufficiently large to overcome divergence in the continuous dynamics due to the energy shaping controller, the exponential stability is guaranteed.
-
-
-Additionally, it should be noted that, as the perturbations approach zero, the divergence from the fixed point due the continuous dynamics approaches zero.
-%
-Thus it seems logical to assume that sufficiently small $\epsilon$ for the energy shaping controller \eqref{eq:es-qp} applied to a system \eqref{eq:hsys} which is exponentially stable will result in exponential stability of the controlled system \eqref{eq:hsys-cl}.
-
-\newpage
-
-\section{Zero Dynamics Formulation}
-
-In order to understand the nature of energy shaping, consider breaking up the system into two sets of coordinates.
-%
-By considering level sets of energy, the continuous dynamics can be expressed as
-\begin{align}
-  \nonumber
-  {\dot \eta} &= f(\eta, \zeta) + g(\eta, \zeta) \, u,\\
-  {\dot \zeta} &= q(\eta, \zeta),
-  \label{eq:zd-vfield}
-\end{align}
-%
-with states $\eta \in \Eta$ and $\zeta \in \Zeta$ and control inputs $u \in \U$.
-%
-The vector fields $f$, $g$, and $q$ are assumed to be locally Lipschitz.
-%
-The natural choice of transformation to convert the continuous dynamics of \eqref{eq:csys} to \eqref{eq:zd-vfield} will be based on energy.
-
-Under the transformation
-\begin{align}
-  \eta = E(x) - \Eref,
-\end{align}
-it is clear that $f(0, \zeta) = 0$.
-%
-In other words, the zero dynamics manifold $\Zeta$ is the restricted subset of $X$ such that $\eta = 0$.
-%
-This is used to express the control Lyapunov function as
-\begin{align}
-  V(\eta) = \frac{1}{2} \eta^{2}.
-\end{align}
-
-Exponential stability of the $\eta$ dynamics is guaranteed if a {\em control Lyapunov function (CLF)} exists satisfying
-\begin{align}
-  \label{eq:lyap-cond-nrg-es}
-  &c_{1} \| \eta \|^{2} \leq \V(\eta) \leq c_{2} \| \eta \|^2,\\
-  \nonumber
-  &\inf_{u \in \U} \left[ L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \right] \leq 0,
-\end{align}
-for all $(\eta, \zeta) \in \Eta \times \Zeta$.
-%
-It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{1}{2}$.
-%
-Define the set
-\begin{align}
-  \K = \left\{ u \in \U : L_{f} \V(\eta, \zeta) + L_{g} \V(\eta, \zeta) \, u + c_{3} \V(\eta) \leq 0 \right\}.
-\end{align}
-For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \Eta \times \Zeta \to \K$, it follows that solutions satisfy
-\begin{align*}
-  \| \eta(t) \| \leq \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2} t} \| \eta(0) \|.
-\end{align*}
-
-Now consider the hybrid control system
-\begin{align}
-  \label{eq:hcsys}
-  {\bar \Sigma}_{c} = \left\{
-  \begin{array}{l l}
-    \begin{array}{r c l}
-      {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
-      {\dot \zeta} &=& q(\eta, \zeta)
-    \end{array} & \mbox{ if } (\eta, \zeta) \in \D \setminus \S,\\
-    \begin{array}{r c l}
-      \eta^{+} &=& \Delta_{\eta}(\eta^{-}, \zeta^{-})\\
-      \zeta^{+} &=& \Delta_{\zeta}(\eta^{-}, \zeta^{-})
-    \end{array} & \mbox{ if } (\eta, \zeta) \in \S,
-  \end{array}\right.
-\end{align}
-
-
-\section{Proof of Main Result}
-
-Consider the 
-
-First, let us define the domain and switching surface of the system:
-\begin{align}
-  \D &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) \geq 0 \right\},\\
-  \nonumber
-  \S &= \left\{ (\eta, \zeta) \in \Eta \times \Zeta : h(\eta, \zeta) = 0 \mbox{ and } {\dot h}(\eta, \zeta) < 0 \right\}.
-\end{align}
-
-Now Theorem 1 can be proven:
-\begin{proof}
-  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\V : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
+  By the discrete converse Lyapunov Theorem, exponential stability of the discrete-time component of the hybrid system \eqref{eq:hsys} implies the existence of a discrete Lyapunov function $\Vbar : \S \to \Rnn$ satisfying
   %
   \begin{align}
+    \label{eq:lyap-conds}
+    c_{1} \| x \|^{2}_{\D} \leq \Vbar(x) \leq c_{2} \| x \|_{\D}^2\\
     \nonumber
-    r_{1} \| x \|^{2} \leq \Vn(x) \leq r_{2} \| x \|^2\\
-    \Vn(\Pe(x)) - \Vn(x) \leq -r_{3} \| x \|^{2}
-    \label{eq:lyap-cond-nom}
+    \Vbar(\P(x)) - \Vbar(x) \leq c_{3} \| x \|^{2}_{\D}
   \end{align}
-for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
+where $\P : S \to \Rnn$ is the Poincar{\'e} return map of \eqref{eq:hsys}.
 %
-In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \X \to \Rnn < 0$.
+Let $\Pe : \S \times \Rnn \to \Rnn$ be the Poincar{\'e} return map of the shaped system where $\limeps \Pe = \P$.
 %
-Denote by $\Vee = \VeS$ its restriction to the switching surface $\S$.
+By Lemma 1, the first condition in \eqref{eq:lyap-conds} holds for the perturbed system.
 %
-Using these Lyapunov functions, define the candidate Lyapunov function
-\begin{align}
-  \VP(x) = \Vn(x) + \sigma \Vee(x).
-\end{align}
-
-From \eqref{} and \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(x)$ is bounded as follows:
-\begin{align}
-  \left( r_{1} + \sigma c_{1} \right) \| x \|^{2} \leq \VP(x) \leq \left( r_{2} + \sigma \frac{c_{2}}{\epsilon^{2}}  \right) \| x \|^{2}.
-\end{align}
-
-It must be shown that
-\begin{align}
-  \VP(\Pe(x)) - \VP(x) \leq -\alpha \| x \|^{2}.
-\end{align}
-
-First note that
-\begin{align}
-  \VP(\Pe(x)) - \VP(x) = \Vn(\Pe(x)) - \Vn(x) \hspace{1.2cm}\\
-  \nonumber
-  \mbox{} + \sigma(\Vee(\Pe(x)) - \Vee(x))
-\end{align}
-
-Thus, it remains to be shown that
-\begin{align}
-  \sigma(\Vee(\Pe(x)) - \Vee(x)) \leq -\beta \| x \|^{2}.
-\end{align}
-for $\beta \in \Rpd$.
-
+Because \eqref{eq:hsys} is exponentially stable, there exists a $\delta > 0$ such that $\P : \B_{\delta}(\xst) \cap \S \to \B_{\delta}(\xst) \cap \S$ is well-defined for all $x \in \B_{\delta}(\xst) \cap \S$ and $x_{k+1} = \P(x_{k})$ is exponentially stable.
+%
+Therefore, by the assumption of Lipschitz continuity, there must exist a neighborhood around $\epsilon = 0$ in which the same holds for $\Pe$ and thus stability is maintained.
 \end{proof}
 
 \end{document}

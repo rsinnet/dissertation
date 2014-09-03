@@ -7,7 +7,7 @@ EPS_TEX := $(wildcard ../figs/*.eps_tex)
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 EPS_NO_LATEX := $(filter-out $(subst .eps_tex,.eps,$(EPS_TEX)), $(EPS_ALL))
 
-all: $(PROJNAME).pdf cg-energy es-stability proposal
+all: $(PROJNAME).pdf cg-energy es-stability high-eps-stability proposal
 
 proposal:
 	$(MAKE) -C proposal
@@ -17,6 +17,9 @@ cg-energy:
 
 es-stability:
 	$(MAKE) -C notes/ es-stability.pdf
+
+high-eps-stability:
+	$(MAKE) -C notes/ high-eps-stability.pdf
 
 outline: outline.pdf
 
