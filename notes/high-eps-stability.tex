@@ -18,7 +18,7 @@
 \rhead[]{R. W. Sinnet}
 %%HASH%%
 \cfoot[]{-\thepage\ of \pageref{LastPage}-}
-\rfoot[]{Revised \today}
+\rfoot[]{Compiled \today}
 
 \begin{document}
 \maketitle
@@ -287,6 +287,14 @@ Now Theorem 1 can be proven:
     &&\hspace{3.2cm}\mbox{} + \sigma(\Vee(\Pe(\eta, \zeta)) - \Vee(\zeta)).
   \end{align}
   %
+
+  By construction of the control law \eqref{eq:es-qp}, it is true that
+  \begin{align}
+    \Vee(\zeta) &\leq c_{2} \| \zeta \|^{2},\\
+    \nonumber
+    \Vee(\Pe^{\eta}(\eta, \zeta)) &\leq c_{2} e^{-c_{3} T_{I}(\eta, \zeta)} \| \Delta_{\eta}(\eta, \zeta) \|^{2}.
+  \end{align}
+
   One thing that must be shown:
   %
   \begin{align}
