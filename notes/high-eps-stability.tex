@@ -39,7 +39,7 @@ The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \R^{+}$, wh
 %
 The uncontrolled hybrid system can be written
 \begin{align}
-  \Sigma = \left\{
+  \HS = \left\{
   \begin{array}{l l}
     {\dot x} = f(x), & x \in \D \setminus \S,\\
     x^{+} = \Delta(x^{-}), &x \in \S,
@@ -48,7 +48,7 @@ The uncontrolled hybrid system can be written
 \end{align}
 Under the action of control effort $u$, the corresponding hybrid control system has the form
 \begin{align}
-  \Sigma_{c} = \left\{
+  \HCS = \left\{
   \begin{array}{l l}
     {\dot x} = f(x) + g(x) \, u, & x \in \D \setminus \S,\\
     x^{+} = \Delta(x^{-}), &x \in \S,
@@ -72,10 +72,10 @@ Consider the energy shaping controller
 Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
 \begin{align}
   \label{eq:hsys-cl}
-  \Sigma = \left\{
+  \HS = \left\{
   \begin{array}{l l}
     {\dot x} = f(x) + g(x) \, \mueps(x), & x \in \D \setminus \S,\\
-    x^{+} = \Delta(x^{-}), &x \in \D \cap \S.
+    x^{+} = \Delta(x^{-}), &x \in \S.
   \end{array}\right.
 \end{align}
 
@@ -183,7 +183,7 @@ Consider the candidate Lyapunov function
 Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtain the hybrid control system
 \begin{align}
   \label{eq:hcsys}
-        \HCS= \left\{
+        \HCSbar= \left\{
         \begin{array}{l l}
           \begin{array}{r c l}
             {\dot \eta} &=& f(\eta, \zeta) + g(\eta, \zeta) \, u\\
