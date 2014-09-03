@@ -228,7 +228,7 @@ For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\et
 %
 The Poincar{\'e} map has a form like
 \begin{align}
-  \Pe(x, z) = \phi_{T_{I}(\eta, \zeta)}(\Delta(\eta, \zeta)
+  \Pe(\eta, \zeta) = \phi_{T_{I}(\eta, \zeta)}(\Delta(\eta, \zeta)
 \end{align}
 where $T_{I}(\eta, \zeta)$ is the time to impact.
 
@@ -255,7 +255,7 @@ Now Theorem 1 can be proven:
 
   {\bf What exactly is $\Vn(\eta, \zeta)$?}
   %
-  From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(x)$ is bounded as follows:
+  From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(\eta, \zeta)$ is bounded as follows:
   %
   \begin{align}
     \sigma c_{1} \| \eta \|^{2} + r_{1} \| (\eta, \zeta) \| &\leq \VP(\eta, \zeta)\\
@@ -266,16 +266,16 @@ Now Theorem 1 can be proven:
   It must be shown that
   %
   \begin{align}
-    \VP(\Pe(x)) - \VP(x) \leq -\alpha \| x \|^{2}.
+    \VP(\Pe(\eta, \zeta)) - \VP(\eta, \zeta) \leq -\alpha \| (\eta, \zeta) \|^{2}.
   \end{align}
   %
       {\bf This may be a bit tricky because the second condition of \eqref{eq:lyap-cond-nom} does not apply since $\P$ must be replaced with $\Pe$.}
   First note that
   %
   \begin{align}
-    \VP(\Pe(x)) - \VP(x) = \Vn(\Pe(x)) - \Vn(x) \hspace{1.2cm}\\
+    \lefteqn{\VP(\Pe(\eta, \zeta)) - \VP(\eta, \zeta) = \Vn(\Pe(\eta, \zeta)) - \Vn(\eta, \zeta)}\\
     \nonumber
-    \mbox{} + \sigma(\Vee(\Pe(x)) - \Vee(x)).
+    &&\hspace{3.2cm}\mbox{} + \sigma(\Vee(\Pe(\eta, \zeta)) - \Vee(\zeta)).
   \end{align}
   %
   One thing that must be shown:
