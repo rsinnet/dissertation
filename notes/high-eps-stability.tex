@@ -67,7 +67,7 @@ Consider the energy shaping controller
   \label{eq:es-qp} \tag {QP}
   \mueps(\x) = \argmin_{u(\x) \in \R^{m}} \ & u(\x)^T u(\x)\\
   \nonumber
-  \mbox{s.t. } & L_{f} V(\x) + L_{g} V(\x) \, u(\x) + \frac{c_{3}}{\resclfparam} V(\x) \leq 0.
+  \mbox{s.t. } L_{f} V&(\x) + L_{g} V(\x) \, u(\x) + \frac{c_{3}}{\resclfparam} V(\x) \leq 0.
 \end{align}
 Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
 \begin{align}
@@ -135,7 +135,7 @@ Thus consider the coordinate transformation
 \end{align}
 which is a local diffeomorphism.
 %
-By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = \mathbf{0}$.
+By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = \boldzero$.
 %
 
 \begin{definition}
@@ -301,34 +301,27 @@ Now Theorem 1 can be proven:
 
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
+    \label{eq:Veh-bound}
     \Vee(\zdz) &\leq c_{2} \| \zdz \|^{2},\\
     \nonumber
     \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \| \Delta_{\zdx}(\zdx, \zdz) \|^{2}.
   \end{align}
-  {\bf If the reset map is locally Lipschitz about the fixed point $(\zdx, \zdz) = \mathbf{0}$, then
+  Since the reset map is locally Lipschitz about the fixed point $(\zdx, \zdz) = \boldzero$, it holds that
     \begin{align}
-      \label{eq:Veh-bound}
-      \| \Delta(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp) \| \leq L_{\Delta} \| (\zdxp, \zdzp) \|
+      \| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \| \leq L_{\Delta} \| (\zdxp, \zdzp) \|
     \end{align}
-    for some $(\zdx + \zdxp, \zdz + \zdzp) \in \B_{\gamma}(\mathbf{0})$ with $\gamma \in \Rpd$.}
+    for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.}
   
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
     \nonumber
     \Vee&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp)\\
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{x}(0, \boldzero) \big\|^{2}\\[1em]
     \nonumber
-    & \hspace{4cm}  + \Delta(\zdx + \zdxp, \zdz + \zdzp)\big\|^{2}\\[1em]
-    \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta(\zdx + \zdxp, \zdz + \zdzp) \big\|\\
-    \nonumber
-    & \hspace{4cm} + \big\| \Delta(\zdx + \zdxp, \zdz + \zdzp) \big\| \Big)^{2}\\[1em]
-    \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \Big( L_{\Delta} \| (\zdxp, \zdzp) \|\\
-    \nonumber
-    & \hspace{4cm} + \big\| \Delta(\zdx + \zdxp, \zdz + \zdzp) \big\| \Big)^{2}.
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} L_{\Delta}^{2} \| (\zdxp, \zdzp) \|^{2}.
   \end{align}
+
   One thing that must be shown:
   %
   \begin{align}
