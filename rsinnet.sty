@@ -7,11 +7,13 @@
 \newcommand{\regressorargs}{\regressor(\q, \dq, \ddq)}
 \newcommand{\regressorparam}{\Theta}
 
-\newcommand{\B}{{\mathcal B}}
+\newcommand{\M}{M}
+\newcommand{\B}{B}
 \newcommand{\Shape}{S}
 \newcommand{\T}{\mathbb{T}}
 \newcommand{\Q}{\mathcal{Q}}
 \newcommand{\X}{\mathcal{X}}
+\newcommand{\ndim}{n}
 \newcommand{\ncv}{m}
 \newcommand{\Lag}{L}
 \newcommand{\R}{\mathbb{R}}
@@ -27,8 +29,11 @@
 \newcommand{\Keps}{\K_{\resclfparam}}
 \newcommand{\mueps}{\mu_{\resclfparam}}
 
-\newcommand{\Es}{E^{*}}
-\newcommand{\Eref}{E_{\mathrm{ref}}}
+\newcommand{\E}{E}
+\newcommand{\Es}{\E^{*}}
+\newcommand{\Eref}{\E_{\mathrm{ref}}}
+
+\newcommand{\Lie}[1]{L_{#1}}
 
 \newcommand{\V}{V}
 \newcommand{\dV}{V}
@@ -53,7 +58,7 @@
 \newcommand{\Zeta}{Z}
 
 % Nominal CLF
-\newcommand{\Vn}{V_{\mathit{n}}}
+\newcommand{\Vn}{\V_{\mathit{n}}}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
 
@@ -91,13 +96,19 @@
 \newcommand{\zdxp}{\xi}
 \newcommand{\zdzp}{\zeta}
 
+\renewcommand{\u}{u}
+
 \newcommand{\limeps}{\lim_{\resclfparam \to 0}}
+
+\newcommand{\Poincare}{Poincar{\'e}}
 
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\lemref}[1]{Lemma~\ref{#1}}
 \newcommand{\thmref}[1]{Theorem~\ref{#1}}
 \newcommand{\propref}[1]{Proposition~\ref{#1}}
+
+\newcommand{\CG}{H}
 
 \newcommand{\HS}{\Sigma}
 \newcommand{\HCS}{\HS_{c}}

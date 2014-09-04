@@ -33,7 +33,7 @@ Formally, this means that, given an exponentially-stable limit cycle in a dynami
 
 Consider a hybrid dynamical system with total energy $E(\x)$.
 %
-The system has coordinates $x \in \D$ which take values in the {\em domain of admissibility}, $\D$.
+The system has coordinates $\x \in \D$ which take values in the {\em domain of admissibility}, $\D$.
 
 The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \Rnn$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
 %
@@ -41,33 +41,33 @@ The uncontrolled hybrid system can be written
 \begin{align}
   \HS = \left\{
   \begin{array}{l l}
-    \dx = f(\x), & x \in \D \setminus \S,\\
-    \xp = \Delta(\xm), &\x \in \S,
+    \dx = f(\x), & \x \in \D \setminus \S,\\
+    \xp = \Delta(\xm), & \x \in \S,
   \end{array}\right.
   \label{eq:hsys}
 \end{align}
-Under the action of control effort $u$, the corresponding hybrid control system has the form
+Under the action of control effort $\u$, the corresponding hybrid control system has the form
 \begin{align}
   \HCS = \left\{
   \begin{array}{l l}
-    \dx = f(\x) + g(\x) \, u, & \x \in \D \setminus \S,\\
+    \dx = f(\x) + g(\x) \, \u, & \x \in \D \setminus \S,\\
     \xp = \Delta(\xm), & \x \in \S,
   \end{array}\right.
   \label{eq:hcsys}
 \end{align}
 for control values in a set $\U \subseteq \R^{m}$.
 %
-For the continuous dynamics, construct a Lyapunov function, $V : \D \to \Rnn$, of the form
+For the continuous dynamics, construct a Lyapunov function, $\V : \D \to \Rnn$, of the form
 \begin{align}
   \label{eq:lyap}
-  V(\x) = \frac{1}{2} (E(\x) - \Eref)^2.
+  \V(\x) = \frac{1}{2} (\E(\x) - \Eref)^2.
 \end{align}
 Consider the energy shaping controller
 \begin{align}
   \label{eq:es-qp} \tag {QP}
-  \mueps(\x) = \argmin_{u(\x) \in \R^{m}} \ & u(\x)^T u(\x)\\
+  \mueps(\x) = \argmin_{u(\x) \in \R^{m}} \ & \u(\x)^T \u(\x)\\
   \nonumber
-  \mbox{s.t. } L_{f} V&(\x) + L_{g} V(\x) \, u(\x) + \frac{c_{3}}{\resclfparam} V(\x) \leq 0.
+  \mbox{s.t. } \Lie{f} \V&(\x) + \Lie{g} \V(\x) \, \u(\x) + \frac{c_{3}}{\resclfparam} \V(\x) \leq 0.
 \end{align}
 Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
 \begin{align}
@@ -148,7 +148,7 @@ By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = 
   \begin{align}
     &c_{1} \| \zdx \| \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|,\\
     \nonumber
-    &\inf_{u \in \U} \left[ L_{f} \Ve(\zdx, \zdz) + L_{g} \Ve(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
+    &\inf_{\u \in \U} \left[ \Lie{f} \Ve(\zdx, \zdz) + \Lie{g} \Ve(\zdx, \zdz) \, \u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
   \end{align}
 \end{definition}
 
@@ -171,12 +171,13 @@ Consider the candidate Lyapunov function
 \end{align}
 
 \begin{proposition}  
+  \label{prop:res-clf}
   Exponential stability of the continuous $\zdx$ dynamics is guaranteed if a RES--CLF exists satisfying
   \begin{align}
     \label{eq:lyap-cond-nrg-es}
     &c_{1} \| \zdx \|^{2} \leq \V(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|^2,\\
     \nonumber
-    &\inf_{u \in \U} \left[ L_{f} \V(\zdx, \zdz) + L_{g} \V(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
+    &\inf_{\u \in \U} \left[ \Lie{f} \V(\zdx, \zdz) + \Lie{g} \V(\zdx, \zdz) \, \u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
   \end{align}
   for all $(\zdx, \zdz) \in \zdX \times \zdZ$.
 \end{proposition}
@@ -187,14 +188,45 @@ Consider the candidate Lyapunov function
   %
   Define the set
   \begin{align}
-    \K = \left\{ u \in \U : L_{f} \V(\zdx, \zdz) + L_{g} \V(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
+    \Keps = \left\{ \u \in \U : \Lie{f} \V(\zdx, \zdz) + \Lie{g} \V(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
     \label{eq:control-set}
   \end{align}
-  For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
+  In order to see that the set $\Keps$ is not empty, consider the control Lypaunov function system in the original coordinates:
+  \begin{align}
+    \Ve(\x) = \frac{1}{2} \E^{2}(\x).
+  \end{align}
+  The time derivative is
+  \begin{align}
+    \dVe(\x) &= \E(\x) \pd{\E(\x)}{\x}(f(\x) + g(\x) \, u)\\
+    \nonumber
+    &= \E(\q, \dq) \left(\begin{array}{c c}
+      \pd{\E(\q, \dq)}{\q} & \pd{\E(\q, \dq)}{\dq}
+    \end{array}\right) \cdot\\
+    \nonumber
+    & \hspace{1em} \left[
+    \left(\begin{array}{c}
+      \dq\\
+      -\M^{-1}(\q) \CG(\q, \dq)
+    \end{array}\right) +
+    \left(\begin{array}{c}
+      \boldzero_{\ndim \times \ncv}\\
+      -\M^{-1}(\q) \B(\q)
+    \end{array}\right) \, \u
+    \right].
+  \end{align}
+  For a fully-actuated system, $\ncv = \ndim$ so $\B : \Q \to \R^{\ndim \times \ncv}$ is full rank.
+  %
+  As a result, there exists a solution to the equality; that is,
+  \begin{align}
+    \lefteqn{\u(\q, \dq) = \B^{-1}(\q) \M(\q) \bigg[ \frac{c_{3}}{\resclfparam} \frac{1}{2} \E^{2}(\q, \dq)}\\
+      \nonumber
+      && \mbox{} + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq) \bigg]
+  \end{align}
+  %
+  Now, for the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
   \begin{align*}
     \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|. & \qedhere
   \end{align*}
-  
 \end{proof}
 
 Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtain the hybrid control system
@@ -238,11 +270,11 @@ Define the domain and switching surface of the system:
   \nonumber
   \S &= \left\{ (\zdx, \zdz) \in \zdX \times \zdZ : h(\zdx, \zdz) = 0 \mbox{ and } {\dot h}(\zdx, \zdz) < 0 \right\}.
 \end{align}
-Let the Poincar{\'e} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\phi_{t}(\zdx, \zdz)$ represent a flow of the vector field for time $t$ starting from state $(\zdx, \zdz)$.
+Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\phi_{t}(\zdx, \zdz)$ represent a flow of the vector field for time $t$ starting from state $(\zdx, \zdz)$.
 %
-For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\zdx, \zdz) = \P(\zdx, \zdz)$.
+For the unshaped system, the \Poincare{} map can be seen to be $\limeps \Pe(\zdx, \zdz) = \P(\zdx, \zdz)$.
 %
-The Poincar{\'e} map has a form like
+The \Poincare{} map has a form like
 \begin{align}
   \Pe(\zdx, \zdz) = \phi_{\TIe(\zdx, \zdz)}(\Delta(\zdx, \zdz)),
 \end{align}
@@ -343,7 +375,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \sigma \left( \Vex(\Pex(\zdx, \zdz)) - \Vex(\zdx) \right) \leq \sigma \left( (\beta_{1} - c_{1}) \| \zdx \|^{2} + \beta_{1} \| \zdz \|^{2} \right).
   \end{align}
-  which in itself is not a valid Lyapunov function.
+  which, in itself, is not a valid Lyapunov function as would be expected.
   %
   Hopefully, combining this with the other part will render the composite difference negative semi-definite.}
 
@@ -354,7 +386,7 @@ Now \thmref{theorem:main-theorem} can be proven:
 The following is a list of pieces not yet finished:
 \begin{itemize}
 \item Prove that the coordinate transformation is a local diffeomorphism.
-\item Put bounds on the nominal Lyapunov function of both a point on the guard and of the Poincare map on the guard.
-\item Examine Aaron's Lemma 1 from the TAC paper for this construction and find a bound for the time-to-impact function.
+\item Put bounds on the nominal Lyapunov function of both a point on the guard and of the \Poincare{} map on the guard.
+\item Examine Aaron's Lemma 1 from the TAC paper in the context of energy shaping constructions.
 \end{itemize}
 \end{document}
