@@ -360,11 +360,12 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \nonumber
     \LDelta \| (\zdx, \zdz) \| &\geq \| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \|\\
+    \label{eq:impact-Lipschitz}
     &\geq \| \Delta_{x}(\zdx, \zdz) - \Delta_{x}(0, \boldzero) \|
   \end{align}
   for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$ where $\LDelta$ is the Lipschitz constant of $\Delta(\zdx, \zdz)$.
   %
-  Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
+  Combining \eqref{eq:Veh-bound} and \eqref{eq:impact-Lipschitz} yields
   \begin{align}
     \nonumber
     \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
