@@ -84,6 +84,7 @@ Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
 The main idea is stated as follows:
 %
 \begin{theorem}
+  \label{theorem:main-theorem}
   Given an exponentially-stable limit cycle in a hybrid dynamical system of the form \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:hcsys} results in the closed-loop hybrid system \eqref{eq:hsys-cl}, which is exponentially stable.
 \end{theorem}
 %
@@ -248,6 +249,7 @@ The Poincar{\'e} map has a form like
 where $\TIe(\zdx, \zdz)$ is the time to impact.
 
 \begin{lemma}
+  \label{lemma:TIe-bounds}
   The time-to-impact function $\TIe(\zdx, \zdz)$ satisfies
   \begin{align}
     \label{eq:TIe-bounds}
@@ -259,8 +261,8 @@ where $\TIe(\zdx, \zdz)$ is the time to impact.
   Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps(\zdx, \zdz)$. The function $\TIe(\zdx, \zdz)$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $(\zdx, \zdz) \in \B_{\delta}(0, 0) \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
 \end{proof}
 
-Now Theorem 1 can be proven:
-\begin{proof}
+Now \thmref{theorem:main-theorem} can be proven:
+\begin{proof} [Proof of \thmref{theorem:main-theorem}]
   By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
   %
   \begin{align}
@@ -282,11 +284,11 @@ Now Theorem 1 can be proven:
 
   In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \zdX \to \Rnn$.
   %
-  Denote by $\Vee = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
+  Denote by $\Vex = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
   %
   Using these Lyapunov functions, define the candidate Lyapunov function
   \begin{align}
-    \VP(\zdx, \zdz) = \Vn(\zdx, \zdz) + \sigma \Vee(\zdx).
+    \VP(\zdx, \zdz) = \Vn(\zdx, \zdz) + \sigma \Vex(\zdx).
   \end{align}
 
   {\bf What exactly is $\Vn(\zdx, \zdz)$?}
@@ -310,32 +312,40 @@ Now Theorem 1 can be proven:
   \begin{align}
     \nonumber
     \lefteqn{\VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) = \Vn(\Pe(\zdx, \zdz)) - \Vn(\zdx, \zdz)}\\
-    &&\hspace{2cm}\mbox{} + \sigma(\Vee(\Pe(\zdx, \zdz)) - \Vee(\zdx)).
+    &&\hspace{2cm}\mbox{} + \sigma(\Vex(\Pe(\zdx, \zdz)) - \Vex(\zdx)).
   \end{align}
   %
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
     \label{eq:Veh-bound}
-    \Vee(\zdx) &\leq c_{2} \left\| \zdx \right\|^{2},\\
+    \Vex(\zdx) &\leq c_{2} \left\| \zdx \right\|^{2},\\
     \nonumber
-    \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
+    \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
   \end{align}
   Since the reset map is locally Lipschitz continuous about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
   \begin{align}
-    \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\| \leq L_{\Delta} \left\| (\zdxp, \zdzp) \right\|
+    \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\| \leq \LDelta \left\| (\zdxp, \zdzp) \right\|
   \end{align}
   for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.
   %
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
-    \Vee&(\Pe^{\zdx}(\zdx, \zdz))\\
+    \Vex&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
     \nonumber
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\|^{2}\\
     \nonumber
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} L_{\Delta}^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \LDelta^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
   \end{align}
+  %
+  {\bf Using \lemref{lemma:TIe-bounds} and defining $\beta_{1}(\resclfparam) := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
+  \begin{align}
+    \sigma \left( \Vex(\Pex(\zdx, \zdz)) - \Vex(\zdx) \right) \leq \sigma \left( (\beta_{1} - c_{1}) \| \zdx \|^{2} + \beta_{1} \| \zdz \|^{2} \right).
+  \end{align}
+  which in itself is not a valid Lyapunov function.
+  %
+  Hopefully, combining this with the other part will render the composite difference negative semi-definite.}
 
   Now the Lyapunv function from the converse theorem must be bounded.
 \end{proof}
