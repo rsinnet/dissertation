@@ -53,7 +53,7 @@ Under the action of control effort $u$, the corresponding hybrid control system 
     \dx = f(\x) + g(\x) \, u, & \x \in \D \setminus \S,\\
     \xp = \Delta(\xm), & \x \in \S,
   \end{array}\right.
-  \label{eq:csys}
+  \label{eq:hcsys}
 \end{align}
 for control values in a set $\U \subseteq \R^{m}$.
 %
@@ -84,7 +84,7 @@ Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
 The main idea is stated as follows:
 %
 \begin{theorem}
-  Given an exponentially-stable limit cycle in a hybrid dynamical system of the form \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:csys} results in the closed-loop hybrid system \eqref{eq:hsys-cl}, which is exponentially stable.
+  Given an exponentially-stable limit cycle in a hybrid dynamical system of the form \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:hcsys} results in the closed-loop hybrid system \eqref{eq:hsys-cl}, which is exponentially stable.
 \end{theorem}
 %
 The proof is given later.
@@ -96,7 +96,7 @@ The proof is given later.
 In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:
 
 \begin{lemma}
-  Applying the energy shaping controller \eqref{eq:es-qp} to a hybrid control system \eqref{eq:csys} results in a closed-loop system that demonstrates a periodic orbit which is identical to the unshaped system \eqref{eq:hsys}.
+  Applying the energy shaping controller \eqref{eq:es-qp} to a hybrid control system \eqref{eq:hcsys} results in a closed-loop system that demonstrates a periodic orbit which is identical to the unshaped system \eqref{eq:hsys}.
 \end{lemma}
 
 \begin{proof}
@@ -127,7 +127,7 @@ with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $u \in \U$.
 %
 The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz.
 %
-The natural choice of transformation to convert the continuous dynamics of \eqref{eq:csys} to \eqref{eq:zd-vfield} is through energy.
+The natural choice of transformation to convert the continuous dynamics of \eqref{eq:hcsys} to \eqref{eq:zd-vfield} is through energy.
 %
 Thus consider the coordinate transformation
 \begin{align}
@@ -194,7 +194,7 @@ Consider the candidate Lyapunov function
 
 Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtain the hybrid control system
 \begin{align}
-  \label{eq:hcsys}
+  \label{eq:zd-hcsys}
         \HCSbar= \left\{
         \begin{array}{l l}
           \begin{array}{r c l}
@@ -208,10 +208,10 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
         \end{array}\right.
 \end{align}
 %
-Applying the a valid Lipschitz control law which takes values in \eqref{eq:control-set} to \eqref{eq:hcsys} results in the closed loop hybrid system
+Applying the a valid Lipschitz control law which takes values in \eqref{eq:control-set} to \eqref{eq:zd-hcsys} results in the closed loop hybrid system
 %
 \begin{align}
-  \label{eq:hsys-cl}
+  \label{eq:zd-hsys-cl}
         \HSbar_{\resclfparam} = \left\{\!\!\!\!
         \begin{array}{l l}
           \begin{array}{r c l}
@@ -260,7 +260,7 @@ Now Theorem 1 can be proven:
     \nonumber
     r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
     \Vn(\P_{\resclfparam}(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
-    \label{eq:lyap-cond-nom}
+    \label{eq:lyap-cond-pert}
   \end{align}
   holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\zdx, \zdz)$; to wit, $\limeps \Pe(\zdx, \zdz)$.}
 
@@ -302,15 +302,15 @@ Now Theorem 1 can be proven:
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
     \label{eq:Veh-bound}
-    \Vee(\zdz) &\leq c_{2} \| \zdz \|^{2},\\
+    \Vee(\zdx) &\leq c_{2} \| \zdx \|^{2},\\
     \nonumber
     \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \| \Delta_{\zdx}(\zdx, \zdz) \|^{2}.
   \end{align}
-  Since the reset map is locally Lipschitz about the fixed point $(\zdx, \zdz) = \boldzero$, it holds that
+  Since the reset map is locally Lipschitz about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
     \begin{align}
       \| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \| \leq L_{\Delta} \| (\zdxp, \zdzp) \|
     \end{align}
-    for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.}
+    for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.
   
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
