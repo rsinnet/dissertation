@@ -141,7 +141,7 @@ By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = 
 \begin{definition}
   For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \zdX \to \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} if there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all $0 < \resclfparam < 1$ and for all $(\zdx, \zdz) \in \zdX \times \zdZ$,
   \begin{align}
-    &c_{1} \| \zdx \| \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam} \| \zdx \|,\\
+    &c_{1} \| \zdx \| \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|,\\
     \nonumber
     &\inf_{u \in \U} \left[ L_{f} \Ve(\zdx, \zdz) + L_{g} \Ve(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
   \end{align}
@@ -169,7 +169,7 @@ Consider the candidate Lyapunov function
   Exponential stability of the continuous $\zdx$ dynamics is guaranteed if a RES--CLF exists satisfying
   \begin{align}
     \label{eq:lyap-cond-nrg-es}
-    &c_{1} \| \zdx \|^{2} \leq \V(\zdx) \leq \frac{c_{2}}{\resclfparam} \| \zdx \|^2,\\
+    &c_{1} \| \zdx \|^{2} \leq \V(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|^2,\\
     \nonumber
     &\inf_{u \in \U} \left[ L_{f} \V(\zdx, \zdz) + L_{g} \V(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
   \end{align}
@@ -178,7 +178,7 @@ Consider the candidate Lyapunov function
 
 
 \begin{proof}
-  It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{\resclfparam}{2}$.
+  It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{\resclfparam^{2}}{2}$.
   %
   Define the set
   \begin{align}
@@ -249,18 +249,18 @@ Now Theorem 1 can be proven:
   %
   \begin{align}
     \nonumber
-    r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
-    \Vn(\P(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
+    &r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
     \label{eq:lyap-cond-nom}
+    &\Vn(\P(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
   \end{align}
   for some $r_{1}, r_{2}, r_{3} \in \Rpd$.
   %
   {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$? If so, then it would follow that
     \begin{align}
       \nonumber
-      r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
-      \Vn(\P_{\resclfparam}(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
+      &r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
       \label{eq:lyap-cond-pert}
+      &\Vn(\P_{\resclfparam}(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
     \end{align}
     holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\zdx, \zdz)$; to wit, $\limeps \Pe(\zdx, \zdz)$.}
 
@@ -292,9 +292,9 @@ Now Theorem 1 can be proven:
   First, note that
   %
   \begin{align}
-    \lefteqn{\VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) = \Vn(\Pe(\zdx, \zdz)) - \Vn(\zdx, \zdz)}\\
     \nonumber
-    &&\hspace{3.2cm}\mbox{} + \sigma(\Vee(\Pe(\zdx, \zdz)) - \Vee(\zdx)).
+    \lefteqn{\VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) = \Vn(\Pe(\zdx, \zdz)) - \Vn(\zdx, \zdz)}\\
+    &&\hspace{2cm}\mbox{} + \sigma(\Vee(\Pe(\zdx, \zdz)) - \Vee(\zdx)).
   \end{align}
   %
   By construction of the control law \eqref{eq:es-qp}, it is true that
@@ -312,14 +312,13 @@ Now Theorem 1 can be proven:
   %
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
-    \nonumber
     \Vee&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} T_{I}(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\|^{2}\\
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} T_{I}(\zdx, \zdz)} \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\|^{2}\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} L_{\Delta}^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} T_{I}(\zdx, \zdz)} L_{\Delta}^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
   \end{align}
 
   Now the Lyapunv function from the converse theorem must be bounded.
@@ -330,6 +329,6 @@ The following is a list of pieces not yet finished:
 \begin{itemize}
 \item Prove that the coordinate transformation is a local diffeomorphism.
 \item Put bounds on the nominal Lyapunov function of both a point on the guard and of the Poincare map on the guard.
-\item Examine Aaron's Lemma 1 from the TAC paper for this specific system.
+\item Examine Aaron's Lemma 1 from the TAC paper for this construction and find a bound for the time-to-impact function.
 \end{itemize}
 \end{document}
