@@ -199,7 +199,7 @@ Consider the candidate Lyapunov function
   \begin{align}
     \dVe(\x) &= \E(\x) \pd{\E(\x)}{\x}(f(\x) + g(\x) \, u)\\
     \nonumber
-    &= \E(\q, \dq) \left(\begin{array}{c c}
+    &\geq \E(\q, \dq) \left(\begin{array}{c c}
       \pd{\E(\q, \dq)}{\q} & \pd{\E(\q, \dq)}{\dq}
     \end{array}\right) \cdot\\
     \nonumber
@@ -216,14 +216,16 @@ Consider the candidate Lyapunov function
   \end{align}
   For a fully-actuated system, $\ncv = \ndim$ so $\B : \Q \to \R^{\ndim \times \ncv}$ is full rank.
   %
-  As a result, there exists a solution to the equality; that is,
+  Since $M(\q)$ is invertible for physical bodies, $M(\q) B(\q)$ is invertible.
+  %
+  Thus there exists at least one $u(\q, \dq)$ satisfying
   \begin{align}
-    \lefteqn{\u(\q, \dq) = \B^{-1}(\q) \M(\q) \bigg[ \frac{c_{3}}{\resclfparam} \frac{1}{2} \E^{2}(\q, \dq)}\\
-      \nonumber
-      && \mbox{} + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq) \bigg]
+    \lefteqn{\M^{-1}(\q) \B(\q) \, \u(\q, \dq) = \frac{c_{3}}{\resclfparam} \frac{1}{2} \E^{2}(\q, \dq)}\\
+    \nonumber
+      && \mbox{} + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq).
   \end{align}
   %
-  Now, for the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
+  and, for the CLF \eqref{eq:lyap-cond-nrg-es} with any such locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
   \begin{align*}
     \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|. & \qedhere
   \end{align*}
@@ -381,6 +383,8 @@ Now \thmref{theorem:main-theorem} can be proven:
 
   Now the Lyapunv function from the converse theorem must be bounded.
 \end{proof}
+
+\newpage
 
 \section*{Todo}
 The following is a list of pieces not yet finished:
