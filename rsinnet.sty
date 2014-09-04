@@ -1,3 +1,5 @@
+\newcommand{\resclfparam}{\varepsilon}
+
 \newcommand{\q}{q}
 \newcommand{\dq}{\dot{\q}}
 \newcommand{\ddq}{\ddot{q}}
@@ -22,7 +24,7 @@
 \newcommand{\Orbit}{{\mathscr O}}
 \newcommand{\K}{K}
 
-\newcommand{\mueps}{\mu_{\epsilon}}
+\newcommand{\mueps}{\mu_{\resclfparam}}
 
 \newcommand{\Es}{E^{*}}
 \newcommand{\Eref}{E_{\mathrm{ref}}}
@@ -30,18 +32,18 @@
 \newcommand{\V}{V}
 \newcommand{\dV}{V}
 
-\newcommand{\Ve}{V_{\epsilon}}
-\newcommand{\dVe}{{\dot V}_{\epsilon}}
+\newcommand{\Ve}{V_{\resclfparam}}
+\newcommand{\dVe}{{\dot V}_{\resclfparam}}
 
 \newcommand{\Vbar}{\overline{V}}
 
-\newcommand{\Vebar}{\Vbar_{\epsilon}}
+\newcommand{\Vebar}{\Vbar_{\resclfparam}}
 \newcommand{\VeS}{\left.\Ve\right|_{\S}}
-\newcommand{\Vee}{V_{\epsilon, \eta}}
+\newcommand{\Vee}{V_{\resclfparam, \eta}}
 
 \newcommand{\VP}{V_{\Pe}}
 
-\newcommand{\Pe}{P_{\epsilon}}
+\newcommand{\Pe}{P_{\resclfparam}}
 \renewcommand{\P}{P}
 
 \newcommand{\Eta}{H}
@@ -62,12 +64,18 @@
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
 \newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
 
 \newcommand{\orbit}{\mathscr{O}}
 
 \newcommand{\qst}{\q^{*}}
 \newcommand{\dqst}{\dq^{*}}
-\newcommand{\xst}{x^{*}}
+
+\newcommand{\x}{\chi}
+\newcommand{\dx}{{\dot \x}}
+\newcommand{\xst}{\x^{*}}
+\newcommand{\xp}{\x^{+}}
+\newcommand{\xm}{\x^{-}}
 
 \newcommand{\zdX}{X}
 \newcommand{\zdZ}{Z}
@@ -78,7 +86,7 @@
 \newcommand{\zdxp}{\xi}
 \newcommand{\zdzp}{\zeta}
 
-\newcommand{\limeps}{\lim_{\epsilon \to 0}}
+\newcommand{\limeps}{\lim_{\resclfparam \to 0}}
 
 \newcommand{\figref}[1]{Figure~\ref{#1}}
 
@@ -87,3 +95,4 @@
 
 \newcommand{\HSbar}{{\overline \HS}}
 \newcommand{\HCSbar}{\HSbar_{c}}
+
