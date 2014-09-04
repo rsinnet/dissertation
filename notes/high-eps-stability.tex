@@ -352,13 +352,13 @@ Now \thmref{theorem:main-theorem} can be proven:
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
     \label{eq:Veh-bound}
-    \Vex(\zdx) &\leq c_{2} \left\| \zdx \right\|^{2},\\
+    \Vex(\zdx) &\leq \frac{c_{2}}{\resclfparam} \left\| \zdx \right\|^{2},\\
     \nonumber
-    \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
+    \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
   \end{align}
   Since the reset map is locally Lipschitz continuous about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
   \begin{align}
-    \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\| \leq \LDelta \left\| (\zdxp, \zdzp) \right\|
+    \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\| \leq \LDelta \left\| (\zdx, \zdz) \right\|
   \end{align}
   for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.
   %
