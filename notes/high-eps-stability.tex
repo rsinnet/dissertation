@@ -141,10 +141,10 @@ By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = 
 \begin{definition}
   For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \zdX \to \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} if there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all $0 < \resclfparam < 1$ and for all $(\zdx, \zdz) \in \zdX \times \zdZ$,
   \begin{align}
-  &c_{1} \| \zdx \| \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam} \| \zdx \|,\\
+    &c_{1} \| \zdx \| \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam} \| \zdx \|,\\
     \nonumber
-  &\inf_{u \in \U} \left[ L_{f} \Ve(\zdx, \zdz) + L_{g} \Ve(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
-\end{align}
+    &\inf_{u \in \U} \left[ L_{f} \Ve(\zdx, \zdz) + L_{g} \Ve(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
+  \end{align}
 \end{definition}
 
 
@@ -195,34 +195,34 @@ Consider the candidate Lyapunov function
 Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtain the hybrid control system
 \begin{align}
   \label{eq:zd-hcsys}
-        \HCSbar= \left\{
-        \begin{array}{l l}
-          \begin{array}{r c l}
-            {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, u\\
-            {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, u
-          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
-          \begin{array}{r c l}
-            \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
-            \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
-          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
-        \end{array}\right.
+  \HCSbar= \left\{
+  \begin{array}{l l}
+    \begin{array}{r c l}
+      {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, u\\
+      {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, u
+    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
+    \begin{array}{r c l}
+      \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
+      \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
+    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
+  \end{array}\right.
 \end{align}
 %
 Applying the a valid Lipschitz control law which takes values in \eqref{eq:control-set} to \eqref{eq:zd-hcsys} results in the closed loop hybrid system
 %
 \begin{align}
   \label{eq:zd-hsys-cl}
-        \HSbar_{\resclfparam} = \left\{\!\!\!\!
-        \begin{array}{l l}
-          \begin{array}{r c l}
-            {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, \mueps(\zdx, \zdz)\\
-            {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, \mueps(\zdx, \zdz)
-          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
-          \begin{array}{r c l}
-            \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
-            \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
-          \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
-        \end{array}\right.
+  \HSbar_{\resclfparam} = \left\{\!\!\!\!
+  \begin{array}{l l}
+    \begin{array}{r c l}
+      {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, \mueps(\zdx, \zdz)\\
+      {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, \mueps(\zdx, \zdz)
+    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
+    \begin{array}{r c l}
+      \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
+      \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
+    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
+  \end{array}\right.
 \end{align}
 
 \section{Proof of Main Result}
@@ -256,13 +256,13 @@ Now Theorem 1 can be proven:
   for some $r_{1}, r_{2}, r_{3} \in \Rpd$.
   %
   {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$? If so, then it would follow that
-  \begin{align}
-    \nonumber
-    r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
-    \Vn(\P_{\resclfparam}(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
-    \label{eq:lyap-cond-pert}
-  \end{align}
-  holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\zdx, \zdz)$; to wit, $\limeps \Pe(\zdx, \zdz)$.}
+    \begin{align}
+      \nonumber
+      r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
+      \Vn(\P_{\resclfparam}(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
+      \label{eq:lyap-cond-pert}
+    \end{align}
+    holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\zdx, \zdz)$; to wit, $\limeps \Pe(\zdx, \zdz)$.}
 
   In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \zdX \to \Rnn$.
   %
@@ -288,8 +288,9 @@ Now Theorem 1 can be proven:
   \begin{align}
     \VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) \leq -\alpha \| (\zdx, \zdz) \|^{2}.
   \end{align}
+  
+  {\bf This may be a bit tricky because the second condition of \eqref{eq:lyap-cond-nom} does not apply since $\P$ must be replaced with $\Pe$.}
   %
-      {\bf This may be a bit tricky because the second condition of \eqref{eq:lyap-cond-nom} does not apply since $\P$ must be replaced with $\Pe$.}
   First note that
   %
   \begin{align}
@@ -302,24 +303,26 @@ Now Theorem 1 can be proven:
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
     \label{eq:Veh-bound}
-    \Vee(\zdx) &\leq c_{2} \| \zdx \|^{2},\\
+    \Vee(\zdx) &\leq c_{2} \left\| \zdx \right\|^{2},\\
     \nonumber
-    \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \| \Delta_{\zdx}(\zdx, \zdz) \|^{2}.
+    \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
   \end{align}
   Since the reset map is locally Lipschitz about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
-    \begin{align}
-      \| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \| \leq L_{\Delta} \| (\zdxp, \zdzp) \|
-    \end{align}
-    for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.
+  \begin{align}
+    \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\| \leq L_{\Delta} \left\| (\zdxp, \zdzp) \right\|
+  \end{align}
+  for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.
   
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
     \nonumber
     \Vee&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \big\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{x}(0, \boldzero) \big\|^{2}\\[1em]
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
     \nonumber
-    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} L_{\Delta}^{2} \| (\zdxp, \zdzp) \|^{2}.
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\|^{2}\\
+    \nonumber
+    &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} L_{\Delta}^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
   \end{align}
 
   One thing that must be shown:
