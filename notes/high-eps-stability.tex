@@ -282,16 +282,14 @@ Now Theorem 1 can be proven:
     \nonumber
     &\leq \sigma c_{2} \| \zdx \|^{2} + r_{2} \| (\zdx, \zdz) \|^{2}.
   \end{align}
-  %
+  
   It must be shown that, for some real $\alpha > 0$,
   %
   \begin{align}
     \VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) \leq -\alpha \| (\zdx, \zdz) \|^{2}.
   \end{align}
-  
-  {\bf This may be a bit tricky because the second condition of \eqref{eq:lyap-cond-nom} does not apply since $\P$ must be replaced with $\Pe$.}
-  %
-  First note that
+  %  
+  First, note that
   %
   \begin{align}
     \lefteqn{\VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) = \Vn(\Pe(\zdx, \zdz)) - \Vn(\zdx, \zdz)}\\
@@ -299,7 +297,6 @@ Now Theorem 1 can be proven:
     &&\hspace{3.2cm}\mbox{} + \sigma(\Vee(\Pe(\zdx, \zdz)) - \Vee(\zdx)).
   \end{align}
   %
-
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
     \label{eq:Veh-bound}
@@ -325,15 +322,14 @@ Now Theorem 1 can be proven:
     &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} L_{\Delta}^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
   \end{align}
 
-  One thing that must be shown:
-  %
-  \begin{align}
-    \sigma(\Vee(\Pe^{\zdx}(\zdx, \zdz)) - \Vee(\zdx)) \leq -\beta \| \zdx \|^{2}.
-  \end{align}
-  %
-  for $\beta \in \Rpd$.
-  %
-  In the above, $\Pe^{\zdx}(\zdx, \zdz)$ represents the $\zdx$ coordinate returned by the Poincar{\'e} map $\Pe(\zdx, \zdz)$.
+  Now the Lyapunv function from the converse theorem must be bounded.
 \end{proof}
 
+\section*{Todo}
+The following is a list of pieces not yet finished:
+\begin{itemize}
+\item Prove that the coordinate transformation is a local diffeomorphism.
+\item Put bounds on the nominal Lyapunov function of both a point on the guard and of the Poincare map on the guard.
+\item Examine Aaron's Lemma 1 from the TAC paper for this specific system.
+\end{itemize}
 \end{document}
