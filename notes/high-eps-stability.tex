@@ -104,7 +104,11 @@ In order to achieve the stated goal, it is necessary to show that, given a syste
   %
   Therefore, the limit cycle represents an invariant level set of the energy.
   %
-  By construction of the Lyapunov function \eqref{eq:lyap} used in the the controller \eqref{eq:es-qp}, it is clear that $V(\xst) = 0$ and, moreover, that $$\min_{\x \in \D} V(\x) = 0.$$
+  By construction of the Lyapunov function \eqref{eq:lyap} used in the the controller \eqref{eq:es-qp}, it is clear that $V(\xst) = 0$ and, moreover, that
+  %
+  \begin{align}
+    \inf_{\x \in \D} V(\x) = 0.
+  \end{align}
   %
   The solution to the optimization problem \eqref{eq:es-qp} has cost $u(\x)^T u(\x) = 0$ (which implies that all elements of $u(\x)$ are zero) and argument $u(\x) = 0$ and this satisfies the stability condition of the control Lyapunov function; indeed ${\dot V}(\xst) = 0$ since the energy does not change without external forcing.
   %
