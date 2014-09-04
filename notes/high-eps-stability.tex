@@ -125,7 +125,7 @@ By considering level sets of energy, the continuous dynamics can be expressed as
 %
 with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $u \in \U$.
 %
-The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz.
+The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz continuous.
 %
 The natural choice of transformation to convert the continuous dynamics of \eqref{eq:hcsys} to \eqref{eq:zd-vfield} is through energy.
 %
@@ -185,7 +185,7 @@ Consider the candidate Lyapunov function
     \K = \left\{ u \in \U : L_{f} \V(\zdx, \zdz) + L_{g} \V(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
     \label{eq:control-set}
   \end{align}
-  For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
+  For the CLF \eqref{eq:lyap-cond-nrg-es} with any locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
   \begin{align*}
     \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|. & \qedhere
   \end{align*}
@@ -208,7 +208,7 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
   \end{array}\right.
 \end{align}
 %
-Applying the a valid Lipschitz control law which takes values in \eqref{eq:control-set} to \eqref{eq:zd-hcsys} results in the closed loop hybrid system
+Applying the a valid Lipschitz continuous control law which takes values in \eqref{eq:control-set} to \eqref{eq:zd-hcsys} results in the closed loop hybrid system
 %
 \begin{align}
   \label{eq:zd-hsys-cl}
@@ -307,12 +307,12 @@ Now Theorem 1 can be proven:
     \nonumber
     \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
   \end{align}
-  Since the reset map is locally Lipschitz about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
+  Since the reset map is locally Lipschitz continuous about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
   \begin{align}
     \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\| \leq L_{\Delta} \left\| (\zdxp, \zdzp) \right\|
   \end{align}
   for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.
-  
+  %
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
     \nonumber
