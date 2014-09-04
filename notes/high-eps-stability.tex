@@ -356,18 +356,18 @@ Now \thmref{theorem:main-theorem} can be proven:
     \nonumber
     \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
   \end{align}
-  Since the reset map is locally Lipschitz continuous about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
+  Since the reset map is locally Lipschitz continuous about the fixed point $(\zdx, \zdz) = (0, \boldzero)$ and because $\Delta_{x}(0, \boldzero) = 0$, it follows that
   \begin{align}
-    \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\| \leq \LDelta \left\| (\zdx, \zdz) \right\|
+    \nonumber
+    \LDelta \| (\zdx, \zdz) \| &\geq \| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \|\\
+    &\geq \| \Delta_{x}(\zdx, \zdz) - \Delta_{x}(0, \boldzero) \|
   \end{align}
-  for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$.
+  for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$ where $\LDelta$ is the Lipschitz constant of $\Delta(\zdx, \zdz)$.
   %
   Using this assumption, the inequality \eqref{eq:Veh-bound} can be written
   \begin{align}
-    \Vex&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
-    \nonumber
+    \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \LDelta^{2} \left\| (\zdx, \zdz) \right\|^{2}.
   \end{align}
   %
