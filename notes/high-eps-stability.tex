@@ -135,7 +135,7 @@ The natural choice of transformation to convert the continuous dynamics of \eqre
 %
 Thus consider the coordinate transformation
 \begin{align}
-  \zdx := E(x) - \Eref,
+  \zdx := E(\x) - \Eref,
 \end{align}
 which is a local diffeomorphism.
 %
@@ -243,9 +243,21 @@ For the unshaped system, the Poincar{\'e} map can be seen to be $\limeps \Pe(\zd
 %
 The Poincar{\'e} map has a form like
 \begin{align}
-  \Pe(\zdx, \zdz) = \phi_{T_{I}(\zdx, \zdz)}(\Delta(\zdx, \zdz)),
+  \Pe(\zdx, \zdz) = \phi_{\TIe(\zdx, \zdz)}(\Delta(\zdx, \zdz)),
 \end{align}
-where $T_{I}(\zdx, \zdz)$ is the time to impact.
+where $\TIe(\zdx, \zdz)$ is the time to impact.
+
+\begin{lemma}
+  The time-to-impact function $\TIe(\zdx, \zdz)$ satisfies
+  \begin{align}
+    \label{eq:TIe-bounds}
+    0.9 \Tst \leq \TIe(\zdx, \zdz) \leq 1.1 \Tst,
+  \end{align}
+  where $\Tst = \TIe(0, \boldzero)$ is the period of the orbit $\Orbit$.
+\end{lemma}
+\begin{proof}
+  Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps(\zdx, \zdz)$. The function $\TIe(\zdx, \zdz)$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $(\zdx, \zdz) \in \B_{\delta}(0, 0) \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
+\end{proof}
 
 Now Theorem 1 can be proven:
 \begin{proof}
@@ -306,7 +318,7 @@ Now Theorem 1 can be proven:
     \label{eq:Veh-bound}
     \Vee(\zdx) &\leq c_{2} \left\| \zdx \right\|^{2},\\
     \nonumber
-    \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} T_{I}(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
+    \Vee(\Pe^{\zdx}(\zdx, \zdz)) &\leq c_{2} e^{-c_{3} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
   \end{align}
   Since the reset map is locally Lipschitz continuous about the fixed point $(\zdx, \zdz) = (0, \boldzero)$, it holds that
   \begin{align}
@@ -318,11 +330,11 @@ Now Theorem 1 can be proven:
   \begin{align}
     \Vee&(\Pe^{\zdx}(\zdx, \zdz))\\
     \nonumber
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} T_{I}(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
     \nonumber
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} T_{I}(\zdx, \zdz)} \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\|^{2}\\
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \right\|^{2}\\
     \nonumber
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} T_{I}(\zdx, \zdz)} L_{\Delta}^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} L_{\Delta}^{2} \left\| (\zdxp, \zdzp) \right\|^{2}.
   \end{align}
 
   Now the Lyapunv function from the converse theorem must be bounded.
