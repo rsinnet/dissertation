@@ -289,7 +289,7 @@ where $\TIe\argsxz$ is the time to impact.
 
 \begin{lemma}
   \label{lemma:TIe-bounds}
-  The time-to-impact function $\TIe\argsxz$ satisfies
+  For some $\delta > 0$ and $\argsxz \in \B_{\delta}(0, 0) \cap \S$, the time-to-impact function $\TIe\argsxz$ satisfies
   \begin{align}
     \label{eq:TIe-bounds}
     0.9 \Tst \leq \TIe\argsxz \leq 1.1 \Tst,
@@ -359,7 +359,7 @@ Now \thmref{theorem:main-theorem} can be proven:
     \label{eq:impact-Lipschitz}
     &\geq \| \Delta_{x}\argsxz - \Delta_{x}(0, \boldzero) \|
   \end{align}
-  for some $\argsxz \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
+  for some $\argsxz \in \B_{\gamma}(0, \boldzero)$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
   %
   Combining \eqref{eq:Veh-bound} and \eqref{eq:impact-Lipschitz} yields
   \begin{align}
@@ -368,15 +368,12 @@ Now \thmref{theorem:main-theorem} can be proven:
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
   \end{align}
   %
-  {\bf Using \lemref{lemma:TIe-bounds} and defining $\beta_{1}(\resclfparam) := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
+  Using \lemref{lemma:TIe-bounds} and defining $\beta_{1}(\resclfparam) := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
   \begin{align}
-    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq -c_{1} \| \zdx \|^{2} + \beta_{1} \| \argsxz \|^{2}.
+    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \beta_{1} \| \argsxz \|^{2} - c_{1} \| \zdx \|^{2}.
   \end{align}
-  which, in itself, is not a valid Lyapunov function as would be expected.
-  %
-  Hopefully, combining this with the other part will render the composite difference negative semi-definite.}
 
-  Now the Lyapunv function from the converse theorem must be bounded.
+  Now the Lyapunov function from the converse theorem must be bounded.
   %
   By the definition of the \Poincare{} map, it is apparent that
   \begin{align}
