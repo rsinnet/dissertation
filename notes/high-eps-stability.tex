@@ -330,19 +330,13 @@ Now \thmref{theorem:main-theorem} can be proven:
     \nonumber
     &\leq \sigma \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|^{2} + r_{2} \| \argsxz \|^{2}.
   \end{align}
-  
-  It must be shown that, for some real $\alpha > 0$,
+  %
+  Next, note that
   %
   \begin{align}
-    \VP(\Pe\argsxz) - \VP\argsxz \leq -\alpha \| \argsxz \|^{2}.
-  \end{align}
-  %  
-  First, note that
-  %
-  \begin{align}
+    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz =}\\
     \nonumber
-    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz = \Vn(\Pe\argsxz) - \Vn\argsxz}\\
-    &&\hspace{2cm}\mbox{} + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).
+      &&\Vn(\Pe\argsxz) - \Vn\argsxz + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).
   \end{align}
   %
   By construction of the control law \eqref{eq:es-qp}, it is true that
@@ -354,9 +348,9 @@ Now \thmref{theorem:main-theorem} can be proven:
   \end{align}
   Since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = (0, \boldzero)$ and because $\Delta_{x}(0, \boldzero) = 0$, it follows that
   \begin{align}
-    \nonumber
-    \LDelta \| \argsxz \| &\geq \| \Delta\argsxz - \Delta(0, \boldzero) \|\\
     \label{eq:impact-Lipschitz}
+    \LDelta \| \argsxz \| &\geq \| \Delta\argsxz - \Delta(0, \boldzero) \|\\
+    \nonumber
     &\geq \| \Delta_{x}\argsxz - \Delta_{x}(0, \boldzero) \|
   \end{align}
   for some $\argsxz \in \B_{\gamma}(0, \boldzero)$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
