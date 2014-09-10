@@ -375,7 +375,14 @@ Now \thmref{theorem:main-theorem} can be proven:
   \end{align}
 \end{proof}
 
-\newpage
+{\bf We want to show that}
+\begin{align}
+  \lefteqn{\Vn(\Pe\argsxz) - \Vn\argsxz }\\
+  \nonumber
+  &= \Vn(\Pe\argsxz) - \Vn(\P\argsxz) + \Vn(\P\argsxz) - \Vn\argsxz\\
+  \nonumber
+  &\leq \Vn(\Pe\argsxz) - \Vn(\P\argsxz) - r_{3} \|\argsxz\|
+\end{align}
 
 \section{Bounding the Nominal Lyapunov Function}
 One way to approach the problem of bounding is to consider the flow,
