@@ -202,7 +202,7 @@ Consider the candidate Lyapunov function
   \end{align}
   The time derivative is
   \begin{align}
-    \dVe(\x) &= \E(\x) \pd{\E(\x)}{\x}(f(\x) + g(\x) \, u)\\
+    \dVe(\x) &= \E(\x) \pd{\E(\x)}{\x}(f(\x) + g(\x) \, \u)\\
     \nonumber
     &\geq \E(\q, \dq) \left(\begin{array}{c c}
       \pd{\E(\q, \dq)}{\q} & \pd{\E(\q, \dq)}{\dq}
@@ -303,10 +303,14 @@ where $\TIe\argsxz$ is the time to impact.
 In addition to the preceding lemma, some bounds must be established in order to prove \thmref{theorem:main-theorem}:
 
 \begin{lemma}
+  {\bf For the vector fields described, the following bounds probably hold:}
   \begin{align}
-    \| \TIe\argsxz - \TI\argsxz \| \leq L_{\TI} \| \argsxz \|
     \nonumber
+    \| \TIe\argsxz - \TI\argsxz \| &\leq \LTI \| \argsxz \|,\\
+    \nonumber
+    \| \Pe\argsxz - \P\argsxz \| &\leq \LDP \| \argsxz \|,
   \end{align}
+  where $\LTI$ and $\LDP$ are local Lipschitz constants.
 \end{lemma}
 \begin{proof}
   Begin by constructing an auxiliary time-to-impact function, $\TB$, which is Lipschitz continuous and independent of $\resclfparam$:
@@ -335,12 +339,13 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \end{align}
   Defining
   \begin{align}
-    \mu_{1} &= \zdx_{1}(t)\big|_{t = \TIe\argsxz} - \zdx_{2}(t)\big|_{t = \TIe\argsxz},\\
     \nonumber
+    \mu_{1} &= \zdx_{1}(t)\big|_{t = \TIe\argsxz} - \zdx_{2}(t)\big|_{t = \TIe\argsxz},\\
     \mu_{2} &= \zdz_{1}(t)\big|_{t = \TIe\argsxz} - \zdz_{2}(t)\big|_{t = \TIe\argsxz},
   \end{align}
   where
   \begin{align}
+    \nonumber
     \zdx_{1}(0) &= \DeltaX\argsxz,& \zdz_{1}(0) &= \DeltaZ\argsxz,\\
     \zdx_{2}(0) &= \DeltaX(0, \boldzero),& \zdz_{2}(0) &= \DeltaZ(0, \boldzero).
   \end{align}
