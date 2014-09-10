@@ -300,6 +300,35 @@ where $\TIe\argsxz$ is the time to impact.
   Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$. The function $\TIe\argsxz$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}(0, 0) \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
 \end{proof}
 
+In addition to the preceding lemma, some bounds must be established in order to prove \thmref{theorem:main-theorem}:
+
+\begin{lemma}
+  \begin{align}
+    \| \TIe\argsxz - \TI\argsxz \| \leq L_{\TI} \| \argsxz \|
+    \nonumber
+  \end{align}
+\end{lemma}
+\begin{proof}
+  First, consider the case where $\TIe\argsxz < \TI\argsxz$:
+  \begin{align}
+    \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| =}\\
+    \nonumber
+    & \hspace{2em} \Bigg\| \int_{0}^{\TIe\argsxz} \! \left[\!\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\!\right] \, \mueps\argstxz \, d\tau\\ 
+    \nonumber
+    & \hspace{10em} \mbox{} - \int_{\TIe\argsxz}^{\TI\argsxz} \! \left[\!\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\!\right] d\tau \Bigg\|.
+  \end{align}
+  
+  For the case where $\TI\argsxz < \TIe\argsxz$, the above becomes the following:
+  \begin{align}
+    \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| =}\\
+    \nonumber
+    & \hspace{2em} \Bigg\| \int_{0}^{\TIe\argsxz} \! \left[\!\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\!\right] \, \mueps\argstxz \, d\tau\\ 
+    \nonumber
+    & \hspace{10em} \mbox{} + \int_{\TI\argsxz}^{\TIe\argsxz} \! \left[\!\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\!\right] d\tau \Bigg\|.
+  \end{align}
+
+\end{proof}
+
 Now \thmref{theorem:main-theorem} can be proven:
 \begin{proof} [Proof of \thmref{theorem:main-theorem}]
   By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
@@ -386,7 +415,7 @@ Now \thmref{theorem:main-theorem} can be proven:
 
 \section{Bounding the Nominal Lyapunov Function}
 One way to approach the problem of bounding is to consider the flow,
-\begin{align}\
+\begin{align}
   \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}(\Delta\argsxz) - \flow_{\TI(\zdx,\zdz)}(\Delta\argsxz) \| =}\\
   \nonumber
   & \hspace{2em} \Bigg\| \int_{0}^{\TIe(\Delta\argsxz)} \! f(\Delta\argsxz) + g(\Delta\argsxz) \, \mueps(\Delta\argsxz) \, d\tau\\ 
