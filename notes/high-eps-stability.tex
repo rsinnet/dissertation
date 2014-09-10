@@ -246,8 +246,8 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
       {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, u
     \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \S,\\
     \begin{array}{r c l}
-      \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
-      \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
+      \zdx^{+} &\!\!=\!\!& \DeltaX(\zdx^{-}, \zdz^{-})\\
+      \zdz^{+} &\!\!=\!\!& \DeltaZ(\zdx^{-}, \zdz^{-})
     \end{array} \!\! & \!\! \mbox{if } \argsxz \in \S.
   \end{array}\right.
 \end{align}
@@ -263,8 +263,8 @@ Applying the a valid Lipschitz continuous control law which takes values in \eqr
       {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, \mueps\argsxz
     \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \S,\\
     \begin{array}{r c l}
-      \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
-      \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
+      \zdx^{+} &\!\!=\!\!& \DeltaX(\zdx^{-}, \zdz^{-})\\
+      \zdz^{+} &\!\!=\!\!& \DeltaZ(\zdx^{-}, \zdz^{-})
     \end{array} \!\! & \!\! \mbox{if } \argsxz \in \S.
   \end{array}\right.
 \end{align}
@@ -317,17 +317,32 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \end{align}
   By this definition, it is easy to see that
   \begin{align}
-    \TB(0, 0, \zdx, \zdz) = \TI(x, z).
+    \TB(0, 0, \zdx, \zdz) = \TI\argsxz.
   \end{align}
   Since $\|\argsmuxz\| = \|\mu_{1}\| + \|\mu_{2}\| + \|\zdx\| + \|\zdz\|$, it follows that
   \begin{align}
     | \TB\argsmuxz - \TI\argsxz| \leq \LB (\| \mu_{1} \| + \| \mu_{2} \|),
   \end{align}
-  where $\LB$ is the local Lipschitz constant. Defining
+  where $\LB$ is the local Lipschitz constant. Consider two solutions, $(\zdx_{1}(t), \zdz_{1}(t))$ and  $(\zdx_{2}(t), \zdz_{2}(t))$, which satisfy
   \begin{align}
-    \mu_{1} &= x_{1}(t)\big|_{t = \TIe\argsxz} - x_{2}(t)\big|_{t = \TIe\argsxz}\\
     \nonumber
-    \mu_{2} &= z_{1}(t)\big|_{t = \TIe\argsxz} - z_{2}(t)\big|_{t = \TIe\argsxz}
+    \dzdx_{1}(t) &= f\argstxzi{t}{1} + f\argstxzi{t}{1} \, \mueps\argstxzi{t}{1},\\
+    \nonumber
+    \dzdz_{1}(t) &= q\argstxzi{t}{1} + w\argstxzi{t}{1} \, \mueps\argstxzi{t}{1},\\
+    \nonumber
+    \dzdx_{2}(t) &= f\argstxzi{t}{2} + g\argstxzi{t}{2} \, \mueps\argstxzi{t}{2},\\
+    \dzdz_{2}(t) &= q\argstxzi{t}{2} + w\argstxzi{t}{2} \, \mueps\argstxzi{t}{2}.
+  \end{align}
+  Defining
+  \begin{align}
+    \mu_{1} &= \zdx_{1}(t)\big|_{t = \TIe\argsxz} - \zdx_{2}(t)\big|_{t = \TIe\argsxz},\\
+    \nonumber
+    \mu_{2} &= \zdz_{1}(t)\big|_{t = \TIe\argsxz} - \zdz_{2}(t)\big|_{t = \TIe\argsxz},
+  \end{align}
+  where
+  \begin{align}
+    \zdx_{1}(0) &= \DeltaX\argsxz,& \zdz_{1}(0) &= \DeltaZ\argsxz,\\
+    \zdx_{2}(0) &= \DeltaX(0, \boldzero),& \zdz_{2}(0) &= \DeltaZ(0, \boldzero).
   \end{align}
   results in
   \begin{align}
@@ -398,21 +413,21 @@ Now \thmref{theorem:main-theorem} can be proven:
     \label{eq:Veh-bound}
     \Vex(\zdx) &\leq \frac{c_{2}}{\resclfparam^{2}} \left\| \zdx \right\|^{2},\\
     \nonumber
-    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \Delta_{\zdx}\argsxz \right\|^{2}.
+    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz \right\|^{2}.
   \end{align}
-  Since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = (0, \boldzero)$ and because $\Delta_{x}(0, \boldzero) = 0$, it follows that
+  Since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = (0, \boldzero)$ and because $\DeltaX(0, \boldzero) = 0$, it follows that
   \begin{align}
     \label{eq:impact-Lipschitz}
     \LDelta \| \argsxz \| &\geq \| \Delta\argsxz - \Delta(0, \boldzero) \|\\
     \nonumber
-    &\geq \| \Delta_{x}\argsxz - \Delta_{x}(0, \boldzero) \|
+    &\geq \| \DeltaX\argsxz - \DeltaX(0, \boldzero) \|
   \end{align}
   for some $\argsxz \in \B_{\gamma}(0, \boldzero)$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
   %
   Combining \eqref{eq:Veh-bound} and \eqref{eq:impact-Lipschitz} yields
   \begin{align}
     \nonumber
-    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \Delta_{\zdx}\argsxz - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
+    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz - \DeltaX(0, \boldzero) \right\|^{2}\\
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
   \end{align}
   %
@@ -437,12 +452,4 @@ Now \thmref{theorem:main-theorem} can be proven:
   \nonumber
   &\leq \Vn(\Pe\argsxz) - \Vn(\P\argsxz) - r_{3} \|\argsxz\|
 \end{align}
-
-\section*{Todo}
-The following is a list of pieces not yet finished:
-\begin{itemize}
-\item Prove that the coordinate transformation is a local diffeomorphism.
-\item Put bounds on the nominal Lyapunov function of both a point on the guard and of the \Poincare{} map on the guard.
-\item Examine Aaron's Lemma 1 from the TAC paper in the context of energy shaping constructions.
-\end{itemize}
 \end{document}
