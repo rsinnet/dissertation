@@ -123,8 +123,8 @@ In order to understand the nature of energy shaping, consider breaking up the sy
 By considering level sets of energy, the continuous dynamics can be expressed as
 \begin{align}
   \nonumber
-  \dot \zdx &= f(\zdx, \zdz) + g(\zdx, \zdz) \, u,\\
-  \dot \zdz &= q(\zdx, \zdz) + w(\zdx, \zdz) \, u,
+  \dot \zdx &= f\argsxz + g\argsxz \, u,\\
+  \dot \zdz &= q\argsxz + w\argsxz \, u,
   \label{eq:zd-vfield}
 \end{align}
 %
@@ -136,19 +136,24 @@ The natural choice of transformation to convert the continuous dynamics of \eqre
 %
 Thus consider the coordinate transformation
 \begin{align}
-  \zdx := E(\x) - \Eref,
+  \zdx := E(\x) - \Eref.
 \end{align}
-which is a local diffeomorphism.
-%
-By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = \boldzero$.
+By construction, the fixed point of the hybrid system occurs at $\argsxz = \boldzero$.
 %
 
+\subsection{Diffeomorphism}
+The energy of a mechanical system takes the form
+\begin{align}
+  E(\q, \dq) = \frac{1}{2} \dq^{T} \M(\q) \dq + \pd{\G(\q)}{\q}
+\end{align}
+Because $\M(\q)$ is invertible for mechanical systems, it never has determinant zero.
+
 \begin{definition}
-  For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \zdX \to \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} if there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all $0 < \resclfparam < 1$ and for all $(\zdx, \zdz) \in \zdX \times \zdZ$,
+  For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \zdX \to \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} if there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all $0 < \resclfparam < 1$ and for all $\argsxz \in \zdX \times \zdZ$,
   \begin{align}
     &c_{1} \| \zdx \| \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{f} \Ve(\zdx, \zdz) + \Lie{g} \Ve(\zdx, \zdz) \, \u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
+    &\inf_{\u \in \U} \left[ \Lie{f} \Ve\argsxz + \Lie{g} \Ve\argsxz \, \u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
   \end{align}
 \end{definition}
 
@@ -156,8 +161,8 @@ By construction, the fixed point of the hybrid system occurs at $(\zdx, \zdz) = 
 Applying the control law \eqref{eq:es-qp}, the dynamics \eqref{eq:zd-vfield} becomes
 \begin{align}
   \nonumber
-  \dot \zdx &= f(\zdx, \zdz) + g(\zdx, \zdz) \, \mueps(\zdx, \zdz),\\
-  \dot \zdz &= q(\zdx, \zdz) + w(\zdx, \zdz) \, \mueps(\zdx, \zdz).
+  \dot \zdx &= f\argsxz + g\argsxz \, \mueps\argsxz,\\
+  \dot \zdz &= q\argsxz + w\argsxz \, \mueps\argsxz.
   \label{eq:zd-vfield-cl}
 \end{align}
 
@@ -177,9 +182,9 @@ Consider the candidate Lyapunov function
     \label{eq:lyap-cond-nrg-es}
     &c_{1} \| \zdx \|^{2} \leq \V(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|^2,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{f} \V(\zdx, \zdz) + \Lie{g} \V(\zdx, \zdz) \, \u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
+    &\inf_{\u \in \U} \left[ \Lie{f} \V\argsxz + \Lie{g} \V\argsxz \, \u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
   \end{align}
-  for all $(\zdx, \zdz) \in \zdX \times \zdZ$.
+  for all $\argsxz \in \zdX \times \zdZ$.
 \end{proposition}
 
 
@@ -188,7 +193,7 @@ Consider the candidate Lyapunov function
   %
   Define the set
   \begin{align}
-    \Keps = \left\{ \u \in \U : \Lie{f} \V(\zdx, \zdz) + \Lie{g} \V(\zdx, \zdz) \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
+    \Keps = \left\{ \u \in \U : \Lie{f} \V\argsxz + \Lie{g} \V\argsxz \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
     \label{eq:control-set}
   \end{align}
   In order to see that the set $\Keps$ is not empty, consider the control Lypaunov function system in the original coordinates:
@@ -237,13 +242,13 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
   \HCSbar= \left\{
   \begin{array}{l l}
     \begin{array}{r c l}
-      {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, u\\
-      {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, u
-    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
+      {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, u\\
+      {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, u
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \S,\\
     \begin{array}{r c l}
       \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
       \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
-    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \S.
   \end{array}\right.
 \end{align}
 %
@@ -254,13 +259,13 @@ Applying the a valid Lipschitz continuous control law which takes values in \eqr
   \HSbar_{\resclfparam} = \left\{\!\!\!\!
   \begin{array}{l l}
     \begin{array}{r c l}
-      {\dot \zdx} &\!\!=\!\!& f(\zdx, \zdz) + g(\zdx, \zdz) \, \mueps(\zdx, \zdz)\\
-      {\dot \zdz} &\!\!=\!\!& q(\zdx, \zdz) + w(\zdx, \zdz) \, \mueps(\zdx, \zdz)
-    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \D \setminus \S,\\
+      {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, \mueps\argsxz\\
+      {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, \mueps\argsxz
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \S,\\
     \begin{array}{r c l}
       \zdx^{+} &\!\!=\!\!& \Delta_{\zdx}(\zdx^{-}, \zdz^{-})\\
       \zdz^{+} &\!\!=\!\!& \Delta_{\zdz}(\zdx^{-}, \zdz^{-})
-    \end{array} \!\! & \!\! \mbox{if } (\zdx, \zdz) \in \S.
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \S.
   \end{array}\right.
 \end{align}
 
@@ -268,122 +273,129 @@ Applying the a valid Lipschitz continuous control law which takes values in \eqr
 
 Define the domain and switching surface of the system:
 \begin{align}
-  \D &= \left\{ (\zdx, \zdz) \in \zdX \times \zdZ : h(\zdx, \zdz) \geq 0 \right\},\\
+  \D &= \left\{ \argsxz \in \zdX \times \zdZ : h\argsxz \geq 0 \right\},\\
   \nonumber
-  \S &= \left\{ (\zdx, \zdz) \in \zdX \times \zdZ : h(\zdx, \zdz) = 0 \mbox{ and } {\dot h}(\zdx, \zdz) < 0 \right\}.
+  \S &= \left\{ \argsxz \in \zdX \times \zdZ : h\argsxz = 0 \mbox{ and } {\dot h}\argsxz < 0 \right\}.
 \end{align}
-Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\phi_{t}(\zdx, \zdz)$ represent a flow of the vector field for time $t$ starting from state $(\zdx, \zdz)$.
+Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\flow_{t}\argsxz$ represent a flow of the vector field for time $t$ starting from state $\argsxz$.
 %
-For the unshaped system, the \Poincare{} map can be seen to be $\limeps \Pe(\zdx, \zdz) = \P(\zdx, \zdz)$.
+For the unshaped system, the \Poincare{} map can be seen to be $\limeps \Pe\argsxz = \P\argsxz$.
 %
 The \Poincare{} map has a form like
 \begin{align}
-  \Pe(\zdx, \zdz) = \phi_{\TIe(\zdx, \zdz)}(\Delta(\zdx, \zdz)),
+  \Pe\argsxz = \floweps_{\TIe\argsxz}(\Delta\argsxz),
 \end{align}
-where $\TIe(\zdx, \zdz)$ is the time to impact.
+where $\TIe\argsxz$ is the time to impact.
 
 \begin{lemma}
   \label{lemma:TIe-bounds}
-  The time-to-impact function $\TIe(\zdx, \zdz)$ satisfies
+  The time-to-impact function $\TIe\argsxz$ satisfies
   \begin{align}
     \label{eq:TIe-bounds}
-    0.9 \Tst \leq \TIe(\zdx, \zdz) \leq 1.1 \Tst,
+    0.9 \Tst \leq \TIe\argsxz \leq 1.1 \Tst,
   \end{align}
   where $\Tst = \TIe(0, \boldzero)$ is the period of the orbit $\Orbit$.
 \end{lemma}
 \begin{proof}
-  Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps(\zdx, \zdz)$. The function $\TIe(\zdx, \zdz)$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $(\zdx, \zdz) \in \B_{\delta}(0, 0) \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
+  Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$. The function $\TIe\argsxz$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}(0, 0) \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
 \end{proof}
 
 Now \thmref{theorem:main-theorem} can be proven:
 \begin{proof} [Proof of \thmref{theorem:main-theorem}]
   By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
   %
-  \begin{align}
-    \nonumber
-    &r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
+  \begin{eqnarray}
     \label{eq:lyap-cond-nom}
-    &\Vn(\P(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
-  \end{align}
+    &r_{1} \| \argsxz \|^{2} \leq \Vn\argsxz \leq r_{2} \| \argsxz \|^2,\\
+    \nonumber
+    &\Vn(\P\argsxz) - \Vn\argsxz \leq -r_{3} \| \argsxz \|^{2},\\
+    \nonumber
+    &\| \Vn\argsxz - \Vn(\zdx', \zdz') \| \leq r_{4} \| \zdz - \zdz' \| \left( \|\zdz\| + \|\zdz'\|\right)
+  \end{eqnarray}
   for some $r_{1}, r_{2}, r_{3} \in \Rpd$.
   %
-  {\bf Given that this is true on some ball $\B_{\delta}$, is it all true for a perturbed $\Pe$ on a another (possibly smaller) ball $\B_{\bar \delta}$? If so, then it would follow that
-    \begin{align}
-      \nonumber
-      &r_{1} \| (\zdx, \zdz) \|^{2} \leq \Vn(\zdx, \zdz) \leq r_{2} \| (\zdx, \zdz) \|^2,\\
-      \label{eq:lyap-cond-pert}
-      &\Vn(\P_{\resclfparam}(\zdx, \zdz)) - \Vn(\zdx, \zdz) \leq -r_{3} \| (\zdx, \zdz) \|^{2},
-    \end{align}
-    holds on $\B_{\bar \delta}$ but this argument would be based on an infinitesimal perturbation to $P(\zdx, \zdz)$; to wit, $\limeps \Pe(\zdx, \zdz)$.}
-
   In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \zdX \to \Rnn$.
   %
   Denote by $\Vex = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
   %
   Using these Lyapunov functions, define the candidate Lyapunov function
   \begin{align}
-    \VP(\zdx, \zdz) = \Vn(\zdx, \zdz) + \sigma \Vex(\zdx).
+    \VP\argsxz = \Vn\argsxz + \sigma \Vex(\zdx).
   \end{align}
-
-  {\bf What exactly is $\Vn(\zdx, \zdz)$?}
   %
-  From \eqref{eq:lyap-cond-nom}, it is apparent that $\VP(\zdx, \zdz)$ is bounded as follows:
+  From \eqref{eq:lyap-cond-nrg-es} and \eqref{eq:lyap-cond-nom}, it is apparent that $\VP\argsxz$ is bounded as follows:
   %
   \begin{align}
-    \sigma c_{1} \| \zdx \|^{2} + r_{1} \| (\zdx, \zdz) \|^{2} &\leq \VP(\zdx, \zdz)\\
+    \sigma c_{1} \| \zdx \|^{2} + r_{1} \| \argsxz \|^{2} &\leq \VP\argsxz\\
     \nonumber
-    &\leq \sigma c_{2} \| \zdx \|^{2} + r_{2} \| (\zdx, \zdz) \|^{2}.
+    &\leq \sigma \frac{c_{2}}{\resclfparam^{2}} \| \zdx \|^{2} + r_{2} \| \argsxz \|^{2}.
   \end{align}
   
   It must be shown that, for some real $\alpha > 0$,
   %
   \begin{align}
-    \VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) \leq -\alpha \| (\zdx, \zdz) \|^{2}.
+    \VP(\Pe\argsxz) - \VP\argsxz \leq -\alpha \| \argsxz \|^{2}.
   \end{align}
   %  
   First, note that
   %
   \begin{align}
     \nonumber
-    \lefteqn{\VP(\Pe(\zdx, \zdz)) - \VP(\zdx, \zdz) = \Vn(\Pe(\zdx, \zdz)) - \Vn(\zdx, \zdz)}\\
-    &&\hspace{2cm}\mbox{} + \sigma(\Vex(\Pe(\zdx, \zdz)) - \Vex(\zdx)).
+    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz = \Vn(\Pe\argsxz) - \Vn\argsxz}\\
+    &&\hspace{2cm}\mbox{} + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).
   \end{align}
   %
   By construction of the control law \eqref{eq:es-qp}, it is true that
   \begin{align}
     \label{eq:Veh-bound}
-    \Vex(\zdx) &\leq \frac{c_{2}}{\resclfparam} \left\| \zdx \right\|^{2},\\
+    \Vex(\zdx) &\leq \frac{c_{2}}{\resclfparam^{2}} \left\| \zdx \right\|^{2},\\
     \nonumber
-    \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) \right\|^{2}.
+    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \Delta_{\zdx}\argsxz \right\|^{2}.
   \end{align}
-  Since the reset map is locally Lipschitz continuous about the fixed point $(\zdx, \zdz) = (0, \boldzero)$ and because $\Delta_{x}(0, \boldzero) = 0$, it follows that
+  Since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = (0, \boldzero)$ and because $\Delta_{x}(0, \boldzero) = 0$, it follows that
   \begin{align}
     \nonumber
-    \LDelta \| (\zdx, \zdz) \| &\geq \| \Delta(\zdx, \zdz) - \Delta(0, \boldzero) \|\\
+    \LDelta \| \argsxz \| &\geq \| \Delta\argsxz - \Delta(0, \boldzero) \|\\
     \label{eq:impact-Lipschitz}
-    &\geq \| \Delta_{x}(\zdx, \zdz) - \Delta_{x}(0, \boldzero) \|
+    &\geq \| \Delta_{x}\argsxz - \Delta_{x}(0, \boldzero) \|
   \end{align}
-  for some $(\zdx, \zdz) \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$ where $\LDelta$ is the Lipschitz constant of $\Delta(\zdx, \zdz)$.
+  for some $\argsxz \in \B_{\gamma}(0, \boldzero)$ with $\gamma \in \Rpd$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
   %
   Combining \eqref{eq:Veh-bound} and \eqref{eq:impact-Lipschitz} yields
   \begin{align}
     \nonumber
-    \Vex(\Pe^{\zdx}(\zdx, \zdz)) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \left\| \Delta_{\zdx}(\zdx, \zdz) - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe(\zdx, \zdz)} \LDelta^{2} \left\| (\zdx, \zdz) \right\|^{2}.
+    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \Delta_{\zdx}\argsxz - \Delta_{\zdx}(0, \boldzero) \right\|^{2}\\
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
   \end{align}
   %
   {\bf Using \lemref{lemma:TIe-bounds} and defining $\beta_{1}(\resclfparam) := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
   \begin{align}
-    \sigma \left( \Vex(\Pex(\zdx, \zdz)) - \Vex(\zdx) \right) \leq \sigma \left( (\beta_{1} - c_{1}) \| \zdx \|^{2} + \beta_{1} \| \zdz \|^{2} \right).
+    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq -c_{1} \| \zdx \|^{2} + \beta_{1} \| \argsxz \|^{2}.
   \end{align}
   which, in itself, is not a valid Lyapunov function as would be expected.
   %
   Hopefully, combining this with the other part will render the composite difference negative semi-definite.}
 
   Now the Lyapunv function from the converse theorem must be bounded.
+  %
+  By the definition of the \Poincare{} map, it is apparent that
+  \begin{align}
+    \Pe\argsxz = \floweps_{\TIe\argsxz}(\Delta\argsxz).
+  \end{align}
 \end{proof}
 
 \newpage
+
+\section{Bounding the Nominal Lyapunov Function}
+One way to approach the problem of bounding is to consider the flow,
+\begin{align}\
+  \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}(\Delta\argsxz) - \flow_{\TI(\zdx,\zdz)}(\Delta\argsxz) \| =}\\
+  \nonumber
+  & \hspace{2em} \Bigg\| \int_{0}^{\TIe(\Delta\argsxz)} \! f(\Delta\argsxz) + g(\Delta\argsxz) \, \mueps(\Delta\argsxz) \, d\tau\\ 
+\nonumber
+  & \hspace{12em} \mbox{} - \int_{0}^{\TI(\Delta\argsxz)} \! f(\Delta\argsxz) \, d\tau \Bigg\|.
+\end{align}
+{\bf How can this be translated into something meaningful?}
 
 \section*{Todo}
 The following is a list of pieces not yet finished:
