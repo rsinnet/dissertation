@@ -309,6 +309,31 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \end{align}
 \end{lemma}
 \begin{proof}
+  Begin by constructing an auxiliary time-to-impact function, $\TB$, which is Lipschitz continuous and independent of $\resclfparam$:
+  \begin{align}
+    \lefteqn{\TB :=}\\
+    \nonumber
+    &&\inf \{t \geq 0 : h(\flowtx(\Delta\argsxz) + \mu_{1}, \flowtz(\Delta\argsxz) + \mu_{2}) = 0 \}.
+  \end{align}
+  By this definition, it is easy to see that
+  \begin{align}
+    \TB(0, 0, \zdx, \zdz) = \TI(x, z).
+  \end{align}
+  Since $\|\argsmuxz\| = \|\mu_{1}\| + \|\mu_{2}\| + \|\zdx\| + \|\zdz\|$, it follows that
+  \begin{align}
+    | \TB\argsmuxz - \TI\argsxz| \leq \LB (\| \mu_{1} \| + \| \mu_{2} \|),
+  \end{align}
+  where $\LB$ is the local Lipschitz constant. Defining
+  \begin{align}
+    \mu_{1} &= x_{1}(t)\big|_{t = \TIe\argsxz} - x_{2}(t)\big|_{t = \TIe\argsxz}\\
+    \nonumber
+    \mu_{2} &= z_{1}(t)\big|_{t = \TIe\argsxz} - z_{2}(t)\big|_{t = \TIe\argsxz}
+  \end{align}
+  results in
+  \begin{align}
+    \TB\argsmuxz = \TIe\argsxz
+  \end{align}
+
   First, consider the case where $\TIe\argsxz < \TI\argsxz$:
   \begin{align}
     \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| =}\\
