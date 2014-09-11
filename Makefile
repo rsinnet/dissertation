@@ -7,7 +7,7 @@ EPS_TEX := $(wildcard ../figs/*.eps_tex)
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 EPS_NO_LATEX := $(filter-out $(subst .eps_tex,.eps,$(EPS_TEX)), $(EPS_ALL))
 
-all: $(PROJNAME).pdf cg-energy high-eps-stability proposal
+all: $(PROJNAME).pdf cg-energy es-stability proposal
 
 proposal:
 	$(MAKE) -C proposal
@@ -15,8 +15,8 @@ proposal:
 cg-energy:
 	$(MAKE) -C notes/ cg-energy.pdf
 
-high-eps-stability:
-	$(MAKE) -C notes/ high-eps-stability.pdf
+es-stability:
+	$(MAKE) -C notes/ es-stability.pdf
 
 outline: outline.pdf
 
@@ -43,7 +43,7 @@ sections/*.tex references.bib $(EPS_LATEX) $(EPS_NO_LATEX)
 figs/%.eps_latex: figs/%.eps_tex figs/%.eps figs/do_latex_subs.py figs/latex_subs.json
 	$(MAKE) -C figs/ $(notdir $@)
 
-.PHONY: clean all outline cg-energy high-eps-stability proposal
+.PHONY: clean all outline cg-energy es-stability proposal
 
 clean:
 	rm -f $(PROJNAME).pdf $(PROJNAME).ps $(PROJNAME).lot $(PROJNAME).lof \
