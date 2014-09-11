@@ -148,8 +148,8 @@ The energy of a mechanical system takes the form
 \end{align}
 Because $\M(\q)$ is invertible for mechanical systems, it never has determinant zero.
 
-\begin{definition}
-  For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \zdX \to \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} if there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all $0 < \resclfparam < 1$ and for all $\argsxz \in \zdX \times \zdZ$,
+\begin{definition}g
+ continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \zdX \to \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} if there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all $0 < \resclfparam < 1$ and for all $\argsxz \in \zdX \times \zdZ$,
   \begin{align}
     &c_{1} \nzdx \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx,\\
     \nonumber
@@ -440,10 +440,10 @@ Now \thmref{theorem:main-theorem} can be proven:
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
   \end{align}
   %
-  Using \lemref{lemma:TIe-bounds} and defining $\beta_{1}(\resclfparam) := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
+  Using \lemref{lemma:TIe-bounds} and defining $\beps= \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
   \begin{align}
     \label{eq:DVeX-bounds}
-    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \beta_{1} \nzdxz^{2} - c_{1} \nzdx^{2}.
+    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \beps \nzdxz^{2} - c_{1} \nzdx^{2}.
   \end{align}
 
   Now the Lyapunov function from the converse theorem must be bounded.
@@ -485,8 +485,41 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz \leq}\\
     \nonumber
-    &&\beta_{2} \nzdxz^{2} - r_{3} \nzdxz^{2} + \sigma (\beta_{1} \nzdxz^{2} - c_{1} \nzdx^{2}).
+    &&\beta_{2} \nzdxz^{2} - r_{3} \nzdxz^{2} + \sigma (\beps \nzdxz^{2} - c_{1} \nzdx^{2}).
   \end{align}
+  This can be written in matrix form as
+  \begin{align}
+    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz \leq}\\
+    \nonumber
+    &&\left(\begin{array}{c c}
+      \nzdx & \nzdz
+    \end{array}\right)
+    \Le
+    \left(\begin{array}{c}
+        \nzdx\\
+        \nzdz
+    \end{array}\right)
+  \end{align}
+  where
+  \begin{align}
+    \Le =
+    \left(\begin{array}{c c}
+      \beta_{2} - r_{3} + \sigma (\beps - c_{1}) & 0\\
+      0 & \beta_{2} - r_{3} + \sigma \beps
+    \end{array}\right)
+  \end{align}
+  The matrix is positive definite if
+  \begin{align}
+    \nonumber
+    \det \Le &= [\beta_{2} - r_{3} + \sigma \beps] [\beta_{2} - r_{3} + \sigma (\beps - c_{1})]\\
+    &> 0
+  \end{align}
+  and, therefore, it is required that
+  \begin{align}
+    \beta_{2} - r_{3} + \sigma \beps > \sigma c_{1}
+  \end{align}
+  For small enough $\resclfparam$, $\beps > c_{1}$, and then for large enough $\sigma$, $\sigma(\beps - c_{1}) > \beta_{2} - r_{3}$.\qedhere
+  
 \end{proof}
 
 
