@@ -138,7 +138,7 @@ Thus consider the coordinate transformation
 \begin{align}
   \zdx := E(\x) - \Eref.
 \end{align}
-By construction, the fixed point of the hybrid system occurs at $\argsxz = \boldzero$.
+By construction, the fixed point of the hybrid system occurs at $\argsxz = \argszero$.
 %
 
 \subsection{Diffeomorphism}
@@ -385,7 +385,7 @@ Now \thmref{theorem:main-theorem} can be proven:
     \nonumber
     \Vn(\P\argsxz) - \Vn\argsxz &\leq -r_{3} \nzdxz^{2},\\
     \nonumber
-    \| \Vn\argsxz - \Vn(\zdx', \zdz') \| &\leq\\
+    | \Vn\argsxz - \Vn(\zdx', \zdz') | &\leq\\
     \nonumber
     r_{4} \| \argsxz - &\argsxzprime \| \left( \nzdxz + \nzdxzprime\right)
   \end{align}
@@ -411,6 +411,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   Next, note that
   %
   \begin{align}
+    \label{eq:composite-lyap}
     \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz =}\\
     \nonumber
       &&\Vn(\Pe\argsxz) - \Vn\argsxz + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).
@@ -441,6 +442,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   Using \lemref{lemma:TIe-bounds} and defining $\beta_{1}(\resclfparam) := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
   \begin{align}
+    \label{eq:DVeX-bounds}
     \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \beta_{1} \nzdxz^{2} - c_{1} \nzdx^{2}.
   \end{align}
 
@@ -448,6 +450,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   As a result of \lemref{lemma:hard-one} and the assumption of exponential stability about the origin, it follows that
   \begin{align}
+    \label{eq:Pe-P-bounds}
     &\| \Pe\argsxz - \P\argsxz \| \leq A \nzdxz,\\
     \nonumber
     &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\argszero\|,\\
@@ -460,19 +463,25 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   Then, using \eqref{eq:lyap-cond-nom},
   \begin{align}
-    \lefteqn{\| \Vn(\Pe\argsxz) - \Vn(\P\argsxz) \| \leq}\\
+    \lefteqn{| \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq}\\
     \nonumber
-    &&r_{4} \| \Pe\argsxz - \P\argsxz \| \left( \P\nzdxz + \Pe\nzdxz\right)
+    &&r_{4} \| \Pe\argsxz - \P\argsxz \| \left( \|\P\argsxz\| + \|\Pe\argsxz\| \right).
   \end{align}
-
-{\bf We want to show that}
-\begin{align}
-  \lefteqn{\Vn(\Pe\argsxz) - \Vn\argsxz }\\
-  \nonumber
-  &= \Vn(\Pe\argsxz) - \Vn(\P\argsxz) + \Vn(\P\argsxz) - \Vn\argsxz\\
-  \nonumber
-  &\leq \Vn(\Pe\argsxz) - \Vn(\P\argsxz) - r_{3} \nzdxz
-\end{align}
+  Applying \eqref{eq:Pe-P-bounds} to the above results in
+  \begin{align}
+    \label{eq:Pe-P-beta}
+    | \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq \beta_{2} \nzdxz^{2}
+  \end{align}
+  where, for simplicity, $\beta_{2} := r_{4} A (N \alpha + A  + \LP)$.
+  %
+  Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and \eqref{eq:Pe-P-beta} yields
+  \begin{align}
+    \lefteqn{\Vn(\Pe\argsxz) - \Vn\argsxz }\\
+    \nonumber
+    &= \Vn(\Pe\argsxz) - \Vn(\P\argsxz) + \Vn(\P\argsxz) - \Vn\argsxz\\
+    \nonumber
+    &\leq \beta_{2} \nzdxz^{2} - r_{3} \nzdxz.
+  \end{align}
 
 \end{proof}
 
