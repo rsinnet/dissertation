@@ -504,22 +504,17 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \Le =
     \left(\begin{array}{c c}
-      \beta_{2} - r_{3} + \sigma (\beps - c_{1}) & 0\\
-      0 & \beta_{2} - r_{3} + \sigma \beps
+      \beta_{2} - r_{3} + \sigma (\beps - c_{1}) & \beta_{2} - r_{3} + \sigma \beps\\
+      \beta_{2} - r_{3} + \sigma \beps & \beta_{2} - r_{3} + \sigma \beps
     \end{array}\right)
   \end{align}
   The matrix is positive definite if
   \begin{align}
     \nonumber
-    \det \Le &= [\beta_{2} - r_{3} + \sigma \beps] [\beta_{2} - r_{3} + \sigma (\beps - c_{1})]\\
-    &> 0
+    \lefteqn{0 < \det \Le = - [\beta_{2} - r_{3} + \sigma \beps]^2}\\
+    && \mbox{} + [\beta_{2} - r_{3} + \sigma \beps] [\beta_{2} - r_{3} + \sigma (\beps - c_{1})].
   \end{align}
-  and, therefore, it is required that
-  \begin{align}
-    \beta_{2} - r_{3} + \sigma \beps > \sigma c_{1}
-  \end{align}
-  For small enough $\resclfparam$, $\beps > c_{1}$, and then for large enough $\sigma$, $\sigma(\beps - c_{1}) > \beta_{2} - r_{3}$.\qedhere
-  
+  {\bf This matrix is NEVER positive definite.}
 \end{proof}
 
 
