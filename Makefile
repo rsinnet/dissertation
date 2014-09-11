@@ -15,9 +15,6 @@ proposal:
 cg-energy:
 	$(MAKE) -C notes/ cg-energy.pdf
 
-es-stability:
-	$(MAKE) -C notes/ es-stability.pdf
-
 high-eps-stability:
 	$(MAKE) -C notes/ high-eps-stability.pdf
 

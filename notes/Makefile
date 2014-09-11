@@ -1,6 +1,6 @@
 PDFLATEX_CMD=pdflatex -interaction=nonstopmode
 
-all: es-stability.pdf cg-energy.pdf high-eps-stability.pdf
+all: cg-energy.pdf high-eps-stability.pdf
 
 # Dependencies go here so they appear in the hash
 %.latex: %.tex ../rsinnet.sty
