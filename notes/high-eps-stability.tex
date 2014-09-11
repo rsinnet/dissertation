@@ -379,15 +379,17 @@ Now \thmref{theorem:main-theorem} can be proven:
 \begin{proof} [Proof of \thmref{theorem:main-theorem}]
   By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}(0) \cap \S \to \Rnn$ satisfying
   %
-  \begin{eqnarray}
+  \begin{align}
     \label{eq:lyap-cond-nom}
-    &r_{1} \nzdxz^{2} \leq \Vn\argsxz \leq r_{2} \nzdxz^2,\\
+    r_{1} \nzdxz^{2} \leq \Vn\argsxz &\leq r_{2} \nzdxz^2,\\
     \nonumber
-    &\Vn(\P\argsxz) - \Vn\argsxz \leq -r_{3} \nzdxz^{2},\\
+    \Vn(\P\argsxz) - \Vn\argsxz &\leq -r_{3} \nzdxz^{2},\\
     \nonumber
-    &\| \Vn\argsxz - \Vn(\zdx', \zdz') \| \leq r_{4} \| \zdz - \zdz' \| \left( \nzdz + \|\zdz'\|\right)
-  \end{eqnarray}
-  for some $r_{1}, r_{2}, r_{3} \in \Rpd$.
+    \| \Vn\argsxz - \Vn(\zdx', \zdz') \| &\leq\\
+    \nonumber
+    r_{4} \| \argsxz - &\argsxzprime \| \left( \nzdxz + \nzdxzprime\right)
+  \end{align}
+  for some $r_{1}, r_{2}, r_{3}, r_{4} \in \Rpd$.
   %
   In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \zdX \to \Rnn$.
   %
@@ -451,11 +453,16 @@ Now \thmref{theorem:main-theorem} can be proven:
     &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\argszero\|,\\
     \nonumber
     & \hspace{4.4em} \leq A \nzdxz  + \LP\nzdxz\\
+    \nonumber
     &\| \P\argsxz \| \leq N \alpha \nzdxz,
   \end{align}
-  By the definition of the \Poincare{} map, it is apparent that
+  where $\LP$ is the Lipschitz constant for $\P$.
+  %
+  Then, using \eqref{eq:lyap-cond-nom},
   \begin{align}
-    \Pe\argsxz = \floweps_{\TIe\argsxz}(\Delta\argsxz).
+    \lefteqn{\| \Vn(\Pe\argsxz) - \Vn(\P\argsxz) \| \leq}\\
+    \nonumber
+    &&r_{4} \| \Pe\argsxz - \P\argsxz \| \left( \P\nzdxz + \Pe\nzdxz\right)
   \end{align}
 
 {\bf We want to show that}
