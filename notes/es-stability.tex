@@ -309,9 +309,9 @@ In addition to the preceding lemma, some bounds must be established in order to 
     \nonumber
     \| \TIe\argsxz - \TI\argsxz \| &\leq \LTI \nzdxz,\\
     \nonumber
-    \| \Pe\argsxz - \P\argsxz \| &\leq A \nzdxz,
+    \| \Pe\argsxz - \P\argsxz \| &\leq \Ae \nzdxz,
   \end{align}
-  where $\LTI$ and $A$ (not Lipschitz; see Thm 3.4, Khalil).
+  where $\LTI$ and $\Ae$ (not Lipschitz; see Thm 3.4, Khalil).
 \end{lemma}
 \begin{proof}
   Begin by constructing an auxiliary time-to-impact function, $\TB$, which is Lipschitz continuous and independent of $\resclfparam$:
@@ -440,10 +440,10 @@ Now \thmref{theorem:main-theorem} can be proven:
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
   \end{align}
   %
-  Using \lemref{lemma:TIe-bounds} and defining $\beps= \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
+  Using \lemref{lemma:TIe-bounds} and defining $\bepsone= \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
   \begin{align}
     \label{eq:DVeX-bounds}
-    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \beps \nzdxz^{2} - c_{1} \nzdx^{2}.
+    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \bepsone \nzdxz^{2} - c_{1} \nzdx^{2}.
   \end{align}
 
   Now the Lyapunov function from the converse theorem must be bounded.
@@ -451,11 +451,11 @@ Now \thmref{theorem:main-theorem} can be proven:
   As a result of \lemref{lemma:hard-one} and the assumption of exponential stability about the origin, it follows that
   \begin{align}
     \label{eq:Pe-P-bounds}
-    &\| \Pe\argsxz - \P\argsxz \| \leq A \nzdxz,\\
+    &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxz,\\
     \nonumber
     &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\argszero\|,\\
     \nonumber
-    & \hspace{4.4em} \leq A \nzdxz  + \LP\nzdxz\\
+    & \hspace{4.4em} \leq \Ae \nzdxz  + \LP\nzdxz\\
     \nonumber
     &\| \P\argsxz \| \leq N \alpha \nzdxz,
   \end{align}
@@ -470,22 +470,22 @@ Now \thmref{theorem:main-theorem} can be proven:
   Applying \eqref{eq:Pe-P-bounds} to the above results in
   \begin{align}
     \label{eq:Pe-P-beta}
-    | \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq \beta_{2} \nzdxz^{2}
+    | \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq \bepstwo \nzdxz^{2}
   \end{align}
-  where, for simplicity, $\beta_{2} := r_{4} A (N \alpha + A  + \LP)$.
+  where, for simplicity, $\bepstwo := r_{4} \Ae (N \alpha + \Ae  + \LP)$.
   %
   \begin{align}
     \lefteqn{\Vn(\Pe\argsxz) - \Vn\argsxz }\\
     \nonumber
     &= \Vn(\Pe\argsxz) - \Vn(\P\argsxz) + \Vn(\P\argsxz) - \Vn\argsxz\\
     \nonumber
-    &\leq \beta_{2} \nzdxz^{2} - r_{3} \nzdxz^{2}.
+    &\leq \bepstwo \nzdxz^{2} - r_{3} \nzdxz^{2}.
   \end{align}
   Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and \eqref{eq:Pe-P-beta} yields
   \begin{align}
     \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz \leq}\\
     \nonumber
-    &&\beta_{2} \nzdxz^{2} - r_{3} \nzdxz^{2} + \sigma (\beps \nzdxz^{2} - c_{1} \nzdx^{2}).
+    &&\bepstwo \nzdxz^{2} - r_{3} \nzdxz^{2} + \sigma (\bepsone \nzdxz^{2} - c_{1} \nzdx^{2}).
   \end{align}
   This can be written in matrix form as
   \begin{align}
@@ -504,17 +504,24 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \Le =
     \left(\begin{array}{c c}
-      \beta_{2} - r_{3} + \sigma (\beps - c_{1}) & \beta_{2} - r_{3} + \sigma \beps\\
-      \beta_{2} - r_{3} + \sigma \beps & \beta_{2} - r_{3} + \sigma \beps
+      \bepstwo - r_{3} + \sigma (\bepsone - c_{1}) & \bepstwo - r_{3} + \sigma \bepsone\\
+      \bepstwo - r_{3} + \sigma \bepsone & \bepstwo - r_{3} + \sigma \bepsone
     \end{array}\right)
   \end{align}
   The matrix is positive definite if
   \begin{align}
+    \lefteqn{0 < \det \Le = - [\bepstwo - r_{3} + \sigma \bepsone]^2}\\
     \nonumber
-    \lefteqn{0 < \det \Le = - [\beta_{2} - r_{3} + \sigma \beps]^2}\\
-    && \mbox{} + [\beta_{2} - r_{3} + \sigma \beps] [\beta_{2} - r_{3} + \sigma (\beps - c_{1})].
+    && \mbox{} + [\bepstwo - r_{3} + \sigma \bepsone] [\bepstwo - r_{3} + \sigma (\bepsone - c_{1})].
   \end{align}
-  {\bf This matrix is NEVER positive definite.}
+  Since, through simplification,
+  \begin{align}
+    \det \Le = -c_{1} (\bepstwo - r_{3} + \sigma \bepsone),
+  \end{align}
+  stability is only achieved if
+  \begin{align*}
+    &r_{3} > \bepstwo + \sigma \bepsone. \qedhere
+  \end{align*}
 \end{proof}
 
 
