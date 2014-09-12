@@ -440,10 +440,12 @@ Now \thmref{theorem:main-theorem} can be proven:
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
   \end{align}
   %
-  Using \lemref{lemma:TIe-bounds} and defining $\bepsone= \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ results in
+  Using \lemref{lemma:TIe-bounds} and defining $\bepsone := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ yields
   \begin{align}
     \label{eq:DVeX-bounds}
-    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \bepsone \nzdxz^{2} - c_{1} \nzdx^{2}.
+    \lefteqn{\Vex(\Pex\argsxz) - \Vex(\zdx) \leq}\\
+    \nonumber
+    &&\bepsone \nzdxz^{2} - \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2}.
   \end{align}
 
   Now the Lyapunov function from the converse theorem must be bounded.
@@ -465,7 +467,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \lefteqn{| \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq}\\
     \nonumber
-    &&r_{4} \| \Pe\argsxz - \P\argsxz \| \left( \|\P\argsxz\| + \|\Pe\argsxz\| \right).
+    &&r_{4} \| \Pe\argsxz - \P\argsxz \| \left( \|\Pe\argsxz\| + \|\P\argsxz\| \right).
   \end{align}
   Applying \eqref{eq:Pe-P-bounds} to the above results in
   \begin{align}
@@ -481,47 +483,41 @@ Now \thmref{theorem:main-theorem} can be proven:
     \nonumber
     &\leq \bepstwo \nzdxz^{2} - r_{3} \nzdxz^{2}.
   \end{align}
-  Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and \eqref{eq:Pe-P-beta} yields
+  {\bf What about the absolute value??} Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and \eqref{eq:Pe-P-beta} yields
   \begin{align}
-    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz \leq}\\
-    \nonumber
-    &&\bepstwo \nzdxz^{2} - r_{3} \nzdxz^{2} + \sigma (\bepsone \nzdxz^{2} - c_{1} \nzdx^{2}).
-  \end{align}
-  This can be written in matrix form as
-  \begin{align}
-    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz \leq}\\
-    \nonumber
-    &&\left(\begin{array}{c c}
-      \nzdx & \nzdz
-    \end{array}\right)
+    \VP(\Pe\argsxz) - \VP\argsxz \leq
+    \left(\!\!\begin{array}{c c}
+      \nzdx\!\! & \!\!\nzdz
+    \end{array}\!\!\right)
     \Le
-    \left(\begin{array}{c}
+    \left(\!\!\!\begin{array}{c}
         \nzdx\\
         \nzdz
-    \end{array}\right)
+    \end{array}\!\!\!\right)
   \end{align}
   where
   \begin{align}
-    \Le =
-    \left(\begin{array}{c c}
-      \bepstwo - r_{3} + \sigma (\bepsone - c_{1}) & \bepstwo - r_{3} + \sigma \bepsone\\
+    \lefteqn{\Le =}\\
+    \nonumber
+    &&\left(\begin{array}{c c}
+      \bepstwo - r_{3} + \sigma (\bepsone - \frac{c_{2}}{\resclfparam^{2}}) & \bepstwo - r_{3} + \sigma \bepsone\\
       \bepstwo - r_{3} + \sigma \bepsone & \bepstwo - r_{3} + \sigma \bepsone
     \end{array}\right)
   \end{align}
   The matrix is positive definite if
   \begin{align}
-    \lefteqn{0 < \det \Le = - [\bepstwo - r_{3} + \sigma \bepsone]^2}\\
-    \nonumber
-    && \mbox{} + [\bepstwo - r_{3} + \sigma \bepsone] [\bepstwo - r_{3} + \sigma (\bepsone - c_{1})].
+    \det \Le = -\sigma\frac{c_{2}}{\resclfparam^{2}} (\bepstwo - r_{3} + \sigma \bepsone) > 0,
   \end{align}
-  Since, through simplification,
+  and thus stability is achieved if
   \begin{align}
-    \det \Le = -c_{1} (\bepstwo - r_{3} + \sigma \bepsone),
+    &\bepstwo + \sigma \bepsone < r_{3}.
   \end{align}
-  stability is only achieved if
-  \begin{align*}
-    &r_{3} > \bepstwo + \sigma \bepsone. \qedhere
-  \end{align*}
+  Examining the limits, it becomes apparent that
+  \begin{align}
+    \nonumber
+    \lim_{\resclfparam \to \infty} \bepsone = 0, &&\lim_{\resclfparam \to \infty} \bepstwo &= 0
+  \end{align}
+  and thus for small enough values of $\sigma > 0$ and large enough values of $\resclfparam$, stability is maintained. \qedhere
 \end{proof}
 
 
