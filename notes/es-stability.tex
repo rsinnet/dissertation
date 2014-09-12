@@ -1,6 +1,6 @@
 \documentclass[twocolumn]{article}
 
-\usepackage{amsmath,amssymb,amsthm,mathrsfs}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs,bigints}
 \usepackage[top=1.25in, bottom=1.25in, left=.75in, right=.75in]{geometry}
 
 \usepackage[english]{babel}
@@ -372,6 +372,20 @@ In addition to the preceding lemma, some bounds must be established in order to 
     \nonumber
     & \hspace{10em} \mbox{} + \int_{\TI\argsxz}^{\TIe\argsxz} \! \left[\!\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\!\right] d\tau \Bigg\|.
   \end{align}
+
+Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
+\begin{align}
+  \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| \leq}\\
+  \nonumber
+  & \hspace{2em} \bigintsss_{0}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\right) \, \mueps\argstxz \, \bigg\| d\tau\\
+  \nonumber
+  & \hspace{8em} \mbox{} + \bigintsss_{\TI\argsxz}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\right) \bigg\| \, d\tau.
+\end{align}
+
+{\bf If we can show that}
+\begin{align*}
+  \| \TIe\argsxz - \TI\argsxz \| \leq \LTIeps \nzdxz,
+\end{align*}
 
 \end{proof}
 
