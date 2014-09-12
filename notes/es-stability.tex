@@ -455,9 +455,9 @@ Now \thmref{theorem:main-theorem} can be proven:
     \label{eq:Pe-P-bounds}
     &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxz,\\
     \nonumber
-    &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\argszero\|,\\
+    &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\argszero\|\\
     \nonumber
-    & \hspace{4.4em} \leq \Ae \nzdxz  + \LP\nzdxz\\
+    & \hspace{4.4em} \leq \Ae \nzdxz  + \LP\nzdxz,\\
     \nonumber
     &\| \P\argsxz \| \leq N \alpha \nzdxz,
   \end{align}
@@ -498,7 +498,7 @@ Now \thmref{theorem:main-theorem} can be proven:
         \nzdz
     \end{array}\!\!\!\right)
   \end{align}
-  where
+  with
   \begin{align}
     \lefteqn{\Le =}\\
     \nonumber
@@ -507,11 +507,11 @@ Now \thmref{theorem:main-theorem} can be proven:
       r_{3} - \bepstwo - \sigma \bepsone & r_{3} - \bepstwo - \sigma \bepsone
     \end{array}\right).
   \end{align}
-  The matrix is positive definite if
+  The matrix $\Le$ is positive definite if
   \begin{align}
     \det \Le = \sigma\frac{c_{2}}{\resclfparam^{2}} (r_{3} - \bepstwo - \sigma \bepsone) > 0,
   \end{align}
-  and thus stability is achieved if
+  and thus stability is achieved when
   \begin{align}
     &\bepstwo + \sigma \bepsone < r_{3}.
   \end{align}
