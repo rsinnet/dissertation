@@ -311,9 +311,43 @@ In addition to the preceding lemma, some bounds must be established in order to 
     \nonumber
     \| \Pe\argsxz - \P\argsxz \| &\leq \Ae \nzdxz,
   \end{align}
-  where $\LTI$ and $\Ae$ (not Lipschitz; see Thm 3.4, Khalil).
+  where $\LTI$ and $\Ae$ (not Lipschitz).
 \end{lemma}
 \begin{proof}
+  The solution to the QP is given by the min-norm control law:
+  \begin{align}
+    \mueps\argsxz = -\frac{\psi_{0}\psi_{1}}{\psi_{1}^{T}\psi_{1}},
+  \end{align}
+  with
+  \begin{align}
+    \psi_{1} := \cancelto{0}{\Lie{f}} \Ve\argsxz + \frac{c_{3}}{\resclfparam}, &&
+    \psi_{2} := \left( \Lie{g} \Ve \right)^{T},
+  \end{align}
+  where $\Lie{f} \Ve\argsxz \equiv 0$ by the choice of $\Ve\argsxz$ as energy.
+  %
+  Since energy does not change by the natural dynamics,
+  \begin{align}
+    \mueps\argsxz = - \frac{\frac{c_{3}}{\epsilon} \Ve\argsxz g^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} g\argsxz g^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}.
+  \end{align}
+  If, in addition, $g$ is full rank and takes values in a compact set for states near the orbit, i.e., $g\argsxz \in \mathcal{C} \setminus \{\boldzero\}$ and $\| g\argsxz \| \leq \eta$, then
+  \begin{align}
+    \| \mueps\argsxz \|
+    &\leq \frac{\frac{c_{2}c_{3}}{\epsilon^3} \|x\|^{2} \left\| \argsxz g^{T}\argsxz
+      \left(\begin{array}{c}
+        \zdx\\
+        \boldzero
+      \end{array}\right)\right\|}{\left\|
+      \left(\begin{array}{c c}
+        \zdx & \boldzero
+      \end{array}\right) g\argsxz g^{T}\argsxz
+      \left(\begin{array}{c}
+        \zdx\\
+        \boldzero
+      \end{array}\right) \right\|}\\
+    &\leq \frac{\gamma}{\epsilon} \| \zdx \|.
+  \end{align}
+  
+  
   Begin by constructing an auxiliary time-to-impact function, $\TB$, which is Lipschitz continuous and independent of $\resclfparam$:
   \begin{align}
     \lefteqn{\TB :=}\\
