@@ -297,8 +297,6 @@ Define the domain and switching surface of the system:
 \end{align}
 Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\flow_{t}\argsxz$ represent a flow of the vector field for time $t$ starting from state $\argsxz$.
 %
-For the unshaped system, the \Poincare{} map can be seen to be $\limeps \Pe\argsxz = \P\argsxz$.
-%
 The \Poincare{} map has a form like
 \begin{align}
   \Pe\argsxz = \floweps_{\TIe\argsxz}(\Delta\argsxz),
@@ -345,7 +343,15 @@ Now, consider the following bounds on the time-to-impact functions:
     \| \TI(\Deltaxz) - \Tst \| &\leq \LTI \nDeltaxz,\\
     \| \TIe(\Deltaxz) - \Tst \| &\leq \LTIeps \nDeltaxz.
   \end{align}
+  First, note that
+  \begin{align}
+    \TIe(\Deltaxz) - &\TI(\Deltaxz)\\
+    \nonumber
+    &= \TIe(\Deltaxz) - \Tst - \left(\TI(\Deltaxz) - \Tst\right)
+  \end{align}
+  %
   Using these properties,
+  %
   \begin{align}
     \| \TIe(\Deltaxz) - &\TI(\Deltaxz) \|\\
     \nonumber
@@ -355,9 +361,17 @@ Now, consider the following bounds on the time-to-impact functions:
     \nonumber
     &\leq \LTIeps \nDeltaxz + \LTI \nDeltaxz\\
     \nonumber
-    &\leq \LDelta \left(\LTIeps + \LTI\right) \nzdxz .\\
+    &\leq \LDelta \left(\LTIeps + \LTI\right) \nzdxz\\
     \nonumber
     &\leq \ATIe \nzdxz. &\qedhere
+  \end{align}
+  {\bf Need to show that}
+  \begin{align}
+    &\leq \LDelta \left\| \LTIeps - \LTI\right\| \nzdxz\\
+  \end{align}
+  {\bf and that}
+  \begin{align}
+    \limeps \LTIeps = \LTI.
   \end{align}
 \end{proof}
 %
