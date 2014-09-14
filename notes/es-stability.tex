@@ -344,6 +344,8 @@ Now, consider the following bounds on the time-to-impact functions:
     \| \TIe(\Deltaxz) - \Tst \| &\leq \LTIeps \nDeltaxz.
   \end{align}
   First, note that
+  %
+  %
   \begin{align}
     \TIe(\Deltaxz) - &\TI(\Deltaxz)\\
     \nonumber
@@ -365,11 +367,17 @@ Now, consider the following bounds on the time-to-impact functions:
     \nonumber
     &\leq \ATIe \nzdxz. &\qedhere
   \end{align}
+
   {\bf Need to show that}
+  %
   \begin{align}
-    &\leq \LDelta \left\| \LTIeps - \LTI\right\| \nzdxz\\
+    \| \TIe(\Deltaxz) - &\TI(\Deltaxz) \|\\
+    \nonumber
+    &\leq \LDelta \left\| \LTIeps - \LTI\right\| \nzdxz
   \end{align}
+  %
   {\bf and that}
+  %
   \begin{align}
     \limeps \LTIeps = \LTI.
   \end{align}
