@@ -355,7 +355,7 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \begin{align}
     \mueps\argsxz = - \frac{\frac{c_{3}}{\resclfparam} \Ve\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} \bigG\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}.
   \end{align}
-  If, in addition, $\bigG$ is full rank and takes values in a compact set for states near the orbit, i.e., $\bigG\argsxz \in \mathcal{C} \setminus \{\boldzero\}$ and $d_{1} \| \bigG\argsxz \| \leq d_{z2}$, then
+  If, in addition, $\bigG$ is full rank and takes values in a compact set for states near the orbit, i.e., $\bigG\argsxz \in \mathcal{C} \setminus \{\boldzero\}$ and $d_{1} \leq \| \bigG\argsxz \| \leq d_{2}$, then
   \begin{align}
     \nonumber
     \| \mueps\argsxz \|
@@ -390,52 +390,7 @@ In addition to the preceding lemma, some bounds must be established in order to 
   
   {\bf We can probably do this for more general situations using \eqref{eq:dVedx-bounds} but I'm not sure how to handle zero dynamics with dimension greater than one because of the terms in the denominator.}
 
-  Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
-  %
-  \begin{align}
-    \label{eq:flow-bound-comp}
-    \lefteqn{\left\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \right\| \leq}\\
-    \nonumber
-    && \int_{\TI\argsxz}^{\TIe\argsxz} \hspace{-2em} \left\| \bigF\argsxz \right\| \, d\tau
-      + \int_{0}^{\TIe\argsxz} \hspace{-2em} \left\| \bigG\argsxz \, \mueps\argstxz \, \right\| d\tau.
-  \end{align}
-  %
-  For simplicity, consider the two terms separately.
-  %
-  If $\bigF$ is bounded around the limit cycle, then
-  \begin{align}
-    \nonumber
-    \int_{\TI\argsxz}^{\TIe\argsxz} \! \left\| \bigF\argsxz \right\| \, d\tau
-    &\leq \supF \int_{\TI\argsxz}^{\TIe\argsxz} d\tau\\
-    \nonumber
-    &\leq \left.\supF \tau\right|_{\tau=\TI\argsxz}^{\TIe\argsxz}\\
-    \nonumber
-    &\leq \supF \left(\TIe\argsxz - \TI\argsxz\right)\\
-    \label{eq:F-bound}
-    &\leq \supF \ATIe \nzdxz.
-  \end{align}
-
-  The other term is bounded using \eqref{eq:mueps-bounds} and then \eqref{eq:xt-bounds}:
-  \begin{align}
-    \nonumber
-    \int_{0}^{\TIe\argsxz} \! &\left\| \bigG \, \mueps\argstxz \, \right\| d\tau\\
-    \nonumber
-    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \int_{0}^{\TIe\argsxz} \! \nzdxt d\tau\\
-    \nonumber
-    &\leq \frac{c_{2}^{\frac{3}{2}}c_{3}}{c_{1}^{\frac{1}{2}}\resclfparam^{4}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \|\zdx(0)\| \int_{0}^{\TIe\argsxz} \! \left\|e^{-\frac{c_{3}}{2\resclfparam} \tau} \right\| d\tau\\
-    \label{eq:G-bound}
-    &\leq \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \left\|\zdx(0)\right\| \, \left. e^{-\frac{c_{3}}{2\resclfparam} \tau} \right|^{0}_{\tau=\TIe\argsxz}.
-  \end{align}
-  %
-  Applying the reset map before integration results in
-  %
-  \begin{align}
-    \label{eq:flow-bound-foo-1}
-    \lefteqn{\int_{0}^{\TIe\argsxz} \! \left\| \bigG \, \mueps\argstxz \, \right\| d\tau \leq}\\
-    \nonumber
-    &&\frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz - \DeltaX\argszero\right\|.
-  \end{align}
-  Since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \argszero$ and because $\DeltaX\argszero = 0$, it follows that
+  Next, since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \argszero$ and because $\DeltaX\argszero = 0$, it follows that
   \begin{align}
     \label{eq:impact-Lipschitz}
     \LDelta \nzdxz &\geq \| \Delta\argsxz - \Delta\argszero \|\\
@@ -443,6 +398,56 @@ In addition to the preceding lemma, some bounds must be established in order to 
     &\geq \| \DeltaX\argsxz - \DeltaX\argszero \|
   \end{align}
   for some $\argsxz \in \B_{\gamma}\argszero$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
+
+  Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
+  %
+  \begin{align}
+    \label{eq:flow-bound-comp}
+    \lefteqn{\left\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \right\| \leq}\\
+    \nonumber
+    & \hspace{2em} \int_{\TIDelta}^{\TIeDelta} \hspace{-2.5em} \left\| \bigF\argsxztau \right\| \, d\tau\\
+    \nonumber
+    & \hspace{4em} \mbox{} + \int_{0}^{\TIeDelta} \hspace{-2.5em} \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau.
+  \end{align}
+  %
+  For simplicity, consider the two terms separately.
+  %
+  If $\bigF$ is bounded around the limit cycle, then
+  \begin{align}
+    \nonumber
+    \int_{\TIDelta}^{\TIeDelta)} \! \hspace{-1em} \left\| \bigF\argsxz \right\| \, d\tau
+    &\leq \supF \int_{\TIDelta}^{\TIeDelta} d\tau\\
+    \nonumber
+    &\leq \left.\supF \tau\right|_{\tau=\TIDelta}^{\TIeDelta}\\
+    \nonumber
+    &\leq \supF \left(\TIeDelta - \TIDelta\right)\\
+    \nonumber
+    &\leq \supF \ATIe \left\| \Deltaxz - \Delta\argszero \right\|\\
+    \label{eq:F-bound}
+    &\leq \supF \LDelta \ATIe \nzdxz.
+  \end{align}
+
+
+  The other term is bounded using \eqref{eq:mueps-bounds} and then \eqref{eq:xt-bounds}:
+  \begin{align}
+    \nonumber
+    \int_{0}^{\TIe\argsxz} \! &\left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau\\
+    \nonumber
+    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \int_{0}^{\TIeDelta} \! \nzdxt d\tau\\
+    \nonumber
+    &\leq \frac{c_{2}^{\frac{3}{2}}c_{3}}{c_{1}^{\frac{1}{2}}\resclfparam^{4}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \|\zdx(0)\| \int_{0}^{\TIeDelta} \! \left\|e^{-\frac{c_{3}}{2\resclfparam} \tau} \right\| d\tau\\
+    \label{eq:G-bound}
+    &\leq \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \left\|\zdx(0)\right\| \, \left. e^{-\frac{c_{3}}{2\resclfparam} \tau} \right|^{0}_{\tau=\TIeDelta}.
+  \end{align}
+  %
+  Applying the reset map before integration results in
+  %
+  \begin{align}
+    \label{eq:flow-bound-foo-1}
+    \lefteqn{\int_{0}^{\TIeDelta} \! \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau \leq}\\
+    \nonumber
+    &&\frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz - \DeltaX\argszero\right\|.
+  \end{align}
   %
   Finally, combining \eqref{eq:flow-bound-comp}, \eqref{eq:F-bound}, \eqref{eq:G-bound}, and \eqref{eq:impact-Lipschitz} results in
   \begin{align}
@@ -452,7 +457,7 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \begin{align}
     \lefteqn{\Ae :=} \\
     \nonumber
-    &&\LDelta \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) + \supF \ATIe. &\qedhere
+    &&\LDelta \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) + \supF \LDelta \ATIe. &\qedhere
   \end{align}
 \end{proof}
 
