@@ -365,16 +365,13 @@ In addition to the preceding lemma, some bounds must be established in order to 
         \boldzero
       \end{array}\right) \right\|}\\
     \nonumber
-    &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^{3}} \nzdx^{2} \left\| \bigG^{T}\argsxz
-      \left(\begin{array}{c}
-        \zdx\\
-        \boldzero
-      \end{array}\right)\right\|}{\left\|
-      \bigG_{i,i}\argsxz \bigG_{i,i}\argsxz \zdx^{2}\right\|}\\
+    &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^{3}} \nzdx^{2} \left\| \bigG\argsxz
+      \, \zdx \right\|}{\left\|
+      \sum_{i} \bigG_{i,i}^{2}\argsxz \right\| \nzdx^{2}}\\
     &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambda_{\max}}{\lambda_{\min}^{2}} \nzdx,
   \end{align}
   %
-  where Einstein notation has been used and
+  where
   \begin{align}
     \lambda_{\max} &:= \sup_{\ell \in \R} \{ \ell = \lambdamax\bigG\argsxz : \argsxz \in \stabletube \},\\
     \lambda_{\min} &:= \inf_{\ell \in \R} \{ \ell = \lambdamin\bigG\argsxz : \argsxz \in \stabletube \}.
