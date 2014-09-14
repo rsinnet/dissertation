@@ -399,11 +399,13 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \end{align}
   for some $\argsxz \in \B_{\gamma}\argszero$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
 
-  Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
+  Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$.
+  %
+  For states $\argsxz \in \S$,
   %
   \begin{align}
     \label{eq:flow-bound-comp}
-    \lefteqn{\left\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \right\| \leq}\\
+    \lefteqn{\left\| \Pe\argsxz - \P\argsxz \right\| \leq}\\
     \nonumber
     & \hspace{2em} \int_{\TIDelta}^{\TIeDelta} \hspace{-2.5em} \left\| \bigF\argsxztau \right\| \, d\tau\\
     \nonumber
@@ -415,7 +417,7 @@ In addition to the preceding lemma, some bounds must be established in order to 
   If $\bigF$ is bounded around the limit cycle, then
   \begin{align}
     \nonumber
-    \int_{\TIDelta}^{\TIeDelta)} \! \hspace{-1em} \left\| \bigF\argsxz \right\| \, d\tau
+    \int_{\TIDelta}^{\TIeDelta)} \! \hspace{-3em} \left\| \bigF\argsxztau \right\| \, d\tau
     &\leq \supF \int_{\TIDelta}^{\TIeDelta} d\tau\\
     \nonumber
     &\leq \left.\supF \tau\right|_{\tau=\TIDelta}^{\TIeDelta}\\
@@ -451,7 +453,7 @@ In addition to the preceding lemma, some bounds must be established in order to 
   %
   Finally, combining \eqref{eq:flow-bound-comp}, \eqref{eq:F-bound}, \eqref{eq:G-bound}, and \eqref{eq:impact-Lipschitz} results in
   \begin{align}
-    \left\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \right\| \leq \Ae \! \nzdxz,
+    \left\| \Pe\argsxz - \P\argsxz \right\| \leq \Ae \! \nzdxz,
   \end{align}
   where
   \begin{align}
