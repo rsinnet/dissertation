@@ -62,7 +62,11 @@
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\lambdamax}{\lambda_{\mathrm{max}}}
 \DeclareMathOperator*{\lambdamin}{\lambda_{\mathrm{min}}}
-\DeclareMathOperator*{\lambdaminsq}{\lambda_{\mathrm{min}}^{2}}
+
+\newcommand{\lambdamaxG}{\lambda_{\mathrm{max}}}
+\newcommand{\lambdaminG}{\lambda_{\mathrm{min}}}
+
+\newcommand{\supF}{\Upsilon}
 
 % partial derivative
 \newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
@@ -130,10 +134,12 @@
 \newcommand{\argstxzi}[2]{(\zdx_{#2}(#1), \zdz_{#2}(#1))}
 \newcommand{\argsxzprime}{(\zdx', \zdz')}
 
-\newcommand{\nzdxz}{\|\argsxz\|}
-\newcommand{\nzdx}{\|\zdx\|}
-\newcommand{\nzdz}{\|\zdz\|}
-\newcommand{\nzdxzprime}{\|\argsxzprime\|}
+\newcommand{\nzdxz}{\left\|\argsxz\right\|}
+\newcommand{\nzdx}{\left\|\zdx\right\|}
+\newcommand{\nzdz}{\left\|\zdz\right\|}
+\newcommand{\nzdxzprime}{\left\|\argsxzprime\right\|}
+
+\newcommand{\nzdxt}{\|\zdx(\tau)\|}
 
 \newcommand{\argszero}{(0, \boldzero)}
 
@@ -147,11 +153,12 @@
 
 \newcommand{\LDelta}{L_{\Delta}}
 \newcommand{\LB}{L_{B}}
-\newcommand{\LTI}{L_{\TI}}
 \newcommand{\LTIeps}{L_{\TI}(\resclfparam)}
 \newcommand{\LP}{L_{P}}
 \newcommand{\Le}{\Lambda(\resclfparam)}
 
+\newcommand{\Ae}{A_{P}(\resclfparam)}
+\newcommand{\ATIe}{A_{\TI}(\resclfparam)}
 \newcommand{\bepsone}{\beta_{1}(\resclfparam)}
 \newcommand{\bepstwo}{\beta_{2}(\resclfparam)}
 
@@ -160,7 +167,6 @@
 \newcommand{\flowtx}{\flowt^{x}}
 \newcommand{\flowtz}{\flowt^{z}}
 
-\newcommand{\Ae}{A(\resclfparam)}
 
 \newcommand{\floweps}{\flow^{\resclfparam}}
 

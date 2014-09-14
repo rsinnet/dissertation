@@ -1,6 +1,6 @@
 \documentclass[twocolumn]{article}
 
-\usepackage{amsmath,amssymb,amsthm,mathrsfs,bigints}
+\usepackage{amsmath,amssymb,amsthm,mathrsfs}
 \usepackage[top=1.25in, bottom=1.25in, left=.75in, right=.75in]{geometry}
 
 \usepackage[english]{babel}
@@ -248,9 +248,10 @@ Consider the candidate Lyapunov function
   \end{align}
   %
   and, for the CLF \eqref{eq:lyap-cond-nrg-es} with any such locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
-  \begin{align*}
-    \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|. & \qedhere
-  \end{align*}
+  \begin{align}
+    \label{eq:xt-bounds}
+    \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|.
+  \end{align}
 \end{proof}
 
 Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtain the hybrid control system
@@ -324,21 +325,27 @@ In addition to the preceding lemma, some bounds must be established in order to 
   {\bf For the vector fields described, the following bounds probably hold:}
   \begin{align}
     \nonumber
-    \| \TIe\argsxz - \TI\argsxz \| &\leq \LTI \nzdxz,\\
-    \nonumber
+    \| \TIe\argsxz - \TI\argsxz \| &\leq \ATIe \nzdxz,\\
     \| \Pe\argsxz - \P\argsxz \| &\leq \Ae \nzdxz,
   \end{align}
-  where $\LTI$ and $\Ae$ (not Lipschitz).
+  where $\ATIe$ and $\Ae$ (not Lipschitz).
 \end{lemma}
+
+{\bf We still need to show that}
+\begin{align*}
+  \| \TIe\argsxz - \TI\argsxz \| \leq \ATIe \nzdxz.
+\end{align*}
+
 \begin{proof}
   The solution to the QP is given by the min-norm control law:
   \begin{align}
-    \mueps\argsxz = -\frac{\psi_{0}\psi_{1}}{\psi_{1}^{T}\psi_{1}},
+    \mueps\argsxz = -\frac{\psi_{0}\argsxz \psi_{1}\argsxz}{\psi_{1}^{T}\argsxz \psi_{1}\argsxz},
   \end{align}
   with
   \begin{align}
-    \psi_{1} := \Lie{\bigF} \Ve\argsxz + \frac{c_{3}}{\resclfparam}, &&
-    \psi_{2} := \left( \Lie{\bigG} \Ve \right)^{T},
+    \nonumber
+    \psi_{1}\argsxz &:= \Lie{\bigF} \Ve\argsxz + \frac{c_{3}}{\resclfparam},\\
+    \psi_{2}\argsxz &:= \left( \Lie{\bigG} \Ve\argsxz \right)^{T},
   \end{align}
   where $\Lie{\bigF} \Ve\argsxz \equiv 0$ by the choice of $\Ve\argsxz$ as energy.
   %
@@ -346,35 +353,37 @@ In addition to the preceding lemma, some bounds must be established in order to 
   %
   Since energy does not change by the natural dynamics,
   \begin{align}
-    \mueps\argsxz = - \frac{\frac{c_{3}}{\epsilon} \Ve\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} \bigG\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}.
+    \mueps\argsxz = - \frac{\frac{c_{3}}{\resclfparam} \Ve\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} \bigG\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}.
   \end{align}
   If, in addition, $\bigG$ is full rank and takes values in a compact set for states near the orbit, i.e., $\bigG\argsxz \in \mathcal{C} \setminus \{\boldzero\}$ and $d_{1} \| \bigG\argsxz \| \leq d_{z2}$, then
   \begin{align}
     \nonumber
     \| \mueps\argsxz \|
-    &\leq \frac{\frac{c_{2}c_{3}}{\epsilon^3} \nzdx^{2} \left\| \bigG^{T}\argsxz
-      \left(\begin{array}{c}
+    &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^3} \nzdx^{2} \left\| \bigG^{T}\argsxz
+      \left(\!\begin{array}{c}
         \zdx\\
         \boldzero
-      \end{array}\right)\right\|}{\left\|
-      \left(\begin{array}{c c}
+      \end{array}\!\right)\right\|}{\left\|
+      \left(\!\begin{array}{c c}
         \zdx & \boldzero
-      \end{array}\right) \bigG\argsxz \bigG^{T}\argsxz
-      \left(\begin{array}{c}
+      \end{array}\!\right) \bigG\argsxz \bigG^{T}\argsxz
+      \left(\!\begin{array}{c}
         \zdx\\
         \boldzero
-      \end{array}\right) \right\|}\\
+      \end{array}\!\right) \right\|}\\
     \nonumber
     &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^{3}} \nzdx^{2} \left\| \bigG\argsxz
       \, \zdx \right\|}{\left\|
       \sum_{i} \bigG_{i,i}^{2}\argsxz \right\| \nzdx^{2}}\\
-    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambda_{\max}}{\lambda_{\min}^{2}} \nzdx,
+    \label{eq:mueps-bounds}
+    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG}{\lambdaminG} \nzdx,
   \end{align}
   %
   where
   \begin{align}
-    \lambda_{\max} &:= \sup_{\ell \in \R} \{ \ell = \lambdamax\bigG\argsxz : \argsxz \in \stabletube \},\\
-    \lambda_{\min} &:= \inf_{\ell \in \R} \{ \ell = \lambdamin\bigG\argsxz : \argsxz \in \stabletube \}.
+    \nonumber
+    \lambdamaxG &:= \sup_{\ell \in \R} \{ \ell = \lambdamax\bigG\argsxz : \argsxz \in \stabletube \},\\
+    \lambdaminG &:= \inf_{\ell \in \R} \{ \ell = \lambdamin\bigG\argsxz : \argsxz \in \stabletube \}.
   \end{align}
   where $\stabletube \subset \D$ is a stable tube around the periodic orbit.
   
@@ -384,18 +393,67 @@ In addition to the preceding lemma, some bounds must be established in order to 
   Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
   %
   \begin{align}
-    \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| \leq}\\
+    \label{eq:flow-bound-comp}
+    \lefteqn{\left\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \right\| \leq}\\
     \nonumber
-    & \hspace{2em} \bigintsss_{0}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\right) \, \mueps\argstxz \, \bigg\| d\tau\\
+    && \int_{\TI\argsxz}^{\TIe\argsxz} \hspace{-2em} \left\| \bigF\argsxz \right\| \, d\tau
+      + \int_{0}^{\TIe\argsxz} \hspace{-2em} \left\| \bigG\argsxz \, \mueps\argstxz \, \right\| d\tau.
+  \end{align}
+  %
+  For simplicity, consider the two terms separately.
+  %
+  If $\bigF$ is bounded around the limit cycle, then
+  \begin{align}
     \nonumber
-    & \hspace{8em} \mbox{} + \bigintsss_{\TI\argsxz}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\right) \bigg\| \, d\tau.
+    \int_{\TI\argsxz}^{\TIe\argsxz} \! \left\| \bigF\argsxz \right\| \, d\tau
+    &\leq \supF \int_{\TI\argsxz}^{\TIe\argsxz} d\tau\\
+    \nonumber
+    &\leq \left.\supF \tau\right|_{\tau=\TI\argsxz}^{\TIe\argsxz}\\
+    \nonumber
+    &\leq \supF \left(\TIe\argsxz - \TI\argsxz\right)\\
+    \label{eq:F-bound}
+    &\leq \supF \ATIe \nzdxz.
   \end{align}
 
-  {\bf If we can show that}
-  \begin{align*}
-    \| \TIe\argsxz - \TI\argsxz \| \leq \LTIeps \nzdxz,
-  \end{align*}
-
+  The other term is bounded using \eqref{eq:mueps-bounds} and then \eqref{eq:xt-bounds}:
+  \begin{align}
+    \nonumber
+    \int_{0}^{\TIe\argsxz} \! &\left\| \bigG \, \mueps\argstxz \, \right\| d\tau\\
+    \nonumber
+    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \int_{0}^{\TIe\argsxz} \! \nzdxt d\tau\\
+    \nonumber
+    &\leq \frac{c_{2}^{\frac{3}{2}}c_{3}}{c_{1}^{\frac{1}{2}}\resclfparam^{4}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \|\zdx(0)\| \int_{0}^{\TIe\argsxz} \! \left\|e^{-\frac{c_{3}}{2\resclfparam} \tau} \right\| d\tau\\
+    \label{eq:G-bound}
+    &\leq \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \left\|\zdx(0)\right\| \, \left. e^{-\frac{c_{3}}{2\resclfparam} \tau} \right|^{0}_{\tau=\TIe\argsxz}.
+  \end{align}
+  %
+  Applying the reset map before integration results in
+  %
+  \begin{align}
+    \label{eq:flow-bound-foo-1}
+    \lefteqn{\int_{0}^{\TIe\argsxz} \! \left\| \bigG \, \mueps\argstxz \, \right\| d\tau \leq}\\
+    \nonumber
+    &&\frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz - \DeltaX\argszero\right\|.
+  \end{align}
+  Since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \argszero$ and because $\DeltaX\argszero = 0$, it follows that
+  \begin{align}
+    \label{eq:impact-Lipschitz}
+    \LDelta \nzdxz &\geq \| \Delta\argsxz - \Delta\argszero \|\\
+    \nonumber
+    &\geq \| \DeltaX\argsxz - \DeltaX\argszero \|
+  \end{align}
+  for some $\argsxz \in \B_{\gamma}\argszero$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
+  %
+  Finally, combining \eqref{eq:flow-bound-comp}, \eqref{eq:F-bound}, \eqref{eq:G-bound}, and \eqref{eq:impact-Lipschitz} results in
+  \begin{align}
+    \left\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \right\| \leq \Ae \! \nzdxz,
+  \end{align}
+  where
+  \begin{align}
+    \lefteqn{\Ae :=} \\
+    \nonumber
+    &&\LDelta \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) + \supF \ATIe. &\qedhere
+  \end{align}
 \end{proof}
 
 Now \thmref{theorem:main-theorem} can be proven:
@@ -447,16 +505,8 @@ Now \thmref{theorem:main-theorem} can be proven:
     \nonumber
     \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz \right\|^{2}.
   \end{align}
-  Since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \argszero$ and because $\DeltaX\argszero = 0$, it follows that
-  \begin{align}
-    \label{eq:impact-Lipschitz}
-    \LDelta \nzdxz &\geq \| \Delta\argsxz - \Delta\argszero \|\\
-    \nonumber
-    &\geq \| \DeltaX\argsxz - \DeltaX\argszero \|
-  \end{align}
-  for some $\argsxz \in \B_{\gamma}\argszero$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
   %
-  Combining \eqref{eq:Veh-bound} and \eqref{eq:impact-Lipschitz} yields
+  Combining \eqref{eq:impact-Lipschitz} and \eqref{eq:Veh-bound} yields
   \begin{align}
     \nonumber
     \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz - \DeltaX\argszero \right\|^{2}\\
