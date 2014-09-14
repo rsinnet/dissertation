@@ -150,7 +150,7 @@ Thus consider the coordinate transformation
 \begin{align}
   \zdx := E(\x) - \Eref.
 \end{align}
-By construction, the fixed point of the hybrid system occurs at $\argsxz = \argszero$.
+By construction, the fixed point of the hybrid system occurs at $\argsxz = \argszero$, and, moreover, $f\argsxz = 0$.
 %
 
 \subsection{Diffeomorphism}
@@ -382,10 +382,15 @@ In addition to the preceding lemma, some bounds must be established in order to 
   where
   \begin{align}
     \nonumber
-    \lambdamaxG &:= \sup_{\ell \in \R} \{ \ell = \lambdamax\bigG\argsxz : \argsxz \in \stabletube \},\\
-    \lambdaminG &:= \inf_{\ell \in \R} \{ \ell = \lambdamin\bigG\argsxz : \argsxz \in \stabletube \}.
+    \lambdamaxG &:= \sup \left\{\lambdamax\bigG\argsxz : \argsxz \in \stabletube \right\},\\
+    \lambdaminG &:= \inf \left\{\lambdamin\bigG\argsxz : \argsxz \in \stabletube \right\},
   \end{align}
   where $\stabletube \subset \D$ is a stable tube around the periodic orbit.
+  %
+  In addition, by the Lipschitz assumption, $\bigF$ is bounded around the limit cycle, hence
+  \begin{align}
+    \supF := \sup \left\{ \left\| \bigF\argsxz \right\| : \argsxz \in \stabletube \right\}.
+  \end{align}
   
   
   {\bf We can probably do this for more general situations using \eqref{eq:dVedx-bounds} but I'm not sure how to handle zero dynamics with dimension greater than one because of the terms in the denominator.}
@@ -414,7 +419,7 @@ In addition to the preceding lemma, some bounds must be established in order to 
   %
   For simplicity, consider the two terms separately.
   %
-  If $\bigF$ is bounded around the limit cycle, then
+  The first term can be bounded as follows:
   \begin{align}
     \nonumber
     \int_{\TIDelta}^{\TIeDelta)} \! \hspace{-3em} \left\| \bigF\argsxztau \right\| \, d\tau
