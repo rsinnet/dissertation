@@ -350,6 +350,7 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \end{align}
   If, in addition, $\bigG$ is full rank and takes values in a compact set for states near the orbit, i.e., $\bigG\argsxz \in \mathcal{C} \setminus \{\boldzero\}$ and $d_{1} \| \bigG\argsxz \| \leq d_{z2}$, then
   \begin{align}
+    \nonumber
     \| \mueps\argsxz \|
     &\leq \frac{\frac{c_{2}c_{3}}{\epsilon^3} \nzdx^{2} \left\| \bigG^{T}\argsxz
       \left(\begin{array}{c}
@@ -362,18 +363,25 @@ In addition to the preceding lemma, some bounds must be established in order to 
       \left(\begin{array}{c}
         \zdx\\
         \boldzero
-      \end{array}\right) \right|}\\
+      \end{array}\right) \right\|}\\
+    \nonumber
     &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^{3}} \nzdx^{2} \left\| \bigG^{T}\argsxz
       \left(\begin{array}{c}
         \zdx\\
         \boldzero
       \end{array}\right)\right\|}{\left\|
       \bigG_{i,i}\argsxz \bigG_{i,i}\argsxz \zdx^{2}\right\|}\\
-    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamax \bigG\argsxz}{\lambdaminsq \bigG\argsxz} \nzdx,
-\end{align}
+    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambda_{\max}}{\lambda_{\min}^{2}} \nzdx,
+  \end{align}
   %
-  where Einstein notation has been used.
-  %
+  where Einstein notation has been used and
+  \begin{align}
+    \lambda_{\max} &:= \sup_{\ell \in \R} \{ \ell = \lambdamax\bigG\argsxz : \argsxz \in \stabletube \},\\
+    \lambda_{\min} &:= \inf_{\ell \in \R} \{ \ell = \lambdamin\bigG\argsxz : \argsxz \in \stabletube \}.
+  \end{align}
+  where $\stabletube \subset \D$ is a stable tube around the periodic orbit.
+  
+  
   {\bf We can probably do this for more general situations using \eqref{eq:dVedx-bounds} but I'm not sure how to handle zero dynamics with dimension greater than one because of the terms in the denominator.}
 
   Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
