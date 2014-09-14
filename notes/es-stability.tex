@@ -31,17 +31,24 @@ Formally, this means that, given an exponentially-stable limit cycle in a dynami
 
 \section{Setup}
 
-Consider a hybrid dynamical system with total energy $E(\x)$.
+Consider a hybrid dynamical system with total energy $\E(\x)$.
 %
 The system has coordinates $\x \in \D$ which take values in the {\em domain of admissibility}, $\D$.
-
-The discrete aspect comes from a {\em guard constraint}, $h : \Q \to \Rnn$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
+%
+The discrete aspect comes from a {\em guard constraint}, $h : \D \to \Rnn$, which leads to a transverse plane, $\S \subset \D$, called the {\em switching surface}.
+%
+Define the domain and switching surface of the system:
+\begin{align}
+  \D &= \left\{ \argsxz \in \zdX \times \zdZ : h\argsxz \geq 0 \right\},\\
+  \nonumber
+  \S &= \left\{ \argsxz \in \zdX \times \zdZ : h\argsxz = 0 \mbox{ and } {\dot h}\argsxz < 0 \right\}.
+\end{align}
 %
 The uncontrolled hybrid system can be written
 \begin{align}
   \HS = \left\{
   \begin{array}{l l}
-    \dx = f(\x), & \x \in \D \setminus \S,\\
+    \dx = \xf(\x), & \x \in \D \setminus \S,\\
     \xp = \Delta(\xm), & \x \in \S,
   \end{array}\right.
   \label{eq:hsys}
@@ -50,31 +57,31 @@ Under the action of control effort $\u$, the corresponding hybrid control system
 \begin{align}
   \HCS = \left\{
   \begin{array}{l l}
-    \dx = f(\x) + g(\x) \, \u, & \x \in \D \setminus \S,\\
+    \dx = \xf(\x) + \xg(\x) \, \u, & \x \in \D \setminus \S,\\
     \xp = \Delta(\xm), & \x \in \S,
   \end{array}\right.
   \label{eq:hcsys}
 \end{align}
 for control values in a set $\U \subseteq \R^{m}$.
 %
-For the continuous dynamics, construct a Lyapunov function, $\V : \D \to \Rnn$, of the form
+For the continuous dynamics, construct a candidate Lyapunov function, $\V : \D \to \Rnn$, of the form
 \begin{align}
   \label{eq:lyap}
   \V(\x) = \frac{1}{2} (\E(\x) - \Eref)^2.
 \end{align}
 Consider the energy shaping controller
 \begin{align}
-  \label{eq:es-qp} \tag {QP}
+  \label{eq:es-qp}
   \mueps(\x) = \argmin_{u(\x) \in \R^{m}} \ & \u(\x)^T \u(\x)\\
   \nonumber
-  \mbox{s.t. } \Lie{f} \V&(\x) + \Lie{g} \V(\x) \, \u(\x) + \frac{c_{3}}{\resclfparam} \V(\x) \leq 0.
+  \mbox{s.t. } \Lie{\xf} \V&(\x) + \Lie{\xg} \V(\x) \, \u(\x) + \frac{c_{3}}{\resclfparam} \V(\x) \leq 0.
 \end{align}
-Applying this to the system \eqref{eq:hsys} results in the closed-loop dynamics
+Applying this to the system \eqref{eq:hsys} results in
 \begin{align}
   \label{eq:hsys-cl}
   \HS = \left\{
   \begin{array}{l l}
-    \dx = f(\x) + g(\x) \, \mueps(\x), & \x \in \D \setminus \S,\\
+    \dx = \xf(\x) + \xg(\x) \, \mueps(\x), & \x \in \D \setminus \S,\\
     \xp = \Delta(\xm), &\x \in \S.
   \end{array}\right.
 \end{align}
@@ -150,7 +157,9 @@ Thus consider the coordinate transformation
 \begin{align}
   \zdx := E(\x) - \Eref.
 \end{align}
-By construction, the fixed point of the hybrid system occurs at $\argsxz = \argszero$, and, moreover, $f\argsxz = 0$.
+By construction, the fixed point of the hybrid system occurs at $\argsxz = \xzst$ and $\Delta\xzst = \argszero$.
+%
+Moreover, $f\argsxz = 0$.
 %
 
 \subsection{Diffeomorphism}
@@ -162,15 +171,15 @@ Because $\M(\q)$ is invertible for mechanical systems, it never has determinant 
 
 \begin{definition}
   For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \zdX \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} if there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all $\resclfparam > 0$ and for all $\argsxz \in \zdX \times \zdZ$,
-  \begin{align}
+  \begin{eqnarray}
     &c_{1} \nzdx \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{\bigF} \Ve\argsxz + \Lie{\bigG} \Ve\argsxz \, \u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
-  \end{align}
+    &\inf_{\u \in \U} \left[ \Lie{\bigF} \Ve\argsxz + \Lie{\bigG} \Ve\argsxz \, \u + \frac{c_{3}}{\resclfparam} \Ve\argsx \right] \leq 0.
+  \end{eqnarray}
   If these are satisfied, then it will also be true that
   \begin{align}
     \label{eq:dVedx-bounds}
-    \left\| \pd{\Ve\argsx}{\zdx} \right\| \leq c_{4} \| \zdx \|
+    \left\| \pd{\Ve\argsx}{\zdx} \right\| \leq c_{4} \nzdx
   \end{align}
   for some $c_{4} > 0$.
 \end{definition}
@@ -185,7 +194,7 @@ Applying the control law \eqref{eq:es-qp}, the dynamics \eqref{eq:zd-vfield} bec
 
 By the construction of the control law \eqref{eq:es-qp}, it is clear that $\mueps(0, \zdz) = 0$ and thus it follows that $f(0, \zdz) = 0$.
 %
-In other words, the zero dynamics manifold $\zdZ$ is the restricted subset of $X$ such that $\zdx = 0$.
+In other words, the zero dynamics manifold $\zdmanifold$ is the restricted subset of $X$ such that $\zdx = 0$.
 %
 Consider the candidate Lyapunov function
 \begin{align}
@@ -195,12 +204,12 @@ Consider the candidate Lyapunov function
 \begin{proposition}  
   \label{prop:res-clf}
   Exponential stability of the continuous $\zdx$ dynamics is guaranteed if a RES--CLF exists satisfying
-  \begin{align}
+  \begin{eqnarray}
     \label{eq:lyap-cond-nrg-es}
-    &c_{1} \nzdx^{2} \leq \V(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx^2,\\
+    &c_{1} \nzdx^{2} \leq \V\argsx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx^2,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
-  \end{align}
+    &\inf_{\u \in \U} \left[ \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \u + \frac{c_{3}}{\resclfparam} \V\argsx \right] \leq 0,
+  \end{eqnarray}
   for all $\argsxz \in \zdX \times \zdZ$.
 \end{proposition}
 
@@ -270,7 +279,7 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
   \end{array}\right.
 \end{align}
 %
-Applying the a valid Lipschitz continuous control law which takes values in \eqref{eq:control-set} to \eqref{eq:zd-hcsys} results in the closed loop hybrid system
+Applying a valid Lipschitz continuous control law which takes values in \eqref{eq:control-set} to \eqref{eq:zd-hcsys} results in the closed loop hybrid system
 %
 \begin{align}
   \label{eq:zd-hsys-cl}
@@ -289,12 +298,6 @@ Applying the a valid Lipschitz continuous control law which takes values in \eqr
 
 \section{Proof of Main Result}
 
-Define the domain and switching surface of the system:
-\begin{align}
-  \D &= \left\{ \argsxz \in \zdX \times \zdZ : h\argsxz \geq 0 \right\},\\
-  \nonumber
-  \S &= \left\{ \argsxz \in \zdX \times \zdZ : h\argsxz = 0 \mbox{ and } {\dot h}\argsxz < 0 \right\}.
-\end{align}
 Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\flow_{t}\argsxz$ represent a flow of the vector field for time $t$ starting from state $\argsxz$.
 %
 The \Poincare{} map has a form like
@@ -305,27 +308,28 @@ where $\TIe\argsxz$ is the time to impact.
 
 \begin{lemma}
   \label{lemma:TIe-bounds}
-  For some $\delta > 0$ and $\argsxz \in \B_{\delta}\argszero \cap \S$, the time-to-impact function $\TIe\argsxz$ satisfies
+  For some $\delta > 0$ and $\argsxz \in \B_{\delta}\xzst \cap \S$, the time-to-impact function $\TIe\argsxz$ satisfies
   \begin{align}
     \label{eq:TIe-bounds}
     0.9 \Tst \leq \TIe\argsxz \leq 1.1 \Tst,
   \end{align}
-  where $\Tst = \TIe\argszero$ is the period of the orbit $\Orbit$.
+  where $\Tst = \TIe\xzst$ is the period of the invariant orbit $\Orbit$.
 \end{lemma}
 \begin{proof}
-  Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$. The function $\TIe\argsxz$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}\argszero \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
+  Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$. The function $\TIe\argsxz$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}\xzst \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
 \end{proof}
 
 In addition to the preceding lemma, some bounds must be established in order to prove \thmref{theorem:main-theorem}.
 %
-First, however, note that, since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \argszero$ and because $\DeltaX\argszero = 0$, it follows that
-\begin{align}
-  \label{eq:impact-Lipschitz}
-  \LDelta \nzdxz &\geq \left\| \Delta\argsxz - \Delta\argszero \right\|\\
+First, however, note that, since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \xzst$ and because $\DeltaX\xzst = 0$, it follows that
+\begin{align} 
   \nonumber
-  &\geq \left\| \DeltaX\argsxz - \DeltaX\argszero \right\|
+  \left\| \DeltaX\argsxz - \DeltaX\xzst \right\| &\leq \left\| \Delta\argsxz - \Delta\xzst \right\|
+  \\
+  \label{eq:impact-Lipschitz}
+  &\leq \LDelta \nzdxz
 \end{align}
-for some $\argsxz \in \B_{\gamma}\argszero$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
+for some $\argsxz \in \B_{\gamma}\xzst$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
 
 Now, consider the following bounds on the time-to-impact functions:
 
@@ -337,7 +341,7 @@ Now, consider the following bounds on the time-to-impact functions:
   \end{align}
 \end{lemma}
 \begin{proof}
-  The functions $\TI(\Deltaxz)$ and $\TIe(\Deltaxz)$ are Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}\argszero \cap S$,
+  The functions $\TI(\Deltaxz)$ and $\TIe(\Deltaxz)$ are Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}\xzst \cap S$,
   \begin{align}
     \nonumber
     \| \TI(\Deltaxz) - \Tst \| &\leq \LTI \nDeltaxz,\\
@@ -477,13 +481,11 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
     \nonumber
     &\leq \supF \left(\TIeDelta - \TIDelta\right)\\
     \nonumber
-    &\leq \supF \ATIe \left\| \Deltaxz - \Delta\argszero \right\|\\
+    &\leq \supF \ATIe \left\| \Deltaxz - \Delta\xzst \right\|\\
     \label{eq:F-bound}
     &\leq \supF \LDelta \ATIe \nzdxz.
   \end{align}
-
-
-  The other term is bounded using \eqref{eq:mueps-bounds} and then \eqref{eq:xt-bounds}:
+  The second term of \eqref{eq:flow-bound-comp} is bounded using \eqref{eq:mueps-bounds} and \eqref{eq:xt-bounds}:
   \begin{align}
     \nonumber
     \int_{0}^{\TIe\argsxz} \! &\left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau\\
@@ -501,7 +503,7 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
     \label{eq:flow-bound-foo-1}
     \lefteqn{\int_{0}^{\TIeDelta} \! \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau \leq}\\
     \nonumber
-    &&\frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz - \DeltaX\argszero\right\|.
+    &&\frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz - \DeltaX\xzst\right\|.
   \end{align}
   %
   Finally, combining \eqref{eq:flow-bound-comp}, \eqref{eq:F-bound}, \eqref{eq:G-bound}, and \eqref{eq:impact-Lipschitz} results in
@@ -569,7 +571,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   Combining \eqref{eq:impact-Lipschitz} and \eqref{eq:Veh-bound} yields
   \begin{align}
     \nonumber
-    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz - \DeltaX\argszero \right\|^{2}\\
+    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz - \DeltaX\xzst \right\|^{2}\\
     &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
   \end{align}
   %
@@ -588,7 +590,7 @@ Now \thmref{theorem:main-theorem} can be proven:
     \label{eq:Pe-P-bounds}
     &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxz,\\
     \nonumber
-    &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\argszero\|\\
+    &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\xzst\|\\
     \nonumber
     & \hspace{4.4em} \leq \Ae \nzdxz  + \LP\nzdxz,\\
     \nonumber
