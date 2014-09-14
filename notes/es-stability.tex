@@ -226,15 +226,15 @@ Consider the candidate Lyapunov function
     \end{array}\right) \cdot\\
     \nonumber
     & \hspace{1em} \left[
-    \left(\begin{array}{c}
-      \dq\\
-      -\M^{-1}(\q) \CG(\q, \dq)
-    \end{array}\right) +
-    \left(\begin{array}{c}
-      \boldzero_{\ndim \times \ncv}\\
-      -\M^{-1}(\q) \B(\q)
-    \end{array}\right) \, \u
-    \right].
+      \left(\begin{array}{c}
+        \dq\\
+        -\M^{-1}(\q) \CG(\q, \dq)
+      \end{array}\right) +
+      \left(\begin{array}{c}
+        \boldzero_{\ndim \times \ncv}\\
+        -\M^{-1}(\q) \B(\q)
+      \end{array}\right) \, \u
+      \right].
   \end{align}
   For a fully-actuated system, $\ncv = \ndim$ so $\B : \Q \to \R^{\ndim \times \ncv}$ is full rank.
   %
@@ -244,7 +244,7 @@ Consider the candidate Lyapunov function
   \begin{align}
     \lefteqn{\M^{-1}(\q) \B(\q) \, \u(\q, \dq) = \frac{c_{3}}{\resclfparam} \frac{1}{2} \E^{2}(\q, \dq)}\\
     \nonumber
-      && \mbox{} + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq).
+    && \mbox{} + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq).
   \end{align}
   %
   and, for the CLF \eqref{eq:lyap-cond-nrg-es} with any such locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
@@ -318,24 +318,59 @@ where $\TIe\argsxz$ is the time to impact.
   Let $\resclfparam > 0$ be fixed and select a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$. The function $\TIe\argsxz$ is Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}\argszero \cap \S$, \eqref{eq:TIe-bounds} is satisfied.
 \end{proof}
 
-In addition to the preceding lemma, some bounds must be established in order to prove \thmref{theorem:main-theorem}:
+In addition to the preceding lemma, some bounds must be established in order to prove \thmref{theorem:main-theorem}.
+%
+First, however, note that, since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \argszero$ and because $\DeltaX\argszero = 0$, it follows that
+\begin{align}
+  \label{eq:impact-Lipschitz}
+  \LDelta \nzdxz &\geq \left\| \Delta\argsxz - \Delta\argszero \right\|\\
+  \nonumber
+  &\geq \left\| \DeltaX\argsxz - \DeltaX\argszero \right\|
+\end{align}
+for some $\argsxz \in \B_{\gamma}\argszero$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
+
+Now, consider the following bounds on the time-to-impact functions:
 
 \begin{lemma}
-  \label{lemma:hard-one}
-  {\bf For the vector fields described, the following bounds probably hold:}
+  \label{lemma:time-to-impact}
+  For the control system \eqref{eq:zd-hsys-cl},
+  \begin{align}
+    \| \TIe\argsxz - \TI\argsxz \| &\leq \ATIe \nzdxz.    
+  \end{align}
+\end{lemma}
+\begin{proof}
+  The functions $\TI(\Deltaxz)$ and $\TIe(\Deltaxz)$ are Lipschitz continuous and therefore there exists a $\delta > 0$ such that for all $\argsxz \in \B_{\delta}\argszero \cap S$,
   \begin{align}
     \nonumber
-    \| \TIe\argsxz - \TI\argsxz \| &\leq \ATIe \nzdxz,\\
+    \| \TI(\Deltaxz) - \Tst \| &\leq \LTI \nDeltaxz,\\
+    \| \TIe(\Deltaxz) - \Tst \| &\leq \LTIeps \nDeltaxz.
+  \end{align}
+  Using these properties,
+  \begin{align}
+    \| \TIe(\Deltaxz) - &\TI(\Deltaxz) \|\\
+    \nonumber
+    &= \left\| \TIe(\Deltaxz) - \Tst - \left(\TI(\Deltaxz) - \Tst\right) \right\|\\
+    \nonumber
+    &\leq \left\| \TIe(\Deltaxz) - \Tst \right\| + \left\| \TI(\Deltaxz) - \Tst \right\|\\
+    \nonumber
+    &\leq \LTIeps \nDeltaxz + \LTI \nDeltaxz\\
+    \nonumber
+    &\leq \ATIe \left\| \Deltaxz - \Delta\argszero \right\|.\\
+    \nonumber
+    &\leq \ATIe \LDelta \nzdxz. &\qedhere
+  \end{align}
+\end{proof}
+%
+Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to construct bounds on the difference in the \Poincare{} maps:
+%
+\begin{lemma}
+  \label{lemma:hard-one}
+  For the control system \eqref{eq:zd-hsys-cl},
+  \begin{align}
     \| \Pe\argsxz - \P\argsxz \| &\leq \Ae \nzdxz,
   \end{align}
   where $\ATIe$ and $\Ae$ (not Lipschitz).
 \end{lemma}
-
-{\bf We still need to show that}
-\begin{align*}
-  \| \TIe\argsxz - \TI\argsxz \| \leq \ATIe \nzdxz.
-\end{align*}
-
 \begin{proof}
   The solution to the QP is given by the min-norm control law:
   \begin{align}
@@ -361,15 +396,15 @@ In addition to the preceding lemma, some bounds must be established in order to 
     \| \mueps\argsxz \|
     &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^3} \nzdx^{2} \left\| \bigG^{T}\argsxz
       \left(\!\begin{array}{c}
-        \zdx\\
-        \boldzero
+      \zdx\\
+      \boldzero
       \end{array}\!\right)\right\|}{\left\|
       \left(\!\begin{array}{c c}
-        \zdx & \boldzero
+      \zdx & \boldzero
       \end{array}\!\right) \bigG\argsxz \bigG^{T}\argsxz
       \left(\!\begin{array}{c}
-        \zdx\\
-        \boldzero
+      \zdx\\
+      \boldzero
       \end{array}\!\right) \right\|}\\
     \nonumber
     &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^{3}} \nzdx^{2} \left\| \bigG\argsxz
@@ -379,30 +414,21 @@ In addition to the preceding lemma, some bounds must be established in order to 
     &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG}{\lambdaminG} \nzdx,
   \end{align}
   %
-  where
+  with
   \begin{align}
     \nonumber
     \lambdamaxG &:= \sup \left\{\lambdamax\bigG\argsxz : \argsxz \in \stabletube \right\},\\
     \lambdaminG &:= \inf \left\{\lambdamin\bigG\argsxz : \argsxz \in \stabletube \right\},
   \end{align}
-  where $\stabletube \subset \D$ is a stable tube around the periodic orbit.
+  where $\stabletube \subset \D$ is a stable tube around the periodic orbit $\Orbit$.
   %
-  In addition, by the Lipschitz assumption, $\bigF$ is bounded around the limit cycle, hence
+  In addition, by the Lipschitz assumption, $\bigF$ is bounded around $\Orbit$, hence
   \begin{align}
     \supF := \sup \left\{ \left\| \bigF\argsxz \right\| : \argsxz \in \stabletube \right\}.
   \end{align}
   
   
   {\bf We can probably do this for more general situations using \eqref{eq:dVedx-bounds} but I'm not sure how to handle zero dynamics with dimension greater than one because of the terms in the denominator.}
-
-  Next, since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \argszero$ and because $\DeltaX\argszero = 0$, it follows that
-  \begin{align}
-    \label{eq:impact-Lipschitz}
-    \LDelta \nzdxz &\geq \left\| \Delta\argsxz - \Delta\argszero \right\|\\
-    \nonumber
-    &\geq \left\| \DeltaX\argsxz - \DeltaX\argszero \right\|
-  \end{align}
-  for some $\argsxz \in \B_{\gamma}\argszero$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
 
   Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$.
   %
@@ -507,7 +533,7 @@ Now \thmref{theorem:main-theorem} can be proven:
     \label{eq:composite-lyap}
     \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz =}\\
     \nonumber
-      &&\Vn(\Pe\argsxz) - \Vn\argsxz + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).
+    &&\Vn(\Pe\argsxz) - \Vn\argsxz + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).
   \end{align}
   %
   By construction of the control law \eqref{eq:es-qp}, it is true that
@@ -575,12 +601,12 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \VP(\Pe\argsxz) - \VP\argsxz \leq
     -\left(\!\!\!\begin{array}{c c}
-      \nzdx\!\!\! & \!\!\!\nzdz
+    \nzdx\!\!\! & \!\!\!\nzdz
     \end{array}\!\!\!\right)
     \!\Le\!
     \left(\!\!\!\begin{array}{c}
-        \nzdx\\
-        \nzdz
+    \nzdx\\
+    \nzdz
     \end{array}\!\!\!\right)
   \end{align}
   with
