@@ -132,6 +132,18 @@ with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $u \in \U$.
 %
 The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz continuous.
 %
+To simplify notation, define
+\begin{align}
+  \bigF\argsxz = \left(\begin{array}{c}
+    f\argsxz\\
+    q\argsxz
+  \end{array}\right),&&
+  \bigG \argsxz = \left(\begin{array}{c}
+    g\argsxz\\
+    w\argsxz
+  \end{array}\right).
+\end{align}
+%
 The natural choice of transformation to convert the continuous dynamics of \eqref{eq:hcsys} to \eqref{eq:zd-vfield} is through energy.
 %
 Thus consider the coordinate transformation
@@ -153,10 +165,15 @@ Because $\M(\q)$ is invertible for mechanical systems, it never has determinant 
   \begin{align}
     &c_{1} \nzdx \leq \Ve(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{f} \Ve\argsxz + \Lie{g} \Ve\argsxz \, \u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
+    &\inf_{\u \in \U} \left[ \Lie{\bigF} \Ve\argsxz + \Lie{\bigG} \Ve\argsxz \, \u + \frac{c_{3}}{\resclfparam} \Ve(\zdx) \right] \leq 0.
   \end{align}
+  If these are satisfied, then it will also be true that
+  \begin{align}
+    \label{eq:dVedx-bounds}
+    \left\| \pd{\Ve\argsx}{\zdx} \right\| \leq c_{4} \| \zdx \|
+  \end{align}
+  for some $c_{4} > 0$.
 \end{definition}
-
 
 Applying the control law \eqref{eq:es-qp}, the dynamics \eqref{eq:zd-vfield} becomes
 \begin{align}
@@ -182,7 +199,7 @@ Consider the candidate Lyapunov function
     \label{eq:lyap-cond-nrg-es}
     &c_{1} \nzdx^{2} \leq \V(\zdx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx^2,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{f} \V\argsxz + \Lie{g} \V\argsxz \, \u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
+    &\inf_{\u \in \U} \left[ \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \u + \frac{c_{3}}{\resclfparam} \V(\zdx) \right] \leq 0,
   \end{align}
   for all $\argsxz \in \zdX \times \zdZ$.
 \end{proposition}
@@ -193,7 +210,7 @@ Consider the candidate Lyapunov function
   %
   Define the set
   \begin{align}
-    \Keps = \left\{ \u \in \U : \Lie{f} \V\argsxz + \Lie{g} \V\argsxz \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
+    \Keps = \left\{ \u \in \U : \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
     \label{eq:control-set}
   \end{align}
   In order to see that the set $\Keps$ is not empty, consider the control Lypaunov function system in the original coordinates:
@@ -320,106 +337,59 @@ In addition to the preceding lemma, some bounds must be established in order to 
   \end{align}
   with
   \begin{align}
-    \psi_{1} := \cancelto{0}{\Lie{f}} \Ve\argsxz + \frac{c_{3}}{\resclfparam}, &&
-    \psi_{2} := \left( \Lie{g} \Ve \right)^{T},
+    \psi_{1} := \Lie{\bigF} \Ve\argsxz + \frac{c_{3}}{\resclfparam}, &&
+    \psi_{2} := \left( \Lie{\bigG} \Ve \right)^{T},
   \end{align}
-  where $\Lie{f} \Ve\argsxz \equiv 0$ by the choice of $\Ve\argsxz$ as energy.
+  where $\Lie{\bigF} \Ve\argsxz \equiv 0$ by the choice of $\Ve\argsxz$ as energy.
+  %
+  {\bf Should we say this is by assumption?}
   %
   Since energy does not change by the natural dynamics,
   \begin{align}
-    \mueps\argsxz = - \frac{\frac{c_{3}}{\epsilon} \Ve\argsxz g^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} g\argsxz g^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}.
+    \mueps\argsxz = - \frac{\frac{c_{3}}{\epsilon} \Ve\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} \bigG\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}.
   \end{align}
-  If, in addition, $g$ is full rank and takes values in a compact set for states near the orbit, i.e., $g\argsxz \in \mathcal{C} \setminus \{\boldzero\}$ and $\| g\argsxz \| \leq \eta$, then
+  If, in addition, $\bigG$ is full rank and takes values in a compact set for states near the orbit, i.e., $\bigG\argsxz \in \mathcal{C} \setminus \{\boldzero\}$ and $d_{1} \| \bigG\argsxz \| \leq d_{z2}$, then
   \begin{align}
     \| \mueps\argsxz \|
-    &\leq \frac{\frac{c_{2}c_{3}}{\epsilon^3} \|x\|^{2} \left\| \argsxz g^{T}\argsxz
+    &\leq \frac{\frac{c_{2}c_{3}}{\epsilon^3} \nzdx^{2} \left\| \bigG^{T}\argsxz
       \left(\begin{array}{c}
         \zdx\\
         \boldzero
       \end{array}\right)\right\|}{\left\|
       \left(\begin{array}{c c}
         \zdx & \boldzero
-      \end{array}\right) g\argsxz g^{T}\argsxz
+      \end{array}\right) \bigG\argsxz \bigG^{T}\argsxz
       \left(\begin{array}{c}
         \zdx\\
         \boldzero
-      \end{array}\right) \right\|}\\
-    &\leq \frac{\gamma}{\epsilon} \| \zdx \|.
-  \end{align}
-  
-  
-  Begin by constructing an auxiliary time-to-impact function, $\TB$, which is Lipschitz continuous and independent of $\resclfparam$:
-  \begin{align}
-    \lefteqn{\TB :=}\\
-    \nonumber
-    &&\inf \{t \geq 0 : h(\flowtx(\Delta\argsxz) + \mu_{1}, \flowtz(\Delta\argsxz) + \mu_{2}) = 0 \}.
-  \end{align}
-  By this definition, it is easy to see that
-  \begin{align}
-    \TB(0, 0, \zdx, \zdz) = \TI\argsxz.
-  \end{align}
-  Since $\|\argsmuxz\| = \|\mu_{1}\| + \|\mu_{2}\| + \nzdx + \nzdz$, it follows that
-  \begin{align}
-    | \TB\argsmuxz - \TI\argsxz| \leq \LB (\| \mu_{1} \| + \| \mu_{2} \|),
-  \end{align}
-  where $\LB$ is the local Lipschitz constant. Consider two solutions, $(\zdx_{1}(t), \zdz_{1}(t))$ and  $(\zdx_{2}(t), \zdz_{2}(t))$, which satisfy
-  \begin{align}
-    \nonumber
-    \dzdx_{1}(t) &= f\argstxzi{t}{1} + f\argstxzi{t}{1} \, \mueps\argstxzi{t}{1},\\
-    \nonumber
-    \dzdz_{1}(t) &= q\argstxzi{t}{1} + w\argstxzi{t}{1} \, \mueps\argstxzi{t}{1},\\
-    \nonumber
-    \dzdx_{2}(t) &= f\argstxzi{t}{2} + g\argstxzi{t}{2} \, \mueps\argstxzi{t}{2},\\
-    \dzdz_{2}(t) &= q\argstxzi{t}{2} + w\argstxzi{t}{2} \, \mueps\argstxzi{t}{2}.
-  \end{align}
-  Defining
-  \begin{align}
-    \nonumber
-    \mu_{1} &= \zdx_{1}(t)\big|_{t = \TIe\argsxz} - \zdx_{2}(t)\big|_{t = \TIe\argsxz},\\
-    \mu_{2} &= \zdz_{1}(t)\big|_{t = \TIe\argsxz} - \zdz_{2}(t)\big|_{t = \TIe\argsxz},
-  \end{align}
-  where
-  \begin{align}
-    \nonumber
-    \zdx_{1}(0) &= \DeltaX\argsxz,& \zdz_{1}(0) &= \DeltaZ\argsxz,\\
-    \zdx_{2}(0) &= \DeltaX\argszero,& \zdz_{2}(0) &= \DeltaZ\argszero.
-  \end{align}
-  results in
-  \begin{align}
-    \TB\argsmuxz = \TIe\argsxz
-  \end{align}
-
-  First, consider the case where $\TIe\argsxz < \TI\argsxz$:
-  \begin{align}
-    \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| =}\\
-    \nonumber
-    & \hspace{2em} \Bigg\| \int_{0}^{\TIe\argsxz} \! \left[\!\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\!\right] \, \mueps\argstxz \, d\tau\\ 
-    \nonumber
-    & \hspace{10em} \mbox{} - \int_{\TIe\argsxz}^{\TI\argsxz} \! \left[\!\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\!\right] d\tau \Bigg\|.
-  \end{align}
-  
-  For the case where $\TI\argsxz < \TIe\argsxz$, the above becomes the following:
-  \begin{align}
-    \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| =}\\
-    \nonumber
-    & \hspace{2em} \Bigg\| \int_{0}^{\TIe\argsxz} \! \left[\!\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\!\right] \, \mueps\argstxz \, d\tau\\ 
-    \nonumber
-    & \hspace{10em} \mbox{} + \int_{\TI\argsxz}^{\TIe\argsxz} \! \left[\!\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\!\right] d\tau \Bigg\|.
-  \end{align}
-
-Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
-\begin{align}
-  \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| \leq}\\
-  \nonumber
-  & \hspace{2em} \bigintsss_{0}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\right) \, \mueps\argstxz \, \bigg\| d\tau\\
-  \nonumber
-  & \hspace{8em} \mbox{} + \bigintsss_{\TI\argsxz}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\right) \bigg\| \, d\tau.
+      \end{array}\right) \right|}\\
+    &\leq \frac{\frac{c_{2}c_{3}}{\resclfparam^{3}} \nzdx^{2} \left\| \bigG^{T}\argsxz
+      \left(\begin{array}{c}
+        \zdx\\
+        \boldzero
+      \end{array}\right)\right\|}{\left\|
+      \bigG_{i,i}\argsxz \bigG_{i,i}\argsxz \zdx^{2}\right\|}\\
+    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamax \bigG\argsxz}{\lambdaminsq \bigG\argsxz} \nzdx,
 \end{align}
+  %
+  where Einstein notation has been used.
+  %
+  {\bf We can probably do this for more general situations using \eqref{eq:dVedx-bounds} but I'm not sure how to handle zero dynamics with dimension greater than one because of the terms in the denominator.}
 
-{\bf If we can show that}
-\begin{align*}
-  \| \TIe\argsxz - \TI\argsxz \| \leq \LTIeps \nzdxz,
-\end{align*}
+  Without loss of generality, assume $\TIe\argsxz \geq \TI\argsxz$; hence
+  %
+  \begin{align}
+    \lefteqn{\| \floweps_{\TIe(\zdx,\zdz)}\argsxz - \flow_{\TI(\zdx,\zdz)}\argsxz \| \leq}\\
+    \nonumber
+    & \hspace{2em} \bigintsss_{0}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} g\argstxz\\ q\argstxz \end{array}\!\right) \, \mueps\argstxz \, \bigg\| d\tau\\
+    \nonumber
+    & \hspace{8em} \mbox{} + \bigintsss_{\TI\argsxz}^{\TIe\argsxz} \! \bigg\| \left(\!\begin{array}{c} f\argstxz\\ w\argstxz \end{array}\!\right) \bigg\| \, d\tau.
+  \end{align}
+
+  {\bf If we can show that}
+  \begin{align*}
+    \| \TIe\argsxz - \TI\argsxz \| \leq \LTIeps \nzdxz,
+  \end{align*}
 
 \end{proof}
 
