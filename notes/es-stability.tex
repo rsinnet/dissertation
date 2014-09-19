@@ -395,7 +395,7 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
   \begin{align}
     \| \Pe\argsxz - \P\argsxz \| &\leq \Ae \nzdxzst,
   \end{align}
-  where $\ATIe$ and $\Ae$ (not Lipschitz).
+  where $\limeps\Ae=0$.
 \end{lemma}
 \begin{proof}
   The solution to the QP is given by the min-norm control law:
@@ -474,7 +474,7 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
   The first term can be bounded as follows:
   \begin{align}
     \nonumber
-    \int_{\TIDelta}^{\TIeDelta)} \! \hspace{-3em} \left\| \bigF\argsxztau \right\| \, d\tau
+    \int_{\TIDelta}^{\TIeDelta)} \! \hspace{-3.5em} \left\| \bigF\argsxztau \right\| \, d\tau
     &\leq \supF \int_{\TIDelta}^{\TIeDelta} d\tau\\
     \nonumber
     &\leq \left.\supF \tau\right|_{\tau=\TIDelta}^{\TIeDelta}\\
@@ -506,7 +506,7 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
     &&\frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz - \DeltaX\xzst\right\|.
   \end{align}
   %
-  Finally, combining \eqref{eq:flow-bound-comp}, \eqref{eq:F-bound}, \eqref{eq:G-bound}, and \eqref{eq:impact-Lipschitz} results in
+  Finally, combining \eqref{eq:impact-Lipschitz}, \eqref{eq:flow-bound-comp}, \eqref{eq:F-bound}, and \eqref{eq:G-bound} results in
   \begin{align}
     \left\| \Pe\argsxz - \P\argsxz \right\| \leq \Ae \! \nzdxzst,
   \end{align}
@@ -655,7 +655,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   Examining the limits, it becomes apparent that
   \begin{align}
     \nonumber
-    \lim_{\resclfparam \to \infty} \bepsone = 0, &&\lim_{\resclfparam \to \infty} \bepstwo &= 0,
+    \limeps \bepsone = 0, &&\limeps \bepstwo &= 0,
   \end{align}
   and thus for small enough values of $\sigma > 0$ and large enough values of $\resclfparam$, stability is maintained. \qedhere
 \end{proof}
