@@ -327,7 +327,7 @@ First, however, note that, since the reset map is locally Lipschitz continuous a
   \left\| \DeltaX\argsxz - \DeltaX\xzst \right\| &\leq \left\| \Delta\argsxz - \Delta\xzst \right\|
   \\
   \label{eq:impact-Lipschitz}
-  &\leq \LDelta \nzdxz
+  &\leq \LDelta \nzdxzst
 \end{align}
 for some $\argsxz \in \B_{\gamma}\xzst$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
 
@@ -337,7 +337,7 @@ Now, consider the following bounds on the time-to-impact functions:
   \label{lemma:time-to-impact}
   For the control system \eqref{eq:zd-hsys-cl},
   \begin{align}
-    \| \TIe\argsxz - \TI\argsxz \| &\leq \ATIe \nzdxz.    
+    \| \TIe\argsxz - \TI\argsxz \| &\leq \ATIe \nzdxzst.
   \end{align}
 \end{lemma}
 \begin{proof}
@@ -367,9 +367,9 @@ Now, consider the following bounds on the time-to-impact functions:
     \nonumber
     &\leq \LTIeps \nDeltaxz + \LTI \nDeltaxz\\
     \nonumber
-    &\leq \LDelta \left(\LTIeps + \LTI\right) \nzdxz\\
+    &\leq \LDelta \left(\LTIeps + \LTI\right) \nzdxzst\\
     \nonumber
-    &\leq \ATIe \nzdxz. &\qedhere
+    &\leq \ATIe \nzdxzst. &\qedhere
   \end{align}
 
   {\bf Need to show that}
@@ -377,7 +377,7 @@ Now, consider the following bounds on the time-to-impact functions:
   \begin{align}
     \| \TIe(\Deltaxz) - &\TI(\Deltaxz) \|\\
     \nonumber
-    &\leq \LDelta \left\| \LTIeps - \LTI\right\| \nzdxz
+    &\leq \LDelta \left\| \LTIeps - \LTI\right\| \nzdxzst
   \end{align}
   %
   {\bf and that}
@@ -393,7 +393,7 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
   \label{lemma:hard-one}
   For the control system \eqref{eq:zd-hsys-cl},
   \begin{align}
-    \| \Pe\argsxz - \P\argsxz \| &\leq \Ae \nzdxz,
+    \| \Pe\argsxz - \P\argsxz \| &\leq \Ae \nzdxzst,
   \end{align}
   where $\ATIe$ and $\Ae$ (not Lipschitz).
 \end{lemma}
@@ -483,7 +483,7 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
     \nonumber
     &\leq \supF \ATIe \left\| \Deltaxz - \Delta\xzst \right\|\\
     \label{eq:F-bound}
-    &\leq \supF \LDelta \ATIe \nzdxz.
+    &\leq \supF \LDelta \ATIe \nzdxzst.
   \end{align}
   The second term of \eqref{eq:flow-bound-comp} is bounded using \eqref{eq:mueps-bounds} and \eqref{eq:xt-bounds}:
   \begin{align}
@@ -508,7 +508,7 @@ Using the bounds established in \lemref{lemma:time-to-impact}, it is possible to
   %
   Finally, combining \eqref{eq:flow-bound-comp}, \eqref{eq:F-bound}, \eqref{eq:G-bound}, and \eqref{eq:impact-Lipschitz} results in
   \begin{align}
-    \left\| \Pe\argsxz - \P\argsxz \right\| \leq \Ae \! \nzdxz,
+    \left\| \Pe\argsxz - \P\argsxz \right\| \leq \Ae \! \nzdxzst,
   \end{align}
   where
   \begin{align}
@@ -524,13 +524,14 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   \begin{align}
     \label{eq:lyap-cond-nom}
-    r_{1} \nzdxz^{2} \leq \Vn\argsxz &\leq r_{2} \nzdxz^2,\\
+    r_{1} \nzdxz^{2} \leq \Vn\argsxz &\leq r_{2} \nzdxzst^2,\\
     \nonumber
-    \Vn(\P\argsxz) - \Vn\argsxz &\leq -r_{3} \nzdxz^{2},\\
+    \Vn(\P\argsxz) - \Vn\argsxz &\leq -r_{3} \nzdxzst^{2},\\
     \nonumber
-    | \Vn\argsxz - \Vn(\zdx', \zdz') | &\leq\\
+    | \Vn\argsxz - \Vn(\zdx', \zdz') | &\leq
+    r_{4} \| \argsxzst - \argsxzstprime \| \cdot\\
     \nonumber
-    r_{4} \| \argsxz - &\argsxzprime \| \left( \nzdxz + \nzdxzprime\right)
+    & \hspace{1em} (\nzdxzst + \nzdxzstprime)
   \end{align}
   for some $r_{1}, r_{2}, r_{3}, r_{4} \in \Rpd$.
   %
@@ -546,9 +547,9 @@ Now \thmref{theorem:main-theorem} can be proven:
   From \eqref{eq:lyap-cond-nrg-es} and \eqref{eq:lyap-cond-nom}, it is apparent that $\VP\argsxz$ is bounded as follows:
   %
   \begin{align}
-    \sigma c_{1} \nzdx^{2} + r_{1} \nzdxz^{2} &\leq \VP\argsxz\\
+    \lefteqn{\sigma c_{1} \nzdx^{2} + r_{1} \nzdxzst^{2}}\\
     \nonumber
-    &\leq \sigma \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2} + r_{2} \nzdxz^{2}.
+    &&\hspace{5em} \leq \VP\argsxz \leq \sigma \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2} + r_{2} \nzdxzst^{2}.
   \end{align}
   %
   Next, note that
@@ -572,7 +573,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   \begin{align}
     \nonumber
     \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz - \DeltaX\xzst \right\|^{2}\\
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \left\| \argsxz \right\|^{2}.
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \nzdxzst^{2}.
   \end{align}
   %
   Using \lemref{lemma:TIe-bounds} and defining $\bepsone := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ yields
@@ -580,7 +581,7 @@ Now \thmref{theorem:main-theorem} can be proven:
     \label{eq:DVeX-bounds}
     \lefteqn{\Vex(\Pex\argsxz) - \Vex(\zdx) \leq}\\
     \nonumber
-    &&\bepsone \nzdxz^{2} - \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2}.
+    &&\bepsone \nzdxzst^{2} - \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2}.
   \end{align}
 
   Now the Lyapunov function from the converse theorem must be bounded.
@@ -588,13 +589,13 @@ Now \thmref{theorem:main-theorem} can be proven:
   As a result of \lemref{lemma:hard-one} and the assumption of exponential stability about the origin, it follows that
   \begin{align}
     \label{eq:Pe-P-bounds}
-    &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxz,\\
+    &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,\\
     \nonumber
     &\| \Pe\argsxz \| = \| \Pez\argsxz - \P\argsxz + \P\argsxz - \P\xzst\|\\
     \nonumber
-    & \hspace{4.4em} \leq \Ae \nzdxz  + \LP\nzdxz,\\
+    & \hspace{4.4em} \leq \Ae \nzdxzst  + \LP\nzdxzst,\\
     \nonumber
-    &\| \P\argsxz \| \leq N \alpha \nzdxz,
+    &\| \P\argsxz \| \leq N \alpha \nzdxzst,
   \end{align}
   where $\LP$ is the Lipschitz constant for $\P$.
   %
@@ -607,7 +608,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   Applying \eqref{eq:Pe-P-bounds} to the above results in
   \begin{align}
     \label{eq:Pe-P-beta}
-    | \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq \bepstwo \nzdxz^{2}
+    | \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq \bepstwo \nzdxzst^{2}
   \end{align}
   where, for simplicity, $\bepstwo := r_{4} \Ae (N \alpha + \Ae  + \LP)$.
   %
@@ -619,19 +620,20 @@ Now \thmref{theorem:main-theorem} can be proven:
     \nonumber
     &= \Vn(\Pe\argsxz) - \Vn(\P\argsxz) + \Vn(\P\argsxz) - \Vn\argsxz\\
     \nonumber
-    &\leq \bepstwo \nzdxz^{2} - r_{3} \nzdxz^{2}.
+    &\leq \bepstwo \nzdxzst^{2} - r_{3} \nzdxzst^{2}.
   \end{align}
   Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and \eqref{eq:nom-lyap-bounds} yields
   \begin{align}
-    \VP(\Pe\argsxz) - \VP\argsxz \leq
-    -\left(\!\!\!\begin{array}{c c}
-    \nzdx\!\!\! & \!\!\!\nzdz
-    \end{array}\!\!\!\right)
-    \!\Le\!
-    \left(\!\!\!\begin{array}{c}
+    \nonumber
+    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz \leq}\\
+    &&-\left(\begin{array}{c c}
+    \nzdx & \nzdzst
+    \end{array}\right)
+    \Le
+    \left(\begin{array}{c}
     \nzdx\\
-    \nzdz
-    \end{array}\!\!\!\right)
+    \nzdzst
+    \end{array}\right)
   \end{align}
   with
   \begin{align}
