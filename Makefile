@@ -30,15 +30,15 @@ $(PROJNAME).ps: $(PROJNAME).dvi
 	dvips $<
 
 $(PROJNAME).dvi: $(PROJNAME).aux
-	$(LATEX_CMD) $(PROJNAME).tex
-	$(LATEX_CMD) $(PROJNAME).tex
+	$(LATEX_CMD) $(basename $<)
+	$(LATEX_CMD) $(basename $<)
 
 $(PROJNAME).aux: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
 sections/*.tex references.bib $(EPS_LATEX) $(EPS_NO_LATEX)
-	$(LATEX_CMD) $(PROJNAME).tex
-	bibtex $(PROJNAME).aux
+	$(LATEX_CMD) $<
+	bibtex $(basename $<)
 
 figs/%.eps_latex: figs/%.eps_tex figs/%.eps figs/do_latex_subs.py figs/latex_subs.json
 	$(MAKE) -C figs/ $(notdir $@)

@@ -30,6 +30,11 @@
 \newcommand{\Keps}{\K_{\resclfparam}}
 \newcommand{\mueps}{\mu_{\resclfparam}}
 
+\newcommand{\neps}{\left\|\tfrac{1}{\resclfparam}\right\|}
+\newcommand{\nrho}{\|\rho\|}
+\newcommand{\flowrho}{\flow^{\rho}}
+\newcommand{\flowrhot}{\flow^{\rho}_{t}}
+
 \newcommand{\E}{E}
 \newcommand{\Es}{\E^{*}}
 \newcommand{\Eref}{\E_{\mathrm{ref}}}
@@ -90,6 +95,9 @@
 \newcommand{\xst}{\x^{*}}
 \newcommand{\xp}{\x^{+}}
 \newcommand{\xm}{\x^{-}}
+\newcommand{\xo}{\x^{\orbit}}
+
+\newcommand{\nx}{\|\x\|}
 
 \newcommand{\boldzero}{{\mathbf 0}}
 
@@ -111,11 +119,13 @@
 
 \newcommand{\Poincare}{Poincar{\'e}}
 
-\newcommand{\figref}[1]{Figure~\ref{#1}}
+\newcommand{\defref}[1]{Definition~\ref{#1}}
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\lemref}[1]{Lemma~\ref{#1}}
 \newcommand{\thmref}[1]{Theorem~\ref{#1}}
 \newcommand{\propref}[1]{Proposition~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
 
 \newcommand{\CG}{H}
 
@@ -126,11 +136,18 @@
 \newcommand{\HCSbar}{\HSbar_{c}}
 
 \newcommand{\argsxz}{(\zdx, \zdz)}
+\newcommand{\argsxzti}[1]{(\zdx_{#1}(t), \zdz_{#1}(t))}
+\newcommand{\argsxzizero}[1]{(\zdx_{#1}(0), \zdz_{#1}(0))}
+\newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}(t), {\dot \zdz}_{#1}(t))}
 \newcommand{\argsx}{(\zdx)}
 \newcommand{\argsz}{(\zdz)}
 
 \newcommand{\xzst}{(0, \zdz^{*})}
 
+\newcommand{\taueps}{\tau^{\resclfparam}}
+\newcommand{\taurho}{\tau^{\rho}}
+
+\newcommand{\argsxzt}{(\zdx(t), \zdz(t))}
 \newcommand{\argsxztau}{(\zdx(\tau), \zdz(\tau))}
 \newcommand{\argsmuxz}{(\mu_{1}, \mu_{2}, \zdx, \zdz)}
 \newcommand{\argstxzi}[2]{(\zdx_{#2}(#1), \zdz_{#2}(#1))}
@@ -145,12 +162,13 @@
 \newcommand{\nzdxzst}{\left\|\argsxzst\right\|}
 
 
-\newcommand{\nzdx}{\left\|\zdx\right\|}
+\newcommand{\nzdx}{\left|\zdx\right|}
 \newcommand{\nzdz}{\left\|\zdz\right\|}
 \newcommand{\nzdxzprime}{\left\|\argsxzprime\right\|}
 \newcommand{\nzdxzstprime}{\left\|\argsxzstprime\right\|}
 
-\newcommand{\nzdxt}{\|\zdx(\tau)\|}
+\newcommand{\nzdxt}{|\zdx(\tau)|}
+\newcommand{\nzdxzero}{|\zdx(0)|}
 \newcommand{\nzdzst}{\left\|\zdz - \zdzst\right\|}
 
 \newcommand{\argszero}{(0, \boldzero)}
@@ -177,7 +195,8 @@
 \newcommand{\Le}{\Lambda(\resclfparam)}
 
 \newcommand{\Ae}{A_{P}(\resclfparam)}
-\newcommand{\ATIe}{A_{\TI}(\resclfparam)}
+\newcommand{\ATI}{A_{\TI}}
+\newcommand{\ATIe}{\ATI(\resclfparam)}
 \newcommand{\bepsone}{\beta_{1}(\resclfparam)}
 \newcommand{\bepstwo}{\beta_{2}(\resclfparam)}
 
@@ -188,6 +207,7 @@
 
 
 \newcommand{\floweps}{\flow^{\resclfparam}}
+\newcommand{\flowepst}{\floweps_{t}}
 
 \newcommand{\bigF}{\Phi}
 \newcommand{\bigG}{\Gamma}
@@ -197,3 +217,11 @@
 
 \newcommand{\stabletube}{\Omega}
 \newcommand{\zdmanifold}{\mathcal{Z}}
+
+\newcommand{\vgap}{}
+
+\newcommand{\PSection}{\mathcal{P}}
+
+\newcommand{\etaeps}{\eta_{\resclfparam}}
+
+\newcommand{\xrem}{(\q_{1}, \ \ldots, \ q_{n}, \ \dq_{1}, \ \ldots, \ \dq_{n-1})}
