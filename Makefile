@@ -18,11 +18,6 @@ cg-energy:
 es-stability:
 	$(MAKE) -C notes/ es-stability.pdf
 
-outline: outline.pdf
-
-outline.pdf: outline.rst
-	rst2pdf outline.rst
-
 $(PROJNAME).pdf: $(PROJNAME).ps
 	ps2pdf $<
 
