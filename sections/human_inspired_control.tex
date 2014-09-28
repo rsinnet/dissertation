@@ -5,23 +5,23 @@ This section shows how to determine the domain breakdown for the walking of nine
 
 Application of the presented method to each of the tests subjects results in an identical domain breakdown for each subject, purporting that there is indeed a {\em universal} domain breakdown for healthy human walking. This result is a significant step toward understanding human walking. Accordingly, this universal domain breakdown will be considered when constructing the hybrid model of the biped of interest in this paper. This domain breakdown has been used by the authors to formulate a metric on the humanlike nature of robotic walking gaits.\cite{AVB11,VAB11}
 
-%\begin{figure}[t!]
-%  \centering
-%  \includegraphics[width=0.5\textwidth]{figures/LabeledDiagram}
-%  \caption{Illustrations of the experimental setup (left) and sensor placement (right). Each subject in the experiment was required to wear a suit where the LED sensors are fastened in place. The sensors were placed at the joints as illustrated with the red dots on the right lateral and anterior aspects of the right leg. Sensors were placed identically on the left leg. The same sensors drawn from different views are connected with red arrows. The blue arrows illustrate the leg segment lengths of interest, i.e. $L_1, L_2, L_3, L_4$. The diversity of the subjects with respect to these lengths can be seen in \tabref{tab:measurements}.}
-%  \label{fig:Sensors}
-%\end{figure}
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=1.0\textwidth]{LabeledDiagram}
+  \caption{Illustrations of the experimental setup (left) and sensor placement (right). Each subject in the experiment was required to wear a suit where the LED sensors are fastened in place. The sensors were placed at the joints as illustrated with the red dots on the right lateral and anterior aspects of the right leg. Sensors were placed identically on the left leg. The same sensors drawn from different views are connected with red arrows. The blue arrows illustrate the leg segment lengths of interest, i.e. $L_1, L_2, L_3, L_4$. The diversity of the subjects with respect to these lengths can be seen in \tabref{tab:measurements}.}
+  \label{fig:Sensors}
+\end{figure}
 
 \subsection{Walking Experiment} Data were collected on nine subjects using the Phase Space System\cite{phasespace}\xspace which computes the 3D position of $19$ LED sensors at $480$ frames per second using $12$ cameras. The cameras were calibrated prior to the experiment and were placed to achieve a one millimeter level of accuracy for a space of size five by five by five meters cubed. Eight LED sensors were placed on each leg at the joints and on the heel and toe as shown in \figref{fig:Sensors}, one LED sensor was placed on the sternum, one LED sensor was placed on the back behind the sternum, and one LED sensor was placed on the umbilicus.
 
 Each trial of the experiment required the subject to walk three meters along a straight line drawn on the floor. Each subject performed $12$ trials which constituted a single experiment. Three female and six male subjects were tested with ages ranging between $17$ and $77$ years, heights ranging between $161$ and $189$ centimeters, and masses ranging between $47.6$ and $90.7$ kilograms. \tabref{tab:measurements} describes the measurements of each of the subjects. The data for each individual were rotated so the walking occurs in the $x$-direction and, for each subject, the $12$ walking trials were averaged (after appropriately shifting the data in time) which resulted in a single trajectory for each constraint for each subject for at least two steps (one step per leg); the resulting data can be seen in \figref{fig:heeltoefit}. An interested researcher should be able to perform analysis on the collected data, which can be found online.\cite{ourdataset}
 
-%\begin{figure}[t!]
-%  \centering
-%  \includegraphics[width=.6\textwidth]{figures/subject_range_graph}
-%  \caption{The ranges of age, height, and mass of the test subjects.}
-%  \label{fig:subject-ranges}
-%\end{figure}
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=1.0\textwidth]{subject_range_graph}
+  \caption{The ranges of age, height, and mass of the test subjects.}
+  \label{fig:subject-ranges}
+\end{figure}
 
 \subsection{Function Fitting} In order to determine the domain breakdowns for the subjects in the walking experiment, it is necessary to determine the times when the robot-ground contact points change, i.e., the {\em event times}. Rather than looking for when the contact point is constrained (through thresholds), one can look for the ``simplest'' function that the contact point follows when not enforced. Then, for the domains in which the constraint {\em is not} enforced, use the simple function; in the other domains, those in which the constraint {\em is} enforced, fit a flat line to the constraint as it should be essentially constant. This is an optimization problem which can be stated as follows:
 \begin{enumerate}
@@ -31,19 +31,19 @@ Each trial of the experiment required the subject to walk three meters along a s
   \item{Minimize the cost function by choosing a new guess for the event times and then repeating steps 2-4.}
 \end{enumerate}
 
-%\begin{figure}[t!]
-%  \centering
-%  \subfloat[Heel height]{
-%    \includegraphics[width=0.48\columnwidth]{figures/LeftHeel}
-%    \label{fig:heelheight}
-%  }
-%  \subfloat[Toe height]{
-%    \includegraphics[width=0.48\columnwidth]{figures/LeftToe}
-%    \label{fig:toeheight}
-%  }
-%  \caption{The data for the heights of the heel and toe together with the fittings of a constant$\to$Gaussian$\to$constant for the heel and a constant$\to$fourth-order polynomial$\to$constant for the toe. The vertical lines on the left and right indicate the lift and strike times, respectively.}
-%  \label{fig:heeltoefit}
-%\end{figure}
+\begin{figure}[t!]
+  \centering
+  \subfloat[Heel height]{
+    \includegraphics[width=0.48\columnwidth]{LeftHeel}
+    \label{fig:heelheight}
+  }
+  \subfloat[Toe height]{
+    \includegraphics[width=0.48\columnwidth]{LeftToe}
+    \label{fig:toeheight}
+  }
+  \caption{The data for the heights of the heel and toe together with the fittings of a constant$\to$Gaussian$\to$constant for the heel and a constant$\to$fourth-order polynomial$\to$constant for the toe. The vertical lines on the left and right indicate the lift and strike times, respectively.}
+  \label{fig:heeltoefit}
+\end{figure}
 
 
 To formalize the idea of function fitting to determine event times, given a set of contact points $\C$, let $s_{c}(t, a_{c})$ be the ``simplest'' function that a given contact point $c \in \C$ follows when not in contact with the ground; here $a_{c} \in R^{n_{c}}$ is a collection of parameters for the function $s_{c}(t, a_{c})$ corresponding to contact point $c$. Denote the indexed human data for contact point $c$ by $y_{c}[k]$, with $\tau[k]$ the time corresponding to datum $y_{c}[k]$ for discrete index variable $k \in \{1,\ldots,T\}$. When the contact point is constrained, it is constant, and when it is unconstrained, it follows $s_{c}(t, a_{c})$. For each contact point $c \in \C$, consider the function:
@@ -63,12 +63,12 @@ for each $c \in \C$. In the case of humans with flat feet, there are four constr
 
 To illustrate this procedure, consider the averaged data for the heel and toe shown in \figref{fig:heeltoefit}. Looking at these data, the trajectory of the heel appears to follow a constant, followed by a Gaussian, followed by a constant.  In a similar fashion, the averaged data for the toe appear to follow a constant, followed by a fourth-order polynomial, followed by a constant. With these observations in hand, fit the averaged heel and toe data to these functions using the described procedure. The results of the fitting procedure are shown in the topmost graph of \figref{fig:heeltoefit}; the transition points $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ are indicated by vertical lines. The fits quite accurately represent the data given the simplicity of the functions chosen; to quantify this, the coefficients of correlatation are $0.9968$ for the heel and $0.9699$ for the toe.
 
-%\begin{figure}[t!]
-%  \centering
-%  \includegraphics[width=0.98\columnwidth]{figures/domainbreaking}
-%  \caption{An overview of how the domain breakdown is achieved. The top row illustrates the height of the toe and heel of each leg over one step along with the lifting and strike time for each constraint (illustrated with vertical lines). The middle row illustrates which constraints are active based upon the fitting. The bottom row is the resulting domain breakdown where enforced constraints are drawn in green circles.}
-%  \label{fig:domainbreakdown}
-%\end{figure}
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=1.0\columnwidth]{domainbreaking}
+  \caption{An overview of how the domain breakdown is achieved. The top row illustrates the height of the toe and heel of each leg over one step along with the lifting and strike time for each constraint (illustrated with vertical lines). The middle row illustrates which constraints are active based upon the fitting. The bottom row is the resulting domain breakdown where enforced constraints are drawn in green circles.}
+  \label{fig:domainbreakdown}
+\end{figure}
 
 
 \subsection{Determining the Domain Breakdown} Given the data for a contact point $c \in \C$, the lift and strike times are determined for each contact point, $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ for $c \in \C =  \{c_{1},c_{2},c_{3},c_{4}\} = \{\clh, \clt, \crh, \crt\}$, over the time interval of the averaged data, $\big[\tau[1], \tau[T]\big]$, using the aforementioned techniques. Since the data comprise at least two steps (one step with each leg), there are multiple lift and strike times over the period of the data. Denote by $\mathcal{J}_{c} \subset \big[\tau[1], \tau[T]\big]$ the period where the constraints associated with a contact point are enforced, i.e., $t \in \mathcal{J}_{c}$ if $f_{c}(t) = \mathrm{constant}$ with $f_{c}$ the fitting function for the contact point $c \in \C$; these intervals are shown in blue in \figref{fig:domainbreakdown} over the course of one step (not the entire data period) in the case of $\C =  \{\clh, \clt, \crh, \crt\}$.  Analogous to the definition of a domain breakdown (\defref{def:domainbreakdown}), one can define a binary vector, $b(t) \in \Z_{2}^{|\C|}$ with $|\C|$ representing the cardinality of $\C$, encoding which contact points are constrained at any given time by letting $b_{i}(t) = 1$ if $t \in \mathcal{J}_{c_{i}}$ for $i \in \{1, \ldots, |\C|\}$.
@@ -86,30 +86,30 @@ for $n \in \{1, \ldots, N-p\}$ with $I$ the identity matrix and $\boldzero, I \i
 
 \subsection{Results} The outlined process is performed on the set of contact points $\C =  \{\clh, \clt, \crh , \crt\}$ for the nine test subjects that performed the walking experiment. The end result showed that each subject had the same, {\em universal}, domain breakdown; this can be seen in \figref{fig:domaingraph}. In the context of this paper, a single subject was chosen for study based upon the completeness of the sensor data, which, in this case, was subject four; the domain breakdown and the time spent in each domain for the subject can be seen in \figref{fred}. It is important to note that the results are consistent with those found in the biomechanics literature. Specifically, performing the breakdown process on data from the literature\cite{Winter90} resulted in the same domain breakdown. Additionally, the amount of time spent having single and double support are similar to previous studies.\cite{Ackermann07}
 
-%\begin{figure}[t]
-%  \centering
-%  \includegraphics[width=0.7\columnwidth]{figures/Fred}
-%  \caption{The domain breakdown for subject four together with the amount of time spent in each domain. Each illustration is a snapshot of the subject's configuration at the beginning of the domain together with the contact points enforced.}
-%  \label{fred}
-%\end{figure}
+\begin{figure}[t]
+  \centering
+  \includegraphics[width=1.0\columnwidth]{test_subject_4}
+  \caption{The domain breakdown for subject four together with the amount of time spent in each domain. Each illustration is a snapshot of the subject's configuration at the beginning of the domain together with the contact points enforced.}
+  \label{fred}
+\end{figure}
 
-%\begin{figure*}[t!]
-%  \centering
-%  \subfloat[Angular constraints]{
-%    \includegraphics[width=0.32\textwidth]{figures/constraints_angles}
-%    \label{fig:constraints-knees}
-%  }
-%  \subfloat[Slope constraints]{
-%    \includegraphics[width=0.32\textwidth]{figures/constraints_slopes}
-%    \label{fig:constraints-legs}
-%  }
-%  \subfloat[Height constraints]{
-%    \includegraphics[width=0.32\textwidth]{figures/constraints_heights}
-%    \label{fig:constraints-heights}
-%  }
-%  \caption{Human data over the course of one step with one leg and the ``canonical'' functions that are fitted to these data. $d$ superscripts represent the data and $f$ superscripts represent the fits. The plots start at the beginning of the domain {\DA}, with vertical lines indicating when transitions between domains occur. The specific variables that are plotted can be seen in \figref{fig:robotconstraints}.}
-%  \label{fig:constraints-fitting}
-%\end{figure*}
+\begin{figure}[t!]
+  \centering
+  \subfloat[Angular constraints]{
+    \includegraphics[width=0.32\textwidth]{constraints_angles}
+    \label{fig:constraints-knees}
+  }
+  \subfloat[Slope constraints]{
+   \includegraphics[width=0.32\textwidth]{constraints_slopes}
+    \label{fig:constraints-legs}
+  }
+  \subfloat[Height constraints]{
+    \includegraphics[width=0.32\textwidth]{constraints_heights}
+    \label{fig:constraints-heights}
+  }
+  \caption{Human data over the course of one step with one leg and the ``canonical'' functions that are fitted to these data. $d$ superscripts represent the data and $f$ superscripts represent the fits. The plots start at the beginning of the domain {\DA}, with vertical lines indicating when transitions between domains occur. The specific variables that are plotted can be seen in \figref{fig:robotconstraints}.}
+  \label{fig:constraints-fitting}
+\end{figure}
 
 \section{Human-Inspired Controller Design} \noindent
 The goal of this section is to find functions that are ``canonical'' to human walking, i.e., outputs on the configuration of the human, such as the angle of the knee, that seem to be intrinsic to walking. These functions will be used in the design of control laws, for a bipedal robot with anthropomorphic measurements, using the standard method of input/output linearization.\cite{Sastry99}\xspace This control design strategy results in anthropomorphic walking behavior.
@@ -119,19 +119,19 @@ Rather than just using trajectories from the human data, functions are sought wh
 
 Data is considered from subject four; this data is obtained through the process outlined in \secref{sec:domainbreakdown}. (Subject four's data was selected as it contains the least noise.) A variety of functions are inspected --- these represent different fundamental behaviors of human walking, e.g., the movement of the torso or of the legs. Examination of the human data, reveals that functions describing the behavior of the torso, the hip, the non-stance leg slope (the slope of the line connecting the non-stance ankle to the hip), the knee angles, and the heel and toe heights seem to encode the most fundamental behaviors related to walking, as dictated by the correlation between the data and the fitted functions. The human behavior of these different functions throughout the course of the walking gait can be seen in \figref{fig:constraints-fitting}, with the data beginning at the start of domain $ts$.
 
-%\begin{figure*}[t]
-%  \centering
-%  \subfloat[Comparison of hip movement] {
-%    \includegraphics[width=.48\textwidth]{figures/hip_pos}
-%    \label{fig:hip-pos}
-%  }
-%  \subfloat[Angular motion of torso] {
-%    \includegraphics[width=.48\textwidth]{figures/torso_angle}
-%    \label{fig:torso-angle}
-%  }
-%  \caption{Trajectories for the hip (a) and torso (b).}
-%  \label{fig:torso-hip}
-%\end{figure*}
+\begin{figure}[t]
+  \centering
+  \subfloat[Comparison of hip movement] {
+    \includegraphics[width=.48\textwidth]{hip_pos}
+    \label{fig:hip-pos}
+  }
+  \subfloat[Angular motion of torso] {
+    \includegraphics[width=.48\textwidth]{torso_angle}
+    \label{fig:torso-angle}
+  }
+  \caption{Trajectories for the hip (a) and torso (b).}
+  \label{fig:torso-hip}
+\end{figure}
 
 Before further detail is given, a remark on the choice of constraints is in order:
 \begin{remark} \label{rmk:actuation}
@@ -182,20 +182,20 @@ After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracke
   Certain constraint functions represent dimensionalized constraints, e.g., heel height, whereas other functions discussed, e.g., angles and slopes, represent nondimensionalized constraints. In general it is not effective to follow dimensionalized constraints as they represent constraints on specific points of the system and thus have the potential to introduce extreme restrictions on the configuration space of the entire system. This should be thought of in terms of the inverse kinematics problem: consider an end-effector and solve for the range of possible configurations on the angles leading up to that point. Thus, dimensionalized constraints are not robust with respect to length parameters. Additionally, these dimensionalized constraints can conflict with other holonomic constraints being tracked. Recall that the intent is to track the height of the stance toe; in this case, the issue of configuration restriction is minimal: only the heel is pinned to the ground so tracking the toe's height is equivalent to tracking the angle or slope of the foot.
 \end{remark}
 
-%\begin{figure}[t!]
-%  \centering
-%  \subfloat[Robot configuration]{
-%    \includegraphics[width=.4\columnwidth]{figures/robot_config}
-%    \label{fig:roboconf}
-%  }
-%  \hspace{.2cm}
-%  \subfloat[Tracking outputs]{
-%    \includegraphics[width=.4\columnwidth]{figures/robot_const}
-%    \label{fig:trackingoutputs}
-%  }
-%  \caption{(a) The general configuration of the 2D bipedal robot with knees and feet being considered in this paper. (b) The different configuration-based outputs considered in the fitting of the ``canonical'' functions.}
-%    \label{fig:robotconstraints}
-%\end{figure}
+\begin{figure}[t!]
+  \centering
+  \subfloat[Robot configuration]{
+    \includegraphics[width=.4\columnwidth]{robot_config}
+    \label{fig:roboconf}
+  }
+  \hspace{.2cm}
+  \subfloat[Tracking outputs]{
+    \includegraphics[width=.4\columnwidth]{robot_const}
+    \label{fig:trackingoutputs}
+  }
+  \caption{(a) The general configuration of the 2D bipedal robot with knees and feet being considered in this paper. (b) The different configuration-based outputs considered in the fitting of the ``canonical'' functions.}
+    \label{fig:robotconstraints}
+\end{figure}
 
 \subsubsection{Fitting} The paramaters of the ``canonical'' functions can be found by minimizing the error between the human data and the corresponding functions. Formally, given a function choice $y_d(t, A)$, with $A \in \R^{n_{d}}$ the $n_d$ parameters, and the corresponding data function $x_{d}[k]$ with indexed time $\tau_{d}[k]$ for data index $k \in \{1, \ldots, K\}$ (for $K$ data points),  a solution is sought for the optimization problem:
 \begin{align}
@@ -204,12 +204,12 @@ After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracke
 \end{align}
 The fits that result from solving \eqref{eq:fitsolve} are shown in \figref{fig:constraints-fitting}. The correlation coefficient for the fits of each of the respective functions can be found in \tabref{tab:fitcor}. In all cases (with the exception of the torso and ankle), the fits are very good. One final note of import: in order to achieve walking in simulation, some parameters had to be tweaked by hand; the parameters generated as well as the tweaked parameters can be found in \tabref{tab:funcparam}.
 
-%\begin{figure}
-%  \centering
-%  \includegraphics[width=.5\columnwidth]{figures/robot_angles}
-%  \caption{The shape coordinates for the biped labeled $q_i$ with the corresponding arrows representing twists. The $x$-axis is coming out of the page. The hip width is zero and is shown for illustration purposes only. The axes shown represents the body-fixed frame which has orientation about the $y$-axis given by $\phi_b$.}
-%  \label{fig:shapecoords}
-%\end{figure}
+\begin{figure}
+  \centering
+  \includegraphics[width=.5\columnwidth]{robot_angles}
+  \caption{The shape coordinates for the biped labeled $q_i$ with the corresponding arrows representing twists. The $x$-axis is coming out of the page. The hip width is zero and is shown for illustration purposes only. The axes shown represents the body-fixed frame which has orientation about the $y$-axis given by $\phi_b$.}
+  \label{fig:shapecoords}
+\end{figure}
 
 \subsection{Robotic Hybrid Model \& Controllers} \noindent
 Consider the robotic walker shown in \figref{fig:robotconstraints}. The goal is to use the human-inspired domain breakdown and ``canonical'' walking functions to design controllers for this robot.
@@ -331,13 +331,13 @@ In the context of bipedal walking, a stable limit cycle or an exponentially stab
 \end{align}
 where, for the sake of space, only the five eigenvalues with the largest magnitudes are included. At this point in the discussion, a remark about zero eigenvalues is appropriate:
 
-%\input{phase_portrait_figure}
-%\begin{figure*}[p!]
-%  \centering
-%  \includegraphics[width=0.98\textwidth]{figures/gait_tiles}
-%  \caption{Comparison of simulated walking gaits between time-based feedback control and autonomous feedback control.}
-%  \label{fig:gaittiles}
-%\end{figure*}
+\input{phase_portrait_figure}
+\begin{figure*}[p!]
+  \centering
+  \includegraphics[width=1.0\textwidth]{hic_gait_tiles}
+  \caption{Comparison of simulated walking gaits between time-based feedback control and autonomous feedback control.}
+  \label{fig:gaittiles}
+\end{figure*}
 
 \begin{remark}
   When considering a Poincar{\'e} section $\Sigma$ which is a guard of a hybrid system with constraints, some of the eigenvalues will be zero. This is a result of the difference in the dimension of the Jacobian and the dimension of the guard which is a transverse hyperplane of the continuous trajectory. Specifically, consider the guard used here as $\Sigma$. In this case, the guard restricts the previously nine-dimensional position space such that the state of the system, throwing out cyclic variables such as $x$-position, can be determined completely using only six position variables. This results in a number of zero eigenvalues, in this case, three relating to position and three for the corresponding velocities. More on this topic can be found in the literature.\cite{WA10}

@@ -25,6 +25,18 @@
 \usepackage{mathrsfs}
 \usepackage{xspace}
 
+\graphicspath{{figs/}}
+\DeclareGraphicsExtensions{.pdf,.eps,.jpg,.png}
+
+\usepackage[labelformat=simple]{subfig}
+\renewcommand{\thesubfigure}{(\alph{subfigure})}
+\makeatletter
+  \renewcommand{\p@subfigure}{\thefigure}
+  \renewcommand\@biblabel[1]{#1.}
+\makeatother
+
+
+
 % Added to fix issues with pdf searching in some versions of LaTeX
 %\usepackage[T1]{fontenc}\usepackage{lmodern}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
