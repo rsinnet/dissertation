@@ -2,13 +2,13 @@
 
 Though the methods presented in this thesis may be useful on a variety of control systems, the primary application used for expositional purposes is bipedal robotic walking.
 %
-This phenomenon demonstrates two mathematically similar dynamics which operate at vastly different time scales.
+This phenomenon demonstrates two dynamics which operate at different time scales.
 %
 In particular, nominal motion can be modeled as a continuous dynamics and impact behavior can be treated as a discrete dynamics.
 %
 The development of the dynamic models for these two dynamics is parallel but a dichotomy arises in the application of constraining forces.
 
-This chapter presents the development of the necessary dynamics for modeling hybrid mechanical systems and discusses some of the tools available for modeling and simulation.
+This chapter presents the development of the necessary dynamics for modeling hybrid mechanical systems.
 
 
 \section{Rigid Body Kinematics}
@@ -21,7 +21,11 @@ that
 \end{align}
 which expresses the basic property of physics that applying a force to a massive object induces a particular acceleration.
 %
-Through the property of superposition, this relationship eventually leads to standard dynamic model of a robot as expressed in \ref{eq:robot-dynamics}, but fundamentally, all physics-based models demonstrate Newton's Second Law.
+Through the property of superposition, this relationship eventually leads to standard dynamic model of a robot,
+\begin{align}
+  \M\argsq + \HCor\argsqdq = \B\argsq \, \u
+\end{align}
+but fundamentally, all physics-based models demonstrate Newton's Second Law.
 
 Consider a three-dimensional rigid body with no contact assumptions; i.e., the body is free to move in space.
 %
@@ -60,7 +64,7 @@ As one might guess, this requires that the fixed frame be located at the center 
 
 \section{Kinematic Chains}
 
-Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact.
+Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact (this is typically called the Newton--Euler method \cite{Hollerbach80}).
 %
 For robotic motion, holonomic constraints act to reduce the allowable motion and, as a consequence, there exists a minimal set of coordinates which can be used to describe a robot's dynamics.
 %
@@ -80,36 +84,40 @@ This minimal set is referred to as the {\em generalized coordinates}.
 
 Hybrid dynamical systems are systems which combine continuous and discrete dynamics.
 %
-This combination of dynamics at different time scales motivates the use of hybrid systems in modeling numerous physical phenomena including bipedal walking, which is the motivating example most pertinent to this thesis.
+By their nature, they provide a useful framework for modeling mechanical systems with impact.
 %
-Hybrid dynamical systems have seen widespread use and comprehensive formal development over the years; see, e.g., \cite{aut_2014_gcsa_01,WGCCM07}.
+Thr combination of dynamics motivates the use of hybrid systems in modeling numerous physical phenomena including bipedal walking, which is the motivating example most pertinent to this thesis.
 %
-Other frameworks exist for modeling the same physical phenomena such as differential inclusions as discussed in \cite{Filippov88}.
 
-With the goal of modeling a mechanical system exhibiting both continuous and discrete dynamics, consider a hybrid dynamical system with total energy $\E(\x)$.
+Hybrid dynamical systems have seen widespread use and comprehensive formal development over the years; see, e.g., \cite{BrBoMi98,GoSaTe09,aut_2014_gcsa_01,ScSc00,WGCCM07}.
 %
-Let the generalized coordinates of the system be represented by $\x \in \X$ where $\X$ is the state space.
+Other frameworks exist for modeling the same physical phenomena such as differential inclusions as discussed in \cite{Filippov88} but hybrid systems methods are becoming increasingly popular.
+
+With the goal of modeling a mechanical system exhibiting both continuous and discrete dynamics, consider a hybrid dynamical system with total energy $\E\argsqdq$ where the coordinates $\q \in \Q$ take values in the {\em configuration space} $\Q$ and the velocities are in the tangent bundle, $T\Q$.
+%
+For ease of exposition, let the generalized coordinates of the system be represented by $\argsqdq = \x \in \X$ where $\X$ is the state space.
 %
 The evolution of the system depends on a {\em unilateral constraint}, $h : \R^{n} \to \Rnn$, which can be used to define the {\em guard} or {\em switching surface}.
 %
-In the case of a bipedal robot with simple foot behavior, a common selection for the unilateral constraint is the height of the swing foot, i.e., $h = \hnsf(\q)$.
-
-
-which takes values in the {\em domain of admissibility},
+In the case of a bipedal robot with simple foot behavior, a common selection for the unilateral constraint is the height of the swing foot, i.e., $h\argsx = \hnsf\argsq$.
+%
+By definining unilateral constraints as functions which not be negative and which cause dicrete jumps when the system attempts to cross the zero level set of a function ($h\argsx$), one arrives at a a definition of the {\em domain of admissibility} as
 %
 \begin{align}
   \label{eq:domain}
-  \D &= \left\{ \x \times \R^{n} : h(\x) \geq 0 \right\}.
+  \D &= \left\{ \x \times \R^{n} : h\arx \geq 0 \right\},
 \end{align}
 %
-where the discrete aspect comes from a {\em guard constraint}, , which leads to a transverse plane, $\S \subset \R^{n}$, called the {\em switching surface},
+which describes the admissible states of the system.
+%
+The boundary at the zero level set of $h\argsx$ naturally gives rise to the switching surface,
 %
 \begin{align}
   \label{eq:guard}
-  \S &= \left\{ \x \in \R^{n} : h(\x) = 0 \mbox{ and } {\dot h}(\x) < 0 \right\}.
+  \S &= \left\{ \x \in \R^{n} : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0 \right\}.
 \end{align}
 %
-The uncontrolled hybrid system can be written
+Using these spaces, an uncontrolled hybrid system can be expressed as
 %
 \begin{align}
   \HS = \left\{
@@ -120,14 +128,14 @@ The uncontrolled hybrid system can be written
   \label{eq:hsys}
 \end{align}
 %
-where $\xf(\x)$ and $\xg(\x04)$ are smooth vector fields and $\Delta$ is a smooth map called the reset map (see, e.g., \cite{MoGr05}).
+where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D \setminus S$ is a smooth map called the reset map (see, e.g., \cite{MoGr05}).
 %
 Under the action of control effort $\u$, the corresponding hybrid control system has the form
 %
 \begin{align}
   \HCS = \left\{
   \begin{array}{l l}
-    \dx = \xf(\x) + \xg(\x) \, \u, & \x \in \D \setminus \S,\\
+    \dx = \xf\arx + \xg\arx \, \u, & \x \in \D \setminus \S,\\
     \xp = \Delta(\xm), & \x \in \S,
   \end{array}\right.
   \label{eq:hcsys}
