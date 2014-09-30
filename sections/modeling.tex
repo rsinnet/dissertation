@@ -414,7 +414,7 @@ Using this Jacobian, the constrained dynamic model is given by
   \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \u + J_v^T\argsq F_v\argsqdqu.
 \end{align}
 %
-where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eqn:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (\cite{MLS94}).
+where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eqn:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (see \cite{MLS94}).
 %
 Because the robot is modeled in a generalized position with ground contact enforced through constraints, the matrices $\M\argsq$, $\HCor\argsqdq$, and $\B\argsq$ are identical in every domain.
 %
@@ -468,9 +468,9 @@ Specifically, from the wrench $F_{v}\argsqdqu$, one can ensure that the foot doe
   \mu_{v}\argsq F_{v}\argsqdqu \geq 0,
 \end{align}
 %
-with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the geometry of the foot (\cite{GCAS10}).
+with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the geometry of the foot \cite{GCAS10}.
 %
-Additionally, it has been shown (\cite{CBAA09,VBSS90}) that the moment produced by the ground is limited; this limitation can be written in the form:
+Additionally, it has been shown in \cite{CBAA09,VBSS90} that the moment produced by the ground is limited; this limitation can be written in the form:
 %
 \begin{align}
   \label{eq:constnu}
@@ -565,4 +565,4 @@ This reset map takes a point on the guard of a domain and maps it into the next 
 
 The end result is that, given a domain breakdown and a bipedal robot, the hybrid model for the biped is completely determined.
 %
-One of the goals of this thesis is to determine the domain breakdowns that humans use and this section demonstrated the importance of the domain breakdown in determining the unique mathematical model of the system.
+%One of the goals of this thesis is to determine the domain breakdowns that humans use and this section demonstrated the importance of the domain breakdown in determining the unique mathematical model of the system.
