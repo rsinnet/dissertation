@@ -80,6 +80,45 @@ This minimal set is referred to as the {\em generalized coordinates}.
 %
 %Moreover, as complexity grows, it becomes is increasingly difficult to glean any useful bit of intuition from examining the expressions in symbolic form.
 
+
+Begin with a bipedal robot in either two or three dimensions---the discussions herein are applicable to either case.
+%
+Then construct a Lagrangian for the biped in a general position---specifically, no assumptions are made on ground contact---and use holonomic constraints to enforce the ground contact conditions given by the domain graph.
+
+\subsubsection{Lagrangians}
+Let $R_{0}$ be a fixed inertial or world frame and let $R_{b}$ be a reference frame attached to the body of the biped with position $p_{b} \in \R^{3}$ and orientation $\phi_{b} \in \SO(3)$ where $\SO(n)$ represents the special orthogonal group in $n$ dimensions (see \cite{CCNPW86}).
+%
+Let $\q_{s} \in \Q_{s}$ represent a choice of {\em body} or {\em shape coordinates} for the robot with $\Q_{s}$ the configuration space.
+%
+Herein, $\q_{s}$ represents the relative angles between adjacent links of the robot as shown later in \figref{fig:shapecoords}.
+%
+The {\em generalized coordinates} are then found by combining the shape coordinates with the position and orientation of the body-fixed frame, $R_{b}$, viz.
+%
+\begin{align}
+  \q = (p_{b}^{T}, \phi_{b}^{T}, \q_{s}^{T})^{T} \in Q = \R^{3} \times \SO(3) \times \Q_{s},
+\end{align}
+%
+where $Q$ is the generalized configuration space.
+
+The Lagrangian of a bipedal robot, $\Lag : T\Q \to \R$, can be stated in terms of the kinetic energy, $K : T\Q \to \R$, and the potential energy, $V : \Q \to \R$, as:
+%
+\begin{align}
+  \Lag\argsqdq = K\argsqdq - V\argsq.
+\end{align}
+%
+The Euler-Lagrange equations can be used to find the equations of motion, which, for robotic systems (\cite{MLS94}, are written:
+%
+\begin{align}
+  \label{eqn:eom}
+  \M\argsq\ddq + \HCor\argsqdq = \B\argsq \, \u
+\end{align}
+%
+where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the torque distribution matrix, only depend on $\q$, $\u$ is a vector of applied torques, and
+\begin{align}
+  \HCor\argsqdq = \CCor\argsqdq \, \dq + \G\argsq
+\end{align}
+contains terms resulting from the Coriolis effect and gravity terms grouped into a single vector. The matrix $\CCor\argsqdq$ can be found using standard methods; see \cite{MLS94}.
+
 \section{Hybrid Dynamical Systems}
 
 Hybrid dynamical systems are systems which combine continuous and discrete dynamics.
@@ -149,67 +188,98 @@ for control values in a set $\U \subseteq \R^{m}$.
 (cf. \cite{YeMiHo98})
 
 \section{Complex Domain Structure}
-Bipedal robotic walking exhibits both discrete and continuous behavior; it is, therefore, natural to model bipedal robots as hybrid systems. A walking gait will be shown to consist of multiple domains---on each domain, the system evolves in a continuous fashion according to a dynamic model derived from a Lagrangian modeling the mechanical system on that domain. This dynamic model will vary depending on which points on the robot are in contact with the ground---having points in contact with the ground introduces kinematic constraints on the system. At a certain point in each domain, i.e., when the contact points change, the model will discretely change to another phase of walking with a different dynamic model and different control. This combination of continuous and discrete phenomena is the fundamental concept underlying hybrid systems.
+Bipedal robotic walking exhibits both discrete and continuous behavior; it is, therefore, natural to model bipedal robots as hybrid systems.
+%
+A human walking gait will be shown to consist of multiple domains---on each domain, the system evolves in a continuous fashion according to a dynamic model derived from a Lagrangian modeling the mechanical system on that domain.
+%
+This dynamic model will vary depending on which points on the robot are in contact with the ground---having points in contact with the ground introduces kinematic constraints on the system.
+%
+At a certain point in each domain, i.e., when the contact points change, the model will discretely change to another phase of walking with a different dynamic model and different control.
+%
+%This combination of continuous and discrete phenomena is the fundamental concept underlying hybrid systems.
 
-In this section, a formalism for hybrid systems is introduced and a discussion of how the equations of motion of a robot together with a temporal ordering of discrete events, i.e., change in contact points, completely determine the hybrid model of a system. More specifically, to model bipedal robots, one need only consider the domain breakdown and the Lagrangian on each domain. Details are provided to show how the breakdown can be derived by considering the kinematic constraints imposed on the system throughout the course of a step.
+In this section, a formalism for multidomain hybrid systems is introduced and a discussion of how the equations of motion of a robot together with a temporal ordering of discrete events, i.e., change in contact points, completely determine the hybrid model of a system.
+%
+More specifically, to model bipedal robots, one need only consider the domain breakdown and the Lagrangian on each domain.
+%
+Details are provided to show how the breakdown can be derived by considering the kinematic constraints imposed on the system throughout the course of a step.
 
 
-\subsection{Formal Definition of Hybrid Systems}
-{\em Hybrid systems} or {\em systems with impulse effects}\cite{GAP01}\xspace have been studied extensively in a wide variety of contexts and have been used to model a wide range of bipedal robotic systems.\cite{GCAS10}\xspace This section introduces a definition of hybrid systems applicable to bipedal walking.
+\subsection{Formal Definitions}
+%{\em Hybrid systems} or {\em systems with impulse effects}\cite{GAP01}\xspace have been studied extensively in a wide variety of contexts and have been used to model a wide range of bipedal robotic systems.\cite{GCAS10}\xspace This section introduces a definition of hybrid systems applicable to bipedal walking.
 
-Steady state bipedal walking is naturally periodic with discrete impacts leading to different walking phases. Therefore, when studying walking, one should consider multi-domain hybrid systems with a temporal ordering of events, i.e., systems in which the domain graph is a {\em directed cycle}.
+Steady state bipedal walking is naturally periodic with discrete impacts leading to different walking phases.
+%
+Therefore, when studying walking, one should consider multi-domain hybrid systems with a temporal ordering of events, i.e., systems in which the domain graph is a {\em directed cycle}.
 
 %\begin{figure}[t]
 %  \centering
-%  \includegraphics[width=0.7\columnwidth]{figures/domaingraph}
+%  \includegraphics[width=0.7\columnwidth]{xdomaingraph}
 %  \caption{An example of a {\em domain breakdown}---a combination of discrete phases of a walking gait with a specific temporal ordering. The red dots indicate which constraints are enforced in each discrete phase (or domain). The domain labels are selected based on which event causes a given domain to transition to the next.}
 %  \label{fig:domaingraph}
 %\end{figure}
 
 \begin{definition}
-A {\em directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of vertices and $E$ a set of edges---for an edge $e \in E$, denote the source by $\sor(e)$ and the target by $\tar(e)$---in which the edges and vertices can be written
-\begin{align}
-\label{eqn:directedcyclep}
+  A {\em directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of vertices and $E$ a set of edges---for an edge $e \in E$, denote the source by $\sor(e)$ and the target by $\tar(e)$---in which the edges and vertices can be written
+  %
+  \begin{align}
+    \nonumber
     V &= \left\{v_{1}, v_{2}, \ldots, v_{p}\right\},\\
+    \label{eqn:directedcyclep}
     E &= \left\{e_{1} = \{v_{1}, v_{2}\}, e_{2} = \{v_{2}, v_{3}\}, \ldots, e_{p} = \{v_{p}, v_{1}\}\right\},
-\end{align}
+  \end{align}
+  %
+  where $p$ is the number of discrete domains in the corresponding hybrid model.
 \end{definition}
-where $p$ is the number of discrete domains in the corresponding hybrid model.
 
-This concept is illustrated in the following example, which will be used later in this paper:
+This concept is illustrated in the following example, which will be used later in \chapref{ch:hic}:
 
 \begin{exmp} \label{universalgraph}
-The domain breakdown pictured in \figref{fig:domaingraph} has an underlying graph that is a directed cycle; the graph is given by $\Gamma_{u} = (V_{u}, E_{u})$. In particular, there are four vertices and four edges with
-\begin{align}
+  The domain breakdown pictured in \figref{fig:domaingraph} has an underlying graph that is a directed cycle;
+  %
+  the graph is given by $\Gamma_{u} = (V_{u}, E_{u})$.
+  %
+  In particular, there are four vertices and four edges with
+  %
+  \begin{align}
+    \nonumber
     V_u &= \left\{\DA, \DB, \DC, \DD\right\},\\
     E_u &= \left\{\{\DA, \DB\}, \{\DB, \DC\}, \{\DC, \DD\}, \{\DD, \DA\}\right\}.
-\end{align}
+  \end{align}
 \end{exmp}
 
-The concept of a directed cycle a fundamental component in the forumulation of multidomain hybrid systems:
+The concept of a directed cycle is a fundamental component in the forumulation of multidomain hybrid systems:
 
 \begin{definition} A {\em hybrid control system in a cycle} is a tuple,
-\begin{align}
-  \HCS = (\Gamma, \D, U, S, \Delta, FG),
-\end{align}
-\end{definition}
-where
-\begin{itemize}
+  %
+  \begin{align}
+    \HCS = (\Gamma, \D, U, S, \Delta, FG),
+  \end{align}
+  %
+  where
+  \begin{itemize}
   \item $\Gamma = (V,E)$ is a {\em directed cycle},
   \item $\D = \{\D_{v}\}_{v \in V}$ is a set of {\em domains} with $\D_{v} \subseteq \mathcal{X}_{v} \times U_v$ a smooth submanifold, where $\mathcal{X}_{v}$ represents the state space,
-  \item $U = \{U_{v}\}_{v \in V}$ with $U_{v} \subseteq \R^{m_{v}}$ a set of admissible controls,
+  \item $U = \{U_{v}\}_{v \in V}$ with $U_{v} \subseteq \R^{m_{v}}$ a set of {\em admissible control sets},
   \item $S = \{S_{e}\}_{e \in E}$ is a set of {\em guards} or {\em switching surfaces}, with $S_{e} \subseteq \D_{\sor(e)}$,
   \item $\Delta = \{\Delta_{e}\}_{e \in E}$ is a set of {\em reset maps}, with $\Delta_{e} : S_{e} \to \mathcal{X}_{\tar(e)}$ a smooth map,
-  \item $FG = \{(f_{v}, g_{v})\}_{v \in E}$ with $(f_v,g_v)$ a {\em control system} on $D_{v}$, i.e., $\dot{x} = f_{v}(x) + g_{v}(x) u$ $\forall$ $(x^{T}, u^{T})^{T} \in \D_{v}$.
-\end{itemize}
-A {\em hybrid system} is a hybrid control system with $U_v = \emptyset$ $\forall$ $v \in V$, e.g., any applicable feedback controllers have been applied, making the system closed-loop:
-\begin{align}
-  \HS = (\Gamma, \D, S, \Delta, F),
-\end{align}
-where $F = \{f_{v}\}_{v \in E}$, with $f_{v}$ a (possibly non-autonomous) {\em dynamical system} on $\mathcal{X} \subseteq \D_{v}$, i.e., $\dot{x} = f_{v}(x,t)$.
+  \item $FG = \{(f_{v}, g_{v})\}_{v \in E}$ with $(f_v,g_v)$ a {\em control system} on $D_{v}$, i.e., $\dot{x} = f_{v}(\x) + g_{v}(\x) u$ $\forall$ $(\x^{T}, \u^{T})^{T} \in \D_{v}$.
+  \end{itemize}
+\end{definition}
+
+\begin{definition}
+  A {\em hybrid system} is a hybrid control system with $U_v = \emptyset$ $\forall$ $v \in V$, e.g., any applicable feedback controllers have been applied, making the system closed-loop:
+  \begin{align}
+    \HS = (\Gamma, \D, S, \Delta, F),
+  \end{align}
+  %
+  where $F = \{f_{v}\}_{v \in E}$, with $f_{v}$ a (possibly non-autonomous) {\em dynamical system} on $\mathcal{X} \subseteq \D_{v}$, i.e., $\dx = f_{v}(\x,t)$.
+\end{definition}
 
 \subsection{Obtaining Hybrid Systems from Constraints}
-The remainder of this section is devoted to discussing how the Lagrangian for a biped, together with a domain breakdown (which determines the constraints at each vertex of the associated cycle), allows one to explicitly construct a hybrid model of the system.  Many details of this construction are only outlined due to space constraints, but more detail is available in the literature.\cite{GCAS10}
+The remainder of this section is devoted to discussing how the Lagrangian for a biped, together with a domain breakdown (which determines the constraints at each vertex of the associated cycle), allows one to explicitly construct a hybrid model of the system.
+%
+Examples can be found throughout the literature; see, for example, \cite{nolcos_2010_gcas_01,aut_2014_gcsa_01,cdc_2009_sa_01}.
 
 
 %\begin{figure}
@@ -220,29 +290,6 @@ The remainder of this section is devoted to discussing how the Lagrangian for a 
 
 
 \subsubsection{General Setup}
-Begin with a bipedal robot in either two or three dimensions---the discussions in this paper are applicable to either case. Then construct a Lagrangian for the biped in a general position---specifically, no assumptions are made on ground contact---and then use holonomic constraints to enforce the ground contact conditions given by the domain graph.
-
-\subsubsection{Lagrangians}
-Following an existing presentation,\cite{GCAS10}\xspace let $R_{0}$ be a fixed inertial or world frame and let $R_{b}$ be a reference frame attached to the body of the biped with position $p_{b} \in \R^{3}$ and orientation $\phi_{b} \in SO(3)$ where $SO(n)$ represents the special orthogonal group in $n$ dimensions.\cite{CCNPW86}\xspace Let $q_{s} \in Q_{s}$ represent a choice of {\em body} or {\em shape coordinates} for the robot with $Q_{s}$ the configuration space. In this paper, $q_{s}$ represents the relative angles between adjacent links of the robot as shown later in \figref{fig:shapecoords}. The {\em generalized coordinates} are then found by combining the shape coordinates with the position and orientation of the body-fixed frame, $R_{b}$, viz.
-\begin{align}
-  q = (p_{b}^{T}, \phi_{b}^{T}, q_{s}^{T})^{T} \in Q = \R^{3} \times SO(3) \times Q_{s},
-\end{align}
-where $Q$ is the generalized configuration space.
-
-The Lagrangian of a bipedal robot, $L : TQ \to \R$, can be stated in terms of the kinetic energy, $K : TQ \to \R$, and the potential energy, $V : Q \to \R$, as:
-\begin{align}
-  L(q, {\dot q}) = K(q, {\dot q}) - V(q).
-\end{align}
-The Euler-Lagrange equations can be used to find the equations of motion, which, for robotic systems,\cite{MLS94}\xspace are written:
-\begin{align}
-  \label{eqn:eom}
-  D(q)\ddot{q} + H(q,\dot{q}) = B(q) u
-\end{align}
-where, here, $D(q)$, the manipulator inertia matrix, and $B(q)$, the torque distribution matrix, only depend on $q$, $u$ is a vector of applied torques, and
-\begin{align}
-  H(q,{\dot q}) = C(q,{\dot q}) {\dot q} + G(q)
-\end{align}
-contains terms resulting from the Coriolis effect and gravity terms grouped into a single vector. The matrix $C(q, {\dot q})$ can be found using standard methods.\cite{MLS94}
 
 \subsubsection{Constraints} The continuous dynamics of the system depend on which constraints are enforced at any given time while the discrete dynamics depend on the change in constraints.  Constraints and their enforcement are dictated by the number of contact points between the system and the ground. Specifically, one can define a {\em contact set} $\C = \{c_{1}, c_{2}, \ldots, c_{k}\}$, with each $c_i$ a specific type of foot/ground contact possible in the biped. Assuming that foot contact is restricted to edges parallel to the $y$-axis (i.e., the toe edge or the heel edge)---and this is the case in 2D as in this paper---there are four contact points of interest:
 \begin{align}
@@ -290,10 +337,10 @@ It is apparent from \eqref{eq:angvelmat} that $v_{c}(q, {\dot q})$ and $\omega_{
 In the case of a 2D biped, as is considered in this paper, the treatment is exactly the same but $\eta_{c}(q, {\dot q}) = (v_{c}^{x}(q, {\dot q}), v_{c}^{z}(q, {\dot q}))^T$. The end result of this choice of coordinates is a holonomic constraint which enforces the condition $\eta_{c}(q, {\dot q}) = \mathrm{constant}$---this fixes the contact point to the ground but allows rotation about the heel or toe depending on the specific type of contact.  It is useful to express the collection of all holonomic constraints in a single matrix $\eta(q, {\dot q}) \in \R^{20 \times 4}$ as:
 \begin{align}
   \eta(q, {\dot q}) \!\! = \!\!\! \left[\!\!\begin{array}{c c c c}
-      \! \eta_{\sth}(q, {\dot q}) \! & 0 & 0 & 0 \\
-      0 & \! \eta_{\stt}(q, {\dot q}) \! & 0 & 0 \\
-      0 & 0 & \! \eta_{\nsh}(q, {\dot q}) \! & 0 \\
-      0 & 0 & 0 & \! \eta_{\nst}(q, {\dot q}) \!
+    \! \eta_{\sth}(q, {\dot q}) \! & 0 & 0 & 0 \\
+    0 & \! \eta_{\stt}(q, {\dot q}) \! & 0 & 0 \\
+    0 & 0 & \! \eta_{\nsh}(q, {\dot q}) \! & 0 \\
+    0 & 0 & 0 & \! \eta_{\nst}(q, {\dot q}) \!
     \end{array}\!\!\right]
 \end{align}
 
@@ -353,14 +400,14 @@ and combine this equation with \eqref{constraineddynamics}. Doing so results in 
 This is sometimes referred to in the literature as a Lagrange multiplier.\cite{MLS94}\xspace Combining \eqref{constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $F_{v}(q, {\dot q}, u)$ and obtain the fields associated to the control system $\dot{x} = f_{v}(x) + g_{v}(x) u$. For $x = (q^{T}, {\dot q}^{T})^{T}$,
 \begin{align}
   f_{v}(x) \!\! &= \!\!\! \left[\!\!\!\begin{array}{c}
-      \dot{q}\\
-      D^{-1}(q)\Big( \big(J_{v}^{T}(q) \Xi(q) J_{v}(q) D^{-1}(q) - I \big) H(q, {\dot q}) \\
-      \hspace{1cm}- J_{v}^{T}(q) \Xi(q) {\dot J}_{v}^{T}(q, {\dot q}) {\dot q} \Big)
+    \dot{q}\\
+    D^{-1}(q)\Big( \big(J_{v}^{T}(q) \Xi(q) J_{v}(q) D^{-1}(q) - I \big) H(q, {\dot q}) \\
+    \hspace{1cm}- J_{v}^{T}(q) \Xi(q) {\dot J}_{v}^{T}(q, {\dot q}) {\dot q} \Big)
     \end{array}\!\!\!\right],\\
   \label{eqn:controlsystem}
   g_{v}(x) \!\! &= \!\!\! \left[\!\!\!\begin{array}{c}
-      0\\
-      D^{-1}(q) \big(I - J_{v}^{T}(q) \Xi(q) J_{v}(q) D^{-1}(q) \big) B(q)
+    0\\
+    D^{-1}(q) \big(I - J_{v}^{T}(q) \Xi(q) J_{v}(q) D^{-1}(q) \big) B(q)
     \end{array}\!\!\!\right],
 \end{align}
 where, for simplicity, $\Xi(q) := \big( J_{v}(q) D^{-1}(q) J_{v}^{T}(q) \big)^{-1}$.
@@ -395,7 +442,7 @@ Thus, the domain is given by
 The guard is just the boundary of this domain with the additional assumption that the set of admissible configurations is decreasing, i.e., the vector field is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
 \begin{align}
   S_{e} \! = \! \Bigl\{ \!(q^{T}, {\dot q}^{T}, \! u^{T})^{T} \! \in \! TQ \times \R^{m_v} : \ &A_{v}(q, \! {\dot q}, \! u) \! = \! 0 \\
-\nonumber
+  \nonumber
   \mathrm{and} \ &{\dot A}_{v}(q, \! {\dot q}, \! u) \! \leq \! 0 \! \Bigl\}.
 \end{align}
 
