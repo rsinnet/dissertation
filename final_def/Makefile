@@ -1,10 +1,11 @@
-PROJNAME=prelim_def
+PROJNAME=final_def
 LATEX_CMD=pdflatex --shell-escape -interaction=nonstopmode
 
 FIGS_DIR := ../figs
 
 EPS_TEX := $(wildcard $(FIGS_DIR)/*.eps_tex)
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
+
 
 EVARS :=
 
@@ -30,24 +31,24 @@ sec-5:
 sec-6:
 	$(eval EVARS += "PRELIMSECF=1")
 
-1:	sec-1 $(PROJNAME).pdf
+1:	sec-1
 
-2:	sec-2 $(PROJNAME).pdf
+2:	sec-2
 
-3:	sec-3 $(PROJNAME).pdf
+3:	sec-3
 
-4:	sec-4 $(PROJNAME).pdf
+4:	sec-4
 
-5:	sec-5 $(PROJNAME).pdf
+5:	sec-5
 
-6:	sec-6 $(PROJNAME).pdf
+6:	sec-6
 
-$(PROJNAME).pdf: $(PROJNAME).tex sections/*.tex $(FIGS_DIR)/*.pdf $(FIGS_DIR)/*.eps $(EPS_LATEX) $(PROJNAME).sty
+$(PROJNAME).pdf: $(PROJNAME).tex sections/*.tex $(FIGS_DIR)/*.eps $(EPS_LATEX) $(PROJNAME).sty
 	$(subst $\",,$(EVARS)) $(LATEX_CMD) $(PROJNAME)
 	$(subst $\",,$(EVARS)) $(LATEX_CMD) $(PROJNAME)
 	echo $(EVARS) $(LATEX_CMD) $(PROJNAME)
 
-$(FIGS_DIR)/%.eps_latex: $(FIGS_DIR)/%.eps_tex $(FIGS_DIR)/%.eps $(FIGS_DIR)/do_latex_subs.py $(FIGS_DIR)/latex_subs.json
+../figs/%.eps_latex: $(FIGS_DIR)/%.eps_tex $(FIGS_DIR)/%.eps $(FIGS_DIR)/do_latex_subs.py $(FIGS_DIR)/latex_subs.json
 	$(MAKE) -C $(FIGS_DIR)/ $(notdir $@)
 
 clean:

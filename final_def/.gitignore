@@ -1,0 +1,10 @@
+/*.dvi
+/*.log
+/*.nav
+/*.out
+/*.ps
+/*.snm
+/*.toc
+/*.pdf
+/figures/*-eps-converted-to.pdf
+/figures/*.eps_latex
