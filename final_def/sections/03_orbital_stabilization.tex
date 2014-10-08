@@ -6,14 +6,17 @@
 \begin{frame}
   \frametitle{Motivation}
   \begin{block}{Main Question}
-    Can we use an understanding of energy exchange to improve global stability properties of periodic orbits in mechanical systems?
+    Can we use an understanding of energy exchange to improve global stability
+    properties of periodic orbits in mechanical systems?
   \end{block}
 
   \begin{block}{Observations}
     \begin{itemize}
-    \item Numerous control design schemes exist for stabilizing mechanical systems to periodic orbits.
+    \item Numerous control design schemes exist for stabilizing mechanical
+      systems to periodic orbits.
     \item Some controllers produce good behavior locally but lack robustness.
-    \item Periodic orbits have associated energy functions with level sets which are invariant under the orbits.
+    \item Periodic orbits have associated energy functions with level sets which
+      are invariant under the orbits.
     \end{itemize}
   \end{block}
 \end{frame}
@@ -26,17 +29,21 @@
       \begin{align*}
         \dx = \xf(\x) + \xg(\x) \, \uu(\x).
       \end{align*}
-      Assume there exists a control law ${\bar \uu}\arx$ which creates a limit cycle in the closed-loop dynamics,
+      Assume there exists a control law ${\bar \uu}\arx$ which creates a limit
+      cycle in the closed-loop dynamics,
       \begin{align*}
         {\bar \xf}\arx = \xf\argsqdq + \xg\argsq \, {\bar \uu}\argsqdq.
       \end{align*}
-      Also assume there exists an energy function $E_{c} : T\ConfigurationSpace \to \R$ which is conserved, i.e., $E_{c}\argsqdq \equiv E_{0}$, on the limit cycle.
+      Also assume there exists an energy function $E_{c} : T\ConfigurationSpace
+      \to \R$ which is conserved, i.e., $E_{c}\argsqdq \equiv E_{0}$, on the
+      limit cycle.
     \end{block}
   }
 
   \only<2>{
     \begin{block}{Main Idea}
-      Add robustness to a periodic behavior by imposing convergence on an energy function to a level set which is known to be invariant under the system dynamics.
+      Add robustness to a periodic behavior by imposing convergence on an energy
+      function to a level set which is known to be invariant under the system dynamics.
     \end{block}
     
     \begin{block}{Control Objective}
@@ -56,23 +63,45 @@
   \frametitle{Control Lyapunov Functions}
   A \blue{control Lyapunov function} $\V : \X \to \R$ which satisfies
   \begin{align*}
-    &c_{1} \nx^{2} \leq \V(\x) \leq c_{2} \nx^{2},\\
-    &\inf_{\uu \in \U} \Lie{\xf} \V(\x) + \Lie{\xg} V\arx \, \uu + c_{3} \V\arx \leq 0
+    &c_{1} \nx^{2} \leq \V\arx \leq c_{2} \nx^{2},\\
+    &\inf_{\uu \in \U} \Lie{\xf}\V\arx + \Lie{\xg}\V\arx \, \uu + c_{3} \V\arx \leq 0
   \end{align*}
-  for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence.
+  for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence. If the above
+  are satisfied, then it is also true that
+  \begin{align*}
+    \left\| \pd{\V\arx}{\x} \right\| \leq c_{4} \nx.
+  \end{align*}
+\end{frame}
+
+
+\begin{frame}
+  \frametitle{Rapidly Exponentially Stabilizing Control Lyapunov Functions}
+  A \blue{rapidly exponentially stability control Lyapunov function (RES--CLF)}
+  $\Ve : \X \to \Rnn$ satisfies
+  \begin{align*}
+    &c_{1} \nx^{2} \leq \Ve\arx \leq \frac{c_{2}}{\resclfparam^{2}} \nx^{2},\\
+    &\inf_{\uu \in \U} \Lie{\xf}\Ve\arx + \Lie{\xg}\Ve\arx \, \uu +
+    \frac{c_{3}}{\resclfparam} \Ve\arx \leq 0
+  \end{align*}
+  for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence. If the above
+  are satisfied, then it is also true that
+  \begin{align*}
+    \left\| \pd{\Ve\arx}{\x} \right\| \leq c_{4} \nx.
+  \end{align*}
 \end{frame}
 
 \begin{frame}
   \frametitle{Energy Shaping}
-  Consider a conserved energy function $E_{c}\arx$. For an exponentially stabilizing CLF, we seek $\mu\arx$ such that
+  Consider a conserved energy function $E_{c}\arx$ and define a candidate
+  control Lyapunov function:
+  \begin{align*}
+    V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right).
+  \end{align*}
+  For an exponentially stabilizing CLF, we seek $\mu\arx$ such that
   \begin{align*}
     \Lie{\xf} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
   \end{align*}
-  Choosing $V\arx = \eta^{2}$ with $\eta\arx = E_{c}\arx - E_{0}$, we obtain
-  \begin{align*}
-    2 \eta\arx \left(\Lie{\xf} \eta\arx + \Lie{\xg} \eta\arx \, \mu\arx \right) + \epsilon \eta^{2}\arx \leq 0.
-  \end{align*}
-  %We can relax this condition by augmenting the optimization space with $\delta \in \R$ and requiring
+  % We can relax this condition by augmenting the optimization space with $\delta \in \R$ and requiring
   %\begin{align*}
   %  2 \eta\arx \left(\Lie{\xf} \eta\arx + \Lie{\xg} \eta\arx \, \mu\arx \right) + \epsilon \eta^{2}\arx \leq \delta\arx.
   %\end{align*}
@@ -85,30 +114,31 @@
     \nonumber
     \mueps\arx = \argmin_{\uu \in \R^{n}}  \, & \uu^T \uu\\
     \label{eq:clf} \tag{clf}
-    \mbox{s.t. } & \Aclf(x) \, \uu \leq \bclf(x)%\\
+    \mbox{s.t. } & \Aclf\arx \, \uu \leq \bclf\arx%\\
     %\label{lim} \tag{lim}
     %& \Alim v \leq \blim
   \end{align}
-  where \eqref{eq:clf} imposes the control Lyapunv function. To encode the dynamics of the system under control input ${\bar \uu}\arx$, select
+  where \eqref{eq:clf} imposes the control Lyapunov function. To encode the dynamics of the system, select
   \begin{align*}
-    \Aclf = 2 \eta\arx \, \Lie{\xg} \eta\arx
+    \Aclf = \Lie{\xg}\Ve\arx
     \quad
-    \bclf = -\epsilon \eta^{2}\arx - 2\eta\arx \, \Lie{\xf} \eta\arx.
+    \bclf = -\Lie{\xf}\Ve\arx - \frac{c_{3}}{\resclfparam} \Ve\arx.
   \end{align*}
 \end{frame}
-
-\subsection{HSYS}
 
 \begin{frame}
-  Energy shaping operates on hybrid control systems of the form
+  Applying the energy shaping controller gives the closed-loop hybrid system
   \begin{align*}
-    \HCS = \left\{
+    \HS = \left\{
       \begin{array}{l l}
-        \dx = \xf\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
-        \xp = \Delta(\xm), & \x \in \S,
+        \dx = \xf\arx + \xg\arx \, \mueps, & \x \in \D \setminus \S,\\
+        \xp = \Delta(\xm), & \x \in \S.
       \end{array}\right.
   \end{align*}
+  
 \end{frame}
+
+\subsection{Energy Shaping Theorem}
 
 \begin{frame}
   \frametitle{Main Theorem}
@@ -123,10 +153,51 @@
         \xp = \Delta(\xm), & \x \in \S,
       \end{array}\right.
   \end{align*}
-  which is exponentially stable.
+  which is exponentially stable for small enough $\resclfparam$.
+  
   \end{theorem}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Zero Dynamics Formulation}
+  Construct a change of coordinates, splitting up the system into two sets of coordinates:
+  \begin{align*}
+    \dot \zdx &= f\argsxz + g\argsxz \, \uu,\\
+    \dot \zdz &= q\argsxz + w\argsxz \, \uu.
+  \end{align*}
+  The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz continuous.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Energy-Based Coordinate Change}
+  For mechanical systems with coordinates $\x = \argsqdq \in T\Q$, construct the transformation $\Phi\argsqdq := \argsxz$ where
+  \begin{align*}
+    \zdx &= \Ec\argsqdq - \Eref,\\
+    \zdz &= \xrem,
+  \end{align*}
+  where $n$ is the size of the configuration space, $\Q$. The fixed point of the
+  hybrid system is chosen to occur at $\argsxz = \xzst$ such that $\Delta\xzst =
+  \argszero$.
+\end{frame}
+
+\begin{frame}
+  \frametitle{Validity of Transformation}
+  The coordinate change $\Phi\argsqdq$ is valid if it is locally diffeomorphic around the orbit
+  $\orbit$, i.e., if
+  \begin{align}
+    \pd{\Psi(\q, \dq)}{(\q, \dq)} =
+    \left(\begin{array}{c c}
+        I & \boldzero_{2n-1 \times 1}\\
+        \pd{E(\q, \dq)}{\xrem} & \pd{E(\q, \dq)}{\dq_{n}}
+      \end{array}\right)
+  \end{align}
+  % 
+  has full rank, which occurs when
+  \begin{align*}
+    \det \Psi\argsqdq = \pd{E(\q, \dq)}{\dq_{n}} \ne 0.
+  \end{align*}
+\end{frame}
+  
 \begin{frame}
   \frametitle{Sketch of Proof}
   Define a composite Lyapunov function,
@@ -139,7 +210,14 @@
     (converse Lyapunov theorem)
   \item $\Vex$ : Lyapunov function for energy shaping control law
   \end{itemize}
-  with scaling parameter $\sigma$ and show that
+  with scaling parameter $\sigma$. This is a discrete Lyapunov function that is
+  valid on the guard.
+
+\end{frame}
+
+\begin{frame}
+  \frametitle{Sketch of Proof}  
+  and show that
   \begin{align*}
     \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz =}\\
     &&\Vn(\Pe\argsxz) - \Vn\argsxz + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).

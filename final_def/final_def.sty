@@ -107,7 +107,8 @@
 
 % real numbers
 \newcommand{\R}{\ensuremath{\mathbb{R}}}
-\renewcommand{\S}{\ensuremath{\mathbb{S}}}
+\newcommand{\Rnn}{\R_{\geq 0}}
+\newcommand{\Rpd}{\R_{> 0}}
 
 % natural numbers
 \newcommand{\Nat}{\ensuremath{\mathbb{N}}}
@@ -286,6 +287,8 @@
 
 
 % From acc paper
+\newcommand{\orbit}{\mathscr O}
+
 \newcommand{\x}{\chi}
 \newcommand{\dx}{{\dot \x}}
 \newcommand{\xst}{\x^{*}}
@@ -319,9 +322,14 @@
 \newcommand{\Pex}{\Pe^{\zdx}}
 \newcommand{\Pez}{\Pe^{\zdz}}
 
+\newcommand{\Ve}{V_{\resclfparam}}
+\newcommand{\dVe}{{\dot V}_{\resclfparam}}
+
 \newcommand{\Vn}{\V_{\mathit{n}}}
 \newcommand{\VP}{\V_{\Pe}}
 \newcommand{\Vbar}{\overline{V}}
+
+\renewcommand{\S}{S}
 
 \newcommand{\Vebar}{\Vbar_{\resclfparam}}
 \newcommand{\VeS}{\left.\Ve\right|_{\S}}
@@ -412,3 +420,15 @@
 
 \newcommand{\dzdx}{{\dot \zdx}}
 \newcommand{\dzdz}{{\dot \zdz}}
+
+
+\newcommand{\E}{E}
+\newcommand{\Ec}{\E_{c}}
+\newcommand{\Es}{\E^{*}}
+\newcommand{\Eref}{\E_{\mathrm{ref}}}
+
+\newcommand{\xrem}{(\q_{1}, \ \ldots, \ q_{n}, \ \dq_{1}, \ \ldots, \ \dq_{n-1})}
+
+\newcommand{\boldzero}{{\mathbf 0}}
+
+\newcommand{\xzst}{(0, \zdz^{*})}
