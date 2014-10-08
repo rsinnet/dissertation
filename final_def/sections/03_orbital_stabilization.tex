@@ -200,26 +200,52 @@
   
 \begin{frame}
   \frametitle{Sketch of Proof}
-  Define a composite Lyapunov function,
-  \begin{align*}
-    \VP\argsxz = \Vn\argsxz + \sigma \Vex(\zdx),
-  \end{align*}
-  where
-  \begin{itemize}
-  \item $\Vn$ : Lyapunov function guaranteed by stability of nominal system
-    (converse Lyapunov theorem)
-  \item $\Vex$ : Lyapunov function for energy shaping control law
-  \end{itemize}
-  with scaling parameter $\sigma$. This is a discrete Lyapunov function that is
-  valid on the guard.
-
+  \only<1> {
+    Define a composite Lyapunov function,
+    \begin{align*}
+      \VP\argsxz = \Vn\argsxz + \sigma \Vex(\zdx),
+    \end{align*}
+    where
+    \begin{itemize}
+    \item $\Vn$ : Lyapunov function guaranteed by stability of the nominal system
+      (converse Lyapunov theorem)
+    \item $\Vex$ : Lyapunov function for energy shaping control law
+    \end{itemize}
+    with scaling parameter $\sigma$. This is a discrete Lyapunov function that is
+    valid on the guard.
+  }
+  
+  \only<2> {
+    Exponential stability of the hybrid system $\HS$ is guaranteed by the discrete Lyapunov theorem if
+    \begin{eqnarray*}
+      &r_{1} \nzdxzst^{2} \leq \VP\argsxz \leq r_{2} \nzdxzst^{2}\\
+      &\VP(\Pe\argsxz) - \VP\argsxz \leq r_{3} \nzdxzst^{2}
+    \end{eqnarray*}
+    for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
+  }
 \end{frame}
 
 \begin{frame}
-  \frametitle{Sketch of Proof}  
-  and show that
-  \begin{align*}
-    \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz =}\\
-    &&\Vn(\Pe\argsxz) - \Vn\argsxz + \sigma(\Vex(\Pe\argsxz) - \Vex(\zdx)).
-  \end{align*}
+  \frametitle{Definition of the \Poincare{} map}
+  The {\em \Poincare{} first return map} takes a point on the guard, applies the
+  reset map and then integrates forward until the guard is reached again.%
+  \only<1> {
+    For the shaped system, $\Pe : \S \to \S$, is defined by
+    \begin{align*}
+      \Pe\argsxz = \floweps_{\TIeDelta}\argsDeltaxz,
+    \end{align*}
+    where $\TIe : \zdX \times \zdZ \to \Rnn$ is the \tti{} function which is
+    defined by
+    \begin{align*}
+      \TIe\argsxz = \inf \{ t \geq 0 : h(\flowepst\argsxz) \}
+    \end{align*}
+    and is locally Lipschitz continuous by the implicit function theorem.
+  }
+
+  \only<2> {
+    \begin{figure}
+      \centering
+      \includegraphics[height=.5\textheight]{hybrid_periodic_orbit}
+    \end{figure}
+  }
 \end{frame}
