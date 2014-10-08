@@ -165,7 +165,18 @@
     \dot \zdx &= f\argsxz + g\argsxz \, \uu,\\
     \dot \zdz &= q\argsxz + w\argsxz \, \uu.
   \end{align*}
-  The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz continuous.
+  The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz
+  continuous. For simplicity, define
+  \begin{align*}
+    \bigF\argsxz = \left(\begin{array}{c}
+        f\argsxz\\
+        q\argsxz
+      \end{array}\right),&&
+    \bigG \argsxz = \left(\begin{array}{c}
+        g\argsxz\\
+        w\argsxz
+      \end{array}\right).
+  \end{align*}
 \end{frame}
 
 \begin{frame}
@@ -187,7 +198,7 @@
   \begin{align}
     \pd{\Psi(\q, \dq)}{(\q, \dq)} =
     \left(\begin{array}{c c}
-        I & \boldzero_{2n-1 \times 1}\\
+        I_{2n-1} & \boldzero_{2n-1 \times 1}\\
         \pd{E(\q, \dq)}{\xrem} & \pd{E(\q, \dq)}{\dq_{n}}
       \end{array}\right)
   \end{align}
@@ -197,40 +208,33 @@
     \det \Psi\argsqdq = \pd{E(\q, \dq)}{\dq_{n}} \ne 0.
   \end{align*}
 \end{frame}
-  
+
 \begin{frame}
-  \frametitle{Sketch of Proof}
-  \only<1> {
-    Define a composite Lyapunov function,
-    \begin{align*}
-      \VP\argsxz = \Vn\argsxz + \sigma \Vex(\zdx),
-    \end{align*}
-    where
-    \begin{itemize}
-    \item $\Vn$ : Lyapunov function guaranteed by stability of the nominal system
-      (converse Lyapunov theorem)
-    \item $\Vex$ : Lyapunov function for energy shaping control law
-    \end{itemize}
-    with scaling parameter $\sigma$. This is a discrete Lyapunov function that is
-    valid on the guard.
-  }
-  
-  \only<2> {
-    Exponential stability of the hybrid system $\HS$ is guaranteed by the discrete Lyapunov theorem if
-    \begin{eqnarray*}
-      &r_{1} \nzdxzst^{2} \leq \VP\argsxz \leq r_{2} \nzdxzst^{2}\\
-      &\VP(\Pe\argsxz) - \VP\argsxz \leq r_{3} \nzdxzst^{2}
-    \end{eqnarray*}
-    for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
-  }
+  \frametitle{Flows of Continuous Dynamical Systems}
+  Recall that the flow of an ODE expressed in the variables $\argsxz$ is given
+  by
+  \begin{align*}
+    \flowt\argsxz = \int_{0}^{t} \bigF\argsxz + \bigG\argsxz \, \uu\argsxz
+  \end{align*}
+  for some feedback control law $\uu : \zdX \times \zdZ \to \U$. For some stable
+  tube $\stabletube$ around the orbit $\orbit$, it holds that the vector fields are bounded:
+  \begin{align*}
+    \supF & := \sup \left\{ \left\| \bigF\argsxz \right\| : \argsxz \in
+      \stabletube \right\},\\
+    \lambdamaxG &:= \sup \left\{\lambdamax\bigG\argsxz : \argsxz \in \stabletube
+    \right\},\\
+    \lambdaminG &:= \inf \left\{\lambdamin\bigG\argsxz : \argsxz \in \stabletube
+    \right\}.
+  \end{align*}
 \end{frame}
+
 
 \begin{frame}
   \frametitle{Definition of the \Poincare{} map}
-  The {\em \Poincare{} first return map} takes a point on the guard, applies the
-  reset map and then integrates forward until the guard is reached again.%
   \only<1> {
-    For the shaped system, $\Pe : \S \to \S$, is defined by
+    The {\em \Poincare{} first return map} takes a point on the guard, applies
+    the reset map and then integrates forward until the guard is reached
+    again. For the shaped system, $\Pe : \S \to \S$, is defined by
     \begin{align*}
       \Pe\argsxz = \floweps_{\TIeDelta}\argsDeltaxz,
     \end{align*}
@@ -247,5 +251,38 @@
       \centering
       \includegraphics[height=.5\textheight]{hybrid_periodic_orbit}
     \end{figure}
+  }
+\end{frame}
+
+\begin{frame}
+  
+  
+\end{frame}
+
+\subsection{Sketch of Proof}
+\begin{frame}
+  \only<1> {
+    Define a composite Lyapunov function,
+    \begin{align*}
+      \VP\argsxz = \Vn\argsxz + \sigma \Vex(\zdx),
+    \end{align*}
+    where
+    \begin{itemize}
+    \item $\Vn$ : Lyapunov function guaranteed by stability of the nominal system
+      (converse Lyapunov theorem)
+    \item $\Vex$ : Lyapunov function for energy shaping control law
+    \end{itemize}
+    with scaling parameter $\sigma$. This is a discrete Lyapunov function that
+    is valid on the guard.
+  }
+  
+  \only<2> {
+    Exponential stability of the hybrid system $\HS$ is guaranteed by the
+    discrete Lyapunov theorem if
+    \begin{eqnarray*}
+      &r_{1} \nzdxzst^{2} \leq \VP\argsxz \leq r_{2} \nzdxzst^{2}\\
+      &\VP(\Pe\argsxz) - \VP\argsxz \leq r_{3} \nzdxzst^{2}
+    \end{eqnarray*}
+    for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
   }
 \end{frame}
