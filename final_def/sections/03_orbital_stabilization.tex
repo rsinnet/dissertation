@@ -32,11 +32,10 @@
       Assume there exists a control law ${\bar \uu}\arx$ which creates a limit
       cycle in the closed-loop dynamics,
       \begin{align*}
-        {\bar \xf}\arx = \xf\argsqdq + \xg\argsq \, {\bar \uu}\argsqdq.
+        {\bar \xf}\arx = \xf\arx + \xg\arx \, {\bar \uu}\arx.
       \end{align*}
-      Also assume there exists an energy function $E_{c} : T\ConfigurationSpace
-      \to \R$ which is conserved, i.e., $E_{c}\argsqdq \equiv E_{0}$, on the
-      limit cycle.
+      Also assume there exists an energy function $E_{c} : T\X \to \R$ which is
+      conserved, i.e., $E_{c}\arx \equiv E_{0}$, on the limit cycle.
     \end{block}
   }
 
@@ -47,13 +46,13 @@
     \end{block}
     
     \begin{block}{Control Objective}
-      Choose control input $\mu\argsqdq$ such that $\| \mu\argsqdq - {\bar \uu}\argsqdq \|$ is minimized and $E_{c}(\q(t), \dq(t)) \to E_0$ as $t \to \infty$.
+      Choose control input $\mu\arx$ such that $\| \mu\arx - {\bar \uu}\arx \|$ is minimized and $E_{c}\arxt \to E_0$ as $t \to \infty$.
     \end{block}
 
     \begin{block}{Exponential Convergence}
       To achieve exponential stabilization, $E_{c}(x(t))$ should satifisy
       \begin{align*}
-        E_{c}(\q(t), \dq(t)) \leq E_{c}(\q(t_{0}), \dq(t_{0})) e^{-\beta t} \mbox{ for } t \geq t_{0}, \beta > 0.
+        E_{c}\arxt \leq E_{c}\arxzero e^{-\beta t} \mbox{ for } t \geq 0, \beta > 0.
       \end{align*}
     \end{block}
   }
@@ -120,22 +119,22 @@
   \end{align}
   where \eqref{eq:clf} imposes the control Lyapunov function. To encode the dynamics of the system, select
   \begin{align*}
-    \Aclf = \Lie{\xg}\Ve\arx
-    \quad
-    \bclf = -\Lie{\xf}\Ve\arx - \frac{c_{3}}{\resclfparam} \Ve\arx.
+    \Aclf = \Lie{\xg}\Ve\arx, && \bclf = -\Lie{\xf}\Ve\arx - \frac{c_{3}}{\resclfparam} \Ve\arx.
   \end{align*}
 \end{frame}
 
 \begin{frame}
+  \frametitle{Closed-Loop Hybrid System}
   Applying the energy shaping controller gives the closed-loop hybrid system
   \begin{align*}
-    \HS = \left\{
+    \HSeps = \left\{
       \begin{array}{l l}
-        \dx = \xf\arx + \xg\arx \, \mueps, & \x \in \D \setminus \S,\\
+        \dx = \xf\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
         \xp = \Delta(\xm), & \x \in \S.
       \end{array}\right.
   \end{align*}
-  
+  This is called the \blue{shaped system}. It has a periodic orbit, $\orbit$,
+  which is identical to that of the unshaped system, $\HS$.
 \end{frame}
 
 \subsection{Energy Shaping Theorem}
@@ -143,7 +142,7 @@
 \begin{frame}
   \frametitle{Main Theorem}
 
-  \begin{theorem}
+  \begin{theorem}[Energy Shaping]
     Given an exponentially-stable cycle in a hybrid system, application
     of the energy shaping controller results in the closed-loop hybrid system
     \begin{align*}
@@ -153,7 +152,8 @@
         \xp = \Delta(\xm), & \x \in \S,
       \end{array}\right.
   \end{align*}
-  which is exponentially stable for small enough $\resclfparam$.
+  which is exponentially stable about the hybrid periodic orbit $\orbit$ for
+  large enough $\resclfparam$.
   
   \end{theorem}
 \end{frame}
@@ -181,7 +181,7 @@
 
 \begin{frame}
   \frametitle{Energy-Based Coordinate Change}
-  For mechanical systems with coordinates $\x = \argsqdq \in T\Q$, construct the transformation $\Phi\argsqdq := \argsxz$ where
+  For mechanical systems with coordinates $\x = \argsqdq \in T\Q$, construct the transformation $\xform\argsqdq := \argsxz$ where
   \begin{align*}
     \zdx &= \Ec\argsqdq - \Eref,\\
     \zdz &= \xrem,
@@ -193,10 +193,10 @@
 
 \begin{frame}
   \frametitle{Validity of Transformation}
-  The coordinate change $\Phi\argsqdq$ is valid if it is locally diffeomorphic around the orbit
+  The coordinate change $\xform\argsqdq$ is valid if it is locally diffeomorphic around the orbit
   $\orbit$, i.e., if
   \begin{align}
-    \pd{\Psi(\q, \dq)}{(\q, \dq)} =
+    \pd{\xform(\q, \dq)}{(\q, \dq)} =
     \left(\begin{array}{c c}
         I_{2n-1} & \boldzero_{2n-1 \times 1}\\
         \pd{E(\q, \dq)}{\xrem} & \pd{E(\q, \dq)}{\dq_{n}}
@@ -205,7 +205,7 @@
   % 
   has full rank, which occurs when
   \begin{align*}
-    \det \Psi\argsqdq = \pd{E(\q, \dq)}{\dq_{n}} \ne 0.
+    \det\left(\pd{\xform\argsqdq}{\argsqdq}\right) = \pd{E(\q, \dq)}{\dq_{n}} \ne 0.
   \end{align*}
 \end{frame}
 
@@ -214,7 +214,8 @@
   Recall that the flow of an ODE expressed in the variables $\argsxz$ is given
   by
   \begin{align*}
-    \flowt\argsxz = \int_{0}^{t} \bigF\argsxz + \bigG\argsxz \, \uu\argsxz
+    \flowt\argsxz = \int_{0}^{t} \left[ \bigF\argsxztau + \bigG\argsxztau \,
+      \uu\argsxztau \right] \, d\tau
   \end{align*}
   for some feedback control law $\uu : \zdX \times \zdZ \to \U$. For some stable
   tube $\stabletube$ around the orbit $\orbit$, it holds that the vector fields are bounded:
@@ -232,7 +233,7 @@
 \begin{frame}
   \frametitle{Definition of the \Poincare{} map}
   \only<1> {
-    The {\em \Poincare{} first return map} takes a point on the guard, applies
+    The \blue{\Poincare{} first return map} takes a point on the guard, applies
     the reset map and then integrates forward until the guard is reached
     again. For the shaped system, $\Pe : \S \to \S$, is defined by
     \begin{align*}
@@ -254,13 +255,40 @@
   }
 \end{frame}
 
+\subsection{Sketch of Proof}
+
 \begin{frame}
-  
-  
+  \frametitle{Equivalence of Hybrid Periodic Orbits}
+  \begin{theorem}
+    Applying the energy shaping controller to the hybrid control system $\HCS$
+    results in the closed-loop hybrid system $\HSeps$ that demonstrates a
+    periodic orbit which is identical to the unshaped system $\HS$.
+  \end{theorem}
+  \begin{proof}
+    The energy of states $\xo \in \orbit$ is a constant,
+    $\E(\xo) \equiv \Eref$. By the choice of Lyapunov function,
+    $Ve(\xo) \equiv 0$. In addition, $\dVe(\xo) \equiv 0$ since
+    the system is conservative. And since the solution to the optimization
+    problem has cost $\uu(\xo)^{T} \uu(\xo) \equiv 0$, the
+    control effort is also zero. Hence the orbits are equivalent.
+    \end{proof}
 \end{frame}
 
-\subsection{Sketch of Proof}
 \begin{frame}
+  \frametitle{Boundedness of \TtI{} function}
+  \begin{lemma}[Boundedness of \TtI{}]
+    For the hybrid systems $\HS$ and $\HSeps$,
+    \begin{eqnarray}
+      \nonumber
+      &| \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst,\\
+      &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,
+    \end{eqnarray}
+    where $\limeps \ATIe = 0$ and $\limeps\Ae = 0$.
+  \end{lemma}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Proof of Energy Shaping Theorem}
   \only<1> {
     Define a composite Lyapunov function,
     \begin{align*}

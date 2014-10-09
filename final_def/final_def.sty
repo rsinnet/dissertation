@@ -52,11 +52,12 @@
 
 \newcommand{\HRule}{\rule{\linewidth}{0.1mm}}
 
-% symbol for hybrid control system
-\newcommand{\HCS}{\ensuremath{\mathscr{HC}}}
-
 % symbol for hybrid system.
-\newcommand{\HS}{\ensuremath{\mathscr{H}}}
+\newcommand{\HS}{\ensuremath{\Sigma}}
+\newcommand{\HSeps}{\ensuremath{\Sigma_{\resclfparam}}}
+
+% symbol for hybrid control system
+\newcommand{\HCS}{\HS_{c}}
 
 % partial derivative
 \newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
@@ -301,6 +302,8 @@
 \newcommand{\argsq}{(\q)}
 \newcommand{\argsqdq}{(\q, \dq)}
 \newcommand{\arx}{(\x)}
+\newcommand{\arxt}{(\x(t))}
+\newcommand{\arxzero}{(\x(0))}
 
 \newcommand{\xf}{F}
 \newcommand{\xg}{G}
@@ -437,14 +440,19 @@
 \newcommand{\Poincare}{Poincar{\'e}}
 
 \newcommand{\tti}{time-to-impact}
+\newcommand{\TtI}{Time-to-Impact}
 
 \newcommand{\stabletube}{\Omega}
 
 \DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\lambdamax}{\lambda_{\mathrm{max}}}
-\DeclareMathOperator*{\lambdamin}{\lambda_{\mathrm{min}}}
+\DeclareMathOperator*{\lambdamax}{\lambda_{\max}}
+\DeclareMathOperator*{\lambdamin}{\lambda_{\min}}
 
-\newcommand{\lambdamaxG}{\lambda_{\mathrm{max}}}
-\newcommand{\lambdaminG}{\lambda_{\mathrm{min}}}
+\newcommand{\lambdamaxG}{\bigG_{\max}}
+\newcommand{\lambdaminG}{\bigG_{\min}}
 
-\newcommand{\supF}{\Upsilon}
+\newcommand{\supF}{\bigF_{\max}}
+
+\newcommand{\limeps}{\lim_{\resclfparam \nearrow +\infty}}
+
+\newcommand{\xform}{\Psi}
