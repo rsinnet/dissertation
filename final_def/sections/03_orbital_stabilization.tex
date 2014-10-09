@@ -248,9 +248,11 @@
   }
 
   \only<2> {
-    \begin{figure}
+    \begin{figure}    
       \centering
-      \includegraphics[height=.5\textheight]{hybrid_periodic_orbit}
+      \def\svgwidth{.45\columnwidth}
+      \input{../figs/poincare_map.eps_latex}
+      \caption{A hybrid periodic orbit. Stability is ascertained using the method of Poincar\'e.}
     \end{figure}
   }
 \end{frame}
@@ -264,14 +266,14 @@
     results in the closed-loop hybrid system $\HSeps$ that demonstrates a
     periodic orbit which is identical to the unshaped system $\HS$.
   \end{theorem}
-  \begin{proof}
+  \begin{block}{Proof}
     The energy of states $\xo \in \orbit$ is a constant,
     $\E(\xo) \equiv \Eref$. By the choice of Lyapunov function,
     $Ve(\xo) \equiv 0$. In addition, $\dVe(\xo) \equiv 0$ since
     the system is conservative. And since the solution to the optimization
-    problem has cost $\uu(\xo)^{T} \uu(\xo) \equiv 0$, the
+    problem has cost $\uu^{T}(\xo) \uu(\xo) \equiv 0$, the
     control effort is also zero. Hence the orbits are equivalent.
-    \end{proof}
+    \end{block}
 \end{frame}
 
 \begin{frame}

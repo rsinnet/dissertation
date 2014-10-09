@@ -1,13 +1,26 @@
 {
     "files": [
 	{
+	    "poincare_map":
+	    {
+		"D": "$D$",
+		"S": "$S$",
+		"Dx": "$\\chi_1 = \\Delta(\\chi_0)$",
+		"x0": "$\\chi_0$",
+		"x1": "$\\chi_1$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$",
+		"ftx0": "$\\phi_t(\\chi_0)$",
+		"ftx1": "$\\phi_t(\\chi_1)$"
+	    }
+	},
+	{
 	    "hybrid_periodic_orbit":
 	    {
-		"D": "$\\mathcal{D}$",
-		"G": "$\\mathcal{G}$",
-		"Dx": "$\\Delta(x^*)$",
-		"xstar": "$x^*$",
-		"xdot": "$\\dot x  = f(x)$"
+		"D": "$D$",
+		"G": "$S$",
+		"Dx": "$\\Delta(\\chi^*)$",
+		"xstar": "$\\chi^*$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$"
 	    }
 	},
 	{

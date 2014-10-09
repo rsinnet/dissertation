@@ -10,7 +10,7 @@ import sys
 with open('latex_subs.json') as datafile:
     data = json.load(datafile)
 
-search_pattern = r'((\s*\\put\([0-9]*(\.[0-9]*)?,[0-9]*(\.[0-9]*)?\))\{\\color\[rgb\]\{[0-9]*,[0-9]*,[0-9]*\}\\makebox\([0-9]*,[0-9]*\)\[.*\]\{\\smash\{)(.*)(\}\}\}\%)'
+search_pattern = r'((\s*\\put\(-?[0-9]*(\.[0-9]*)?,-?[0-9]*(\.[0-9]*)?\))\{\\color\[rgb\]\{[0-9]*,[0-9]*,[0-9]*\}\\makebox\([0-9]*,[0-9]*\)\[.*\]\{\\smash\{)(.*)(\}\}\}\%)'
 
 for file_prefix in data['files']:
     if file_prefix.keys()[0] == sys.argv[1]:
