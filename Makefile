@@ -10,13 +10,13 @@ EPS_NO_LATEX := $(filter-out $(subst .eps_tex,.eps,$(EPS_TEX)), $(EPS_ALL))
 all: $(PROJNAME).pdf cg-energy es-stability proposal prelim-def final-def
 
 proposal:
-	$(MAKE) -C proposal
+	$(MAKE) -C proposal all
 
 prelim-def:
-	$(MAKE) -C prelim_def
+	$(MAKE) -C prelim_def all
 
 final-def:
-	$(MAKE) -C final_def
+	$(MAKE) -C final_def all
 
 cg-energy:
 	$(MAKE) -C notes/ cg-energy.pdf

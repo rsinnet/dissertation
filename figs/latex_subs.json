@@ -1,6 +1,20 @@
 {
     "files": [
 	{
+	    "poincare_return_map":
+	    {
+		"D": "$D$",
+		"S": "$S$",
+		"Dx": "$\\chi_1 = \\Delta(\\phi_{T_{I}(\\chi_0)}(\\chi_0))$",
+		"x0": "$\\chi_0$",
+		"x1": "$\\chi_1$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$",
+		"fx0": "$\\phi_{T_{I}(\\chi_0)}(\\chi_0)$",
+		"ftx0": "$\\phi_t(\\chi_0)$",
+		"ftx1": "$\\phi_t(\\chi_1)$"
+	    }
+	},
+	{
 	    "poincare_map":
 	    {
 		"D": "$D$",

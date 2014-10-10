@@ -3,7 +3,7 @@
 
 \subsection{Energy Shaping with Control Lyapunov Functions}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Motivation}
   \begin{block}{Main Question}
     Can we use an understanding of energy exchange to improve global stability
@@ -50,7 +50,7 @@
     \end{block}
 
     \begin{block}{Exponential Convergence}
-      To achieve exponential stabilization, $E_{c}(x(t))$ should satifisy
+      To achieve exponential stabilization, $E_{c}(x(t))$ should satisfy\vspace{-.4em}
       \begin{align*}
         E_{c}\arxt \leq E_{c}\arxzero e^{-\beta t} \mbox{ for } t \geq 0, \beta > 0.
       \end{align*}
@@ -58,7 +58,7 @@
   }
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Control Lyapunov Functions}
   A \blue{control Lyapunov function} $\V : \X \to \R$ which satisfies
   \begin{align*}
@@ -73,7 +73,7 @@
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Rapidly Exponentially Stabilizing Control Lyapunov Functions}
   A \blue{rapidly exponentially stability control Lyapunov function (RES--CLF)}
   $\Ve : \X \to \Rnn$ satisfies
@@ -89,7 +89,7 @@
   \end{align*}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Energy Shaping}
   Consider a conserved energy function $E_{c}\arx$ and define a candidate
   control Lyapunov function:
@@ -123,7 +123,7 @@
   \end{align*}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Closed-Loop Hybrid System}
   Applying the energy shaping controller gives the closed-loop hybrid system
   \begin{align*}
@@ -137,9 +137,9 @@
   which is identical to that of the unshaped system, $\HS$.
 \end{frame}
 
-\subsection{Energy Shaping Theorem}
+%\subsection{Energy Shaping Theorem}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Main Theorem}
 
   \begin{theorem}[Energy Shaping]
@@ -158,7 +158,9 @@
   \end{theorem}
 \end{frame}
 
-\begin{frame}
+\subsection{Sketch of Proof}
+
+\begin{frame}[t]
   \frametitle{Zero Dynamics Formulation}
   Construct a change of coordinates, splitting up the system into two sets of coordinates:
   \begin{align*}
@@ -179,7 +181,7 @@
   \end{align*}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Energy-Based Coordinate Change}
   For mechanical systems with coordinates $\x = \argsqdq \in T\Q$, construct the transformation $\xform\argsqdq := \argsxz$ where
   \begin{align*}
@@ -191,7 +193,7 @@
   \argszero$.
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Validity of Transformation}
   The coordinate change $\xform\argsqdq$ is valid if it is locally diffeomorphic around the orbit
   $\orbit$, i.e., if
@@ -209,7 +211,7 @@
   \end{align*}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Flows of Continuous Dynamical Systems}
   Recall that the flow of an ODE expressed in the variables $\argsxz$ is given
   by
@@ -230,7 +232,7 @@
 \end{frame}
 
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Definition of the \Poincare{} map}
   \only<1> {
     The \blue{\Poincare{} first return map} takes a point on the guard, applies
@@ -250,46 +252,91 @@
   \only<2> {
     \begin{figure}    
       \centering
-      \def\svgwidth{.45\columnwidth}
-      \input{../figs/poincare_map.eps_latex}
-      \caption{A hybrid periodic orbit. Stability is ascertained using the method of Poincar\'e.}
+      \def\svgwidth{.78\columnwidth}
+      \input{../figs/poincare_return_map.eps_latex}
+      \caption{The \Poincare{} map is defined by the \tti{} function and maps
+        from states on the \Poincare{} section $\S$ back to the section.}
     \end{figure}
   }
 \end{frame}
 
-\subsection{Sketch of Proof}
+%\subsection{Sketch of Proof}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Equivalence of Hybrid Periodic Orbits}
-  \begin{theorem}
+  \begin{lemma}[Equivalence of Orbits]
     Applying the energy shaping controller to the hybrid control system $\HCS$
     results in the closed-loop hybrid system $\HSeps$ that demonstrates a
     periodic orbit which is identical to the unshaped system $\HS$.
-  \end{theorem}
+  \end{lemma}
   \begin{block}{Proof}
     The energy of states $\xo \in \orbit$ is a constant,
     $\E(\xo) \equiv \Eref$. By the choice of Lyapunov function,
-    $Ve(\xo) \equiv 0$. In addition, $\dVe(\xo) \equiv 0$ since
+    $\Ve(\xo) \equiv 0$. In addition, $\dVe(\xo) \equiv 0$ since
     the system is conservative. And since the solution to the optimization
     problem has cost $\uu^{T}(\xo) \uu(\xo) \equiv 0$, the
     control effort is also zero. Hence the orbits are equivalent.
     \end{block}
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
   \frametitle{Boundedness of \TtI{} function}
-  \begin{lemma}[Boundedness of \TtI{}]
-    For the hybrid systems $\HS$ and $\HSeps$,
-    \begin{eqnarray}
-      \nonumber
-      &| \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst,\\
-      &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,
-    \end{eqnarray}
-    where $\limeps \ATIe = 0$ and $\limeps\Ae = 0$.
-  \end{lemma}
+  \only<1> {
+    \begin{lemma}[Boundedness of \TtI{}]
+      For the hybrid systems $\HS$ and $\HSeps$,
+      \begin{eqnarray}
+        \nonumber
+        &| \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst,\\
+        &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,
+      \end{eqnarray}
+      where $\limeps \ATIe = 0$ and $\limeps\Ae = 0$.
+    \end{lemma}
+  }
+  \only<2> {
+    \begin{block}{Proof (Boundedness of \TtI{})}
+      Construct an auxiliary \tti{} function $\TB$ which is locally Lipschitz
+      continuous and independent of $\resclfparam$:
+      \begin{align*}
+        \TB(\eta, \zdx, \zdz) = \inf\{t \geq 0 : h(\eta + \flowt(\Delta(0, \zdzst))) = 0\}.
+      \end{align*}
+      By construction,
+      \begin{align*}
+        \TB(0, \zdx, \zdz) = \TI\argsxz.
+      \end{align*}
+    \end{block}
+    }
+
+    \only<3> {
+      \begin{block}{Proof (Boundedness of \TtI{})}
+        Let $\argsxzti{1}$ and $\argsxzti{2}$ satisfy\vspace{-.4em}
+        \begin{align*}
+          \argsDxzti{1} = \floweps\argsxzti{1}, && \argsDxzti{2} =
+          \flow\argsxzti{2},
+        \end{align*}
+        with initial conditions $\argsxzizero{1} = \argsxzizero{2} = \Delta(0,
+        \zdzst)$. Define
+        \begin{align*}
+          \etaeps = \left.\argsxzti{1}\right|_{t = \TIe\argsxz} -
+          \left.\argsxzti{2}\right|_{t = \TIe\argsxz}
+        \end{align*}
+        and as a result,\vspace{-.4em}
+        \begin{align*}
+          \TIe\argsxz = \TB(\etaeps, \zdx, \zdz).
+        \end{align*}
+
+      \end{block}
+    }
+      
+    \only<4> {
+      \begin{block}{Proof (Boundedness of \TtI{})}
+      \end{block}
+    }
 \end{frame}
 
-\begin{frame}
+\begin{frame}[t]
+\end{frame}
+
+\begin{frame}[t]
   \frametitle{Proof of Energy Shaping Theorem}
   \only<1> {
     Define a composite Lyapunov function,

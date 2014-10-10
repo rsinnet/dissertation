@@ -13,7 +13,7 @@ whoa: 3 $(PROJNAME).pdf
 
 all: all-files $(PROJNAME).pdf
 
-all-files: sec-1 sec-2 sec-3 sec-4 sec-5 sec-6
+all-files: sec-1 sec-2 sec-3 sec-6
 
 sec-1:
 	$(eval EVARS += "PRELIMSECA=1")
