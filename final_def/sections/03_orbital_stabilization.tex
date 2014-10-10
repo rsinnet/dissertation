@@ -329,11 +329,32 @@
       
     \only<4> {
       \begin{block}{Proof (Boundedness of \TtI{})}
+        Because $\TB$ is Lipschitz continuous, it follows that
+        \begin{align*}
+          | \TIe\argsxz - \TI\argsxz | &= | \TB(\etaeps, \zdx, \zdz) - \TB(0, \zdx, \zdz)|\\
+          &\leq \LB \| \etaeps \|
+        \end{align*}
+        It can be shown that $\| \etaeps \|$ is bounded and that $\limeps \|
+        \etaeps \| \ = 0$ and thus
+        \begin{align*}
+          | \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst. &&\qedsymbol
+        \end{align*}
       \end{block}
     }
 \end{frame}
 
 \begin{frame}[t]
+    \frametitle{Boundedness of \Poincare{} Maps}
+  \only<1> {
+    \begin{lemma}[Boundedness of \Poincare{} Maps]
+      For the hybrid systems $\HS$ and $\HSeps$,
+      \begin{eqnarray}
+        \nonumber
+        &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,
+      \end{eqnarray}
+      where  $\limeps\Ae = 0$.
+    \end{lemma}
+  }
 \end{frame}
 
 \begin{frame}[t]
