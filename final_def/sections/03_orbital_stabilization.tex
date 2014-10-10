@@ -282,14 +282,15 @@
 \begin{frame}[t]
   \frametitle{Boundedness of \TtI{} function}
   \only<1> {
+    The difference in solutions between the shaped and unshaped systems can be
+    bounded by examining the difference in solutions:
     \begin{lemma}[Boundedness of \TtI{}]
       For the hybrid systems $\HS$ and $\HSeps$,
       \begin{eqnarray}
         \nonumber
-        &| \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst,\\
-        &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,
+        &| \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst,
       \end{eqnarray}
-      where $\limeps \ATIe = 0$ and $\limeps\Ae = 0$.
+      where $\limeps \ATIe = 0$.
     \end{lemma}
   }
   \only<2> {

@@ -63,7 +63,7 @@
 \newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
 
 % tuple for hybrid system
-\newcommand{\hsystem}{\ensuremath{(\Domain, \Guard, \ResetMap, \F)}}
+\newcommand{\hsystem}{\ensuremath{(\Domain, \Guard, \ResetMap, \xf)}}
 
 % tuple for hybrid control system
 \newcommand{\hcsystem}{\ensuremath{(\Domain, \ControlSet, \Guard, \ResetMap, \FG)}}
@@ -89,15 +89,15 @@
 \newcommand{\tl}{\ensuremath{\mathit{tl}}}
 \newcommand{\hl}{\ensuremath{\mathit{hl}}}
 \newcommand{\hs}{\ensuremath{\mathit{hs}}}
-\newcommand{\Domain}{\ensuremath{\mathcal{D}}}
-\newcommand{\ControlSet}{\ensuremath{\mathcal{U}}}
-\newcommand{\Guard}{\ensuremath{\mathcal{G}}}
+\newcommand{\Domain}{\D}
+\newcommand{\ControlSet}{\U}
+\newcommand{\Guard}{\S}
 \newcommand{\DGraph}{\ensuremath{\Gamma}}
-\newcommand{\ResetMap}{\ensuremath{R}}
-\newcommand{\F}{\ensuremath{f}}
-\newcommand{\FG}{\ensuremath{f, g}}
-\newcommand{\ConfigurationSpace}{\ensuremath{\mathcal{Q}}}
-\newcommand{\StateSpace}{\ensuremath{\mathcal{X}}}
+\newcommand{\ResetMap}{\ensuremath{\Delta}}
+\newcommand{\F}{\ensuremath{\xf}}
+\newcommand{\FG}{\ensuremath{\xf, \xg}}
+\newcommand{\ConfigurationSpace}{\Q}
+\newcommand{\StateSpace}{\X}
 \newcommand{\ContactSet}{\ensuremath{\mathcal{C}}}
 % executions
 \newcommand{\executionHS}{\ensuremath{\chi^{\HS}}}
@@ -149,11 +149,13 @@
 % potential energy
 \newcommand{\V}{\ensuremath{V}}
 
-% manipulator inertia matrix for dynamic model
 \newcommand{\D}{\ensuremath{D}}
 
 % Coriolis Jacobian to find wrench for to dynamic model, i.e. C(q, qdot) * qdot
 \newcommand{\C}{\ensuremath{C}}
+
+\newcommand{\M}{M}
+\newcommand{\B}{B}
 
 % wrench resulting from gravity
 \newcommand{\G}{\ensuremath{G}}

@@ -1,6 +1,15 @@
 {
     "files": [
 	{
+	    "simple_hybrid_system":
+	    {
+		"D": "$D$",
+		"R": "$\\Delta$",
+		"xdot": "$\\dot \\chi  = F(\\chi)$",
+		"S": "$S$"
+	    }
+	},
+	{
 	    "poincare_return_map":
 	    {
 		"D": "$D$",
