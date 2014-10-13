@@ -9,7 +9,7 @@ EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 
 EVARS :=
 
-whoa: 3 $(PROJNAME).pdf
+whoa: 1 2 3 6 $(PROJNAME).pdf
 
 all: all-files $(PROJNAME).pdf
 

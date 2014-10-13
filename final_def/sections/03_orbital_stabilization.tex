@@ -61,10 +61,10 @@
 \begin{frame}[t]
   \frametitle{Control Lyapunov Functions}
   A \blue{control Lyapunov function} $\V : \X \to \R$ which satisfies
-  \begin{align*}
+  \begin{eqnarray*}
     &c_{1} \nx^{2} \leq \V\arx \leq c_{2} \nx^{2},\\
     &\inf_{\uu \in \U} \Lie{\xf}\V\arx + \Lie{\xg}\V\arx \, \uu + c_{3} \V\arx \leq 0
-  \end{align*}
+  \end{eqnarray*}
   for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence. If the above
   are satisfied, then it is also true that
   \begin{align*}
@@ -101,9 +101,9 @@
     \Lie{\xf} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
   \end{align*}
   % We can relax this condition by augmenting the optimization space with $\delta \in \R$ and requiring
-  %\begin{align*}
-  %  2 \eta\arx \left(\Lie{\xf} \eta\arx + \Lie{\xg} \eta\arx \, \mu\arx \right) + \epsilon \eta^{2}\arx \leq \delta\arx.
-  %\end{align*}
+  % \begin{align*}
+  %   2 \eta\arx \left(\Lie{\xf} \eta\arx + \Lie{\xg} \eta\arx \, \mu\arx \right) + \epsilon \eta^{2}\arx \leq \delta\arx.
+  % \end{align*}
 \end{frame}
 
 \begin{frame}[t]
@@ -114,8 +114,8 @@
     \mueps\arx = \argmin_{\uu \in \R^{n}}  \, & \uu^T \uu\\
     \label{eq:clf} \tag{clf}
     \mbox{s.t. } & \Aclf\arx \, \uu \leq \bclf\arx%\\
-    %\label{lim} \tag{lim}
-    %& \Alim v \leq \blim
+    % \label{lim} \tag{lim}
+    % & \Alim v \leq \blim
   \end{align}
   where \eqref{eq:clf} imposes the control Lyapunov function. To encode the dynamics of the system, select
   \begin{align*}
@@ -137,7 +137,7 @@
   which is identical to that of the unshaped system, $\HS$.
 \end{frame}
 
-%\subsection{Energy Shaping Theorem}
+% \subsection{Energy Shaping Theorem}
 
 \begin{frame}[t]
   \frametitle{Main Theorem}
@@ -147,14 +147,14 @@
     of the energy shaping controller results in the closed-loop hybrid system
     \begin{align*}
       \HS_{\resclfparam} = \left\{
-      \begin{array}{l l}
-        \dx = \xf\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
-        \xp = \Delta(\xm), & \x \in \S,
-      \end{array}\right.
-  \end{align*}
-  which is exponentially stable about the hybrid periodic orbit $\orbit$ for
-  large enough $\resclfparam$.
-  
+        \begin{array}{l l}
+          \dx = \xf\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
+          \xp = \Delta(\xm), & \x \in \S,
+        \end{array}\right.
+    \end{align*}
+    which is exponentially stable about the hybrid periodic orbit $\orbit$ for
+    large enough $\resclfparam$.
+    
   \end{theorem}
 \end{frame}
 
@@ -260,7 +260,7 @@
   }
 \end{frame}
 
-%\subsection{Sketch of Proof}
+% \subsection{Sketch of Proof}
 
 \begin{frame}[t]
   \frametitle{Equivalence of Hybrid Periodic Orbits}
@@ -276,7 +276,7 @@
     the system is conservative. And since the solution to the optimization
     problem has cost $\uu^{T}(\xo) \uu(\xo) \equiv 0$, the
     control effort is also zero. Hence the orbits are equivalent.
-    \end{block}
+  \end{block}
 \end{frame}
 
 \begin{frame}[t]
@@ -305,48 +305,50 @@
         \TB(0, \zdx, \zdz) = \TI\argsxz.
       \end{align*}
     \end{block}
-    }
+  }
 
-    \only<3> {
-      \begin{block}{Proof (Boundedness of \TtI{})}
-        Let $\argsxzti{1}$ and $\argsxzti{2}$ satisfy\vspace{-.4em}
-        \begin{align*}
-          \argsDxzti{1} = \floweps\argsxzti{1}, && \argsDxzti{2} =
-          \flow\argsxzti{2},
-        \end{align*}
-        with initial conditions $\argsxzizero{1} = \argsxzizero{2} = \Delta(0,
-        \zdzst)$. Define
-        \begin{align*}
-          \etaeps = \left.\argsxzti{1}\right|_{t = \TIe\argsxz} -
-          \left.\argsxzti{2}\right|_{t = \TIe\argsxz}
-        \end{align*}
-        and as a result,\vspace{-.4em}
-        \begin{align*}
-          \TIe\argsxz = \TB(\etaeps, \zdx, \zdz).
-        \end{align*}
+  \only<3> {
+    \begin{block}{Proof (Boundedness of \TtI{})}
+      Let $\argsxzti{1}$ and $\argsxzti{2}$ satisfy\vspace{-.4em}
+      \begin{align*}
+        \argsDxzti{1} = \floweps\argsxzti{1}, && \argsDxzti{2} =
+        \flow\argsxzti{2},
+      \end{align*}
+      with initial conditions $\argsxzizero{1} = \argsxzizero{2} = \Delta(0,
+      \zdzst)$. Define
+      \begin{align*}
+        \etaeps = \left.\argsxzti{1}\right|_{t = \TIe\argsxz} -
+        \left.\argsxzti{2}\right|_{t = \TIe\argsxz}
+      \end{align*}
+      and as a result,\vspace{-.4em}
+      \begin{align*}
+        \TIe\argsxz = \TB(\etaeps, \zdx, \zdz).
+      \end{align*}
 
-      \end{block}
-    }
-      
-    \only<4> {
-      \begin{block}{Proof (Boundedness of \TtI{})}
-        Because $\TB$ is Lipschitz continuous, it follows that
-        \begin{align*}
-          | \TIe\argsxz - \TI\argsxz | &= | \TB(\etaeps, \zdx, \zdz) - \TB(0, \zdx, \zdz)|\\
-          &\leq \LB \| \etaeps \|
-        \end{align*}
-        It can be shown that $\| \etaeps \|$ is bounded and that $\limeps \|
-        \etaeps \| \ = 0$ and thus
-        \begin{align*}
-          | \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst. &&\qedsymbol
-        \end{align*}
-      \end{block}
-    }
+    \end{block}
+  }
+  
+  \only<4> {
+    \begin{block}{Proof (Boundedness of \TtI{})}
+      Because $\TB$ is Lipschitz continuous, it follows that
+      \begin{align*}
+        | \TIe\argsxz - \TI\argsxz | &= | \TB(\etaeps, \zdx, \zdz) - \TB(0, \zdx, \zdz)|\\
+        &\leq \LB \| \etaeps \|
+      \end{align*}
+      It can be shown that $\| \etaeps \|$ has a bound of the form
+      \begin{align*}
+        | \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst.
+      \end{align*}
+       and that $\limeps \ATIe = 0$. \hfill \qedsymbol
+    \end{block}
+  }
 \end{frame}
 
 \begin{frame}[t]
-    \frametitle{Boundedness of \Poincare{} Maps}
+  \frametitle{Boundedness of \Poincare{} Maps}
   \only<1> {
+    The difference in \Poincare{} maps of the unshaped and shaped systems can be
+    bounded by examining the difference in solutions:
     \begin{lemma}[Boundedness of \Poincare{} Maps]
       For the hybrid systems $\HS$ and $\HSeps$,
       \begin{eqnarray}
@@ -355,6 +357,28 @@
       \end{eqnarray}
       where  $\limeps\Ae = 0$.
     \end{lemma}
+  }
+
+  \only<2> {
+    \begin{block}{Proof (Boundedness of \Poincare{} Maps)}
+      \begin{align*}
+        \lefteqn{\left\| \Pe\argsxz - \P\argsxz \right\| \leq}\\
+        & \hspace{2em} \int_{\TIDelta}^{\TIeDelta} \hspace{-2.5em} \left\| \bigF\argsxztau \right\| \, d\tau\\
+        & \hspace{4em} \mbox{} + \int_{0}^{\TIeDelta} \hspace{-2.5em} \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau.
+      \end{align*}
+    \end{block}
+  }
+
+  \only<3> {
+    \begin{block}{Proof (Boundedness of \Poincare{} Maps)}
+      Using the explicit solution given by the min-norm controller and the bounds
+      established on the difference in \tti{} functions, the bounds can be
+      evaluated and the result is a bound of the form
+      \begin{align*}
+        \left\| \Pe\argsxz - \P\argsxz \right\| \leq \Ae \! \nzdxzst,
+      \end{align*}
+      where  $\limeps\Ae = 0$. \hfill \qedsymbol
+    \end{block}
   }
 \end{frame}
 

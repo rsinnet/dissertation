@@ -41,14 +41,14 @@
       \end{definition}
     \end{column}
     \begin{column}{.4\textwidth}
-        \begin{figure}    
-          \centering
-          \def\svgwidth{.8\columnwidth}
-          \input{../figs/simple_hybrid_system.eps_latex}
-        \end{figure}
-        \vspace{-1em}
-        A \alert{simple hybrid system}:\vspace{-.5em}
-        $$\HS = \hsystem$$
+      \begin{figure}    
+        \centering
+        \def\svgwidth{.8\columnwidth}
+        \input{../figs/simple_hybrid_system.eps_latex}
+      \end{figure}
+      \vspace{-1em}
+      A \alert{simple hybrid system}:\vspace{-.5em}
+      $$\HS = \hsystem$$
     \end{column}
   \end{columns}
 \end{frame}
@@ -57,41 +57,42 @@
   \frametitle{Lagrangian Systems}
   Mechanical systems are defined by:
   \begin{itemize}
-  \item Kinetic energy, $T : T\sQ \to \R^+$,\\
+  \item Kinetic energy, $T : T\sQ \to \Rnn$,\\
   \item Potential energy, $U : \sQ \to \R$,
   \end{itemize}
   which together comprise the Lagrangian,
   \begin{align*}
-    \Lagrangian(q, \dot q) = T(q, \dot q) - U(q).
+    \Lagrangian\argsqdq = T\argsqdq - U\argsqdq.
   \end{align*}
-  Dynamical motion in such a system with external forcing $F = B(q) u$ is governed by the Euler--Lagrange equation:
+  Dynamical motion in such a system with external forcing $\mathcal{F} = B\argsq u$ is governed by the Euler--Lagrange equation:
   \begin{align*}
-    \frac{d}{dt} \pd{\Lagrangian}{\dq} - \pd{\Lagrangian}{\q} = B(q) u.
+    \frac{d}{dt} \pd{\Lagrangian}{\dq} - \pd{\Lagrangian}{\q} = B\argsq u.
   \end{align*}
 \end{frame}
 
 \begin{frame}[t]
+
   \frametitle{Swing Phase Dynamics}
   \begin{columns}
     \begin{column}{.55\textwidth}
       For Lagrangian $\Lagrangian$ with coordinates
       \begin{align*}
-        \x = (\q^{T}, \dq^{T})^{T} \in T\ConfigurationSpace,
+        \x = \argsqdq \in T\ConfigurationSpace,
       \end{align*}
       the dynamic model has the form
       \begin{align*}
-        \M(\q) \, \ddq + \C(\q, \dq) \, \dq + \G(\q) = \B(\q) \, \uu,
+        \M\argsq \, \ddq + \C\argsqdq \, \dq + \G\argsq = \B\argsq \, \uu,
       \end{align*}
-      or $\dx = \xf(q, \dot q) + \xg(q) \, \uu,$ with
+      or $\dx = \xf\argsqdq+ \xg\argsq \, \uu,$ with
       \begin{align*}
-        \xf(\q, \dq) &= \left(\!\!\begin{array}{c}
-        \dq\\
-        \M^{-1}(\q) (-\C(\q, \dq) \, \dq - \G(\q))
-        \end{array}\!\!\right),\\
+        \xf\argsqdq &= \left(\!\!\begin{array}{c}
+            \dq\\
+            \M^{-1}\argsq (-\C\argsqdq \, \dq - \G\argsq)
+          \end{array}\!\!\right),\\
         \xg(\q) &= \left(\!\!\begin{array}{c}
-        \mathbf{0}_{m \times m}\\
-        \M^{-1}(\q) \B(\q)
-        \end{array}\!\!\right).
+            \mathbf{0}_{m \times m}\\
+            \M^{-1}(\q) \B(\q)
+          \end{array}\!\!\right).
       \end{align*}
     \end{column}\!\!
     \begin{column}{.45\textwidth}
@@ -107,7 +108,7 @@
 
 \begin{frame}[t]
   \frametitle{Impact Dynamics}
-  Introduce extended coordinates $\qe = (X, \q^{T})^{T} \in \mathrm{SE}(3) \times \ConfigurationSpace$ which contains the kinematics of a reference point on the robot. Angular momentum balance based on H{\"u}rm{\"u}zl{\"u} and Marghitu:
+  Introduce extended coordinates $\qe = (X, \q) \in \mathrm{SE}(3) \times \ConfigurationSpace$ which contains the kinematics of a reference point on the robot. Angular momentum balance based on H{\"u}rm{\"u}zl{\"u} and Marghitu:
   \begin{massump}
     \begin{itemize}
     \item Rigid-body plastic impacts
@@ -180,8 +181,8 @@
   \frametitle{Conservative Systems}
   For a conservative system, total energy is conserved; i.e.:
   \begin{align*}
-    E_{c} &= T(q, \dot q) + U(q)\\
-    &= E(q(0), \dot q(0)) = E_{0}
+    \Ec &= T\argsqdq + U\argsq\\
+    &= \E(q(0), \dot q(0)) = \Eref
   \end{align*}
   Dynamical motion for such a system relies on the interplay between kinetic and potential energy, which is expressed in the Euler-Lagrange equation,
   \begin{align*}
@@ -197,11 +198,11 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = 0
+        \M\argsq \ddot q + \CG\argsqdq = 0
       \end{align*}
       Control Law:
       \begin{align*}
-        u = 0.
+        \uu = 0.
       \end{align*}
       \column{1.5in}
       \begin{figure}%width=1.0\columnwidth,
@@ -218,13 +219,15 @@
   \only<2>{
     \begin{figure}
       \includemedia[
-        %width=1.0\columnwidth,
-        %height=0.5625\columnwidth,
-        width=1.0\columnwidth,
-        height=0.5\columnwidth,
-        addresource=cg2d_slope.mp4,
-        activate=pageopen,
-        flashvars={source=cg2d_slope.mp4&loop=true&autoPlay=true}
+      % width=1.0\columnwidth,
+      % height=0.5625\columnwidth,
+      %width=1.0\columnwidth,
+      %height=0.5\columnwidth,
+      width=.9\columnwidth,
+      height=0.45\columnwidth,
+      addresource=cg2d_slope.mp4,
+      activate=pageopen,
+      flashvars={source=cg2d_slope.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
       \caption{Stable passive gaits can be found for a range of slopes.}
     \end{figure}    
@@ -244,8 +247,8 @@
   \frametitle{Nonconservative Systems}
   For a nonconservative system, energy flows out of the system at a rate of $F_{\nc} \cdot dq$. Thus, the following quantity is conserved:
   \begin{align*}
-    E_{c} &= T(q, \dot q) + U(q) - \int_{t_{0}}^{t} \! F_{\nc} \cdot \frac{dq}{d\tau} \ d\tau\\
-    &= E(q(0), \dot q(0)) = E_{0}
+    \Ec &= T\argsqdq + U\argsq - \int_{t_{0}}^{t} \! F_{\nc} \cdot \frac{dq}{d\tau} \ d\tau\\
+    &= \E(q(0), \dot q(0)) = \Eref
   \end{align*}
   This equation expresses the interplay between kinetic and potential energy and the flow of energy into and out of the system.
 \end{frame}
@@ -258,11 +261,11 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = B(q) u.
+        \M\argsq \ddq + \CG\argsqdq = \B\argsq \uu.
       \end{align*}
       Controlled Symmetries:
       \begin{align*}
-        u &= G(q) - G(\Psi_{\gamma}(q))
+        \uu &= \G\argsq - G(\Psi_{\gamma}\argsq)
       \end{align*}
       where $\Psi : \S \times \R \to \sQ$ rotates the frame of gravity by $\gamma$.
 
@@ -279,13 +282,13 @@
   \only<2>{
     \begin{figure}
       \includemedia[
-        %width=1.0\columnwidth,
-        %height=0.5625\columnwidth,
-        width=.9\columnwidth,
-        height=0.45\columnwidth,
-        addresource=cg2d_2link_simulation.mp4,
-        activate=pageopen,
-        flashvars={source=cg2d_2link_simulation.mp4&loop=true&autoPlay=true}
+      % width=1.0\columnwidth,
+      % height=0.5625\columnwidth,
+      width=.9\columnwidth,
+      height=0.45\columnwidth,
+      addresource=cg2d_2link_simulation.mp4,
+      activate=pageopen,
+      flashvars={source=cg2d_2link_simulation.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
       \caption{Passive downhill gaits can be translated to flat ground with Controlled Symmetries.}
     \end{figure}    
@@ -306,12 +309,12 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = B(q) u
+        \M\argsq \ddq + \CG\argsqdq = \B\argsq \uu
       \end{align*}
       Control Law:
       \begin{align*}
-        u &= G(q) - G(\Psi(q))\\
-        u_3 &=-k_{d} (\dot \vartheta_{T}^{a})\\
+        \uu &= \G\argsq - \G(\Psi\argsq)\\
+        \uu_3 &=-k_{d} (\dot \vartheta_{T}^{a})\\
         &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d})
       \end{align*}
       \column{1.5in}
@@ -336,11 +339,13 @@
   \only<3>{
     \begin{figure}
       \includemedia[
-        width=1.0\columnwidth,
-        height=0.5\columnwidth,
-        addresource=cg2d_3link_simulation.mp4,
-        activate=pageopen,
-        flashvars={source=cg2d_3link_simulation.mp4&loop=true&autoPlay=true}
+      %width=1.0\columnwidth,
+      %height=0.5\columnwidth,
+      width=.9\columnwidth,
+      height=0.45\columnwidth,
+      addresource=cg2d_3link_simulation.mp4,
+      activate=pageopen,
+      flashvars={source=cg2d_3link_simulation.mp4&loop=true&autoPlay=true}
       ]{}{VPlayer9.swf}
       \caption{Stable passive gaits can be found for a range of slopes.}
     \end{figure}
