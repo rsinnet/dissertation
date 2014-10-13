@@ -6,13 +6,13 @@
 \begin{frame}[t]
   \frametitle{Motivation}
   \begin{block}{Main Question}
-    Can we use an understanding of energy exchange to improve global stability
-    properties of periodic orbits in mechanical systems?
+    Can we use an understanding of energy exchange to improve robustness  of
+    periodic orbits in hybrid mechanical systems?
   \end{block}
 
   \begin{block}{Observations}
     \begin{itemize}
-    \item Numerous control design schemes exist for stabilizing mechanical
+    \item Numerous control design schemes exist for stabilizing hybrid mechanical
       systems to periodic orbits.
     \item Some controllers produce good behavior locally but lack robustness.
     \item Periodic orbits have associated energy functions with level sets which
@@ -24,29 +24,77 @@
 \begin{frame}[t]
   \frametitle{Overview}
   \only<1>{
-    \begin{block}{Setup}
-      Consider the control system 
+    \begin{block}{Conservative Systems}
+      Consider the hybrid control system
       \begin{align*}
-        \dx = \xf(\x) + \xg(\x) \, \uu(\x).
+        \HCS = \left\{
+          \begin{array}{l l}
+            \dx = \xf\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
+            \xp = \Delta(\xm), & \x \in \S.
+          \end{array}\right.
       \end{align*}
-      Assume there exists a control law ${\bar \uu}\arx$ which creates a limit
-      cycle in the closed-loop dynamics,
+      For a \blue{conservative system}, $\uu \equiv \boldzero$, which leads to
+      the hybrid system
       \begin{align*}
-        {\bar \xf}\arx = \xf\arx + \xg\arx \, {\bar \uu}\arx.
+        \HS = \left\{
+          \begin{array}{l l}
+            \dx = \xf\arx, & \x \in \D \setminus \S,\\
+            \xp = \Delta(\xm), & \x \in \S.
+          \end{array}\right.
       \end{align*}
-      Also assume there exists an energy function $E_{c} : T\X \to \R$ which is
-      conserved, i.e., $E_{c}\arx \equiv E_{0}$, on the limit cycle.
     \end{block}
   }
-
+  
   \only<2>{
+    \begin{block}{Nonconservative Systems}
+      Consider the hybrid control system
+      \begin{align*}
+        \HCS = \left\{
+          \begin{array}{l l}
+            \dx = \xf\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
+            \xp = \Delta(\xm), & \x \in \S.
+          \end{array}\right.
+      \end{align*}
+      For a \blue{nonconservative system}, assume the control input $\uu$ takes
+      the form of a feedback control law, $\vv : \X \to \R^{n}$ which is
+      subsumed under the vector field $\xfbar\arx = \xf\arx + \xg\arx \,
+      \vv\arx$ which yields
+      % and augment the
+      % state space with a \blue{storage function}, $W$:      
+      \begin{align*}
+        \HCSbar = \left\{
+          \begin{array}{l l}
+            \dx = \xfbar\arx, & \x \in \D \setminus \S,\\
+            \xp = \Delta(\xm), & \x \in \S.
+          \end{array}\right.
+      \end{align*}      
+    \end{block}
+  }
+  
+  % \only<3> {
+  % \begin{block}{Setup}
+  %   \begin{align*}
+  %     \dx = \xf\arx + \xg\arx \, \uu.
+  %   \end{align*}
+  %   Assume there exists a feedback control law $\vv\arx$ which creates a limit
+  %   cycle in the closed-loop dynamics,
+  %   \begin{align*}
+  %     {\bar \xf}\arx = \xf\arx + \xg\arx \, \vv\arx.
+  %   \end{align*}
+  %   Also assume there exists an energy function $E_{c} : T\X \to \R$ which is
+  %   conserved, i.e., $E_{c}\arx \equiv E_{0}$, on the limit cycle.
+  % \end{block}
+  % }
+  
+  \only<3>{
     \begin{block}{Main Idea}
       Add robustness to a periodic behavior by imposing convergence on an energy
       function to a level set which is known to be invariant under the system dynamics.
     \end{block}
     
     \begin{block}{Control Objective}
-      Choose control input $\mu\arx$ such that $\| \mu\arx - {\bar \uu}\arx \|$ is minimized and $E_{c}\arxt \to E_0$ as $t \to \infty$.
+      Choose control input $\mu\arx$ such that $\| \mu\arx - \vv\arx \|$ is
+      minimized and $E_{c}\arxt \to E_0$ as $t \to \infty$.
     \end{block}
 
     \begin{block}{Exponential Convergence}
@@ -91,11 +139,12 @@
 
 \begin{frame}[t]
   \frametitle{Energy Shaping}
-  Consider a conserved energy function $E_{c}\arx$ and define a candidate
+  Consider a conserved energy function $E_{c}\arx$ on a hybrid system $\HS$ and define a candidate
   control Lyapunov function:
   \begin{align*}
-    V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right).
+    V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right),
   \end{align*}
+  with $\Eref$ the constant energy level of 
   For an exponentially stabilizing CLF, we seek $\mu\arx$ such that
   \begin{align*}
     \Lie{\xf} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
