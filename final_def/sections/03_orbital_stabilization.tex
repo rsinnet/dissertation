@@ -42,6 +42,7 @@
             \xp = \Delta(\xm), & \x \in \S.
           \end{array}\right.
       \end{align*}
+      For simplicity, define $\xfbar\arx = \xf\arx$ when dealing with conservative systems.
     \end{block}
   }
   
@@ -106,20 +107,19 @@
   }
 \end{frame}
 
-\begin{frame}[t]
-  \frametitle{Control Lyapunov Functions}
-  A \blue{control Lyapunov function} $\V : \X \to \R$ which satisfies
-  \begin{eqnarray*}
-    &c_{1} \nx^{2} \leq \V\arx \leq c_{2} \nx^{2},\\
-    &\inf_{\uu \in \U} \Lie{\xf}\V\arx + \Lie{\xg}\V\arx \, \uu + c_{3} \V\arx \leq 0
-  \end{eqnarray*}
-  for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence. If the above
-  are satisfied, then it is also true that
-  \begin{align*}
-    \left\| \pd{\V\arx}{\x} \right\| \leq c_{4} \nx.
-  \end{align*}
-\end{frame}
-
+%\begin{frame}[t]
+%  \frametitle{Control Lyapunov Functions}
+%  A \blue{control Lyapunov function} $\V : \X \to \R$ which satisfies
+%  \begin{eqnarray*}
+%    &c_{1} \nx^{2} \leq \V\arx \leq c_{2} \nx^{2},\\
+%    &\inf_{\uu \in \U} \Lie{\xf}\V\arx + \Lie{\xg}\V\arx \, \uu + c_{3} \V\arx \leq 0
+%  \end{eqnarray*}
+%  for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence. If the above
+%  are satisfied, then it is also true that
+%  \begin{align*}
+%    \left\| \pd{\V\arx}{\x} \right\| \leq c_{4} \nx.
+%  \end{align*}
+%\end{frame}
 
 \begin{frame}[t]
   \frametitle{Rapidly Exponentially Stabilizing Control Lyapunov Functions}
@@ -127,7 +127,7 @@
   $\Ve : \X \to \Rnn$ satisfies
   \begin{align*}
     &c_{1} \nx^{2} \leq \Ve\arx \leq \frac{c_{2}}{\resclfparam^{2}} \nx^{2},\\
-    &\inf_{\uu \in \U} \Lie{\xf}\Ve\arx + \Lie{\xg}\Ve\arx \, \uu +
+    &\inf_{\uu \in \U} \Lie{\xfbar}\Ve\arx + \Lie{\xg}\Ve\arx \, \uu +
     \frac{c_{3}}{\resclfparam} \Ve\arx \leq 0
   \end{align*}
   for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence. If the above
@@ -139,20 +139,37 @@
 
 \begin{frame}[t]
   \frametitle{Energy Shaping}
-  Consider a conserved energy function $E_{c}\arx$ on a hybrid system $\HS$ and define a candidate
-  control Lyapunov function:
+  Consider a conserved energy function $E_{c}\arx$ on a hybrid system $\HS$
+  which has a periodic orbit $\orbit$ and define a Lyapunov candidate:
   \begin{align*}
     V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right),
   \end{align*}
-  with $\Eref$ the constant energy level of 
-  For an exponentially stabilizing CLF, we seek $\mu\arx$ such that
+  with $\Eref$ the constant energy level of the system on the orbit
+  $\orbit$. For an exponentially stabilizing CLF, we seek $\mu\arx$ such that
   \begin{align*}
-    \Lie{\xf} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
+    \Lie{\xfbar} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
   \end{align*}
   % We can relax this condition by augmenting the optimization space with $\delta \in \R$ and requiring
   % \begin{align*}
   %   2 \eta\arx \left(\Lie{\xf} \eta\arx + \Lie{\xg} \eta\arx \, \mu\arx \right) + \epsilon \eta^{2}\arx \leq \delta\arx.
   % \end{align*}
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Conserved Energy Functions}
+  \begin{block}{Conservative Systems}
+    Total energy is conserved through the continuous dynamics
+    \begin{align*}
+      \Ec\argsqdq = T\argsqdq + U\argsqdq.
+    \end{align*}
+    \end{block}
+    \begin{block}{Nonconservative systems}
+      Similarly, in nonconservative systems, the following is conserved:
+      \begin{align*}
+        \Ec\argsqdq = T\argsqdq + U\argsqdq - \int_{0}^{t} \left( \B\argsqtau \,
+        \uu\argsqdqtau \right)^{T} \pd{\q}{\tau} \ d\tau
+    \end{align*}
+  \end{block}
 \end{frame}
 
 \begin{frame}[t]
@@ -168,7 +185,7 @@
   \end{align}
   where \eqref{eq:clf} imposes the control Lyapunov function. To encode the dynamics of the system, select
   \begin{align*}
-    \Aclf = \Lie{\xg}\Ve\arx, && \bclf = -\Lie{\xf}\Ve\arx - \frac{c_{3}}{\resclfparam} \Ve\arx.
+    \Aclf = \Lie{\xg}\Ve\arx, && \bclf = -\Lie{\xfbar}\Ve\arx - \frac{c_{3}}{\resclfparam} \Ve\arx.
   \end{align*}
 \end{frame}
 
@@ -178,7 +195,7 @@
   \begin{align*}
     \HSeps = \left\{
       \begin{array}{l l}
-        \dx = \xf\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
+        \dx = \xfbar\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
         \xp = \Delta(\xm), & \x \in \S.
       \end{array}\right.
   \end{align*}
@@ -197,7 +214,7 @@
     \begin{align*}
       \HS_{\resclfparam} = \left\{
         \begin{array}{l l}
-          \dx = \xf\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
+          \dx = \xfbar\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
           \xp = \Delta(\xm), & \x \in \S,
         \end{array}\right.
     \end{align*}
