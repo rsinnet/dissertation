@@ -22,33 +22,91 @@
 \end{frame}
 
 \begin{frame}[t]
-  \frametitle{Overview}
+  \frametitle{Conserved Energy Functions}
+  \only<1> {
+    \begin{block}{Conservative Systems}
+      A conservative system with state space $\x = \argsqdq$ is modeled as
+      \begin{align*}
+        \HCSbar = \left\{
+          \begin{array}{r c l l}
+            \dx &=& \xfbar\argsqdq + \xgbar\argsq \, \uu, & \argsqdq \in \D \setminus \S,\\
+            \xp &=& \Delta(\xm), & \argsqdq \in \S.
+          \end{array}\right.
+      \end{align*}
+      where $\xfbar\argsqdq = \xf\argsqdq$ and $\xgbar\argsq = \xg\argsq$ for notational clarity. Total
+      energy is conserved through the continuous dynamics, i.e.,
+      \begin{align*}
+        \Ec\argsqdq = T\argsqdq + U\argsq.
+      \end{align*}
+    \end{block}
+  }
+
+  \only<2> {
+    \begin{block}{Nonconservative Systems}
+      To properly handle the flow of energy from $\vv\argsqdq$, define a storage
+      function, $\W$, which obeys the differential equation
+      \begin{align*}
+        d\W = \vfR\argsqdq \, dt = \left( \B\argsq \, \vv\argsqdq \right)^{T}
+        \frac{d\q}{dt}\art \, dt.
+      \end{align*}
+      Using $\W$, augment the state space, $\x := (\q, \dq, \W)$, and the vector
+      fields,
+      \begin{align*}
+        \xfbar\argsqdq := \left(\begin{array}{c}
+            \xf\argsqdq\\
+            \vfR\argsqdq
+          \end{array}\right), &&
+        \xgbar\argsq := \left(\begin{array}{c}
+            \xg\argsq\\
+            \boldzero
+          \end{array}\right).
+      \end{align*}
+    \end{block}
+  }
+  \only<3> {
+    \begin{block}{Nonconservative Systems}
+      Use the augmented state to define the hybrid control system
+      \begin{align*}
+        \HCSbar = \left\{
+          \begin{array}{l l}
+            \left.\begin{array}{r c l}
+                \hspace{1.15em}\dx &=& \xfbar\argsqdq + \xgbar\argsq \, \uu
+              \end{array}\right\}  & \mbox{if } \argsqdq \in \D \setminus \S,\\
+            \left. \begin{array}{r c l}
+                \qp &=& \Deltaq\argsqm\\
+                \dqp &=& \Deltadq\argsqdqm\\
+                \Wp &=& 0
+              \end{array} \right\} & \mbox{if } \argsqdq \in \S.
+          \end{array}\right.
+      \end{align*}
+      For such a system, the following quantity is conserved:
+      \begin{align*}
+        \Ec\argsqdqW = T\argsqdq + U\argsq - W
+      \end{align*}
+    \end{block}
+  }
+\end{frame}
+
+\begin{frame}[t]
+  \frametitle{Setup}
   \only<1>{
     \begin{block}{Conservative Systems}
       Consider the hybrid control system
       \begin{align*}
         \HCS = \left\{
-          \begin{array}{l l}
-            \dx = \xf\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
-            \xp = \Delta(\xm), & \x \in \S.
+          \begin{array}{r c l l}
+            \dx &=& \xf\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
+            \xp &=& \Delta(\xm), & \x \in \S.
           \end{array}\right.
       \end{align*}
-      For a \blue{conservative system}, $\uu \equiv \boldzero$.
-      %, which leads to the hybrid system
-      %\begin{align*}
-      %  \HS = \left\{
-      %    \begin{array}{l l}
-      %      \dx = \xf\arx, & \x \in \D \setminus \S,\\
-      %      \xp = \Delta(\xm), & \x \in \S.
-      %    \end{array}\right.
-      %\end{align*}
-      For simplicity of exposition when dealing with conservative systems,
-      define $\xfbar\arx = \xf\arx$ and
+      For a \blue{conservative system}, $\uu \equiv \boldzero$. For simplicity
+      of exposition when dealing with conservative systems, define $\xfbar\arx =
+      \xf\arx$ and
       \begin{align*}
         \HCSbar = \left\{
-          \begin{array}{l l}
-            \dx = \xfbar\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
-            \xp = \Delta(\xm), & \x \in \S.
+          \begin{array}{r c l l}
+            \dx &=& \xfbar\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
+            \xp &=& \Delta(\xm), & \x \in \S.
           \end{array}\right.
       \end{align*}
     \end{block}
@@ -79,22 +137,7 @@
       \end{align*}      
     \end{block}
   }
-  
-  % \only<3> {
-  % \begin{block}{Setup}
-  %   \begin{align*}
-  %     \dx = \xf\arx + \xg\arx \, \uu.
-  %   \end{align*}
-  %   Assume there exists a feedback control law $\vv\arx$ which creates a limit
-  %   cycle in the closed-loop dynamics,
-  %   \begin{align*}
-  %     {\bar \xf}\arx = \xf\arx + \xg\arx \, \vv\arx.
-  %   \end{align*}
-  %   Also assume there exists an energy function $E_{c} : T\X \to \R$ which is
-  %   conserved, i.e., $E_{c}\arx \equiv E_{0}$, on the limit cycle.
-  % \end{block}
-  % }
-  
+    
   \only<3>{
     \begin{block}{Main Idea}
       Add robustness to a periodic behavior by imposing convergence on an energy
@@ -132,57 +175,32 @@
 
 \begin{frame}[t]
   \frametitle{Energy Shaping}
-  Consider a conserved energy function $\Ec\arx$ on a hybrid control system
-  $\HCSbar$ which has a periodic orbit $\orbit$ and define a Lyapunov candidate:
-  \begin{align*}
-    V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right)^{2},
-  \end{align*}
-  with $\Eref$ the constant energy level of the system on the orbit
-  $\orbit$. For a RES--CLF, we seek a feedback control law, $\mu\arx$, such that
-  \begin{align*}
-    \Lie{\xfbar} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
-  \end{align*}
-\end{frame}
-
-\begin{frame}[t]
-  \frametitle{Conserved Energy Functions}
-  \only<1> {
+  \only<1>{
     \begin{block}{Conservative Systems}
-      Total energy is conserved through the continuous dynamics
+      Consider a conserved energy function $\Ec\arx$ on a hybrid control system
+      $\HCSbar$ which has a periodic orbit $\orbit$ and define a Lyapunov candidate:
       \begin{align*}
-        \Ec\argsqdq = T\argsqdq + U\argsqdq.
+        V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right)^{2},
       \end{align*}
-    \end{block}
-    \begin{block}{Nonconservative Systems}
-      Similarly, in nonconservative systems, the following is conserved:
+      with $\Eref$ the constant energy level of the system on the orbit
+      $\orbit$. For a RES--CLF, we seek a feedback control law, $\mu\arx$, such that
       \begin{align*}
-        \lefteqn{\Ec\argsqdq = T\argsqdq + U\argsqdq}\\
-        &&\mbox{}- \int_{0}^{t} \left( \B\argsqtau \,
-          \uu\argsqdqtau \right)^{T} \pd{\q}{\tau} \ d\tau.
+        \Lie{\xfbar} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
       \end{align*}
     \end{block}
   }
-
-  \only<2> {
+  
+  \only<2>{
     \begin{block}{Nonconservative Systems}
-      To properly handle the flow of energy from $\vv\argsqdq$, define a storage function, $\W$,
-      which obeys the differential equation
+      Consider a conserved energy function $\Ec\arxW$ on a hybrid control system
+      $\HCSbar$ which has a periodic orbit $\orbit$ and define a Lyapunov candidate:
       \begin{align*}
-        d\W = \left( \B\argsq \, \vv\argsqdq \right)^{T} \pd{\q}{t} \ dt,
+        V\arxW = \frac{1}{2} \left(\Ec\arxW - \Eref\right)^{2},
       \end{align*}
-      and augment the state space to create the hybrid control system
+      with $\Eref$ the constant energy level of the system on the orbit
+      $\orbit$. For a RES--CLF, we seek a feedback control law, $\mu\arxW$, such that
       \begin{align*}
-        \HCSbar = \left\{
-          \begin{array}{l l}
-            \begin{array}{r c l}
-              \hphantom{^{+}}\dx &=& \xfbar\arx + \xg\arx \, \uu\\
-              \hphantom{^{+}}\Wdot &=& \left( \B\argsq \, \vv\argsqdq \right)^{T} \dq
-            \end{array}  & \mbox{if } \x \in \D \setminus \S,\\
-            \begin{array}{r c l}
-              \xp &=& \Delta(\xm)\\
-              \Wp &=& 0 
-            \end{array} & \mbox{if } \x \in \S.
-          \end{array}\right.
+        \Lie{(\xfbar, \vfR)} V\arxW + \Lie{(\xg, \boldzero)} \V\arxW \, \mu\arxW + \epsilon \V\arxW &\leq 0.
       \end{align*}
     \end{block}
   }
@@ -202,21 +220,43 @@
 
 \begin{frame}[t]
   \frametitle{Main Theorem}
-
-  \begin{theorem}[Energy Shaping]
-    Given an exponentially-stable cycle in a hybrid system, application
-    of the energy shaping controller results in the closed-loop hybrid system
-    \begin{align*}
-      \HS_{\resclfparam} = \left\{
-        \begin{array}{l l}
-          \dx = \xfbar\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
-          \xp = \Delta(\xm), & \x \in \S,
-        \end{array}\right.
-    \end{align*}
-    which is exponentially stable about the hybrid periodic orbit $\orbit$ for
-    large enough $\resclfparam$.
-    
-  \end{theorem}
+  \only<1> {
+    \begin{block}{Theorem [Energy Shaping (Conservative Systems)]}
+      Given an exponentially-stable cycle in a hybrid system, application
+      of the energy shaping controller results in the closed-loop hybrid system
+      \begin{align*}
+        \HS_{\resclfparam} = \left\{
+          \begin{array}{r c l l}
+            \dx &=& \xfbar\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
+            \xp &=& \Delta(\xm), & \x \in \S,
+          \end{array}\right.
+      \end{align*}
+      which is exponentially stable about the hybrid periodic orbit $\orbit$ for
+      large enough $\resclfparam$.
+    \end{block}
+  }
+  
+  \only<2> {
+    \begin{block}{Theorem [Energy Shaping (Nonconservative Systems)]}
+      Given an exponentially-stable cycle in a hybrid system, application
+      of the energy shaping controller results in the closed-loop hybrid system
+      \begin{align*}
+        \HS_{\resclfparam} = \left\{
+          \begin{array}{l l}
+            \begin{array}{r c l}
+              \pspace\dx &=& \xfbar\arx + \xg\arx \, \mueps\arxW\\
+              \pspace\Wdot &=& \vfR\arx
+            \end{array}  & \mbox{if } \x \in \D \setminus \S,\\
+            \begin{array}{r c l}
+              \xp &=& \Delta(\xm)\\
+              \Wp &=& 0
+            \end{array} & \mbox{if } \x \in \S.
+          \end{array}\right.
+      \end{align*}
+      which is exponentially stable about the hybrid periodic orbit $\orbit$ for
+      large enough $\resclfparam$.
+    \end{block}
+  }
 \end{frame}
 
 \subsection{Sketch of Proof}

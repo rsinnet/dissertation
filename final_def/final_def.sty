@@ -304,22 +304,38 @@
 
 \newcommand{\nx}{\|\x\|}
 
+\newcommand{\qp}{\q^{+}}
+\newcommand{\dqp}{\dq^{+}}
+\newcommand{\qm}{\q^{-}}
+\newcommand{\dqm}{\dq^{-}}
+
+\newcommand{\art}{(t)}
+\newcommand{\artau}{(\tau)}
+\newcommand{\arzero}{(0)}
+
 \newcommand{\argsq}{(\q)}
 \newcommand{\argsqdq}{(\q, \dq)}
+\newcommand{\argsqdqW}{(\q, \dq, \W)}
 \newcommand{\arx}{(\x)}
-\newcommand{\arxt}{(\x(t))}
-\newcommand{\arxzero}{(\x(0))}
+\newcommand{\arxt}{(\x\art)}
+\newcommand{\arxzero}{(\x\arzero)}
+\newcommand{\argsqm}{(\qm)}
+\newcommand{\argsqdqm}{(\qm, \dqm)}
 
-\newcommand{\argsqdqtau}{(\q(\tau), \dq(\tau))}
-\newcommand{\argsqtau}{(\q(\tau))}
 
-\newcommand{\argsqdqt}{(\q(t), \dq(t))}
-\newcommand{\argsqt}{(\q(t))}
+\newcommand{\arxW}{(\x, \W)}
+
+\newcommand{\argsqdqtau}{(\q\artau, \dq\artau)}
+\newcommand{\argsqtau}{(\q\artau)}
+
+\newcommand{\argsqdqt}{(\q\art, \dq\art)}
+\newcommand{\argsqt}{(\q\art)}
 
 \newcommand{\xf}{F}
 \newcommand{\xg}{G}
 
 \newcommand{\xfbar}{{\bar \xf}}
+\newcommand{\xgbar}{{\bar \xg}}
 
 \newcommand{\Lie}[1]{L_{#1}}
 
@@ -354,17 +370,17 @@
 
 
 \newcommand{\argsxz}{(\zdx, \zdz)}
-\newcommand{\argsxzti}[1]{(\zdx_{#1}(t), \zdz_{#1}(t))}
-\newcommand{\argsxzizero}[1]{(\zdx_{#1}(0), \zdz_{#1}(0))}
-\newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}(t), {\dot \zdz}_{#1}(t))}
+\newcommand{\argsxzti}[1]{(\zdx_{#1}\art, \zdz_{#1}\art)}
+\newcommand{\argsxzizero}[1]{(\zdx_{#1}\arzero, \zdz_{#1}\arzero)}
+\newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}\art, {\dot \zdz}_{#1}\art)}
 \newcommand{\argsx}{(\zdx)}
 \newcommand{\argsz}{(\zdz)}
 
 \newcommand{\taueps}{\tau^{\resclfparam}}
 \newcommand{\taurho}{\tau^{\rho}}
 
-\newcommand{\argsxzt}{(\zdx(t), \zdz(t))}
-\newcommand{\argsxztau}{(\zdx(\tau), \zdz(\tau))}
+\newcommand{\argsxzt}{(\zdx\art, \zdz\art)}
+\newcommand{\argsxztau}{(\zdx\artau, \zdz\artau)}
 \newcommand{\argsmuxz}{(\mu_{1}, \mu_{2}, \zdx, \zdz)}
 \newcommand{\argstxzi}[2]{(\zdx_{#2}(#1), \zdz_{#2}(#1))}
 \newcommand{\argsxzprime}{(\zdx', \zdz')}
@@ -383,8 +399,8 @@
 \newcommand{\nzdxzprime}{\left\|\argsxzprime\right\|}
 \newcommand{\nzdxzstprime}{\left\|\argsxzstprime\right\|}
 
-\newcommand{\nzdxt}{|\zdx(\tau)|}
-\newcommand{\nzdxzero}{|\zdx(0)|}
+\newcommand{\nzdxt}{|\zdx\artau|}
+\newcommand{\nzdxzero}{|\zdx\arzero|}
 \newcommand{\nzdzst}{\left\|\zdz - \zdzst\right\|}
 
 \newcommand{\argszero}{(0, \boldzero)}
@@ -475,3 +491,10 @@
 \newcommand{\CG}{H}
 
 \newcommand{\vv}{v}
+
+\newcommand{\pspace}{\hphantom{^{+}}}
+
+\newcommand{\vfR}{\ensuremath{R}}
+
+\newcommand{\Deltaq}{\ensuremath{\Delta_{\q}}}
+\newcommand{\Deltadq}{\ensuremath{\Delta_{\dq}}}
