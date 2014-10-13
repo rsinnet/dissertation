@@ -54,11 +54,13 @@
 
 % symbol for hybrid system.
 \newcommand{\HS}{\ensuremath{\Sigma}}
-\newcommand{\HSeps}{\ensuremath{\Sigma_{\resclfparam}}}
+\newcommand{\HSbar}{\ensuremath{\bar{\Sigma}}}
+\newcommand{\HSeps}{\ensuremath{\HS_{\resclfparam}}}
+\newcommand{\HSepsbar}{\ensuremath{\HSbar_{\resclfparam}}}
 
 % symbol for hybrid control system
 \newcommand{\HCS}{\HS_{c}}
-\newcommand{\HCSbar}{\bar{\HS}_{c}}
+\newcommand{\HCSbar}{\HSbar_{c}}
 
 % partial derivative
 \newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
@@ -354,12 +356,13 @@
 \newcommand{\Pex}{\Pe^{\zdx}}
 \newcommand{\Pez}{\Pe^{\zdz}}
 
-\newcommand{\Ve}{V_{\resclfparam}}
-\newcommand{\dVe}{{\dot V}_{\resclfparam}}
+\newcommand{\dV}{{\dot \V}}
+
+\newcommand{\Ve}{\V_{\resclfparam}}
+\newcommand{\dVe}{\dV_{\resclfparam}}
 
 \newcommand{\Vn}{\V_{\mathit{n}}}
 \newcommand{\VP}{\V_{\Pe}}
-\newcommand{\Vbar}{\overline{V}}
 
 \renewcommand{\S}{S}
 

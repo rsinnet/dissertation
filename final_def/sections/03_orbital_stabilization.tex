@@ -326,14 +326,14 @@
 \begin{frame}[t]
   \frametitle{Equivalence of Hybrid Periodic Orbits}
   \begin{lemma}[Equivalence of Orbits]
-    Applying the energy shaping controller to the hybrid control system $\HCS$
-    results in the closed-loop hybrid system $\HSeps$ that demonstrates a
-    periodic orbit which is identical to the unshaped system $\HS$.
+    Applying the energy shaping controller to the hybrid control system $\HCSbar$
+    results in the closed-loop hybrid system $\HSepsbar$ that demonstrates a
+    periodic orbit which is identical to the unshaped system $\HSbar$.
   \end{lemma}
   \begin{block}{Proof}
     The energy of states $\xo \in \orbit$ is a constant,
     $\E(\xo) \equiv \Eref$. By the choice of Lyapunov function,
-    $\V(\xo) \equiv 0$. In addition, $\dVe(\xo) \equiv 0$ since
+    $\V(\xo) \equiv 0$. In addition, $\dV(\xo) \equiv 0$ since
     the system is conservative. And since the solution to the optimization
     problem has cost $\uu^{T}(\xo) \uu(\xo) \equiv 0$, the
     control effort is also zero. Hence the orbits are equivalent.
@@ -341,12 +341,12 @@
 \end{frame}
 
 \begin{frame}[t]
-  \frametitle{Boundedness of \TtI{} function}
+  \frametitle{Boundedness of \TtI{} Function}
   \only<1> {
     The difference in solutions between the shaped and unshaped systems can be
     bounded by examining the difference in solutions:
     \begin{lemma}[Boundedness of \TtI{}]
-      For the hybrid systems $\HS$ and $\HSeps$,
+      For the hybrid systems $\HSbar$ and $\HSepsbar$,
       \begin{eqnarray}
         \nonumber
         &| \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst,
@@ -388,19 +388,46 @@
 
     \end{block}
   }
-  
+
   \only<4> {
+    \begin{block}{Proof (Boundedness of \TtI{})}
+      Examining the explicit solution given by the min-norm control law, i.e.,
+      \begin{align*}
+        \mueps\argsxz = - \frac{\frac{c_{3}}{\resclfparam} \Ve\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} \bigG\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}},
+      \end{align*}
+      a bound can be established:
+      \begin{align*}
+        \| \mueps\argsxz \| \leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG}{\lambdaminG} \nzdx.
+      \end{align*}
+    \end{block}
+  }
+
+  \only<5> {
+    \begin{block}{Proof (Boundedness of \TtI{})}
+      The difference between flows can then be bounded:
+      \begin{align*}
+        \|\etaeps\| &\leq \int_{0}^{\TIe\argsxz} \! \left\| \bigG\argsxztau \,
+          \mueps\argsxztau \, \right\| d\tau\\
+        &\leq \LDelta \frac{c_{2}^{\frac{3}{2}}
+          c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}}
+        \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 -
+          e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \nzdxzst
+      \end{align*}
+    \end{block}
+  }
+  
+  \only<6> {
     \begin{block}{Proof (Boundedness of \TtI{})}
       Because $\TB$ is Lipschitz continuous, it follows that
       \begin{align*}
         | \TIe\argsxz - \TI\argsxz | &= | \TB(\etaeps, \zdx, \zdz) - \TB(0, \zdx, \zdz)|\\
-        &\leq \LB \| \etaeps \|
+        &\leq \LB \| \etaeps \|.
       \end{align*}
-      It can be shown that $\| \etaeps \|$ has a bound of the form
+      Using the bound for $\etaeps$ leads to the conclusion that
       \begin{align*}
         | \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst.
       \end{align*}
-       and that $\limeps \ATIe = 0$. \hfill \qedsymbol
+      with $\limeps \ATIe = 0$. \hfill \qedsymbol
     \end{block}
   }
 \end{frame}
@@ -411,7 +438,7 @@
     The difference in \Poincare{} maps of the unshaped and shaped systems can be
     bounded by examining the difference in solutions:
     \begin{lemma}[Boundedness of \Poincare{} Maps]
-      For the hybrid systems $\HS$ and $\HSeps$,
+      For the hybrid systems $\HSbar$ and $\HSepsbar$,
       \begin{eqnarray}
         \nonumber
         &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,
