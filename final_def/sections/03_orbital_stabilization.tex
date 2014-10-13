@@ -101,7 +101,7 @@
             \left. \begin{array}{r c l}
                 \qp &=& \Deltaq\argsqm\\
                 \dqp &=& \Deltadq\argsqdqm\\
-                \Wp &=& 0
+                \Wp &=& \DeltaW = 0
               \end{array} \right\} & \mbox{if } \argsqdq \in \S.
           \end{array}\right.
       \end{align*}
@@ -139,7 +139,7 @@
   with $\Eref$ the constant energy level of the system on the orbit
   $\orbit$. For a RES--CLF, we seek a feedback control law, $\mu\arx$, such that
   \begin{align*}
-    \Lie{\xfbar} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
+    \Lie{\xfbar} V\arx + \Lie{\xgbar} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
   \end{align*}
 \end{frame}
 
@@ -157,46 +157,33 @@
 
 \begin{frame}[t]
   \frametitle{Main Theorem}
-  \only<1> {
-    \begin{block}{Theorem [Energy Shaping (Conservative Systems)]}
-      Given an exponentially-stable cycle in a hybrid system, application
-      of the energy shaping controller results in the closed-loop hybrid system
-      \begin{align*}
-        \HS_{\resclfparam} = \left\{
-          \begin{array}{r c l l}
-            \dx &=& \xfbar\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
-            \xp &=& \Delta(\xm), & \x \in \S,
-          \end{array}\right.
-      \end{align*}
-      which is exponentially stable about the hybrid periodic orbit $\orbit$ for
-      large enough $\resclfparam$.
-    \end{block}
-  }
-  
-  \only<2> {
-    \begin{block}{Theorem [Energy Shaping (Nonconservative Systems)]}
-      Given an exponentially-stable cycle in a hybrid system, application
-      of the energy shaping controller results in the closed-loop hybrid system
-      \begin{align*}
-        \HS_{\resclfparam} = \left\{
-          \begin{array}{l l}
-            \begin{array}{r c l}
-              \pspace\dx &=& \xfbar\arx + \xg\arx \, \mueps\arxW\\
-              \pspace\Wdot &=& \vfR\arx
-            \end{array}  & \mbox{if } \x \in \D \setminus \S,\\
-            \begin{array}{r c l}
-              \xp &=& \Delta(\xm)\\
-              \Wp &=& 0
-            \end{array} & \mbox{if } \x \in \S.
-          \end{array}\right.
-      \end{align*}
-      which is exponentially stable about the hybrid periodic orbit $\orbit$ for
-      large enough $\resclfparam$.
-    \end{block}
-  }
+  \begin{block}{Theorem [Energy Shaping]}
+    Given an exponentially-stable cycle in a hybrid system, application
+    of the energy shaping controller results in the closed-loop hybrid system
+    \begin{align*}
+      \HS_{\resclfparam} = \left\{
+        \begin{array}{r c l l}
+          \dx &=& \xfbar\arx + \xgbar\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
+          \xp &=& \Delta(\xm), & \x \in \S,
+        \end{array}\right.
+    \end{align*}
+    which is exponentially stable about the hybrid periodic orbit $\orbit$ for
+    large enough $\resclfparam$.
+  \end{block}
 \end{frame}
 
 \subsection{Sketch of Proof}
+
+\begin{frame}[t]
+  \frametitle{Overview of Proof}
+  \begin{block}{Sketch of Proof [Energy Shaping]}
+    \begin{enumerate}
+    \item Transform the coordinates into a more intuitive form.
+    \item Define a discrete Lyapunov candidate function valid on the \Poincare{} map.
+    \item Show the conditions for stability through bounding arguments.
+    \end{enumerate}
+  \end{block}
+\end{frame}
 
 \begin{frame}[t]
   \frametitle{Zero Dynamics Formulation}
@@ -221,11 +208,25 @@
 
 \begin{frame}[t]
   \frametitle{Energy-Based Coordinate Change}
-  For mechanical systems with coordinates $\x = \argsqdq \in T\Q$, construct the transformation $\xform\argsqdq := \argsxz$ where
-  \begin{align*}
-    \zdx &= \Ec\argsqdq - \Eref,\\
-    \zdz &= \xrem,
-  \end{align*}
+  \only<1> {
+    \begin{block}{Conservative Systems}
+      Using the state $\x = \argsqdq$, construct the transformation $\xform\argsqdqW := \argsxz$ where
+      \begin{align*}
+        \zdx &= \Ec\argsqdq - \Eref,\\
+        \zdz &= \xrem,
+      \end{align*}
+    \end{block}
+  }
+
+  \only<2> {
+    \begin{block}{Nonconservative Systems}
+      Using the state $\x = \argsqdqW$, construct the transformation $\xform\argsqdqW := \argsxz$ where
+      \begin{align*}
+        \zdx &= \Ec\argsqdqW - \Eref,\\
+        \zdz &= \xremW,
+      \end{align*}
+    \end{block}
+  }
   where $n$ is the size of the configuration space, $\Q$. The fixed point of the
   hybrid system is chosen to occur at $\argsxz = \xzst$ such that $\Delta\xzst =
   \argszero$.
@@ -233,25 +234,49 @@
 
 \begin{frame}[t]
   \frametitle{Validity of Transformation}
-  The coordinate change $\xform\argsqdq$ is valid if it is locally diffeomorphic around the orbit
-  $\orbit$, i.e., if
-  \begin{align}
-    \pd{\xform(\q, \dq)}{(\q, \dq)} =
-    \left(\begin{array}{c c}
-        I_{2n-1} & \boldzero_{2n-1 \times 1}\\
-        \pd{E(\q, \dq)}{\xrem} & \pd{E(\q, \dq)}{\dq_{n}}
-      \end{array}\right)
-  \end{align}
-  % 
-  has full rank, which occurs when
-  \begin{align*}
-    \det\left(\pd{\xform\argsqdq}{\argsqdq}\right) = \pd{E(\q, \dq)}{\dq_{n}} \ne 0.
-  \end{align*}
+  \only<1> {
+    \begin{block}{Conservative Systems}
+      The coordinate change $\xform\arx = \xform\argsqdq$ is valid if it is locally
+      diffeomorphic around the orbit $\orbit$, i.e., if
+      \begin{align*}
+        \pd{\xform\argsqdq}{\argsqdq} =
+        \left(\begin{array}{c c}
+            I_{2n-1} & \boldzero_{2n-1 \times 1}\\
+            \pd{\Ec(\q, \dq)}{\xrem} & \pd{\Ec(\q, \dq)}{\dq_{n}}
+          \end{array}\right)
+      \end{align*}
+      % 
+      has full rank, which occurs when
+      \begin{align*}
+        \det\left(\pd{\xform\argsqdq}{\argsqdq}\right) = \pd{\Ec\argsqdq}{\dq_{n}} \ne 0.
+      \end{align*}
+    \end{block}
+  }
+  
+  \only<2> {
+    \begin{block}{Nonconservative Systems}
+      The coordinate change $\xform\arx = \xform\argsqdqW$ is valid if it is locally
+      diffeomorphic around the orbit $\orbit$, i.e., if
+      \begin{align*}
+        \pd{\xform\argsqdqW}{\argsqdqW} =
+        \left(\begin{array}{c c c}
+            I_{2n-1} & \boldzero_{2n-1 \times 1} & \boldzero_{2n-1 \times 1}\\
+            \pd{\E\argsqdqW}{\xrem} & \pd{\Ec\argsqdqW}{\dq_{n}} & 1\\
+            \boldzero_{1 \times 2n-1} & 0 & 1
+          \end{array}\right)
+      \end{align*}
+      % 
+      has full rank, which occurs when
+      \begin{align*}
+        \det \pd{\xform\argsqdqW}{\argsqdqW} = \pd{\Ec\argsqdqW}{\dq_{n}} \ne 0.
+      \end{align*}
+    \end{block}
+  }
 \end{frame}
 
 \begin{frame}[t]
   \frametitle{Flows of Continuous Dynamical Systems}
-  Recall that the flow of an ODE expressed in the variables $\argsxz$ is given
+  The flow of an ODE expressed in the variables $\argsxz$ is given
   by
   \begin{align*}
     \flowt\argsxz = \int_{0}^{t} \left[ \bigF\argsxztau + \bigG\argsxztau \,
@@ -271,7 +296,7 @@
 
 
 \begin{frame}[t]
-  \frametitle{Definition of the \Poincare{} map}
+  \frametitle{Definition of the \Poincare{} Map}
   \only<1> {
     The \blue{\Poincare{} first return map} takes a point on the guard, applies
     the reset map and then integrates forward until the guard is reached
@@ -298,8 +323,6 @@
   }
 \end{frame}
 
-% \subsection{Sketch of Proof}
-
 \begin{frame}[t]
   \frametitle{Equivalence of Hybrid Periodic Orbits}
   \begin{lemma}[Equivalence of Orbits]
@@ -310,7 +333,7 @@
   \begin{block}{Proof}
     The energy of states $\xo \in \orbit$ is a constant,
     $\E(\xo) \equiv \Eref$. By the choice of Lyapunov function,
-    $\Ve(\xo) \equiv 0$. In addition, $\dVe(\xo) \equiv 0$ since
+    $\V(\xo) \equiv 0$. In addition, $\dVe(\xo) \equiv 0$ since
     the system is conservative. And since the solution to the optimization
     problem has cost $\uu^{T}(\xo) \uu(\xo) \equiv 0$, the
     control effort is also zero. Hence the orbits are equivalent.
