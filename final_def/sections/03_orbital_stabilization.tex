@@ -33,16 +33,24 @@
             \xp = \Delta(\xm), & \x \in \S.
           \end{array}\right.
       \end{align*}
-      For a \blue{conservative system}, $\uu \equiv \boldzero$, which leads to
-      the hybrid system
+      For a \blue{conservative system}, $\uu \equiv \boldzero$.
+      %, which leads to the hybrid system
+      %\begin{align*}
+      %  \HS = \left\{
+      %    \begin{array}{l l}
+      %      \dx = \xf\arx, & \x \in \D \setminus \S,\\
+      %      \xp = \Delta(\xm), & \x \in \S.
+      %    \end{array}\right.
+      %\end{align*}
+      For simplicity of exposition when dealing with conservative systems,
+      define $\xfbar\arx = \xf\arx$ and
       \begin{align*}
-        \HS = \left\{
+        \HCSbar = \left\{
           \begin{array}{l l}
-            \dx = \xf\arx, & \x \in \D \setminus \S,\\
+            \dx = \xfbar\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
             \xp = \Delta(\xm), & \x \in \S.
           \end{array}\right.
       \end{align*}
-      For simplicity, define $\xfbar\arx = \xf\arx$ when dealing with conservative systems.
     \end{block}
   }
   
@@ -56,16 +64,16 @@
             \xp = \Delta(\xm), & \x \in \S.
           \end{array}\right.
       \end{align*}
-      For a \blue{nonconservative system}, assume the control input $\uu$ takes
-      the form of a feedback control law, $\vv : \X \to \R^{n}$ which is
-      subsumed under the vector field $\xfbar\arx = \xf\arx + \xg\arx \,
-      \vv\arx$ which yields
+      For a \blue{nonconservative system}, assume the nominal  control input
+      $\uu$ takes the form of a feedback control law, $\vv : \X \to \R^{n}$
+      which is subsumed under the vector field $\xfbar\arx = \xf\arx + \xg\arx \,
+      \vv\arx$ yielding
       % and augment the
       % state space with a \blue{storage function}, $W$:      
       \begin{align*}
         \HCSbar = \left\{
           \begin{array}{l l}
-            \dx = \xfbar\arx, & \x \in \D \setminus \S,\\
+            \dx = \xfbar\arx + \xg\arx \, \uu, & \x \in \D \setminus \S,\\
             \xp = \Delta(\xm), & \x \in \S.
           \end{array}\right.
       \end{align*}      
@@ -94,35 +102,20 @@
     \end{block}
     
     \begin{block}{Control Objective}
-      Choose control input $\mu\arx$ such that $\| \mu\arx - \vv\arx \|$ is
-      minimized and $E_{c}\arxt \to E_0$ as $t \to \infty$.
+      Choose control input $\mu\arx$ such that $\| \mu\arx \|$ is minimized and $\Ec\arxt \to \Eref$ as $t \to \infty$.
     \end{block}
 
     \begin{block}{Exponential Convergence}
-      To achieve exponential stabilization, $E_{c}(x(t))$ should satisfy\vspace{-.4em}
+      To achieve exponential stabilization, $\Ec\arxt$ should satisfy\vspace{-.4em}
       \begin{align*}
-        E_{c}\arxt \leq E_{c}\arxzero e^{-\beta t} \mbox{ for } t \geq 0, \beta > 0.
+        \Ec\arxt \leq \Ec\arxzero e^{-\beta t} \mbox{ for } t \geq 0, \beta > 0.
       \end{align*}
     \end{block}
   }
 \end{frame}
 
-%\begin{frame}[t]
-%  \frametitle{Control Lyapunov Functions}
-%  A \blue{control Lyapunov function} $\V : \X \to \R$ which satisfies
-%  \begin{eqnarray*}
-%    &c_{1} \nx^{2} \leq \V\arx \leq c_{2} \nx^{2},\\
-%    &\inf_{\uu \in \U} \Lie{\xf}\V\arx + \Lie{\xg}\V\arx \, \uu + c_{3} \V\arx \leq 0
-%  \end{eqnarray*}
-%  for $c_{1}, c_{2}, c_{3} > 0$ exhibits exponential convergence. If the above
-%  are satisfied, then it is also true that
-%  \begin{align*}
-%    \left\| \pd{\V\arx}{\x} \right\| \leq c_{4} \nx.
-%  \end{align*}
-%\end{frame}
-
 \begin{frame}[t]
-  \frametitle{Rapidly Exponentially Stabilizing Control Lyapunov Functions}
+  \frametitle{Rapidly Exponentially Stabilizing CLFs}
   A \blue{rapidly exponentially stability control Lyapunov function (RES--CLF)}
   $\Ve : \X \to \Rnn$ satisfies
   \begin{align*}
@@ -139,71 +132,73 @@
 
 \begin{frame}[t]
   \frametitle{Energy Shaping}
-  Consider a conserved energy function $E_{c}\arx$ on a hybrid system $\HS$
-  which has a periodic orbit $\orbit$ and define a Lyapunov candidate:
+  Consider a conserved energy function $\Ec\arx$ on a hybrid control system
+  $\HCSbar$ which has a periodic orbit $\orbit$ and define a Lyapunov candidate:
   \begin{align*}
-    V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right),
+    V\arx = \frac{1}{2} \left(\Ec\arx - \Eref\right)^{2},
   \end{align*}
   with $\Eref$ the constant energy level of the system on the orbit
-  $\orbit$. For an exponentially stabilizing CLF, we seek $\mu\arx$ such that
+  $\orbit$. For a RES--CLF, we seek a feedback control law, $\mu\arx$, such that
   \begin{align*}
     \Lie{\xfbar} V\arx + \Lie{\xg} \V\arx \, \mu\arx + \epsilon \V\arx &\leq 0.
   \end{align*}
-  % We can relax this condition by augmenting the optimization space with $\delta \in \R$ and requiring
-  % \begin{align*}
-  %   2 \eta\arx \left(\Lie{\xf} \eta\arx + \Lie{\xg} \eta\arx \, \mu\arx \right) + \epsilon \eta^{2}\arx \leq \delta\arx.
-  % \end{align*}
 \end{frame}
 
 \begin{frame}[t]
   \frametitle{Conserved Energy Functions}
-  \begin{block}{Conservative Systems}
-    Total energy is conserved through the continuous dynamics
-    \begin{align*}
-      \Ec\argsqdq = T\argsqdq + U\argsqdq.
-    \end{align*}
+  \only<1> {
+    \begin{block}{Conservative Systems}
+      Total energy is conserved through the continuous dynamics
+      \begin{align*}
+        \Ec\argsqdq = T\argsqdq + U\argsqdq.
+      \end{align*}
     \end{block}
-    \begin{block}{Nonconservative systems}
+    \begin{block}{Nonconservative Systems}
       Similarly, in nonconservative systems, the following is conserved:
       \begin{align*}
-        \Ec\argsqdq = T\argsqdq + U\argsqdq - \int_{0}^{t} \left( \B\argsqtau \,
-        \uu\argsqdqtau \right)^{T} \pd{\q}{\tau} \ d\tau
-    \end{align*}
-  \end{block}
+        \lefteqn{\Ec\argsqdq = T\argsqdq + U\argsqdq}\\
+        &&\mbox{}- \int_{0}^{t} \left( \B\argsqtau \,
+          \uu\argsqdqtau \right)^{T} \pd{\q}{\tau} \ d\tau.
+      \end{align*}
+    \end{block}
+  }
+
+  \only<2> {
+    \begin{block}{Nonconservative Systems}
+      To properly handle the flow of energy from $\vv\argsqdq$, define a storage function, $\W$,
+      which obeys the differential equation
+      \begin{align*}
+        d\W = \left( \B\argsq \, \vv\argsqdq \right)^{T} \pd{\q}{t} \ dt,
+      \end{align*}
+      and augment the state space to create the hybrid control system
+      \begin{align*}
+        \HCSbar = \left\{
+          \begin{array}{l l}
+            \begin{array}{r c l}
+              \hphantom{^{+}}\dx &=& \xfbar\arx + \xg\arx \, \uu\\
+              \hphantom{^{+}}\Wdot &=& \left( \B\argsq \, \vv\argsqdq \right)^{T} \dq
+            \end{array}  & \mbox{if } \x \in \D \setminus \S,\\
+            \begin{array}{r c l}
+              \xp &=& \Delta(\xm)\\
+              \Wp &=& 0 
+            \end{array} & \mbox{if } \x \in \S.
+          \end{array}\right.
+      \end{align*}
+    \end{block}
+  }
 \end{frame}
 
 \begin{frame}[t]
   \frametitle{Quadratic Program Formulation}
-  The linear form of the CLF condition suggests
+  The linear form of the RES--CLF condition suggests
   \begin{align}
     \nonumber
-    \mueps\arx = \argmin_{\uu \in \R^{n}}  \, & \uu^T \uu\\
-    \label{eq:clf} \tag{clf}
-    \mbox{s.t. } & \Aclf\arx \, \uu \leq \bclf\arx%\\
-    % \label{lim} \tag{lim}
-    % & \Alim v \leq \blim
+    \mueps\arx = \argmin_{\uu \in \R^{n}}  \, & \uu^T \uu,\\
+    \mbox{s.t. } & \Aclf\arx \, \uu \leq \bclf\arx
   \end{align}
-  where \eqref{eq:clf} imposes the control Lyapunov function. To encode the dynamics of the system, select
-  \begin{align*}
-    \Aclf = \Lie{\xg}\Ve\arx, && \bclf = -\Lie{\xfbar}\Ve\arx - \frac{c_{3}}{\resclfparam} \Ve\arx.
-  \end{align*}
+  which encodes the dynamics of the system. This controller imposes exponential
+  stabilization of the energy as defined by the RES--CLF.
 \end{frame}
-
-\begin{frame}[t]
-  \frametitle{Closed-Loop Hybrid System}
-  Applying the energy shaping controller gives the closed-loop hybrid system
-  \begin{align*}
-    \HSeps = \left\{
-      \begin{array}{l l}
-        \dx = \xfbar\arx + \xg\arx \, \mueps\arx, & \x \in \D \setminus \S,\\
-        \xp = \Delta(\xm), & \x \in \S.
-      \end{array}\right.
-  \end{align*}
-  This is called the \blue{shaped system}. It has a periodic orbit, $\orbit$,
-  which is identical to that of the unshaped system, $\HS$.
-\end{frame}
-
-% \subsection{Energy Shaping Theorem}
 
 \begin{frame}[t]
   \frametitle{Main Theorem}
