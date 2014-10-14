@@ -30,7 +30,8 @@
   \end{block}
   
   \begin{block}{Control Objective}
-    Choose control input $\mu\arx$ such that $\| \mu\arx \|$ is minimized and $\Ec\arxt \to \Eref$ as $t \to \infty$.
+    Choose control input $\mu\arx$ such that $\| \mu\arx \|$ is minimized and
+    $\Ec\arxt \to \Eref$ as $t \to \infty$.
   \end{block}
 
   \begin{block}{Exponential Convergence}
@@ -187,7 +188,8 @@
 
 \begin{frame}[t]
   \frametitle{Zero Dynamics Formulation}
-  Construct a change of coordinates, splitting up the system into two sets of coordinates:
+  Construct a change of coordinates, splitting up the system into two sets of
+  coordinates:
   \begin{align*}
     \dot \zdx &= f\argsxz + g\argsxz \, \uu,\\
     \dot \zdz &= q\argsxz + w\argsxz \, \uu.
@@ -210,7 +212,8 @@
   \frametitle{Energy-Based Coordinate Change}
   \only<1> {
     \begin{block}{Conservative Systems}
-      Using the state $\x = \argsqdq$, construct the transformation $\xform\argsqdqW := \argsxz$ where
+      Using the state $\x = \argsqdq$, construct the transformation
+      $\xform\argsqdqW := \argsxz$ where
       \begin{align*}
         \zdx &= \Ec\argsqdq - \Eref,\\
         \zdz &= \xrem,
@@ -220,7 +223,8 @@
 
   \only<2> {
     \begin{block}{Nonconservative Systems}
-      Using the state $\x = \argsqdqW$, construct the transformation $\xform\argsqdqW := \argsxz$ where
+      Using the state $\x = \argsqdqW$, construct the transformation
+      $\xform\argsqdqW := \argsxz$ where
       \begin{align*}
         \zdx &= \Ec\argsqdqW - \Eref,\\
         \zdz &= \xremW,
@@ -248,15 +252,16 @@
       % 
       has full rank, which occurs when
       \begin{align*}
-        \det\left(\pd{\xform\argsqdq}{\argsqdq}\right) = \pd{\Ec\argsqdq}{\dq_{n}} \ne 0.
+        \det\left(\pd{\xform\argsqdq}{\argsqdq}\right) =
+        \pd{\Ec\argsqdq}{\dq_{n}} \ne 0.
       \end{align*}
     \end{block}
   }
   
   \only<2> {
     \begin{block}{Nonconservative Systems}
-      The coordinate change $\xform\arx = \xform\argsqdqW$ is valid if it is locally
-      diffeomorphic around the orbit $\orbit$, i.e., if
+      The coordinate change $\xform\arx = \xform\argsqdqW$ is valid if it is
+      locally diffeomorphic around the orbit $\orbit$, i.e., if
       \begin{align*}
         \pd{\xform\argsqdqW}{\argsqdqW} =
         \left(\begin{array}{c c c}
@@ -283,7 +288,8 @@
       \uu\argsxztau \right] \, d\tau
   \end{align*}
   for some feedback control law $\uu : \zdX \times \zdZ \to \U$. For some stable
-  tube $\stabletube$ around the orbit $\orbit$, it holds that the vector fields are bounded:
+  tube $\stabletube$ around the orbit $\orbit$, it holds that the vector fields
+  are bounded:
   \begin{align*}
     \supF & := \sup \left\{ \left\| \bigF\argsxz \right\| : \argsxz \in
       \stabletube \right\},\\
@@ -321,6 +327,27 @@
         from states on the \Poincare{} section $\S$ back to the section.}
     \end{figure}
   }
+
+  \only<3> {
+    Using the change of coordinates $\rho(\resclfparam) :=
+    \tfrac{1}{\resclfparam}$, define the function
+    \begin{align*}
+      N(t, \rho, \zdx, \zdz) = h(\flowrhot(\Deltaxz)),
+    \end{align*}
+    By the implicit function theorem, there exists a $\delta > 0$ and a unique
+    function $\taurho(\rho, \zdx, \zdz)$ defined and locally Lipschitz for all
+    $(\rho, \zdx, \zdz) \in \B_{\delta}(0, 0, \zdzst)$ such that $\tau^{0}(0,
+    \zdzst) = \TI(0, \zdzst) = \Tst$ where $\Tst$ is the period of the invariant
+    orbit $\orbit$.\\ \ \\
+
+    Selecting a fixed $\resclfparam > 0$ with the min-norm controller, it
+    follows that for some $\delta > 0$ and $\argsxz \in \B_{\delta}\xzst \cap
+    \S$,
+    \begin{align*}
+      \label{eq:TIe-bounds}
+      0.9 \Tst \leq \TIe\argsxz \leq 1.1 \Tst.
+    \end{align*}
+  }
 \end{frame}
 
 \begin{frame}[t]
@@ -354,12 +381,14 @@
       where $\limeps \ATIe = 0$.
     \end{lemma}
   }
+  
   \only<2> {
     \begin{block}{Proof (Boundedness of \TtI{})}
       Construct an auxiliary \tti{} function $\TB$ which is locally Lipschitz
       continuous and independent of $\resclfparam$:
       \begin{align*}
-        \TB(\eta, \zdx, \zdz) = \inf\{t \geq 0 : h(\eta + \flowt(\Delta(0, \zdzst))) = 0\}.
+        \TB(\eta, \zdx, \zdz) = \inf\{t \geq 0 : h(\eta + \flowt(\Delta(0,
+        \zdzst))) = 0\}.
       \end{align*}
       By construction,
       \begin{align*}
@@ -385,7 +414,6 @@
       \begin{align*}
         \TIe\argsxz = \TB(\etaeps, \zdx, \zdz).
       \end{align*}
-
     \end{block}
   }
 
@@ -393,7 +421,10 @@
     \begin{block}{Proof (Boundedness of \TtI{})}
       Examining the explicit solution given by the min-norm control law,
       \begin{align*}
-        \mueps\argsxz = - \frac{\frac{c_{3}}{\resclfparam} \Ve\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} \bigG\argsxz \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}},
+        \mueps\argsxz = - \frac{\frac{c_{3}}{\resclfparam} \Ve\argsxz
+          \bigG^{T}\argsxz \left( \pd{V_{e}\argsxz}{\argsxz}
+          \right)^{T}}{\pd{V_{e}\argsxz}{\argsxz} \bigG\argsxz \bigG^{T}\argsxz
+          \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}},
       \end{align*}
       a bound can be established:
       \begin{align*}
@@ -411,7 +442,7 @@
         &\leq \LDelta \frac{c_{2}^{\frac{3}{2}}
           c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}}
         \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 -
-          e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \nzdxzst
+          e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \nzdxzst.
       \end{align*}
     \end{block}
   }
@@ -420,12 +451,13 @@
     \begin{block}{Proof (Boundedness of \TtI{})}
       Because $\TB$ is Lipschitz continuous, it follows that
       \begin{align*}
-        | \TIe\argsxz - \TI\argsxz | &= | \TB(\etaeps, \zdx, \zdz) - \TB(0, \zdx, \zdz)|\\
+        | \TIe\argsxz - \TI\argsxz | &= | \TB(\etaeps, \zdx, \zdz) - \TB(0,
+        \zdx, \zdz)|\\
         &\leq \LB \| \etaeps \|.
       \end{align*}
       Using the bound for $\etaeps$ leads to the conclusion that
       \begin{align*}
-        | \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst.
+        | \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst
       \end{align*}
       with $\limeps \ATIe = 0$. \hfill \qedsymbol
     \end{block}
@@ -449,10 +481,13 @@
 
   \only<2> {
     \begin{block}{Proof (Boundedness of \Poincare{} Maps)}
+      By the definition of the \Poincare{} map,
       \begin{align*}
         \lefteqn{\left\| \Pe\argsxz - \P\argsxz \right\| \leq}\\
-        & \hspace{2em} \int_{\TIDelta}^{\TIeDelta} \hspace{-2.5em} \left\| \bigF\argsxztau \right\| \, d\tau\\
-        & \hspace{4em} \mbox{} + \int_{0}^{\TIeDelta} \hspace{-2.5em} \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau.
+        & \hspace{2em} \int_{\TIDelta}^{\TIeDelta} \hspace{-2.5em} \left\|
+          \bigF\argsxztau \right\| \, d\tau\\
+        & \hspace{4em} \mbox{} + \int_{0}^{\TIeDelta} \hspace{-2.5em} \left\|
+          \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau.
       \end{align*}
     \end{block}
   }
