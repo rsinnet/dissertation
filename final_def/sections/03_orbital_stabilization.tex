@@ -531,4 +531,78 @@
     \end{eqnarray*}
     for some $r_{1}, r_{2}, r_{3} \in \Rnn$.
   }
+
+  \only<3> {
+    By construction of the control law, it is true that
+    % 
+    \begin{align*}
+      \Vex(\zdx) &\leq \frac{c_{2}}{\resclfparam^{2}} \left\| \zdx
+      \right\|^{2},\\
+      \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}}
+      e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz \right\|^{2}.
+    \end{align*}
+    Since the reset map is locally Lipschitz continuous,
+    \begin{align*}
+      \left\| \DeltaX\argsxz - \DeltaX\xzst \right\| &\leq \left\| \Delta\argsxz
+        - \Delta\xzst \right\|
+      \leq \LDelta \nzdxzst
+    \end{align*}
+    and thus
+    \begin{align*}
+      \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}}
+      e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz -
+        \DeltaX\xzst \right\|^{2}\\
+      &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam}
+        \TIe\argsxz} \LDelta^{2} \nzdxzst^{2}.
+    \end{align*}
+  }
+
+  \only<4> {
+    From these bounds, it follows that
+    \begin{align*}
+      \lefteqn{\Vex(\Pex\argsxz) - \Vex(\zdx) \leq}\\
+      &&\bepsone \nzdxzst^{2} - \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2}.
+    \end{align*}
+    where
+    \begin{align*}
+      \bepsone := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2}
+      e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}.
+    \end{align*}
+  }
+
+  \only<5> {
+    As a result of the bounds on the \tti{} functions and the assumption of exponential stability about the origin, it follows that
+  %
+  \begin{align*}
+    &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,\\
+    &\| \Pe\argsxz \| = \| \Pe\argsxz - \P\argsxz + \P\argsxz - \P\xzst\|\\
+    & \hspace{4.4em} \leq \Ae \nzdxzst  + \LP\nzdxzst,\\
+    &\| \P\argsxz \| \leq N \alpha \nzdxzst,
+  \end{align*}
+  %
+  where $\LP$ is the Lipschitz constant for $\P$.
+}
+  
+  \only<6> {
+    Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and \eqref{eq:nom-lyap-bounds} yields
+    \begin{align*}
+      \lefteqn{\VP(\Pe\argsxz) - \VP\argsxz \leq}\\
+      &&-\left(\begin{array}{c c}
+          \nzdx & \nzdzst
+        \end{array}\right)
+      \Le
+      \left(\begin{array}{c}
+          \nzdx\\
+          \nzdzst
+        \end{array}\right)
+    \end{align*}
+    with
+    \begin{align*}
+      \lefteqn{\Le =}\\
+      &&\left(\begin{array}{c c}
+          r_{3} - \bepstwo - \sigma (\bepsone - \frac{c_{2}}{\resclfparam^{2}}) & r_{3} - \bepstwo - \sigma \bepsone\\
+          r_{3} - \bepstwo - \sigma \bepsone & r_{3} - \bepstwo - \sigma \bepsone
+        \end{array}\right).
+    \end{align*}
+  }
 \end{frame}

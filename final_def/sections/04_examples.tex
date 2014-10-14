@@ -89,6 +89,31 @@
       \caption{Energy shaping to stabilize to a gait from distant initial condition.}
     \end{figure}
   }
+
+  \only<6> {
+    \begin{figure}
+      \centering
+      \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{pp_eps_0}
+        \caption{Nominal system.}
+      \end{subfigure}%
+      \hfill
+      \begin{subfigure}[t]{0.48\textwidth}
+        \includegraphics[width=\textwidth]{pp_eps_1_100}
+        \caption{Shaped system with $\resclfparam = \frac{1}{100}$.}
+      \end{subfigure}
+      \caption{Comparison of unshaped and shaped system.}
+    \end{figure}
+  }
+
+  \only<7> {
+    \begin{figure}
+      \centering
+      \includegraphics[height=.7\textheight]{poincare_cloud}
+      \caption{A three-dimensional representation of the domain of attraction
+        on the guard, comparing the unshaped and shaped system.}
+    \end{figure}
+  }
 \end{frame}
 
 \begin{frame}
