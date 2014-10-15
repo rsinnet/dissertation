@@ -10,11 +10,11 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = B(q) u
+        \M\argsq \ddq + \CG\argsqdq = \B\argsq \uu
       \end{align*}
       Control Law:
       \begin{align*}
-        \bar u(q) &= G(q) - G(\Psi(q))
+        \vv\argsq &= \G\argsq - \G(\Psi\argsq)
       \end{align*}
 
       \column{1.5in}
@@ -46,23 +46,18 @@
 
   \only<3>{
     Energy shaping can be achieved using:
-    \begin{align}
-      \nonumber
-      \argmin_{v = (\delta, u)}  \, & v^T \! H \, v + h^T(q, \dot q) v\\
-      \label{clf} \tag{clf}
-      \mbox{s.t. } & \Aclf(q, \dot q) v \leq \bclf(q, \dot q)
-    \end{align}
+    \begin{align*}
+      \argmin_{u \in \Rn}  \, &\uu^{T} \uu\\
+      \mbox{s.t. } & \Aclf\argsqdq \uu \leq \bclf\argsqdq
+    \end{align*}
     where
     \begin{align*}
-      H = \left(\begin{array}{c c}\epsilon & 0\\ 0 & I\end{array}\right), \qquad
-        h(q, \dot q) = \left(\begin{array}{c} 0\\ -2 \, \bar u(q, \dot q) \end{array}\right),
+      \Aclf = 2 \eta \Lie{\xgbar} \eta, &&
+      \bclf = -\resclfparam \eta^{2} - 2\eta \Lie{\xfbar} \eta,
     \end{align*}
-    and
+    with
     \begin{align*}
-      \Aclf = \left(\begin{array}{c c}
-        -1 & 2 \eta L_{g} \eta
-      \end{array}\right), \qquad
-      \bclf = -\epsilon \eta^{2} - 2\eta L_{f} \eta
+      \eta = T\argsqdq + U(\Psi\argsq) - \Eref.
     \end{align*}
   }
 
@@ -93,23 +88,17 @@
   \only<6> {
     \begin{figure}
       \centering
-      \begin{subfigure}[t]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{pp_eps_0}
-        \caption{Nominal system.}
-      \end{subfigure}%
-      \hfill
-      \begin{subfigure}[t]{0.48\textwidth}
-        \includegraphics[width=\textwidth]{pp_eps_1_100}
-        \caption{Shaped system with $\resclfparam = \frac{1}{100}$.}
-      \end{subfigure}
-      \caption{Comparison of unshaped and shaped system.}
+      \subfloat[Nominal system.]{\includegraphics[width=.48\textwidth]{pp_eps_0}}
+      \subfloat[Shaped system with $\resclfparam =
+      \frac{1}{100}$.]{\includegraphics[width=.48\textwidth]{pp_eps_1_100}}
+      \caption{Comparison of unshaped and shaped systems.}
     \end{figure}
   }
 
   \only<7> {
     \begin{figure}
       \centering
-      \includegraphics[height=.7\textheight]{poincare_cloud}
+      \includegraphics[height=.65\textheight]{poincare_cloud}
       \caption{A three-dimensional representation of the domain of attraction
         on the guard, comparing the unshaped and shaped system.}
     \end{figure}
@@ -123,13 +112,13 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = B(q) u
+        \M\argsq \ddq + \CG\argsqdq = \B\argsq \uu
       \end{align*}
       Control Law:
       \begin{align*}
-        {\bar u} &= G(q) - G(\Psi(q))\\
-        {\bar u}_3 &=-k_{d} (\dot \vartheta_{T}^{a})\\
-        &\hspace{1.8em} -k_{p} (\vartheta_{T}^{a} - \vartheta_{T}^{d})
+        \vv\argsq& = \G\argsq - \G(\Psi\argsq)\\
+        \vv_3\argsq& \ \  +\!= \ -k_{d} (\dot \vartheta_{T}^{a}\argsq)\\
+        &\hspace{3.2em} -k_{p} (\vartheta_{T}^{a}\argsq - \vartheta_{T}^{d}\argsq)
       \end{align*}
       \column{1.5in}
       \begin{figure}
@@ -145,7 +134,7 @@
     \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_conserved_cg2d_3link}
-      \caption{The quantity, $E_{0}(\q, \dq) = T(\q, \dq) + V(\q) + \int_{t_{0}}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
+      \caption{The quantity, $\Ec\argsqdqW = T\argsqdq + V\argsq - \int_{0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
     \end{figure}
   }
   \only<3>{
@@ -196,7 +185,7 @@
       \column{1.5in}
       Dynamic Model:
       \begin{align*}
-        M(q) \ddot q + H(q, \dot q) = J^{T}(q) \lambda + B(q) u
+        \M\argsq \ddq + \CG\argsqdq = J^{T}\argsq \lambda + \B\argsq \uu
       \end{align*}
       \column{1.5in}
       \begin{figure}
@@ -212,9 +201,9 @@
   \only<2>{
     \begin{block}{Spring--Damper Controller}
       \begin{align*}
-        u(\q) = -\beta e^{-\rho \, h_{\mathrm{nst}}(\q)}
+        \vv_{\mathrm{SD}}\argsq = -\beta e^{-\rho \, h_{\mathrm{nst}}\argsq}
       \end{align*}
-      where $\beta, \rho \in \R^{+}$ and $h_{\mathrm{nst}} : \ConfigurationSpace \to \R$ is the height of the Nonstance toe.
+      where $\beta, \rho \in \R^{+}$ and $h_{\mathrm{nst}} : \Q \to \R$ is the height of the Nonstance toe.
       Used on
       \begin{itemize}
       \item Stance ankle\\
@@ -229,7 +218,7 @@
   \only<3>{
     \begin{block}{Scuffing Prevention Controller}
       \begin{align*}
-        u(\q) = k_p \theta(\q) - k_d \dot \theta(\dq)
+        \vv_{\mathrm{SP}}\argsq = k_p \theta\argsq - k_d \dot \theta\argsqdq
       \end{align*}
       where $k_{p}, k_{d} \in \R^{+}$. Used on
       \begin{itemize}
@@ -267,7 +256,7 @@
     \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_conserved_7link}
-      \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{t_0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
+      \caption{The quantity, $E_{0} \equiv T\argsqdq + U\argsq - \int_{0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
     \end{figure}
   }
 
@@ -275,7 +264,7 @@
     \begin{figure}
       \centering
       \includegraphics[width=1.0\columnwidth]{energy_conserved_7link_outline}
-      \caption{The quantity, $E_{0} \equiv T(q, \dot q) + V(q) + \int_{t_0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
+      \caption{The quantity, $E_{0} \equiv T\argsqdq + U\argsq - \int_{t_0}^{t} F_{nc} \cdot \frac{d\q}{d\tau} d\tau$, is conserved.}
     \end{figure}
   }
   \only<8>{
