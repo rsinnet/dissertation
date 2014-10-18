@@ -1,5 +1,4 @@
 \newcommand{\resclfparam}{\varepsilon}
-
 \newcommand{\q}{q}
 \newcommand{\dq}{\dot{\q}}
 \newcommand{\ddq}{\ddot{\q}}
@@ -11,6 +10,27 @@
 \newcommand{\argsqdq}{(\q, \dq)}
 \newcommand{\argsqdqu}{(\q, \dq, \u)}
 \newcommand{\arx}{(\x)}
+\newcommand{\argt}{(t)}
+\newcommand{\arxt}{(\x\argt)}
+\newcommand{\xzero}{\x\argzero}
+\newcommand{\arxzero}{(\xzero)}
+
+\newcommand{\xk}{\x_{k}}
+\newcommand{\arxk}{(\xk)}
+\newcommand{\nxk}{\|\xk\|}
+
+\newcommand{\nxkzero}{\|\x_{0}\|}
+
+\newcommand{\nxzero}{\|\xzero\|}
+\newcommand{\nxt}{\|\x\argt\|}
+
+\newcommand{\xknaught}{\x_{k_{0}}}
+\newcommand{\nxknaught}{\|\xknaught\|}
+
+\newcommand{\tnaught}{t_{0}}
+\newcommand{\argtnaught}{(\tnaught)}
+\newcommand{\xtnaught}{x\argtnaught}
+\newcommand{\nxtnaught}{\|\xtnaught\|}
 
 \newcommand{\M}{M}
 \newcommand{\B}{B}
@@ -27,6 +47,7 @@
 \newcommand{\R}{\mathbb{R}}
 \newcommand{\Rnn}{\R_{\geq 0}}
 \newcommand{\Rpd}{\R_{> 0}}
+\newcommand{\Rn}{\R^{n}}
 \newcommand{\A}{\mathscr{A}}
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\D}{D}
@@ -151,9 +172,9 @@
 \newcommand{\HCSbar}{\HSbar_{c}}
 
 \newcommand{\argsxz}{(\zdx, \zdz)}
-\newcommand{\argsxzti}[1]{(\zdx_{#1}(t), \zdz_{#1}(t))}
-\newcommand{\argsxzizero}[1]{(\zdx_{#1}(0), \zdz_{#1}(0))}
-\newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}(t), {\dot \zdz}_{#1}(t))}
+\newcommand{\argsxzti}[1]{(\zdx_{#1}\argt, \zdz_{#1}\argt)}
+\newcommand{\argsxzizero}[1]{(\zdx_{#1}\argzero, \zdz_{#1}\argzero)}
+\newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}\argt, {\dot \zdz}_{#1}\argt)}
 \newcommand{\argsx}{(\zdx)}
 \newcommand{\argsz}{(\zdz)}
 
@@ -162,7 +183,7 @@
 \newcommand{\taueps}{\tau^{\resclfparam}}
 \newcommand{\taurho}{\tau^{\rho}}
 
-\newcommand{\argsxzt}{(\zdx(t), \zdz(t))}
+\newcommand{\argsxzt}{(\zdx\argt, \zdz\argt)}
 \newcommand{\argsxztau}{(\zdx(\tau), \zdz(\tau))}
 \newcommand{\argsmuxz}{(\mu_{1}, \mu_{2}, \zdx, \zdz)}
 \newcommand{\argstxzi}[2]{(\zdx_{#2}(#1), \zdz_{#2}(#1))}
@@ -183,9 +204,11 @@
 \newcommand{\nzdxzstprime}{\left\|\argsxzstprime\right\|}
 
 \newcommand{\nzdxt}{|\zdx(\tau)|}
-\newcommand{\nzdxzero}{|\zdx(0)|}
+\newcommand{\nzdxzero}{|\zdx\argzero|}
 \newcommand{\nzdzst}{\left\|\zdz - \zdzst\right\|}
 
+\newcommand{\argzero}{(0)}
+\newcommand{\argbzero}{(\boldzero)}
 \newcommand{\argszero}{(0, \boldzero)}
 
 \newcommand{\TI}{T_{I}}

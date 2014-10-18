@@ -1,4 +1,4 @@
-\chapter{\uppercase{Energy Shaping}}
+\chapter{\uppercase{Lyapunov Stability}}
 
 This chapter discusses stability of hybrid systems. Because of the unique nature
 of hybrid systems, analysis of stability requires special treatment which is
@@ -14,8 +14,100 @@ continuous systems which partly comprise hybrid systems.
 Contemporary treatment of stability generally relies on results initially
 presented in the doctoral work of Aleksandr Lyapunov in 1892 \cite{}.
 
+\subsection{Stability about an Equilibrium Point}
+This work is chiefly concerned with autonomous systems of the form
+\begin{align}
+  \label{eq:autsys}
+  \dx = \xf\arx
+\end{align}
+where $f : \D \to \Rn$ is a locally Lipschitz vector field valid on some domain
+$\D \subset \Rn$.
+%
+Without loss of generality, suppose that the system \eqref{eq:autsys} has an equilibrium point at the
+origin;
+%
+in other words, $\xf\argbzero = \boldzero$.
+%
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ is stable if, for each $\epsilon > 0$,
+  $\exists \delta > 0$ such that
+  \begin{align*}
+    \nxzero < \delta \Rightarrow \nxt < \epsilon \ \forall \ t
+    \geq 0.
+  \end{align*}
+  The equilibrium point is unstable if it is not stable.
+\end{definition}
+
+In addition to the above definition, there are stricter forms of stability:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ is {\bf asymptotically stable} if it is
+  stable and $\delta$ can be chosen such that
+  \begin{align*}
+    \nxzero < \delta \Rightarrow \lim_{t \to \infty} \x\argt = 0.
+  \end{align*}
+\end{definition}
+
+Further, an even stronger form of stability is of interest in this work:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ is {\bf exponentially stable} if there
+  exist real constants $c, k, \lambda > 0$ such that
+  \begin{align*}
+    \nxt \leq k \nxtnaught e^{-\lambda (t - t_{0})} \ \forall \ \nxtnaught
+    < c.
+  \end{align*}
+\end{definition}
+
+
 \section{Stability of Discrete Systems}
+
+In analogy to continuous systems, consider the autonomous system which satisfies
+the difference equation
+\begin{align}
+  \label{eq:disc-sys}
+  x_{k+1} = f(x_{k}).
+\end{align}
+where $f : \D \to \D$ is a locally Lipschitz vector field valid on some domain
+$\D \subset \Rn$.
+%
+Without loss of generality, suppose that the system \eqref{eq:disc-sys} has an
+equilibrium point at the origin;
+%
+in other words, $f\argbzero = \boldzero$.
+%
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ of \eqref{eq:disc-sys} is stable if, for each $\epsilon > 0$,
+  $\exists \delta > 0$ such that
+  \begin{align*}
+    \nxkzero < \delta \Rightarrow \nxk < \epsilon \ \forall \ k
+    \geq 0.
+  \end{align*}
+  The equilibrium point is unstable if it is not stable.
+\end{definition}
+
+In addition to the above definition, there are stricter forms of stability:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ of \eqref{eq:disc-sys} is {\bf asymptotically stable} if it is
+  stable and $\delta$ can be chosen such that
+  \begin{align*}
+    \nxkzero < \delta \Rightarrow \lim_{k \to \infty} \xk = 0.
+  \end{align*}
+\end{definition}
+
+Further, an even stronger form of stability is of interest in this work:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ of \eqref{eq:disc-sys} is {\bf
+    exponentially stable} if there exist real constants $\alpha, \beta, c> 0$
+  such that
+  \begin{align*}
+    \nxk \leq \beta \nxknaught^{\alpha} \ \forall \ \nxknaught
+    < c
+  \end{align*}
+  for $k \geq k_{0}$.
+\end{definition}
+
+
+
 \begin{enumerate}
 \item Lyapunov theorem for discrete systems
-\item Proof 
+\item Proof
 \end{enumerate}
