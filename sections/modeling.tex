@@ -13,7 +13,7 @@ This chapter presents the development of the necessary dynamics for modeling hyb
 
 \section{Rigid Body Kinematics}
 
-At its core, the modeling of complex mechanical systems involves a straightforward, if often complicated, application of Newton's Second Law (see \cite{feynman1963}), namely,
+At its core, the modeling of complex mechanical systems involves a straightforward, if often complicated, application of Newton's Second Law (see \cite{Feynman1964}), namely,
 that
 \begin{align}
   \label{eq:newtons-second}
@@ -29,9 +29,9 @@ but fundamentally, all physics-based models demonstrate Newton's Second Law.
 
 Consider a three-dimensional rigid body with no contact assumptions; i.e., the body is free to move in space.
 %
-With the dynamics of the system being dominated by Newton's laws of motion \cite{feynman1963}, the state of the system can be expressed by associating a reference frame to a fix pointed on the body and using coordinates which express the position and orientation of this point with respect to a global frame or the world frame.
+With the dynamics of the system being dominated by Newton's laws of motion \cite{Feynman1964}, the state of the system can be expressed by associating a reference frame to a fix pointed on the body and using coordinates which express the position and orientation of this point with respect to a global frame or the world frame.
 %
-In three-dimensional space, this transformation between world frame and robot frame can be parameterized with six coordinates: three representing the Euclidean position and three respresenting, for example, an Euler angle--based derivation, namely, the product of three rotation matrices \cite{Baruh98}.
+In three-dimensional space, this transformation between world frame and robot frame can be parameterized with six coordinates: three representing the Euclidean position and three respresenting, for example, an Euler angle--based derivation, namely, the product of three rotation matrices \cite{Baruh1998}.
 %
 The set of all admissible configurations for such a body represents a specific topological space referred to as the {\em special Euclidean group}, $\SE(3)$.
 %
@@ -39,7 +39,7 @@ This group can be thought of as the Cartesian product of the position and orient
 \begin{align*}
   \SO(n) = \left\{ R \in \R^{n \times n} : R R^T = I, \det R = 1 \right\}.
 \end{align*}
-For more information on these topological spaces, consult \cite{MLS94}.
+For more information on these topological spaces, consult \cite{Murray1994}.
 
 
 Newton's laws eventually lead to the understanding the motion of such a system can be captured by the following dynamic model:
@@ -64,7 +64,7 @@ As one might guess, this requires that the fixed frame be located at the center 
 
 \section{Kinematic Chains}
 
-Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact (this is typically called the Newton--Euler method \cite{Hollerbach80}).
+Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact (this is typically called the Newton--Euler method \cite{Hollerbach1980}).
 %
 For robotic motion, holonomic constraints act to reduce the allowable motion and, as a consequence, there exists a minimal set of coordinates which can be used to describe a robot's dynamics.
 %
@@ -85,7 +85,7 @@ Begin with a bipedal robot in either two or three dimensions---the discussions h
 %
 Then construct a Lagrangian for the biped in a general position---specifically, no assumptions are made on ground contact---and use holonomic constraints to enforce the ground contact conditions given by the domain graph.
 
-Let $R_{0}$ be a fixed inertial or world frame and let $R_{b}$ be a reference frame attached to the body of the biped with position $p_{b} \in \R^{3}$ and orientation $\phi_{b} \in \SO(3)$ where $\SO(n)$ represents the special orthogonal group in $n$ dimensions (see \cite{CCNPW86}).
+Let $R_{0}$ be a fixed inertial or world frame and let $R_{b}$ be a reference frame attached to the body of the biped with position $p_{b} \in \R^{3}$ and orientation $\phi_{b} \in \SO(3)$ where $\SO(n)$ represents the special orthogonal group in $n$ dimensions (see \cite{Conway1985}).
 %
 Let $\q_{s} \in \Q_{s}$ represent a choice of {\em body} or {\em shape coordinates} for the robot with $\Q_{s}$ the configuration space.
 %
@@ -105,7 +105,7 @@ The Lagrangian of a bipedal robot, $\Lag : T\Q \to \R$, can be stated in terms o
   \Lag\argsqdq = K\argsqdq - V\argsq.
 \end{align}
 %
-The Euler-Lagrange equations can be used to find the equations of motion, which, for robotic systems (\cite{MLS94}, are written:
+The Euler-Lagrange equations can be used to find the equations of motion, which, for robotic systems (\cite{Murray1994}, are written:
 %
 \begin{align}
   \label{eqn:eom}
@@ -116,7 +116,7 @@ where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the tor
 \begin{align}
   \HCor\argsqdq = \CCor\argsqdq \, \dq + \G\argsq
 \end{align}
-contains terms resulting from the Coriolis effect and gravity terms grouped into a single vector. The matrix $\CCor\argsqdq$ can be found using standard methods; see \cite{MLS94}.
+contains terms resulting from the Coriolis effect and gravity terms grouped into a single vector. The matrix $\CCor\argsqdq$ can be found using standard methods; see \cite{Murray1994}.
 
 \section{Hybrid Dynamical Systems}
 
@@ -127,9 +127,9 @@ By their nature, they provide a useful framework for modeling mechanical systems
 Thr combination of dynamics motivates the use of hybrid systems in modeling numerous physical phenomena including bipedal walking, which is the motivating example most pertinent to this thesis.
 %
 
-Hybrid dynamical systems have seen widespread use and comprehensive formal development over the years; see, e.g., \cite{BrBoMi98,GoSaTe09,aut_2014_gcsa_01,ScSc00,WGCCM07}.
+Hybrid dynamical systems have seen widespread use and comprehensive formal development over the years; see, e.g., \cite{Branicky1998,Goebel2009,Grizzle2014,Schaft2000,Westervelt2007}.
 %
-Other frameworks exist for modeling the same physical phenomena such as differential inclusions as discussed in \cite{Filippov88} but hybrid systems methods are becoming increasingly popular.
+Other frameworks exist for modeling the same physical phenomena such as differential inclusions as discussed in \cite{Filippov1988} but hybrid systems methods are becoming increasingly popular.
 
 With the goal of modeling a mechanical system exhibiting both continuous and discrete dynamics, consider a hybrid dynamical system with total energy $\E\argsqdq$ where the coordinates $\q \in \Q$ take values in the {\em configuration space} $\Q$ and the velocities are in the tangent bundle, $T\Q$.
 %
@@ -166,7 +166,7 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
   \label{eq:hsys}
 \end{align}
 %
-where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D \setminus S$ is a smooth map called the reset map (see, e.g., \cite{MoGr05}).
+where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D \setminus S$ is a smooth map called the reset map (see, e.g., \cite{Morris2005}).
 %
 Under the action of control effort $\u$, the corresponding hybrid control system has the form
 %
@@ -184,7 +184,7 @@ for control values in a set $\U \subseteq \R^{m}$.
 
 
 \section{Solutions to Hybrid Systems}
-(cf. \cite{YeMiHo98})
+(cf. \cite{Ye1998})
 
 \section{Complex Domain Structure}
 Bipedal robotic walking exhibits both discrete and continuous behavior; it is, therefore, natural to model bipedal robots as hybrid systems.
@@ -278,7 +278,7 @@ The concept of a directed cycle is a fundamental component in the forumulation o
 \subsection{Obtaining Hybrid Systems from Constraints}
 The remainder of this section is devoted to discussing how the Lagrangian for a biped, together with a domain breakdown (which determines the constraints at each vertex of the associated cycle), allows one to explicitly construct a hybrid model of the system.
 %
-Examples can be found throughout the literature; see, for example, \cite{nolcos_2010_gcas_01,aut_2014_gcsa_01,cdc_2009_sa_01}.
+Examples can be found throughout the literature; see, for example, \cite{Grizzle2010,Grizzle2014,Sinnet2009}.
 
 
 %\begin{figure}
@@ -414,7 +414,7 @@ Using this Jacobian, the constrained dynamic model is given by
   \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \u + J_v^T\argsq F_v\argsqdqu.
 \end{align}
 %
-where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eqn:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (see \cite{MLS94}).
+where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eqn:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (see \cite{Murray1994}).
 %
 Because the robot is modeled in a generalized position with ground contact enforced through constraints, the matrices $\M\argsq$, $\HCor\argsqdq$, and $\B\argsq$ are identical in every domain.
 %
@@ -468,9 +468,9 @@ Specifically, from the wrench $F_{v}\argsqdqu$, one can ensure that the foot doe
   \mu_{v}\argsq F_{v}\argsqdqu \geq 0,
 \end{align}
 %
-with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the geometry of the foot \cite{GCAS10}.
+with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the geometry of the foot \cite{Grizzle2010}.
 %
-Additionally, it has been shown in \cite{CBAA09,VBSS90} that the moment produced by the ground is limited; this limitation can be written in the form:
+Additionally, it has been shown in \cite{Chevallereau2009,Vukobratovic1990} that the moment produced by the ground is limited; this limitation can be written in the form:
 %
 \begin{align}
   \label{eq:constnu}
@@ -507,9 +507,9 @@ The guard is just the boundary of this domain with the additional assumption tha
 
 The impact equations are obtained by considering the constraints enforced on the subsequent domain; denote the Jacobian associated to these constraints by $J_{e'}$.
 %
-For an edge $e = \{v, v'\} \in E$, the post-impact velocity $\dq^+$ is given in terms of the pre-impact velocity $\dq^-$ by balancing angular momentum \cite{HM94}.
+For an edge $e = \{v, v'\} \in E$, the post-impact velocity $\dq^+$ is given in terms of the pre-impact velocity $\dq^-$ by balancing angular momentum \cite{Hurmuzlu1994}.
 %
-Using the Schur complement \cite{Fuzhen05}, the post-impact velocity can be written:
+Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be written:
 %
 \begin{align}
   \label{eq:pmap}
@@ -540,7 +540,7 @@ For transitions where a contact point lifts from the ground, there will not be a
 
 In an attempt to simplify the model and obtain biperiodic behavior in the walking, the ``left'' and ``right'' leg must be ``swapped'' at one of the domain transitions;
 %
-this ``trick'' is common throughout the literature \cite{GAP01}.
+this ``trick'' is common throughout the literature \cite{Grizzle2001}.
 %
 This is done with a coordinate transformation (applied to $\q$), switching the role of the left and right leg, i.e., a state relabeling procedure, which is included in the calculation of the reset map for that edge.
 %

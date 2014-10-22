@@ -41,13 +41,13 @@ By taking advantage of the presence of energy level sets in periodic behaviors, 
 
 \section{Control Lyapunov Functions}
 
-The controller presented in this paper relies on the use of control Lyapunov functions \cite{Artstein83,FreeKoko}.
+The controller presented in this paper relies on the use of control Lyapunov functions \cite{Artstein1983,Freeman1996}.
 %
 In order to guarantee a stricter form of convergence, a modified notion of these functions is used:\vgap
 
 \begin{definition}
   \label{def:res-clf}
-  For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \D \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} (see \cite{AmGaSrGr14}) if there exist constants $c_{1}, c_{2}, c_{3}, c_{4} \in \Rpd$ such that for all $\resclfparam > 0$ and for all $\x \in \D$,
+  For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \D \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} (see \cite{Ames2014}) if there exist constants $c_{1}, c_{2}, c_{3}, c_{4} \in \Rpd$ such that for all $\resclfparam > 0$ and for all $\x \in \D$,
   %
   \begin{eqnarray}
     &c_{1} \nx \leq \Ve(\x) \leq \frac{c_{2}}{\resclfparam^{2}} \nx,\\
@@ -339,7 +339,7 @@ The \Poincare{} map takes the form
 %
 where $\TIe\argsxz$ is the time to impact.
 %
-Before proving the main theorem, some bounds related to the \Poincare{} map must be established using arguments similar to those presented in \cite{AmGaSrGr14,MoGr05}.
+Before proving the main theorem, some bounds related to the \Poincare{} map must be established using arguments similar to those presented in \cite{Ames2014,Morris2005}.
 
 First, however, note that since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \xzst$ and because $\DeltaX\xzst = 0$, it follows that
 %
@@ -385,13 +385,13 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   \end{align}
 
   %
-  Thus, by the implicit function theorem (\cite{Sun01}), there exists a $\delta > 0$ and a unique function $\taurho(\rho, \zdx, \zdz)$ defined and locally Lipschitz for all $(\rho, \zdx, \zdz) \in \B_{\delta}(0, 0, \zdzst)$ such that $\tau^{0}(0, \zdzst) = \TI(0, \zdzst) = \Tst$ where $\Tst$ is the period of the invariant orbit $\Orbit$ and
+  Thus, by the implicit function theorem (\cite{Sun2001}), there exists a $\delta > 0$ and a unique function $\taurho(\rho, \zdx, \zdz)$ defined and locally Lipschitz for all $(\rho, \zdx, \zdz) \in \B_{\delta}(0, 0, \zdzst)$ such that $\tau^{0}(0, \zdzst) = \TI(0, \zdzst) = \Tst$ where $\Tst$ is the period of the invariant orbit $\Orbit$ and
   %
   \begin{align}
     N(\taurho\argsxz, \rho, \zdx, \zdz) = 0.
   \end{align}
   %
-  In addition, selecting a fixed  $\resclfparam > 0$ and a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$ such as the min-norm controller \cite{FreeKoko}, it follows that for some (possibly smaller) $\delta > 0$ and $\argsxz \in \B_{\delta}\xzst \cap \S$, the time-to-impact function $\TIe\argsxz$ satisfies
+  In addition, selecting a fixed  $\resclfparam > 0$ and a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$ such as the min-norm controller \cite{Freeman1996}, it follows that for some (possibly smaller) $\delta > 0$ and $\argsxz \in \B_{\delta}\xzst \cap \S$, the time-to-impact function $\TIe\argsxz$ satisfies
   %
   \begin{align}
     \label{eq:TIe-bounds}
@@ -449,7 +449,7 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   %
   Now $\mu$ must be bounded.
 
-  The explicit solution to the QP \eqref{eq:es-qp} is given by the min-norm control law \cite{FreeKoko}:
+  The explicit solution to the QP \eqref{eq:es-qp} is given by the min-norm control law \cite{Freeman1996}:
   %
   \begin{align}
     \mueps\argsxz = -\frac{\psi_{0}\argsxz \psi_{1}\argsxz}{\psi_{1}^{T}\argsxz \psi_{1}\argsxz},

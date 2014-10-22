@@ -10,4 +10,6 @@
 *.toc
 dissertation.pdf
 outline.pdf
+myrefs.bib
+*.bak
 auto/

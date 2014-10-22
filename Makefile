@@ -39,9 +39,12 @@ $(PROJNAME).dvi: $(PROJNAME).aux
 $(PROJNAME).aux: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
-sections/*.tex references.bib $(EPS_LATEX) $(EPS_NO_LATEX)
+sections/*.tex myrefs.bib $(EPS_LATEX) $(EPS_NO_LATEX)
 	$(LATEX_CMD) $<
 	bibtex $(basename $<)
+
+myrefs.bib: refs.bib format_bibtex_months
+	./format_bibtex_months refs.bib myrefs.bib
 
 figs/%.eps_latex: figs/%.eps_tex figs/%.eps figs/do_latex_subs.py figs/latex_subs.json
 	$(MAKE) -C figs/ $(notdir $@)
