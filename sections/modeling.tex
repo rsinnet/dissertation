@@ -152,7 +152,7 @@ The boundary at the zero level set of $h\argsx$ naturally gives rise to the swit
 %
 \begin{align}
   \label{eq:guard}
-  \S &= \left\{ \x \in \R^{2n} : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0 \right\}.
+  \Guard &= \left\{ \x \in \R^{2n} : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0 \right\}.
 \end{align}
 %
 Using these spaces, an uncontrolled hybrid system can be expressed as
@@ -160,8 +160,8 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
 \begin{align}
   \HS = \left\{
   \begin{array}{l l}
-    \dx = \xf(\x), & \x \in \D \setminus \S,\\
-    \xp = \Delta(\xm), & \x \in \S,
+    \dx = \xf(\x), & \x \in \D \setminus \Guard,\\
+    \xp = \Delta(\xm), & \x \in \Guard,
   \end{array}\right.
   \label{eq:hsys}
 \end{align}
@@ -173,8 +173,8 @@ Under the action of control effort $\u$, the corresponding hybrid control system
 \begin{align}
   \HCS = \left\{
   \begin{array}{l l}
-    \dx = \xf\arx + \xg\arx \, \u, & \x \in \D \setminus \S,\\
-    \xp = \Delta(\xm), & \x \in \S,
+    \dx = \xf\arx + \xg\arx \, \u, & \x \in \D \setminus \Guard,\\
+    \xp = \Delta(\xm), & \x \in \Guard,
   \end{array}\right.
   \label{eq:hcsys}
 \end{align}

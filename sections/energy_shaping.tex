@@ -88,8 +88,8 @@ Applying this to the system \eqref{eq:hcsys} results in
   \label{eq:hsys-cl}
   \HS = \left\{
   \begin{array}{l l}
-    \dx = \xf(\x) + \xg(\x) \, \mueps(\x), & \x \in \D \setminus \S,\\
-    \xp = \Delta(\xm), &\x \in \S.
+    \dx = \xf(\x) + \xg(\x) \, \mueps(\x), & \x \in \D \setminus \Guard,\\
+    \xp = \Delta(\xm), &\x \in \Guard.
   \end{array}\right.
 \end{align}
 %
@@ -301,11 +301,11 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
     \begin{array}{r c l}
       {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, u\\
       {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, u
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \S,\\
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \Guard,\\
     \begin{array}{r c l}
       \zdx^{+} &\!\!=\!\!& \DeltaX(\zdx^{-}, \zdz^{-})\\
       \zdz^{+} &\!\!=\!\!& \DeltaZ(\zdx^{-}, \zdz^{-})
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \S.
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \Guard.
   \end{array}\right.
 \end{align}
 %
@@ -318,17 +318,17 @@ Applying a valid Lipschitz continuous control law (which takes values in \eqref{
     \begin{array}{r c l}
       {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, \mueps\argsxz\\
       {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, \mueps\argsxz
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \S,\\
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \Guard,\\
     \begin{array}{r c l}
       \zdx^{+} &\!\!=\!\!& \DeltaX(\zdx^{-}, \zdz^{-})\\
       \zdz^{+} &\!\!=\!\!& \DeltaZ(\zdx^{-}, \zdz^{-})
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \S.
+    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \Guard.
   \end{array}\right.
 \end{align}
 
 \section{Proof of Main Result} \label{sec:proof}
 
-Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \S \to \S$ and let $\flow_{t}\argsxz$ represent a flow of the vector field for time $t$ starting from state $\argsxz$.
+Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \Guard \to \Guard$ and let $\flow_{t}\argsxz$ represent a flow of the vector field for time $t$ starting from state $\argsxz$.
 %
 The \Poincare{} map takes the form
 %
@@ -391,7 +391,7 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
     N(\taurho\argsxz, \rho, \zdx, \zdz) = 0.
   \end{align}
   %
-  In addition, selecting a fixed  $\resclfparam > 0$ and a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$ such as the min-norm controller \cite{Freeman1996}, it follows that for some (possibly smaller) $\delta > 0$ and $\argsxz \in \B_{\delta}\xzst \cap \S$, the time-to-impact function $\TIe\argsxz$ satisfies
+  In addition, selecting a fixed  $\resclfparam > 0$ and a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$ such as the min-norm controller \cite{Freeman1996}, it follows that for some (possibly smaller) $\delta > 0$ and $\argsxz \in \B_{\delta}\xzst \cap \Guard$, the time-to-impact function $\TIe\argsxz$ satisfies
   %
   \begin{align}
     \label{eq:TIe-bounds}
@@ -591,7 +591,7 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
 Now \thmref{theorem:main-theorem} can be proven:
 
 \begin{proof}{\em [\thmref{theorem:main-theorem}]}
-  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}\xzst \cap \S \to \Rnn$ satisfying
+  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}\xzst \cap \Guard \to \Rnn$ satisfying
   %
   \begin{align}
     \label{eq:lyap-cond-nom}
@@ -609,7 +609,7 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \zdX \to \Rnn$.
   %
-  Denote by $\Vex = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\S$.
+  Denote by $\Vex = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\Guard$.
   %
   Using these Lyapunov functions, define the candidate Lyapunov function
   %
