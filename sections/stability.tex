@@ -6,6 +6,9 @@ Because of the unique nature of hybrid systems, analysis of stability requires
 special treatment which is distinct from continuous-time systems and more
 closely parallels that used for discrete-time systems.
 %
+Stability of systems has a long history, appearing in the works of researchers
+such as Routh \cite{Routh1877} and Hurwitz \cite{Hurwitz1895}.
+%
 Contemporary notions of stability in nonlinear systems generally rely on results
 initially presented in the doctoral work of Aleksandr Lyapunov in his doctoral
 thesis in 1892 \cite{Lyapunov1992}.
@@ -39,9 +42,9 @@ of an algorithmic procedure for constructing valid Lyapunov functions.
 Both methods are used in this work but for different purposes:
 %
 Lyapunov's indirect method is often used to analyze the stability of hybrid
-systems by considering examining the stability of a linearization of the
-\Poincare{} map about the equilibrium point; this will be explained in greater
-detail later in this chapter.
+systems by examining the stability of a linearization of the \Poincare{} map
+about the equilibrium point; this will be explained in greater detail later in
+this chapter.
 %
 Accordingly, the numerical simulations in this work will rely on this usage of
 Lyapunov's indirect method.
@@ -49,18 +52,29 @@ Lyapunov's indirect method.
 In order to formally demonstrate the stability of energy shaping---the main
 focus of this work---Lyapunov's direct method will be employed.
 %
-This method is often used in theoretical proofs and can also be used to
-understand domain of attraction, although the constructions used will preclude
+This method is often used in theoretical constructions and can also be used to
+understand domain of attraction, although the particular usage will preclude
 this type of application.
 
-Stability of systems has a long history and dates back even before the work of
-Lyapunov, appearing in the works of researchers such as Routh \cite{Routh1877}
-and Hurwitz \cite{Hurwitz1895}.
+Lyapunov's work on the direct method established sufficient conditions for
+stability but lacked the notion of {\em uniform stability} which was necessary
+for establishing necessary conditions.
 %
+As explained in the literature (see, e.g., \cite{Michel2007,Teel1999}, the
+assumptions of uniformity were not formulated until much later in the work of
+Malkin \cite{Malkin1954}, building on an earlier paper by Massera
+\cite{Massera1949} which introduced the notion of {\em equiasymptotic
+  stability}.
+%
+
+\cite{Malkin1938}
+
+Using the newly-established results on uniform stability, Massera
+\cite{Massera1956} set forth necessary conditions for Lyapunov stability which
+are now generally referred to as {\em converse Lyapunov theorems}.
+
 Definitions of stability are ubiquitous in the literature; see, e.g.,
 \cite{Khalil2002,Teschl2012,Vidyasagar1993}.
-\todo{Converse theorems}
-
 
 \section{Stability of Continuous Systems}
 
