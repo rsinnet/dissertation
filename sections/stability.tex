@@ -1,12 +1,66 @@
 \chapter{\uppercase{Lyapunov Stability}}
 
-This chapter discusses stability of hybrid systems. Because of the unique nature
-of hybrid systems, analysis of stability requires special treatment which is
-distinct from continuous-time systems and more closely parallels that of
-discrete-time systems.
+This chapter discusses notions of stability in hybrid dynamical systems.
+%
+Because of the unique nature of hybrid systems, analysis of stability requires
+special treatment which is distinct from continuous-time systems and more
+closely parallels that used for discrete-time systems.
+%
+Contemporary notions of stability in nonlinear systems generally rely on results
+initially presented in the doctoral work of Aleksandr Lyapunov in his doctoral
+thesis in 1892 \cite{Lyapunov1992}.
+%
+In said treatise, Lyapunov described two methods for analyzing the stability of
+equilibrium points of ordinary differential equations.
 
-\section{History of Lypaunov Stability}
-\todo{Exposition of the development and some cases.}
+The {\em first method}, sometimes called the {\em indirect method of Lyapunov},
+provides a means for understanding the stability properties of an equilibrium
+point by examining a linearization of the nonlinear system.
+%
+Due to the nature of linearization, the results of such an analysis only pertain
+locally and within an unknown region about the equilibrium point.
+%
+Nonetheless, this method is well-known and sees widespread use due to its
+simplicity and straightforward nature.
+%
+
+The {\em second method}, sometimes called the {\em direct method of Lyapunov}
+involves the use of scalar-valued functions of the state of a system called {\em
+  Lyapunov functions} which satisfy specific conditions that are set forth
+later.
+%
+Through the use of these Lyapunov functions, it is possible to prove
+stability not only locally but in a known region containing an equilibrium point
+or even globally.
+%
+These functions are not unique and a major drawback to this method is the lack
+of an algorithmic procedure for constructing valid Lyapunov functions.
+
+Both methods are used in this work but for different purposes:
+%
+Lyapunov's indirect method is often used to analyze the stability of hybrid
+systems by considering examining the stability of a linearization of the
+\Poincare{} map about the equilibrium point; this will be explained in greater
+detail later in this chapter.
+%
+Accordingly, the numerical simulations in this work will rely on this usage of
+Lyapunov's indirect method.
+%
+In order to formally demonstrate the stability of energy shaping---the main
+focus of this work---Lyapunov's direct method will be employed.
+%
+This method is often used in theoretical proofs and can also be used to
+understand domain of attraction, although the constructions used will preclude
+this type of application.
+
+Stability of systems has a long history and dates back even before the work of
+Lyapunov, appearing in the works of researchers such as Routh \cite{Routh1877}
+and Hurwitz \cite{Hurwitz1895}.
+%
+Definitions of stability are ubiquitous in the literature; see, e.g.,
+\cite{Khalil2002,Teschl2012,Vidyasagar1993}.
+\todo{Converse theorems}
+
 
 \section{Stability of Continuous Systems}
 
@@ -14,9 +68,6 @@ In order to understand the theory presented in this work, it is necessary to
 understand not only the stability of hybrid systems but also the stability of
 continuous systems and discrete systems which partly comprise hybrid systems.
 %
-Contemporary treatment of stability generally relies on results initially
-presented in the doctoral work of Aleksandr Lyapunov in 1892
-\cite{}. Definitions of stability are ubiquitous in the literature; see, e.g., \cite{Khalil2002,Teschl2012,Vidyasagar1993}
 
 \subsection{Stability about an Equilibrium Point}
 This work is chiefly concerned with autonomous systems of the form
