@@ -1,21 +1,105 @@
-\newcommand{\resclfparam}{\varepsilon}
+% Custom environments
+\newtheorem{lemma}{Lemma}
+\newtheorem{theorem}{Theorem}
+\newtheorem{proposition}{Proposition}
+\newtheorem{definition}{Definition}
+\newtheorem{exmp}{Example}
+\newtheorem{remark}{Remark}
+
+% Reference macros
+\newcommand{\chapref}[1]{Chapter~\ref{#1}}
+\newcommand{\defref}[1]{Definition~\ref{#1}}
+\newcommand{\figref}[1]{Fig.~\ref{#1}}
+\newcommand{\secref}[1]{Section~\ref{#1}}
+\newcommand{\lemref}[1]{Lemma~\ref{#1}}
+\newcommand{\thmref}[1]{Theorem~\ref{#1}}
+\newcommand{\propref}[1]{Proposition~\ref{#1}}
+\newcommand{\tabref}[1]{Table~\ref{#1}}
+\newcommand{\exmpref}[1]{Example~\ref{#1}}
+\newcommand{\rmkref}[1]{Remark~\ref{#1}}
+
+% Math operations
+\DeclareMathOperator*{\argmin}{arg\,min}
+\DeclareMathOperator*{\lambdamax}{\lambda_{\mathrm{max}}}
+\DeclareMathOperator*{\lambdamin}{\lambda_{\mathrm{min}}}
+
+% Set of cyclical coordinates (Taurus)
+\newcommand{\T}{\mathbb{T}}
+
+% Set of integers
+\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
+
+% Sets and subsets of real numbers
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\Rnn}{\R_{\geq 0}}
+\newcommand{\Rpd}{\R_{> 0}}
+\newcommand{\Rn}{\R^{n}}
+
+
+% Partial derivative
+\newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
+
+% General system coordinates
+\newcommand{\x}{x}
+
+% Mechanical system coordinates
 \newcommand{\q}{q}
 \newcommand{\dq}{\dot{\q}}
 \newcommand{\ddq}{\ddot{\q}}
-\newcommand{\regressor}{\ensuremath{Y}}
-\newcommand{\regressorargs}{\regressor(\q, \dq, \ddq)}
-\newcommand{\regressorparam}{\Theta}
 
+% Zero dynamics coordinates
+\newcommand{\zdx}{\xi}
+\newcommand{\zdz}{\zeta}
+
+% General system vector fields
+\newcommand{\xf}{F}
+\newcommand{\xg}{G}
+
+% Zero dynamics vector fields
+\newcommand{\bigF}{\Phi}
+\newcommand{\bigG}{\Gamma}
+
+
+% RES-CLF control gain
+\newcommand{\resclfparam}{\varepsilon}
+
+% Index variable used for discrete systems
+\newcommand{\discreteindex}{k}
+
+% Spaces for general system coordinates
+\newcommand{\X}{\mathcal{X}}
+
+% Spaces for mechanical system coordinates
+\newcommand{\Q}{\mathcal{Q}}
+
+% Spaces for zero dynamics coordinates
+\newcommand{\zdX}{\Xi}
+\newcommand{\zdZ}{Z}
+
+% Dynamics for mechanical robotic systems
+\newcommand{\M}{M}
+\newcommand{\B}{B}
+\newcommand{\HCor}{H}
+\newcommand{\CCor}{C}
+\newcommand{\G}{G}
+
+% Admissible control sets
+\newcommand{\K}{K}
+\newcommand{\Keps}{\K_{\resclfparam}}
+
+% Various dependent coordinate macros
 \newcommand{\argsq}{(\q)}
 \newcommand{\argsqdq}{(\q, \dq)}
 \newcommand{\argsqdqu}{(\q, \dq, \u)}
+
 \newcommand{\arx}{(\x)}
 \newcommand{\argt}{(t)}
 \newcommand{\arxt}{(\x\argt)}
+
 \newcommand{\xzero}{\x\argzero}
 \newcommand{\arxzero}{(\xzero)}
 
-\newcommand{\xk}{\x_{k}}
+\newcommand{\xk}{\x_{\discreteindex}}
 \newcommand{\arxk}{(\xk)}
 \newcommand{\nxk}{\|\xk\|}
 
@@ -24,7 +108,7 @@
 \newcommand{\nxzero}{\|\xzero\|}
 \newcommand{\nxt}{\|\x\argt\|}
 
-\newcommand{\xknaught}{\x_{k_{0}}}
+\newcommand{\xknaught}{\x_{\discreteindex_{0}}}
 \newcommand{\nxknaught}{\|\xknaught\|}
 
 \newcommand{\tnaught}{t_{0}}
@@ -32,22 +116,12 @@
 \newcommand{\xtnaught}{x\argtnaught}
 \newcommand{\nxtnaught}{\|\xtnaught\|}
 
-\newcommand{\M}{M}
-\newcommand{\B}{B}
-\newcommand{\HCor}{H}
-\newcommand{\CCor}{C}
-\newcommand{\G}{G}
 \newcommand{\Shape}{S}
-\newcommand{\T}{\mathbb{T}}
-\newcommand{\Q}{\mathcal{Q}}
-\newcommand{\X}{\mathcal{X}}
+
 \newcommand{\ndim}{n}
 \newcommand{\ncv}{m}
 \newcommand{\Lag}{L}
-\newcommand{\R}{\mathbb{R}}
-\newcommand{\Rnn}{\R_{\geq 0}}
-\newcommand{\Rpd}{\R_{> 0}}
-\newcommand{\Rn}{\R^{n}}
+
 \newcommand{\A}{\mathscr{A}}
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\D}{D}
@@ -55,8 +129,6 @@
 \newcommand{\Guard}{S}
 \newcommand{\Orbit}{{\mathscr O}}
 
-\newcommand{\K}{K}
-\newcommand{\Keps}{\K_{\resclfparam}}
 \newcommand{\mueps}{\mu_{\resclfparam}}
 
 \newcommand{\neps}{\left\|\tfrac{1}{\resclfparam}\right\|}
@@ -70,6 +142,7 @@
 
 \newcommand{\Lie}[1]{L_{#1}}
 
+% Lyapunov function macros
 \newcommand{\V}{V}
 \newcommand{\dV}{V}
 
@@ -85,6 +158,7 @@
 
 \newcommand{\VP}{\V_{\Pe}}
 
+% Poincare map macros 
 \renewcommand{\P}{P}
 \newcommand{\Pe}{\P_{\resclfparam}}
 \newcommand{\Pex}{\Pe^{\zdx}}
@@ -93,36 +167,24 @@
 % Nominal CLF
 \newcommand{\Vn}{\V_{\mathit{n}}}
 
-\DeclareMathOperator*{\argmin}{arg\,min}
-\DeclareMathOperator*{\lambdamax}{\lambda_{\mathrm{max}}}
-\DeclareMathOperator*{\lambdamin}{\lambda_{\mathrm{min}}}
-
+% Extremum of control field
 \newcommand{\lambdamaxG}{\lambda_{\mathrm{max}}}
 \newcommand{\lambdaminG}{\lambda_{\mathrm{min}}}
 
+% Maximum of dynamics vector field
 \newcommand{\supF}{\Upsilon}
 
-% partial derivative
-\newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
-
+% Rotation groups
 \newcommand{\SO}{\mathbf{SO}}
 \newcommand{\SE}{\mathbf{SE}}
+
 \newcommand{\Fnc}{F_{\mathrm{nc}}}
-
-\newtheorem{lemma}{Lemma}
-\newtheorem{theorem}{Theorem}
-\newtheorem{proposition}{Proposition}
-\newtheorem{definition}{Definition}
-\newtheorem{exmp}{Example}
-\newtheorem{remark}{Remark}
-
 
 \newcommand{\orbit}{\mathscr{O}}
 
 \newcommand{\qst}{\q^{*}}
 \newcommand{\dqst}{\dq^{*}}
 
-\newcommand{\x}{\chi}
 \newcommand{\dx}{{\dot \x}}
 \newcommand{\xst}{\x^{*}}
 \newcommand{\xp}{\x^{+}}
@@ -133,11 +195,6 @@
 
 \newcommand{\boldzero}{{\mathbf 0}}
 
-\newcommand{\zdX}{X}
-\newcommand{\zdZ}{Z}
-
-\newcommand{\zdx}{x}
-\newcommand{\zdz}{z}
 
 \newcommand{\dzdx}{{\dot \zdx}}
 \newcommand{\dzdz}{{\dot \zdz}}
@@ -151,26 +208,34 @@
 
 \newcommand{\Poincare}{Poincar{\'e}}
 
-\newcommand{\chapref}[1]{Chapter~\ref{#1}}
-\newcommand{\defref}[1]{Definition~\ref{#1}}
-\newcommand{\figref}[1]{Fig.~\ref{#1}}
-\newcommand{\secref}[1]{Section~\ref{#1}}
-\newcommand{\lemref}[1]{Lemma~\ref{#1}}
-\newcommand{\thmref}[1]{Theorem~\ref{#1}}
-\newcommand{\propref}[1]{Proposition~\ref{#1}}
-\newcommand{\tabref}[1]{Table~\ref{#1}}
-\newcommand{\exmpref}[1]{Example~\ref{#1}}
-\newcommand{\rmkref}[1]{Remark~\ref{#1}}
-
 \newcommand{\gap}{\vspace{.1cm}}
 
 \newcommand{\CG}{H}
 
+% Hybrid systems and hybrid control systems
 \newcommand{\HS}{\Sigma}
 \newcommand{\HCS}{\HS_{c}}
 
 \newcommand{\HSbar}{{\overline \HS}}
 \newcommand{\HCSbar}{\HSbar_{c}}
+
+% Reset map
+\newcommand{\ResetMap}{\Delta}
+
+\newcommand{\DeltaX}{\ResetMap_{\zdX}}
+\newcommand{\DeltaZ}{\ResetMap_{\zdZ}}
+
+\newcommand{\Deltaxz}{\ResetMap\argsxz}
+\newcommand{\nDeltaxz}{\left\|\ResetMap\argsxz\right\|}
+
+
+% Equilibrium of zero dynamics
+\newcommand{\xzst}{(0, \zdz^{*})}
+
+% tau-time commands
+\newcommand{\taueps}{\tau^{\resclfparam}}
+\newcommand{\taurho}{\tau^{\rho}}
+
 
 \newcommand{\argsxz}{(\zdx, \zdz)}
 \newcommand{\argsxzti}[1]{(\zdx_{#1}\argt, \zdz_{#1}\argt)}
@@ -178,11 +243,6 @@
 \newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}\argt, {\dot \zdz}_{#1}\argt)}
 \newcommand{\argsx}{(\zdx)}
 \newcommand{\argsz}{(\zdz)}
-
-\newcommand{\xzst}{(0, \zdz^{*})}
-
-\newcommand{\taueps}{\tau^{\resclfparam}}
-\newcommand{\taurho}{\tau^{\rho}}
 
 \newcommand{\argsxzt}{(\zdx\argt, \zdz\argt)}
 \newcommand{\argsxztau}{(\zdx(\tau), \zdz(\tau))}
@@ -194,10 +254,8 @@
 \newcommand{\zdzst}{\zdz^{*}}
 \newcommand{\argsxzst}{(\zdx, \zdz - \zdzst)}
 
-
 \newcommand{\nzdxz}{\left\|\argsxz\right\|}
 \newcommand{\nzdxzst}{\left\|\argsxzst\right\|}
-
 
 \newcommand{\nzdx}{\left|\zdx\right|}
 \newcommand{\nzdz}{\left\|\zdz\right\|}
@@ -212,47 +270,40 @@
 \newcommand{\argbzero}{(\boldzero)}
 \newcommand{\argszero}{(0, \boldzero)}
 
+
+% Time-to-impact functions
 \newcommand{\TI}{T_{I}}
 \newcommand{\TIe}{\TI^{\resclfparam}}
 \newcommand{\Tst}{T^{*}}
 \newcommand{\TB}{T_{B}}
 
-\newcommand{\TIDelta}{\TI(\Delta\argsxz)}
-\newcommand{\TIeDelta}{\TIe(\Delta\argsxz)}
+\newcommand{\TIDelta}{\TI(\ResetMap\argsxz)}
+\newcommand{\TIeDelta}{\TIe(\ResetMap\argsxz)}
 
-\newcommand{\DeltaX}{\Delta_{\zdX}}
-\newcommand{\DeltaZ}{\Delta_{\zdZ}}
-
-\newcommand{\Deltaxz}{\Delta\argsxz}
-\newcommand{\nDeltaxz}{\left\|\Delta\argsxz\right\|}
-
-\newcommand{\LDelta}{L_{\Delta}}
+% Lipschitz constans
+\newcommand{\LDelta}{L_{\ResetMap}}
 \newcommand{\LB}{L_{B}}
 \newcommand{\LTI}{L_{\TI}}
 \newcommand{\LTIeps}{L_{\TIe}(\resclfparam)}
 \newcommand{\LP}{L_{P}}
 \newcommand{\Le}{\Lambda(\resclfparam)}
 
+% Custom parameters
 \newcommand{\Ae}{A_{P}(\resclfparam)}
 \newcommand{\ATI}{A_{\TI}}
 \newcommand{\ATIe}{\ATI(\resclfparam)}
 \newcommand{\bepsone}{\beta_{1}(\resclfparam)}
 \newcommand{\bepstwo}{\beta_{2}(\resclfparam)}
 
+% Flows to hybrid systems
 \newcommand{\flow}{\phi}
 \newcommand{\flowt}{\flow_{t}}
 \newcommand{\flowtx}{\flowt^{x}}
 \newcommand{\flowtz}{\flowt^{z}}
 
-
 \newcommand{\floweps}{\flow^{\resclfparam}}
 \newcommand{\flowepst}{\floweps_{t}}
 
-\newcommand{\bigF}{\Phi}
-\newcommand{\bigG}{\Gamma}
-
-\newcommand{\xf}{F}
-\newcommand{\xg}{G}
 
 \newcommand{\stabletube}{\Omega}
 \newcommand{\zdmanifold}{\mathcal{Z}}
@@ -288,16 +339,22 @@
 \newcommand{\cnsh}{\ensuremath{c_{\nsh}}}
 \newcommand{\cnst}{\ensuremath{c_{\nst}}}
 
+% Contact points for footed biped
 \newcommand{\clh}{\ensuremath{c_{\mathit{lh}}}}
 \newcommand{\clt}{\ensuremath{c_{\mathit{lt}}}}
 \newcommand{\crh}{\ensuremath{c_{\mathit{rh}}}}
 \newcommand{\crt}{\ensuremath{c_{\mathit{rt}}}}
 
+% Labels for foot contact points
 \newcommand{\cstk}{\ensuremath{\mathit{stk}\angle}}
 \newcommand{\cnsk}{\ensuremath{\mathit{nsk}\angle}}
 \newcommand{\cstth}{\ensuremath{\mathit{stth}}}
 \newcommand{\csthh}{\ensuremath{\mathit{sthh}}}
 
-\newcommand{\Z}{\ensuremath{\mathbb{Z}}}
-
 \newcommand{\vo}{v}
+
+
+% Unused macros
+%\newcommand{\regressor}{\ensuremath{Y}}
+%\newcommand{\regressorargs}{\regressor(\q, \dq, \ddq)}
+%\newcommand{\regressorparam}{\Theta}
