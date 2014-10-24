@@ -291,7 +291,7 @@ Raibert observed that hopping and running can be represented by a low-dimensiona
 %
 at a speed of 1 m/s (\cite{Raibert1984,Raibert1984a,Raibert1986}).
 %
-This was followed by a 3D hopper that was able to run without being constrained to the sagittal plane (\cite[Chap.~3]{Raibert1986}, \cite{raibert:dbu}) as well as multi-legged robots \cite{raibert1986a,Raibert1990,Hodgins1991}.
+This was followed by a 3D hopper that was able to run without being constrained to the sagittal plane (\cite[Chap.~3]{Raibert1986}, \cite{raibert:dbu}) as well as multi-legged robots \cite{Raibert1986a,Raibert1990,Hodgins1991}.
 %
 
 This body of work gave rise to the Spring-Loaded Inverted Pendulum (SLIP) model,
@@ -314,7 +314,7 @@ To regulate the hopping height, the length of the leg at the bottom of the stanc
 %
 Finally, to control the pitch attitude of the body, the controller employs hip torque during stance.
 %
-The inclusion of springs into legged robots with revolute knees seems to have started with spring flamingo and spring turkey as described in \cite{HOHUBA92,PRPR99,PR00,PRCHTODIPR01}.
+The inclusion of springs into legged robots with revolute knees seems to have started with spring flamingo and spring turkey as described in \cite{Hollerbach1992,Pratt1999,Pratt2000,Pratt2001}.
 %
 These robots used a type of series elastic actuator (SEA) designed for force control as opposed to energy storage. %is it necessary to say this? JWG re-worded. helps to tie in with MABEL.
 %
@@ -334,20 +334,20 @@ Though comparatively less complex in terms of the models studied, many of the fo
 However, the simpler design facilitates more complete modeling and, indeed, control researchers who follow this path often consider impact dynamics, thereby taking into account the full hybrid model which is generally omitted from analysis of controllers designed using the LIPM.
 %
 
-\cite{Mochon198049} concluded that the swing phase of human walking is similar to a double pendulum, pointing to the passive nature of human walking and the importance of mechanism design.
+\cite{Mochon1980} concluded that the swing phase of human walking is similar to a double pendulum, pointing to the passive nature of human walking and the importance of mechanism design.
 %
-In the late 80's, McGeer analyzed and built planar, passive bipedal walkers, i.e., {\em no actuation}, which could walk stably down shallow slopes, starting with the compass gait walker (which is simply an inverted pendulum) in \cite{MC90} and later adding knees in \cite{mcgeer:kneed}.
+In the late 80's, McGeer analyzed and built planar, passive bipedal walkers, i.e., {\em no actuation}, which could walk stably down shallow slopes, starting with the compass gait walker (which is simply an inverted pendulum) in \cite{McGeer1990} and later adding knees in \cite{McGeer1990a}.
 %
 This gave rise to the terminology {\em passive dynamic walking}.
 %
-Subsequently, robots with this general principle at their core have been constructed, as described in \cite{CORUTEWI05}, based on injecting small amounts of energy into passive-type bipeds.
+Subsequently, robots with this general principle at their core have been constructed, as described in \cite{Collins2005}, based on injecting small amounts of energy into passive-type bipeds.
 %
 The result is very ``human-looking'' walking, but the remarkable elegance and economy of these walkers comes at the cost of poor ability in achieving tasks other than walking at a fixed speed; they cannot climb stairs, pause, turn or run.
 %
 
-Additional work was later done to analyze the properties of passive dynamics walkers, for instance, in \cite{ESGO94,GACHRUCO98,BORZOVAE04}.
+Additional work was later done to analyze the properties of passive dynamics walkers, for instance, in \cite{Espiau1994,Garcia1998,Borzova2004}.
 %
-In terms of control, \cite{SP99} looked at passive dynamic walking with energy-based methods to design passivity-based control strategies such as controlled symmetries, introduced in \cite{SPBU05}.
+In terms of control, \cite{Spong1999} looked at passive dynamic walking with energy-based methods to design passivity-based control strategies such as controlled symmetries, introduced in \cite{Spong2005}.
 %, which was later used to obtain anthropomorphic foot action in \cite{SA:CDC09-1,SA:CDC09-2} and recently extended to underactuated bipeds in \cite{Hu20111605}.
 % maybe this doesn't go here, but maybe good to put newer stuff
 %
@@ -356,7 +356,8 @@ In terms of control, \cite{SP99} looked at passive dynamic walking with energy-b
 %
 %A thorough analysis of the compass-gait biped and its stability properties was later provided by Espiau and Goswami \cite{ESGO94}.
 % don't really need the above sentence
-Other important contributions to passive dynamic walking are given in \cite{KUO99,KUO02,ANDERSONS05,WIVDL07}.
+Other important contributions to passive dynamic walking are given in
+\cite{Kuo1999,Kuo2002,Anderson2005,Wisse2007}.
 %
 
 %\subsection{Foot Placement}
@@ -364,12 +365,12 @@ Other important contributions to passive dynamic walking are given in \cite{KUO9
 
 %\textbf{JWG: disucss how early implementations used offline trajectory computation, while more recently, on-line planning via an linear inverted pendulum model and a QP are used (Weiber)?}
 
-Early implementations of ZMP-based controllers used offline trajectory optimization to generate center of mass trajectories on the basis of the LIPM and generally ignored impact dynamics in the control design. Modern methods have achieved improved control by formulating the control problem as a {\em quadratic program} (QP), allowing gait replanning on the fly and improving stability properties (\cite{KuKoIk02,stephens2010push,herdt2010online}).
+Early implementations of ZMP-based controllers used offline trajectory optimization to generate center of mass trajectories on the basis of the LIPM and generally ignored impact dynamics in the control design. Modern methods have achieved improved control by formulating the control problem as a {\em quadratic program} (QP), allowing gait replanning on the fly and improving stability properties \cite{Kudoh2002,Stephens2010,Herdt2010}.
 %
 
-Similarly, sums of squares methods, also formulate trajectory generation as a convex optimization (\cite{TeMaToRo2010}).
+Similarly, sums of squares methods, also formulate trajectory generation as a convex optimization \cite{Tedrake2010}.
 %
-One elegant method which provides formal guarantees on stability is outlined in \cite{MaAhTe2013}.
+One elegant method which provides formal guarantees on stability is outlined in \cite{Majumdar2013}.
 %
 The procedure investigates the notion of controllability, composing sequential funnels (verified with sum of squares Lyapunov inequalities), which each lead to a predefined goal set.
 %
