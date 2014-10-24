@@ -23,7 +23,7 @@ which expresses the basic property of physics that applying a force to a massive
 %
 Through the property of superposition, this relationship eventually leads to standard dynamic model of a robot,
 \begin{align}
-  \M\argsq + \HCor\argsqdq = \B\argsq \, \u
+  \M\argsq + \HCor\argsqdq = \B\argsq \, \uu
 \end{align}
 but fundamentally, all physics-based models demonstrate Newton's Second Law.
 
@@ -109,10 +109,10 @@ The Euler-Lagrange equations can be used to find the equations of motion, which,
 %
 \begin{align}
   \label{eqn:eom}
-  \M\argsq\ddq + \HCor\argsqdq = \B\argsq \, \u
+  \M\argsq\ddq + \HCor\argsqdq = \B\argsq \, \uu
 \end{align}
 %
-where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the torque distribution matrix, only depend on $\q$, $\u$ is a vector of applied torques, and
+where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the torque distribution matrix, only depend on $\q$, $\uu$ is a vector of applied torques, and
 \begin{align}
   \HCor\argsqdq = \CCor\argsqdq \, \dq + \G\argsq
 \end{align}
@@ -168,12 +168,12 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
 %
 where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D \setminus S$ is a smooth map called the reset map (see, e.g., \cite{Morris2005}).
 %
-Under the action of control effort $\u$, the corresponding hybrid control system has the form
+Under the action of control effort $\uu$, the corresponding hybrid control system has the form
 %
 \begin{align}
   \HCS = \left\{
   \begin{array}{l l}
-    \dx = \xf\arx + \xg\arx \, \u, & \x \in \D \setminus \Guard,\\
+    \dx = \xf\arx + \xg\arx \, \uu, & \x \in \D \setminus \Guard,\\
     \xp = \Delta(\xm), & \x \in \Guard,
   \end{array}\right.
   \label{eq:hcsys}
@@ -262,7 +262,7 @@ The concept of a directed cycle is a fundamental component in the forumulation o
   \item $U = \{U_{v}\}_{v \in V}$ with $U_{v} \subseteq \R^{m_{v}}$ a set of {\em admissible control sets},
   \item $S = \{S_{e}\}_{e \in E}$ is a set of {\em guards} or {\em switching surfaces}, with $S_{e} \subseteq \D_{\sor(e)}$,
   \item $\Delta = \{\Delta_{e}\}_{e \in E}$ is a set of {\em reset maps}, with $\Delta_{e} : S_{e} \to \mathcal{X}_{\tar(e)}$ a smooth map,
-  \item $FG = \{(f_{v}, g_{v})\}_{v \in E}$ with $(f_v,g_v)$ a {\em control system} on $D_{v}$, i.e., $\dot{x} = f_{v}(\x) + g_{v}(\x) u$ $\forall$ $(\x^{T}, \u^{T})^{T} \in \D_{v}$.
+  \item $FG = \{(f_{v}, g_{v})\}_{v \in E}$ with $(f_v,g_v)$ a {\em control system} on $D_{v}$, i.e., $\dot{x} = f_{v}(\x) + g_{v}(\x) u$ $\forall$ $(\x^{T}, \uu^{T})^{T} \in \D_{v}$.
   \end{itemize}
 \end{definition}
 
@@ -389,7 +389,7 @@ Since the Lagrangian is intrinsic to the robot being considered, a domain breakd
 
 \subsubsection{Continuous Dynamics}
 
-The control system $\dx = f_v(\x) + g_v(\x) \, \u$ can be explicity constructed through the constraints imposed on each domain by the domain breakdown.
+The control system $\dx = f_v(\x) + g_v(\x) \, \uu$ can be explicity constructed through the constraints imposed on each domain by the domain breakdown.
 %
 For the domain $v \in V$, the imposed holonomic constraints are given by:
 %
@@ -411,7 +411,7 @@ Using this Jacobian, the constrained dynamic model is given by
 %
 \begin{align}
   \label{constraineddynamics}
-  \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \u + J_v^T\argsq F_v\argsqdqu.
+  \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \uu + J_v^T\argsq F_v\argsqdqu.
 \end{align}
 %
 where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eqn:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (see \cite{Murray1994}).
@@ -432,12 +432,12 @@ Doing so results in an expression for the wrench $F_v\argsqdqu$:
   \label{eq:wrench}
   \lefteqn{F_{v}\argsqdqu = -\left( J_{v}\argsq \M^{-1}\argsq J_{v}^{T}\argsq \right)^{-1} }\\
   \nonumber
-  &&\left( {\dot J}_{v}\argsqdq \, \dq + J_{v}\argsq \M^{-1}\argsq \left( \B\argsq \, \u - \HCor\argsqdq \right) \right).
+  &&\left( {\dot J}_{v}\argsqdq \, \dq + J_{v}\argsq \M^{-1}\argsq \left( \B\argsq \, \uu - \HCor\argsqdq \right) \right).
 \end{align}
 %
 This is sometimes referred to in the literature as a Lagrange multiplier.
 %
-Combining \eqref{constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $F_{v}\argsqdqu$ and obtain the fields associated to the control system $\dx = f_{v}\arx + g_{v}\arx \, \u$. For $\x = \argsqdq$,
+Combining \eqref{constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $F_{v}\argsqdqu$ and obtain the fields associated to the control system $\dx = f_{v}\arx + g_{v}\arx \, \uu$. For $\x = \argsqdq$,
 %
 \begin{align}
   f_{v}\arx \!\! &= \!\!\! \left[\!\!\!\begin{array}{c}
@@ -494,13 +494,13 @@ Thus, the domain is given by
 %
 \begin{align}
   \label{eq:domain}
-  \D_{v} \! = \! \left\{ \! (q^{T}, \! {\dot q}^{T}, \! \u^{T})^{T} \! \in \! T\Q \times \R^{m_{v}} : A_{v}\argsqdqu \! \geq \! 0 \! \right\}.
+  \D_{v} \! = \! \left\{ \! (q^{T}, \! {\dot q}^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times \R^{m_{v}} : A_{v}\argsqdqu \! \geq \! 0 \! \right\}.
 \end{align}
 %
 The guard is just the boundary of this domain with the additional assumption that the set of admissible configurations is decreasing, i.e., the vector field is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
 %
 \begin{align}
-  S_{e} \! = \! \Bigl\{ \!(\q^{T}, \dq^{T}, \! \u^{T})^{T} \! \in \! T\Q \times \R^{m_v} : \ &A_{v}\argsqdqu \! = \! 0 \\
+  S_{e} \! = \! \Bigl\{ \!(\q^{T}, \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times \R^{m_v} : \ &A_{v}\argsqdqu \! = \! 0 \\
   \nonumber
   \mathrm{and} \ &{\dot A}_{v}\argsqdqu \! \leq \! 0 \! \Bigl\}.
 \end{align}

@@ -52,7 +52,7 @@ In order to guarantee a stricter form of convergence, a modified notion of these
   \begin{eqnarray}
     &c_{1} \nx \leq \Ve(\x) \leq \frac{c_{2}}{\resclfparam^{2}} \nx,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{\bigF} \Ve(\x) + \Lie{\bigG} \Ve(\x) \, \u + \frac{c_{3}}{\resclfparam} \Ve(\x) \right] \leq 0.
+    &\inf_{\uu \in \U} \left[ \Lie{\bigF} \Ve(\x) + \Lie{\bigG} \Ve(\x) \, \uu + \frac{c_{3}}{\resclfparam} \Ve(\x) \right] \leq 0.
   \end{eqnarray}
   %
   If these are satisfied, then it will also be true that
@@ -77,9 +77,9 @@ with $\Eref$ the energy associated with the periodic orbit, and use it as a cont
 %
 \begin{align}
   \label{eq:es-qp}
-  \mueps(\x) = \argmin_{u(\x) \in \R^{m}} \ & \u(\x)^T \u(\x)\\
+  \mueps(\x) = \argmin_{u(\x) \in \R^{m}} \ & \uu(\x)^T \uu(\x)\\
   \nonumber
-  \mbox{s.t. } \Lie{\xf} \V&(\x) + \Lie{\xg} \V(\x) \, \u(\x) + \frac{c_{3}}{\resclfparam} \V(\x) \leq 0.
+  \mbox{s.t. } \Lie{\xf} \V&(\x) + \Lie{\xg} \V(\x) \, \uu(\x) + \frac{c_{3}}{\resclfparam} \V(\x) \leq 0.
 \end{align}
 %
 Applying this to the system \eqref{eq:hcsys} results in
@@ -143,7 +143,7 @@ In order to understand the nature of energy shaping, consider breaking up the sy
   \label{eq:zd-vfield}
 \end{align}
 %
-with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $u \in \U$.
+with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $\uu \in \U$.
 %
 The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz continuous.
 %
@@ -235,7 +235,7 @@ and consider the following:\vgap
     \label{eq:lyap-cond-nrg-es}
     &c_{1} \nzdx^{2} \leq \V\argsx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx^2,\\
     \nonumber
-    &\inf_{\u \in \U} \left[ \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \u + \frac{c_{3}}{\resclfparam} \V\argsx \right] \leq 0,
+    &\inf_{\uu \in \U} \left[ \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \uu + \frac{c_{3}}{\resclfparam} \V\argsx \right] \leq 0,
   \end{eqnarray}
   %
   for all $\argsxz \in \zdX \times \zdZ$.\vgap
@@ -248,7 +248,7 @@ and consider the following:\vgap
   Define the set
   %
   \begin{align}
-    \Keps = \left\{ \u \in \U : \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, u + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
+    \Keps = \left\{ \uu \in \U : \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \uu + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
     \label{eq:control-set}
   \end{align}
   %
@@ -257,7 +257,7 @@ and consider the following:\vgap
   The time derivative is
   %
   \begin{align}
-    \dVe(\x) &= \E(\x) \pd{\E(\x)}{\x}(f(\x) + g(\x) \, \u)\\
+    \dVe(\x) &= \E(\x) \pd{\E(\x)}{\x}(f(\x) + g(\x) \, \uu)\\
     \nonumber
     &\geq \E(\q, \dq) \left(\!\!\begin{array}{c c}
     \pd{\E(\q, \dq)}{\q} & \pd{\E(\q, \dq)}{\dq}
@@ -270,7 +270,7 @@ and consider the following:\vgap
       \left(\!\!\begin{array}{c}
       \boldzero_{\ndim \times \ncv}\\
       -\M^{-1}(\q) \B(\q)
-      \end{array}\!\!\right) \, \u
+      \end{array}\!\!\right) \, \uu
       \right].
   \end{align}
   %
@@ -278,10 +278,10 @@ and consider the following:\vgap
   %
   Since $M(\q)$ is invertible for physical bodies, $M(\q) B(\q)$ is invertible.
   %
-  Thus there exists at least one $\u(\q, \dq)$ satisfying
+  Thus there exists at least one $\uu(\q, \dq)$ satisfying
   %
   \begin{align}
-    \M^{-1}(\q) \B(\q) \, \u(\q, \dq) = \frac{c_{3}}{\resclfparam} \frac{1}{2} \E^{2}(\q, \dq) + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq).
+    \M^{-1}(\q) \B(\q) \, \uu(\q, \dq) = \frac{c_{3}}{\resclfparam} \frac{1}{2} \E^{2}(\q, \dq) + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq).
   \end{align}
   %
   and, for the CLF \eqref{eq:lyap-cond-nrg-es} with any such locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
@@ -299,8 +299,8 @@ Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtai
   \HCSbar= \left\{
   \begin{array}{l l}
     \begin{array}{r c l}
-      {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, u\\
-      {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, u
+      {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, \uu\\
+      {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, \uu
     \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \Guard,\\
     \begin{array}{r c l}
       \zdx^{+} &\!\!=\!\!& \DeltaX(\zdx^{-}, \zdz^{-})\\
