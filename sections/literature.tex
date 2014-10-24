@@ -259,7 +259,7 @@ In another common model, a flywheel is added to the inverted pendulum;
 %
 examples can be found throughout the literature:
 %
-\cite{Stephens2001} used it for posture control,
+\cite{Stephens2011} used it for posture control,
 %
 \cite{Takenaka2009} used it to with on-line error compensation to mitigate the effect of modeling errors on gait generation,
 %
@@ -291,15 +291,22 @@ Raibert observed that hopping and running can be represented by a low-dimensiona
 %
 at a speed of 1 m/s (\cite{Raibert1984,Raibert1984a,Raibert1986}).
 %
-This was followed by a 3D hopper that was able to run without being constrained to the sagittal plane (\cite[Chap.~3]{Raibert1986}, \cite{raibert:dbu}) as well as multi-legged robots (\cite{raibert1986a,Raibert1990,Hodgins1991}).
+This was followed by a 3D hopper that was able to run without being constrained to the sagittal plane (\cite[Chap.~3]{Raibert1986}, \cite{raibert:dbu}) as well as multi-legged robots \cite{raibert1986a,Raibert1990,Hodgins1991}.
 %
 
-This body of work gave rise to the Spring-Loaded Inverted Pendulum (SLIP) model, which has been shown to approximate the body center-of-mass (CoM) motion during \textit{steady-state running gaits} of a wide diversity of terrestrial animals (\cite{Blickhan89_springmass, Mcmahon90_slip,Farley93_animal_size, full00_rhythmic,DIFAFU00,Seyfarth01_stability}).
+This body of work gave rise to the Spring-Loaded Inverted Pendulum (SLIP) model,
+which has been shown to approximate the body center-of-mass (CoM) motion during
+\textit{steady-state running gaits} of a wide diversity of terrestrial animals
+\cite{Blickhan1989,Mcmahon1990,Farley1993,Full2000,Dickinson2000,Seyfarth2002}.
 %
-Successful running robots, such as the Planar Hopper, ARL Mono pod II and CMU Bowleg Hopper, also exhibit SLIP model behavior (\cite{RA86a, Zeglin98_bowleg, AHBU06}).
+Successful running robots, such as the Planar Hopper, ARL Mono pod II and CMU Bowleg Hopper, also exhibit SLIP model behavior (\cite{Raibert1986,Zeglin1998,Ahmadi2006}).
 %
 
-The control of these robots has been based on Raibert's original control ideas, which can be decomposed into three subtasks dedicated to (a) forward propulsion of the robot at the desired speed, (b) regulation of the vertical hopping height of the body, and (c) keeping the body at a desired posture (\cite{RAI84}, \cite[Chapter 2]{RA86a}).
+The control of these robots has been based on Raibert's original control ideas,
+which can be decomposed into three subtasks dedicated to (a) forward propulsion
+of the robot at the desired speed, (b) regulation of the vertical hopping height
+of the body, and (c) keeping the body at a desired posture (\cite{Raibert1984},
+\cite[Ch. 2]{Raibert1986}).
 %
 To control the forward speed, the controller places the toe at a desired position with respect to the center of mass during flight.
 %
