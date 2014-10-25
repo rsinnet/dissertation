@@ -6,11 +6,14 @@
 import json
 import re
 import sys
+from shutil import copyfile
 
 with open('latex_subs.json') as datafile:
     data = json.load(datafile)
 
 search_pattern = r'((\s*\\put\(-?[0-9]*(\.[0-9]*)?,-?[0-9]*(\.[0-9]*)?\))\{\\color\[rgb\]\{[0-9]*,[0-9]*,[0-9]*\}\\makebox\([0-9]*,[0-9]*\)\[.*\]\{\\smash\{)(.*)(\}\}\}\%)'
+
+wrote_file = False
 
 for file_prefix in data['files']:
     if file_prefix.keys()[0] == sys.argv[1]:
@@ -27,3 +30,8 @@ for file_prefix in data['files']:
                     out_line = line.rstrip()
 
                 ofile.write(out_line + "\n")
+                wrote_file = True
+
+if not wrote_file:
+    copyfile('{0}.eps_tex'.format(sys.argv[1]), '{0}.eps_latex'.format(sys.argv[1]))
+    wrote_file = True

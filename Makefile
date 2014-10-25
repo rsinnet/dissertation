@@ -1,8 +1,8 @@
 PROJNAME=dissertation
 LATEX_CMD=latex -interaction=nonstopmode
 
-EPS_ALL := $(wildcard ../figs/*.eps)
-EPS_TEX := $(wildcard ../figs/*.eps_tex)
+EPS_ALL := $(wildcard figs/*.eps)
+EPS_TEX := $(wildcard figs/*.eps_tex)
 
 EPS_LATEX := $(subst .eps_tex,.eps_latex,$(EPS_TEX))
 EPS_NO_LATEX := $(filter-out $(subst .eps_tex,.eps,$(EPS_TEX)), $(EPS_ALL))

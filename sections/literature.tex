@@ -147,8 +147,6 @@ results on Lyapunov stability in almost periodic systems.
 Additional information on the history of Lyapunov theory can be found throughout
 the literature; see, e.g., \cite{Michel2007,Teel1999}.
 %
-Definitions of stability are ubiquitous in the literature; see, e.g.,
-\cite{Khalil2002,Teschl2012,Vidyasagar1993}.
 
 \section{Bipedal Robotic Locomotion}
 
@@ -170,21 +168,28 @@ Definitions of stability are ubiquitous in the literature; see, e.g.,
 
 %\end{itemize}
 
-%\begin{figure*}
-%  \centering
-%  \includegraphics[width=1.0\textwidth]{biped-models}
-%  \caption{Four low-dimensional models that are frequently used as approximate representations of walking robots. From left to right:
-    %Linear Inverted Pendulum, Inverted Pendulum with Flywheel, Spring-Loaded Inverted Pendulum, Compass-Gait Biped
-%    %
-%    the Linear Inverted Pendulum Model (LIPM) lumps the mass of the robot at a point moving at a %constant height and assumes massless legs;
-%    %
-%    the Inverted Pendulum with Flywheel (IPF) relaxes the assumption on constant height and adds %a flywheel to account for internal angular momentum;
-%    %
-%    the Spring-Loaded Inverted Pendulum (SLIP) adds a spring to model a robot's legs as a %massless pogo stick;
-%    %
-%    and the Compass-Gait Biped (CG) treats a robot as a double pendulum with lumped masses on %the stance and swing legs.}
-%  \label{fig:biped-models}
-%\end{figure*}
+\begin{figure}
+  \centering
+  \def\svgwidth{1.0\columnwidth}
+  \input{figs/biped-models.eps_latex}
+  \caption{Four low-dimensional models that are frequently used as approximate
+    representations of walking robots. From left to right:
+    % 
+    Linear Inverted Pendulum, Inverted Pendulum with Flywheel, Spring-Loaded
+    Inverted Pendulum, Compass-Gait Biped
+    % 
+    the Linear Inverted Pendulum Model (LIPM) lumps the mass of the robot at a
+    point moving at a constant height and assumes massless legs;
+    %
+    the Inverted Pendulum with Flywheel (IPF) relaxes the assumption on constant
+    height and adds a flywheel to account for internal angular momentum;
+    %
+    the Spring-Loaded Inverted Pendulum (SLIP) adds a spring to model a robot's
+    legs as a massless pogo stick;
+    and the Compass-Gait Biped (CG) treats a robot as a double pendulum with
+    lumped masses on the stance and swing legs.}
+  \label{fig:biped-models}
+\end{figure}
 
 %\section{Comments on the Literature}
 %\label{sec:Literature}
