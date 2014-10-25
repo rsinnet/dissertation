@@ -1,13 +1,28 @@
 \chapter{\uppercase{Literature Overview}}
 
+This chapter describes the literature related which pertains to bipedal robotic
+walking, reviewing work from different fields and perspectives such as
+biomechanics and dynamical systems.
+%
+Bipedal robotic walking is inherently interdisciplinary including theoretical
+and experimental components and drawing inspiration from locomotion found in
+nature.
+%
+The exposition is divided by field:
+%
+Research on the stability of dynamical systems is discussed first followed by
+modeling of hybrid systems.
+%
+The chapter ends with a review of bipedal robots from the literature.
+
 \section{Stability of Dynamical Systems}
 
 Stability of dynamical systems has a long history, appearing in the works of
 researchers such as Routh \cite{Routh1877} and Hurwitz \cite{Hurwitz1895}.
 %
 Contemporary notions of stability in nonlinear systems generally rely on results
-initially presented in the doctoral work of Aleksandr Lyapunov in his doctoral
-thesis in 1892 \cite{Lyapunov1992}.
+initially presented in the work of Aleksandr Lyapunov in his doctoral thesis in
+1892 \cite{Lyapunov1992}.
 %
 In said treatise, Lyapunov described two methods for analyzing the stability of
 equilibrium points of ordinary differential equations.
@@ -39,11 +54,11 @@ Both methods are used in this work but for different purposes:
 %
 Lyapunov's indirect method is often used to analyze the stability of hybrid
 systems by examining the stability of a linearization of the \Poincare{} map
-about the equilibrium point; this will be explained in greater detail later in
-this chapter.
+about the equilibrium point; this will be explained in greater detail in
+\chapref{chap:stability}.
 %
-Accordingly, the numerical simulations in this work will rely on this usage of
-Lyapunov's indirect method.
+The numerical simulations in this work will rely on this usage of Lyapunov's
+indirect method.
 %
 In order to formally demonstrate the stability of energy shaping---the main
 focus of this work---Lyapunov's direct method will be employed.
@@ -66,21 +81,33 @@ Khalikoff \cite{Khalikoff1937} and Malkin \cite{Malkin1938} proved additional
 theorems on stability which could be used to show stability in the sense of
 Lyapunov with relaxed assumptions.
 %
+As explained in \cite{Murakami1988}, using Lyapunov's direct method, Marachkoff
+\cite{Marachkoff1940} provided a proof of asymptotic stability on systems of the
+form $\dx = f(t, x)$ using a negative definite Lyapunov function;
+%
+the negative definiteness requirement was later relaxed to negative semidefinite
+through the addition of a second Lyapunov function by Matorosov
+\cite{Matorosov1962}.
+%
+
+%
 Masera \cite{Massera1949} provided more restrictive definitions, introducing the
 notion of {\em equiasymptotic stability}.
 %
-Yet it wasn't until the assumptions of uniformity were formulated by Malkin
+Yet it wasn't until the assumptions of uniformity were provided by Malkin
 \cite{Malkin1954} that the necessary framework existed in which to formulate
 converse theorems.
 %
-Barbashin and Krasovski\u{\i} further strengthed Malkin's result in \cite{Barbashin1954}.
+Barbashin and Krasovski\u{\i} further strengthened Malkin's result in
+\cite{Barbashin1954}.
 %
 
 After these observations were published, converse theorems followed shortly
-thereafter thanks to researchers such as Kurzweil \cite{Kurzweil1956} and
-Massera \cite{Massera1956}.
+thanks to researchers such as Kurzweil \cite{Kurzweil1956} and Massera
+\cite{Massera1956}.
 %
-Converse theorems have seen substantial development and broad use since these results.
+Converse theorems have seen substantial development and broad use since these
+results.
 %
 Hoppensteadt \cite{Hoppensteadt1966} presented constructions for singularly
 perturbed systems in which he constructed a $C^{1}$ Lyapunov function, extending
@@ -90,14 +117,14 @@ Wilson \cite{Wilson1969} constructed a $C^{\infty}$ Lyapunov function for a
 continuous vector field having an asymptotically stable invariant set.
 %
 Early results on converse Lyapunov functions for stability of sets are
-summarized in numerous texts; see, e.g, \cite{Antosiewicz1958,Yoshizawa1975}.
+summarized in numerous texts; see, e.g, \cite{Antosiewicz1958}.
 
 In addition to providing necessary and sufficient conditions for stability,
 researchers have also studied what conditions are necessary for solutions to be
 integrable for all time.
 %
-Cesari provides conditions  for \cite[\S 1.5]{Cesari1971} for second-order
-linear systems.
+Cesari provides conditions for \cite[\S 1.5]{Cesari1971} for second-order linear
+systems.
 %
 Strauss introduces $L^{p}$ stability to attempt to provide conditions for more
 general systems in \cite{Strauss1965}.
@@ -113,6 +140,9 @@ backgrounds.
 %
 Shortly thereafter, additional texts emerged including those of Krasovski\u{\i}
 \cite{Krasovskii1963} and of Hahn \cite{Hahn1967}.
+%
+Yoshizawa's text from 1975 \cite{Yoshizawa1975} provides a compilation of
+results on Lyapunov stability in almost periodic systems.
 
 Additional information on the history of Lyapunov theory can be found throughout
 the literature; see, e.g., \cite{Michel2007,Teel1999}.
