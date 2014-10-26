@@ -23,7 +23,7 @@ authors to formulate a metric on the humanlike nature of robotic walking gaits \
 \begin{figure}[t!]
   \centering
   \includegraphics[width=1.0\textwidth]{LabeledDiagram}
-  \caption{Illustrations of the experimental setup (left) and sensor placement (right). Each subject in the experiment was required to wear a suit where the LED sensors are fastened in place. The sensors were placed at the joints as illustrated with the red dots on the right lateral and anterior aspects of the right leg. Sensors were placed identically on the left leg. The same sensors drawn from different views are connected with red arrows. The blue arrows illustrate the leg segment lengths of interest, i.e. $L_1, L_2, L_3, L_4$. The diversity of the subjects with respect to these lengths can be seen in \tabref{tab:measurements}.}
+  \caption[Illustrations of the experimental setup]{Illustrations of the experimental setup (left) and sensor placement (right). Each subject in the experiment was required to wear a suit where the LED sensors are fastened in place. The sensors were placed at the joints as illustrated with the red dots on the right lateral and anterior aspects of the right leg. Sensors were placed identically on the left leg. The same sensors drawn from different views are connected with red arrows. The blue arrows illustrate the leg segment lengths of interest, i.e. $L_1, L_2, L_3, L_4$. The diversity of the subjects with respect to these lengths can be seen in \tabref{tab:measurements}.}
   \label{fig:Sensors}
 \end{figure}
 
@@ -69,7 +69,7 @@ which can be found online \cite{ourdataset}.
     \includegraphics[width=0.48\columnwidth]{LeftToe}
     \label{fig:toeheight}
   }
-  \caption{The data for the heights of the heel and toe together with the fittings of a constant$\to$Gaussian$\to$constant for the heel and a constant$\to$fourth-order polynomial$\to$constant for the toe. The vertical lines on the left and right indicate the lift and strike times, respectively.}
+  \caption[The data for the heights of the heel and toe]{The data for the heights of the heel and toe together with the fittings of a constant$\to$Gaussian$\to$constant for the heel and a constant$\to$fourth-order polynomial$\to$constant for the toe. The vertical lines on the left and right indicate the lift and strike times, respectively.}
   \label{fig:heeltoefit}
 \end{figure}
 
@@ -94,12 +94,13 @@ To illustrate this procedure, consider the averaged data for the heel and toe sh
 \begin{figure}[t!]
   \centering
   \includegraphics[width=1.0\columnwidth]{domainbreaking}
-  \caption{An overview of how the domain breakdown is achieved. The top row illustrates the height of the toe and heel of each leg over one step along with the lifting and strike time for each constraint (illustrated with vertical lines). The middle row illustrates which constraints are active based upon the fitting. The bottom row is the resulting domain breakdown where enforced constraints are drawn in green circles.}
+  \caption[An overview of how the domain breakdown is achieved.]{An overview of how the domain breakdown is achieved. The top row illustrates the height of the toe and heel of each leg over one step along with the lifting and strike time for each constraint (illustrated with vertical lines). The middle row illustrates which constraints are active based upon the fitting. The bottom row is the resulting domain breakdown where enforced constraints are drawn in green circles.}
   \label{fig:domainbreakdown}
 \end{figure}
 
 
-\subsection{Determining the Domain Breakdown} Given the data for a contact point $c \in \C$, the lift and strike times are determined for each contact point, $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ for $c \in \C =  \{c_{1},c_{2},c_{3},c_{4}\} = \{\clh, \clt, \crh, \crt\}$, over the time interval of the averaged data, $\big[\tau[1], \tau[T]\big]$, using the aforementioned techniques. Since the data comprise at least two steps (one step with each leg), there are multiple lift and strike times over the period of the data. Denote by $\mathcal{J}_{c} \subset \big[\tau[1], \tau[T]\big]$ the period where the constraints associated with a contact point are enforced, i.e., $t \in \mathcal{J}_{c}$ if $f_{c}(t) = \mathrm{constant}$ with $f_{c}$ the fitting function for the contact point $c \in \C$; these intervals are shown in blue in \figref{fig:domainbreakdown} over the course of one step (not the entire data period) in the case of $\C =  \{\clh, \clt, \crh, \crt\}$.  Analogous to the definition of a domain breakdown (\defref{def:domainbreakdown}), one can define a binary vector, $b(t) \in \Z_{2}^{|\C|}$ with $|\C|$ representing the cardinality of $\C$, encoding which contact points are constrained at any given time by letting $b_{i}(t) = 1$ if $t \in \mathcal{J}_{c_{i}}$ for $i \in \{1, \ldots, |\C|\}$.
+\subsection{Determining the Domain Breakdown}
+Given the data for a contact point $c \in \C$, the lift and strike times are determined for each contact point, $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ for $c \in \C =  \{c_{1},c_{2},c_{3},c_{4}\} = \{\clh, \clt, \crh, \crt\}$, over the time interval of the averaged data, $\big[\tau[1], \tau[T]\big]$, using the aforementioned techniques. Since the data comprise at least two steps (one step with each leg), there are multiple lift and strike times over the period of the data. Denote by $\mathcal{J}_{c} \subset \big[\tau[1], \tau[T]\big]$ the period where the constraints associated with a contact point are enforced, i.e., $t \in \mathcal{J}_{c}$ if $f_{c}(t) = \mathrm{constant}$ with $f_{c}$ the fitting function for the contact point $c \in \C$; these intervals are shown in blue in \figref{fig:domainbreakdown} over the course of one step (not the entire data period) in the case of $\C =  \{\clh, \clt, \crh, \crt\}$.  Analogous to the definition of a domain breakdown (\defref{def:domainbreakdown}), one can define a binary vector, $b(t) \in \Z_{2}^{|\C|}$ with $|\C|$ representing the cardinality of $\C$, encoding which contact points are constrained at any given time by letting $b_{i}(t) = 1$ if $t \in \mathcal{J}_{c_{i}}$ for $i \in \{1, \ldots, |\C|\}$.
 
 To determine the domain breakdown associated with walking, begin by defining the directed cycle $\Gamma$ (if it exists, which is not guaranteed). The function $b(t)$ takes on only a finite number of values, say, $N$ values; let these values be represented by $d[n]$ for $i \in \{1, \ldots, N\}$. For the walking to be periodic, there must exist a positive value of $p \in \Z$ satisfying
 \begin{align}
@@ -129,7 +130,7 @@ previous studies \cite{Ackermann2007}.
 \begin{figure}[t]
   \centering
   \includegraphics[width=1.0\columnwidth]{test_subject_4}
-  \caption{The domain breakdown for subject four together with the amount of time spent in each domain. Each illustration is a snapshot of the subject's configuration at the beginning of the domain together with the contact points enforced.}
+  \caption[The domain breakdown for subject four]{The domain breakdown for subject four together with the amount of time spent in each domain. Each illustration is a snapshot of the subject's configuration at the beginning of the domain together with the contact points enforced.}
   \label{fred}
 \end{figure}
 
@@ -147,7 +148,7 @@ previous studies \cite{Ackermann2007}.
     \includegraphics[width=0.32\textwidth]{constraints_heights}
     \label{fig:constraints-heights}
   }
-  \caption{Human data over the course of one step with one leg and the ``canonical'' functions that are fitted to these data. $d$ superscripts represent the data and $f$ superscripts represent the fits. The plots start at the beginning of the domain {\DA}, with vertical lines indicating when transitions between domains occur. The specific variables that are plotted can be seen in \figref{fig:robotconstraints}.}
+  \caption[Human data over the course of one step with one leg]{Human data over the course of one step with one leg and the ``canonical'' functions that are fitted to these data. $d$ superscripts represent the data and $f$ superscripts represent the fits. The plots start at the beginning of the domain {\DA}, with vertical lines indicating when transitions between domains occur. The specific variables that are plotted can be seen in \figref{fig:robotconstraints}.}
   \label{fig:constraints-fitting}
 \end{figure}
 
@@ -239,7 +240,7 @@ After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracke
     \includegraphics[width=.4\columnwidth]{robot_const}
     \label{fig:trackingoutputs}
   }
-  \caption{(a) The general configuration of the 2D bipedal robot with knees and feet being considered in this paper. (b) The different configuration-based outputs considered in the fitting of the ``canonical'' functions.}
+  \caption[(a) The general configuration of the 2D bipedal robot]{(a) The general configuration of the 2D bipedal robot with knees and feet being considered in this paper. (b) The different configuration-based outputs considered in the fitting of the ``canonical'' functions.}
     \label{fig:robotconstraints}
 \end{figure}
 
@@ -253,7 +254,7 @@ The fits that result from solving \eqref{eq:fitsolve} are shown in \figref{fig:c
 \begin{figure}
   \centering
   \includegraphics[width=.5\columnwidth]{robot_angles}
-  \caption{The shape coordinates for the biped labeled $q_i$ with the corresponding arrows representing twists. The $x$-axis is coming out of the page. The hip width is zero and is shown for illustration purposes only. The axes shown represents the body-fixed frame which has orientation about the $y$-axis given by $\phi_b$.}
+  \caption[The shape coordinates for the biped labeled $q_i$]{The shape coordinates for the biped labeled $q_i$ with the corresponding arrows representing twists. The $x$-axis is coming out of the page. The hip width is zero and is shown for illustration purposes only. The axes shown represents the body-fixed frame which has orientation about the $y$-axis given by $\phi_b$.}
   \label{fig:shapecoords}
 \end{figure}
 
@@ -426,7 +427,7 @@ where, for the sake of space, only the five eigenvalues with the largest magnitu
 \begin{figure*}[p!]
   \centering
   \includegraphics[width=1.0\textwidth]{hic_gait_tiles}
-  \caption{Comparison of simulated walking gaits between time-based feedback control and autonomous feedback control.}
+  \caption[Comparison of simulated walking gaits]{Comparison of simulated walking gaits between time-based feedback control and autonomous feedback control.}
   \label{fig:gaittiles}
 \end{figure*}
 

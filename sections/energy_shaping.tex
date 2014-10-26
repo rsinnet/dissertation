@@ -1,26 +1,35 @@
 \chapter{\uppercase{Energy Shaping}}
 
-This chapter focuses on the primary contribution of this thesis: stabilization of periodic behaviors in hybrid dynamical systems through {\em energy shaping}.
+This chapter focuses on the primary contribution of this thesis: stabilization
+of periodic behaviors in hybrid dynamical systems through {\em energy shaping}.
 %
-This method provides a manner for understanding the dynamics of non-conservative systems in terms of energy exchange and employs Lyapunov methods to improve the stability properties of controllers for such systems.
+This method provides a manner for understanding the dynamics of both
+conservative and  non-conservative systems in terms of energy exchange and
+employs Lyapunov methods to improve the stability properties of controllers for
+such systems.
 %
 
 \section{Overview}
 
-Periodic behaviors in mechanical systems have specific energy signatures that evolves over time.
+Periodic behaviors in mechanical systems have specific energy signatures that
+evolves over time.
 %
-The energy dynamics of a conservative system can be understood as an interplay between kinetic and potential energy, with energy transfer occuring between these two quantities.
+The energy dynamics of a conservative system can be understood as an interplay
+between kinetic and potential energy, with energy transfer occuring between
+these two quantities.
 %
 Indeed for conservative systems, the energy is constant, i.e.,
 \begin{align}
-  E_{0} \equiv E(\q, \dq) = T(\q, \dq) + U(\q).
+  E_{0} \equiv E\argsqdq = T\argsqdq + U\argsq,
 \end{align}
-\todo{What is the setup for the system?}
+where $T : T\Q \to \Rnn$ represents the kinetic energy and $U : \Q \to \R$
+represents the potential energy.
 %
-In a non-conservative system, this relationship does not hold, but the dynamics of energy can still be understood as
+In a non-conservative system, this relationship does not hold, but the dynamics
+of energy can still be understood as
 \begin{align}
   \label{eq:ncsys-nrg-cons}
-  E_{0} \equiv E_{c}(\q(t), \dq(t)) = T(\q(t), \dq(t)) + U(\q(t)) - \int_{0}^{t} \! \Fnc \cdot \frac{dq(\tau)}{d\tau} \ d\tau.
+  E_{0} \equiv E_{c}\argsqdqt = T(\q(t), \dq(t)) + U(\q(t)) - \int_{0}^{t} \! \Fnc \cdot \frac{dq(\tau)}{d\tau} \ d\tau.
 \end{align}
 where $\Fnc$ represents conservative forcing. Typically this represents an autonomous feedback control law and so $\Fnc : T\Q \to \R^m$ where $m$ is the number of actuators in the system.
 %

@@ -148,6 +148,53 @@ Additional information on the history of Lyapunov theory can be found throughout
 the literature; see, e.g., \cite{Michel2007,Teel1999}.
 %
 
+\section{Hybrid Systems}
+
+The term hybrid systems derives its name from the mixed nature of the dynamics
+involved.
+%
+In general, systems which combine continuous dynamics with discrete dynamics are
+referred to as such.
+%
+Contemporary notions of hybrid systems evolved over the past few decades;
+%
+the term hybrid systems itself is broadly and loosely used in different areas of
+control.
+%
+Because of the combination of dynamics, hybrid systems often contain solutions
+with discontinuities as discussed by Filippov \cite{Filippov1988}.
+
+Many of the developments in hybrid systems have been motivated by applications:
+%
+G{\"{o}}ll{\"{u}} and Varaiya \cite{Gollu1989} applied hybrid dynamical systems to
+formulate a control scheme for hard disk drives.
+%
+In a later work \cite{Varaiya1993}, Varaiya also described automated
+vehicle--highway systems.
+%
+Similarly, Tomlin, Pappas and Sastry \cite{Tomlin1998} described automated
+automated air traffic management systems.
+%
+Brockett \cite{Brockett1993} described hybrid models for motion control systems,
+attempting to provide generalizations for a wide class of systems.
+%
+Such multilayer control schemes as those described earlier by, e.g., Brooks
+\cite{Brooks1986}, in some sense provided an impetus for more formal
+descriptions.
+%
+Simpler examples include thermostat/furnace systems and surge tanks as described
+by, e.g., Antsaklis, Stiver and Lemmon \cite{Antsaklis1993}, and the even
+simpler cat and mouse game mentioned by Manna and Pnueli \cite{Manna1993}.
+
+Harel \cite{Harel1987} presented the idea of statecharts as a visual formalism
+for modeling of hybrid systems.
+%
+Other researchers have proposed various languages for hybrid systems such as
+Hooman \cite{Hooman1993} and Benveniste, Borgne and Guernic \cite{Benveniste1993}.
+
+
+
+
 \section{Bipedal Robotic Locomotion}
 
 %\textbf{JWG: In the following, I have started some of the editing. Hopefully I will have help!}
@@ -172,7 +219,7 @@ the literature; see, e.g., \cite{Michel2007,Teel1999}.
   \centering
   \def\svgwidth{1.0\columnwidth}
   \input{figs/biped-models.eps_latex}
-  \caption{Four low-dimensional models that are frequently used as approximate
+  \caption[Four low-dimensional models]{Four low-dimensional models that are frequently used as approximate
     representations of walking robots. From left to right:
     % 
     Linear Inverted Pendulum, Inverted Pendulum with Flywheel, Spring-Loaded
