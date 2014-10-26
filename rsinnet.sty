@@ -92,12 +92,18 @@
 
 % Various dependent coordinate macros
 \newcommand{\argsq}{(\q)}
+\newcommand{\argsqt}{(\q\argt)}
+\newcommand{\argsqtau}{(\q\argtau)}
+  
 \newcommand{\argsqdq}{(\q, \dq)}
 \newcommand{\argsqdqu}{(\q, \dq, \uu)}
 \newcommand{\argsqdqt}{(\q\argt, \dq\argt)}
+\newcommand{\argsqdqtau}{(\q\argtau, \dq\argtau)}
+
+\newcommand{\argt}{(t)}
+\newcommand{\argtau}{(\tau)}
 
 \newcommand{\arx}{(\x)}
-\newcommand{\argt}{(t)}
 \newcommand{\arxt}{(\x\argt)}
 
 \newcommand{\xzero}{\x\argzero}
@@ -148,7 +154,7 @@
 
 % Lyapunov function macros
 \newcommand{\V}{V}
-\newcommand{\dV}{V}
+\newcommand{\dV}{{\dot V}}
 
 \newcommand{\Ve}{V_{\resclfparam}}
 \newcommand{\dVe}{{\dot V}_{\resclfparam}}
@@ -207,6 +213,7 @@
 \newcommand{\zdzp}{\zeta}
 
 \newcommand{\uu}{u}
+\newcommand{\vv}{v}
 
 \newcommand{\limeps}{\lim_{\resclfparam \nearrow +\infty}}
 
