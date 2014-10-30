@@ -18,7 +18,50 @@
 
 \chapter{\uppercase{First Appendix}}
 
-Text for the Appendix follows.
+\begin{theorem}
+  Let $\argsxz = \argszero$ be an equilibrium point for the nonlinear system
+  \begin{align*}
+    \dzdx &= \zdf\argsxz + \zdg\argsxz,\\
+    \dzdz &= \zdq\argsxz + \zdw\argsxz,
+  \end{align*}
+  where $\zdf : \zdX \times \zdZ \to \R$,  $\zdg : \zdX \times \zdZ \to
+  \R^{1 \times m}$, $\zdq : \zdX \times \zdZ \to \R^{n-1}$,  and $\zdw : \zdX \times
+  \zdZ \to \R^{(n-1) \times m}$ are continuously differentiable, $\D = \{\argsxz
+  \in \zdX \times \zdZ : \nzdxz < r \}$ , and the Jacobian matrix
+  $(\pd{\zdf}{\argsxz}, \pd{\zdq}{\argsxz})$\todo{The fields are incomplete
+    because they should include control.}\xspace is bounded on $\D$, uniformly in
+  $t$. Let $c_{1}$, $c_{2}$, $c_{3}$, $c_{4}$, $\resclfparam$, and $r_{0}$ be
+  positive constants with $r_{0} < r \resclfparam
+  \sqrt{\frac{c_{1}}{c_{2}}}$. Let $\D_{0} = \{ \argsxz \in \zdX \times \zdZ :
+  \nzdxz < r_{0} \}$. Assume that trajectories of the system satisfy
+  \begin{align*}
+    \nzdxt \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}}
+    e^{-\frac{c_{3}}{2 \resclfparam} t} \nzdxzero, \ \forall \
+    \argsxztzero \in \D_{0}, \ \forall \ t \geq t_{0} \geq 0.
+  \end{align*}
+  Then, there is a function $\V : \D_{0} \to \R$ that satisfies the inequalities
+  \begin{eqnarray*}
+    & c_{1} \nzdx^{2} \leq \V\argsxz \leq \frac{c_{2}}{\resclfparam} \nzdx^{2}\\
+    & \pd{\V}{\argsxz} \bigF\argsxz \leq -\frac{c_{3}}{\resclfparam} \nzdx^{2}\\
+    & \left\| \pd{\V}{\argsxz} \right\| \leq c_{4} \nzdxz
+  \end{eqnarray*}
+  for some positive constants $c_{1}$, $c_{2}$, $c_{3}$, and $c_{4}$.
+\end{theorem}
+
+\begin{proof}
+  Let $\flow(\tau; t, \zdx, \zdz)$ denote the flow of the system that starts at
+  $\argstxz$; that is, $\flow(t; t, \zdx, \zdz) = \argsxz$. For all $\argsxz \in
+  \D_{0}$, $\phi(\tau; t, \zdx, \zdz) \in \D$ for all $\tau > t$. Let
+  \begin{align*}
+    \V\argsx = \int_{t}^{t + \delta} \phi^{T}(\tau; t, \zdx, \zdz) \phi(\tau; t,
+    \zdx, \zdz) \, d\tau
+  \end{align*}
+  where $\delta$ is a positive constant to be chosen. Due to the exponentially
+  decaying bound on trajectories, we have
+  \begin{align*}
+    \V\argsx = 
+  \end{align*}
+\end{proof}
 
 %\begin{figure}[H]
 %\centering

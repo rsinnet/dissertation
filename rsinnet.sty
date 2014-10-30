@@ -39,6 +39,12 @@
 \newcommand{\Rn}{\R^{n}}
 
 
+% zero dynamics vector fields
+\newcommand{\zdf}{f}
+\newcommand{\zdg}{g}
+\newcommand{\zdq}{q}
+\newcommand{\zdw}{w}
+
 % Partial derivative
 \newcommand{\pd}[2]{\ensuremath{\frac{\partial{#1}}{\partial{#2}}}}
 
@@ -94,7 +100,7 @@
 \newcommand{\argsq}{(\q)}
 \newcommand{\argsqt}{(\q\argt)}
 \newcommand{\argsqtau}{(\q\argtau)}
-  
+
 \newcommand{\argsqdq}{(\q, \dq)}
 \newcommand{\argsqdqu}{(\q, \dq, \uu)}
 \newcommand{\argsqdqt}{(\q\argt, \dq\argt)}
@@ -102,6 +108,7 @@
 
 \newcommand{\argt}{(t)}
 \newcommand{\argtau}{(\tau)}
+\newcommand{\argtzero}{(t_{0})}
 
 \newcommand{\arx}{(\x)}
 \newcommand{\arxt}{(\x\argt)}
@@ -250,7 +257,7 @@
 
 \newcommand{\argsxz}{(\zdx, \zdz)}
 \newcommand{\argsxzti}[1]{(\zdx_{#1}\argt, \zdz_{#1}\argt)}
-\newcommand{\argsxzizero}[1]{(\zdx_{#1}\argzero, \zdz_{#1}\argzero)}
+\newcommand{\argsxzizero}[1]{(\zdx_{#1}\argzero, \zdz_{#1}\argbzero)}
 \newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}\argt, {\dot \zdz}_{#1}\argt)}
 \newcommand{\argsx}{(\zdx)}
 \newcommand{\argsz}{(\zdz)}
@@ -261,6 +268,10 @@
 \newcommand{\argstxzi}[2]{(\zdx_{#2}(#1), \zdz_{#2}(#1))}
 \newcommand{\argsxzprime}{(\zdx', \zdz')}
 \newcommand{\argsxzstprime}{(\zdx', \zdz'-\zdzst)}
+
+\newcommand{\argstxz}{(t, \zdx, \zdz)}
+
+\newcommand{\argsxztzero}{(\zdx\argtzero, \zdz\argtzero)}
 
 \newcommand{\zdzst}{\zdz^{*}}
 \newcommand{\argsxzst}{(\zdx, \zdz - \zdzst)}
@@ -273,7 +284,8 @@
 \newcommand{\nzdxzprime}{\left\|\argsxzprime\right\|}
 \newcommand{\nzdxzstprime}{\left\|\argsxzstprime\right\|}
 
-\newcommand{\nzdxt}{|\zdx(\tau)|}
+\newcommand{\nzdxt}{|\zdx\argt|}
+\newcommand{\nzdxtau}{|\zdx\argtau|}
 \newcommand{\nzdxzero}{|\zdx\argzero|}
 \newcommand{\nzdzst}{\left\|\zdz - \zdzst\right\|}
 
