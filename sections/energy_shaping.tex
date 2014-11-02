@@ -1,18 +1,65 @@
 \chapter{\uppercase{Energy Shaping}} \label{ch:energy-shaping}
 
 This chapter focuses on the primary contribution of this thesis: stabilization
-of periodic behaviors in hybrid dynamical systems through {\em energy shaping}.
+ of periodic behaviors in hybrid dynamical systems through {\em energy shaping}.
 %
 This method provides a manner for understanding the dynamics of both
 conservative and  non-conservative systems in terms of energy exchange and
-employs Lyapunov methods to improve the stability properties of controllers for
+employs Lyapunov methods to alter the stability properties of controllers for
 such systems.
 %
+The formal theoretical contribution appears in \thmref{theorem:main-theorem}
+which states that the energy shaping controller presented does not destabilize
+the system to which it is applied for small enough control gains.
+%
+Although nothing is formally shown regarding the robustness of the shaped system
+to perturbations in initial conditions, myriad numerical simulations later show
+that, the method results in a larger domain of attraction and shorter
+stabilization times for limit cycles.
+
+It should be mentioned that this problem falls under a class of problems
+involving stability of systems with zero dynamics.
+%
+In \cite{Ames2014}, a similar problem was considered in which a stabilizing
+control law was constructed using control Lyapunov functions to stabilize to a
+zero dynamics which exhibited hybrid invariance;
+%
+that is, for initial conditions on the intersection of the switching surface and
+the hybrid zero dynamics manifold, application of the reset map will result in a
+state which is still on the hybrid zero dynamics.
+%
+This was a key assumption underlying the \cite{Ames2014} but this assumption
+does not hold for energy shaping as energy is generally not invariant through
+impact, though there may be pathological examples which demonstrate this
+property.
+%
+In fact, for certain conservative systems like the compass gait biped shown in
+\figref{fig:compass_gait_slope_model}, which exhibits local exponential
+stability, energy change can only occur through discrete transitions and so
+impacts actually act as a stabilizing influence.
+
+\begin{figure}
+  \centering
+  \def\svgwidth{.5\columnwidth}
+  \input{figs/cg2d-slope-model.eps_latex}
+  \caption{Compass-gait biped falling down a slope.}
+  \label{fig:compass_gait_slope_model}
+\end{figure}
+
+Another key difference is the assumption of stability which is necessary for the
+application of energy shaping.
+%
+Whereas \cite{Ames2014} requires stability of the system for states restricted
+to the hybrid zero dynamics, this work requires stability of the nominal system
+and does not require hybrid invariance of the zero dynamics.
+%
+Thus, while the problems are somewhat similar, they also have their differences
+and are applicable to different types of systems and problems.
 
 \section{Overview}
 
 Periodic behaviors in mechanical systems have specific energy signatures that
-evolves over time.
+evolve over time.
 %
 The energy dynamics of a conservative system can be understood as an interplay
 between kinetic and potential energy, with energy transfer occuring between
@@ -29,9 +76,19 @@ In a non-conservative system, this relationship does not hold, but the dynamics
 of energy can still be understood as
 \begin{align}
   \label{eq:ncsys-nrg-cons}
-  E_{0} \equiv E_{c}\argsqdqt = T\argsqdqt + U\argsqt - \int_{0}^{t} \! \Fnc \cdot \frac{dq\argtau}{d\tau} \ d\tau.
+  E_{0} \equiv \Ec\argsqdqt = T\argsqdqt + U\argsqt - \W(\q\argzero,
+  \dq\argzero, t).
 \end{align}
-where $\Fnc$ represents non-conservative forcing.
+with the storage function $\W : T\Q \times \Rnn \to \R$ defined by
+\begin{align}
+  \label{eq:storage-function-Fnc}
+  \W(\q\argzero, \dq\argzero, t) = \int_{0}^{t} \! \Fnc\argtau \cdot
+  \frac{d\q\argtau}{d\tau} \ d\tau
+\end{align}
+where $\Fnc: \Rnn \to \R^{n}$ represents non-conservative forcing.
+%
+From the above definition it is clear that the storage function is dependent on
+initial conditions.
 %
 This work will consider forcing that takes the form of an autonomous feedback
 control law, i.e.,
@@ -39,17 +96,17 @@ control law, i.e.,
   \Fnc = \B(q) \, \vv\argsqdq
 \end{align}
 %
-Under such an assumption, \eqref{eq:ncsys-nrg-cons} becomes
+Under such an assumption, \eqref{eq:storage-function-Fnc} becomes
 \begin{align}
-  E_{c}\argsqdqt = T\argsqdqt + U\argsqt - \int_{0}^{t} \!
-  \B\argsqtau \, \vv\argsqdqtau \cdot \frac{dq\argtau}{d\tau} \ d\tau.
+  \label{eq:storage-function}
+  W(\q\argzero, \dq\argzero, t) = \int_{0}^{t} \! \B\argsqtau \, \vv\argsqdqtau \cdot \frac{dq\argtau}{d\tau} \ d\tau.
 \end{align}
 
 From the relationship stated in \eqref{eq:ncsys-nrg-cons}, it is clear that the
 total energy present in the system plus the energy removed by non-conservative
 forcing is constant.
 %
-In other words the integral term represents the flow of energy into and out of
+In other words, the integral term represents the flow of energy into and out of
 the system.
 %
 This phenomenon is well understood and it holds for all motion in mechanical
@@ -60,7 +117,7 @@ shaping.
 %
 By taking advantage of the presence of energy level sets in periodic behaviors,
 energy shaping seeks to augment certain types of controllers which do not
-necessarily have an intrinsic notion of stabilizing to a zero dynamics
+necessarily have an intrinsic notion of stabilizing to a zero dynamics as in
 \cite{Ames2014}.
 %
 In doing so, the goal is to alter the properties of robustness with respect to
@@ -69,9 +126,6 @@ perturbations in initial conditions for existing controllers.
 The design of such a controller will therefore seek to satisfy the above goals
 and formal proof will be given that the designed controller does not destabilize
 the existing behavior (induced by an existing control law).
-
-Although there is no formal proof given with respect to robustness, numerical
-simulations provide compelling evidence.
 
 \section{Control Lyapunov Functions}
 
@@ -107,13 +161,6 @@ For a system with no control (or a closed-loop system) of the form
     \nonumber
     &\dV\arx + c_{3} \V\arx \leq 0.
   \end{eqnarray}
-  %
-  If these are satisfied, then it will also be true that
-  %
-  \begin{align}
-    \label{eq:dVedx-bounds}
-    \left\| \pd{\V\arx}{\x} \right\| \leq c_{4} \nx.
-  \end{align}
 \end{definition}
 
 From the above definition, it is easy to see that
@@ -122,8 +169,8 @@ From the above definition, it is easy to see that
 \end{align}
 where $\V_{0} = \V(\x\argbzero)$.
 
-A natural extension of Lyapunov functions is the notion of a control Lyapunov
-functions which generalizes the time derivative to include a control term.
+A natural extension of Lyapunov functions is the notion of control Lyapunov
+functions which generalize the time derivative to include a control term.
 %
 For a system with no control, the time derivative of a function $\V : \Rnn \to \R$ can be
 computed as simply
