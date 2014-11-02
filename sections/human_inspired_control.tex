@@ -2,47 +2,99 @@
 
 \section{Domain Breakdown from Human Data} \label{sec:domainbreakdown} \noindent
 This section shows how to determine the domain breakdown for the walking of nine
-human subjects.  First, a discussion is given on the human experiment and how
-the data were handled. Then a method is presented for determining the domain
-breakdown by finding the times when the constraint for a given contact point is
-enforced through a method that fits the ``simplest'' function to the motion of
-the contact point when the constraint is not enforced (or, in other words, when
-the contact point is not in contact with the ground); the time intervals during
-a step when the constraints are enforced are simply the times when this function
-is not being followed. The end result of this procedure is a temporal ordering
-of events which creates a discrete structure termed the domain breakdown.
+human subjects.
+%
+First, a discussion is given on the human experiment and how the data were
+handled.
+%
+Then a method is presented for determining the domain breakdown by finding the
+times when the constraint for a given contact point is enforced through a method
+that fits the ``simplest'' function to the motion of the contact point when the
+constraint is not enforced (or, in other words, when the contact point is not in
+contact with the ground);
+%
+the time intervals during a step when the constraints are enforced are simply
+the times when this function is not being followed.
+%
+The end result of this procedure is a temporal ordering of events which creates
+a discrete structure termed the domain breakdown.
 
 Application of the presented method to each of the tests subjects results in an
 identical domain breakdown for each subject, purporting that there is indeed a
-{\em universal} domain breakdown for healthy human walking. This result is a
-significant step toward understanding human walking. Accordingly, this universal
-domain breakdown will be considered when constructing the hybrid model of the
-biped of interest in this paper. This domain breakdown has been used by the
-authors to formulate a metric on the humanlike nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
+{\em universal} domain breakdown for healthy human walking.
+%
+This result is a significant step toward understanding human walking.
+%
+Accordingly, this universal domain breakdown will be considered when
+constructing the hybrid model of the biped of interest.
+%
+This domain breakdown has been used by the authors to formulate a metric on the
+humanlike nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
 
 \begin{figure}[t!]
   \centering
   \includegraphics[width=1.0\textwidth]{LabeledDiagram}
-  \caption[Illustrations of the experimental setup]{Illustrations of the experimental setup (left) and sensor placement (right). Each subject in the experiment was required to wear a suit where the LED sensors are fastened in place. The sensors were placed at the joints as illustrated with the red dots on the right lateral and anterior aspects of the right leg. Sensors were placed identically on the left leg. The same sensors drawn from different views are connected with red arrows. The blue arrows illustrate the leg segment lengths of interest, i.e. $L_1, L_2, L_3, L_4$. The diversity of the subjects with respect to these lengths can be seen in \tabref{tab:measurements}.}
+  \caption[Illustrations of the experimental setup and sensor
+  placement.]{Illustrations of the experimental setup (left) and sensor
+    placement (right).
+    %
+    Each subject in the experiment was required to wear a suit where the LED
+    sensors are fastened in place.
+    %
+    The sensors were placed at the joints as illustrated with the red dots on
+    the right lateral and anterior aspects of the right leg.
+    %
+    Sensors were placed identically on the left leg.
+    %
+    The same sensors drawn from different views are connected with red arrows.
+    %
+    The blue arrows illustrate the leg segment lengths of interest, i.e. $L_1$,
+    $L_2$, $L_3$, $L_4$.
+    %
+    The diversity of the subjects with respect to these lengths can be seen in
+    \tabref{tab:measurements}.}
   \label{fig:Sensors}
 \end{figure}
 
-\subsection{Walking Experiment} Data were collected on nine subjects using the
-Phase Space System \cite{phasespace} which computes the 3D position of $19$ LED sensors at $480$ frames per second using $12$ cameras. The cameras were calibrated prior to the experiment and were placed to achieve a one millimeter level of accuracy for a space of size five by five by five meters cubed. Eight LED sensors were placed on each leg at the joints and on the heel and toe as shown in \figref{fig:Sensors}, one LED sensor was placed on the sternum, one LED sensor was placed on the back behind the sternum, and one LED sensor was placed on the umbilicus.
+\subsection{Walking Experiment}\todo{Tone this down.}
+The data used in this work taken from \cite{}.
+%
+A summary of the collection procedure is provided for reference:
+%
+were collected on nine subjects using the Phase Space System \cite{phasespace}
+which computes the 3D position of $19$ LED sensors at $480$ frames per second
+using $12$ cameras.
+%
+The cameras were calibrated prior to the experiment and were placed to achieve a
+one millimeter level of accuracy for a space of size five by five by five meters
+cubed.
+%
+Eight LED sensors were placed on each leg at the joints and on the heel and toe
+as shown in \figref{fig:Sensors}, one LED sensor was placed on the sternum, one
+LED sensor was placed on the back behind the sternum, and one LED sensor was
+placed on the umbilicus.
 
 Each trial of the experiment required the subject to walk three meters along a
-straight line drawn on the floor. Each subject performed $12$ trials which
-constituted a single experiment. Three female and six male subjects were tested
-with ages ranging between $17$ and $77$ years, heights ranging between $161$ and
-$189$ centimeters, and masses ranging between $47.6$ and $90.7$
-kilograms. \tabref{tab:measurements} describes the measurements of each of the
-subjects. The data for each individual were rotated so the walking occurs in the
+straight line drawn on the floor.
+%
+Each subject performed $12$ trials which constituted a single experiment.
+%
+Three female and six male subjects were tested with ages ranging between $17$
+and $77$ years, heights ranging between $161$ and $189$ centimeters, and masses
+ranging between $47.6$ and $90.7$ kilograms.
+%
+\tabref{tab:measurements} describes the measurements of each of the subjects.
+%
+The data for each individual were rotated so the walking occurs in the
 $x$-direction and, for each subject, the $12$ walking trials were averaged
 (after appropriately shifting the data in time) which resulted in a single
 trajectory for each constraint for each subject for at least two steps (one step
-per leg); the resulting data can be seen in \figref{fig:heeltoefit}. An
-interested researcher should be able to perform analysis on the collected data,
-which can be found online \cite{ourdataset}.
+per leg);
+%
+the resulting data can be seen in \figref{fig:heeltoefit}.
+%
+An interested researcher should be able to perform analysis on the collected
+data, which can be found online \cite{ourdataset}.
 
 \begin{figure}[t!]
   \centering
@@ -51,12 +103,34 @@ which can be found online \cite{ourdataset}.
   \label{fig:subject-ranges}
 \end{figure}
 
-\subsection{Function Fitting} In order to determine the domain breakdowns for the subjects in the walking experiment, it is necessary to determine the times when the robot-ground contact points change, i.e., the {\em event times}. Rather than looking for when the contact point is constrained (through thresholds), one can look for the ``simplest'' function that the contact point follows when not enforced. Then, for the domains in which the constraint {\em is not} enforced, use the simple function; in the other domains, those in which the constraint {\em is} enforced, fit a flat line to the constraint as it should be essentially constant. This is an optimization problem which can be stated as follows:
+\subsection{Function Fitting}
+In order to determine the domain breakdowns for the subjects in the walking
+experiment, it is necessary to determine the times when the robot-ground contact
+points change, i.e., the {\em event times}.
+%
+Rather than looking for when the contact point is constrained (through
+thresholds), one can look for the ``simplest'' function that the contact point
+follows when not enforced.
+%
+Then, for the domains in which the constraint {\em is not} enforced, use the
+simple function; in the other domains, those in which the constraint {\em is}
+enforced, fit a flat line to the constraint as it should be essentially
+constant.
+%
+This is an optimization problem which can be stated as follows:
 \begin{enumerate}
-  \item{Select a simple function which is qualitatively similar to the trajectory of the constraint in the domains in which it is not enforced and choose an initial guess for the event times.}
-  \item{Create the fitted function as a piecewise combination of the chosen function fitted to the data in the domains in which the constraint {\em is not} enforced and a flat line fitted to the data in the domains in which the constraint {\em is} enforced.}
-  \item{Compute the cost function as the sum of squares of the difference between the data and value of the fitted trajectory at each datum for one full step (one step with each leg).}
-  \item{Minimize the cost function by choosing a new guess for the event times and then repeating steps 2-4.}
+\item Select a simple function which is qualitatively similar to the trajectory
+  of the constraint in the domains in which it is not enforced and choose an
+  initial guess for the event times.
+\item Create the fitted function as a piecewise combination of the chosen
+  function fitted to the data in the domains in which the constraint {\em is
+    not} enforced and a flat line fitted to the data in the domains in which
+  the constraint {\em is} enforced.
+\item Compute the cost function as the sum of squares of the difference between
+  the data and value of the fitted trajectory at each datum for one full step
+  (one step with each leg).
+\item Minimize the cost function by choosing a new guess for the event times
+  and then repeating steps 2--4.
 \end{enumerate}
 
 \begin{figure}[t!]
@@ -69,12 +143,34 @@ which can be found online \cite{ourdataset}.
     \includegraphics[width=0.48\columnwidth]{LeftToe}
     \label{fig:toeheight}
   }
-  \caption[The data for the heights of the heel and toe]{The data for the heights of the heel and toe together with the fittings of a constant$\to$Gaussian$\to$constant for the heel and a constant$\to$fourth-order polynomial$\to$constant for the toe. The vertical lines on the left and right indicate the lift and strike times, respectively.}
+  \caption[The data for the heights of the heel and toe.]{The data for the
+    heights of the heel and toe.
+    %
+    Also shown are the fittings of a constant$\to$Gaussian$\to$constant for the
+    heel and a constant$\to$fourth-order polynomial$\to$constant for the toe.
+    %
+    The vertical lines on the left and right indicate the lift and strike times,
+    respectively.}
   \label{fig:heeltoefit}
 \end{figure}
 
 
-To formalize the idea of function fitting to determine event times, given a set of contact points $\C$, let $s_{c}(t, a_{c})$ be the ``simplest'' function that a given contact point $c \in \C$ follows when not in contact with the ground; here $a_{c} \in R^{n_{c}}$ is a collection of parameters for the function $s_{c}(t, a_{c})$ corresponding to contact point $c$. Denote the indexed human data for contact point $c$ by $y_{c}[k]$, with $\tau[k]$ the time corresponding to datum $y_{c}[k]$ for discrete index variable $k \in \{1,\ldots,T\}$. When the contact point is constrained, it is constant, and when it is unconstrained, it follows $s_{c}(t, a_{c})$. For each contact point $c \in \C$, consider the function:
+To formalize the idea of function fitting to determine event times, given a set
+of contact points $\C$, let $s_{c}(t, a_{c})$ be the ``simplest'' function that
+a given contact point $c \in \C$ follows when not in contact with the ground;
+%
+here $a_{c} \in R^{n_{c}}$ is a collection of parameters for the function
+$s_{c}(t, a_{c})$ corresponding to contact point $c$.
+%
+Denote the indexed human data for contact point $c$ by $y_{c}[k]$, with
+$\tau[k]$ the time corresponding to datum $y_{c}[k]$ for discrete index variable
+$k \in \{1,\ldots,T\}$.
+%
+When the contact point is constrained, it is constant, and when it is
+unconstrained, it follows $s_{c}(t, a_{c})$.
+%
+For each contact point $c \in \C$, consider the function:
+%
 \begin{align}
   f_{c}(t, k_{c}^{\ell}, k_{c}^{s}, a_{c}) =  \left\{\begin{array}{l l}
     s_{c}(\tau[k_{c}^{\ell}], a_{c}), & \hspace{2mm} t \leq  \tau[k_{c}^{\ell}],\\
@@ -82,27 +178,96 @@ To formalize the idea of function fitting to determine event times, given a set 
     s_{c}(\tau[k_{c}^{s}], a_{c}), & \hspace{2mm} \tau[k_{c}^{s}] \leq t,\\
   \end{array} \right.
 \end{align}
-where $\tau[k_{c}^{\ell}], \tau[k_{c}^{s}] \in \{\tau[k]\}_{k = 1}^{T}$ are the event times indicating when contact point $c$ becomes unconstrained (lift) and constrained (strike), respectively. It is assumed that $k_{c}^{\ell} < k_{c}^{s}$. If this is not the case, then $f_{c}$ would consist of the ``simplest'' function, followed by a constant, followed by the ``simplest'' function. After the construction of the $f_{c}$ functions in this paper, the optimization parameters are supressed---i.e., $f_{c}(t) = f_{c}(t, k_{c}^{\ell}, k_{c}^{s}, a_{c})$---but it is assumed they have been determined. To calculate the event times as they best fit the data, one must solve the following optimization problem
+where $\tau[k_{c}^{\ell}], \tau[k_{c}^{s}] \in \{\tau[k]\}_{k = 1}^{T}$ are the
+event times indicating when contact point $c$ becomes unconstrained (lift) and
+constrained (strike), respectively.
+%
+It is assumed that $k_{c}^{\ell} < k_{c}^{s}$.
+%
+If this is not the case, then $f_{c}$ would consist of the ``simplest''
+function, followed by a constant, followed by the ``simplest'' function.
+%
+After the construction of the $f_{c}$ functions in this paper, the optimization
+parameters are supressed---i.e., $f_{c}(t) = f_{c}(t, k_{c}^{\ell}, k_{c}^{s},
+a_{c})$---but it is assumed they have been determined.
+%
+To calculate the event times as they best fit the data, one must solve the following optimization problem
 \begin{align}
-  %\min_{\bigcup_{c \in \C} \{k_{c}^{\ell}, k_{c}^{s}\} \in \{l\}_{l=1}^{T}} \ \sum_{c \in \C} \ \min_{a_{c} \in \R^{n_c}} \ \sum_{k = 1}^{T} \left| f_{c}(t,k_{c}^{\ell},k_{c}^{s},a_{c}) - y_{c}(t) \right|.
-  \min_{k_{c}^{\ell}, k_{c}^{s} \in \{1, \ldots, T\}} \ \min_{a_{c} \in \R^{n_{c}}} \ \sum_{k = 1}^{T} \left( f_{c}(t,k_{c}^{\ell},k_{c}^{s},a_{c}) - y_{c}(t) \right)^2
+  \min_{k_{c}^{\ell}, k_{c}^{s} \in \{1, \ldots, T\}} \ \min_{a_{c} \in
+    \R^{n_{c}}} \ \sum_{k = 1}^{T} \left( f_{c}(t,k_{c}^{\ell},k_{c}^{s},a_{c})
+    - y_{c}(t) \right)^2
 \end{align}
-for each $c \in \C$. In the case of humans with flat feet, there are four constraints of interest: one at the heel and one at the toe for both the left and right feet. Since each constraint has a lift and strike time, there is a total of eight domains in one whole step. However, when referring to a step in robotics, researchers typically use stance and non-stance legs; without the distinction of left and right, the system is reduced to a four-domain model. Doing this allows one to exploit the symmetry inherent in bipedal walking to simplfy controller design.
+for each $c \in \C$.
+%
+In the case of humans with flat feet, there are four constraints of interest:
+%
+one at the heel and one at the toe for both the left and right feet.
+%
+Since each constraint has a lift and strike time, there is a total of eight
+domains in one whole step.
+%
+However, when referring to a step in robotics, researchers typically use stance
+and non-stance legs;
+%
+without the distinction of left and right, the system is reduced to a
+four-domain model.
+%
+Doing this allows one to exploit the symmetry inherent in bipedal walking to
+simplfy controller design.
 
 To illustrate this procedure, consider the averaged data for the heel and toe shown in \figref{fig:heeltoefit}. Looking at these data, the trajectory of the heel appears to follow a constant, followed by a Gaussian, followed by a constant.  In a similar fashion, the averaged data for the toe appear to follow a constant, followed by a fourth-order polynomial, followed by a constant. With these observations in hand, fit the averaged heel and toe data to these functions using the described procedure. The results of the fitting procedure are shown in the topmost graph of \figref{fig:heeltoefit}; the transition points $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ are indicated by vertical lines. The fits quite accurately represent the data given the simplicity of the functions chosen; to quantify this, the coefficients of correlatation are $0.9968$ for the heel and $0.9699$ for the toe.
 
 \begin{figure}[t!]
   \centering
   \includegraphics[width=1.0\columnwidth]{domainbreaking}
-  \caption[An overview of how the domain breakdown is achieved.]{An overview of how the domain breakdown is achieved. The top row illustrates the height of the toe and heel of each leg over one step along with the lifting and strike time for each constraint (illustrated with vertical lines). The middle row illustrates which constraints are active based upon the fitting. The bottom row is the resulting domain breakdown where enforced constraints are drawn in green circles.}
+  \caption[An overview of how the domain breakdown is achieved.]{An overview of
+    how the domain breakdown is achieved.
+    %
+    The top row illustrates the height of the toe and heel of each leg over one
+    step along with the lifting and strike time for each constraint (illustrated
+    with vertical lines).
+    %
+    The middle row illustrates which constraints are active based upon the
+    fitting.
+    %
+    The bottom row is the resulting domain breakdown where enforced constraints
+    are drawn in green circles.}
   \label{fig:domainbreakdown}
 \end{figure}
 
 
 \subsection{Determining the Domain Breakdown}
-Given the data for a contact point $c \in \C$, the lift and strike times are determined for each contact point, $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ for $c \in \C =  \{c_{1},c_{2},c_{3},c_{4}\} = \{\clh, \clt, \crh, \crt\}$, over the time interval of the averaged data, $\big[\tau[1], \tau[T]\big]$, using the aforementioned techniques. Since the data comprise at least two steps (one step with each leg), there are multiple lift and strike times over the period of the data. Denote by $\mathcal{J}_{c} \subset \big[\tau[1], \tau[T]\big]$ the period where the constraints associated with a contact point are enforced, i.e., $t \in \mathcal{J}_{c}$ if $f_{c}(t) = \mathrm{constant}$ with $f_{c}$ the fitting function for the contact point $c \in \C$; these intervals are shown in blue in \figref{fig:domainbreakdown} over the course of one step (not the entire data period) in the case of $\C =  \{\clh, \clt, \crh, \crt\}$.  Analogous to the definition of a domain breakdown (\defref{def:domainbreakdown}), one can define a binary vector, $b(t) \in \Z_{2}^{|\C|}$ with $|\C|$ representing the cardinality of $\C$, encoding which contact points are constrained at any given time by letting $b_{i}(t) = 1$ if $t \in \mathcal{J}_{c_{i}}$ for $i \in \{1, \ldots, |\C|\}$.
+Given the data for a contact point $c \in \C$, the lift and strike times are
+determined for each contact point, $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$
+for $c \in \C =  \{c_{1},c_{2},c_{3},c_{4}\} = \{\clh, \clt, \crh, \crt\}$, over
+the time interval of the averaged data, $\big[\tau[1], \tau[T]\big]$, using the
+aforementioned techniques.
+%
+Since the data comprise at least two steps (one step with each leg), there are
+multiple lift and strike times over the period of the data.
+%
+Denote by $\mathcal{J}_{c} \subset \big[\tau[1], \tau[T]\big]$ the period where
+the constraints associated with a contact point are enforced, i.e., $t \in
+\mathcal{J}_{c}$ if $f_{c}(t) = \mathrm{constant}$ with $f_{c}$ the fitting
+function for the contact point $c \in \C$; these intervals are shown in blue in
+\figref{fig:domainbreakdown} over the course of one step (not the entire data
+period) in the case of $\C =  \{\clh, \clt, \crh, \crt\}$.
+%
+Analogous to the definition of a domain breakdown
+(\defref{def:domainbreakdown}), one can define a binary vector, $b(t) \in
+\Z_{2}^{|\C|}$ with $|\C|$ representing the cardinality of $\C$, encoding which
+contact points are constrained at any given time by letting $b_{i}(t) = 1$ if $t
+\in \mathcal{J}_{c_{i}}$ for $i \in \{1, \ldots, |\C|\}$.
 
-To determine the domain breakdown associated with walking, begin by defining the directed cycle $\Gamma$ (if it exists, which is not guaranteed). The function $b(t)$ takes on only a finite number of values, say, $N$ values; let these values be represented by $d[n]$ for $i \in \{1, \ldots, N\}$. For the walking to be periodic, there must exist a positive value of $p \in \Z$ satisfying
+To determine the domain breakdown associated with walking, begin by defining the
+directed cycle $\Gamma$ (if it exists, which is not guaranteed).
+%
+The function $b(t)$ takes on only a finite number of values, say, $N$ values;
+%
+let these values be represented by $d[n]$ for $i \in \{1, \ldots, N\}$.
+%
+For the walking to be periodic, there must exist a positive value of $p \in \Z$
+satisfying
 \begin{align}
   \label{eq:dstep}
   d[n + p] =
@@ -226,7 +391,20 @@ After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracke
 \end{align}
 
 \begin{remark} \label{rmk:dimconst}
-  Certain constraint functions represent dimensionalized constraints, e.g., heel height, whereas other functions discussed, e.g., angles and slopes, represent nondimensionalized constraints. In general it is not effective to follow dimensionalized constraints as they represent constraints on specific points of the system and thus have the potential to introduce extreme restrictions on the configuration space of the entire system. This should be thought of in terms of the inverse kinematics problem: consider an end-effector and solve for the range of possible configurations on the angles leading up to that point. Thus, dimensionalized constraints are not robust with respect to length parameters. Additionally, these dimensionalized constraints can conflict with other holonomic constraints being tracked. Recall that the intent is to track the height of the stance toe; in this case, the issue of configuration restriction is minimal: only the heel is pinned to the ground so tracking the toe's height is equivalent to tracking the angle or slope of the foot.
+  Certain constraint functions represent dimensionalized constraints, e.g., heel
+  height, whereas other functions discussed, e.g., angles and slopes, represent
+  nondimensionalized constraints. In general it is not effective to follow
+  dimensionalized constraints as they represent constraints on specific points
+  of the system and thus have the potential to introduce extreme restrictions on
+  the configuration space of the entire system. This should be thought of in
+  terms of the inverse kinematics problem: consider an end-effector and solve
+  for the range of possible configurations on the angles leading up to that
+  point. Thus, dimensionalized constraints are not robust with respect to length
+  parameters. Additionally, these dimensionalized constraints can conflict with
+  other holonomic constraints being tracked. Recall that the intent is to track
+  the height of the stance toe; in this case, the issue of configuration
+  restriction is minimal: only the heel is pinned to the ground so tracking the
+  toe's height is equivalent to tracking the angle or slope of the foot.
 \end{remark}
 
 \begin{figure}[t!]
@@ -240,11 +418,23 @@ After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracke
     \includegraphics[width=.4\columnwidth]{robot_const}
     \label{fig:trackingoutputs}
   }
-  \caption[(a) The general configuration of the 2D bipedal robot]{(a) The general configuration of the 2D bipedal robot with knees and feet being considered in this paper. (b) The different configuration-based outputs considered in the fitting of the ``canonical'' functions.}
+  \caption[Kinematic and dynamic model of the 2D bipedal robot.]{Kinematic and
+    dynamic model of the 2D bipedal robot:
+    %
+    (a) The general configuration of the 2D bipedal robot with knees and feet;
+    %
+    (b) The different configuration-based outputs considered in the fitting of
+    the ``canonical'' functions.}
     \label{fig:robotconstraints}
 \end{figure}
 
-\subsubsection{Fitting} The paramaters of the ``canonical'' functions can be found by minimizing the error between the human data and the corresponding functions. Formally, given a function choice $y_d(t, A)$, with $A \in \R^{n_{d}}$ the $n_d$ parameters, and the corresponding data function $x_{d}[k]$ with indexed time $\tau_{d}[k]$ for data index $k \in \{1, \ldots, K\}$ (for $K$ data points),  a solution is sought for the optimization problem:
+\subsubsection{Fitting}
+The paramaters of the ``canonical'' functions can be found by minimizing the
+error between the human data and the corresponding functions. Formally, given a
+function choice $y_d(t, A)$, with $A \in \R^{n_{d}}$ the $n_d$ parameters, and
+the corresponding data function $x_{d}[k]$ with indexed time $\tau_{d}[k]$ for
+data index $k \in \{1, \ldots, K\}$ (for $K$ data points),  a solution is sought
+for the optimization problem:
 \begin{align}
   \label{eq:fitsolve}
   \min_{A \in \R^{n_{d}}} \sum_{k=1}^{K} (y_{d}(\tau_{d}[k], A) - x_{d}[k])^2.

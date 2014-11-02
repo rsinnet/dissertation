@@ -12,7 +12,7 @@
 % Reference macros
 \newcommand{\chapref}[1]{Chapter~\ref{#1}}
 \newcommand{\defref}[1]{Definition~\ref{#1}}
-\newcommand{\figref}[1]{Fig.~\ref{#1}}
+\newcommand{\figref}[1]{Figure~\ref{#1}}
 \newcommand{\secref}[1]{Section~\ref{#1}}
 \newcommand{\lemref}[1]{Lemma~\ref{#1}}
 \newcommand{\thmref}[1]{Theorem~\ref{#1}}
@@ -64,6 +64,9 @@
 \newcommand{\xf}{F}
 \newcommand{\xg}{G}
 
+\newcommand{\xfbar}{{\bar \xf}}
+\newcommand{\xgbar}{{\bar \xg}}
+
 % Zero dynamics vector fields
 \newcommand{\bigF}{\Phi}
 \newcommand{\bigG}{\Gamma}
@@ -101,10 +104,15 @@
 \newcommand{\argsqt}{(\q\argt)}
 \newcommand{\argsqtau}{(\q\argtau)}
 
+\newcommand{\argsdq}{(\dq)}
+
 \newcommand{\argsqdq}{(\q, \dq)}
 \newcommand{\argsqdqu}{(\q, \dq, \uu)}
 \newcommand{\argsqdqt}{(\q\argt, \dq\argt)}
 \newcommand{\argsqdqtau}{(\q\argtau, \dq\argtau)}
+
+\newcommand{\argsqmdqm}{(\qm, \dqm)}
+\newcommand{\argsqdqW}{(\q, \dq, \W)}
 
 \newcommand{\argt}{(t)}
 \newcommand{\argtau}{(\tau)}
@@ -159,6 +167,9 @@
 
 \newcommand{\Lie}[1]{L_{#1}}
 
+% Stored energy
+\newcommand{\W}{W}
+
 % Lyapunov function macros
 \newcommand{\V}{V}
 \newcommand{\dV}{{\dot V}}
@@ -199,8 +210,13 @@
 
 \newcommand{\orbit}{\mathscr{O}}
 
+% More coordinates
 \newcommand{\qst}{\q^{*}}
 \newcommand{\dqst}{\dq^{*}}
+
+\newcommand{\qm}{\q^{-}}
+\newcommand{\dqm}{\dq^{-}}
+
 
 \newcommand{\dx}{{\dot \x}}
 \newcommand{\xst}{\x^{*}}
