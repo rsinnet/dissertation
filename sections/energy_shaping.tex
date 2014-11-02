@@ -38,6 +38,24 @@ In fact, for certain conservative systems like the compass gait biped shown in
 stability, energy change can only occur through discrete transitions and so
 impacts actually act as a stabilizing influence.
 
+Energy shaping has been considered for conservative systems \cite{Spong2003} and
+for non-conservative systems \cite{Spong2007}.
+%
+There is, however, a dearth of formal results and this thesis aims to fill in
+some of the gaps in the literature.
+%
+In \cite{Spong2003}, Spong and Bhatia presented the idea of designing a
+controller to shape the total energy of the system for the compass-gait biped
+and showed that the controller would guarantee asymptotic stability to the
+desired energy level through the continuous dynamics.
+%
+Later in \cite{Spong2007}, the results were extended to non-conservative systems
+by considering storage functions of the form shown in
+\eqref{eq:storage-function-Fnc}.
+%
+The exposition was generally based around numerical simulations and had limited
+formal results.
+
 \begin{figure}
   \centering
   \def\svgwidth{.5\columnwidth}
@@ -76,14 +94,12 @@ In a non-conservative system, this relationship does not hold, but the dynamics
 of energy can still be understood as
 \begin{align}
   \label{eq:ncsys-nrg-cons}
-  E_{0} \equiv \Ec\argsqdqt = T\argsqdqt + U\argsqt - \W(\q\argzero,
-  \dq\argzero, t).
+  E_{0} \equiv \Ec\argt = T\argsqdqt + U\argsqt - \W\argt.
 \end{align}
-with the storage function $\W : T\Q \times \Rnn \to \R$ defined by
+with the storage function $\W : \Rnn \to \R$ defined by
 \begin{align}
   \label{eq:storage-function-Fnc}
-  \W(\q\argzero, \dq\argzero, t) = \int_{0}^{t} \! \Fnc\argtau \cdot
-  \frac{d\q\argtau}{d\tau} \ d\tau
+  \W\argt = \int_{0}^{t} \! \Fnc\argtau \cdot \frac{d\q\argtau}{d\tau} \ d\tau
 \end{align}
 where $\Fnc: \Rnn \to \R^{n}$ represents non-conservative forcing.
 %
@@ -92,25 +108,45 @@ initial conditions.
 %
 This work will consider forcing that takes the form of an autonomous feedback
 control law, i.e.,
-\begin{align}
-  \Fnc = \B(q) \, \vv\argsqdq
-\end{align}
+\begin{align*}
+  \Fnc\argt = \Fnca\argsqdqt
+\end{align*}
+for autonomous forcing
+\begin{align*}
+  \Fnca\argsqdq := \B\argsq \, \vv\argsqdq.
+\end{align*}
+%
+While the state variables $\q$ and $\dq$ vary with time, the forcing is
+autonomous in the normal sense of the term in that the forcing does not depend
+on the value of an independent variable time variable directly but rather only
+on the values of $q$ and $\dq$ at any given point in time.
+%
+Time can be shifted arbitrarily and the resulting evolution of coordinates will
+not changed.
+%
+For more on the difference between autonomous and non-autonomous (time-based)
+systems, see, for example, \cite[pp.~63]{Perko2001}.
+
 %
 Under such an assumption, \eqref{eq:storage-function-Fnc} becomes
 \begin{align}
   \label{eq:storage-function}
-  W(\q\argzero, \dq\argzero, t) = \int_{0}^{t} \! \B\argsqtau \, \vv\argsqdqtau \cdot \frac{dq\argtau}{d\tau} \ d\tau.
+  W\argt = \int_{0}^{t} \! \B\argsqtau \, \vv\argsqdqtau \cdot
+  \frac{dq\argtau}{d\tau} \ d\tau.
 \end{align}
 
-From the relationship stated in \eqref{eq:ncsys-nrg-cons}, it is clear that the
-total energy present in the system plus the energy removed by non-conservative
-forcing is constant.
+From the relationship stated in \eqref{eq:ncsys-nrg-cons} and
+\eqref{eq:storage-function-Fnc}, it is clear that the total energy present in
+the system plus the energy removed by non-conservative forcing is constant.
 %
 In other words, the integral term represents the flow of energy into and out of
 the system.
 %
 This phenomenon is well understood and it holds for all motion in mechanical
 systems, not just for periodic behaviors.
+%
+This storage function is central to passivity-based control, a topic which
+appears throughout the literature \cite{Spong2007}.
 
 Understanding the energy dynamics of a system is key to the method of energy
 shaping.
@@ -126,6 +162,93 @@ perturbations in initial conditions for existing controllers.
 The design of such a controller will therefore seek to satisfy the above goals
 and formal proof will be given that the designed controller does not destabilize
 the existing behavior (induced by an existing control law).
+
+\section{Setup}
+
+The main idea behind energy shaping is to impose exponential convergence to a
+conserved energy function through the continuous dynamics of a hybrid system of
+the form \eqref{eq:hcsys} with the goal of not destabilizing the overall hybrid
+system.
+%
+As mentioned in \chapref{ch:stability}, there are multiple types of stability
+depending upon the type convergence exhibited by a system.
+%
+Energy shaping shaping seeks to achieve exponential convergence to a desired
+energy level;
+%
+formally, given a conserved energy function $\Ec$ as in
+\eqref{eq:ncsys-nrg-cons}, the following condition is desired:
+\begin{align*}
+  \Ec(t) \leq \Ec(0) \, e^{-\alpha t}
+\end{align*}
+for some positive real constant $\alpha$ and for $t \geq 0$.
+
+For non-conservative systems, as mentioned above, a storage function is
+necessary to track energy flow into and out of the system due to
+non-conservative forcing as doing so allows energy shaping to take advantage of
+conservation of energy.
+%
+The storage function that is of interest was described in
+\eqref{eq:storage-function} but the evolution of the function must be expressed
+as a differential equation for the dynamics to be properly understood.
+%
+By the fundamental theorem of calculus, it is clear that the desired storage
+function must satisfy
+\begin{align*}
+  d\W = R\argsqdq \, dt
+\end{align*}
+where $R$ is given by
+\begin{align*}
+  R\argsqdq := \left(\B\argsq \, \vv\argsqdq\right)^{T} \frac{d\q}{dt}.
+\end{align*}
+%
+Using this storage function $\W$, augment the state space viz.
+\begin{align*}
+  \x := \argsqdqW.
+\end{align*}
+%
+In addition, the vector fields must be augmented to take the $\W$ dynamics into
+account as follows:
+\begin{align*}
+  \xfbar\argsqdq := \left(\begin{array}{c}
+      \xf\argsqdq + \xg\argsqdq \, \vv\argsqdq\\
+      R\argsqdq
+    \end{array}\right), &&
+  \xgbar\argsq := \left(\begin{array}{c}
+      \xg\argsq\\
+      \boldzero
+    \end{array}\right).
+\end{align*}
+Using the augmented state leads to the followed definition of an augmented
+hybrid control system:
+\begin{align*}
+  \HCSbar = \left\{
+    \begin{array}{l l}
+      \left.\begin{array}{r c l}
+          \hspace{1.15em}\dx &=& \xfbar\argsqdq + \xgbar\argsq \, \uu
+        \end{array}\right\}  & \mbox{if } \argsqmdqm \in \D \setminus \Guard,\\
+      \left. \begin{array}{r c l}
+          \qp &=& \Deltaq\argsqm\\
+          \dqp &=& \Deltadq\argsqmdqm\\
+          \Wp &=& \DeltaW = 0
+        \end{array} \right\} & \mbox{if } \argsqmdqm \in \Guard.
+    \end{array}\right.
+\end{align*}
+where $\Deltaq$, $\Deltadq$, and $\DeltaW$, respectively, represent the $\q$, $\dq$, and
+$\W$ components of the reset map, $\Delta$.
+%
+Under this formulation, the conserved energy can be expressed as
+\begin{align*}
+  \Ec\argsqdqW = T\argsqdq + U\argsq - W.
+\end{align*}
+%
+In this form, it is clear that the system of interest is an autonomous one.
+%
+This formulation will be used to state and prove the energy shaping theorem (\thmref{theorem:main-theorem}). 
+%
+However, before stating the theorem, it is important to first introduce and
+discuss a tool which will play a crucial part in achieving energy stabilization:
+the control Lyapunov function.
 
 \section{Control Lyapunov Functions}
 
@@ -153,20 +276,19 @@ For a system with no control (or a closed-loop system) of the form
   \label{def:lyap-func}
   For a system of the form \eqref{eq:csys-es}, a continuously differentiable
   function $V : \D \to \Rnn$ is said to be a {\bf \em Lyapunov function} if
-  there exist constants $c_{1}, c_{2}, c_{3}, c_{4} \in \Rpd$ such that for all
+  there exist constants $c_{1}, c_{2}, c_{3} \in \Rpd$ such that for all
   $\x \in \D$,
   %
-  \begin{eqnarray}
+  \begin{eqnarray*}
     &c_{1} \nx \leq \V\arx \leq c_{2} \nx,\\
-    \nonumber
     &\dV\arx + c_{3} \V\arx \leq 0.
-  \end{eqnarray}
+  \end{eqnarray*}
 \end{definition}
 
 From the above definition, it is easy to see that
-\begin{align}
-  \frac{d\V\arx}{dt} + c_{3} \V\arx \leq 0 \Rightarrow \V(t) \leq \V_{0} e^{c_{3} t},
-\end{align}
+\begin{align*}
+  \frac{d\V\arx}{dt} + c_{3} \V\arx \leq 0 \Rightarrow \V(t) \leq \V_{0} \, e^{c_{3} t},
+\end{align*}
 where $\V_{0} = \V(\x\argbzero)$.
 
 A natural extension of Lyapunov functions is the notion of control Lyapunov
@@ -180,9 +302,9 @@ computed as simply
 where $\Lie{\xf} \V\arx$ represents the Lie derivative (see, e.g.,
 \cite{Sastry1999}) of the function $\V\arx$ along the flow of the vector field
 $\xf$ or
-\begin{align}
+\begin{align*}
   \Lie{\xf} \V\arx = \pd{\V\arx}{\x} \cdot \frac{d\x}{dt}.
-\end{align}
+\end{align*}
 %
 If control acts on the system as in
 \begin{align}
@@ -190,9 +312,9 @@ If control acts on the system as in
   \dx = \xf + \xg \, \uu,
 \end{align}
 the time derivative becomes
-\begin{align}
+\begin{align*}
   \dx = \Lie{\xf} \V\arx + \Lie{\xg} \V\arx \, \uu.
-\end{align}
+\end{align*}
 %
 This leads to the concept of a control Lyapunov function:
 %
@@ -203,18 +325,10 @@ This leads to the concept of a control Lyapunov function:
     (CLF)} if there exist constants $c_{1}, c_{2}, c_{3}, c_{4} \in \Rpd$ such
   that for all $\x \in \D$,
   %
-  \begin{eqnarray}
+  \begin{eqnarray*}
     &c_{1} \nx \leq \V\arx \leq c_{2} \nx,\\
-    \nonumber
     &\inf_{\uu \in \U} \left[ \Lie{\xf} \V\arx + \Lie{\xg} \V\arx \, \uu + c_{3} \V\arx \right] \leq 0.
-  \end{eqnarray}
-  %
-  If these are satisfied, then it will also be true that
-  %
-  \begin{align}
-    \label{eq:dVedx-bounds}
-    \left\| \pd{\V\arx}{\x} \right\| \leq c_{4} \nx.
-  \end{align}
+  \end{eqnarray*}
 \end{definition}
 
 % 
@@ -225,18 +339,10 @@ functions is used (c.f. \cite{Ames2014}):
   \label{def:res-clf}
   For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \D \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} (see \cite{Ames2014}) if there exist constants $c_{1}, c_{2}, c_{3}, c_{4} \in \Rpd$ such that for all $\resclfparam > 0$ and for all $\x \in \D$,
   %
-  \begin{eqnarray}
+  \begin{eqnarray*}
     &c_{1} \nx \leq \Ve(\x) \leq \frac{c_{2}}{\resclfparam^{2}} \nx,\\
-    \nonumber
     &\inf_{\uu \in \U} \left[ \Lie{\bigF} \Ve(\x) + \Lie{\bigG} \Ve(\x) \, \uu + \frac{c_{3}}{\resclfparam} \Ve(\x) \right] \leq 0.
-  \end{eqnarray}
-  %
-  If these are satisfied, then it will also be true that
-  %
-  \begin{align}
-    \label{eq:dVedx-bounds}
-    \left\| \pd{\Ve(\x)}{\x} \right\| \leq c_{4} \nx.
-  \end{align}
+  \end{eqnarray*}
 \end{definition}
 \todo{Derive this, it may contain $\resclfparam$.}
 \
@@ -297,9 +403,9 @@ In order to achieve the stated goal, it is necessary to show that, given a syste
   %
   By construction of the Lyapunov function \eqref{eq:lyap} used in the controller \eqref{eq:es-qp}, it is clear that $V(\xo) = 0$ and, moreover, that
   %
-  \begin{align}
+  \begin{align*}
     \inf_{\x \in \D} V(\x) = 0.
-  \end{align}
+  \end{align*}
   %
   The solution to the optimization problem \eqref{eq:es-qp} has cost $u(\x)^T u(\x) = 0$ (which implies that all elements of $u(\x)$ are zero when $V(\x) = 0$) and this satisfies the stability condition of the control Lyapunov function;
   %
@@ -325,7 +431,7 @@ The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz con
 %
 To simplify notation, define
 %
-\begin{align}
+\begin{align*}
   \bigF\argsxz = \left(\begin{array}{c}
     f\argsxz\\
     q\argsxz
@@ -334,17 +440,16 @@ To simplify notation, define
     g\argsxz\\
     w\argsxz
   \end{array}\right).
-\end{align}
+\end{align*}
 %
 The natural choice of transformation to convert the continuous dynamics of \eqref{eq:hcsys} to \eqref{eq:zd-vfield} is through energy.
 %
 Thus, for mechanical systems where $\x = (\q, \dq) \in T\Q$, consider the coordinate transformation
 %
-\begin{align}
-  \nonumber
+\begin{align*}
   \zdx &= \E(\x) - \Eref,\\
   \zdz &= \xrem,
-\end{align}
+\end{align*}
 where $n$ is the size of the configuration space, $\Q$.
 %
 By construction, the fixed point of the hybrid system can be chosen to occur at $\argsxz = \xzst$ such that $\Delta\xzst = \argszero$.
@@ -367,17 +472,17 @@ where the first and second terms represent the kinetic and mechanical energy, re
 Because $\M(\q)$ is invertible for mechanical systems, it never has determinant zero.
 %
 In addition, the Jacobian matrix associated with the transformation is
-\begin{align}
+\begin{align*}
   \pd{\Psi(\q, \dq)}{(\q, \dq)} =
   \left(\begin{array}{c c}
     I & \boldzero_{2n-1 \times 1}\\
     \pd{E(\q, \dq)}{\xrem} & \pd{E(\q, \dq)}{\dq_{n}}
   \end{array}\right).
-\end{align}
+\end{align*}
 %
 This matrix is invertible when
 \begin{align*}
-  \det \Psi\argsxz = \pd{E(\q, \dq)}{\dq_{n}}.
+  \det \Psi\argsxz = \pd{E(\q, \dq)}{\dq_{n}} \neq 0.
 \end{align*}
 From inspection of \eqref{eq:mech-sys-nrg}, one can see that the coordinate transformation is almost everywhere diffeomorphic for physical systems.
 
@@ -398,9 +503,9 @@ In other words, the zero dynamics manifold $\zdmanifold$ is the restricted subse
 %
 Rewrite the candidate Lyapunov function \eqref{eq:lyap} in the zero dynamics coordinates,
 %
-\begin{align}
+\begin{align*}
   V(\zdx) = \frac{1}{2} \zdx^{2}
-\end{align}
+\end{align*}
 and consider the following:\vgap
 
 \begin{proposition}  
@@ -432,9 +537,8 @@ and consider the following:\vgap
   %
   The time derivative is
   %
-  \begin{align}
+  \begin{align*}
     \dVe(\x) &= \E(\x) \pd{\E(\x)}{\x}(f(\x) + g(\x) \, \uu)\\
-    \nonumber
     &\geq \E(\q, \dq) \left(\!\!\begin{array}{c c}
     \pd{\E(\q, \dq)}{\q} & \pd{\E(\q, \dq)}{\dq}
     \end{array}\!\!\right) \cdot
@@ -448,7 +552,7 @@ and consider the following:\vgap
       -\M^{-1}(\q) \B(\q)
       \end{array}\!\!\right) \, \uu
       \right].
-  \end{align}
+  \end{align*}
   %
   For a fully-actuated system, $\ncv = \ndim$ so $\B : \Q \to \R^{\ndim \times \ncv}$ is full rank.
   %
@@ -456,9 +560,11 @@ and consider the following:\vgap
   %
   Thus there exists at least one $\uu(\q, \dq)$ satisfying
   %
-  \begin{align}
-    \M^{-1}(\q) \B(\q) \, \uu(\q, \dq) = \frac{c_{3}}{\resclfparam} \frac{1}{2} \E^{2}(\q, \dq) + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq} \M^{-1}(\q) \CG(\q, \dq).
-  \end{align}
+  \begin{align*}
+    \M^{-1}(\q) \B(\q) \, \uu(\q, \dq) = \frac{c_{3}}{\resclfparam} \frac{1}{2}
+    \E^{2}(\q, \dq) + \pd{\E(\q, \dq)}{\q} \dq - \pd{\E(\q, \dq)}{\dq}
+    \M^{-1}(\q) \CG(\q, \dq).
+  \end{align*}
   %
   and, for the CLF \eqref{eq:lyap-cond-nrg-es} with any such locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
   %
@@ -535,11 +641,10 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   \label{lemma:TIe-P-bounds}
   For the control system \eqref{eq:zd-hsys-cl},
   %
-  \begin{eqnarray}
-    \nonumber
+  \begin{eqnarray*}
     &| \TIe(\Deltaxz) - \TI(\Deltaxz) | \leq \ATIe \nzdxzst,\\
     &\| \Pe\argsxz - \P\argsxz \| \leq \Ae \nzdxzst,
-  \end{eqnarray}
+  \end{eqnarray*}
   %
   where $\limeps \ATIe = 0$ and $\limeps\Ae = 0$.\vgap
 \end{lemma}
@@ -548,9 +653,9 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   %
   Using the change of coordinates $\rho(\resclfparam) := \tfrac{1}{\resclfparam}$, define the function
   %
-  \begin{align}
+  \begin{align*}
     N(t, \rho, \zdx, \zdz) = h(\flowrhot(\Deltaxz)),
-  \end{align}
+  \end{align*}
   %
   which is locally Lipschitz continuous in $\zdx$, $\zdz$, and $\rho$ by construction as a composition of Lipschitz continuous functions.
   %

@@ -116,30 +116,56 @@ where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the tor
 \begin{align}
   \HCor\argsqdq = \CCor\argsqdq \, \dq + \G\argsq
 \end{align}
-contains terms resulting from the Coriolis effect and gravity terms grouped into a single vector. The matrix $\CCor\argsqdq$ can be found using standard methods; see \cite{Murray1994}.
+contains terms resulting from the Coriolis effect and gravity terms grouped into
+a single vector.
+%
+The matrix $\CCor\argsqdq$ can be found using standard methods; see
+\cite{Murray1994}.\todo{Adding equation for computing $\CCor$.}
 
 \section{Hybrid Dynamical Systems}
 
-Hybrid dynamical systems are systems which combine continuous and discrete dynamics.
+Hybrid dynamical systems are systems which combine continuous and discrete
+dynamics.
 %
-By their nature, they provide a useful framework for modeling mechanical systems with impact.
+By their nature, they provide a useful framework for modeling mechanical systems
+with impacts.
 %
-Thr combination of dynamics motivates the use of hybrid systems in modeling numerous physical phenomena including bipedal walking, which is the motivating example most pertinent to this thesis.
+The combination of dynamics motivates the use of hybrid systems in modeling
+numerous physical phenomena including bipedal walking, which is the motivating
+example most pertinent to this thesis.
 %
 
-Hybrid dynamical systems have seen widespread use and comprehensive formal development over the years; see, e.g., \cite{Branicky1998,Goebel2009,Grizzle2014,Schaft2000,Westervelt2007}.
+Hybrid dynamical systems have seen widespread use and comprehensive formal
+development over the years;
 %
-Other frameworks exist for modeling the same physical phenomena such as differential inclusions as discussed in \cite{Filippov1988} but hybrid systems methods are becoming increasingly popular.
+see, e.g.,
+\cite{Branicky1998,Goebel2009,Grizzle2014,Schaft2000,Westervelt2007}.
+%
+Other frameworks exist for modeling the same physical phenomena such as
+differential inclusions as discussed in \cite{Filippov1988} but hybrid systems
+methods are becoming increasingly popular.
 
-With the goal of modeling a mechanical system exhibiting both continuous and discrete dynamics, consider a hybrid dynamical system with total energy $\E\argsqdq$ where the coordinates $\q \in \Q$ take values in the {\em configuration space} $\Q$ and the velocities are in the tangent bundle, $T\Q$.
+With the goal of modeling a mechanical system exhibiting both continuous and
+discrete dynamics, consider a hybrid dynamical system with total energy
+$\E\argsqdq$ where the coordinates $\q \in \Q$ take values in the {\em
+  configuration space} $\Q$ and the velocities are in the tangent bundle,
+$T\Q$.
 %
-For ease of exposition, let the generalized coordinates of the system be represented by $\argsqdq = \x \in \X$ where $\X$ is the state space.
+For ease of exposition, let the generalized coordinates of the system be
+represented by $\argsqdq = \x \in \X$ where $\X$ is the state space.
 %
-The evolution of the system depends on a {\em unilateral constraint}, $h : \R^{n} \to \Rnn$, which can be used to define the {\em guard} or {\em switching surface}.
+The evolution of the system depends on a {\em unilateral constraint}, $h :
+\R^{n} \to \Rnn$, which can be used to define the {\em guard} or {\em switching
+  surface}.
 %
-In the case of a bipedal robot with simple foot behavior, a common selection for the unilateral constraint is the height of the swing foot, i.e., $h\argsx = \hnsf\argsq$.
+In the case of a bipedal robot with simple foot behavior, a common selection for
+the unilateral constraint is the height of the swing foot, i.e., $h\argsx =
+\hnsf\argsq$.
 %
-By definining unilateral constraints as functions which not be negative and which cause dicrete jumps when the system attempts to cross the zero level set of a function, $h\argsx$, one arrives at a a definition of the {\em domain of admissibility} as
+By definining unilateral constraints as functions which not be negative and
+which cause dicrete jumps when the system attempts to cross the zero level set
+of a function, $h\argsx$, one arrives at a a definition of the {\em domain of
+  admissibility} as
 %
 \begin{align}
   \label{eq:domain}
@@ -148,11 +174,13 @@ By definining unilateral constraints as functions which not be negative and whic
 %
 which describes the admissible states of the system.
 %
-The boundary at the zero level set of $h\argsx$ naturally gives rise to the switching surface,
+The boundary at the zero level set of $h\argsx$ naturally gives rise to the
+switching surface,
 %
 \begin{align}
   \label{eq:guard}
-  \Guard &= \left\{ \x \in \R^{2n} : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0 \right\}.
+  \Guard &= \left\{ \x \in \R^{2n} : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0
+  \right\}.
 \end{align}
 %
 Using these spaces, an uncontrolled hybrid system can be expressed as
@@ -160,21 +188,24 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
 \begin{align}
   \HS = \left\{
   \begin{array}{l l}
-    \dx = \xf(\x), & \x \in \D \setminus \Guard,\\
-    \xp = \Delta(\xm), & \x \in \Guard,
+    \dx = \xf(\x), & \xm \in \D \setminus \Guard,\\
+    \xp = \Delta(\xm), & \xm \in \Guard,
   \end{array}\right.
   \label{eq:hsys}
-\end{align}
+\end{align}\todo{Mention $\xm$ and $\xp$.}
 %
-where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D \setminus S$ is a smooth map called the reset map (see, e.g., \cite{Morris2005}).
+where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D
+\setminus S$ is a smooth map called the reset map (see, e.g.,
+\cite{Morris2005}).
 %
-Under the action of control effort $\uu$, the corresponding hybrid control system has the form
+Under the action of control effort $\uu$, the corresponding hybrid control
+system has the form
 %
 \begin{align}
   \HCS = \left\{
   \begin{array}{l l}
-    \dx = \xf\arx + \xg\arx \, \uu, & \x \in \D \setminus \Guard,\\
-    \xp = \Delta(\xm), & \x \in \Guard,
+    \dx = \xf\arx + \xg\arx \, \uu, & \xm \in \D \setminus \Guard,\\
+    \xp = \Delta(\xm), & \xm \in \Guard,
   \end{array}\right.
   \label{eq:hcsys}
 \end{align}
@@ -187,54 +218,83 @@ for control values in a set $\U \subseteq \R^{m}$.
 (cf. \cite{Ye1998})
 
 \section{Complex Domain Structure}
-Bipedal robotic walking exhibits both discrete and continuous behavior; it is, therefore, natural to model bipedal robots as hybrid systems.
+Bipedal robotic walking exhibits both discrete and continuous behavior; it is,
+therefore, natural to model bipedal robots as hybrid systems.
 %
-A human walking gait will be shown to consist of multiple domains---on each domain, the system evolves in a continuous fashion according to a dynamic model derived from a Lagrangian modeling the mechanical system on that domain.
+A human walking gait will be shown to consist of multiple domains---on each
+domain, the system evolves in a continuous fashion according to a dynamic model
+derived from a Lagrangian modeling the mechanical system on that domain.
 %
-This dynamic model will vary depending on which points on the robot are in contact with the ground---having points in contact with the ground introduces kinematic constraints on the system.
+This dynamic model will vary depending on which points on the robot are in
+contact with the ground---having points in contact with the ground introduces
+kinematic constraints on the system.
 %
-At a certain point in each domain, i.e., when the contact points change, the model will discretely change to another phase of walking with a different dynamic model and different control.
+At a certain point in each domain, i.e., when the contact points change, the
+model will discretely change to another phase of walking with a different
+dynamic model and different control.
 %
-%This combination of continuous and discrete phenomena is the fundamental concept underlying hybrid systems.
+%This combination of continuous and discrete phenomena is the fundamental
+%concept underlying hybrid systems.
 
-In this section, a formalism for multidomain hybrid systems is introduced and a discussion of how the equations of motion of a robot together with a temporal ordering of discrete events, i.e., change in contact points, completely determine the hybrid model of a system.
+In this section, a formalism for multidomain hybrid systems is introduced and a
+discussion of how the equations of motion of a robot together with a temporal
+ordering of discrete events, i.e., change in contact points, completely
+determine the hybrid model of a system.
 %
-More specifically, to model bipedal robots, one need only consider the domain breakdown and the Lagrangian on each domain.
+More specifically, to model bipedal robots, one need only consider the domain
+breakdown and the Lagrangian on each domain.
 %
-Details are provided to show how the breakdown can be derived by considering the kinematic constraints imposed on the system throughout the course of a step.
+Details are provided to show how the breakdown can be derived by considering the
+kinematic constraints imposed on the system throughout the course of a step.
 
 
 \subsection{Formal Definitions}
 %{\em Hybrid systems} or {\em systems with impulse effects}\cite{GAP01}\xspace have been studied extensively in a wide variety of contexts and have been used to model a wide range of bipedal robotic systems.\cite{GCAS10}\xspace This section introduces a definition of hybrid systems applicable to bipedal walking.
 
-Steady state bipedal walking is naturally periodic with discrete impacts leading to different walking phases.
+Steady state bipedal walking is naturally periodic with discrete impacts leading
+to different walking phases.
 %
-Therefore, when studying walking, one should consider multi-domain hybrid systems with a temporal ordering of events, i.e., systems in which the domain graph is a {\em directed cycle}.
+Therefore, when studying walking, one should consider multi-domain hybrid
+systems with a temporal ordering of events, i.e., systems in which the domain
+graph is a {\em directed cycle}.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.8\columnwidth]{domaingraph}
-  \caption[An example of a {\em domain breakdown}]{An example of a {\em domain breakdown}---a combination of discrete phases of a walking gait with a specific temporal ordering. The red dots indicate which constraints are enforced in each discrete phase (or domain). The domain labels are selected based on which event causes a given domain to transition to the next.}
+  \caption[An example of a {\em domain breakdown}]{An example of a {\em domain
+      breakdown}---a combination of discrete phases of a walking gait with a
+    specific temporal ordering. The red dots indicate which constraints are
+    enforced in each discrete phase (or domain).
+    %
+    The domain labels are selected based on which event causes a given domain to
+    transition to the next.}
   \label{fig:domaingraph}
 \end{figure}
 
 \begin{definition}
-  A {\em directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of vertices and $E$ a set of edges---for an edge $e \in E$, denote the source by $\sor(e)$ and the target by $\tar(e)$---in which the edges and vertices can be written
+  A {\em directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of
+  vertices and $E$ a set of edges---for an edge $e \in E$, denote the source by
+  $\sor(e)$ and the target by $\tar(e)$---in which the edges and vertices can be
+  written
   %
   \begin{align}
     \nonumber
     V &= \left\{v_{1}, v_{2}, \ldots, v_{p}\right\},\\
     \label{eqn:directedcyclep}
-    E &= \left\{e_{1} = \{v_{1}, v_{2}\}, e_{2} = \{v_{2}, v_{3}\}, \ldots, e_{p} = \{v_{p}, v_{1}\}\right\},
+    E &= \left\{e_{1} = \{v_{1}, v_{2}\}, e_{2} = \{v_{2}, v_{3}\}, \ldots,
+      e_{p} = \{v_{p}, v_{1}\}\right\},
   \end{align}
   %
-  where $p$ is the number of discrete domains in the corresponding hybrid model.
+  where $p$ is the number of discrete domains in the corresponding hybrid
+  model.
 \end{definition}
 
-This concept is illustrated in the following example, which will be used later in \chapref{ch:hic}:
+This concept is illustrated in the following example, which will be used later
+in \chapref{ch:hic}:
 
 \begin{exmp} \label{universalgraph}
-  The domain breakdown pictured in \figref{fig:domaingraph} has an underlying graph that is a directed cycle;
+  The domain breakdown pictured in \figref{fig:domaingraph} has an underlying
+  graph that is a directed cycle;
   %
   the graph is given by $\Gamma_{u} = (V_{u}, E_{u})$.
   %
@@ -243,11 +303,13 @@ This concept is illustrated in the following example, which will be used later i
   \begin{align}
     \nonumber
     V_u &= \left\{\DA, \DB, \DC, \DD\right\},\\
-    E_u &= \left\{\{\DA, \DB\}, \{\DB, \DC\}, \{\DC, \DD\}, \{\DD, \DA\}\right\}.
+    E_u &= \left\{\{\DA, \DB\}, \{\DB, \DC\}, \{\DC, \DD\}, \{\DD,
+      \DA\}\right\}.
   \end{align}
 \end{exmp}
 
-The concept of a directed cycle is a fundamental component in the forumulation of multidomain hybrid systems:
+The concept of a directed cycle is a fundamental component in the formulation
+of multidomain hybrid systems:
 
 \begin{definition} A {\em hybrid control system in a cycle} is a tuple,
   %
@@ -258,25 +320,39 @@ The concept of a directed cycle is a fundamental component in the forumulation o
   where
   \begin{itemize}
   \item $\Gamma = (V,E)$ is a {\em directed cycle},
-  \item $\D = \{\D_{v}\}_{v \in V}$ is a set of {\em domains} with $\D_{v} \subseteq \mathcal{X}_{v} \times U_v$ a smooth submanifold, where $\mathcal{X}_{v}$ represents the state space,
-  \item $U = \{U_{v}\}_{v \in V}$ with $U_{v} \subseteq \R^{m_{v}}$ a set of {\em admissible control sets},
-  \item $S = \{S_{e}\}_{e \in E}$ is a set of {\em guards} or {\em switching surfaces}, with $S_{e} \subseteq \D_{\sor(e)}$,
-  \item $\Delta = \{\Delta_{e}\}_{e \in E}$ is a set of {\em reset maps}, with $\Delta_{e} : S_{e} \to \mathcal{X}_{\tar(e)}$ a smooth map,
-  \item $FG = \{(f_{v}, g_{v})\}_{v \in E}$ with $(f_v,g_v)$ a {\em control system} on $D_{v}$, i.e., $\dot{x} = f_{v}(\x) + g_{v}(\x) u$ $\forall$ $(\x^{T}, \uu^{T})^{T} \in \D_{v}$.
+  \item $\D = \{\D_{v}\}_{v \in V}$ is a set of {\em domains} with $\D_{v}
+    \subseteq \mathcal{X}_{v} \times U_v$ a smooth submanifold, where
+    $\mathcal{X}_{v}$ represents the state space,
+  \item $U = \{U_{v}\}_{v \in V}$ with $U_{v} \subseteq \R^{m_{v}}$ a set of
+    {\em admissible control sets},
+  \item $S = \{S_{e}\}_{e \in E}$ is a set of {\em guards} or {\em switching
+      surfaces}, with $S_{e} \subseteq \D_{\sor(e)}$,
+  \item $\Delta = \{\Delta_{e}\}_{e \in E}$ is a set of {\em reset maps}, with
+    $\Delta_{e} : S_{e} \to \mathcal{X}_{\tar(e)}$ a smooth map,
+  \item $FG = \{(f_{v}, g_{v})\}_{v \in E}$ with $(f_v,g_v)$ a {\em control
+      system} on $D_{v}$, i.e., $\dot{x} = f_{v}(\x) + g_{v}(\x) u$ $\forall$
+    $(\x^{T}, \uu^{T})^{T} \in \D_{v}$.
   \end{itemize}
 \end{definition}
 
 \begin{definition}
-  A {\em hybrid system} is a hybrid control system with $U_v = \emptyset$ $\forall$ $v \in V$, e.g., any applicable feedback controllers have been applied, making the system closed-loop:
+  A {\em hybrid system} is a hybrid control system with $U_v = \emptyset$
+  $\forall$ $v \in V$, e.g., any applicable feedback controllers have been
+  applied, making the system closed-loop:
   \begin{align}
     \HS = (\Gamma, \D, S, \Delta, F),
   \end{align}
   %
-  where $F = \{f_{v}\}_{v \in E}$, with $f_{v}$ a (possibly non-autonomous) {\em dynamical system} on $\mathcal{X} \subseteq \D_{v}$, i.e., $\dx = f_{v}(\x,t)$.
+  where $F = \{f_{v}\}_{v \in E}$, with $f_{v}$ a (possibly non-autonomous) {\em
+    dynamical system} on $\mathcal{X} \subseteq \D_{v}$, i.e., $\dx =
+  f_{v}(\x,t)$.
 \end{definition}
 
 \subsection{Obtaining Hybrid Systems from Constraints}
-The remainder of this section is devoted to discussing how the Lagrangian for a biped, together with a domain breakdown (which determines the constraints at each vertex of the associated cycle), allows one to explicitly construct a hybrid model of the system.
+The remainder of this section is devoted to discussing how the Lagrangian for a
+biped, together with a domain breakdown (which determines the constraints at
+each vertex of the associated cycle), allows one to explicitly construct a
+hybrid model of the system.
 %
 Examples can be found throughout the literature; see, for example, \cite{Grizzle2010,Grizzle2014,Sinnet2009}.
 
@@ -287,14 +363,43 @@ Examples can be found throughout the literature; see, for example, \cite{Grizzle
 %  \caption{A three-dimensional bipedal robot, together with world ($R_0$), body ($R_b$) and reference ($R_c$) coordinate frames} \label{biped}
 %\end{figure}
 
-\subsubsection{Constraints} The continuous dynamics of the system depend on which constraints are enforced at any given time while the discrete dynamics depend on the change in constraints.  Constraints and their enforcement are dictated by the number of contact points between the system and the ground. Specifically, one can define a {\em contact set} $\C = \{c_{1}, c_{2}, \ldots, c_{k}\}$, with each $c_i$ a specific type of foot/ground contact possible in the biped. Assuming that foot contact is restricted to edges parallel to the $y$-axis (i.e., the toe edge or the heel edge)---and this is the case in 2D as in this paper---there are four contact points of interest:
+\subsubsection{Constraints}
+The continuous dynamics of the system depend on which constraints are enforced
+at any given time while the discrete dynamics depend on the change in constraints.
+%
+Constraints and their enforcement are dictated by the number of contact points
+between the system and the ground.
+%
+Specifically, one can define a {\em contact set} $\C = \{c_{1}, c_{2}, \ldots,
+c_{k}\}$, with each $c_i$ a specific type of foot/ground contact
+possible in the biped.
+%
+Assuming that foot contact is restricted to edges parallel to the $y$-axis
+(i.e., the toe edge or the heel edge)---and this is the case in 2D as in this
+work---there are four contact points of interest:
 \begin{align}
   \C =  \{\csh, \cst, \cnsh , \cnst\},
 \end{align}
-where these constraints physically represent the stance heel, stance toe, non-stance heel, and non-stance toe, respectively. The reason for choosing this set of contact points will become clear after data analysis.
+where these constraints physically represent the stance heel, stance toe,
+non-stance heel, and non-stance toe, respectively.
+%
+The reason for choosing this set of contact points will become clear after data
+analysis.
 
 \begin{remark}
-  In some of the literature, the term non-stance is referred to as swing. This is an artifact of point-foot bipedal models which have only single support and instantaneous double support (at impact). This paper instead uses the term non-stance due to the existence of noninstantaneous double support phases where there are periods with no free swinging behavior. In this case the naming of stance/non-stance legs is arbitrary; in this paper, the stance leg is defined as the leg holding most of the weight of the robot.
+  In some of the literature, the term non-stance is referred to as swing.
+  %
+  This is an artifact of point-foot bipedal models which have only single
+  support and instantaneous double support (at impact).
+  %
+  This paper instead uses the term non-stance due to the existence of
+  noninstantaneous double support phases where there are periods with no free
+  swinging behavior.
+  %
+  In this case the naming of stance/non-stance legs is arbitrary;
+  %
+  in this thesis, the stance leg is defined as the leg holding most of the weight
+  of the robot.
 \end{remark}
 
 %%%% FIX
@@ -304,37 +409,73 @@ where these constraints physically represent the stance heel, stance toe, non-st
 
 %%%% FIX
 %%%% Need to treat the following section in a more correct manner, e.g., flat foot vs. toe roll
-Contact points introduce {\it holonomic constraints}, $\eta_{c}$ for $c \in \C$, on the system; this vector must be held constant for the contact point to be maintained. To construct these constraints, consider a reference frame $R_{c}$ at the contact point $c$ such that the axis of rotation about this point (either the heel or toe) is along $y$-axis. Let $R_0^c\argsq$ be a rotation matrix between reference frames from $R_{0}$ and $R_{c}$. Let $p_{c} : Q \to \R^{3}$ represent the position of the frame and let $v_{c}(q, {\dot q}) = {\dot p}_{c}(q, {\dot q})$ represent the velocity. The body-fixed angular velocity of the frame can then be found:
+Contact points introduce {\it holonomic constraints}, $\eta_{c}$ for $c \in \C$,
+on the system; this vector must be held constant for the contact point to be
+maintained.
+%
+To construct these constraints, consider a reference frame $R_{c}$ at the
+contact point $c$ such that the axis of rotation about this point (either the
+heel or toe) is along $y$-axis.
+%
+Let $R_0^c\argsq$ be a rotation matrix between reference frames from $R_{0}$ and
+$R_{c}$.
+%
+Let $p_{c} : Q \to \R^{3}$ represent the position of the frame and let $v_{c}\argsqdq = {\dot p}_{c}\argsqdq$ represent the velocity.
+%
+The body-fixed angular velocity of the frame can then be found:
+%
 \begin{align}
   \label{eq:angvelmat}
-  \Omega_{c}(q, {\dot q}) &= (R_{0}^{c}\argsq)^{T} \, \pd{R_{0}^{c}\argsq}{q} {\dot q}\\
+  \Omega_{c}\argsqdq &= (R_{0}^{c}\argsq)^{T} \, \pd{R_{0}^{c}\argsq}{\q} \dq\\
   \nonumber
   &= \left[\begin{array}{c c c}
-      0 & -\omega_{c}^{z}(q, {\dot q}) & \omega_{c}^{y}(q, {\dot q})\\
-      \omega_{c}^{z}(q, {\dot q}) & 0 & -\omega_{c}^{x}(q, {\dot q})\\
-      -\omega_{c}^{y}(q, {\dot q}) & \omega_{c}^{x}(q, {\dot q}) & 0
+      0 & -\omega_{c}^{z}\argsqdq & \omega_{c}^{y}\argsqdq\\
+      \omega_{c}^{z}\argsqdq & 0 & -\omega_{c}^{x}\argsqdq\\
+      -\omega_{c}^{y}\argsqdq & \omega_{c}^{x}\argsqdq & 0
     \end{array}\right].
 \end{align}
 The angular velocity vector
 \begin{align}
-  \omega_{c}(q, {\dot q}) = (\omega_{c}^{x}(q, {\dot q}), \omega_{c}^{y}(q, {\dot q}), \omega_{c}^{z}(q, {\dot q}))
+  \omega_{c}\argsqdq = (\omega_{c}^{x}\argsqdq, \omega_{c}^{y}\argsqdq, \omega_{c}^{z}\argsqdq)
 \end{align}
-is dual to the skew-symmetric matrix $\Omega(q, {\dot q})$. Using the linear and angular velocities, the holonomic constraint can be written
+is dual to the skew-symmetric matrix $\Omega\argsqdq$.
+%
+Using the linear and angular velocities, the holonomic constraint can be written
 \begin{align}
-  \eta_{c}(q, {\dot q}) = \left[\begin{array}{c}
-      v_{c}(q, {\dot q})\\
-      \omega_{c}^{x}(q, {\dot q})\\
-      \omega_{c}^{z}(q, {\dot q})
+  \eta_{c}\argsqdq = \left[\begin{array}{c}
+      v_{c}\argsqdq\\
+      \omega_{c}^{x}\argsqdq\\
+      \omega_{c}^{z}\argsqdq
     \end{array}\right] =
-  J_{c}\argsq {\dot q}.
+  J_{c}\argsq \dq.
 \end{align}
-It is apparent from \eqref{eq:angvelmat} that $v_{c}(q, {\dot q})$ and $\omega_{c}(q, {\dot q})$ are linearly dependent on ${\dot q}$. Furthermore, $v_{c}(q, {\dot q}) = \pd{p_{c}\argsq}{q} {\dot q}$ with $p_{c}\argsq$ the Cartesian position of the contact point $c$. Therefore, it is possible to find the associated Jacobian matrix: $J_{c}\argsq = \pd{\eta_{c}(q, {\dot q})}{{\dot q}}$.
+It is apparent from \eqref{eq:angvelmat} that $v_{c}\argsqdq$ and
+$\omega_{c}\argsqdq$ are linearly dependent on $\dq$.
+%
+Furthermore,
+\begin{align*}
+  v_{c}\argsqdq = \pd{p_{c}\argsq}{\q} \dq
+\end{align*}
+with $p_{c}\argsq$ the Cartesian position of the contact point $c$.
+%
+Therefore, it is possible to find the associated Jacobian matrix:
+%
+\begin{align*}
+  J_{c}\argsq = \pd{\eta_{c}\argsqdq}{\dq}.
+\end{align*}
 
-In the case of a 2D biped, the treatment is exactly the same but $\eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, v_{c}^{z}\argsqdq)^T$.
+In the case of a 2D biped, the treatment is exactly the same but
+\begin{align*}
+  \eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, v_{c}^{z}\argsqdq)^T.
+\end{align*}
 %
-The end result of this choice of coordinates is a holonomic constraint which enforces the condition $\eta_{c}\argsqdq = \mathrm{constant}$---this fixes the contact point to the ground but allows rotation about the heel or toe depending on the specific type of contact.
+The end result of this choice of coordinates is a holonomic constraint which
+enforces the condition $\eta_{c}\argsqdq = \mathrm{constant}$---this fixes the
+contact point to the ground but allows rotation about the heel or toe depending
+on the specific type of contact.
 %
-It is useful to express the collection of all holonomic constraints in a single matrix $\eta\argsqdq \in \R^{20 \times 4}$ as:
+It is useful to express the collection of all holonomic constraints in a single
+matrix $\eta\argsqdq \in \R^{20 \times 4}$ as:
 \begin{align}
   \eta\argsqdq \!\! = \!\!\! \left[\!\!\begin{array}{c c c c}
     \! \eta_{\sth}\argsqdq \! & 0 & 0 & 0 \\
@@ -344,17 +485,30 @@ It is useful to express the collection of all holonomic constraints in a single 
     \end{array}\!\!\right]
 \end{align}
 
-Another class of constraints that is important is the class of {\it unilateral constraints}, $h_{c}\argsq$ for $c \in \C$, since they dictate the set of admissible configurations of the system.
+Another class of constraints that is important is the class of {\it unilateral
+  constraints}, $h_{c}\argsq$ for $c \in \C$, since they dictate the set of
+admissible configurations of the system.
 %
-Assuming that the knees do not lock, these constraints represent the height of a contact point above the ground, $h_{c}\argsq = p_{c}^{z}\argsq$, and can be put in the form of a matrix $h\argsq \in \R^{4 \times 4}$ in the same manner as holonomic constraints;
+Assuming that the knees do not lock, these constraints represent the height of a
+contact point above the ground, $h_{c}\argsq = p_{c}^{z}\argsq$, and can be put
+in the form of a matrix $h\argsq \in \R^{4 \times 4}$ in the same manner as
+holonomic constraints;
 %
-that is, $h\argsq = \mathrm{diag}(h_{\sth}\argsq, h_{\stt}\argsq, h_{\nsh}\argsq, h_{\nst}\argsq)$.
+that is,
+\begin{align*}
+  h\argsq = \mathrm{diag}(h_{\sth}\argsq, h_{\stt}\argsq, h_{\nsh}\argsq,
+  h_{\nst}\argsq).
+\end{align*}
+
+
 
 \subsubsection{Domain Breakdowns}
 
-A domain breakdown is a directed cycle together with a specific choice of contact points on every vertex of the graph.
+A domain breakdown is a directed cycle together with a specific choice of
+contact points on every vertex of the graph.
 %
-To define this formally, assign to each vertex a binary vector describing which contact points are enforced on each domain.
+To define this formally, assign to each vertex a binary vector describing which
+contact points are enforced on each domain.
 
 \gap
 
@@ -389,7 +543,12 @@ Since the Lagrangian is intrinsic to the robot being considered, a domain breakd
 
 \subsubsection{Continuous Dynamics}
 
-The control system $\dx = f_v(\x) + g_v(\x) \, \uu$ can be explicity constructed through the constraints imposed on each domain by the domain breakdown.
+The control system
+\begin{align*}
+  \dx = f_v(\x) + g_v(\x) \, \uu
+\end{align*}
+can be explicity constructed through the constraints imposed on each domain by
+the domain breakdown.
 %
 For the domain $v \in V$, the imposed holonomic constraints are given by:
 %
@@ -494,7 +653,7 @@ Thus, the domain is given by
 %
 \begin{align}
   \label{eq:domain}
-  \D_{v} \! = \! \left\{ \! (q^{T}, \! {\dot q}^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times \R^{m_{v}} : A_{v}\argsqdqu \! \geq \! 0 \! \right\}.
+  \D_{v} \! = \! \left\{ \! (q^{T}, \! \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times \R^{m_{v}} : A_{v}\argsqdqu \! \geq \! 0 \! \right\}.
 \end{align}
 %
 The guard is just the boundary of this domain with the additional assumption that the set of admissible configurations is decreasing, i.e., the vector field is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
