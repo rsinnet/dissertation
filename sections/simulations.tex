@@ -1,4 +1,4 @@
-\chapter{\uppercase{Simulation Results}}
+\chapter{\uppercase{Simulation Results}} \label{chap:simulations}
 
 
 
@@ -130,11 +130,14 @@ flow is tracked in the $W$ coordinate, viz.
       0
     \end{array}\right),
 \end{align*}
-
 and the reset map acts to reset the stored energy, i.e.,
 \begin{align*}
   \Delta\argsqdq = (\q, \dq, 0).
 \end{align*}
+%
+The hybrid control system \eqref{eq:hcs_cart_spring} is of the same form as
+\eqref{eq:hcs_bar} but it written in a more compact way.
+
 
 \begin{figure*}[htp!]
   \centering
@@ -155,6 +158,7 @@ and the reset map acts to reset the stored energy, i.e.,
     switching surface.}
   \label{fig:cart_spring_simulation_nominal}
 \end{figure*}
+
 
 \subsection{Simulation of Nominal System}
 Beginning from the (post-reset) initial condition
@@ -193,7 +197,6 @@ on the aforementioned criterion requires 11 ``steps'';
 in other words, the cart passes through the origin from the positive side 11
 times.
 
-
 From the evolution of the coordinates shown in
 \figref{fig:cart_spring_simulation_nominal}, it is apparent that the
 oscillations grow until the system reaches the limit cycle.
@@ -204,6 +207,17 @@ The conserved energy of the limit cycle (as defined in
 This jump is a result of the resetting of the storage function, $W$, which
 occurs when the cart passes through the switching surface
 \eqref{eq:cart_spring_guard}.
+
+\subsection{Simulation of Shaped System}
+
+To demonstrate the effect of energy shaping, a simulation was conducted on the
+cart--spring system described in the previous subsection.
+%
+The relevant hybrid control system for the application of energy shaping is
+given in \eqref{eq:hcs_bar}.
+%
+In contrast to the nominal simulation, this simulation was conducted with $w$
+given by the min--norm control law \eqref{eq:}
 
 \begin{figure*}[htp!]
   \centering
@@ -226,4 +240,168 @@ occurs when the cart passes through the switching surface
   \label{fig:cart_spring_simulation_shaped}
 \end{figure*}
 
-\subsection{Simulation of Shaped System}
+
+\begin{figure}
+  \centering
+  \def\svgwidth{0.5\columnwidth}
+  \input{figs/cg2d-slope-model.eps_latex}
+  \caption{Compass-gait biped with walking down a slope.}
+  \label{fig:simulation-model}
+  \vspace{-1em}
+\end{figure}
+% 
+\begin{table}[t]
+  \caption{Physical parameters for the simulation model.}
+  \label{tab:mparam}
+  \centering
+  \begin{tabular}{c c c c}
+    $M =20 \ \mathit{kg},$ &
+    $m = 5 \ \mathit{kg},$ &
+    $\ell = 1 \ \mathit{m},$ &
+    $\gamma = .05 \ \mathit{rads}$
+  \end{tabular}
+  \vspace{-1em}
+\end{table}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\columnwidth]{cg-limit-cycle}
+  \caption{Limit cycle of the passive compass gait biped.}
+  \label{fig:lc}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\columnwidth]{cg-pp-fall}
+  \caption{The passive system cannot recover from distant states.}
+  \label{fig:pp-fall}
+\end{figure}
+
+\section{Compass-Gait Biped}
+
+Using the compass gait biped shown in \figref{fig:simulation-model} with model
+parameters as shown in \tabref{tab:mparam}, simulations were conducted to
+demonstrate the effectiveness of the energy shaping procedure.
+%
+The limit cycle of the passive system is shown in \figref{fig:lc} with the
+dotted lines representing discrete jumps from foot-strike (and coordinate
+relabeling).
+%
+This gait has a fixed point
+%
+\begin{align}
+  \label{eq:fixed-point}
+  (\qst, \ \dqst) = (-0.2891, \ 0.5781, \ -1.4006, \ -0.2802)
+\end{align}
+%
+on the guard with eigenvalues
+%
+\begin{align}
+  |\lambda| = (0.5147, \ 0.5147, \ 0.0980)
+\end{align}
+%
+corresponding to a linearization of the \Poincare{} map restricted to the guard.
+%
+Because these eigenvalues have magnitude below unity, the corresponding hybrid
+periodic orbit is locally exponentially stable.
+%
+The impact map can be applied to the fixed point \eqref{eq:fixed-point} to
+compute the post-impact coordinates
+%
+\begin{align}
+  \label{eq:fixed-point-post-impact}
+  \Delta(\qst, \ \dqst) = (0.2891, \ -0.5781, \ -1.0681, \ 0.6797).
+\end{align}
+
+To see the benefit of energy shaping, consider two simulations conducted from a
+perturbed post-impact initial condition,
+%
+\begin{align}
+  \label{eq:ic-sim-1}
+  (\q_{0}, \ \dq_{0}) = (0.2023, \ -0.4047, \ -0.7477, \ 0.4758),
+\end{align}
+%
+which was naively obtained by multiplying the post-impact fixed point
+\eqref{eq:fixed-point-post-impact} by $0.7$ resulting in a relatively large
+perturbation.
+%
+For the passive walker, one can see from \figref{fig:pp-fall} that the biped
+falls on the third step.
+%
+When energy shapping is added by choosing $\frac{c_{3}}{\resclfparam} = 1$ as in
+\figref{fig:pp-recover}, the biped is able to recover from the same initial
+condition and quickly converges to the limit cycle.
+%
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.75\columnwidth]{cg-pp-recover}
+  \caption{Energy shaping allows recovery from more distant states.}
+  \label{fig:pp-recover}
+\end{figure}
+
+\begin{figure}
+  \centering 
+  \includegraphics[width=0.75\columnwidth]{cg-energy-comp}
+  \caption{Convergence has more desirable behavior with energy shaping. Smaller
+    values of $\resclfparam$ offer better convergence.}
+  \label{fig:energy-comp}
+  \vspace{-1em}
+\end{figure}
+
+In addition to the ostensible increase in robustness, energy shaping also seems
+to improve convergence properties.
+%
+To see this, a simulation was conducted from the starting point
+%
+\begin{align}
+  (\q_{0}, \ \dq_{0}) = (0.2457, \ -0.4914, \ -0.9079, \ 0.5777),
+\end{align}
+%
+which, in similarity to the previous simulation, was obtained by multiplying \eqref{eq:fixed-point-post-impact} by $0.85$.
+%
+This point had to be closer than \eqref{eq:ic-sim-1} in order to fall within the domain of attraction (DOA) of the passive biped.
+%
+The difference in convergence for the energy levels of the passive and shaped
+systems is shown in  \figref{fig:energy-comp}.
+%
+One can see that the shaped system converges more quickly than the passive
+system.
+%
+Whereas the passive system changes energy only through impact, the shaped system
+also converges during the continuous dynamics.
+%
+Finally, it seems, stability is mainted for large values of $\resclfparam$,
+smaller values will result in better convergence so a trade-off naturally
+arises.
+
+\begin{figure}[tp!]
+  \centering
+    \centering
+    \includegraphics[width=0.75\columnwidth]{cg-poincare-cloud}
+    \caption{The domain of attraction restricted to the guard can be viewed in
+      three dimensions.
+      %
+      The blue ``+'' symbols represent stable points of the shaped system and the
+      black ``x'' symbols represents stable points of the passive system.}
+    \label{fig:point-cloud}
+  \vspace{-1em}
+\end{figure}
+
+More comprehensive evidence for the expansion of the domain of attraction can be
+seen in \figref{fig:point-cloud} which provides a comparison of the stable
+region on the guard for both the passive and shaped systems.
+%
+It is interesting to note that the domain of attraction expands most readily
+into the region of low energy (small steps, small angular velocities) for which
+states the passive biped would simply lack the energy necessary to fall into a
+gait.
+
+\section{Seven-Link Biped}
+
+\begin{figure}
+  \centering
+  \def\svgwidth{0.5\columnwidth}
+  \input{figs/cg2d-7link-model.eps_latex}
+  \caption{7-link biped configuration.}
+\end{figure}
