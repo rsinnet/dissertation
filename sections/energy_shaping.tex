@@ -223,15 +223,24 @@ Using the augmented state leads to the followed definition of an augmented
 hybrid control system:
 \begin{align}
   \HCSbar = \left\{
-    \begin{array}{l l}
-      \left.\begin{array}{r c l}
-          \hspace{1.15em}\dx &=& \xfbar\argsqdq + \xgbar\argsq \, \uu
-        \end{array}\right\}  & \mbox{if } \argsqmdqm \in \D \setminus \Guard,\\
-      \left. \begin{array}{r c l}
+    \begin{array}{l c l}
+      \begin{array}{r c l}
+        \hspace{1.15em}\dx &=& \xfbar\argsqdq + \xgbar\argsq \, \uu
+      \end{array} &
+      \left.\vphantom{\begin{array}{r c l}
+            \hspace{1.15em}\dx &=& \xfbar\argsqdq + \xgbar\argsq \, \uu
+          \end{array}}\right\} & \mbox{if } \argsqmdqm \in \D \setminus \Guard,\\
+      % 
+      \begin{array}{r c l}
           \qp &=& \Deltaq\argsqm\\
           \dqp &=& \Deltadq\argsqmdqm\\
           \Wp &=& \DeltaW = 0
-        \end{array} \hspace{2.4em}\right\} & \mbox{if } \argsqmdqm \in \Guard.
+        \end{array} &
+        \left.\vphantom{\begin{array}{r c l}
+          \qp &=& \Deltaq\argsqm\\
+          \dqp &=& \Deltadq\argsqmdqm\\
+          \Wp &=& \DeltaW = 0
+        \end{array}}\right\} & \mbox{if } \argsqmdqm \in \Guard.
     \end{array}\right.
   \label{eq:hcs_bar}
 \end{align}
@@ -597,41 +606,64 @@ and consider the following:\vgap
   %
   \begin{align}
     \label{eq:xt-bounds}
-    \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|.
+    \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|
   \end{align}
+  for all $t \geq 0.$
 \end{proof}
 
-Combine the continuous dynamics \eqref{eq:zd-vfield} with the reset map to obtain the hybrid control system
+A hybrid system can be constructed to describe the system under the zero
+dynamics coordinates by combining the continuous dynamics \eqref{eq:zd-vfield}
+with the reset map (expressed in the zero dynamics coordinates) viz.
 %
 \begin{align}
   \label{eq:zd-hcsys}
   \HCSbar= \left\{
-  \begin{array}{l l}
-    \begin{array}{r c l}
-      {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, \uu\\
-      {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, \uu
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \Guard,\\
-    \begin{array}{r c l}
-      \zdx^{+} &\!\!=\!\!& \DeltaX(\zdx^{-}, \zdz^{-})\\
-      \zdz^{+} &\!\!=\!\!& \DeltaZ(\zdx^{-}, \zdz^{-})
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \Guard.
-  \end{array}\right.
+    \begin{array}{l c l}
+      \begin{array}{r c l}
+        {\dot \zdx} &=& f\argsxz + g\argsxz \, \uu\\
+        {\dot \zdz} &=& q\argsxz + w\argsxz \, \uu
+      \end{array} &
+      \left.\vphantom{
+          \begin{array}{r c l}
+            {\dot \zdx} &=& f\argsxz + g\argsxz \, \uu\\
+            {\dot \zdz} &=& q\argsxz + w\argsxz \, \uu
+          \end{array}}\right\} & \mbox{ if } \argsxz \in \D \setminus \Guard,\\
+      % 
+      \begin{array}{r c l}
+        \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
+        \zdz^{+} &=& \DeltaZ(\zdx^{-}, \zdz^{-})
+      \end{array}
+      & \left.\vphantom{\begin{array}{r c l}
+            \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
+            \zdz^{+} &=& \DeltaZ(\zdx^{-}, \zdz^{-})
+          \end{array}}\right\}
+      & \mbox{ if } \argsxz \in \Guard.
+    \end{array}\right.
 \end{align}
-%
+% 
 Applying a valid Lipschitz continuous control law (which takes values in \eqref{eq:control-set}) to the hybrid control system \eqref{eq:zd-hcsys} results in the closed loop hybrid system
 %
 \begin{align}
   \label{eq:zd-hsys-cl}
   \HSbar_{\resclfparam} = \left\{\!\!\!\!
-  \begin{array}{l l}
+  \begin{array}{l c l}
     \begin{array}{r c l}
-      {\dot \zdx} &\!\!=\!\!& f\argsxz + g\argsxz \, \mueps\argsxz\\
-      {\dot \zdz} &\!\!=\!\!& q\argsxz + w\argsxz \, \mueps\argsxz
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \D \setminus \Guard,\\
+      {\dot \zdx} &=& f\argsxz + g\argsxz \, \mueps\argsxz\\
+      {\dot \zdz} &=& q\argsxz + w\argsxz \, \mueps\argsxz
+    \end{array} &
+    \left.\vphantom{\begin{array}{r c l}
+          {\dot \zdx} &=& f\argsxz + g\argsxz \, \mueps\argsxz\\
+          {\dot \zdz} &=& q\argsxz + w\argsxz \, \mueps\argsxz
+        \end{array}}\right\} & \mbox{ if } \argsxz \in \D \setminus \Guard,\\
+    % 
     \begin{array}{r c l}
-      \zdx^{+} &\!\!=\!\!& \DeltaX(\zdx^{-}, \zdz^{-})\\
-      \zdz^{+} &\!\!=\!\!& \DeltaZ(\zdx^{-}, \zdz^{-})
-    \end{array} \!\! & \!\! \mbox{if } \argsxz \in \Guard.
+      \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
+      \zdz^{+} &=& \DeltaZ(\zdx^{-}, \zdz^{-})
+    \end{array}  &
+    \left.\vphantom{\begin{array}{r c l}
+          \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
+          \zdz^{+} &=& \DeltaZ(\zdx^{-}, \zdz^{-})
+        \end{array}}\right\} & \mbox{ if } \argsxz \in \Guard.
   \end{array}\right.
 \end{align}
 

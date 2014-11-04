@@ -411,3 +411,11 @@
 \newcommand{\DeltaW}{\ensuremath{\Delta_{\W}}}
 
 \newcommand{\psieps}{\psi^{\resclfparam}}
+
+
+\usepackage[labelformat=simple]{subfig}
+\renewcommand{\thesubfigure}{(\alph{subfigure})}
+\makeatletter
+\renewcommand{\p@subfigure}{\thefigure}
+\renewcommand\@biblabel[1]{#1.}
+\makeatother

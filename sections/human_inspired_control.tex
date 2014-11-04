@@ -171,13 +171,13 @@ unconstrained, it follows $s_{c}(t, a_{c})$.
 %
 For each contact point $c \in \C$, consider the function:
 %
-\begin{align}
+\begin{align*}
   f_{c}(t, k_{c}^{\ell}, k_{c}^{s}, a_{c}) =  \left\{\begin{array}{l l}
-    s_{c}(\tau[k_{c}^{\ell}], a_{c}), & \hspace{2mm} t \leq  \tau[k_{c}^{\ell}],\\
-    s_{c}(t, a_{c}), & \hspace{2mm} \tau[k_{c}^{\ell}] < t < \tau[k_{c}^{s}],\\
-    s_{c}(\tau[k_{c}^{s}], a_{c}), & \hspace{2mm} \tau[k_{c}^{s}] \leq t,\\
+      s_{c}(\tau[k_{c}^{\ell}], a_{c}), & \hspace{2mm} t \leq  \tau[k_{c}^{\ell}],\\
+      s_{c}(t, a_{c}), & \hspace{2mm} \tau[k_{c}^{\ell}] < t < \tau[k_{c}^{s}],\\
+      s_{c}(\tau[k_{c}^{s}], a_{c}), & \hspace{2mm} \tau[k_{c}^{s}] \leq t,\\
   \end{array} \right.
-\end{align}
+\end{align*}
 where $\tau[k_{c}^{\ell}], \tau[k_{c}^{s}] \in \{\tau[k]\}_{k = 1}^{T}$ are the
 event times indicating when contact point $c$ becomes unconstrained (lift) and
 constrained (strike), respectively.
@@ -192,11 +192,11 @@ parameters are supressed---i.e., $f_{c}(t) = f_{c}(t, k_{c}^{\ell}, k_{c}^{s},
 a_{c})$---but it is assumed they have been determined.
 %
 To calculate the event times as they best fit the data, one must solve the following optimization problem
-\begin{align}
+\begin{align*}
   \min_{k_{c}^{\ell}, k_{c}^{s} \in \{1, \ldots, T\}} \ \min_{a_{c} \in
     \R^{n_{c}}} \ \sum_{k = 1}^{T} \left( f_{c}(t,k_{c}^{\ell},k_{c}^{s},a_{c})
     - y_{c}(t) \right)^2
-\end{align}
+\end{align*}
 for each $c \in \C$.
 %
 In the case of humans with flat feet, there are four constraints of interest:
@@ -351,44 +351,44 @@ Before further detail is given, a remark on the choice of constraints is in orde
 \end{remark}
 
 \subsubsection{Knee} Inspecting the behavior of the human knee over the course of the gait (see \figref{fig:constraints-knees}) reveals that the angle of the human knee appears to follow a Gaussian when it is swinging (the non-stance leg) and a second order system response (i.e., the step response of a spring damper system) when the weight of the person is on the leg (i.e., when the leg is the stance leg). With this in mind, the following functions are fit to the human data for the knee angles of the stance and non-stance legs:
-\begin{align}
+\begin{align*}
   y_{d,\cnsk}(t) &= A_{5,1} \, \exp\left(\frac{-(t-A_{5,2})^2}{2 (A_{5,3})^2}\right) + A_{5,4},\\
   y_{d,\cstk}(t) &= -A_{2,1} \, \frac{\cos(A_{2,2}\,t)-A_{2,3} \sin(A_{2,2}\,t)}{\exp(A_{2,4} \, t)} + A_{2,5}.
-\end{align}
+\end{align*}
 An intuitive explanation of this is as follows: when the leg is in ``stance'' mode, the human knee acts like a spring-damper system responding to the impulse of the human as he or she puts his or her body weight on the stance leg---that is, the human tries to prevent the leg from collapsing by stiffening it, resulting in a spring-damper effect. When the human leg is in ``non-stance'' mode, the weight of the human is primarily not on it, so the knee is free to swing---there is no reason to keep the leg stiff.
 
 \subsubsection{Leg} In the data for the slope of the non-stance leg as seen in \figref{fig:constraints-legs}---here, leg is defined as the straight line connecting the ankle to the hip--- the slope appears to follow a sinusoid; thus the following function is fit:
-\begin{align}
+\begin{align*}
   y_{d,nslm}(t) &= A_{6,1} \, \sin(A_{6,2} \, t + A_{6,3}) + A_{6,4}.
-\end{align}
+\end{align*}
 Intuitively, this just means that the non-stance leg swings freely much like the non-stance knee. Note: while it is possible to choose the slope of the stance leg as a constraint to track---indeed, a simple function can be fitted to the slope of the stance leg---the forward velocity of the hip is instead chosen. In terms of time-control this will not make much of a difference, but the reader will see that, when the control is migrated to pure feedback, tracking the hip velocity will allow for direct control over walking speed.
 
 \subsubsection{Hip} The behavior of the hip is quite simple. Examination of the data reveals that the hip moves forward monotically in time at an approximately constant rate. However, instead of tracking the position of the hip, the velocity of the hip is instead tracked, thus motivating the following function:
-\begin{align}
+\begin{align*}
   y_{d,hv} = A_{3,1}.
-\end{align}
+\end{align*}
 The reason for tracking the velocity instead of the position is related to the method used to impose feedback control on the system and requires some explanation; however, due to the level of detail, this discussion will be deferred until later in this paper. It is of interest, however, to note that, as mentioned previously, tracking hip velocity allows for direct control over the walking speed of the robot.
 
 \subsubsection{Torso} The data show that a human tends to keep his or her torso upright throughout his or her walking gait. Specifically, the data indicates that the absolute angle of the torso with respect to the world frame closely follows a sine wave, but the amplitude is small, so it is approximated with a constant:
-\begin{align}
+\begin{align*}
   y_{d,T\angle} &= A_{4,1}.
-\end{align}
+\end{align*}
 Note that, the choice of tracking a constant results in a poor correlation between the function and data; however, one can argue that the tiny amount of motion from the torso has very little effect on the overall gait.
 
 \subsubsection{Ankle} When the non-stance leg is swinging, to prevent the non-stance ankle from rotating freely, the behavior of the ankle angle is approximated by a constant:
-\begin{align}
+\begin{align*}
   y_{d,nsa\angle} &= A_{8,1}.
-\end{align}
+\end{align*}
 One can justify this choice by claiming that the motion of the ankle has only a marginal effect on the overall gait provided that ground clearance is not an issue. As in the case of the torso, the correlation between this fit and the data will not be good but, again, this does not have a large effect on the gait.
 
 \subsubsection{Foot} Finally, the behaviors of the heel and toe are found to be significantly more complicated than the previously discussed behaviors, as can be seen in \figref{fig:constraints-heights}. Although the actual functions describing these heights are quite simple (see \figref{fig:heeltoefit}), it is generally not effective to follow these functions---see \rmkref{rmk:dimconst}. Since the foot is constrained during certain phases of the gait, it would not make sense to track the constrained points during these phases. Therefore, the behavior of the feet is segmented based on the domain breakdown of the human gait. In particular, the transition from domain {\DA} to domain {\DB} occurs when the stance toe strikes the ground, and, in fact, it is found that the height of the toe approximately follows a constant as it approaches the ground in domain {\DA}. In order to satisfy this local objective, an attempt is made to track the height of the toe using the following function:
-\begin{align}
+\begin{align*}
   y_{d,\cstth}(t) = A_{7,1} \, t + A_{7,2}.
-\end{align}
+\end{align*}
 After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracked. In a similar light, when domain {\DC} is reached, the goal is to effect heel lift. As such, analysis of the data reveals that non-stance heel begins to lift approximately according to a Gaussian, thus motivating the following function:
-\begin{align}
+\begin{align*}
   y_{d,\csthh}(t) &= A_{1,1} \, \exp\left(\frac{-(t-A_{1,2})^2}{2 (A_{1,3})^2}\right) + A_{1,4}.
-\end{align}
+\end{align*}
 
 \begin{remark} \label{rmk:dimconst}
   Certain constraint functions represent dimensionalized constraints, e.g., heel
@@ -491,36 +491,47 @@ $t \to \infty$, a definition is given for the following virtual output vector:
   \label{eq:virtout}
   y_v(q,t) = y^a_v(q) - y^d_v(t).
 \end{align}
-As the functions tracked consists of both positions and velocities, the system has mixed relative degree. That is, the output corresponding to velocity will have relative degree one whereas the outputs corresponding to positions will each have relative degree two. Reorder the outputs as follows:
+As the functions tracked consists of both positions and velocities, the system
+has mixed relative degree.
+%
+That is, the output corresponding to velocity will have relative degree one
+whereas the outputs corresponding to positions will each have relative degree
+two.
+%
+Reorder the outputs as follows:
 \begin{align}
   \label{eq:vouts}
   y_v(q, {\dot q}, t) = (y_{v,1}^T(q, {\dot q}, t),y_{v,2}^T(q, t))^T
 \end{align}
-with $y_{v,1}$ a vector containing the relative-degree-one outputs and $y_{v,2}$ a vector containing the relative-degree-two outputs. (In this paper, $y_{v,1}$ is a scalar.) A control law which drives \eqref{eq:vouts} to zero is
-\begin{align}
-  \lefteqn{u(q, {\dot q}, t) = -\mathcal{A}_{v}^{-1}(q, {\dot q}, t)
-  \bigg(\left[\!\!\begin{array}{c}
-    0\\
-    L_{f_{v}} L_{f_{v}} y_{v,2}(q, t)
-    \end{array}\!\!\right]}\\
-\nonumber
-  &&\hspace{15mm}\mbox{}+ \left[\!\!\begin{array}{c}
-        L_{f_{v}} y_{v,1}(q, {\dot q}, t)\\
-        2 \varepsilon L_{f_{v}} y_{v,2}(q, t)
-      \end{array}\!\!\right] +
+with $y_{v,1}$ a vector containing the relative-degree-one outputs and $y_{v,2}$
+a vector containing the relative-degree-two outputs.
+%
+(In this thesis, $y_{v,1}$ is a scalar.)
+%
+A control law which drives \eqref{eq:vouts} to zero is
+\begin{align*}
+  u(q, {\dot q}, t) = -\mathcal{A}_{v}^{-1}(q, {\dot q}, t)
+  \left(\left[\!\!\begin{array}{c}
+      0\\
+      L_{f_{v}} L_{f_{v}} y_{v,2}(q, t)
+    \end{array}\!\!\right]
+  + \left[\!\!\begin{array}{c}
+      L_{f_{v}} y_{v,1}(q, {\dot q}, t)\\
+      2 \varepsilon L_{f_{v}} y_{v,2}(q, t)
+    \end{array}\!\!\right] +
   \left[\!\!\begin{array}{c}
-    \varepsilon y_{v,1}(q, {\dot q}, t)\\
-    \varepsilon^2 y_{v,2}(q, t)
-    \end{array}\!\!\right]\bigg),
-\end{align}
+      \varepsilon y_{v,1}(q, {\dot q}, t)\\
+      \varepsilon^2 y_{v,2}(q, t)
+    \end{array}\!\!\right]\right),
+\end{align*}
 with $\mathcal{A}_{v}(q, {\dot q},t)$ the decoupling matrix given by
-\begin{align}
+\begin{align*}
   \mathcal{A}_{v}(q, {\dot q},t) =
   \left[\begin{array}{c}
       L_{g_{v}} y_{v,1} (q, {\dot q}, t)\\
       L_{g_{v}} L_{f_{v}} y_{v,2}(q,t)
     \end{array}\right],
-\end{align}
+\end{align*}
 where, again, $(f_{v},g_{v})$ is given in \eqref{eqn:controlsystem}. In the above,
 \begin{align}
   L_{f} y(q, {\dot q}, t) = \pd{y(q, {\dot q}, t)}{(q^T, {\dot q}^T, t)^T} \cdot f(q, \dot q, t)
@@ -662,25 +673,44 @@ When choosing a parameterization, $\varsigma(q)$, it is important to consider it
   \label{eq:prm}
   \varsigma(q) = \frac{p_{\mathit{hip}}^{x}(q) - p_{\mathit{hip}}^{x}(q^-)}{v_{\mathit{hip}}^{x}}.
 \end{align}
-The parameters $p_{\mathit{hip}}^{x}(q^-)$ and $v_{\mathit{hip}}^{x}$ should be chosen based on the quantities they represent (i.e., $v_{\mathit{hip}}^{x}$ should be the average velocity of the hip and $p_{\mathit{hip}}^{x}(q^-)$ should be the $x$-position of the hip at the beginning of a step). In this paper, these values were found by examining the simulation of the time-based controller from the previous section. Specifically, a good choice for $v_{\mathit{hip}}^{x}$ is the parameter for the hip velocity constraint, $A_{3,1}$ (found in \tabref{tab:funcparam}). Using the parameterization \eqref{eq:prm}, the desired trajectories can be expressed by substituting the parameterization $\varsigma(q)$ for time $t$; that is, the desired trajectories will be given by $y_{\vo}^{d}(\varsigma(q))$.
+The parameters $p_{\mathit{hip}}^{x}(q^-)$ and $v_{\mathit{hip}}^{x}$ should be
+chosen based on the quantities they represent (i.e., $v_{\mathit{hip}}^{x}$
+should be the average velocity of the hip and $p_{\mathit{hip}}^{x}(q^-)$ should
+be the $x$-position of the hip at the beginning of a step).
+%
+In this paper, these values were found by examining the simulation of the
+time-based controller from the previous section.
+%
+Specifically, a good choice for $v_{\mathit{hip}}^{x}$ is the parameter for the
+hip velocity constraint, $A_{3,1}$ (found in \tabref{tab:funcparam}).
+%
+Using the parameterization \eqref{eq:prm}, the desired trajectories can be
+expressed by substituting the parameterization $\varsigma(q)$ for time $t$;
+%
+that is, the desired trajectories will be given by $y_{\vo}^{d}(\varsigma(q))$.
 
-\subsubsection{Control Design Modification} Implementation of state feedback allows for the removal of time from the virtual outputs, that is, the control law is no longer time-dependent. Therefore, the virtual output of \eqref{eq:virtout} becomes
-\begin{align}
+\subsubsection{Control Design Modification}
+Implementation of state feedback allows for the removal of time from the virtual
+outputs, that is, the control law is no longer time-dependent.
+%
+Therefore, the virtual output of \eqref{eq:virtout} becomes
+\begin{align*}
   y_{\vo}(q, {\dot q}) = y_{\vo}^a(q, {\dot q}) - y_{\vo}^{d}(\varsigma(q))
-\end{align}
-with $\varsigma(q)$ the parameterization given in \eqref{eq:prm}. Following the derivation of the time-based controller, the outputs are grouped based on relative degree:
-\begin{align}
+\end{align*}
+with $\varsigma(q)$ the parameterization given in \eqref{eq:prm}.
+%
+Following the derivation of the time-based controller, the outputs are grouped
+based on relative degree:
+\begin{align*}
   y_{\vo}(q, {\dot q}) = (y_{\vo,1}^{T}(q, {\dot q}), y_{\vo,2}^{T}(q))^{T}.
-\end{align}
+\end{align*}
 The control law which drives $y_{\vo}(q, {\dot q}) \to 0$ is then given by
-\begin{align}
-  \lefteqn{u(q, {\dot q}) = -\mathcal{A}_{\vo}^{-1}(q, {\dot q}) \bigg(
+\begin{align*}
+  u(q, {\dot q}) = -\mathcal{A}_{\vo}^{-1}(q, {\dot q}) \left(
   \left[ \begin{array}{c}
       0\\
       L_{f_{\vo}} L_{f_{\vo}} y_{\vo,2}(q)
-    \end{array} \right]}\\
-  \nonumber
-  &&\hspace{15mm}\mbox{}+
+    \end{array} \right] +
   \left[ \begin{array}{c}
       L_{f_{\vo}} y_{\vo,1}(q, {\dot q})\\
       2 \varepsilon L_{f_{\vo}} y_{\vo,2}(q)
@@ -688,8 +718,8 @@ The control law which drives $y_{\vo}(q, {\dot q}) \to 0$ is then given by
   \left[ \begin{array}{c}
       \varepsilon y_{\vo,1}(q, {\dot q})\\
       \varepsilon^2 y_{\vo,2}(q)
-    \end{array} \right]\bigg),
-\end{align}
+    \end{array} \right]\right),
+\end{align*}
 with $A_{\vo}(q)$ the decoupling matrix given by
 \begin{align}
   \mathcal{A}_{\vo}(q, {\dot q}) =
@@ -698,19 +728,33 @@ with $A_{\vo}(q)$ the decoupling matrix given by
       L_{g_{\vo}} L_{f_{\vo}} y_{{\vo},2}(q)
     \end{array}\right]
 \end{align}
-and $(f_{\vo}, g_{\vo})$ the control system given in \eqref{eqn:controlsystem}. Application of this control law to the control system yields the closed-loop system:
+and $(f_{\vo}, g_{\vo})$ the control system given in \eqref{eqn:controlsystem}.
+%
+Application of this control law to the control system yields the closed-loop
+system:
 \begin{align}
   f_{cl,\vo} = f_{\vo}(q, {\dot q}) + g_{\vo}(q) u(q, {\dot q}).
 \end{align}
-The virtual outputs are chosen to be the same as those in the time-based controller, specified in \tabref{tab:fitcor}. The end result is an autonomous hybrid system specified by
+The virtual outputs are chosen to be the same as those in the time-based
+controller, specified in \tabref{tab:fitcor}.
+%
+The end result is an autonomous hybrid system specified by
 \begin{align}
   \HS_{a} = (\Gamma, \D, S, \Delta, F_a).
 \end{align}
 with $F_a$ the set of vector fields $\{f_{cl,\vo}\}_{\vo \in V}$.
 
 \subsection{Simulation of Autonomous Feedback Controller} \noindent
-The analysis of the stability of the autonomous system is analogous to that shown in \secref{sec:timesim}. The control gain is again chosen to be $\varepsilon = 15$. The parameters are tweaked, as before, by multiplying row six by $1.25$. This simulation results in the fixed point:
-\begin{align}
+The analysis of the stability of the autonomous system is analogous to that
+shown in \secref{sec:timesim}.
+%
+The control gain is again chosen to be $\varepsilon = 15$.
+%
+The parameters are tweaked, as before, by multiplying row six by $1.25$.
+%
+This simulation results in the fixed point:
+%
+\begin{align*}
 %  \setlength{\extrarowheight}{-3mm}
 %  q_{s,a}^* = \left[\begin{array}{r}
 %      -0.4038\\
@@ -731,15 +775,23 @@ The analysis of the stability of the autonomous system is analogous to that show
 %  \setlength{\extrarowheight}{0mm}\\
   q_{s,t}^{*} =
   \left(\!\!\!\!\begin{array}{r r r r r r}
-    \hphantom{1}-.404 & .245 & \hphantom{1}.208 & \hphantom{0}-.488 & \hphantom{-0}.388 & \hphantom{-}.088
+      \hphantom{1}-.404 & .245 & \hphantom{1}.208 & \hphantom{0}-.488 &
+      \hphantom{-0}.388 & \hphantom{-}.088
   \end{array}\!\!\right)^T\\
   {\dot q}_{s,t}^{*} =
   \left(\!\!\!\!\begin{array}{r r r r r r}
     -1.287 & .282 & 1.078 & \hphantom{-}0.711 & -2.452 & -.076
   \end{array}\!\!\right)^T
-\end{align}
-on the guard of domain {\DC}. Only the shape coordinates are shown, as in the analysis of the time-based feedback controller. The Jacobian matrix of a linearization of the Poincar{\'e} map about the fixed point $((q^*_s)^T, ({\dot q}^*_s)^T)^T$ yields eigenvalues of the following magnitudes:\
-\begin{align}
+\end{align*}
+on the guard of domain {\DC}.
+%
+Only the shape coordinates are shown, as in the analysis of the time-based
+feedback controller.
+%
+The Jacobian matrix of a linearization of the Poincar{\'e} map about the fixed
+point $((q^*_s)^T, ({\dot q}^*_s)^T)^T$ yields eigenvalues of the following
+magnitudes:
+\begin{align*}
   |\lambda_a| \in \{0.1902, 0.0680, 0.0680, 0.504, 0.0058, \ldots\},
-\end{align}
+\end{align*}
 where, again, only the five eigenvalues with the largest magnitudes are shown.
