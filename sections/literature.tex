@@ -55,7 +55,7 @@ Both methods are used in this work but for different purposes:
 Lyapunov's indirect method is often used to analyze the stability of hybrid
 systems by examining the stability of a linearization of the \Poincare{} map
 about the equilibrium point; this will be explained in greater detail in
-\chapref{chap:stability}.
+\secref{sec:hsys-sol}.\todo{Correct location?}\xspace
 %
 The numerical simulations in this work will rely on this usage of Lyapunov's
 indirect method.
@@ -254,18 +254,11 @@ The book \cite{Westervelt2007} and the review paper \cite{Hurmuzlu2004} provide 
 
 \subsection{Zero Moment Point and Linear Inverted Pendulum Models}
 
-%\textbf{Ryan: I tried to make this coherent and have probably failed miserably. Please take a close look. Here are some remarks:}
-%\begin{itemize}
-%  %\item  Your original file is named LiteratureOverview\_v03\_originalByRyan.tex
-%\item The original text did not relate ZMP to the previous section on modeling. I tried to fix that.
-%\item Also, there are several ideas here...ZMP, LIPM, and humanoids. The first 2 are currently tied together. The general humanoid thing is just hanging.
-%\item There was not statement about what exactly do we mean by ZMP control. I tried to fix that, but maybe I a%m not clear enough.
-%\item The subsection is really on control methods. We probably should open with ZMP and relate that to LIPM, instead of the other way around.
-%\end{itemize}
-
-One of the most common control methods for bipedal locomotion is the ZMP control strategy.
+One of the most common control methods for bipedal locomotion is the ZMP control
+strategy as described in \cite{Vukobratovic2004,Vukobratovic1990}.
 %
-Recall from \secref{sec:model:SS_FlatFeet} that the ZMP is the point on the ground at which the reaction forces acting between the ground and the foot produce no horizontal moment.
+The ZMP is the point on the ground at which the reaction forces acting between
+the ground and the foot produce no horizontal moment.
 %
 Traditionally, ZMP control strategies achieve walking by planning the motion of a robot's CoM such that the ZMP remains strictly within the convex hull of the stance foot in the case of single support (or convex hull of the stance feet, in the case of double support).
 %

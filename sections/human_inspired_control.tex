@@ -628,7 +628,9 @@ where, for the sake of space, only the five eigenvalues with the largest magnitu
 \begin{figure*}[p!]
   \centering
   \includegraphics[width=1.0\textwidth]{hic_gait_tiles}
-  \caption[Comparison of simulated walking gaits]{Comparison of simulated walking gaits between time-based feedback control and autonomous feedback control.}
+  \caption[Comparison of simulated walking gaits.]{Comparison of simulated
+    walking gaits. Time-based feedback control and autonomous feedback
+    control.}
   \label{fig:gaittiles}
 \end{figure*}
 
@@ -656,7 +658,7 @@ indeed obtained for on an anthropomorphic biped. The humanlike nature of the
 simulated gait can best be seen in a video of the walking available online, at
 the AMBER Lab website \cite{url:bipedalrobotics}.
 
-\section{Autonomous Feedback Controller Design} \noindent
+\section{Autonomous Feedback Controller Design}
 In general, autonomous control is preferred over non-autonomous, time-based
 control as autonomous controllers tend to be more robust. In this section, a
 method is given which shows how to remove the time-dependence from the
@@ -665,7 +667,7 @@ literature \cite{Westervelt2007} for converting time-based trajectories into
 state-based trajectories is to parameterize time by a state-dependent function;
 this results in an autonomous feedback control strategy.
 
-\subsection{State-Based Trajectory Parameterization} \noindent
+\subsection{State-Based Trajectory Parameterization}
 Recall that the functions discussed in the previous section are directly dependent on time, i.e., they can be written $y_{\vo}^{d}(t)$. Furthermore, these functions are all defined on some interval $[t^- = 0, t^+ = P] = \mathcal{I} \subset \R_{0}^{+}$ with $P$ the period of the gait (that is, one step with one leg); in other words, a given tracking function can be written as a map $y_{\vo}^{d} : \mathcal{I} \to \R$. Autonomous state feedback can be achieved by simply choosing a state-based parameterization $\varsigma : Q \to \mathcal{I}$ and substituting for time, i.e., $y_{\vo}^{d}(\varsigma(q))$.
 
 When choosing a parameterization, $\varsigma(q)$, it is important to consider its role in the system. Since $\varsigma(q)$ is a parameterization for time $t$, the relationship between $\varsigma(q)$ and $t$ should be as linear as possible. Examination of the human hip data, as shown in \figref{fig:hip-pos}, reveals that the hip velocity $v_{\mathit{hip}}^{x}$ is constant throughout the gait; as a result, the hip position approximately satisfies $p_{\mathit{hip}}^{x}(q(t)) = v_{\mathit{hip}}^x t + p_\mathit{hip}^x(q^-)$, with $q^-$ the state at the beginning of a step. Here, the assumption can be made, without loss of generality, that time starts at zero at the beginning of any given step. The linearity of the hip position, $p_{\mathit{hip}}^{x}(q(t))$, with respect to time, makes it a good candidate for time parameterization; substituting $\varsigma(q) \to t$ and solving for $\varsigma(q)$ gives the parameterization
@@ -744,7 +746,7 @@ The end result is an autonomous hybrid system specified by
 \end{align}
 with $F_a$ the set of vector fields $\{f_{cl,\vo}\}_{\vo \in V}$.
 
-\subsection{Simulation of Autonomous Feedback Controller} \noindent
+\subsection{Simulation of Autonomous Feedback Controller}
 The analysis of the stability of the autonomous system is analogous to that
 shown in \secref{sec:timesim}.
 %

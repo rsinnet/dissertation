@@ -119,8 +119,13 @@ where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the tor
 contains terms resulting from the Coriolis effect and gravity terms grouped into
 a single vector.
 %
-The matrix $\CCor\argsqdq$ can be found using standard methods; see
-\cite{Murray1994}.\todo{Adding equation for computing $\CCor$.}
+The elements of $\CCor\argsqdq$ can be found by computing the Christoffel
+symbols of $\M\argsq$:
+\begin{align*}
+  \CCor_{ij}\argsqdq = \frac{1}{2} \sum_{k = 1}^{n} \left( \pd{\M_{ij}}{\q_{k}} +
+    \pd{\M_{ik}}{\q_{j}} - \pd{\M_{kj}}{\q_{i}} \right) \dq_{k}.
+\end{align*}
+See \cite[pp.~170]{Murray1994} for more information.
 
 \section{Hybrid Dynamical Systems}
 
@@ -155,31 +160,32 @@ For ease of exposition, let the generalized coordinates of the system be
 represented by $\argsqdq = \x \in \X$ where $\X$ is the state space.
 %
 The evolution of the system depends on a {\em unilateral constraint}, $h :
-\R^{n} \to \Rnn$, which can be used to define the {\em guard} or {\em switching
+\Q \to \Rnn$, which can be used to define the {\em guard} or {\em switching
   surface}.
 %
 In the case of a bipedal robot with simple foot behavior, a common selection for
-the unilateral constraint is the height of the swing foot, i.e., $h\argsx =
+the unilateral constraint is the height of the swing foot, i.e., $h\arx =
 \hnsf\argsq$.
 %
-By definining unilateral constraints as functions which not be negative and
-which cause dicrete jumps when the system attempts to cross the zero level set
-of a function, $h\argsx$, one arrives at a a definition of the {\em domain of
-  admissibility} as
+Through definition of an appropriate unilateral constraint on a hybrid system
+whose zero crossings correspond to discrete transitions certain properties of
+the system follow.
+Defining a unilateral constraint to be non-negative leads a definition of the
+{\em domain of admissibility} as
 %
 \begin{align}
   \label{eq:domain}
-  \D &= \left\{ \x \times \R^{2n} : h\arx \geq 0 \right\},
+  \D = \left\{ \x \in T\Q : h\arx \geq 0 \right\},
 \end{align}
 %
 which describes the admissible states of the system.
 %
-The boundary at the zero level set of $h\argsx$ naturally gives rise to the
+The boundary at the zero level set of $h\arx$ naturally gives rise to the
 switching surface,
 %
 \begin{align}
   \label{eq:guard}
-  \Guard &= \left\{ \x \in \R^{2n} : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0
+  \Guard &= \left\{ \x \in \D \subset T\Q : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0
   \right\}.
 \end{align}
 %
@@ -192,11 +198,21 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
     \xp = \Delta(\xm), & \xm \in \Guard,
   \end{array}\right.
   \label{eq:hsys}
-\end{align}\todo{Mention $\xm$ and $\xp$.}
+\end{align}
 %
 where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D
 \setminus S$ is a smooth map called the reset map (see, e.g.,
 \cite{Morris2005}).
+%
+In addition, $\xm\argt = \lim_{\tau \nearrow t} \x\argtau$ and $\xp\argt =
+\lim_{\tau \searrow t} \x\argtau$ are the left and right limits of the solution
+$\x\argt$, respectively.
+%
+For compactness of notation, a hybrid system is sometimes written as
+\begin{align*}
+  \HS = (\D, \Guard, \Delta, \xf).
+\end{align*}
+as in \cite{Sinnet2009}.
 %
 Under the action of control effort $\uu$, the corresponding hybrid control
 system has the form
@@ -210,12 +226,14 @@ system has the form
   \label{eq:hcsys}
 \end{align}
 %
-for control values in a set $\U \subseteq \R^{m}$.
+for control values in a set of {\em admissible controls}, $\U \subseteq \R^{m}$.
 %
+As with hybrid systems, hybrid control systems are sometimes written more
+compactly:
+\begin{align*}
+  \HCS = (\D, \Guard, \U, \Delta, \xf, \xg).
+\end{align*}
 
-
-\section{Solutions to Hybrid Systems}
-(cf. \cite{Ye1998})
 
 \section{Complex Domain Structure}
 Bipedal robotic walking exhibits both discrete and continuous behavior; it is,
@@ -309,7 +327,7 @@ in \chapref{ch:hic}:
 \end{exmp}
 
 The concept of a directed cycle is a fundamental component in the formulation
-of multidomain hybrid systems:
+of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
 
 \begin{definition} A {\em hybrid control system in a cycle} is a tuple,
   %
@@ -496,7 +514,7 @@ holonomic constraints;
 %
 that is,
 \begin{align*}
-  h\argsq = \mathrm{diag}(h_{\sth}\argsq, h_{\stt}\argsq, h_{\nsh}\argsq,
+  h\argsq = \blockdiag(h_{\sth}\argsq, h_{\stt}\argsq, h_{\nsh}\argsq,
   h_{\nst}\argsq).
 \end{align*}
 
@@ -725,3 +743,116 @@ This reset map takes a point on the guard of a domain and maps it into the next 
 The end result is that, given a domain breakdown and a bipedal robot, the hybrid model for the biped is completely determined.
 %
 %One of the goals of this thesis is to determine the domain breakdowns that humans use and this section demonstrated the importance of the domain breakdown in determining the unique mathematical model of the system.
+
+\section{Solutions to Hybrid Systems} \label{sec:hsys-sol}
+(cf. \cite{Ye1998})
+
+
+\section{Stability of Hybrid Systems}
+
+Because of the unique nature of hybrid systems, analysis of stability requires
+special treatment which is distinct from continuous-time systems and more
+closely parallels that used for discrete-time systems.
+%
+Definitions of stability are ubiquitous in the literature; see, e.g.,
+\cite{Khalil2002,Teschl2012,Vidyasagar1993}.
+
+
+\section{Stability of Hybrid Systems}
+
+In order to understand the theory presented in this work, it is necessary to
+understand not only the stability of hybrid systems but also the stability of
+continuous systems and discrete systems which partly comprise hybrid systems.
+%
+
+
+\subsection{Continuous Systems}
+This work is chiefly concerned with autonomous systems of the form
+\begin{align}
+  \label{eq:autsys}
+  \dx = \xf\arx
+\end{align}
+where $\xf : \D \to \Rn$ is a locally Lipschitz vector field valid on some domain
+$\D \subset \Rn$.
+%
+Without loss of generality, suppose that the system \eqref{eq:autsys} has an equilibrium point at the
+origin;
+%
+in other words, $\xf\argbzero = \boldzero$.
+%
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ is stable if, for each $\epsilon > 0$,
+  $\exists \ \delta > 0$ such that
+  \begin{align*}
+    \nxzero < \delta \Rightarrow \nxt < \epsilon \ \forall \ t
+    \geq 0.
+  \end{align*}
+  The equilibrium point is unstable if it is not stable.
+\end{definition}
+
+In addition to the above definition, there are stricter forms of stability:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ is {\bf asymptotically stable} if it is
+  stable and $\delta$ can be chosen such that
+  \begin{align*}
+    \nxzero < \delta \Rightarrow \lim_{t \to \infty} \x\argt = \boldzero.
+  \end{align*}
+\end{definition}
+
+Further, an even stronger form of stability is of interest in this work:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ is {\bf exponentially stable} if there
+  exist real constants $c, k, \lambda > 0$ such that
+  \begin{align*}
+    \nxt \leq k \nxtnaught e^{-\lambda (t - t_{0})} \ \forall \ \nxtnaught
+    < c.
+  \end{align*}
+\end{definition}
+
+
+\subsection{Discrete Systems}
+
+In analogy to continuous systems, consider the autonomous system which satisfies
+the difference equation
+\begin{align}
+  \label{eq:disc-sys}
+  x_{k+1} = f(x_{k}).
+\end{align}
+where $f : \D \to \D$ is a locally Lipschitz vector field valid on some domain
+$\D \subset \Rn$.
+%
+Without loss of generality, suppose that the system \eqref{eq:disc-sys} has an
+equilibrium point at the origin;
+%
+in other words, $f\argbzero = \boldzero$.
+%
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ of \eqref{eq:disc-sys} is stable if, for each $\epsilon > 0$,
+  $\exists \delta > 0$ such that
+  \begin{align*}
+    \nxkzero < \delta \Rightarrow \nxk < \epsilon \ \forall \ k
+    \geq 0.
+  \end{align*}
+  The equilibrium point is unstable if it is not stable.
+\end{definition}
+
+In addition to the above definition, there are stricter forms of stability:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ of \eqref{eq:disc-sys} is {\bf asymptotically stable} if it is
+  stable and $\delta$ can be chosen such that
+  \begin{align*}
+    \nxkzero < \delta \Rightarrow \lim_{k \to \infty} \xk = \boldzero.
+  \end{align*}
+\end{definition}
+
+Further, an even stronger form of stability is of interest in this work:
+\begin{definition}
+  The equilibrium point $\x = \boldzero$ of \eqref{eq:disc-sys} is {\bf
+    exponentially stable} if there exist real constants $\alpha, \beta, c> 0$
+  such that, for all $\nxknaught < c$ and $k \geq k_{0}$,
+  \begin{align*}
+    \nxk \leq \beta \nxknaught^{\alpha}.
+  \end{align*}
+\end{definition}
+
+\subsection{Hybrid Systems}

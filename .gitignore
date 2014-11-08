@@ -8,6 +8,7 @@
 *.lot
 *.out
 *.toc
+*.tdo
 dissertation.pdf
 outline.pdf
 myrefs.bib
