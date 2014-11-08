@@ -1,5 +1,54 @@
 \chapter{\uppercase{Simulation Results}} \label{chap:simulations}
 
+This chapter provides example systems to help provide intuition into energy
+shaping procedures and to demonstrate the outcome of applying energy shaping to
+these example systems.
+%
+Four examples are covered and they are arranged by complexity.
+%
+The first example covered is the cart--spring system, which is a
+single--degree-of-freedom system.
+%
+This example is, perhaps, the most informative due its simplicity:
+%
+with one degree-of-freedom, it is possible to provide figures demonstrating the
+domain of attraction and to plot a proper phase portrait.
+%
+The next example is the compass gait biped walking down a shallow slope.
+%
+This system which is motivated largely by McGeer's work \cite{McGeer1990} has
+two degrees-of-freedom and exhibits conservation of energy in the continuous
+dynamics.
+%
+The third system is a three-link biped with a torso walking on flat ground under
+the influence of Controlled Symmetries \cite{Spong2005} and additional
+non-conservative forcing.
+%
+The fourth and final system is a seven-link, multi-domain biped which uses a
+number of controllers to achieve walking.
+%
+This model is rather complex in comparison to the other examples and is provided
+primarily to demonstrate energy shaping on multi-domain hybrid systems.
+
+In addition to verifying the formal results guaranteed by
+\thmref{theorem:main-theorem}, this chapter will also attempt to provide some
+substance to the claims made about the benefits of energy shaping.
+%
+It was loosely mentioned that energy shaping can be used to improve robustness
+of systems with respect to perturbations in initial conditions.
+%
+Although it may be possible to demonstrate the domain of attraction for some
+models, doing so requires the explicit construction of a Lyapunov function.
+%
+And though \thmref{theorem:main-theorem} guarantees the implicit existence of a
+valid Lyapunov function by fulfilling the necessary conditions for Lyapunov's
+direct method (converse Lyapunov theorem), it does not provide the explicit
+function in much the same way as the definition of time-to-impact as an implicit
+function does not provide any clue as to its explicit form.
+%
+As a result and because of the difficulty of guessing a Lyapunov function, 
+
+
 
 
 \begin{figure}[t!]
@@ -7,17 +56,30 @@
   \def\svgwidth{0.7\columnwidth}
   \input{figs/cart_spring.eps_latex}
   \caption[Configuration of the cart--spring system.]{Configuration of the
-    cart--spring system.}
+    cart--spring system. Values used in simulation shown in \tabref{tab:cart_spring_parameters}.}
   \label{fig:cart-spring-configuration}
 \end{figure}
 
-\section{Cart--Spring System}
+\begin{table}[t!]
+  \caption{Physical parameters for the cart--spring simulation.}
+  \label{tab:cart_spring_parameters}
+  \centering
+  \begin{tabular}{c c c}
+    $M = 1 \ \mathrm{kg},$ &
+    $K = 1 \ \mathrm{N/m},$ &
+    $\gamma = .2 \ \mathrm{kg/m^{2}/s}$
+  \end{tabular}
+  \vspace{-1em}
+\end{table}
+
+\section{Cart--Spring System}\label{sec:cart_spring}
 
 The simplest example system to which energy shaping can be applied is a system
 with a one-dimensional configuration space.
 %
-The cart--spring system shown in \figref{fig:cart-spring-configuration} is just
-such a system and can be used to build intuition into the methods presented.
+The cart--spring system shown in \figref{fig:cart-spring-configuration} (with
+simulation parameters given in \tabref{tab:cart_spring_parameters}) is just such
+a system and can be used to build intuition into the methods presented.
 
 \subsection{Setup}
 
@@ -36,7 +98,10 @@ associated velocity $\dq$, leads to the configuration space $\Q = \R$ with
 tangent bundle $T\Q = \R^{2}$ which has coordinates $\x = \argsqdq \in \T\Q$.
 %
 Disregarding physical restrictions on spring length leads to the domain of
-admissibility for the system being entire, i.e., $\D = \R^{2}$.
+admissibility for the system being entire, i.e.,
+\begin{align*}
+  \D = \R^{2}.
+\end{align*}
 %
 The dynamics of the system obeys the differential equation
 \begin{align*}
@@ -51,7 +116,7 @@ shaping cannot be directly applied.
 However, this system can be made amenable to energy shaping by embedding it
 in a hybrid system.
 %
-Consider that the motion of the spring--cart system involves oscillation about
+Consider that the motion of the cart--spring system involves oscillation about
 the origin.
 %
 Thus all non-trivial trajectories pass through the origin repeatedly, so a
@@ -84,8 +149,9 @@ where
       \end{array}\right).
 \end{align*}
 
-For the constructed hybrid system, the discrete dynamics for the configuration
-and velocity do not change.
+For the constructed hybrid system, the discrete dynamics do not have any effect
+on the configuration and velocity; in other words, the discrete dynamics is the
+identity map.
 %
 Moreover, with no control input, the system is conservative and does not exhibit
 asymptotic stability.
@@ -100,14 +166,14 @@ forcing, i.e.,
 \begin{align*}
   \x = \argsqdqW
 \end{align*}
-where $W$ is the energy storage function as in \eqref{eq:ncsys-nrg-cons}.
+where $\W$ is an energy storage function as in \eqref{eq:storage-function-Fnc}.
 %
 Applying the feedback control law
 \begin{align}
   \label{eq:spring_cart_vdp_controller}
   \uu = \vv\argsqdq = \gamma(1 - \q^{2}) \, \dq + w
 \end{align}
-with $\gamma = .2$ leads to the hybrid control system
+with $\gamma \in \Rnn$ leads to the hybrid control system
 \begin{align}
   \label{eq:hcs_cart_spring}
   \HCSbar = \left\{
@@ -118,7 +184,8 @@ with $\gamma = .2$ leads to the hybrid control system
 \end{align}
 where the nominal controller is subsumed under the system dynamics and energy
 flow is tracked in the $W$ coordinate, viz.
-\begin{align*}
+\begin{align}
+  \label{eq:FGbar_cart_spring}
   \xfbar\argsqdq = \left(\begin{array}{c}
       \dq\\
       -\frac{K}{M} \q + \frac{1}{M} \gamma(1 - \q^{2}) \, \dq\\
@@ -129,14 +196,14 @@ flow is tracked in the $W$ coordinate, viz.
       \frac{1}{M}\\
       0
     \end{array}\right),
-\end{align*}
+\end{align}
 and the reset map acts to reset the stored energy, i.e.,
 \begin{align*}
   \Delta\argsqdq = (\q, \dq, 0).
 \end{align*}
 %
 The hybrid control system \eqref{eq:hcs_cart_spring} is of the same form as
-\eqref{eq:hcs_bar} but it written in a more compact way.
+\eqref{eq:hcs_bar} but is written in a more compact way.
 
 
 \begin{figure*}[htp!]
@@ -166,8 +233,9 @@ Beginning from the (post-reset) initial condition
   \argsqdqW = (0, -.1, 0),
 \end{align*}
 a simulation was conducted to illustrate the nominal behavior of cart--spring
-system governed by \eqref{eq:hcs_cart_spring} under the Van der Pol controller
-defined in \eqref{eq:spring_cart_vdp_controller} with $w = 0$;
+system governed by \eqref{eq:hcs_cart_spring} and \eqref{eq:FGbar_cart_spring}
+under influence of the Van der Pol controller defined in
+\eqref{eq:spring_cart_vdp_controller} with $w = 0$;
 %
 that is, the closed-loop hybrid system
 \begin{align}
@@ -179,11 +247,24 @@ that is, the closed-loop hybrid system
     \end{array}\right.
 \end{align}
 %
-The simulation was constructed to terminate when the distance between successive
+The parameters used are given in \tabref{tab:cart_spring_parameters}; two of the
+parameters refer to the mass and spring constant as shown in \figref{fig:cart-spring-configuration}.
+%
+The simulation was designed to terminate when the distance between successive
 crossings of the \Poincare{} section \eqref{eq:cart_spring_guard} dropped below
-a threshold---in this case, $10^{-3}$---which served as the convergence
+a threshold---in this case, $10^{-3}$---thus serving as the convergence
 criterion.
 %
+Mathematically, this convergence criterion can be expressed as
+\begin{align}
+  \label{eq:cart_spring_convergence}
+  \P_{\TI\arx}\arx - \x < 10^{-3}, \quad \x \in \Guard.
+\end{align}
+%
+In this case, the distance metric is the standard Euclidean one and involves
+only the velocity coordinate due to the definition of the \Poincare{} section
+\eqref{eq:cart_spring_guard}.
+
 From \figref{fig:cart_spring_simulation_nominal}, it is apparent that the
 simulation lasted just under $70$ seconds.
 %
@@ -197,12 +278,13 @@ on the aforementioned criterion requires 11 ``steps'';
 in other words, the cart passes through the origin from the positive side 11
 times.
 
+
 From the evolution of the coordinates shown in
 \figref{fig:cart_spring_simulation_nominal}, it is apparent that the
 oscillations grow until the system reaches the limit cycle.
 %
 The conserved energy of the limit cycle (as defined in
-\eqref{eq:cart_spring_guard}) can be seen to change between iterations in \figref{fig:cart_spring_simulation_nominal}.
+\eqref{eq:ncsys-nrg-cons} and \eqref{eq:storage-function-Fnc}) can be seen to change between iterations in \figref{fig:cart_spring_simulation_nominal}.
 %
 This jump is a result of the resetting of the storage function, $W$, which
 occurs when the cart passes through the switching surface
@@ -214,10 +296,51 @@ To demonstrate the effect of energy shaping, a simulation was conducted on the
 cart--spring system described in the previous subsection.
 %
 The relevant hybrid control system for the application of energy shaping is
-given in \eqref{eq:hcs_bar}.
+given in \eqref{eq:hcs_cart_spring} and \eqref{eq:FGbar_cart_spring}.
 %
 In contrast to the nominal simulation, this simulation was conducted with $w$
-given by the min--norm control law \eqref{eq:}
+given by the min-norm control law \eqref{eq:min-norm} designed to satisfy the
+conditions of energy shaping \eqref{eq:es-qp}, which results in the
+hybrid system
+\begin{align}
+  \label{eq:hs_cart_spring_es}
+  \HSbar = \left\{
+  \begin{array}{l l}
+    \dx\hphantom{^+} = \xfbar\argsqdq + \xgbar \, \mueps\argsqdqW, & \argsqmdqm \in \D \setminus \Guard,\\
+    \xp = \Delta\argsqmdqm, & \argsqmdqm \in \Guard,
+  \end{array}\right.
+\end{align}
+with $\xfbar$ and $\xgbar$ as given in \eqref{eq:FGbar_cart_spring}.
+
+The results of the simulation of \eqref{eq:hs_cart_spring_es} are shown in
+\figref{fig:cart_spring_simulation_shaped}.
+%
+Like the simulation of the nominal system, this simulation of the shaped system
+\eqref{eq:hs_cart_spring_es} was designed to terminate upon convergence using
+the same criterion as specified in \eqref{eq:cart_spring_convergence}.
+%
+From this figure, it is immediately obvious that convergence occurs in fewer
+steps than for the nominal simulation;
+%
+for this shaped simulation, convergence requires three steps (count the
+zero-crossings of $q$ in the middle plot of
+\figref{fig:cart_spring_simulation_shaped}) and the simulation lasted under 20
+seconds.
+%
+In addition, it is apparent from the phase portrait that the convergence happens
+very rapidly.
+%
+The speed of convergence can be affected by varying the gain $\resclfparam$ of
+the energy shaping controller \eqref{eq:es-qp}.
+
+These numerical simulations show that energy shaping can provide improved
+convergence properties for stable systems.
+%
+However, because the Van der Pol controller is globally stable, it is not
+possible to demonstrate an increase in domain of attraction;
+%
+this benefit of energy shaping will be shown in the next example.
+
 
 \begin{figure*}[htp!]
   \centering
@@ -249,37 +372,42 @@ given by the min--norm control law \eqref{eq:}
   \label{fig:simulation-model}
   \vspace{-1em}
 \end{figure}
-% 
+
 \begin{table}[t]
   \caption{Physical parameters for the simulation model.}
   \label{tab:mparam}
   \centering
   \begin{tabular}{c c c c}
-    $M =20 \ \mathit{kg},$ &
-    $m = 5 \ \mathit{kg},$ &
-    $\ell = 1 \ \mathit{m},$ &
-    $\gamma = .05 \ \mathit{rads}$
+    $M =20 \ \mathrm{kg},$ &
+    $m = 5 \ \mathrm{kg},$ &
+    $\ell = 1 \ \mathrm{m},$ &
+    $\gamma = .05 \ \mathrm{rads}$
   \end{tabular}
   \vspace{-1em}
 \end{table}
 
-\begin{figure}
+\section{Compass-Gait Biped}
+
+\begin{figure}[p!]
   \centering
   \includegraphics[width=0.75\columnwidth]{cg-limit-cycle}
   \caption{Limit cycle of the passive compass gait biped.}
   \label{fig:lc}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[p!]
   \centering
   \includegraphics[width=0.75\columnwidth]{cg-pp-fall}
   \caption{The passive system cannot recover from distant states.}
   \label{fig:pp-fall}
 \end{figure}
 
-\section{Compass-Gait Biped}
+With slightly greater complexity than the cart--spring system described in
+\secref{sec:cart_spring}, the compass-gait biped is a two-link rigid kinematic
+chain with periodic impacts (foot-strike) which cause instantaneous jumps in the
+velocity coordinates.
 
-Using the compass gait biped shown in \figref{fig:simulation-model} with model
+Using the compass-gait biped model shown in \figref{fig:simulation-model} with
 parameters as shown in \tabref{tab:mparam}, simulations were conducted to
 demonstrate the effectiveness of the energy shaping procedure.
 %
@@ -301,6 +429,10 @@ on the guard with eigenvalues
 \end{align}
 %
 corresponding to a linearization of the \Poincare{} map restricted to the guard.
+%
+Due to the restriction to the guard, the \Poincare{} section is a
+codimension-one hyperplane and is thus characterized with fewer coordinates (one
+fewer).
 %
 Because these eigenvalues have magnitude below unity, the corresponding hybrid
 periodic orbit is locally exponentially stable.
@@ -333,14 +465,14 @@ When energy shapping is added by choosing $\frac{c_{3}}{\resclfparam} = 1$ as in
 condition and quickly converges to the limit cycle.
 %
 
-\begin{figure}
+\begin{figure}[p!]
   \centering
   \includegraphics[width=0.75\columnwidth]{cg-pp-recover}
   \caption{Energy shaping allows recovery from more distant states.}
   \label{fig:pp-recover}
 \end{figure}
 
-\begin{figure}
+\begin{figure}[p!]
   \centering 
   \includegraphics[width=0.75\columnwidth]{cg-energy-comp}
   \caption{Convergence has more desirable behavior with energy shaping. Smaller
@@ -375,7 +507,8 @@ Finally, it seems, stability is mainted for large values of $\resclfparam$,
 smaller values will result in better convergence so a trade-off naturally
 arises.
 
-\begin{figure}[tp!]
+
+\begin{figure}[t!]
   \centering
     \centering
     \includegraphics[width=0.75\columnwidth]{cg-poincare-cloud}
