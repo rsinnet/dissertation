@@ -170,7 +170,7 @@ conserved energy function through the continuous dynamics of a hybrid system of
 the form \eqref{eq:hcsys} with the goal of not destabilizing the overall hybrid
 system.
 %
-As mentioned in \chapref{ch:stability}, there are multiple types of stability
+As mentioned in \secref{sec:hsys-stability}, there are multiple types of stability
 depending upon the type convergence exhibited by a system.
 %
 Energy shaping shaping seeks to achieve exponential convergence to a desired
@@ -202,7 +202,7 @@ where $R$ is given by
   R\argsqdq := \left(\B\argsq \, \vv\argsqdq\right)^{T} \frac{d\q}{dt}.
 \end{align*}
 %
-Using this storage function $\W$, augment the state space viz.
+Using the storage function $\W$, augment the state space viz.
 \begin{align*}
   \x := \argsqdqW.
 \end{align*}
@@ -213,14 +213,13 @@ account as follows:
   \xfbar\argsqdq := \left(\begin{array}{c}
       \xf\argsqdq + \xg\argsqdq \, \vv\argsqdq\\
       R\argsqdq
-    \end{array}\right), &&
+    \end{array}\right), \qquad
   \xgbar\argsq := \left(\begin{array}{c}
       \xg\argsq\\
       \boldzero
     \end{array}\right).
 \end{align*}
-Using the augmented state leads to the followed definition of an augmented
-hybrid control system:
+Using the augmented state leads to the following hybrid control system:
 \begin{align}
   \HCSbar = \left\{
     \begin{array}{l c l}
@@ -244,8 +243,8 @@ hybrid control system:
     \end{array}\right.
   \label{eq:hcs_bar}
 \end{align}
-where $\Deltaq$, $\Deltadq$, and $\DeltaW$, respectively, represent the $\q$, $\dq$, and
-$\W$ components of the reset map, $\Delta$.
+where $\Deltaq$, $\Deltadq$, and $\DeltaW$, respectively, represent the $\q$,
+$\dq$, and $\W$ components of the reset map, $\Delta$.
 %
 Under this formulation, the conserved energy can be expressed as
 \begin{align*}
@@ -262,8 +261,8 @@ the control Lyapunov function.
 
 \section{Control Lyapunov Functions}
 
-The energy shaping controller relies on the use of {\em control Lyapunov
-  functions} \cite{Artstein1983,Freeman1996}, which are a natural extension of
+The energy shaping controller relies on the use of the {\em control Lyapunov
+  function} \cite{Artstein1983,Freeman1996}, which is a natural extension of
 Lyapunov's direct method.
 %
 Recall that a system of the form
@@ -318,7 +317,7 @@ $\xf$, i.e.,
 If control acts on the system as in
 \begin{align}
   \label{eq:ccsys-es}
-  \dx = \xf + \xg \, \uu,
+  \dx = \xf\arx + \xg\arx \, \uu,
 \end{align}
 the time derivative becomes
 \begin{align*}
@@ -332,12 +331,13 @@ introduction of control Lyapunov functions:
   \label{def:res-clf}
   For a system of the form \eqref{eq:ccsys-es}, a continuously differentiable
   function $\V : \D \to \Rnn$ is said to be a {\bf \em control Lyapunov function
-    (CLF)} if there exist constants $c_{1}, c_{2}, c_{3}, c_{4} \in \Rpd$ such
+    (CLF)} if there exist constants $c_{1}, c_{2}, c_{3}z \in \Rpd$ such
   that for all $\x \in \D$,
   %
   \begin{eqnarray*}
     &c_{1} \nx \leq \V\arx \leq c_{2} \nx,\\
-    &\inf_{\uu \in \U} \left[ \Lie{\xf} \V\arx + \Lie{\xg} \V\arx \, \uu + c_{3} \V\arx \right] \leq 0.
+    &\inf_{\uu \in \U} \left[ \Lie{\xf} \V\arx + \Lie{\xg} \V\arx \, \uu + c_{3}
+      \V\arx \right] \leq 0.
   \end{eqnarray*}
 \end{definition}
 
@@ -347,28 +347,36 @@ functions is used (c.f. \cite{Ames2014}):
 
 \begin{definition}
   \label{def:res-clf}
-  For the continuous dynamics of a system of the form \eqref{eq:hsys}, a continuously differentiable function $V_{\resclfparam} : \D \to \Rnn$ is said to be a {\bf \em rapidly exponentially stablizing control Lyapunov function (RES--CLF)} (see \cite{Ames2014}) if there exist constants $c_{1}, c_{2}, c_{3}, c_{4} \in \Rpd$ such that for all $\resclfparam > 0$ and for all $\x \in \D$,
+  For the continuous dynamics of a system of the form \eqref{eq:hsys}, a
+  continuously differentiable function $V_{\resclfparam} : \D \to \Rnn$ is said
+  to be a {\bf \em rapidly exponentially stablizing control Lyapunov function
+    (RES--CLF)} (see \cite{Ames2014}) if there exist constants $c_{1}, c_{2},
+  c_{3} \in \Rpd$ such that for all $\resclfparam > 0$ and for all $\x \in \D$,
   %
   \begin{eqnarray*}
     &c_{1} \nx \leq \Ve(\x) \leq \frac{c_{2}}{\resclfparam^{2}} \nx,\\
-    &\inf_{\uu \in \U} \left[ \Lie{\bigF} \Ve(\x) + \Lie{\bigG} \Ve(\x) \, \uu + \frac{c_{3}}{\resclfparam} \Ve(\x) \right] \leq 0.
+    &\inf_{\uu \in \U} \left[ \Lie{\bigF} \Ve(\x) + \Lie{\bigG} \Ve(\x) \, \uu +
+      \frac{c_{3}}{\resclfparam} \Ve(\x) \right] \leq 0.
   \end{eqnarray*}
 \end{definition}
 
-For the continuous dynamics, define a candidate Lyapunov function, $\V : \D \to \Rnn$, of the form
+For the continuous dynamics, define a candidate Lyapunov function, $\V : \D \to
+\Rnn$, of the form
 %
 \begin{align}
   \label{eq:lyap}
-  \Ve(\x) = \frac{1}{2} (\E(\x) - \Eref)^2,
+  \Ve(\x) = \frac{1}{2} (\Ec(\x) - \Eref)^2,
 \end{align}
 %
-with $\Eref$ the energy associated with the periodic orbit, and use it as a control Lyapunov function to construct the energy shaping controller
+with $\Eref$ the energy associated with the periodic orbit, and use it as a
+control Lyapunov function to construct the energy shaping controller
 %
 \begin{align}
   \label{eq:es-qp}
   \mueps(\x) = \argmin_{u\arx \in \R^{m}} \ & \uu\arx^T \uu\arx\\
   \nonumber
-  \mbox{s.t. } \Lie{\xf} \Ve&\arx + \Lie{\xg} \Ve\arx \, \uu\arx + \frac{c_{3}}{\resclfparam} \Ve\arx \leq 0.
+  \mbox{s.t. } \Lie{\xf} \Ve&\arx + \Lie{\xg} \Ve\arx \, \uu\arx +
+  \frac{c_{3}}{\resclfparam} \Ve\arx \leq 0.
 \end{align}
 %
 Applying this to the system \eqref{eq:hcsys} results in
@@ -385,29 +393,31 @@ Applying this to the system \eqref{eq:hcsys} results in
 As a result of the control law construction in \eqref{eq:es-qp}, the closed-loop
 dynamics of \eqref{eq:hsys-cl} is stabilized with respect to the zero level set
 of the Lyapunov function \eqref{eq:lyap} thus satisfying the convergence
-guaranteed specified in \defref{def:res-clf}.
+specified in \defref{def:res-clf}.
 
-As an added remark, it bears mentioning that a closed-form continuously
+As an added remark, it bears mentioning that a closed-form, continuously
 differentiable solution to the QP \eqref{eq:es-qp} is given by the min-norm
-controller (see, e.g., \cite{Freeman1996}), 
+controller (see, e.g., \cite{Freeman1996}),
 \begin{align}
   \label{eq:min-norm}
-  \mueps\arx = -\frac{\psieps_{0}\arx \psieps_{1}\arx}{(\psieps_{1}\arx)^{T} \psieps_{1}\arx},
+  \mueps\arx = -\frac{\psieps_{0}\arx \psieps_{1}\arx}{(\psieps_{1}\arx)^{T}
+    \psieps_{1}\arx},
 \end{align}
 where
 \begin{align*}
-  \psieps_{0}\arx := \Lie{\xf} \Ve\arx + \frac{c_{3}}{\resclfparam}, \quad
+  \psieps_{0}\arx := \Lie{\xf} \Ve\arx + \frac{c_{3}}{\resclfparam}, \qquad
   \psieps_{1}\arx := \left( \Lie{\xg} \Ve\arx \right)^{T}.
 \end{align*}
 This solution is practically useful for several reasons.
 %
 Most importantly, it provides a closed-form solution which is important for
-proving \thmref{theorem:main-theorem} (which is stated subsequently in \secref{sec:stab}).
+proving \thmref{theorem:main-theorem} (which is stated subsequently in
+\secref{sec:stab}).
 %
 In addition, it can be used in numerical simulations in place of a quadratic
 program to reduce the computational overhead (in most cases).
 %
-In the simulations described in this work in \chapref{chap:simulations}, the
+In the simulations described in \chapref{chap:simulations}, the
 min-norm solution \eqref{eq:min-norm} is used to reduce computation time.
 
   
@@ -415,44 +425,63 @@ min-norm solution \eqref{eq:min-norm} is used to reduce computation time.
 
 \section{Stability of the Shaped System} \label{sec:stab}
 
-With the preceding setup in mind, the main formal idea behind energy shaping can now be stated:\vgap
+With the preceding setup in mind, the main formal idea behind energy shaping can
+now be stated:
 %
 \begin{theorem}
   \label{theorem:main-theorem}
-  Given an exponentially-stable limit cycle in a hybrid system of the form \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp} to the control system \eqref{eq:hcsys} results in the closed-loop hybrid system \eqref{eq:hsys-cl}, which is exponentially stable.\vgap
+  Given an exponentially-stable limit cycle in a hybrid system of the form
+  \eqref{eq:hsys}, application of the energy shaping controller \eqref{eq:es-qp}
+  to the control system \eqref{eq:hcsys} results in the closed-loop hybrid
+  system \eqref{eq:hsys-cl}, which is exponentially stable.
 \end{theorem}
 %
 
 The proof is given later after some discussion.
 
 
-In order to achieve the stated goal, it is necessary to show that, given a system with a limit cycle representing the desired behavior, energy shaping can be applied and the resulting system will have an invariant orbit which is equivalent to the nominal system. Simply put, the control contribution from the energy shaping controller must be identically zero on the orbit. Consider the following lemma:\vgap
+In order to achieve the stated goal, it is necessary to show that, given a
+system with a limit cycle representing the desired behavior, energy shaping can
+be applied and the resulting system will have an invariant orbit which is
+equivalent to the nominal system. Simply put, the control contribution from the
+energy shaping controller must be identically zero on the orbit. Consider the
+following lemma:
 
 \begin{lemma}
-  Applying the energy shaping controller \eqref{eq:es-qp} to a hybrid control system \eqref{eq:hcsys} results in a closed-loop hybrid system \eqref{eq:hsys-cl} that demonstrates a periodic orbit which is identical to the unshaped system \eqref{eq:hsys}.\vgap
+  Applying the energy shaping controller \eqref{eq:es-qp} to a hybrid control
+  system \eqref{eq:hcsys} results in a closed-loop hybrid system
+  \eqref{eq:hsys-cl} that demonstrates a periodic orbit which is identical to
+  the unshaped system \eqref{eq:hsys}.
 \end{lemma}
 
 \begin{proof}
-  For states on the periodic orbit, i.e., $\xo \in \orbit$, the energy is a known constant, $E(\xo) = \Eref$.
+  For states on the periodic orbit, i.e., $\xo \in \orbit$, the conserved energy
+  is a known constant, $\Ec(\xo) = \Eref$.
   %
   Therefore, the limit cycle represents an invariant level set of the energy.
   %
-  By construction of the Lyapunov function \eqref{eq:lyap} used in the controller \eqref{eq:es-qp}, it is clear that $V(\xo) = 0$ and, moreover, that
+  By construction of the Lyapunov function \eqref{eq:lyap} used in the
+  controller \eqref{eq:es-qp}, it is clear that $V(\xo) = 0$ and, moreover, that
   %
   \begin{align*}
     \inf_{\x \in \D} V(\x) = 0.
   \end{align*}
   %
-  The solution to the optimization problem \eqref{eq:es-qp} has cost $u(\x)^T u(\x) = 0$ (which implies that all elements of $u(\x)$ are zero when $V(\x) = 0$) and this satisfies the stability condition of the control Lyapunov function;
+  The solution to the optimization problem \eqref{eq:es-qp} has cost $u(\x)^T
+  u(\x) = 0$ (which implies that all elements of $u(\x)$ are zero when $V(\x) =
+  0$) and this satisfies the stability condition of the control Lyapunov
+  function;
   %
-  indeed ${\dot V}(\xst) = 0$ since the energy does not change without external forcing.
+  indeed ${\dot V}(\xst) = 0$ since the energy does not change without external
+  forcing.
   %
   Thus, the periodic orbits are equivalent.
 \end{proof}
 
 \section{Zero Dynamics Formulation} \label{sec:zd-form}
 
-In order to understand the nature of energy shaping, consider breaking up the system into two sets of coordinates,
+In order to understand the nature of energy shaping, consider breaking up the
+system into two sets of coordinates,
 %
 \begin{align}
   \nonumber
@@ -461,9 +490,11 @@ In order to understand the nature of energy shaping, consider breaking up the sy
   \label{eq:zd-vfield}
 \end{align}
 %
-with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $\uu \in \U$.
+with states $\zdx \in \zdX$ and $\zdz \in \zdZ$ and control inputs $\uu \in
+\U$.
 %
-The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz continuous.
+The vector fields $f$, $g$, $q$, and $w$ are assumed to be locally Lipschitz
+continuous.
 %
 To simplify notation, define
 %
@@ -471,86 +502,106 @@ To simplify notation, define
   \bigF\argsxz = \left(\begin{array}{c}
     f\argsxz\\
     q\argsxz
-  \end{array}\right), \quad
+  \end{array}\right), \qquad
   \bigG \argsxz = \left(\begin{array}{c}
     g\argsxz\\
     w\argsxz
   \end{array}\right).
 \end{align*}
 %
-The natural choice of transformation to convert the continuous dynamics of \eqref{eq:hcsys} to \eqref{eq:zd-vfield} is through energy.
+The natural choice of transformation to convert the continuous dynamics of
+\eqref{eq:hcsys} to \eqref{eq:zd-vfield} is through energy.
 %
-Thus, for mechanical systems where $\x = (\q, \dq) \in T\Q$, consider the coordinate transformation
+Thus, for mechanical systems where $\x = \argsqdqW \in T\Q$, consider the
+coordinate transformation
 %
 \begin{align*}
-  \zdx &= \E(\x) - \Eref,\\
-  \zdz &= \xrem,
+  \zdx &= \Ec\arx - \Eref,\\
+  \zdz &= \xremW,
 \end{align*}
 where $n$ is the size of the configuration space, $\Q$.
 %
-By construction, the fixed point of the hybrid system can be chosen to occur at $\argsxz = \xzst$ such that $\Delta\xzst = \argszero$.
+By construction, the fixed point of the hybrid system can be chosen to occur at
+$\argsxz = \xzst$ such that $\Delta\xzst = \argszero$.
 %
-Moreover, because energy does not change by the natural dynamics, $f\argsxz = 0$.
+Moreover, because conserved energy does not change by the natural dynamics,
+$f\argsxz = 0$.
 %
 
 %
 The coordinate transformation is valid if it is locally diffeomorphic.
 %
-For mechanical systems, which are of interest to this paper, energy takes the form
+For mechanical systems, which are of interest to this paper, energy takes the
+form
 %
 \begin{align}
   \label{eq:mech-sys-nrg}
-  E(\q, \dq) = \frac{1}{2} \dq^{T} \M(\q) \dq + U(\q),
+  \Ec\arx = \frac{1}{2} \dq^{T} \M\argsq \, \dq + U\argsq - \W,
 \end{align}
 %
-where the first and second terms represent the kinetic and mechanical energy, respectively.
+where the first and second terms represent the kinetic and mechanical energy,
+respectively.
 %
-Because $\M(\q)$ is invertible for mechanical systems, it never has determinant zero.
+Because $\M(\q)$ is invertible for mechanical systems, it never has determinant
+zero.
 %
-In addition, the Jacobian matrix associated with the transformation is
+In addition, for the specific ordering of coordinates
 \begin{align*}
-  \pd{\Psi(\q, \dq)}{(\q, \dq)} =
-  \left(\begin{array}{c c}
-    I & \boldzero_{2n-1 \times 1}\\
-    \pd{E(\q, \dq)}{\xrem} & \pd{E(\q, \dq)}{\dq_{n}}
+  \Psi :=& (\zdz_{1}, \ \ldots, \ \zdz_{2n-1}, \ \zdx, \ \zdz_{2n})\\
+  =& (\q_{1}, \ \ldots, \ \q_{n}, \ \dq_{1}, \ \ldots, \ \dq_{n-1}, \ \Ec\arx -
+  \Eref, \ \W),
+\end{align*}
+the Jacobian matrix
+associated with the transformation is
+\begin{align*}
+  \pd{\Psi\argsqdqW}{\argsqdqW} =
+  \left(\begin{array}{c c c}
+    I & \boldzero_{2n-1 \times 1} & \boldzero_{2n-1 \times 1}\\
+    \pd{\Ec\argsqdqW}{\xrem} & \pd{\Ec\argsqdqW}{\dq_{n}} & 0\\
+    \boldzero_{1 \times 2n-1} & 0 & -1
   \end{array}\right).
 \end{align*}
 %
 This matrix is invertible when
 \begin{align*}
-  \det \Psi\argsxz = \pd{E(\q, \dq)}{\dq_{n}} \neq 0.
+  \det \Psi\argsxz = -\pd{\Ec\argsqdqW}{\dq_{n}} \neq 0.
 \end{align*}
-From inspection of \eqref{eq:mech-sys-nrg}, one can see that the coordinate transformation is almost everywhere diffeomorphic for physical systems.
+From inspection of \eqref{eq:mech-sys-nrg}, one can see that the coordinate
+transformation is almost everywhere diffeomorphic for physical systems.
 
 \section{Exponential Stability}
 
-Applying the control law \eqref{eq:es-qp}, the dynamics \eqref{eq:zd-vfield} becomes
-%
+Applying the control law \eqref{eq:es-qp}, the dynamics \eqref{eq:zd-vfield}
+becomes
 \begin{align}
   \nonumber
   \dot \zdx &= f\argsxz + g\argsxz \, \mueps\argsxz,\\
   \dot \zdz &= q\argsxz + w\argsxz \, \mueps\argsxz.
   \label{eq:zd-vfield-cl}
 \end{align}
-
-By the construction of the control law \eqref{eq:es-qp}, it is clear that $\mueps(0, \zdz) = 0$ and thus it follows that $f(0, \zdz) = 0$.
 %
-In other words, the zero dynamics manifold $\zdmanifold$ is the restricted subset of $X$ such that $\zdx = 0$.
+By the construction of the control law \eqref{eq:es-qp}, it is clear that
+$\mueps(0, \zdz) = 0$ and thus it follows that $f(0, \zdz) = 0$.
 %
-Rewrite the candidate Lyapunov function \eqref{eq:lyap} in the zero dynamics coordinates,
+In other words, the zero dynamics manifold $\zdmanifold$ is the restricted
+subset of $\X$ such that $\zdx = 0$.
+%
+Rewrite the candidate Lyapunov function \eqref{eq:lyap} in the zero dynamics
+coordinates,
 %
 \begin{align*}
-  V(\zdx) = \frac{1}{2} \zdx^{2}
+  V\argsx = \frac{1}{2} \zdx^{2}
 \end{align*}
 and consider the following:\vgap
 
 \begin{proposition}  
   \label{prop:res-clf}
-  Exponential stability of the continuous $\zdx$ dynamics is guaranteed if a RES--CLF exists satisfying
+  Exponential stability of the continuous $\zdx$ dynamics is guaranteed if a
+  RES--CLF exists satisfying
   %
   \begin{eqnarray}
     \label{eq:lyap-cond-nrg-es}
-    &c_{1} \nzdx^{2} \leq \V\argsx) \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx^2,\\
+    &c_{1} \nzdx^{2} \leq \V\argsx \leq \frac{c_{2}}{\resclfparam^{2}} \nzdx^2,\\
     \nonumber
     &\inf_{\uu \in \U} \left[ \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \uu + \frac{c_{3}}{\resclfparam} \V\argsx \right] \leq 0,
   \end{eqnarray}
@@ -560,16 +611,20 @@ and consider the following:\vgap
 
 
 \begin{proof}
-  It is easy to see that the first inequality is satisfied for $c_{1} \leq \frac{1}{2}$ and $c_{2} \geq \frac{\resclfparam^{2}}{2}$.
+  It is easy to see that the first inequality is satisfied for $c_{1} \leq
+  \frac{1}{2}$ and $c_{2} \geq \frac{\resclfparam^{2}}{2}$.
   %
   Define the set
   %
   \begin{align}
-    \Keps = \left\{ \uu \in \U : \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz \, \uu + \frac{c_{3}}{\resclfparam} \V(\zdx) \leq 0 \right\}.
+    \Keps = \left\{ \uu \in \U : \Lie{\bigF} \V\argsxz + \Lie{\bigG} \V\argsxz
+      \, \uu + \frac{c_{3}}{\resclfparam} \V\argsx \leq 0 \right\}.
     \label{eq:control-set}
   \end{align}
   %
-  In order to see that the set $\Keps$ is not empty, consider the control Lypaunov function system in the original coordinates as given in \eqref{eq:lyap}.
+  In order to see that the set $\Keps$ is not empty, consider the control
+  Lypaunov function system in the original coordinates as given in
+  \eqref{eq:lyap}.
   %
   The time derivative is
   %
@@ -590,7 +645,8 @@ and consider the following:\vgap
       \right].
   \end{align*}
   %
-  For a fully-actuated system, $\ncv = \ndim$ so $\B : \Q \to \R^{\ndim \times \ncv}$ is full rank.
+  For a fully-actuated system, $\ncv = \ndim$ so $\B : \Q \to \R^{\ndim \times
+    \ncv}$ is full rank.
   %
   Since $M(\q)$ is invertible for physical bodies, $M(\q) B(\q)$ is invertible.
   %
@@ -602,11 +658,14 @@ and consider the following:\vgap
     \M^{-1}(\q) \CG(\q, \dq).
   \end{align*}
   %
-  and, for the CLF \eqref{eq:lyap-cond-nrg-es} with any such locally Lipschitz continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that solutions satisfy
+  and, for the CLF \eqref{eq:lyap-cond-nrg-es} with any such locally Lipschitz
+  continuous feedback control law $u : \zdX \times \zdZ \to \K$, it follows that
+  solutions satisfy
   %
   \begin{align}
     \label{eq:xt-bounds}
-    \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}} e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|
+    \| \zdx(t) \| \leq \frac{1}{\resclfparam} \sqrt{\frac{c_{2}}{c_{1}}}
+    e^{-\frac{c_{3}}{2\resclfparam} t} \| \zdx(0) \|
   \end{align}
   for all $t \geq 0.$
 \end{proof}
@@ -627,7 +686,7 @@ with the reset map (expressed in the zero dynamics coordinates) viz.
           \begin{array}{r c l}
             {\dot \zdx} &=& f\argsxz + g\argsxz \, \uu\\
             {\dot \zdz} &=& q\argsxz + w\argsxz \, \uu
-          \end{array}}\right\} & \mbox{ if } \argsxz \in \D \setminus \Guard,\\
+          \end{array}}\right\} & \mbox{ if } \argsxzm \in \D \setminus \Guard,\\
       % 
       \begin{array}{r c l}
         \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
@@ -637,11 +696,13 @@ with the reset map (expressed in the zero dynamics coordinates) viz.
             \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
             \zdz^{+} &=& \DeltaZ(\zdx^{-}, \zdz^{-})
           \end{array}}\right\}
-      & \mbox{ if } \argsxz \in \Guard.
+      & \mbox{ if } \argsxzm \in \Guard.
     \end{array}\right.
 \end{align}
 % 
-Applying a valid Lipschitz continuous control law (which takes values in \eqref{eq:control-set}) to the hybrid control system \eqref{eq:zd-hcsys} results in the closed loop hybrid system
+Applying a valid Lipschitz continuous control law (which takes values in
+\eqref{eq:control-set}) to the hybrid control system \eqref{eq:zd-hcsys} results
+in the closed loop hybrid system
 %
 \begin{align}
   \label{eq:zd-hsys-cl}
@@ -654,7 +715,7 @@ Applying a valid Lipschitz continuous control law (which takes values in \eqref{
     \left.\vphantom{\begin{array}{r c l}
           {\dot \zdx} &=& f\argsxz + g\argsxz \, \mueps\argsxz\\
           {\dot \zdz} &=& q\argsxz + w\argsxz \, \mueps\argsxz
-        \end{array}}\right\} & \mbox{ if } \argsxz \in \D \setminus \Guard,\\
+        \end{array}}\right\} & \mbox{ if } \argsxzm \in \D \setminus \Guard,\\
     % 
     \begin{array}{r c l}
       \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
@@ -663,13 +724,15 @@ Applying a valid Lipschitz continuous control law (which takes values in \eqref{
     \left.\vphantom{\begin{array}{r c l}
           \zdx^{+} &=& \DeltaX(\zdx^{-}, \zdz^{-})\\
           \zdz^{+} &=& \DeltaZ(\zdx^{-}, \zdz^{-})
-        \end{array}}\right\} & \mbox{ if } \argsxz \in \Guard.
+        \end{array}}\right\} & \mbox{ if } \argsxzm \in \Guard.
   \end{array}\right.
 \end{align}
 
 \section{Proof of Main Result} \label{sec:proof}
 
-Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \Guard \to \Guard$ and let $\flow_{t}\argsxz$ represent a flow of the vector field for time $t$ starting from state $\argsxz$.
+Let the \Poincare{} map of \eqref{eq:hsys-cl} be denoted $\Pe : \Guard \to
+\Guard$ and let $\flow_{t}\argsxz$ represent a flow of the vector field for time
+$t$ starting from state $\argsxz$.
 %
 The \Poincare{} map takes the form
 %
@@ -680,21 +743,28 @@ The \Poincare{} map takes the form
 %
 where $\TIe\argsxz$ is the time to impact.
 %
-Before proving the main theorem, some bounds related to the \Poincare{} map must be established using arguments similar to those presented in \cite{Ames2014,Morris2005}.
+Before proving the main theorem, some bounds related to the \Poincare{} map must
+be established using arguments similar to those presented in
+\cite{Ames2014,Morris2005}.
 
-First, however, note that since the reset map is locally Lipschitz continuous about the fixed point $\argsxz = \xzst$ and because $\DeltaX\xzst = 0$, it follows that
+First, however, note that since the reset map is locally Lipschitz continuous
+about the fixed point $\argsxz = \xzst$ and because $\DeltaX\xzst = 0$, it
+follows that
 %
 \begin{align} 
   \nonumber
-  \left\| \DeltaX\argsxz - \DeltaX\xzst \right\| &\leq \left\| \Delta\argsxz - \Delta\xzst \right\|
+  \left\| \DeltaX\argsxz - \DeltaX\xzst \right\| &\leq \left\| \Delta\argsxz -
+    \Delta\xzst \right\|
   \\
   \label{eq:impact-Lipschitz}
   &\leq \LDelta \nzdxzst
 \end{align}
 %
-for some $\argsxz \in \B_{\gamma}\xzst$ with $\gamma > 0$ where $\LDelta$ is the Lipschitz constant of $\Delta\argsxz$.
+for some $\argsxz \in \B_{\gamma}\xzst$ with $\gamma > 0$ where $\LDelta$ is the
+Lipschitz constant of $\Delta\argsxz$.
 
-Now, consider the following bounds on the time-to-impact functions and \Poincare{} maps:\vgap
+Now, consider the following bounds on the time-to-impact functions and
+\Poincare{} maps:
 
 \begin{lemma}
   \label{lemma:TIe-P-bounds}
@@ -708,30 +778,42 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   where $\limeps \ATIe = 0$ and $\limeps\Ae = 0$.\vgap
 \end{lemma}
 \begin{proof}
-  Consider the \Poincare{} section $\PSection$ which is the guard from \eqref{eq:guard}.
+  Consider the \Poincare{} section $\PSection$ which is the guard from
+  \eqref{eq:guard}.
   %
-  Using the change of coordinates $\rho(\resclfparam) := \tfrac{1}{\resclfparam}$, define the function
+  Using the change of coordinates $\rho(\resclfparam) :=
+  \tfrac{1}{\resclfparam}$, define the function
   %
   \begin{align*}
     N(t, \rho, \zdx, \zdz) = h(\flowrhot(\Deltaxz)),
   \end{align*}
   %
-  which is locally Lipschitz continuous in $\zdx$, $\zdz$, and $\rho$ by construction as a composition of Lipschitz continuous functions.
+  which is locally Lipschitz continuous in $\zdx$, $\zdz$, and $\rho$ by
+  construction as a composition of Lipschitz continuous functions.
   %
   By the transversality assumption, it follows that
   %
   \begin{align*}
-    \pd{N(T, 0, 0, \zdzst)}{t} &= \dot h(\flow^{0}_{t} (\Delta(0, \zdzst)) \ne 0.
+    \pd{N(T, 0, 0, \zdzst)}{t} &= \dot h(\flow^{0}_{t} (\Delta(0, \zdzst)) \ne
+    0.
   \end{align*}
 
   %
-  Thus, by the implicit function theorem (\cite{Sun2001}), there exists a $\delta > 0$ and a unique function $\taurho(\rho, \zdx, \zdz)$ defined and locally Lipschitz for all $(\rho, \zdx, \zdz) \in \B_{\delta}(0, 0, \zdzst)$ such that $\tau^{0}(0, \zdzst) = \TI(0, \zdzst) = \Tst$ where $\Tst$ is the period of the invariant orbit $\Orbit$ and
+  Thus, by the implicit function theorem (\cite{Sun2001}), there exists a
+  $\delta > 0$ and a unique function $\taurho(\rho, \zdx, \zdz)$ defined and
+  locally Lipschitz for all $(\rho, \zdx, \zdz) \in \B_{\delta}(0, 0, \zdzst)$
+  such that $\tau^{0}(0, \zdzst) = \TI(0, \zdzst) = \Tst$ where $\Tst$ is the
+  period of the invariant orbit $\Orbit$ and
   %
   \begin{align*}
     N(\taurho\argsxz, \rho, \zdx, \zdz) = 0.
   \end{align*}
   %
-  In addition, selecting a fixed  $\resclfparam > 0$ and a Lipschitz continuous feedback control law $\mueps \in \Keps\argsxz$ such as the min-norm controller \cite{Freeman1996}, it follows that for some (possibly smaller) $\delta > 0$ and $\argsxz \in \B_{\delta}\xzst \cap \Guard$, the time-to-impact function $\TIe\argsxz$ satisfies
+  In addition, selecting a fixed  $\resclfparam > 0$ and a Lipschitz continuous
+  feedback control law $\mueps \in \Keps\argsxz$ such as the min-norm controller
+  \cite{Freeman1996}, it follows that for some (possibly smaller) $\delta > 0$
+  and $\argsxz \in \B_{\delta}\xzst \cap \Guard$, the time-to-impact function
+  $\TIe\argsxz$ satisfies
   %
   \begin{align}
     \label{eq:TIe-bounds}
@@ -739,13 +821,17 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   \end{align}
   %
   
-  The rest of the proof involves constructing an auxiliary time-to-impact function, $\TB$, which is locally Lipshitz continuous and independent of $\resclfparam$, and then relating it to $\TIe$.
+  The rest of the proof involves constructing an auxiliary time-to-impact
+  function, $\TB$, which is locally Lipshitz continuous and independent of
+  $\resclfparam$, and then relating it to $\TIe$.
   %
   
-  Let $\eta \in \R^{n}$ be a constant vector and, using the guard $h\argsxz$, define
+  Let $\eta \in \R^{n}$ be a constant vector and, using the guard $h\argsxz$,
+  define
   %
   \begin{align*}
-    \TB(\eta, \zdx, \zdz) = \inf\{t \geq 0 : h(\eta + \flowt(\Delta(0, \zdzst))) = 0\}.
+    \TB(\eta, \zdx, \zdz) = \inf\{t \geq 0 : h(\eta + \flowt(\Delta(0, \zdzst)))
+    = 0\}.
   \end{align*}
   %
   From this, it directly follows that $\TB(0, \zdx, \zdz) = \TI\argsxz$.
@@ -777,7 +863,8 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   %
   \begin{align}
     \label{eq:etaeps}
-    \etaeps = \left.\argsxzti{1}\right|_{t = \TIe\argsxz} - \left.\argsxzti{2}\right|_{t = \TIe\argsxz}
+    \etaeps = \left.\argsxzti{1}\right|_{t = \TIe\argsxz} -
+    \left.\argsxzti{2}\right|_{t = \TIe\argsxz}
   \end{align}
   %
   and as a result,
@@ -788,20 +875,23 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   %
   Now $\mu$ must be bounded.
 
-  The explicit solution to the QP \eqref{eq:es-qp} is given by the min-norm control law \cite{Freeman1996}:
+  The explicit solution to the QP \eqref{eq:es-qp} is given by the min-norm
+  control law \cite{Freeman1996}:
   %
   \begin{align*}
-    \mueps\argsxz = -\frac{\psieps_{0}\argsxz \psieps_{1}\argsxz}{(\psieps_{1})^{T}\argsxz \psieps_{1}\argsxz},
+    \mueps\argsxz = -\frac{\psieps_{0}\argsxz
+      \psieps_{1}\argsxz}{(\psieps_{1})^{T}\argsxz \psieps_{1}\argsxz},
   \end{align*}
   %
   with
   %
   \begin{align*}
-    \psieps_{1}\argsxz := \Lie{\bigF} \Ve\argsxz + \frac{c_{3}}{\resclfparam}, \quad
-    \psieps_{2}\argsxz := \left( \Lie{\bigG} \Ve\argsxz \right)^{T},
+    \psieps_{1}\argsxz := \Lie{\bigF} \Ve\argsxz + \frac{c_{3}}{\resclfparam},
+    \qquad \psieps_{2}\argsxz := \left( \Lie{\bigG} \Ve\argsxz \right)^{T},
   \end{align*}
   %
-  where $\Lie{\bigF} \Ve\argsxz \equiv 0$ by the choice of $\Ve\argsxz$ as energy.
+  where $\Lie{\bigF} \Ve\argsxz \equiv 0$ by the choice of $\Ve\argsxz$ as
+  energy.
   %
   Since energy does not change by the natural dynamics,
   %
@@ -812,7 +902,9 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
       \left( \pd{V_{e}\argsxz}{\argsxz} \right)^{T}}.
   \end{align*}
   %
-  If, in addition, $\bigG$ is full rank and takes values in a compact set for states near the orbit, i.e., $\bigG\argsxz \in \stabletube$ and $d_{1} \leq \| \bigG\argsxz \| \leq d_{2}$, then
+  If, in addition, $\bigG$ is full rank and takes values in a compact set for
+  states near the orbit, i.e., $\bigG\argsxz \in \stabletube$ and $d_{1} \leq \|
+  \bigG\argsxz \| \leq d_{2}$, then
   %
   \begin{align}
     \nonumber
@@ -834,39 +926,61 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
       \, \zdx \right\|}{\left\|
       \sum_{i} \bigG_{i,i}^{2}\argsxz \right\| \nzdx^{2}}\\
     \label{eq:mueps-bounds}
-    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG}{\lambdaminG} \nzdx,
+    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG}{\lambdaminG}
+    \nzdx,
   \end{align}
   %
   with
   %
   \begin{align*}
-    \lambdamaxG &:= \sup \left\{\lambdamax\bigG\argsxz : \argsxz \in \stabletube \right\},\\
-    \lambdaminG &:= \inf \left\{\lambdamin\bigG\argsxz : \argsxz \in \stabletube \right\},
+    \lambdamaxG &:= \sup \left\{\lambdamax\bigG\argsxz : \argsxz \in \stabletube
+    \right\},\\
+    \lambdaminG &:= \inf \left\{\lambdamin\bigG\argsxz : \argsxz \in \stabletube
+    \right\},
   \end{align*}
   %
-  where $\stabletube \subset \D$ is a stable tube around the periodic orbit $\Orbit$.
+  where $\stabletube \subset \D$ is a stable tube around the periodic orbit
+  $\Orbit$.
   %
-  In addition, by the Lipschitz assumption $\bigF$ is bounded around $\Orbit$, hence
+  In addition, by the Lipschitz assumption $\bigF$ is bounded around $\Orbit$,
+  hence
   %
   \begin{align*}
-    \supF := \sup \left\{ \left\| \bigF\argsxz \right\| : \argsxz \in \stabletube \right\}.
+    \supF := \sup \left\{ \left\| \bigF\argsxz \right\| : \argsxz \in
+      \stabletube \right\}.
   \end{align*}
 
-  The expression $\etaeps$ in \eqref{eq:etaeps} is bounded using \eqref{eq:mueps-bounds} and \eqref{eq:xt-bounds}:
+  The expression $\etaeps$ in \eqref{eq:etaeps} is bounded using
+  \eqref{eq:mueps-bounds} and \eqref{eq:xt-bounds}:
   %
   \begin{align}
     \nonumber
-    \|\etaeps\| &\leq \int_{0}^{\TIe\argsxz} \! \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau\\
+    \|\etaeps\| &\leq \int_{0}^{\TIe\argsxz} \! \left\| \bigG\argsxztau \,
+      \mueps\argsxztau \, \right\| d\tau\\
     \nonumber
-    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \int_{0}^{\TIeDelta} \! \nzdxt d\tau\\
+    &\leq \frac{c_{2}c_{3}}{\resclfparam^{3}}
+    \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \int_{0}^{\TIeDelta} \! \nzdxt
+    d\tau\\
     \nonumber
-    &\leq \frac{c_{2}^{\frac{3}{2}}c_{3}}{c_{1}^{\frac{1}{2}}\resclfparam^{4}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \nzdxzero \int_{0}^{\TIeDelta} \! \left|e^{-\frac{c_{3}}{2\resclfparam} \tau} \right| d\tau\\
+    &\leq \frac{c_{2}^{\frac{3}{2}}c_{3}}{c_{1}^{\frac{1}{2}}\resclfparam^{4}}
+    \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \nzdxzero \int_{0}^{\TIeDelta} \!
+    \left|e^{-\frac{c_{3}}{2\resclfparam} \tau} \right| d\tau\\
     \nonumber
-    &\leq \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \nzdxzero \, \left. e^{-\frac{c_{3}}{2\resclfparam} \tau} \right|^{0}_{\tau=\TIeDelta}.\\
+    &\leq \frac{c_{2}^{\frac{3}{2}}
+      c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}}
+    \frac{\lambdamaxG^{2}}{\lambdaminG^{2}} \nzdxzero \,
+    \left. e^{-\frac{c_{3}}{2\resclfparam} \tau} \right|^{0}_{\tau=\TIeDelta}.\\
     \nonumber
-    &\leq\frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz - \DeltaX\xzst\right\|\\
+    &\leq\frac{c_{2}^{\frac{3}{2}}
+      c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}}
+    \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 -
+      e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \left\|\DeltaX\argsxz -
+      \DeltaX\xzst\right\|\\
     \label{eq:G-bound}
-    &\leq \LDelta \frac{c_{2}^{\frac{3}{2}} c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}} \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 - e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \nzdxzst.
+    &\leq \LDelta \frac{c_{2}^{\frac{3}{2}}
+      c_{3}^{2}}{2c_{1}^{\frac{1}{2}}\resclfparam^{5}}
+    \frac{\lambdamaxG^{2}}{\lambdaminG^{2}}  \, \left(1 -
+      e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \nzdxzst.
   \end{align}
   %
   Using this bound with $\TB$ leads to
@@ -881,7 +995,8 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
       e^{-\frac{c_{3}}{2\resclfparam} 1.1 \Tst}\right) \nzdxzst.
   \end{align*}
   %
-  Defining $\ATIe$ as the coefficient of $\nzdxzst$ in the preceding equation establishes the first part of the lemma.
+  Defining $\ATIe$ as the coefficient of $\nzdxzst$ in the preceding equation
+  establishes the first part of the lemma.
 
   To complete the proof, consider the bound
   %
@@ -889,7 +1004,9 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
     \label{eq:flow-bound-comp}
     \lefteqn{\left\| \Pe\argsxz - \P\argsxz \right\| \leq}\\
     \nonumber
-    && \int_{\TIDelta}^{\TIeDelta} \left\| \bigF\argsxztau \right\| \, d\tau  + \int_{0}^{\TIeDelta} \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\| d\tau.
+    && \int_{\TIDelta}^{\TIeDelta} \left\| \bigF\argsxztau \right\| \, d\tau  +
+    \int_{0}^{\TIeDelta} \left\| \bigG\argsxztau \, \mueps\argsxztau \, \right\|
+    d\tau.
   \end{align}
   %
   For simplicity, consider the two terms separately.
@@ -910,7 +1027,8 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
   %
   The second term has already been bounded in \eqref{eq:G-bound}.
   %
-  Finally, combining \eqref{eq:G-bound}, \eqref{eq:flow-bound-comp}, and \eqref{eq:F-bound} results in
+  Finally, combining \eqref{eq:G-bound}, \eqref{eq:flow-bound-comp}, and
+  \eqref{eq:F-bound} results in
   %
   \begin{align*}
     \left\| \Pe\argsxz - \P\argsxz \right\| \leq \Ae \! \nzdxzst,
@@ -926,14 +1044,17 @@ Now, consider the following bounds on the time-to-impact functions and \Poincare
     \ATIe\nzdxzst. %&\qedhere
   \end{align*}
   %
-  From this expression, it is clear that the limiting behavior is $\limeps \Ae = 0$.
+  From this expression, it is clear that the limiting behavior is $\limeps \Ae =
+  0$.
 \end{proof}
 
 
 Now \thmref{theorem:main-theorem} can be proven:
 
 \begin{proof}{\em [\thmref{theorem:main-theorem}]}
-  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$ implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}\xzst \cap \Guard \to \Rnn$ satisfying
+  By the discrete converse Lyapunov theorem, exponential stability of $\Orbit$
+  implies the existence of a discrete Lyapunov function $\Vn : B_{\delta}\xzst
+  \cap \Guard \to \Rnn$ satisfying
   %
   \begin{align}
     \label{eq:lyap-cond-nom}
@@ -949,9 +1070,11 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   for some $r_{1}, r_{2}, r_{3}, r_{4} \in \Rpd$.
   %
-  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve : \zdX \to \Rnn$.
+  In addition, consider the CLF associated with \eqref{eq:es-qp} which is $\Ve :
+  \zdX \to \Rnn$.
   %
-  Denote by $\Vex = \VeS$ the restriction of the CLF $\Ve$ to the switching surface $\Guard$.
+  Denote by $\Vex = \VeS$ the restriction of the CLF $\Ve$ to the switching
+  surface $\Guard$.
   %
   Using these Lyapunov functions, define the candidate Lyapunov function
   %
@@ -959,7 +1082,8 @@ Now \thmref{theorem:main-theorem} can be proven:
     \VP\argsxz = \Vn\argsxz + \sigma \Vex(\zdx).
   \end{align}
   %
-  From \eqref{eq:lyap-cond-nrg-es} and \eqref{eq:lyap-cond-nom}, it is apparent that $\VP\argsxz$ is bounded as follows:
+  From \eqref{eq:lyap-cond-nrg-es} and \eqref{eq:lyap-cond-nom}, it is apparent
+  that $\VP\argsxz$ is bounded as follows:
   %
   \begin{align*}
     \sigma c_{1} \nzdx^{2} + r_{1} \nzdxzst^{2} \leq \VP\argsxz \leq \sigma
@@ -987,20 +1111,27 @@ Now \thmref{theorem:main-theorem} can be proven:
   Combining \eqref{eq:impact-Lipschitz} and \eqref{eq:Veh-bound} yields
   %
   \begin{align*}
-    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz - \DeltaX\xzst \right\|^{2}\\
-    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \LDelta^{2} \nzdxzst^{2}.
+    \Vex(\Pe^{\zdx}\argsxz) &\leq \frac{c_{2}}{\resclfparam^{2}}
+    e^{-\frac{c_{3}}{\resclfparam} \TIe\argsxz} \left\| \DeltaX\argsxz -
+      \DeltaX\xzst \right\|^{2}\\
+    &\leq \frac{c_{2}}{\resclfparam^{2}} e^{-\frac{c_{3}}{\resclfparam}
+      \TIe\argsxz} \LDelta^{2} \nzdxzst^{2}.
   \end{align*}
   %
-  Using \lemref{lemma:TIe-P-bounds} and defining $\bepsone := \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9 \Tst}$ yields
+  Using \lemref{lemma:TIe-P-bounds} and defining $\bepsone :=
+  \frac{c_{2}}{\resclfparam^{2}} \LDelta^{2} e^{-\frac{c_{3}}{\resclfparam} .9
+    \Tst}$ yields
   %
   \begin{align}
     \label{eq:DVeX-bounds}
-    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \bepsone \nzdxzst^{2} - \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2}.
+    \Vex(\Pex\argsxz) - \Vex(\zdx) \leq \bepsone \nzdxzst^{2} -
+    \frac{c_{2}}{\resclfparam^{2}} \nzdx^{2}.
   \end{align}
 
   Now the Lyapunov function from the converse theorem must be bounded.
   %
-  As a result of \lemref{lemma:TIe-P-bounds} and the assumption of exponential stability about the origin, it follows that
+  As a result of \lemref{lemma:TIe-P-bounds} and the assumption of exponential
+  stability about the origin, it follows that
   %
   \begin{align}
     \label{eq:Pe-P-bounds}
@@ -1019,7 +1150,8 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   \begin{align*}
     \lefteqn{| \Vn(\Pe\argsxz) - \Vn(\P\argsxz) | \leq}\\
-    &&r_{4} \| \Pe\argsxz - \P\argsxz \| \left( \|\Pe\argsxz\| + \|\P\argsxz\| \right).
+    &&r_{4} \| \Pe\argsxz - \P\argsxz \| \left( \|\Pe\argsxz\| + \|\P\argsxz\|
+    \right).
   \end{align*}
   %
   Applying \eqref{eq:Pe-P-bounds} to the above results in
@@ -1031,7 +1163,8 @@ Now \thmref{theorem:main-theorem} can be proven:
   %
   where, for simplicity, $\bepstwo := r_{4} \Ae (N \alpha + \Ae  + \LP)$.
   %
-  Application of \eqref{eq:Pe-P-beta} to the nominal part of \eqref{eq:composite-lyap} gives the following bounds:
+  Application of \eqref{eq:Pe-P-beta} to the nominal part of
+  \eqref{eq:composite-lyap} gives the following bounds:
   %
   \begin{align}
     \label{eq:nom-lyap-bounds}
@@ -1042,7 +1175,8 @@ Now \thmref{theorem:main-theorem} can be proven:
     &\leq \bepstwo \nzdxzst^{2} - r_{3} \nzdxzst^{2}.
   \end{align}
   %
-  Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and \eqref{eq:nom-lyap-bounds} yields
+  Combining \eqref{eq:composite-lyap}, \eqref{eq:DVeX-bounds}, and
+  \eqref{eq:nom-lyap-bounds} yields
   %
   \begin{align*}
     \VP(\Pe\argsxz) - \VP\argsxz \leq - \left(\begin{array}{c c}
@@ -1068,7 +1202,8 @@ Now \thmref{theorem:main-theorem} can be proven:
   The matrix $\Le$ is positive definite if
   %
   \begin{align*}
-    \det \Le = \sigma\frac{c_{2}}{\resclfparam^{2}} (r_{3} - \bepstwo - \sigma \bepsone) > 0,
+    \det \Le = \sigma\frac{c_{2}}{\resclfparam^{2}} (r_{3} - \bepstwo - \sigma
+    \bepsone) > 0,
   \end{align*}
   %
   and thus stability is achieved when
@@ -1083,5 +1218,6 @@ Now \thmref{theorem:main-theorem} can be proven:
     \limeps \bepsone = 0, \qquad \limeps \bepstwo = 0,
   \end{align*}
   %
-  and thus for small enough values of $\sigma > 0$ and large enough values of $\resclfparam$, stability is maintained.
+  and thus for small enough values of $\sigma > 0$ and large enough values of
+  $\resclfparam$, stability is maintained.
 \end{proof}

@@ -76,6 +76,12 @@
 \newcommand{\zdx}{\xi}
 \newcommand{\zdz}{\zeta}
 
+\newcommand{\zdxm}{\zdx^{-}}
+\newcommand{\zdzm}{\zdz^{-}}
+
+\newcommand{\zdxp}{\zdx^{+}}
+\newcommand{\zdzp}{\zdz^{+}}
+
 % General system vector fields
 \newcommand{\xf}{F}
 \newcommand{\xg}{G}
@@ -256,9 +262,6 @@
 \newcommand{\dzdx}{{\dot \zdx}}
 \newcommand{\dzdz}{{\dot \zdz}}
 
-\newcommand{\zdxp}{\xi}
-\newcommand{\zdzp}{\zeta}
-
 \newcommand{\uu}{u}
 \newcommand{\vv}{v}
 
@@ -301,6 +304,9 @@
 \newcommand{\argsDxzti}[1]{({\dot \zdx}_{#1}\argt, {\dot \zdz}_{#1}\argt)}
 \newcommand{\argsx}{(\zdx)}
 \newcommand{\argsz}{(\zdz)}
+
+\newcommand{\argsxzm}{(\zdxm, \zdzm)}
+\newcommand{\argsxzp}{(\zdxm, \zdzm)}
 
 \newcommand{\argsxzt}{(\zdx\argt, \zdz\argt)}
 \newcommand{\argsxztau}{(\zdx(\tau), \zdz(\tau))}
@@ -377,7 +383,10 @@
 
 \newcommand{\etaeps}{\eta_{\resclfparam}}
 
-\newcommand{\xrem}{(\q_{1}, \ \ldots, \ q_{n}, \ \dq_{1}, \ \ldots, \ \dq_{n-1})}
+\newcommand{\xrem}{(\q_{1}, \ \ldots, \ \q_{n}, \ \dq_{1}, \ \ldots, \
+  \dq_{n-1})}
+\newcommand{\xremW}{(\q_{1}, \ \ldots, \ \q_{n}, \ \dq_{1}, \ \ldots, \
+  \dq_{n-1}, \ \W)}
 
 \newcommand{\hnsf}{h_{\mathrm{nsf}}}
 
