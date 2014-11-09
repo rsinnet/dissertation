@@ -39,6 +39,8 @@
 \newcommand{\Rpd}{\R_{> 0}}
 \newcommand{\Rn}{\R^{n}}
 
+% Reference frame
+\newcommand{\Rb}{R_{b}}
 
 % zero dynamics vector fields
 \newcommand{\zdf}{f}
@@ -56,6 +58,7 @@
 \newcommand{\q}{q}
 \newcommand{\dq}{\dot{\q}}
 \newcommand{\ddq}{\ddot{\q}}
+\newcommand{\qs}{\q_{s}}
 
 % Extended coordinates
 \newcommand{\qe}{\q_{e}}
@@ -63,11 +66,11 @@
 \newcommand{\ddqe}{\ddq_{e}}
 
 % Pre--post impact coordinates
-\newcommand{\qep}{\qe^{+}}
-\newcommand{\qem}{\qe^{-}}
+\newcommand{\qp}{\q^{+}}
+\newcommand{\qm}{\q^{-}}
 
-\newcommand{\dqep}{\dqe^{+}}
-\newcommand{\dqem}{\dqe^{-}}
+\newcommand{\dqp}{\dq^{+}}
+\newcommand{\dqm}{\dq^{-}}
 
 % Zero dynamics coordinates
 \newcommand{\zdx}{\xi}
@@ -96,6 +99,7 @@
 
 % Spaces for mechanical system coordinates
 \newcommand{\Q}{\mathcal{Q}}
+\newcommand{\Qs}{\Q_{s}}
 
 % Spaces for zero dynamics coordinates
 \newcommand{\zdX}{\Xi}
@@ -128,9 +132,8 @@
 \newcommand{\argsqmdqm}{(\qm, \dqm)}
 \newcommand{\argsqdqW}{(\q, \dq, \W)}
 
-\newcommand{\argsqe}{(\qe)}
-\newcommand{\argsqedqem}{(\qe, \dqem)}
-\newcommand{\argsqedqep}{(\qe, \dqep)}
+\newcommand{\argsqdqm}{(\q, \dqm)}
+\newcommand{\argsqdqp}{(\q, \dqp)}
 
 
 \newcommand{\argt}{(t)}
@@ -238,12 +241,6 @@
 % More coordinates
 \newcommand{\qst}{\q^{*}}
 \newcommand{\dqst}{\dq^{*}}
-
-\newcommand{\qm}{\q^{-}}
-\newcommand{\dqm}{\dq^{-}}
-
-\newcommand{\qp}{\q^{+}}
-\newcommand{\dqp}{\dq^{+}}
 
 \newcommand{\dx}{{\dot \x}}
 \newcommand{\xst}{\x^{*}}

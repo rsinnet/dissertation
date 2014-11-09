@@ -233,24 +233,24 @@ Then construct a Lagrangian for the biped in a general position---specifically,
 no assumptions are made on ground contact---and use holonomic constraints to
 enforce ground contact conditions.
 
-Let $R_{0}$ be a fixed inertial or world frame and let $R_{b}$ be a reference
+Let $R_{0}$ be a fixed inertial or world frame and let $\Rb$ be a reference
 frame attached to the body of the biped with position $p_{b} \in \R^{3}$ and
 orientation $\phi_{b} \in \SO(3)$ where $\SO(n)$ represents the special
 orthogonal group in $n$ dimensions (see \cite{Conway1985}).
 %
-Let $\q_{s} \in \Q_{s}$ represent a choice of {\em body} or {\em shape
-  coordinates} for the robot with $\Q_{s}$ the configuration space.
+Let $\qs \in \Qs$ represent a choice of {\em body} or {\em shape
+  coordinates} for the robot with $\Qs$ the configuration space.
 %
-Herein, $\q_{s}$ represents the relative angles between adjacent links of the
+Herein, $\qs$ represents the relative angles between adjacent links of the
 robot as shown later in \figref{fig:shapecoords}.
 %
 The {\em generalized coordinates} are then found by combining the shape
-coordinates with the position and orientation of the body-fixed frame, $R_{b}$,
+coordinates with the position and orientation of the body-fixed frame, $\Rb$,
 viz.
 %
 \begin{align*}
-  \q = (p_{b}^{T}, \phi_{b}^{T}, \q_{s}^{T})^{T} \in \Q = \R^{3} \times \SO(3)
-  \times \Q_{s},
+  \q = (p_{b}, \phi_{b}, \qs) \in \Q = \R^{3} \times \SO(3)
+  \times \Qs,
 \end{align*}
 %
 where $\Q$ is the generalized configuration space.
@@ -270,12 +270,12 @@ For robots, the kinetic energy has the form
 where $\M\argsq$ is a manipulator inertia matrix which has the property of
 being symmetric and positive definite.
 %
-The Euler-Lagrange equations can be used to find the equations of motion, which,
+The Euler--Lagrange equation can be used to find the equations of motion, which,
 for robotic systems \cite[pp.~171]{Murray1994}, are written:
 %
 \begin{align}
   \label{eq:eom}
-  \M\argsq\ddq + \HCor\argsqdq = \B\argsq \, \uu
+  \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \uu
 \end{align}
 %
 where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the
@@ -287,25 +287,70 @@ torques, and
 contains terms resulting from the Coriolis effect, centrifugal forces, and
 gravity grouped into a single vector.
 %
+The contribution from gravity is related to the potential energy:
+\begin{align*}
+  \G\argsq = \pd{U\argsq}{\q}.
+\end{align*}
+%
 The elements of $\CCor\argsqdq$ can be found by computing the Christoffel
 symbols of $\M\argsq$:
 \begin{align*}
   \CCor_{ij}\argsqdq = \frac{1}{2} \sum_{k = 1}^{n} \left( \pd{\M_{ij}}{\q_{k}} +
     \pd{\M_{ik}}{\q_{j}} - \pd{\M_{kj}}{\q_{i}} \right) \dq_{k}.
 \end{align*}
+%
 See \cite[pp.~170]{Murray1994} for more information.
+
+Equation \eqref{eq:eom} is the simplest dynamic model of robotic motion and does
+not include any contact constraints.
+% 
+This is not necessary a problem if one reduces the coordinates $\q$ by locating
+the body-fixed reference frame $\Rb$ at a stationary point fixing certain
+degrees of freedom, thereby factoring in ground contact constraints.
+%
+To understand this, consider the following example:
+
+\begin{figure}[t!]
+  \centering
+  \def\svgwidth{.5\columnwidth}
+  \input{figs/cg2d_reduced_coordinates.eps_latex}
+  \caption[Example robot coordinates for a compass-gait biped.]{Example robot
+    coordinates for a compass-gait biped.
+    % 
+    The body-fixed frame $\Rb$ is located at the interface between the stance
+    foot and the ground.
+    %
+    The coordinate $\phi_{b}^{y}$ tracks the orientation of $\Rb$ relative to
+    a fixed world frame.
+    %
+    The only body or shape coordinate for this simple model is $\q_{1}$.}
+    \label{fig:compass_gait_reduced_coordinates}
+\end{figure}
+
+\begin{exmp}
+  \label{ex:compass_gait_reduced_coordinates}
+  The dynamics of a 2D model with point feet that walks in the
+  $x$--$z$ plane along the $x$-axis as that shown in
+  \figref{fig:compass_gait_reduced_coordinates} can be modeled with the
+  coordinates $q = (\phi_{b}^{y}, \q_{1})$ using \eqref{eq:eom}.
+\end{exmp}
+
 
 \section{Constraining Forces}
 
-As mentioned, the dynamics of a rigid-body robot is governed by \eqref{eq:eom}
-and this model takes accounts reaction forces but they do not appear in the
-equations as they are included in the form of kinematic constraints which alter
-the form of the dynamics.
+As mentioned, the motion of a rigid-body robot is governed by \eqref{eq:eom}.
 %
+The formulation of the equation, however, does not allow for analysis of
+reaction forces.
+%
+This models takes into account reaction forces but they do not appear in the
+equations as they must be included in the form of kinematic constraints which
+alter the form of the dynamics by fixing coordinates as in \exmpref{ex:compass_gait_reduced_coordinates}.
+
 In some cases, one may wish, for a variety of reasons, to compute the reaction
 forces themselves.
 %
-For those of study materials and mechanism design of bipedal robots, it may be
+For those who study materials and mechanism design of bipedal robots, it may be
 important to understand the forces present at the joints or at the feet to aid
 in design.
 %
@@ -341,29 +386,43 @@ where $J\argsq$ can be thought of as a Jacobian matrix.
 It is assumed that the constraints are linearly independent and thus $J\argsq$
 has full row rank.
 %
-Intuitively, the rows of $J\argsq$ represent velocities of the systems which
-are to be restricted to a constant; generally and all throughout this thesis,
-the constant is zero.
+Intuitively, the rows of $J\argsq$ represent maps to velocities of the
+system---i.e., for $J_{i}\argsq$ which is the $i^{\mathrm{th}}$ row of $J\argsq$,
+the quantity $J_{i}\argsq \, \dq$ represents an output velocity---which are to
+be restricted to a constant.
+%
+Generally and all throughout this thesis, the constant is zero; that is, the
+constraints are designed to prevent any motion rather than enforce constant,
+non-zero velocity.
 
 Revisiting the standard robot model, consider augmenting the model to allow
 additional forces for imposing non-holonomic constraints:
+%
 \begin{align}
   \label{eq:eom-lambda}
-  \M\argsq\ddq + \HCor\argsqdq + J^{T}\argsq \, \lambda = \B\argsq \, \uu.
+  \M\argsq \, \ddq + \HCor\argsqdq + J^{T}\argsq \, \lambda = \B\argsq \, \uu.
 \end{align}
-In the literature, $\lambda$ is often referred to as a Lagrange multiplier.
 %
-The idea is to solve for $\lambda$ in terms of $\q$, $\dq$, and $u$ such that
-\eqref{eq:holocon} is satisfied.
+In the literature, $\lambda$ is often referred to as a Lagrange multiplier
+\cite[\S 4.10]{Baruh1998} and $J^{T}\argsq$ is a map from the space in which the
+output velocity constraints are represented (output space) to joint space and
+thus the constraining forces in joint space are given by
+%
+\begin{align*}
+  F_{\mathit{c}} = J^{T}\argsq \lambda.
+\end{align*}
+The idea is to solve \eqref{eq:eom-lambda} for $\lambda$ in terms of $\q$,
+$\dq$, and $u$ such that \eqref{eq:holocon} is satisfied.
 %
 Differentiating \eqref{eq:holocon} results in
 \begin{align*}
- {\dot J}\argsqdq \dq + J\argsqdq \, \ddq = 0.
+ {\dot J}\argsqdq \, \dq + J\argsqdq \, \ddq = 0.
 \end{align*}
+%
 Then solving \eqref{eq:eom-lambda} for $\ddq$ and substituting into the above
 results in
 \begin{align*}
-  {\dot J}\argsqdq \dq + J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
+  {\dot J}\argsqdq \, \dq + J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
     -\HCor\argsqdq - J^{T}\argsq \, \lambda \right) = 0.
 \end{align*}
 Finally, solving for $\lambda$ gives
@@ -372,10 +431,9 @@ Finally, solving for $\lambda$ gives
    \left( {\dot J}\argsqdq \dq + J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
     -\HCor\argsqdq\right) \right).
 \end{align*}
-Using this expression, the constraining forces acting on the system are given by
-\begin{align*}
-  F_{\mathit{c}} = J^{T}\argsq \lambda.
-\end{align*}
+%
+This formulation can be used to treat robots in a generalized configuration
+with non-holonomic constraints such as ground contact.
 
 Using the developments in this section, the next section will show how to treat
 impacts which require constraining forces.
@@ -388,53 +446,64 @@ consider impacts and their effect on the motion of a system.
 Simple models like the linear inverted pendulum model ignore foot strike which
 results in a greater gap between simulation and experiment.
 %
-This thesis treats impacts using the model of Hurmuzlu and Marghitu
-\cite{Hurmuzlu1994}.
+For more on the different models and how impacts are treated, see
+\secref{sec:literature-bipeds}.
 %
-An impact occurs when a rigid body (the foot) comes into contact with the
-ground.
+Non-smooth mechanics is a complicated topic; more detail can be found in, for
+example, \cite{Brogliato1996,Kozlov1991}.
 %
-For simplicity, impacts are assumed to be rigid and plastic.\todo{More
-  citations, look at Master's thesis.}
+The mechanics of non-smooth impacts has been addressed for tool use in
+\cite{Gorinevsky1997,Siciliano1999}.
 %
+In addition to the rigid models considered in this thesis (as those treated by
+Hurmuzlu and Marghitu \cite{Hurmuzlu1994}), elastic impacts and model
+deformation have also been considered \cite{Chapnik1991,Wei1993}.
 
+For the purposes of this work, an impact is considered to occur when a rigid
+body (the foot) comes into contact with the ground.
+%
+For simplicity, impacts are assumed to be rigid and plastic.
+%
 Consider the extended robot dynamics equation \eqref{eq:eom-lambda}.
 %
 The Lagrange multiplier $\lambda$ can be used with impacts by considering it to
 be representative of impulsive forcing.
 %
+Denote by $\dqm = \lim_{\tau \nearrow t} \dq\argtau$ and $\dqp = \lim_{\tau
+  \searrow t} \dq\argtau$ the left and right limits to the solution
+$\dqe\argt$, respectively.
+%
+Thus $\dqm$ and $\dqp$ respectively represent pre- and post-impact velocities.
+%
+In addition, by assumption the configuration coordinates are continuous in time
+so $\qm = \qp = \q$.
+%
 Assuming actuators do not produce impulsive forces and integrating the model
-\eqref{eq:eom-lambda} results in\todo{Extended model.}
+\eqref{eq:eom-lambda} results in
 \begin{align}
   \label{eq:impulse}
-  \De\argsqe(\dqep - \dqem) = J^{T}\argsqe \lambda\argsqedqem
+  \D\argsq(\dqp - \dqm) = J^{T}\argsq \lambda\argsqdqm
 \end{align}
 where
 \begin{align*}
-  \int_{t^{-}}^{t^{+}} \! \lambda(\qe(\tau), \dqe(\tau)) \, d\tau.
+  \int_{t^{-}}^{t^{+}} \! \lambda(\q(\tau), \dq(\tau)) \, d\tau.
 \end{align*}
-and $\dqem = \lim_{\tau \nearrow t} \dqe\argtau$ and $\dqep = \lim_{\tau
-  \searrow t} \dqe\argtau$ are the left and right limits to the solution
-$\dqe\argt$.
-%
-There may be a discrete jump and these limits may not be different due to
-impulsive forces applied at impact.
 %
 Based on the desired constraints, one can construct a Jacobian matrix,
-$J\argsqe$, whose rows contain individual constraints.
+$J\argsq$, whose rows contain individual constraints.
 %
 Combining \eqref{eq:eom-lambda} with \eqref{eq:impulse} results in the impact model:
 \begin{align*}
   \left(\begin{array}{c c}
-      \De\argsqe & -J^{T}\argsqe\\
-      J\argsqe & \boldzero
+      \D\argsq & -J^{T}\argsq\\
+      J\argsq & \boldzero
     \end{array}\right)
   \left(\begin{array}{c}
-      \dqep\\
-      \lambda\argsqedqep
+      \dqp\\
+      \lambda\argsqdqp
     \end{array}\right) =
   \left(\begin{array}{c}
-      \De\argsqe \dqem\\
+      \D\argsq \dqm\\
       \boldzero
     \end{array}\right)
 \end{align*}
@@ -493,10 +562,12 @@ graph is a {\em directed cycle}.
 \begin{figure}[t]
   \centering
   \includegraphics[width=0.8\columnwidth]{domaingraph}
-  \caption[An example of a {\em domain breakdown}]{An example of a {\em domain
-      breakdown}---a combination of discrete phases of a walking gait with a
-    specific temporal ordering. The red dots indicate which constraints are
-    enforced in each discrete phase (or domain).
+  \caption[An example of a {\em domain breakdown}.]{An example of a {\em domain
+      breakdown}.
+    %
+    That is, a combination of discrete phases of a walking gait with a specific
+    temporal ordering. The red dots indicate which constraints are enforced in
+    each discrete phase (or domain).
     %
     The domain labels are selected based on which event causes a given domain to
     transition to the next.}
