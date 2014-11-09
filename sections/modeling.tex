@@ -1,131 +1,21 @@
 \chapter{\uppercase{Modeling}}
 
-Though the methods presented in this thesis may be useful on a variety of control systems, the primary application used for expositional purposes is bipedal robotic walking.
+Though the methods presented in this thesis may be useful on a variety of
+control systems, the primary application described herein is to mechanical
+systems.
 %
-This phenomenon demonstrates two dynamics which operate at different time scales.
+In particular, this work attempts to demonstrate the application of energy
+shaping in bipedal robotic locomotion.
 %
-In particular, nominal motion can be modeled as a continuous dynamics and impact behavior can be treated as a discrete dynamics.
+Walking is characterized by phases of continuous motion with periodic discrete
+impacts.
 %
-The development of the dynamic models for these two dynamics is parallel but a dichotomy arises in the application of constraining forces.
-
-This chapter presents the development of the necessary dynamics for modeling hybrid mechanical systems.
-
-
-\section{Rigid Body Kinematics}
-
-At its core, the modeling of complex mechanical systems involves a straightforward, if often complicated, application of Newton's Second Law (see \cite{Feynman1964}), namely,
-that
-\begin{align}
-  \label{eq:newtons-second}
-  F = m a,
-\end{align}
-which expresses the basic property of physics that applying a force to a massive object induces a particular acceleration.
+The combination of continuous and discrete dynamics motivates the use of hybrid
+systems methods for modeling and controlling bipeds.
 %
-Through the property of superposition, this relationship eventually leads to standard dynamic model of a robot,
-\begin{align}
-  \M\argsq + \HCor\argsqdq = \B\argsq \, \uu
-\end{align}
-but fundamentally, all physics-based models demonstrate Newton's Second Law.
-
-Consider a three-dimensional rigid body with no contact assumptions; i.e., the body is free to move in space.
+This chapter presents a development of modeling for hybrid systems which is
+sufficient to understand the theory and examples present in this thesis.
 %
-With the dynamics of the system being dominated by Newton's laws of motion \cite{Feynman1964}, the state of the system can be expressed by associating a reference frame to a fix pointed on the body and using coordinates which express the position and orientation of this point with respect to a global frame or the world frame.
-%
-In three-dimensional space, this transformation between world frame and robot frame can be parameterized with six coordinates: three representing the Euclidean position and three respresenting, for example, an Euler angle--based derivation, namely, the product of three rotation matrices \cite{Baruh1998}.
-%
-The set of all admissible configurations for such a body represents a specific topological space referred to as the {\em special Euclidean group}, $\SE(3)$.
-%
-This group can be thought of as the Cartesian product of the position and orientation of a body, i.e., $\SE(3) = \R^3 \times \SO(3)$, where $\SO(3)$ is the {\em special orthogonal group} which can be understood as
-\begin{align*}
-  \SO(n) = \left\{ R \in \R^{n \times n} : R R^T = I, \det R = 1 \right\}.
-\end{align*}
-For more information on these topological spaces, consult \cite{Murray1994}.
-
-
-Newton's laws eventually lead to the understanding the motion of such a system can be captured by the following dynamic model:
-\begin{align}
-  \nonumber
-  I_{x} \dot{\omega}_{x} + (I_{z} - I_{y}) \omega_{y} \omega_{z} &= M_{x}\\
-  \nonumber
-  I_{y} \dot{\omega}_{y} + (I_{x} - I_{z}) \omega_{z} \omega_{x} &= M_{y}\\
-  \nonumber
-  I_{z} \dot{\omega}_{z} + (I_{y} - I_{x}) \omega_{x} \omega_{y} &= M_{z}\\
-  \nonumber
-  m \dot{v}_{x} &= F_{x},\\
-  \nonumber
-  m \dot{v}_{y} &= F_{y},\\
-  m \dot{v}_{z} &= F_{z},
-\end{align}
-where linear and angular velocity are represented by $v$ and $\omega$, respectively, and the corresponding accelerations are shown as time derivatives.
-%
-The applied forces and moments are shown as $F$ and $M$, respectively, and the $I_{x}$, $I_{y}$, and $I_{z}$ terms are the principal moments of inertia about the appropriate axes.
-%
-As one might guess, this requires that the fixed frame be located at the center of mass and oriented along the principal axes of inertia; it is straightforward to redefine the base coordinates but this form---the simplestform ---is given for clarity of presentation.
-
-\section{Kinematic Chains}
-
-Typical robots consist of kinematic chains of rigid bodies attached with prismatic or revolute joints, and for simplicity, the resulting dynamics generally has the appropriate contact assumptions baked in to simplify computation, but it is possible to consider each rigid body separately and solve for the appropriate reaction forces which can be applied through $F$ and $M$ to maintain the proper contact (this is typically called the Newton--Euler method \cite{Hollerbach1980}).
-%
-For robotic motion, holonomic constraints act to reduce the allowable motion and, as a consequence, there exists a minimal set of coordinates which can be used to describe a robot's dynamics.
-%
-This minimal set is referred to as the {\em generalized coordinates}.
-
-
-\section{Langrangian Formulation}
-
-%\section{Spatial Vector Algebra}
-%While a Lagrangian-based approach to modeling is useful for theoretical applications and smaller systems, its shortcomings quickly emerge as systems grow in complexity.
-%
-%Perhaps more than anything else, this poor scalability stems from the need to successively multiply rotation matrices in symbolic form resulting in progressively larger expressions.
-%
-%Moreover, as complexity grows, it becomes is increasingly difficult to glean any useful bit of intuition from examining the expressions in symbolic form.
-
-
-Begin with a bipedal robot in either two or three dimensions---the discussions herein are applicable to either case.
-%
-Then construct a Lagrangian for the biped in a general position---specifically, no assumptions are made on ground contact---and use holonomic constraints to enforce the ground contact conditions given by the domain graph.
-
-Let $R_{0}$ be a fixed inertial or world frame and let $R_{b}$ be a reference frame attached to the body of the biped with position $p_{b} \in \R^{3}$ and orientation $\phi_{b} \in \SO(3)$ where $\SO(n)$ represents the special orthogonal group in $n$ dimensions (see \cite{Conway1985}).
-%
-Let $\q_{s} \in \Q_{s}$ represent a choice of {\em body} or {\em shape coordinates} for the robot with $\Q_{s}$ the configuration space.
-%
-Herein, $\q_{s}$ represents the relative angles between adjacent links of the robot as shown later in \figref{fig:shapecoords}.
-%
-The {\em generalized coordinates} are then found by combining the shape coordinates with the position and orientation of the body-fixed frame, $R_{b}$, viz.
-%
-\begin{align}
-  \q = (p_{b}^{T}, \phi_{b}^{T}, \q_{s}^{T})^{T} \in Q = \R^{3} \times \SO(3) \times \Q_{s},
-\end{align}
-%
-where $Q$ is the generalized configuration space.
-
-The Lagrangian of a bipedal robot, $\Lag : T\Q \to \R$, can be stated in terms of the kinetic energy, $K : T\Q \to \R$, and the potential energy, $V : \Q \to \R$, as:
-%
-\begin{align}
-  \Lag\argsqdq = K\argsqdq - V\argsq.
-\end{align}
-%
-The Euler-Lagrange equations can be used to find the equations of motion, which, for robotic systems (\cite{Murray1994}, are written:
-%
-\begin{align}
-  \label{eqn:eom}
-  \M\argsq\ddq + \HCor\argsqdq = \B\argsq \, \uu
-\end{align}
-%
-where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the torque distribution matrix, only depend on $\q$, $\uu$ is a vector of applied torques, and
-\begin{align}
-  \HCor\argsqdq = \CCor\argsqdq \, \dq + \G\argsq
-\end{align}
-contains terms resulting from the Coriolis effect and gravity terms grouped into
-a single vector.
-%
-The elements of $\CCor\argsqdq$ can be found by computing the Christoffel
-symbols of $\M\argsq$:
-\begin{align*}
-  \CCor_{ij}\argsqdq = \frac{1}{2} \sum_{k = 1}^{n} \left( \pd{\M_{ij}}{\q_{k}} +
-    \pd{\M_{ik}}{\q_{j}} - \pd{\M_{kj}}{\q_{i}} \right) \dq_{k}.
-\end{align*}
-See \cite[pp.~170]{Murray1994} for more information.
 
 \section{Hybrid Dynamical Systems}
 
@@ -234,6 +124,330 @@ compactly:
   \HCS = (\D, \Guard, \U, \Delta, \xf, \xg).
 \end{align*}
 
+Using these basic formalisms of hybrid systems, the next three sections describe
+how to construct hybrid system formulations for mechanical systems.
+
+\section{Rigid Body Kinematics}
+
+At its core, the modeling of complex mechanical systems involves a
+straightforward, if often complicated, application of Newton's Second Law (see
+\cite{Feynman1964}), namely,
+\begin{align*}
+  F = m a,
+\end{align*}
+which expresses the basic property of physics that applying a force to a massive
+object induces a particular acceleration.
+%
+Through the property of superposition, this relationship eventually leads to the
+standard dynamic model of a robot given later in \eqref{eq:eom}.
+%
+But despite the development of complex models, all physics-based models
+fundamentally demonstrate Newton's Second Law.
+
+Consider a three-dimensional rigid body with no contact assumptions; i.e., the
+body is free to move in space.
+%
+With the dynamics of the system being dominated by Newton's laws of motion
+\cite{Feynman1964}, the state of the system can be expressed by associating a
+reference frame to a fix pointed on the body and using coordinates which express
+the position and orientation of this point with respect to a global frame or the
+world frame.
+%
+In three-dimensional space, this transformation between world frame and robot
+frame can be parameterized with six coordinates: three representing the
+Euclidean position and three respresenting, for example, an Euler angle--based
+derivation, namely, the product of three rotation matrices
+\cite[Ch. 7]{Baruh1998}.
+%
+The set of all admissible configurations for such a body represents a specific
+topological space referred to as the {\em special Euclidean group}, $\SE(3)$.
+%
+This group can be thought of as the Cartesian product of the position and
+orientation of a body, i.e., $\SE(3) = \R^3 \times \SO(3)$, where $\SO(3)$ is
+the {\em special orthogonal group} which can be understood as
+\begin{align*}
+  \SO(n) = \left\{ R \in \R^{n \times n} : R R^T = I, \det R = 1 \right\}.
+\end{align*}
+For more information on these topological spaces, consult
+\cite[Ch. 2]{Murray1994}.
+
+
+Newton's laws eventually lead to the understanding that the motion of such a
+system can be captured by the following dynamic model:
+\begin{align*}
+  I_{x} \dot{\omega}_{x} + (I_{z} - I_{y}) \omega_{y} \omega_{z} &= M_{x}\\
+  I_{y} \dot{\omega}_{y} + (I_{x} - I_{z}) \omega_{z} \omega_{x} &= M_{y}\\
+  I_{z} \dot{\omega}_{z} + (I_{y} - I_{x}) \omega_{x} \omega_{y} &= M_{z}\\
+  m \dot{v}_{x} &= F_{x},\\
+  m \dot{v}_{y} &= F_{y},\\
+  m \dot{v}_{z} &= F_{z},
+\end{align*}
+where linear and angular velocity are represented by $v$ and $\omega$,
+respectively, and the corresponding accelerations are shown as time
+derivatives.
+%
+The applied forces and moments are shown as $F$ and $M$, respectively, and the
+$I_{x}$, $I_{y}$, and $I_{z}$ terms are the principal moments of inertia about
+the appropriate axes.
+%
+As one might guess, this requires that the fixed frame be located at the center
+of mass and oriented along the principal axes of inertia; it is straightforward
+to redefine the base coordinates but this form---the simplest form ---is given
+for clarity of presentation.
+%
+For the full development of the above, see, for example, \cite[Ch. 8]{Baruh1998}.
+
+%\section{Kinematic Chains}
+
+Typical robots consist of kinematic chains of rigid bodies attached with
+prismatic or revolute joints, and for simplicity, the resulting dynamics
+generally has the appropriate contact assumptions baked in to simplify
+computation (as in \eqref{eq:eom}), but it is possible to consider
+each rigid body separately and solve for the appropriate reaction forces which
+can be applied through $F$ and $M$ to maintain the proper contact (this is
+typically called the Newton--Euler method \cite{Hollerbach1980}).
+%
+For robotic motion, holonomic constraints act to reduce the allowable motion
+and, as a consequence, there exists a minimal set of coordinates which can be
+used to describe a robot's dynamics.
+%
+This minimal set is referred to as the {\em generalized coordinates}.
+
+
+\section{Langrangian Formulation}
+
+%\section{Spatial Vector Algebra}
+%While a Lagrangian-based approach to modeling is useful for theoretical applications and smaller systems, its shortcomings quickly emerge as systems grow in complexity.
+%
+%Perhaps more than anything else, this poor scalability stems from the need to successively multiply rotation matrices in symbolic form resulting in progressively larger expressions.
+%
+%Moreover, as complexity grows, it becomes is increasingly difficult to glean any useful bit of intuition from examining the expressions in symbolic form.
+
+With the basic understanding provided in the previous section, some additional
+details will now be provided.
+%
+Begin with a bipedal robot in either two or three dimensions---the discussions
+herein are applicable to either case.
+%
+Then construct a Lagrangian for the biped in a general position---specifically,
+no assumptions are made on ground contact---and use holonomic constraints to
+enforce ground contact conditions.
+
+Let $R_{0}$ be a fixed inertial or world frame and let $R_{b}$ be a reference
+frame attached to the body of the biped with position $p_{b} \in \R^{3}$ and
+orientation $\phi_{b} \in \SO(3)$ where $\SO(n)$ represents the special
+orthogonal group in $n$ dimensions (see \cite{Conway1985}).
+%
+Let $\q_{s} \in \Q_{s}$ represent a choice of {\em body} or {\em shape
+  coordinates} for the robot with $\Q_{s}$ the configuration space.
+%
+Herein, $\q_{s}$ represents the relative angles between adjacent links of the
+robot as shown later in \figref{fig:shapecoords}.
+%
+The {\em generalized coordinates} are then found by combining the shape
+coordinates with the position and orientation of the body-fixed frame, $R_{b}$,
+viz.
+%
+\begin{align*}
+  \q = (p_{b}^{T}, \phi_{b}^{T}, \q_{s}^{T})^{T} \in \Q = \R^{3} \times \SO(3)
+  \times \Q_{s},
+\end{align*}
+%
+where $\Q$ is the generalized configuration space.
+
+The Lagrangian of a bipedal robot, $\Lag : T\Q \to \R$, can be stated in terms
+of the kinetic energy, $K : T\Q \to \R$, and the potential energy, $U : \Q \to
+\R$, as:
+%
+\begin{align*}
+  \Lag\argsqdq = K\argsqdq - U\argsq.
+\end{align*}
+%
+For robots, the kinetic energy has the form
+\begin{align*}
+  K\argsqdq = \dq^{T} \M\argsq \, \dq.
+\end{align*}
+where $\M\argsq$ is a manipulator inertia matrix which has the property of
+being symmetric and positive definite.
+%
+The Euler-Lagrange equations can be used to find the equations of motion, which,
+for robotic systems \cite[pp.~171]{Murray1994}, are written:
+%
+\begin{align}
+  \label{eq:eom}
+  \M\argsq\ddq + \HCor\argsqdq = \B\argsq \, \uu
+\end{align}
+%
+where, here, $\M\argsq$, the manipulator inertia matrix, and $\B\argsq$, the
+torque distribution matrix, only depend on $\q$, $\uu$ is a vector of applied
+torques, and
+\begin{align*}
+  \HCor\argsqdq = \CCor\argsqdq \, \dq + \G\argsq
+\end{align*}
+contains terms resulting from the Coriolis effect, centrifugal forces, and
+gravity grouped into a single vector.
+%
+The elements of $\CCor\argsqdq$ can be found by computing the Christoffel
+symbols of $\M\argsq$:
+\begin{align*}
+  \CCor_{ij}\argsqdq = \frac{1}{2} \sum_{k = 1}^{n} \left( \pd{\M_{ij}}{\q_{k}} +
+    \pd{\M_{ik}}{\q_{j}} - \pd{\M_{kj}}{\q_{i}} \right) \dq_{k}.
+\end{align*}
+See \cite[pp.~170]{Murray1994} for more information.
+
+\section{Constraining Forces}
+
+As mentioned, the dynamics of a rigid-body robot is governed by \eqref{eq:eom}
+and this model takes accounts reaction forces but they do not appear in the
+equations as they are included in the form of kinematic constraints which alter
+the form of the dynamics.
+%
+In some cases, one may wish, for a variety of reasons, to compute the reaction
+forces themselves.
+%
+For those of study materials and mechanism design of bipedal robots, it may be
+important to understand the forces present at the joints or at the feet to aid
+in design.
+%
+Control theorists may wish to understand the moment at the stance foot in order
+to design gaits in which the foot does not rotate inadvertently.
+%
+In addition, researchers may wish to study foot-strike which requires the use of
+impulsive constraining forces.
+%
+For these reasons and others, it is important to consider a more generalized
+model that, at the very least, includes reaction forces at the feet.
+
+This section will show how constraints can be added to the standard robotic
+model.
+%
+There are two different types of constraints which should be distinguished; see
+\cite[Ch. 6]{Murray1994} for further details.
+%
+Holonomic constraints act to restrict the motion of a system to a smooth
+hypersurface of the configuration space $\Q$.
+%
+Similarly, non-holonomic constraints act to restrict the motion of a system
+through a restriction on velocity.
+%
+The modeling of constraints necessary for robots can generally be handled by
+considering only non-holonomic constraints, which have the form
+\begin{align}
+  \label{eq:holocon}
+  J\argsq \, \dq = \mathit{constant},
+\end{align}
+where $J\argsq$ can be thought of as a Jacobian matrix.
+%
+It is assumed that the constraints are linearly independent and thus $J\argsq$
+has full row rank.
+%
+Intuitively, the rows of $J\argsq$ represent velocities of the systems which
+are to be restricted to a constant; generally and all throughout this thesis,
+the constant is zero.
+
+Revisiting the standard robot model, consider augmenting the model to allow
+additional forces for imposing non-holonomic constraints:
+\begin{align}
+  \label{eq:eom-lambda}
+  \M\argsq\ddq + \HCor\argsqdq + J^{T}\argsq \, \lambda = \B\argsq \, \uu.
+\end{align}
+In the literature, $\lambda$ is often referred to as a Lagrange multiplier.
+%
+The idea is to solve for $\lambda$ in terms of $\q$, $\dq$, and $u$ such that
+\eqref{eq:holocon} is satisfied.
+%
+Differentiating \eqref{eq:holocon} results in
+\begin{align*}
+ {\dot J}\argsqdq \dq + J\argsqdq \, \ddq = 0.
+\end{align*}
+Then solving \eqref{eq:eom-lambda} for $\ddq$ and substituting into the above
+results in
+\begin{align*}
+  {\dot J}\argsqdq \dq + J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
+    -\HCor\argsqdq - J^{T}\argsq \, \lambda \right) = 0.
+\end{align*}
+Finally, solving for $\lambda$ gives
+\begin{align*}
+   \lambda = \left( J\argsqdq \, \M^{-1}\argsq \, J^{T}\argsq \right)^{-1}
+   \left( {\dot J}\argsqdq \dq + J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
+    -\HCor\argsqdq\right) \right).
+\end{align*}
+Using this expression, the constraining forces acting on the system are given by
+\begin{align*}
+  F_{\mathit{c}} = J^{T}\argsq \lambda.
+\end{align*}
+
+Using the developments in this section, the next section will show how to treat
+impacts which require constraining forces.
+
+\section{Discrete Impacts}
+
+When studying bipedal walking, it is important for the sake of thoroughness, to
+consider impacts and their effect on the motion of a system.
+%
+Simple models like the linear inverted pendulum model ignore foot strike which
+results in a greater gap between simulation and experiment.
+%
+This thesis treats impacts using the model of Hurmuzlu and Marghitu
+\cite{Hurmuzlu1994}.
+%
+An impact occurs when a rigid body (the foot) comes into contact with the
+ground.
+%
+For simplicity, impacts are assumed to be rigid and plastic.\todo{More
+  citations, look at Master's thesis.}
+%
+
+Consider the extended robot dynamics equation \eqref{eq:eom-lambda}.
+%
+The Lagrange multiplier $\lambda$ can be used with impacts by considering it to
+be representative of impulsive forcing.
+%
+Assuming actuators do not produce impulsive forces and integrating the model
+\eqref{eq:eom-lambda} results in\todo{Extended model.}
+\begin{align}
+  \label{eq:impulse}
+  \De\argsqe(\dqep - \dqem) = J^{T}\argsqe \lambda\argsqedqem
+\end{align}
+where
+\begin{align*}
+  \int_{t^{-}}^{t^{+}} \! \lambda(\qe(\tau), \dqe(\tau)) \, d\tau.
+\end{align*}
+and $\dqem = \lim_{\tau \nearrow t} \dqe\argtau$ and $\dqep = \lim_{\tau
+  \searrow t} \dqe\argtau$ are the left and right limits to the solution
+$\dqe\argt$.
+%
+There may be a discrete jump and these limits may not be different due to
+impulsive forces applied at impact.
+%
+Based on the desired constraints, one can construct a Jacobian matrix,
+$J\argsqe$, whose rows contain individual constraints.
+%
+Combining \eqref{eq:eom-lambda} with \eqref{eq:impulse} results in the impact model:
+\begin{align*}
+  \left(\begin{array}{c c}
+      \De\argsqe & -J^{T}\argsqe\\
+      J\argsqe & \boldzero
+    \end{array}\right)
+  \left(\begin{array}{c}
+      \dqep\\
+      \lambda\argsqedqep
+    \end{array}\right) =
+  \left(\begin{array}{c}
+      \De\argsqe \dqem\\
+      \boldzero
+    \end{array}\right)
+\end{align*}
+%
+This model is used throughout this thesis wherever impacts arise.
+
+The information provided thus far is sufficient to handle simple bipeds with
+point feet but for more complex models, the definitions for hybrid systems must
+be expanded.
+%
+This will be done in the next section.
+
+
 
 \section{Complex Domain Structure}
 Bipedal robotic walking exhibits both discrete and continuous behavior; it is,
@@ -298,7 +512,7 @@ graph is a {\em directed cycle}.
   \begin{align}
     \nonumber
     V &= \left\{v_{1}, v_{2}, \ldots, v_{p}\right\},\\
-    \label{eqn:directedcyclep}
+    \label{eq:directedcyclep}
     E &= \left\{e_{1} = \{v_{1}, v_{2}\}, e_{2} = \{v_{2}, v_{3}\}, \ldots,
       e_{p} = \{v_{p}, v_{1}\}\right\},
   \end{align}
@@ -587,11 +801,11 @@ By taking a basis for the row space of the Jacobian, redundant constraints are r
 Using this Jacobian, the constrained dynamic model is given by
 %
 \begin{align}
-  \label{constraineddynamics}
+  \label{eq:constraineddynamics}
   \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \uu + J_v^T\argsq F_v\argsqdqu.
 \end{align}
 %
-where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eqn:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (see \cite{Murray1994}).
+where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eq:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (see \cite{Murray1994}).
 %
 Because the robot is modeled in a generalized position with ground contact enforced through constraints, the matrices $\M\argsq$, $\HCor\argsqdq$, and $\B\argsq$ are identical in every domain.
 %
@@ -601,7 +815,7 @@ To determine the wrench $F_v\argsqdqu$, one differentiates the kinematic constra
   J_{v}\argsq \, \ddq + {\dot J}_{v}\argsqdq \, \dq = 0
 \end{align}
 %
-and combine this equation with \eqref{constraineddynamics}.
+and combine this equation with \eqref{eq:constraineddynamics}.
 %
 Doing so results in an expression for the wrench $F_v\argsqdqu$:
 %
@@ -614,7 +828,7 @@ Doing so results in an expression for the wrench $F_v\argsqdqu$:
 %
 This is sometimes referred to in the literature as a Lagrange multiplier.
 %
-Combining \eqref{constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $F_{v}\argsqdqu$ and obtain the fields associated to the control system $\dx = f_{v}\arx + g_{v}\arx \, \uu$. For $\x = \argsqdq$,
+Combining \eqref{eq:constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $F_{v}\argsqdqu$ and obtain the fields associated to the control system $\dx = f_{v}\arx + g_{v}\arx \, \uu$. For $\x = \argsqdq$,
 %
 \begin{align}
   f_{v}\arx \!\! &= \!\!\! \left[\!\!\!\begin{array}{c}
@@ -622,7 +836,7 @@ Combining \eqref{constraineddynamics} and \eqref{eq:wrench} allows one to elimin
     \M^{-1}\argsq\Big( \big(J_{v}^{T}\argsq \Xi\argsq J_{v}\argsq \M^{-1}\argsq - I \big) \HCor\argsqdq \\
     \hspace{1cm}- J_{v}^{T}\argsq \Xi\argsq {\dot J}_{v}^{T}\argsqdq \, \dq \Big)
     \end{array}\!\!\!\right],\\
-  \label{eqn:controlsystem}
+  \label{eq:controlsystem}
   g_{v}\arx \!\! &= \!\!\! \left[\!\!\!\begin{array}{c}
     0\\
     \M^{-1}\argsq \big(I - J_{v}^{T}\argsq \Xi\argsq J_{v}\argsq \M^{-1}\argsq \big) \B\argsq
