@@ -1,6 +1,7 @@
 \chapter{\uppercase{Human-Inspired Control}} \label{ch:hic}
 
-\section{Domain Breakdown from Human Data} \label{sec:domainbreakdown} \noindent
+\section{Domain Breakdown from Human Data} \label{sec:domainbreakdown}
+
 This section shows how to determine the domain breakdown for the walking of nine
 human subjects.
 %
@@ -219,7 +220,29 @@ four-domain model.
 Doing this allows one to exploit the symmetry inherent in bipedal walking to
 simplfy controller design.
 
-To illustrate this procedure, consider the averaged data for the heel and toe shown in \figref{fig:heeltoefit}. Looking at these data, the trajectory of the heel appears to follow a constant, followed by a Gaussian, followed by a constant.  In a similar fashion, the averaged data for the toe appear to follow a constant, followed by a fourth-order polynomial, followed by a constant. With these observations in hand, fit the averaged heel and toe data to these functions using the described procedure. The results of the fitting procedure are shown in the topmost graph of \figref{fig:heeltoefit}; the transition points $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ are indicated by vertical lines. The fits quite accurately represent the data given the simplicity of the functions chosen; to quantify this, the coefficients of correlatation are $0.9968$ for the heel and $0.9699$ for the toe.
+To illustrate this procedure, consider the averaged data for the heel and toe
+shown in \figref{fig:heeltoefit}.
+%
+Looking at these data, the trajectory of the heel appears to follow a constant,
+followed by a Gaussian, followed by a constant.
+%
+In a similar fashion, the averaged data for the toe appear to follow a constant,
+followed by a fourth-order polynomial, followed by a constant.
+%
+With these observations in hand, fit the averaged heel and toe data to these
+functions using the described procedure.
+%
+The results of the fitting procedure are shown in the topmost graph of
+\figref{fig:heeltoefit};
+%
+the transition points $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ are indicated
+by vertical lines.
+%
+The fits quite accurately represent the data given the simplicity of the
+functions chosen;
+%
+to quantify this, the coefficients of correlatation are $0.9968$ for the heel
+and $0.9699$ for the toe.
 
 \subsection{Determining the Domain Breakdown}
 Given the data for a contact point $c \in \C$, the lift and strike times are
@@ -324,7 +347,8 @@ previous studies \cite{Ackermann2007}.
   \label{fred}
 \end{figure}
 
-\section{Human-Inspired Controller Design} \noindent
+\section{Human-Inspired Controller Design}
+
 The goal of this section is to find functions that are ``canonical'' to human
 walking, i.e., outputs on the configuration of the human, such as the angle of
 the knee, that seem to be intrinsic to walking. These functions will be used in
@@ -333,7 +357,8 @@ measurements, using the standard method of input/output linearization
 \cite{Sastry1999}. This control design strategy results in anthropomorphic
 walking behavior.
 
-\subsection{``Canonical'' Walking Functions} \label{sec:functions} \noindent
+\subsection{``Canonical'' Walking Functions} \label{sec:functions}
+
 Rather than just using trajectories from the human data, functions are sought which have both ``simple'' representations (much like in the case of heel and toe height discussed in \secref{sec:domainbreakdown}) and appear to be intrinsic to human walking. From the perspective of control, these functions must not conflict with the constraints of the system on each domain resulting from the enforced contact points as dictated by the domain breakdown. That is, the system must not be overconstrained.
 
 Data is considered from subject four; this data is obtained through the process outlined in \secref{sec:domainbreakdown}. (Subject four's data was selected as it contains the least noise.) A variety of functions are inspected --- these represent different fundamental behaviors of human walking, e.g., the movement of the torso or of the legs. Examination of the human data, reveals that functions describing the behavior of the torso, the hip, the non-stance leg slope (the slope of the line connecting the non-stance ankle to the hip), the knee angles, and the heel and toe heights seem to encode the most fundamental behaviors related to walking, as dictated by the correlation between the data and the fitted functions. The human behavior of these different functions throughout the course of the walking gait can be seen in \figref{fig:constraints-fitting}, with the data beginning at the start of domain $ts$.
@@ -505,10 +530,24 @@ the parameters generated as well as the tweaked parameters can be found in
 \input{inc/fit_correlations_table}
 \input{inc/func_param_table}
 
-\subsection{Robotic Hybrid Model \& Controllers} \noindent
+\subsection{Robotic Hybrid Model \& Controllers}
+
 Consider the robotic walker shown in \figref{fig:robotconstraints}. The goal is to use the human-inspired domain breakdown and ``canonical'' walking functions to design controllers for this robot.
 
-\subsubsection{Robotic Model} It was shown in \secref{sec:hybridsystem} that, given a collection of contact points and a domain breakdown (defined on a cycle graph), one can explicitly construct a hybrid control system. In particular, using the procedure discussed in \secref{sec:domainbreakdown}, a domain breakdown $\B_u$ is obtained, which is associated to human walking (see \exmpref{ex:domainbreakdown}) defined on the cycle $\Gamma_u = (Q_u,V_u)$ (given in Example \ref{universalgraph}).  As a result of the construction in \secref{sec:hybridsystem}, one obtains a hybrid control system describing this robot:
+\subsubsection{Robotic Model}
+
+It was shown in \secref{sec:complex-models} that, given a collection of contact
+points and a domain breakdown (defined on a cycle graph), one can explicitly
+construct a hybrid control system.
+%
+In particular, using the procedure discussed, a domain breakdown $\B_u$ is
+obtained, which is associated to human walking (see
+\exmpref{ex:domainbreakdown}) defined on the cycle $\Gamma_u = (Q_u,V_u)$ (given
+in \exmpref{universalgraph}).
+%
+As a result of the construction in \secref{sec:complex-models}, one obtains a
+hybrid control system describing this robot:
+%
 \begin{align}
   \label{eq:hcstime}
   \HCS = (\Gamma, \D, U, S, \Delta, FG).
@@ -564,7 +603,7 @@ Consider a control system of the form $(f_{v},g_{v})$, $v \in V_{u}$ as given in
 %
 Let $y^{a}_{v}(q)$ represent the vector of ``actual'' outputs on the system
 (e.g., the height of the stance heel)---these can be found by computation of
-forward kinematics \cite{Murray94}.
+forward kinematics \cite{Murray1994}.
 %
 Let $y^{d}_{v}(t)$ represent the vector of ``desired'' output functions to be
 tracked, which consists of combinations of the human-based ``canonical''
