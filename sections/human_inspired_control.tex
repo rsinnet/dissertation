@@ -33,7 +33,7 @@ humanlike nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
 
 \begin{figure}[t!]
   \centering
-  \includegraphics[width=1.0\textwidth]{LabeledDiagram}
+  \includegraphics[width=0.7\textwidth]{LabeledDiagram}
   \caption[Illustrations of the experimental setup and sensor
   placement.]{Illustrations of the experimental setup (left) and sensor
     placement (right).
@@ -56,12 +56,24 @@ humanlike nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
   \label{fig:Sensors}
 \end{figure}
 
-\subsection{Walking Experiment}\todo{Tone this down.}
-The data used in this work taken from \cite{}.
+\input{inc/subject_data}
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=0.7\textwidth]{subject_range_graph}
+  \caption{The ranges of age, height, and mass of the test subjects.}
+  \label{fig:subject-ranges}
+\end{figure}
+
+\subsection{Walking Experiment}
+The data used in this work taken from \cite{Ames2011a}.
 %
 A summary of the collection procedure is provided for reference:
 %
-were collected on nine subjects using the Phase Space System \cite{phasespace}
+data were collected on nine subjects using the Phase Space System%
+%
+\footnote{\url{http://www.phasespace.com/}}\xspace
+%
 which computes the 3D position of $19$ LED sensors at $480$ frames per second
 using $12$ cameras.
 %
@@ -74,6 +86,28 @@ as shown in \figref{fig:Sensors}, one LED sensor was placed on the sternum, one
 LED sensor was placed on the back behind the sternum, and one LED sensor was
 placed on the umbilicus.
 
+\begin{figure}[t!]
+  \centering
+  \subfloat[Heel height]{
+    \includegraphics[width=0.48\columnwidth]{LeftHeel}
+    \label{fig:heelheight}
+  }
+  \subfloat[Toe height]{
+    \includegraphics[width=0.48\columnwidth]{LeftToe}
+    \label{fig:toeheight}
+  }
+  \caption[The data for the heights of the heel and toe.]{The data for the
+    heights of the heel and toe.
+    %
+    Also shown are the fittings of a constant$\to$Gaussian$\to$constant for the
+    heel and a constant$\to$fourth-order polynomial$\to$constant for the toe.
+    %
+    The vertical lines on the left and right indicate the lift and strike times,
+    respectively.}
+  \label{fig:heeltoefit}
+\end{figure}
+
+
 Each trial of the experiment required the subject to walk three meters along a
 straight line drawn on the floor.
 %
@@ -83,7 +117,8 @@ Three female and six male subjects were tested with ages ranging between $17$
 and $77$ years, heights ranging between $161$ and $189$ centimeters, and masses
 ranging between $47.6$ and $90.7$ kilograms.
 %
-\tabref{tab:measurements} describes the measurements of each of the subjects.
+\tabref{tab:measurements} describes the measurements of each of the subjects and
+a visual representation is given in \figref{fig:subject-ranges}.
 %
 The data for each individual were rotated so the walking occurs in the
 $x$-direction and, for each subject, the $12$ walking trials were averaged
@@ -92,16 +127,6 @@ trajectory for each constraint for each subject for at least two steps (one step
 per leg);
 %
 the resulting data can be seen in \figref{fig:heeltoefit}.
-%
-An interested researcher should be able to perform analysis on the collected
-data, which can be found online \cite{ourdataset}.
-
-\begin{figure}[t!]
-  \centering
-  \includegraphics[width=1.0\textwidth]{subject_range_graph}
-  \caption{The ranges of age, height, and mass of the test subjects.}
-  \label{fig:subject-ranges}
-\end{figure}
 
 \subsection{Function Fitting}
 In order to determine the domain breakdowns for the subjects in the walking
@@ -132,27 +157,6 @@ This is an optimization problem which can be stated as follows:
 \item Minimize the cost function by choosing a new guess for the event times
   and then repeating steps 2--4.
 \end{enumerate}
-
-\begin{figure}[t!]
-  \centering
-  \subfloat[Heel height]{
-    \includegraphics[width=0.48\columnwidth]{LeftHeel}
-    \label{fig:heelheight}
-  }
-  \subfloat[Toe height]{
-    \includegraphics[width=0.48\columnwidth]{LeftToe}
-    \label{fig:toeheight}
-  }
-  \caption[The data for the heights of the heel and toe.]{The data for the
-    heights of the heel and toe.
-    %
-    Also shown are the fittings of a constant$\to$Gaussian$\to$constant for the
-    heel and a constant$\to$fourth-order polynomial$\to$constant for the toe.
-    %
-    The vertical lines on the left and right indicate the lift and strike times,
-    respectively.}
-  \label{fig:heeltoefit}
-\end{figure}
 
 
 To formalize the idea of function fitting to determine event times, given a set
@@ -187,7 +191,7 @@ It is assumed that $k_{c}^{\ell} < k_{c}^{s}$.
 If this is not the case, then $f_{c}$ would consist of the ``simplest''
 function, followed by a constant, followed by the ``simplest'' function.
 %
-After the construction of the $f_{c}$ functions in this paper, the optimization
+After the construction of the $f_{c}$ functions in this chapter, the optimization
 parameters are supressed---i.e., $f_{c}(t) = f_{c}(t, k_{c}^{\ell}, k_{c}^{s},
 a_{c})$---but it is assumed they have been determined.
 %
@@ -216,25 +220,6 @@ Doing this allows one to exploit the symmetry inherent in bipedal walking to
 simplfy controller design.
 
 To illustrate this procedure, consider the averaged data for the heel and toe shown in \figref{fig:heeltoefit}. Looking at these data, the trajectory of the heel appears to follow a constant, followed by a Gaussian, followed by a constant.  In a similar fashion, the averaged data for the toe appear to follow a constant, followed by a fourth-order polynomial, followed by a constant. With these observations in hand, fit the averaged heel and toe data to these functions using the described procedure. The results of the fitting procedure are shown in the topmost graph of \figref{fig:heeltoefit}; the transition points $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$ are indicated by vertical lines. The fits quite accurately represent the data given the simplicity of the functions chosen; to quantify this, the coefficients of correlatation are $0.9968$ for the heel and $0.9699$ for the toe.
-
-\begin{figure}[t!]
-  \centering
-  \includegraphics[width=1.0\columnwidth]{domainbreaking}
-  \caption[An overview of how the domain breakdown is achieved.]{An overview of
-    how the domain breakdown is achieved.
-    %
-    The top row illustrates the height of the toe and heel of each leg over one
-    step along with the lifting and strike time for each constraint (illustrated
-    with vertical lines).
-    %
-    The middle row illustrates which constraints are active based upon the
-    fitting.
-    %
-    The bottom row is the resulting domain breakdown where enforced constraints
-    are drawn in green circles.}
-  \label{fig:domainbreakdown}
-\end{figure}
-
 
 \subsection{Determining the Domain Breakdown}
 Given the data for a contact point $c \in \C$, the lift and strike times are
@@ -276,13 +261,53 @@ satisfying
       I & \boldzero
     \end{array}\right] d[n]
 \end{align}
-for $n \in \{1, \ldots, N-p\}$ with $I$ the identity matrix and $\boldzero, I \in \R^{\frac{|\C|}{2} \times \frac{|\C|}{2}}$. Note: if the data constitute multiple steps, there will be more than one possible value for $p$; in this case, the proper value of $p$ is the smallest of these values as this represents one step. The matrix that is premultiplied by $d[n]$ serves the purpose of reordering the right leg and left leg.  If this $p$ can be found, periodic walking over the course of two steps has been discovered in the data with the behavior of the left leg mirroring the behavior of the right leg. In this case, one constructs a directed cycle with $p$ domains (as in \eqref{eqn:directedcyclep}) and this is the graph $\Gamma$. The corresponding domain breakdown $\B$ is given by $\B(v_{n}) = d[n]$ for $n \in \{1, \ldots, p\}$. The application of this procedure to a single subject can be seen in \figref{fig:domainbreakdown}.
+for $n \in \{1, \ldots, N-p\}$ with $I$ the identity matrix and $\boldzero, I
+\in \R^{\frac{|\C|}{2} \times \frac{|\C|}{2}}$.
+%
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=0.8\columnwidth]{domainbreaking}
+  \caption[An overview of how the domain breakdown is achieved.]{An overview of
+    how the domain breakdown is achieved.
+    %
+    The top row illustrates the height of the toe and heel of each leg over one
+    step along with the lifting and strike time for each constraint (illustrated
+    with vertical lines).
+    %
+    The middle row illustrates which constraints are active based upon the
+    fitting.
+    %
+    The bottom row is the resulting domain breakdown where enforced constraints
+    are drawn in green circles.}
+  \label{fig:domainbreakdown}
+\end{figure}
+Note: if the data constitute multiple steps, there will be more than one
+possible value for $p$;
+%
+in this case, the proper value of $p$ is the smallest of these values as this
+represents one step.
+%
+The matrix that is premultiplied by $d[n]$ serves the purpose of reordering the
+right leg and left leg.
+%
+If this $p$ can be found, periodic walking over the course of two steps has been
+discovered in the data with the behavior of the left leg mirroring the behavior
+of the right leg.
+%
+In this case, one constructs a directed cycle with $p$ domains (as in
+\eqref{eq:directedcyclep}) and this is the graph $\Gamma$.
+%
+The corresponding domain breakdown $\B$ is given by $\B(v_{n}) = d[n]$ for $n
+\in \{1, \ldots, p\}$.
+%
+The application of this procedure to a single subject can be seen in
+\figref{fig:domainbreakdown}.
 
 \subsection{Results} The outlined process is performed on the set of contact
 points $\C =  \{\clh, \clt, \crh , \crt\}$ for the nine test subjects that
 performed the walking experiment. The end result showed that each subject had
 the same, {\em universal}, domain breakdown; this can be seen in
-\figref{fig:domaingraph}. In the context of this paper, a single subject was
+\figref{fig:domaingraph}. In the context of this work, a single subject was
 chosen for study based upon the completeness of the sensor data, which, in this
 case, was subject four; the domain breakdown and the time spent in each domain
 for the subject can be seen in \figref{fred}. It is important to note that the
@@ -298,6 +323,20 @@ previous studies \cite{Ackermann2007}.
   \caption[The domain breakdown for subject four]{The domain breakdown for subject four together with the amount of time spent in each domain. Each illustration is a snapshot of the subject's configuration at the beginning of the domain together with the contact points enforced.}
   \label{fred}
 \end{figure}
+
+\section{Human-Inspired Controller Design} \noindent
+The goal of this section is to find functions that are ``canonical'' to human
+walking, i.e., outputs on the configuration of the human, such as the angle of
+the knee, that seem to be intrinsic to walking. These functions will be used in
+the design of control laws, for a bipedal robot with anthropomorphic
+measurements, using the standard method of input/output linearization
+\cite{Sastry1999}. This control design strategy results in anthropomorphic
+walking behavior.
+
+\subsection{``Canonical'' Walking Functions} \label{sec:functions} \noindent
+Rather than just using trajectories from the human data, functions are sought which have both ``simple'' representations (much like in the case of heel and toe height discussed in \secref{sec:domainbreakdown}) and appear to be intrinsic to human walking. From the perspective of control, these functions must not conflict with the constraints of the system on each domain resulting from the enforced contact points as dictated by the domain breakdown. That is, the system must not be overconstrained.
+
+Data is considered from subject four; this data is obtained through the process outlined in \secref{sec:domainbreakdown}. (Subject four's data was selected as it contains the least noise.) A variety of functions are inspected --- these represent different fundamental behaviors of human walking, e.g., the movement of the torso or of the legs. Examination of the human data, reveals that functions describing the behavior of the torso, the hip, the non-stance leg slope (the slope of the line connecting the non-stance ankle to the hip), the knee angles, and the heel and toe heights seem to encode the most fundamental behaviors related to walking, as dictated by the correlation between the data and the fitted functions. The human behavior of these different functions throughout the course of the walking gait can be seen in \figref{fig:constraints-fitting}, with the data beginning at the start of domain $ts$.
 
 \begin{figure}[t!]
   \centering
@@ -317,37 +356,29 @@ previous studies \cite{Ackermann2007}.
   \label{fig:constraints-fitting}
 \end{figure}
 
-\section{Human-Inspired Controller Design} \noindent
-The goal of this section is to find functions that are ``canonical'' to human
-walking, i.e., outputs on the configuration of the human, such as the angle of
-the knee, that seem to be intrinsic to walking. These functions will be used in
-the design of control laws, for a bipedal robot with anthropomorphic
-measurements, using the standard method of input/output linearization
-\cite{Sastry1999}. This control design strategy results in anthropomorphic
-walking behavior.
-
-\subsection{``Canonical'' Walking Functions} \label{sec:functions} \noindent
-Rather than just using trajectories from the human data, functions are sought which have both ``simple'' representations (much like in the case of heel and toe height discussed in \secref{sec:domainbreakdown}) and appear to be intrinsic to human walking. From the perspective of control, these functions must not conflict with the constraints of the system on each domain resulting from the enforced contact points as dictated by the domain breakdown. That is, the system must not be overconstrained.
-
-Data is considered from subject four; this data is obtained through the process outlined in \secref{sec:domainbreakdown}. (Subject four's data was selected as it contains the least noise.) A variety of functions are inspected --- these represent different fundamental behaviors of human walking, e.g., the movement of the torso or of the legs. Examination of the human data, reveals that functions describing the behavior of the torso, the hip, the non-stance leg slope (the slope of the line connecting the non-stance ankle to the hip), the knee angles, and the heel and toe heights seem to encode the most fundamental behaviors related to walking, as dictated by the correlation between the data and the fitted functions. The human behavior of these different functions throughout the course of the walking gait can be seen in \figref{fig:constraints-fitting}, with the data beginning at the start of domain $ts$.
-
-\begin{figure}[t]
-  \centering
-  \subfloat[Comparison of hip movement] {
-    \includegraphics[width=.48\textwidth]{hip_pos}
-    \label{fig:hip-pos}
-  }
-  \subfloat[Angular motion of torso] {
-    \includegraphics[width=.48\textwidth]{torso_angle}
-    \label{fig:torso-angle}
-  }
-  \caption{Trajectories for the hip (a) and torso (b).}
-  \label{fig:torso-hip}
-\end{figure}
-
 Before further detail is given, a remark on the choice of constraints is in order:
 \begin{remark} \label{rmk:actuation}
-  When choosing which functions to track, it is important to consider which joints will have actuation and which actuators will do most of the work necessary to track a given constraint. An example of a poor choice of constraints would be the stance knee, the stance leg slope, and the stance hip position. The reason this is a poor choice is as follows: to track these three constraints, only two degrees of actuation will do most of the work---the stance ankle and the stance knee. Thus, the dynamics of the system will be ill-behaved. Indeed, if one tries to track three constraints on a two-link pendulum, the result will be an overconstrained system {\em unless} two of the constraints match up perfectly---in other words, two {\em independent} constraints are being tracked. This same argument extends to the specified robot, which is a multi-link kinematic chain.
+  When choosing which functions to track, it is important to consider which
+  joints will have actuation and which actuators will do most of the work
+  necessary to track a given constraint.
+  %
+  An example of a poor choice of constraints would be the stance knee, the
+  stance leg slope, and the stance hip position.
+  %
+  The reason this is a poor choice is as follows:
+  %
+  to track these three constraints, only two degrees of actuation will do most
+  of the work---the stance ankle and the stance knee.
+  %
+  Thus, the dynamics of the system will be ill-behaved.
+  %
+  Indeed, if one tries to track three constraints on a two-link pendulum, the
+  result will be an overconstrained system {\em unless} two of the constraints
+  match up perfectly---in other words, two {\em independent} constraints are
+  being tracked.
+  %
+  This same argument extends to the specified robot, which is a multi-link
+  kinematic chain.
 \end{remark}
 
 \subsubsection{Knee} Inspecting the behavior of the human knee over the course of the gait (see \figref{fig:constraints-knees}) reveals that the angle of the human knee appears to follow a Gaussian when it is swinging (the non-stance leg) and a second order system response (i.e., the step response of a spring damper system) when the weight of the person is on the leg (i.e., when the leg is the stance leg). With this in mind, the following functions are fit to the human data for the knee angles of the stance and non-stance legs:
@@ -367,7 +398,7 @@ Intuitively, this just means that the non-stance leg swings freely much like the
 \begin{align*}
   y_{d,hv} = A_{3,1}.
 \end{align*}
-The reason for tracking the velocity instead of the position is related to the method used to impose feedback control on the system and requires some explanation; however, due to the level of detail, this discussion will be deferred until later in this paper. It is of interest, however, to note that, as mentioned previously, tracking hip velocity allows for direct control over the walking speed of the robot.
+The reason for tracking the velocity instead of the position is related to the method used to impose feedback control on the system and requires some explanation; however, due to the level of detail, this discussion will be deferred until later. It is of interest, however, to note that, as mentioned previously, tracking hip velocity allows for direct control over the walking speed of the robot.
 
 \subsubsection{Torso} The data show that a human tends to keep his or her torso upright throughout his or her walking gait. Specifically, the data indicates that the absolute angle of the torso with respect to the world frame closely follows a sine wave, but the amplitude is small, so it is approximated with a constant:
 \begin{align*}
@@ -393,18 +424,30 @@ After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracke
 \begin{remark} \label{rmk:dimconst}
   Certain constraint functions represent dimensionalized constraints, e.g., heel
   height, whereas other functions discussed, e.g., angles and slopes, represent
-  nondimensionalized constraints. In general it is not effective to follow
-  dimensionalized constraints as they represent constraints on specific points
-  of the system and thus have the potential to introduce extreme restrictions on
-  the configuration space of the entire system. This should be thought of in
-  terms of the inverse kinematics problem: consider an end-effector and solve
-  for the range of possible configurations on the angles leading up to that
-  point. Thus, dimensionalized constraints are not robust with respect to length
-  parameters. Additionally, these dimensionalized constraints can conflict with
-  other holonomic constraints being tracked. Recall that the intent is to track
-  the height of the stance toe; in this case, the issue of configuration
-  restriction is minimal: only the heel is pinned to the ground so tracking the
-  toe's height is equivalent to tracking the angle or slope of the foot.
+  nondimensionalized constraints.
+  %
+  In general it is not effective to follow dimensionalized constraints as they
+  represent constraints on specific points of the system and thus have the
+  potential to introduce extreme restrictions on the configuration space of the
+  entire system.
+  %
+  This should be thought of in terms of the inverse kinematics problem:
+  %
+  consider an end-effector and solve for the range of possible configurations on
+  the angles leading up to that point.
+  %
+  Thus, dimensionalized constraints are not robust with respect to length
+  parameters.
+  %
+  Additionally, these dimensionalized constraints can conflict with other
+  holonomic constraints being tracked.
+  %
+  Recall that the intent is to track the height of the stance toe;
+  %
+  in this case, the issue of configuration restriction is minimal:
+  %
+  only the heel is pinned to the ground so tracking the toe's height is
+  equivalent to tracking the angle or slope of the foot.
 \end{remark}
 
 \begin{figure}[t!]
@@ -420,33 +463,47 @@ After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracke
   }
   \caption[Kinematic and dynamic model of the 2D bipedal robot.]{Kinematic and
     dynamic model of the 2D bipedal robot:
-    %
+    % 
     (a) The general configuration of the 2D bipedal robot with knees and feet;
-    %
+    % 
     (b) The different configuration-based outputs considered in the fitting of
     the ``canonical'' functions.}
-    \label{fig:robotconstraints}
+  \label{fig:robotconstraints}
 \end{figure}
 
 \subsubsection{Fitting}
 The paramaters of the ``canonical'' functions can be found by minimizing the
-error between the human data and the corresponding functions. Formally, given a
-function choice $y_d(t, A)$, with $A \in \R^{n_{d}}$ the $n_d$ parameters, and
-the corresponding data function $x_{d}[k]$ with indexed time $\tau_{d}[k]$ for
-data index $k \in \{1, \ldots, K\}$ (for $K$ data points),  a solution is sought
-for the optimization problem:
+error between the human data and the corresponding functions.
+%
+Formally, given a function choice $y_d(t, A)$, with $A \in \R^{n_{d}}$ the $n_d$
+parameters, and the corresponding data function $x_{d}[k]$ with indexed time
+$\tau_{d}[k]$ for data index $k \in \{1, \ldots, K\}$ (for $K$ data points), a
+solution is sought for the optimization problem:
+%
 \begin{align}
   \label{eq:fitsolve}
   \min_{A \in \R^{n_{d}}} \sum_{k=1}^{K} (y_{d}(\tau_{d}[k], A) - x_{d}[k])^2.
 \end{align}
-The fits that result from solving \eqref{eq:fitsolve} are shown in \figref{fig:constraints-fitting}. The correlation coefficient for the fits of each of the respective functions can be found in \tabref{tab:fitcor}. In all cases (with the exception of the torso and ankle), the fits are very good. One final note of import: in order to achieve walking in simulation, some parameters had to be tweaked by hand; the parameters generated as well as the tweaked parameters can be found in \tabref{tab:funcparam}.
+%
+The fits that result from solving \eqref{eq:fitsolve} are shown in
+\figref{fig:constraints-fitting}.
+%
+The correlation coefficient for the fits of each of the respective functions can
+be found in \tabref{tab:fitcor}.
+%
+In all cases (with the exception of the torso and ankle), the fits are very
+good.
+%
+One final note of import:
+%
+in order to achieve walking in simulation, some parameters had to be tweaked by
+hand;
+%
+the parameters generated as well as the tweaked parameters can be found in
+\tabref{tab:funcparam}.
 
-\begin{figure}
-  \centering
-  \includegraphics[width=.5\columnwidth]{robot_angles}
-  \caption[The shape coordinates for the biped labeled $q_i$]{The shape coordinates for the biped labeled $q_i$ with the corresponding arrows representing twists. The $x$-axis is coming out of the page. The hip width is zero and is shown for illustration purposes only. The axes shown represents the body-fixed frame which has orientation about the $y$-axis given by $\phi_b$.}
-  \label{fig:shapecoords}
-\end{figure}
+\input{inc/fit_correlations_table}
+\input{inc/func_param_table}
 
 \subsection{Robotic Hybrid Model \& Controllers} \noindent
 Consider the robotic walker shown in \figref{fig:robotconstraints}. The goal is to use the human-inspired domain breakdown and ``canonical'' walking functions to design controllers for this robot.
@@ -456,37 +513,69 @@ Consider the robotic walker shown in \figref{fig:robotconstraints}. The goal is 
   \label{eq:hcstime}
   \HCS = (\Gamma, \D, U, S, \Delta, FG).
 \end{align}
+%
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=.45\columnwidth]{robot_angles}
+  \caption[The shape coordinates for the biped labeled $q_i$.]{The shape
+    coordinates for the biped labeled $q_i$.
+    %
+    The corresponding arrows represent twists. The $x$-axis is coming out of the
+    page.
+    %
+    The hip width is zero and is shown for illustration purposes only.
+    %
+    The axes shown represents the body-fixed frame which has orientation about
+    the $y$-axis given by $\phi_b$.}
+  \label{fig:shapecoords}
+\end{figure}
+%
 As discussed previously, attach a reference frame $R_b$ to the hip. Let $\phi_b$
 be the orientation of $R_b$ (with respect to the $y$-axis for a two-dimensional
-model) and let $p_b^x, p_b^z$ be the Cartesian position of $R_b$. The shape
-coordinates $q$ for the biped are chosen to be the relative angles between any
-two successive links starting at the stance foot as shown in
-\figref{fig:shapecoords}. Combining $\phi_b$, $p_b^x$, $p_b^z$, and $q$ gives
-the configuration space for the biped. The only unknowns for the model are the
-physical parameters of the system; these are obtained from the anthropometric
-data for subject four, given in \tabref{tab:measurements}. In particular, the
-lengths are given and the mass of each point mass in the robot (as seen in
-\figref{fig:robotconstraints}) is estimated from the overall mass of the person
-using a standard mass distribution of a human from the literature
-\cite{Winter2009}.
+model) and let $p_b^x, p_b^z$ be the Cartesian position of $R_b$.
+%
+The shape coordinates $q$ for the biped are chosen to be the relative angles
+between any two successive links starting at the stance foot as shown in
+\figref{fig:shapecoords}.
+%
+Combining $\phi_b$, $p_b^x$, $p_b^z$, and $q$ gives the configuration space for
+the biped.
+%
+The only unknowns for the model are the physical parameters of the system;
+%
+these are obtained from the anthropometric data for subject four, given in
+\tabref{tab:measurements}.
+%
+In particular, the lengths are given and the mass of each point mass in the
+robot (as seen in \figref{fig:robotconstraints}) is estimated from the overall
+mass of the person using a standard mass distribution of a human from the
+literature \cite{Winter2009}.
 
-\subsubsection{Controller Design} The goal now is to design a controller to
-track the desired functions given in \secref{sec:functions}. Before discussing
-which of these functions are tracked on each domain, a description technique
-used to track the desired functions, input/output linearization
-\cite{Sastry1999}, is given.
-% Sastry, pp. 407
+\subsubsection{Controller Design}
+The goal now is to design a controller to track the desired functions given in
+\secref{sec:functions}.
+%
+Before discussing which of these functions are tracked on each domain, a
+description technique used to track the desired functions, input/output
+linearization \cite[Ch.~9]{Sastry1999}, is given. % Sastry, pp. 407
 
 Consider a control system of the form $(f_{v},g_{v})$, $v \in V_{u}$ as given in
-\eqref{eqn:controlsystem} for an arbitrary domain in the domain breakdown. Let
-$y^{a}_{v}(q)$ represent the vector of ``actual'' outputs on the system (e.g.,
-the height of the stance heel)---these can be found by computation of forward
-kinematics \cite{Murray94}. Let $y^{d}_{v}(t)$ represent the vector of
-``desired'' output functions to be tracked, which consists of combinations of
-the human-based ``canonical'' constraint functions. Let $n = \dim(Q)$ and let
-$m$ be the number of constraint functions being tracked on a given
-domain. Motivated by the desire to drive $y^{a}_{v}(q(t)) \to y^{d}_{v}(t)$ as
-$t \to \infty$, a definition is given for the following virtual output vector:
+\eqref{eq:controlsystem} for an arbitrary domain in the domain breakdown.
+%
+Let $y^{a}_{v}(q)$ represent the vector of ``actual'' outputs on the system
+(e.g., the height of the stance heel)---these can be found by computation of
+forward kinematics \cite{Murray94}.
+%
+Let $y^{d}_{v}(t)$ represent the vector of ``desired'' output functions to be
+tracked, which consists of combinations of the human-based ``canonical''
+constraint functions.
+%
+Let $n = \dim(Q)$ and let $m$ be the number of constraint functions being
+tracked on a given domain.
+%
+Motivated by the desire to drive $y^{a}_{v}(q(t)) \to y^{d}_{v}(t)$ as $t \to
+\infty$, a definition is given for the following virtual output vector:
+%
 \begin{align}
   \label{eq:virtout}
   y_v(q,t) = y^a_v(q) - y^d_v(t).
@@ -532,10 +621,14 @@ with $\mathcal{A}_{v}(q, {\dot q},t)$ the decoupling matrix given by
       L_{g_{v}} L_{f_{v}} y_{v,2}(q,t)
     \end{array}\right],
 \end{align*}
-where, again, $(f_{v},g_{v})$ is given in \eqref{eqn:controlsystem}. In the above,
+where, again, $(f_{v},g_{v})$ is given in \eqref{eq:controlsystem}.
+%
+In the above,
 \begin{align}
   L_{f} y(q, {\dot q}, t) = \pd{y(q, {\dot q}, t)}{(q^T, {\dot q}^T, t)^T} \cdot f(q, \dot q, t)
-\end{align} represents the Lie derivative with $q, {\dot q}, t$ representing independent variables.
+\end{align}
+represents the Lie derivative with $q, {\dot q}, t$ representing independent
+variables.
 %the control field $g_v(q)$ is given by
 %\begin{align}
 %    g_v(q) = \left[\begin{array}{c}
@@ -544,7 +637,8 @@ where, again, $(f_{v},g_{v})$ is given in \eqref{eqn:controlsystem}. In the abov
 %    \end{array}\right]
 %\end{align}
 %with $B(q)$ a torque distribution matrix specific to each domain. These are omitted but can be found online at \cite{SUP_online}.
-Applying the given control law yields the non-autonomous closed-loop dynamical system
+Applying the given control law yields the non-autonomous closed-loop dynamical
+system
 \begin{align}
   \label{eq:clsys}
   f_\mathit{cl,v}(q, {\dot q},t) = f_v(q, {\dot q}) + g_v(q) u(q, {\dot q}, t).
@@ -554,133 +648,277 @@ Applying the given control law yields the non-autonomous closed-loop dynamical s
 %    \HS = (\D, S, R, F)
 %\end{align}
 
-Completion of the controller construction requires the specification of the vectors $y^{a}_{v}$ and $y^{d}_{v}$ for $v \in V_u$ which are specific to each of the four domains in \figref{fig:domaingraph}. As mentioned previously, the vector $y^a_v$ consists of the robotic constraints pictured in \figref{fig:robotconstraints}, which are computed directly from the kinematics of the robot. Therefore, the only decision remaining is which of the ``canonical'' human functions to track on each domain. The specific choice of functions is shown in \tabref{tab:fitcor} where black dots indicate which functions are tracked on which domains. The choice of functions is based on the discussion in \secref{sec:functions} coupled with choosing collections of functions that do not conflict with the holonomic constraints imposed on the system as a result of ground contact (see Remarks \ref{rmk:actuation} and \ref{rmk:dimconst}). Applying these collections of controllers to the hybrid control system \eqref{eq:hcstime} yields the non-autonomous hybrid system:
+Completion of the controller construction requires the specification of the
+vectors $y^{a}_{v}$ and $y^{d}_{v}$ for $v \in V_u$ which are specific to each
+of the four domains in \figref{fig:domaingraph}.
+%
+As mentioned previously, the vector $y^a_v$ consists of the robotic constraints
+pictured in \figref{fig:robotconstraints}, which are computed directly from the
+kinematics of the robot.
+%
+Therefore, the only decision remaining is which of the ``canonical'' human
+functions to track on each domain.
+%
+The specific choice of functions is shown in \tabref{tab:fitcor} where black
+dots indicate which functions are tracked on which domains.
+%
+The choice of functions is based on the discussion in \secref{sec:functions}
+coupled with choosing collections of functions that do not conflict with the
+holonomic constraints imposed on the system as a result of ground contact (see
+Remarks \ref{rmk:actuation} and \ref{rmk:dimconst}).
+%
+Applying these collections of controllers to the hybrid control system
+\eqref{eq:hcstime} yields the non-autonomous hybrid system:
+%
 \begin{align}
   \label{eq:hstime}
   \HS_t = (\Gamma, \D, S, \Delta, F).
 \end{align}
 
 \begin{remark}
-  One final point worthy of mention is transitioning from domains with no impact, i.e., contact point becomes unconstrained. Looking at equations, \eqref{eqn:controlsystem} and \eqref{eq:wrench}, it is apparent that one can achieve lift by simply solving for a value of $u$ which will cause the heel to lift. Such a value would be outside the domain as defined in \eqref{eq:domain}; specifically, this value of $u$ will violate \eqref{eq:constnu}. Provided that \eqref{eq:constnu} is satisfied during the a given phase, it becomes a control decision when to lift the heel or toe. A criterion is chosen and then appropriate control is applied to instantaneously achieve heel or toe lift. In the domain that follows, the control laws implicit in \eqref{eq:clsys} will be responsible for causing the toe or heel to continue to lift.
+  One final point worthy of mention is transitioning from domains with no
+  impact, i.e., contact point becomes unconstrained.
+  %
+  Looking at equations, \eqref{eq:controlsystem} and \eqref{eq:wrench}, it is
+  apparent that one can achieve lift by simply solving for a value of $u$ which
+  will cause the heel to lift.
+  %
+  Such a value would be outside the domain as defined in \eqref{eq:domain};
+  %
+  specifically, this value of $u$ will violate \eqref{eq:constnu}.
+  %
+  Provided that \eqref{eq:constnu} is satisfied during the a given phase, it
+  becomes a control decision when to lift the heel or toe.
+  %
+  A criterion is chosen and then appropriate control is applied to
+  instantaneously achieve heel or toe lift.
+  %
+  In the domain that follows, the control laws implicit in \eqref{eq:clsys} will
+  be responsible for causing the toe or heel to continue to lift.
 \end{remark}
 
-\subsection{Simulation of Time-Based Feedback Controller} \label{sec:timesim} \noindent
+\subsection{Simulation of Time-Based Feedback Controller} \label{sec:timesim}
+
 This subsection presents the results of a simulation of the bipedal robot
-modeled by \eqref{eq:hstime}. The parameters used for the human functions are
-given in \tabref{tab:funcparam}. It is important to note that, in order to
-achieve walking, it was necessary to tweak the parameters; specifically, this
-amounted to the multiplication of the row corresponding to the non-stance leg
-slope (row six) by $1.25$. Videos of the walking can be found
-online.\cite{url:robotica_2011_spja_01}\xspace It is found through simulation
-that the biped has stable walking. This is checked by finding a fixed point on
-the orbit and verifying its stability using the Poincar\'{e} map technique
-\cite{Parker1989}. Using the model parameters found
-online\cite{url:robotica_2011_spja_01}\xspace and the input/output linearization
-control gain $\varepsilon = 15$, the system is simulated and the following fixed
-point is found:
+modeled by \eqref{eq:hstime}.
+%
+The parameters used for the human functions are given in \tabref{tab:funcparam}.
+%
+It is important to note that, in order to achieve walking, it was necessary to
+tweak the parameters;
+%
+specifically, this amounted to the multiplication of the row corresponding to
+the non-stance leg slope (row six) by $1.25$.
+%
+Videos of the walking can be found online.%
+%
+\footnote{\url{http://www.rwsinnet.com/phdthesis/}\label{fn:rwsinnet}}\xspace
+%
+It is found through simulation that the biped has stable walking.
+%
+This is checked by finding a fixed point on the orbit and verifying its
+stability using the \Poincare{} map technique \cite{Parker1989}.
+%
+Using the model parameters found online\fnref{fn:rwsinnet} and the
+input/output linearization control gain $\varepsilon = 15$, the system is
+simulated and the following fixed point is found:
+%
 \begin{align}
-%  \setlength{\extrarowheight}{-3mm}
-%  q_{s,b}^* = \left[\!\!\!\!\begin{array}{r}
-%      -0.4599\\
-%      0.2462\\
-%      0.2716\\
-%      -0.4411\\
-%      0.3233\\
-%      0.1623
-%    \end{array}\right]\!, \quad
-%  {\dot q}^* = \left[\begin{array}{r}
-%      -0.9505\\
-%      0.4524\\
-%      0.5178\\
-%      0.3090\\
-%      -2.6569\\
-%      -0.5093
-%    \end{array}\right],\\
-%  \setlength{\extrarowheight}{0mm}
   q_{s,t}^{*} =
   \left(\!\!\!\!\begin{array}{c c c c c c}
-    -.460 & \hphantom{-}.246 & \hphantom{-}.272 & -.441 & \hphantom{-0}.323 & \hphantom{-}.162
-  \end{array}\!\!\right)^T\\
+    -.460 & \hphantom{-}.246 & \hphantom{-}.272 & -.441 & \hphantom{-0}.323 &
+    \hphantom{-}.162
+  \end{array}\!\!\right)\\
   {\dot q}_{s,t}^{*} =
   \left(\!\!\!\!\begin{array}{c c c c c c}
     -.951 & \hphantom{-}.452 & \hphantom{-}.518 & -.309 & -2.660 & -.509
-  \end{array}\!\!\right)^T
+  \end{array}\!\!\right)
 \end{align}
-which is on the guard of domain $\DC$. This verifies that there exists a walking gait. Note that only the shape coordinates are given for the fixed point as the other coordinates will be completely determined by the condition that the biped is on the guard; that is, the constraints that exist on the system, e.g., the stance toe is on the ground, are enough to uniquely determine the rest of the variables, $\phi_b$, $p_x$, and $p_z$.
+which is on the guard of domain $\DC$.
+%
+This verifies that there exists a walking gait.
+%
+Note that only the shape coordinates are given for the fixed point as the other
+coordinates will be completely determined by the condition that the biped is on
+the guard;
+%
+that is, the constraints that exist on the system, e.g., the stance toe is on
+the ground, are enough to uniquely determine the rest of the variables,
+$\phi_b$, $p_x$, and $p_z$.
 
 In the context of bipedal walking, a stable limit cycle or an exponentially
-stable periodic orbit implies stable walking. It is, therefore, desirable to
-show that the system has a stable limit cycle. This is achieved by examining the
-Jacobian of the Poincar{\'e} map linearized about the fixed point $((q^*)^T,
-({\dot q}^*)^T)^T$ \cite{Parker1989}. This Poincar{\'e} map will be stable if
-all the eigenvalues of the Jacobian have magnitude below unity. Then, stability
-of the Poincar{\'e} map implies stability of the system. The Jacobian matrix can
-be approximated by perturbing along the guard about the fixed point with respect
-to the coordinates $q$ and ${\dot q}$. A numerical approximation yields
-eigenvalues of the following magnitudes:
+stable periodic orbit implies stable walking.
+%
+It is, therefore, desirable to show that the system has a stable limit cycle.
+%
+This is achieved by examining the Jacobian of the \Poincare{} map linearized
+about the fixed point $((q^*)^T, ({\dot q}^*)^T)^T$ \cite{Parker1989}.
+%
+This \Poincare{} map will be stable if all the eigenvalues of the Jacobian have
+magnitude below unity.
+%
+Then, stability of the \Poincare{} map implies stability of the system.
+%
+The Jacobian matrix can be approximated by perturbing along the guard about the
+fixed point with respect to the coordinates $\q$ and $\dq$.
+%
+A numerical approximation yields eigenvalues of the following magnitudes:
+%
 \begin{align}
   \label{eq:time-eigs}
   |\lambda_t| \in \{0.2640, 0.2492, 0.0337, 0.0337, 0.0011, \ldots\},
 \end{align}
-where, for the sake of space, only the five eigenvalues with the largest magnitudes are included. At this point in the discussion, a remark about zero eigenvalues is appropriate:
+where, for the sake of space, only the five eigenvalues with the largest
+magnitudes are included.
+%
+At this point in the discussion, a remark about zero eigenvalues is appropriate:
 
-\input{phase_portrait_figure}
-\begin{figure*}[p!]
+\begin{remark}
+  When considering a \Poincare{} section $\Guard$ which is a guard of a hybrid
+  system with constraints, some of the eigenvalues will be zero.
+  %
+  This is a result of the difference in the dimension of the Jacobian and the
+  dimension of the guard which is a transverse hyperplane of the continuous
+  trajectory.
+  %
+  Specifically, consider the guard used here as $\Guard$.
+  %
+  In this  case, the guard restricts the previously nine-dimensional position
+  space such that the state of the system, throwing out cyclic variables such as
+  $x$-position, can be determined completely using only six position variables.
+  %
+  This results in a number of zero eigenvalues, in this case, three relating to
+  position and three for the corresponding velocities.
+  %
+  More on this topic can be found in the literature \cite{Wendel2010}.
+\end{remark}
+
+The eigenvalues in \eqref{eq:time-eigs} have magnitude below unity, and thus,
+the system has a locally exponentially stable periodic orbit.
+%
+The phase portraits are shown in \figref{fig:pp-t}.
+%
+These phase portraits are closed---in other words, they contain a closed
+periodic orbit.
+%
+\begin{figure*}[t!]
+  \centering
+  \subfloat[Body frame angle]{
+    \includegraphics[width=0.24\textwidth]{pp-time-1-s}
+    \label{fig:pp-t-ref}
+  }
+  \subfloat[Ankle angles]{
+    \includegraphics[width=0.24\textwidth]{pp-time-2-s}
+    \label{fig:pp-t-ankle}
+  }
+  \subfloat[Knee angles]{
+    \includegraphics[width=0.24\textwidth]{pp-time-3-s}
+    \label{fig:pp-t-knee}
+  }
+  \subfloat[Hip angles]{
+    \includegraphics[width=0.24\textwidth]{pp-time-4-s}
+    \label{fig:pp-t-hip}
+  }
+  \caption{Phase portraits of simulation of time-based system $\HS_t$.}
+  \label{fig:pp-t}
+\end{figure*}
+%
+\begin{figure}[t!]
   \centering
   \includegraphics[width=1.0\textwidth]{hic_gait_tiles}
   \caption[Comparison of simulated walking gaits.]{Comparison of simulated
     walking gaits. Time-based feedback control and autonomous feedback
     control.}
   \label{fig:gaittiles}
-\end{figure*}
-
-\begin{remark}
-  When considering a Poincar{\'e} section $\Sigma$ which is a guard of a hybrid
-  system with constraints, some of the eigenvalues will be zero. This is a
-  result of the difference in the dimension of the Jacobian and the dimension of
-  the guard which is a transverse hyperplane of the continuous
-  trajectory. Specifically, consider the guard used here as $\Sigma$. In this
-  case, the guard restricts the previously nine-dimensional position space such
-  that the state of the system, throwing out cyclic variables such as
-  $x$-position, can be determined completely using only six position
-  variables. This results in a number of zero eigenvalues, in this case, three
-  relating to position and three for the corresponding velocities. More on this
-  topic can be found in the literature \cite{Wendel2010}.
-\end{remark}
-
-The eigenvalues in \eqref{eq:time-eigs} have magnitude below unity, and thus,
-the system has a locally exponentially stable periodic orbit. The phase
-portraits are shown in \figref{fig:pp-t}. These phase portraits are closed---in
-other words, they contain a closed periodic orbit. Snapshots of the walking gait
-are shown in \figref{fig:gaittiles}. These simulation results imply that,
-through a choice of functions intrinsic to human walking, humanlike walking was
-indeed obtained for on an anthropomorphic biped. The humanlike nature of the
-simulated gait can best be seen in a video of the walking available online, at
-the AMBER Lab website \cite{url:bipedalrobotics}.
+\end{figure}
+%
+Snapshots of the walking gait are shown in \figref{fig:gaittiles}.
+%
+These simulation results imply that, through a choice of functions intrinsic to
+human walking, humanlike walking was indeed obtained for on an anthropomorphic
+biped.
+%
+The humanlike nature of the simulated gait can best be seen in a video of the
+walking available online.\fnref{fn:rwsinnet}
 
 \section{Autonomous Feedback Controller Design}
+
 In general, autonomous control is preferred over non-autonomous, time-based
-control as autonomous controllers tend to be more robust. In this section, a
-method is given which shows how to remove the time-dependence from the
-``canonical'' functions described in the previous section. A common trick in the
-literature \cite{Westervelt2007} for converting time-based trajectories into
-state-based trajectories is to parameterize time by a state-dependent function;
+control as autonomous controllers tend to be more robust.
+%
+In this section, a method is given which shows how to remove the time-dependence
+from the ``canonical'' functions described in the previous section.
+%
+A common trick in the literature \cite{Westervelt2007} for converting time-based
+trajectories into state-based trajectories is to parameterize time by a
+state-dependent function;
+%
 this results in an autonomous feedback control strategy.
 
-\subsection{State-Based Trajectory Parameterization}
-Recall that the functions discussed in the previous section are directly dependent on time, i.e., they can be written $y_{\vo}^{d}(t)$. Furthermore, these functions are all defined on some interval $[t^- = 0, t^+ = P] = \mathcal{I} \subset \R_{0}^{+}$ with $P$ the period of the gait (that is, one step with one leg); in other words, a given tracking function can be written as a map $y_{\vo}^{d} : \mathcal{I} \to \R$. Autonomous state feedback can be achieved by simply choosing a state-based parameterization $\varsigma : Q \to \mathcal{I}$ and substituting for time, i.e., $y_{\vo}^{d}(\varsigma(q))$.
+\begin{figure}[t]
+  \centering
+  \subfloat[Comparison of hip movement] {
+    \includegraphics[width=.48\textwidth]{hip_pos}
+    \label{fig:hip-pos}
+  }
+  \subfloat[Angular motion of torso] {
+    \includegraphics[width=.48\textwidth]{torso_angle}
+    \label{fig:torso-angle}
+  }
+  \caption{Trajectories for the hip (a) and torso (b).}
+  \label{fig:torso-hip}
+\end{figure}
 
-When choosing a parameterization, $\varsigma(q)$, it is important to consider its role in the system. Since $\varsigma(q)$ is a parameterization for time $t$, the relationship between $\varsigma(q)$ and $t$ should be as linear as possible. Examination of the human hip data, as shown in \figref{fig:hip-pos}, reveals that the hip velocity $v_{\mathit{hip}}^{x}$ is constant throughout the gait; as a result, the hip position approximately satisfies $p_{\mathit{hip}}^{x}(q(t)) = v_{\mathit{hip}}^x t + p_\mathit{hip}^x(q^-)$, with $q^-$ the state at the beginning of a step. Here, the assumption can be made, without loss of generality, that time starts at zero at the beginning of any given step. The linearity of the hip position, $p_{\mathit{hip}}^{x}(q(t))$, with respect to time, makes it a good candidate for time parameterization; substituting $\varsigma(q) \to t$ and solving for $\varsigma(q)$ gives the parameterization
+
+\subsection{State-Based Trajectory Parameterization}
+
+Recall that the functions discussed in the previous section are directly
+dependent on time, i.e., they can be written $y_{\vo}^{d}(t)$.
+%
+Furthermore, these functions are all defined on some interval $[t^- = 0, t^+ =
+P] = \mathcal{I} \subset \R_{0}^{+}$ with $P$ the period of the gait (that is,
+one step with one leg);
+%
+in other words, a given tracking function can be written as a map $y_{\vo}^{d} :
+\mathcal{I} \to \R$.
+%
+Autonomous state feedback can be achieved by simply choosing a state-based
+parameterization $\varsigma : Q \to \mathcal{I}$ and substituting for time,
+i.e., $y_{\vo}^{d}(\varsigma(q))$.
+
+When choosing a parameterization, $\varsigma(q)$, it is important to consider
+its role in the system.
+%
+Since $\varsigma(q)$ is a parameterization for time $t$, the relationship
+between $\varsigma(q)$ and $t$ should be as linear as possible.
+%
+Examination of the human hip data, as shown in \figref{fig:hip-pos}, reveals
+that the hip velocity $v_{\mathit{hip}}^{x}$ is constant throughout the gait;
+%
+as a result, the hip position approximately satisfies
+$p_{\mathit{hip}}^{x}(q(t)) = v_{\mathit{hip}}^x t + p_\mathit{hip}^x(q^-)$,
+with $q^-$ the state at the beginning of a step.
+%
+Here, the assumption can be made, without loss of generality, that time starts
+at zero at the beginning of any given step.
+%
+The linearity of the hip position, $p_{\mathit{hip}}^{x}(q(t))$, with respect to
+time, makes it a good candidate for time parameterization;
+%
+substituting $\varsigma(q) \to t$ and solving for $\varsigma(q)$ gives the
+parameterization
 \begin{align}
   \label{eq:prm}
-  \varsigma(q) = \frac{p_{\mathit{hip}}^{x}(q) - p_{\mathit{hip}}^{x}(q^-)}{v_{\mathit{hip}}^{x}}.
+  \varsigma(q) = \frac{p_{\mathit{hip}}^{x}(q) -
+    p_{\mathit{hip}}^{x}(q^-)}{v_{\mathit{hip}}^{x}}.
 \end{align}
+%
 The parameters $p_{\mathit{hip}}^{x}(q^-)$ and $v_{\mathit{hip}}^{x}$ should be
 chosen based on the quantities they represent (i.e., $v_{\mathit{hip}}^{x}$
 should be the average velocity of the hip and $p_{\mathit{hip}}^{x}(q^-)$ should
 be the $x$-position of the hip at the beginning of a step).
 %
-In this paper, these values were found by examining the simulation of the
+In this work, these values were found by examining the simulation of the
 time-based controller from the previous section.
 %
 Specifically, a good choice for $v_{\mathit{hip}}^{x}$ is the parameter for the
@@ -730,7 +968,7 @@ with $A_{\vo}(q)$ the decoupling matrix given by
       L_{g_{\vo}} L_{f_{\vo}} y_{{\vo},2}(q)
     \end{array}\right]
 \end{align}
-and $(f_{\vo}, g_{\vo})$ the control system given in \eqref{eqn:controlsystem}.
+and $(f_{\vo}, g_{\vo})$ the control system given in \eqref{eq:controlsystem}.
 %
 Application of this control law to the control system yields the closed-loop
 system:
@@ -746,6 +984,29 @@ The end result is an autonomous hybrid system specified by
 \end{align}
 with $F_a$ the set of vector fields $\{f_{cl,\vo}\}_{\vo \in V}$.
 
+
+\begin{figure*}[tp!]
+  \centering
+  \subfloat[Body frame angle]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-1-s}
+    \label{fig:pp-a-ref}
+  }
+  \subfloat[Ankle angles]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-2-s}
+    \label{fig:pp-a-ankles}
+  }
+  \subfloat[Knee angles]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-3-s}
+    \label{fig:pp-a-knee}
+  }
+  \subfloat[Hip angles]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-4-s}
+    \label{fig:pp-a-hip}
+  }
+  \caption{Phase portraits of simulation of autonomous system $\HS_a$.}
+  \label{fig:pp-a}
+\end{figure*} 
+
 \subsection{Simulation of Autonomous Feedback Controller}
 The analysis of the stability of the autonomous system is analogous to that
 shown in \secref{sec:timesim}.
@@ -757,24 +1018,6 @@ The parameters are tweaked, as before, by multiplying row six by $1.25$.
 This simulation results in the fixed point:
 %
 \begin{align*}
-%  \setlength{\extrarowheight}{-3mm}
-%  q_{s,a}^* = \left[\begin{array}{r}
-%      -0.4038\\
-%      0.2488\\
-%      0.2084\\
-%      -0.4881\\
-%      0.3884\\
-%      0.0879
-%    \end{array}\right], \quad
-%  {\dot q}_{s,a}^* = \left[\begin{array}{r}
-%      -1.2869\\
-%      0.2819\\
-%      1.0776\\
-%      0.7113\\
-%      -2.4516\\
-%      -0.0763
-%    \end{array}\right]
-%  \setlength{\extrarowheight}{0mm}\\
   q_{s,t}^{*} =
   \left(\!\!\!\!\begin{array}{r r r r r r}
       \hphantom{1}-.404 & .245 & \hphantom{1}.208 & \hphantom{0}-.488 &
@@ -790,10 +1033,12 @@ on the guard of domain {\DC}.
 Only the shape coordinates are shown, as in the analysis of the time-based
 feedback controller.
 %
-The Jacobian matrix of a linearization of the Poincar{\'e} map about the fixed
+The Jacobian matrix of a linearization of the \Poincare{} map about the fixed
 point $((q^*_s)^T, ({\dot q}^*_s)^T)^T$ yields eigenvalues of the following
 magnitudes:
 \begin{align*}
   |\lambda_a| \in \{0.1902, 0.0680, 0.0680, 0.504, 0.0058, \ldots\},
 \end{align*}
 where, again, only the five eigenvalues with the largest magnitudes are shown.
+%
+The phase portraits are shown in \figref{fig:pp-a}.

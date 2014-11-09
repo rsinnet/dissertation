@@ -39,7 +39,7 @@ $(PROJNAME).dvi: $(PROJNAME).aux
 $(PROJNAME).aux: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
-sections/*.tex myrefs.bib $(EPS_LATEX) $(EPS_NO_LATEX)
+sections/*.tex inc/*.tex myrefs.bib $(EPS_LATEX) $(EPS_NO_LATEX)
 	$(LATEX_CMD) $<
 	bibtex $(basename $<)
 
