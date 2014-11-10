@@ -110,6 +110,24 @@ simulations seem to substantiate the claim that energy shaping improves
 robustness with respect to initial conditions thereby increasing the domain of
 attraction.
 %
-It may be possible, by guessing valid Lyapunov functions, to make formal
-statements about the domain of attraction, but such investigation is beyond the
-scope of this work.
+It may be possible for specific systems, by guessing valid Lyapunov functions,
+to make formal statements about the domain of attraction, but such investigation
+is beyond the scope of this work.
+
+In addition to energy shaping, this thesis contains a chapter on human-inspired
+control, which is a framework that was created to achieve human-like walking in
+bipedal robots.
+%
+By examining human kinematics data, it becomes apparent that certain
+kinematics outputs of human walking, termed human outputs, can be encoded with
+very little loss by fitting the data to canonical walking functions, which have
+the same form as the solution to a linear spring--mass--damper system.
+%
+In addition, the methods of hybrid zero dynamics \cite{Morris2005} are drawn
+upon to construct a zero dynamics which can be rendered forward-invariant
+through feedback linearization, and is, moreover, invariant through impacts
+(i.e., foot strike), resulting in guaranteed stability properties
+\cite{Ames2012}.
+%
+Simulations are given to demonstrate human-inspired control in
+\chapref{ch:hic}.
