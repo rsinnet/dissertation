@@ -1,1 +1,115 @@
 \chapter{\uppercase{Introduction}}
+
+This thesis discusses energy shaping as a means for improving the stability
+properties of periodic orbits in mechanical systems.
+%
+Energy shaping is applicable to a wide range of mechanical systems but this work
+is chiefly concerned with continuous systems that have intermittent impacts
+\cite{Brogliato1996} which result in non-smooth solutions.
+%
+Such a description (not unintentionally) categorizes bipedal walking which is
+currently an area of widespread interest and is the focal point of the
+application of energy shaping in this thesis.
+%
+By developing energy shaping under the framework of hybrid systems, dealing with
+robotic locomotion becomes straightforward.
+%
+
+The method presented is similar in concept to the method of total energy shaping
+as presented in \cite{Spong2007}, which acts to shape the energy of the system
+but does so in a way which only guarantees asymptotic stability with respect to
+an arbitrary energy level and does not guarantee exponential stability of the
+overall gait and may in fact destabilize gaits.
+%
+The method of energy shaping presented herein, in contrast, can improve the
+stability properties of a hybrid periodic orbit while guaranteeing that
+stability is not lost.
+%
+
+
+Numerous methods currently exist for gait design but, aside from specific
+methods which construct a zero dynamics such as human-inspired control
+\cite{Grizzle2014}, many of these methods do not have an intrinsic concept of
+stabilization to a specific gait through gain adjustment.
+%
+This is especially true of passivity-based methods such as \csx \cite{Spong2005}
+and other controlled Lagrangian methods \cite{Bloch2001,Bloch2000}.
+%
+Energy shaping owes its development to the observation that the total energy of
+a system is conserved in the absence of non-conservative forcing.
+%
+For systems which do exhibit non-conservative forcing, the energy added or
+removed can be tracked using a storage functions and the sum of the total energy
+of the system and the storage function is conserved;
+%
+systems which demonstrate this property are called passivity-based systems
+\cite{Spong2007}.
+%
+
+When such a conserved energy quantity exists, it is, by definition, constant for
+periodic orbits of a system.
+%
+Thus for a hybrid system which exhibits discontinuities, this quantity is
+constant through the continuous dynamics but experiences jumps due to the
+discrete dynamics.
+%
+As a result, it seems reasonable to conclude that stability is largely a result
+of the discrete dynamics.
+%
+An easily digestible example of this phenomenon can be observed in an
+uncontrolled compass-gait biped which, as McGeer observed \cite{McGeer1990}, is
+capable of walking stably down shallow slopes given the appropriate model
+parameters;
+%
+this example is presented in \secref{sec:simulations-compass-gait} and a
+historical context is provided in \secref{sec:literature-passive-walkers}.
+
+For hybrid systems---systems which combine continuous dynamics such as leg
+swing with discrete dynamics such as foot-strike---the conservation of energy
+through the continuous dynamics means that the change in energy level occurs
+from the discrete events in the system---foot-strike for bipeds---which exert
+non-conservative impulsive forcing as a byproduct of an interaction with the
+ground.
+%
+By adding control to the continuous dynamics, overall stability properties of a
+gait tend to improve as has been observed in, e.g., \cite{Spong2003}, and as will
+be demonstrated later in this paper through simulation in
+\chapref{chap:simulations}.
+%
+Formulation of the control objective using a control Lyapunov function makes it
+possible to achieve these improvements while simultaneously guaranteeing the
+existence of a control law which does not destabilize the system.
+
+It is important to clarify the specific advantages conferred by energy shaping.
+%
+One advantage of the method which is presented in this thesis is a formal
+guarantee of stability.
+%
+However, the stability which is proven is local exponential stability and
+nothing is formally shown about stability at arbitrary distances from the valid
+operating region; \secref{sec:hsys-stability} discusses stability in more detail
+and information about historical context can be found in
+\secref{sec:literature-stability}.
+
+In addition to the formal results, the claim is also made (as has been made
+before \cite{Spong2003}) that energy shaping can improve the robustness of
+gaits.
+%
+Different notions of robustness exist throughout the literature and one that is
+rather well known is robustness with respect to model uncertainties
+(cf. \cite{Freeman1996}).
+%
+The theory presented does not treat this form of robustness and assumes perfect
+knowledge of the model.
+%
+Another definition which crops up is robustness with respect to perturbations in
+initial conditions which ties into domain of attraction \cite{Chesi2011}.
+%
+This particular definition is the one considered in this thesis and numerical
+simulations seem to substantiate the claim that energy shaping improves
+robustness with respect to initial conditions thereby increasing the domain of
+attraction.
+%
+It may be possible, by guessing valid Lyapunov functions, to make formal
+statements about the domain of attraction, but such investigation is beyond the
+scope of this work.
