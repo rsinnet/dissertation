@@ -1,6 +1,9 @@
 % Custom hyphenation
 \hyphenation{equi-asymp-tot-ic}
 
+% Superscripts
+\newcommand{\ssth}{\textsuperscript{th}\xspace}
+
 % Custom environments
 \newtheorem{lemma}{Lemma}
 \newtheorem{theorem}{Theorem}
@@ -59,7 +62,15 @@
 \newcommand{\q}{q}
 \newcommand{\dq}{\dot{\q}}
 \newcommand{\ddq}{\ddot{\q}}
+
 \newcommand{\qs}{\q_{s}}
+\newcommand{\dqs}{\dq_{s}}
+
+\newcommand{\qn}[1]{\q_{#1}}
+\newcommand{\dqn}[1]{\dq_{#1}}
+
+\newcommand{\qsn}[1]{\qn{s,#1}}
+\newcommand{\dqsn}[1]{\dqn{s,#1}}
 
 % Extended coordinates
 \newcommand{\qe}{\q_{e}}
@@ -181,9 +192,13 @@
 \newcommand{\U}{\mathcal{U}}
 \newcommand{\D}{D}
 \newcommand{\De}{\D_{e}}
-% \renewcommand{\S}{S}
 \newcommand{\Guard}{S}
 \newcommand{\Orbit}{{\mathscr O}}
+
+\newcommand{\Transition}[3]{#1^{#2 \to #3}}
+
+\newcommand{\GuardTransition}[2]{\Transition{\Guard}{#1}{#2}}
+\newcommand{\DeltaTransition}[2]{\Transition{\Delta}{#1}{#2}}
 
 \newcommand{\mueps}{\mu_{\resclfparam}}
 
@@ -445,3 +460,41 @@
 \renewcommand{\p@subfigure}{\thefigure}
 \renewcommand\@biblabel[1]{#1.}
 \makeatother
+
+% From IFAC
+\newcommand{\csx}{\cs\xspace}
+\newcommand{\cs}{controlled symmetries}
+\newcommand{\Cs}{Controlled symmetries}
+\newcommand{\Csx}{\Cs\xspace}
+%\newcommand{\CS}{\tcase{\cs}}
+
+\newcommand{\PD}{PD}
+\newcommand{\PDx}{\PD\xspace}
+
+% control gains
+\newcommand{\gCS}{\ensuremath{\gamma}}
+\newcommand{\gTS}{\ensuremath{\eta}}
+\newcommand{\gSD}{\ensuremath{\Theta}}
+%\newcommand{\gSW}{\ensuremath{\beta}}
+\newcommand{\gLS}{\ensuremath{\alpha}}
+\newcommand{\gSP}{\ensuremath{\beta}}
+\newcommand{\gIO}{\ensuremath{\varepsilon}}
+
+\newcommand{\Krg}{K^{\gCS}}
+\newcommand{\Krt}{K^{\gSD}}
+\newcommand{\Krm}{K^{\gSP}}
+
+\newcommand{\Krgi}{\Krg_{i}}
+\newcommand{\Krti}{\Krt_{i}}
+\newcommand{\Krmi}{\Krm_{i}}
+
+
+\newcommand{\fri}{f_{i}}
+\newcommand{\frin}[1]{\fri^{#1}}
+
+\newcommand{\frig}{\frin{\gCS}}
+\newcommand{\frit}{\frin{\gSD}}
+\newcommand{\frigt}{\frin{\gCS, \gSD}}
+\newcommand{\frigtm}{\frin{\gCS, \gSD, \gSP}}
+
+\newcommand{\gri}{g_{i}}

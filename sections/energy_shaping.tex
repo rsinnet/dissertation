@@ -553,21 +553,29 @@ In addition, for the specific ordering of coordinates
 \end{align*}
 the Jacobian matrix
 associated with the transformation is
-\begin{align*}
+\begin{align}
+  \label{eq:Psi}
   \pd{\Psi\argsqdqW}{\argsqdqW} =
   \left(\begin{array}{c c c}
     I & \boldzero_{2n-1 \times 1} & \boldzero_{2n-1 \times 1}\\
     \pd{\Ec\argsqdqW}{\xrem} & \pd{\Ec\argsqdqW}{\dq_{n}} & 0\\
     \boldzero_{1 \times 2n-1} & 0 & -1
   \end{array}\right).
-\end{align*}
+\end{align}
 %
 This matrix is invertible when
 \begin{align*}
   \det \Psi\argsxz = -\pd{\Ec\argsqdqW}{\dq_{n}} \neq 0.
 \end{align*}
-From inspection of \eqref{eq:mech-sys-nrg}, one can see that the coordinate
-transformation is almost everywhere diffeomorphic for physical systems.
+%
+This condition guarantees that the transformation \eqref{eq:Psi} is a valid
+diffeomorphism.
+%
+It may not necessarily hold through the entire operating space, $T\Q$, of the
+system but it need only hold locally around the orbit.
+%
+Some analysis of this criterion is given for specific examples in
+\chapref{chap:simulations}.
 
 \section{Exponential Stability}
 
