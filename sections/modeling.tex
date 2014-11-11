@@ -33,8 +33,8 @@ example most pertinent to this thesis.
 Hybrid dynamical systems have seen widespread use and comprehensive formal
 development over the years;
 %
-see, e.g.,
-\cite{Branicky1998,Goebel2009,Grizzle2014,Schaft2000,Westervelt2007}.
+see, e.g., \cite{Branicky1998, Goebel2009, Grizzle2014, Schaft2000,
+  Westervelt2007}.
 %
 Other frameworks exist for modeling the same physical phenomena such as
 differential inclusions as discussed in \cite{Filippov1988} but hybrid systems
@@ -126,6 +126,76 @@ compactly:
 
 Using these basic formalisms of hybrid systems, the next three sections describe
 how to construct hybrid system formulations for mechanical systems.
+
+\section{Solutions to Hybrid Systems} \label{sec:hsys-sol}
+
+Consider a simple hybrid system given by \eqref{eq:hsys}.
+%
+The solution involves the differential equation
+\begin{align}
+  \label{eq:xdot}
+  \dx = \xf\arx
+\end{align}
+which defines the continuous dynamics of \eqref{eq:hsys} as well as the reset
+map
+\begin{align}
+  \label{eq:rmap}
+  \dxp = \Delta\arxm
+\end{align}
+which defines the discrete dynamics.
+%
+Beginning at time $t_{0}$, a solution to \eqref{eq:hsys} evolves according to
+\eqref{eq:xdot} until the trajectory reaches the hypersurface $\Guard$ at time
+$t_{1}$.
+%
+At this point, the reset map instantaneously alters the state according to
+\eqref{eq:rmap} which causes a discontinuity in the solution $\x\argt$ resulting
+in a discrete state update law which yields a new initial condition, $\xp(t_{1})
+= \Delta(\xm(t_{1})).$
+%
+From this new initial condition, the solution then continues to evolve from
+\eqref{eq:xdot}.
+
+Because the discrete dynamics is considered to operate on the solution
+instantaneously, it is important to distinguish between the pre-impact state,
+\begin{align*}
+  \x(t^{-}) = \xm = \lim_{\tau \nearrow t} \x\argtau,
+\end{align*}
+which occurs at time $t^{-}$, and the post-impact state,
+\begin{align*}
+  \x(t^{+}) = \xp = \lim_{\tau \searrow t} \x\argtau,
+\end{align*}
+which occurs at time $t^{+}$.
+%
+The discrepancy in left- and right-hand limits is due to the discontinuity in
+solutions introduced by the reset map.
+%
+
+A solution can be created by piecing together these solutions which each
+describes the evolution of coordinates as the state flows from a point on
+$\Guard$ through the domain $\D$ until it intersects $\Guard$ again.
+%
+Such solutions are often called {\em hybrid flows} or {\em hybrid executions}.
+%
+Formally, a hybrid flow of \eqref{eq:hsys} is a tuple
+\begin{align*}
+  \Upsilon^{\HS} = \left( \cK, \cI, \cC \right)
+\end{align*}
+where $\cK = \{0, 1, 2, \ldots\} \subseteq \N$ is a finite or countably
+infinite {\em indexing set}, $\cI = \left\{I_{k}\right\}_{k \in \cK}$ is a {\em
+  hybrid interval} with $I_{k} = \left[t_{k}, t_{k+1}\right]$, and $\cC =
+\left\{c_{k}\right\}_{k \in \cK}$ is a collection of continuous solutions of
+$\xf\arx$, i.e., ${\dot c}_{k}\argt = \xf(c_{k}\argt) \, \forall k \in \cK$.
+%
+In order to maintain consistency, the following conditions must be met:
+%
+\begin{enumerate}
+\item $c_{k}(t_{k+1}) \in \Guard$
+\item $\Delta(c_{k}(t_{k+1})) = c_{k+1}(t_{i+1})$
+\end{enumerate}
+
+For additional notions of solutions, see \cite{Filippov1988, Goebel2009,
+  Haddad2001, Lygeros2003, Ye1998}.
 
 \section{Rigid Body Kinematics}
 
@@ -450,14 +520,14 @@ For more on the different models and how impacts are treated, see
 \secref{sec:literature-bipeds}.
 %
 Non-smooth mechanics is a complicated topic; more detail can be found in, for
-example, \cite{Brogliato1996,Kozlov1991}.
+example, \cite{Brogliato1996, Kozlov1991}.
 %
 The mechanics of non-smooth impacts has been addressed for tool use in
-\cite{Gorinevsky1997,Siciliano1999}.
+\cite{Gorinevsky1997, Siciliano1999}.
 %
 In addition to the rigid models considered in this thesis (as those treated by
 Hurmuzlu and Marghitu \cite{Hurmuzlu1994}), elastic impacts and model
-deformation have also been considered \cite{Chapnik1991,Wei1993}.
+deformation have also been considered \cite{Chapnik1991, Wei1993}.
 
 For the purposes of this work, an impact is considered to occur when a rigid
 body (the foot) comes into contact with the ground.
@@ -521,7 +591,8 @@ This will be done in the next section.
 \section{Complex Domain Structure} \label{sec:complex-models}
 
 Bipedal robotic walking exhibits both discrete and continuous behavior; it is,
-therefore, natural to model bipedal robots as hybrid systems.
+therefore, natural to model bipedal robots as hybrid systems.\todo{Move parts of
+  this to earlier sections.}\xspace
 %
 A human walking gait will be shown to consist of multiple domains---on each
 domain, the system evolves in a continuous fashion according to a dynamic model
@@ -658,7 +729,8 @@ biped, together with a domain breakdown (which determines the constraints at
 each vertex of the associated cycle), allows one to explicitly construct a
 hybrid model of the system.
 %
-Examples can be found throughout the literature; see, for example, \cite{Grizzle2010,Grizzle2014,Sinnet2009}.
+Examples can be found throughout the literature; see, for example,
+\cite{Grizzle2010, Grizzle2014, Sinnet2009}.
 
 
 %\begin{figure}
@@ -920,29 +992,40 @@ where, for simplicity, $\Xi\argsq := \big( J_{v}\argsq \M^{-1}\argsq J_{v}^{T}\a
 
 \subsubsection{Discrete Dynamics}
 
-The discrete dynamics consist of the domains, guards and reset maps for a hybrid system and are related to the domain breakdown.
+The discrete dynamics consist of the domains, guards and reset maps for a hybrid
+system and are related to the domain breakdown.
 
-Given a vertex $v \in V$, the domain $\D$ is the set of admissible configurations of the system factoring in both friction and a unilateral constraint.
+Given a vertex $v \in V$, the domain $\D$ is the set of admissible
+configurations of the system factoring in both friction and a unilateral
+constraint.
 %
-Specifically, from the wrench $F_{v}\argsqdqu$, one can ensure that the foot does not slip by considering inequalities on the friction which can be stated in the form:
+Specifically, from the wrench $F_{v}\argsqdqu$, one can ensure that the foot
+does not slip by considering inequalities on the friction which can be stated in
+the form:
 %
 \begin{align}
   \label{eq:constmu}
   \mu_{v}\argsq F_{v}\argsqdqu \geq 0,
 \end{align}
 %
-with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the geometry of the foot \cite{Grizzle2010}.
+with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the
+geometry of the foot \cite{Grizzle2010}.
 %
-Additionally, it has been shown in \cite{Chevallereau2009,Vukobratovic1990} that the moment produced by the ground is limited; this limitation can be written in the form:
+Additionally, it has been shown in \cite{Chevallereau2009, Vukobratovic1990}
+that the moment produced by the ground is limited; this limitation can be
+written in the form:
 %
 \begin{align}
   \label{eq:constnu}
   \nu_{v}\argsq F_{v}\argsqdqu \geq 0,
 \end{align}
 %
-where $\nu_{v}\argsq$ depends on the physical parameters and state of the system.
+where $\nu_{v}\argsq$ depends on the physical parameters and state of the
+system.
 %
-Equations \eqref{eq:constmu} and \eqref{eq:constnu} for a given domain can be coupled with the unilateral constraint on the domain, $h_{v}\argsq = h\argsq \B(v)$, if present, to yield the set of admissible configurations:
+Equations \eqref{eq:constmu} and \eqref{eq:constnu} for a given domain can be
+coupled with the unilateral constraint on the domain, $h_{v}\argsq = h\argsq
+\B(v)$, if present, to yield the set of admissible configurations:
 %
 \begin{align}
   \label{admissible}
@@ -957,61 +1040,89 @@ Thus, the domain is given by
 %
 \begin{align}
   \label{eq:domain}
-  \D_{v} \! = \! \left\{ \! (q^{T}, \! \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times \R^{m_{v}} : A_{v}\argsqdqu \! \geq \! 0 \! \right\}.
+  \D_{v} \! = \! \left\{ \! (q^{T}, \! \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q
+    \times \R^{m_{v}} : A_{v}\argsqdqu \! \geq \! 0 \! \right\}.
 \end{align}
 %
-The guard is just the boundary of this domain with the additional assumption that the set of admissible configurations is decreasing, i.e., the vector field is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
+The guard is just the boundary of this domain with the additional assumption
+that the set of admissible configurations is decreasing, i.e., the vector field
+is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
 %
 \begin{align}
-  S_{e} \! = \! \Bigl\{ \!(\q^{T}, \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times \R^{m_v} : \ &A_{v}\argsqdqu \! = \! 0 \\
+  S_{e} \! = \! \Bigl\{ \!(\q^{T}, \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times
+  \R^{m_v} : \ &A_{v}\argsqdqu \! = \! 0 \\
   \nonumber
   \mathrm{and} \ &{\dot A}_{v}\argsqdqu \! \leq \! 0 \! \Bigl\}.
 \end{align}
 
-The impact equations are obtained by considering the constraints enforced on the subsequent domain; denote the Jacobian associated to these constraints by $J_{e'}$.
+The impact equations are obtained by considering the constraints enforced on the
+subsequent domain;
 %
-For an edge $e = \{v, v'\} \in E$, the post-impact velocity $\dq^+$ is given in terms of the pre-impact velocity $\dq^-$ by balancing angular momentum \cite{Hurmuzlu1994}.
+denote the Jacobian associated to these constraints by $J_{e'}$.
 %
-Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be written:
+For an edge $e = \{v, v'\} \in E$, the post-impact velocity $\dq^+$ is given in
+terms of the pre-impact velocity $\dq^-$ by balancing angular momentum
+\cite{Hurmuzlu1994}.
+%
+Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be
+written:
 %
 \begin{align}
   \label{eq:pmap}
-  \dq^{+} = P_{e}(\q, \dq^{-}) = (I - \M^{-1} J_{v'}^T(J_{v'} \M^{-1} J_{v'})^{-1} J_{v'})\dq^{-}
+  \dq^{+} = P_{e}(\q, \dq^{-}) = (I - \M^{-1} J_{v'}^T(J_{v'} \M^{-1}
+  J_{v'})^{-1} J_{v'})\dq^{-}
 \end{align}
 %
-with $I$ the identity matrix and $J_{v'}$ the Jacobian matrix associated with the holonomic constraints of the next domain expressed in the coordinates of this domain.
+with $I$ the identity matrix and $J_{v'}$ the Jacobian matrix associated with
+the holonomic constraints of the next domain expressed in the coordinates of
+this domain.
 %
 The above equation can be used for any discrete transition.
 %
-For transitions where a contact point strikes the ground, there will be a discrete change in velocities given by \eqref{eq:pmap}.
+For transitions where a contact point strikes the ground, there will be a
+discrete change in velocities given by \eqref{eq:pmap}.
 %
-For transitions where a contact point lifts from the ground, there will not be a discrete change; thus $P$ will be the identity map. For the sake of clarification, consider the following example:
+For transitions where a contact point lifts from the ground, there will not be a
+discrete change;
+%
+thus $P$ will be the identity map.
+%
+For the sake of clarification, consider the following example:
 %
 \begin{exmp}
   In the case of domain $\DA$, the impact event is toe-strike.
   %
-  A plastic impact occurs with the stance toe, resulting in zero post-impact velocity of the stance toe.
+  A plastic impact occurs with the stance toe, resulting in zero post-impact
+  velocity of the stance toe.
   %
   The stance heel and non-stance toe both remains on the ground.
   %
-  In order to properly achieve this transition, holonomic constraints on the velocities of stance toe, stance heel, and non-stance toe must be;
+  In order to properly achieve this transition, holonomic constraints on the
+  velocities of stance toe, stance heel, and non-stance toe must be;
   %
-  these constraints lead to the Jacobian matix $J_{\DC}$ which is used in \eqref{eq:pmap};
+  these constraints lead to the Jacobian matix $J_{\DC}$ which is used in
+  \eqref{eq:pmap};
   %
-  and, in fact, these are the same constraints present in the domain breakdown in \eqref{eq:domainbreakdownvectors}.
+  and, in fact, these are the same constraints present in the domain breakdown
+  in \eqref{eq:domainbreakdownvectors}.
 \end{exmp}
 
-In an attempt to simplify the model and obtain biperiodic behavior in the walking, the ``left'' and ``right'' leg must be ``swapped'' at one of the domain transitions;
+In an attempt to simplify the model and obtain biperiodic behavior in the
+walking, the ``left'' and ``right'' leg must be ``swapped'' at one of the domain
+transitions;
 %
 this ``trick'' is common throughout the literature \cite{Grizzle2001}.
 %
-This is done with a coordinate transformation (applied to $\q$), switching the role of the left and right leg, i.e., a state relabeling procedure, which is included in the calculation of the reset map for that edge.
+This is done with a coordinate transformation (applied to $\q$), switching the
+role of the left and right leg, i.e., a state relabeling procedure, which is
+included in the calculation of the reset map for that edge.
 %
 This coordinate transformation can be expressed as a linear map $\mathcal{R}$.
 %
 For transitions in which no relabeling occurs, $\mathcal{R}_{e} = I$.
 %
 The reset map is expressed as follows:
+%
 \begin{align}
   \Delta_{e}\argsqdq =
   \left[ \begin{array}{c c}
@@ -1024,17 +1135,13 @@ The reset map is expressed as follows:
     \end{array} \right].
 \end{align}
 %
-This reset map takes a point on the guard of a domain and maps it into the next domain specified by the domain breakdown.
+This reset map takes a point on the guard of a domain and maps it into the next
+domain specified by the domain breakdown.
 
-The end result is that, given a domain breakdown and a bipedal robot, the hybrid model for the biped is completely determined.
+The end result is that, given a domain breakdown and a bipedal robot, the hybrid
+model for the biped is completely determined.
 %
 %One of the goals of this thesis is to determine the domain breakdowns that humans use and this section demonstrated the importance of the domain breakdown in determining the unique mathematical model of the system.
-
-\section{Solutions to Hybrid Systems} \label{sec:hsys-sol}
-Solutions to hybrid systems, or {\em hybrid flows} or {\em hybrid executions},
-are defined in the traditional manner; see \cite{}
-(cf. \cite{Ye1998})
-
 
 \section{Stability of Hybrid Systems} \label{sec:hsys-stability}
 
@@ -1047,7 +1154,7 @@ understand not only the stability of hybrid systems but also the stability of
 continuous systems and discrete systems which partly comprise hybrid systems.
 %
 Definitions of stability are ubiquitous in the literature; see, e.g.,
-\cite{Khalil2002,Teschl2012,Vidyasagar1993}.
+\cite{Khalil2002, Teschl2012, Vidyasagar1993}.
 %
 For more comments on the literature, see \secref{sec:literature-stability}.
 
@@ -1060,7 +1167,8 @@ This work is chiefly concerned with autonomous systems of the form
 where $\xf : \D \to \Rn$ is a locally Lipschitz vector field valid on some domain
 $\D \subset \Rn$.
 %
-Without loss of generality, suppose that the system \eqref{eq:autsys} has an equilibrium point at the
+Without loss of generality, suppose that the system \eqref{eq:autsys} has an
+equilibrium point at the
 origin;
 %
 in other words, $\xf\argbzero = \boldzero$.

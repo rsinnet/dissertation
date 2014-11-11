@@ -145,7 +145,7 @@ Yoshizawa's text from 1975 \cite{Yoshizawa1975} provides a compilation of
 results on Lyapunov stability in almost periodic systems.
 
 Additional information on the history of Lyapunov theory can be found throughout
-the literature; see, e.g., \cite{Michel2007,Teel1999}.
+the literature; see, e.g., \cite{Michel2007, Teel1999}.
 %
 
 \section{Hybrid Systems}
@@ -240,50 +240,66 @@ affect control design.
 %
 The book \cite{Westervelt2007} and the review paper \cite{Hurmuzlu2004} provide
 an extensive overview of the state of the art up to early 2006; further
-information is available in
-\cite{Full1999,Holmes2006,Wisse2007,Kuo2007,Siciliano2008,Chevallereau2009,Sadati2012}
+information is available in \cite{Full1999, Holmes2006, Wisse2007, Kuo2007,
+  Siciliano2008, Chevallereau2009, Sadati2012}
 and the references therein.
 % Remove papers which are not reviews. CHGRSHIH09
 
 \subsection{Zero Moment Point and Linear Inverted Pendulum Models}
 
 One of the most common control methods for bipedal locomotion is the ZMP control
-strategy as described in \cite{Vukobratovic2004,Vukobratovic1990}.
+strategy as described in \cite{Vukobratovic2004, Vukobratovic1990}.
 %
 The ZMP is the point on the ground at which the reaction forces acting between
 the ground and the foot produce no horizontal moment.
 %
-Traditionally, ZMP control strategies achieve walking by planning the motion of a robot's CoM such that the ZMP remains strictly within the convex hull of the stance foot in the case of single support (or convex hull of the stance feet, in the case of double support).
+Traditionally, ZMP control strategies achieve walking by planning the motion of
+a robot's CoM such that the ZMP remains strictly within the convex hull of the
+stance foot in the case of single support (or convex hull of the stance feet, in
+the case of double support).
 %
-Under this condition on the ZMP, the stance foot remains flat on the ground and immobile (not rotating)---much like the base of a traditional manipulator robot---and hence the robot will not topple; see, e.g., \cite{Yamaguchi1999}.
+Under this condition on the ZMP, the stance foot remains flat on the ground and
+immobile (not rotating)---much like the base of a traditional manipulator
+robot---and hence the robot will not topple; see, e.g., \cite{Yamaguchi1999}.
 
 In the special case of the Linear Inverted Pendulum Model (LIPM),
 %
 %When the height of the CoM is constant as in the LIPM,
 %
-the ZMP can be expressed explicitly in terms of the dynamics of the CoM via a linear ordinary differential equation (ODE).
+the ZMP can be expressed explicitly in terms of the dynamics of the CoM via a
+linear ordinary differential equation (ODE).
 %
-There are key assumptions permitting this simplification, including representing a robot as a point mass with massless telescoping legs.
+There are key assumptions permitting this simplification, including representing
+a robot as a point mass with massless telescoping legs.
 %
 Additionally, the height of the CoM is assumed constant throughout a step.
 %
-Under these conditions, \cite{Kajita1991} showed that the robot model reduces to the LIPM.
+Under these conditions, \cite{Kajita1991} showed that the robot model reduces to
+the LIPM.
 %
-%The ZMP control strategy uses the linear ODE to plan the motion of a robot's CoM such that the ZMP remains strictly within the convex hull of the stance foot in the case of single support (or convex hull of the stance feet, in the case of double support).
+%The ZMP control strategy uses the linear ODE to plan the motion of a robot's
+%CoM such that the ZMP remains strictly within the convex hull of the stance
+%foot in the case of single support (or convex hull of the stance feet, in the
+%case of double support).
 %
-Because of their simplicity when combined, the ZMP control method and the LIPM have historically been tightly connected.
+Because of their simplicity when combined, the ZMP control method and the LIPM
+have historically been tightly connected.
 %
-%One of the more popular models considered for bipedal walking is the Linear Inverted Pendulum Model (LIPM), which represents a robot as a point mass with massless telescoping legs.
+%One of the more popular models considered for bipedal walking is the Linear
+%Inverted Pendulum Model (LIPM), which represents a robot as a point mass with
+%massless telescoping legs.
 %
-%Importantly, this model assumes the height of the center of mass (CoM) and angular momentum about the stance foot are constant through a step.
+%Importantly, this model assumes the height of the center of mass (CoM) and
+%angular momentum about the stance foot are constant through a step.
 %
 %
 While the model found its origins in the study of human posture and balance
-(e.g., \cite{Geursen1976,Winter1995,Patton1999}), it has also been the subject
-of much attention in bipedal walking; see, for example,
-\cite{Miura1984,Kajita2001,Kajita2010}.
+(e.g., \cite{Geursen1976, Winter1995, Patton1999}), it has also been the subject
+of much attention in bipedal walking; see, for example, \cite{Miura1984,
+  Kajita2001, Kajita2010}.
 %
-%This simplified model is often used with control methods that generate walking gaits by controlling the ZMP.
+%This simplified model is often used with control methods that generate walking
+%gaits by controlling the ZMP.
 
 
 
@@ -328,14 +344,16 @@ Kajita et al \cite{Kajita1992} examined potential energy conserving orbits;
 Lim et al \cite{Lim2002} computed ZMP-consistent trajectories offline and
 stabilized them using trunk motion;
 %
-and Nishiwaki et al \cite{Nishiwaki2002} generated ZMP-consistent trajectories in real-time
-while walking.
+and Nishiwaki et al \cite{Nishiwaki2002} generated ZMP-consistent trajectories
+in real-time while walking.
 %
 Additional information on ZMP-based methods and related ground reference points
-is given in \cite{Goswami1999,Vukobratovic2004,Vukobratovic2006,Popovic2005}.
+is given in \cite{Goswami1999, Vukobratovic2004, Vukobratovic2006,
+  Popovic2005}.
 
 %Other contributions include \cite{Yamaguchi1999}.
-%BHR-2 \cite{Jarfi2006}, SURALP \cite{Taskiran2010}.    china and turkey!!! also, REEM-B from Spain
+%BHR-2 \cite{Jarfi2006}, SURALP \cite{Taskiran2010}.    china and turkey!!!
+%also, REEM-B from Spain
 %what about COMAN from Italy (no walking reported in publication?)?
 %
 
@@ -363,23 +381,27 @@ mitigate the effect of modeling errors on gait generation,
 and Komura et al \cite{Komura2005} used it to simulate pathological gaits.
 %
 The various pendulum models have been widely used in analysis of push recovery
-and balance \cite{Takanishi1990,Hof2005,Hyon2007,Stephens2007}.
+and balance \cite{Takanishi1990, Hof2005, Hyon2007, Stephens2007}.
 
 %However, the capture point method is often used with simply the LIPM model (\cite{Englsberger2012}) to achieve walking.
 
-%over the past decade, researchers have taken further forays into the feedback control of humanoid robots, examining aspects such as balance and push recovery \cite{PCDG2006,Stephens_humanoidpush2007,Pratt2012,Koolen2012}.
+%over the past decade, researchers have taken further forays into the feedback
+%control of humanoid robots, examining aspects such as balance and push recovery
+%\cite{PCDG2006, Stephens_humanoidpush2007, Pratt2012, Koolen2012}.
 %
 Pratt et al \cite{Pratt2006} considered a flywheel model in order to present the
 idea of the {\em capture point}---a point on the ground on which a biped can
 step and come to a complete (upright) stop without falling over;
 %
-additional information on capture points can be found in
-\cite{Koolen2012,Pratt2012}.
+additional information on capture points can be found in \cite{Koolen2012,
+  Pratt2012}.
 %
 The capture point \cite{Pratt2006a} has gained recognition as a convenient
 method for stabilizing a biped.
 %
-%ntuitively, a capture point is a point on the ground where a biped can place its swing foot to be able to avoid falling over---the set of all capture points is called the {\em capture region}.
+%ntuitively, a capture point is a point on the ground where a biped can place
+%its swing foot to be able to avoid falling over---the set of all capture points
+%is called the {\em capture region}.
 %
 This method, which considers a robot as an inverted pendulum with a flywheel,
 has been used not only for standing but for robust walking as well.
@@ -399,17 +421,18 @@ monopod with a pogo-stick (springy) leg that was able to run%
   %
   hence hopping on one leg and running on two legs are closely related.}\xspace
 %
-at a speed of 1 m/s \cite{Raibert1984,Raibert1986,Raibert1984a}.
+at a speed of 1 m/s \cite{Raibert1984, Raibert1986, Raibert1984a}.
 %
 This was followed by a 3D hopper that was able to run without being constrained
 to the sagittal plane \cite[Chap.~3]{Raibert1986} as well as multi-legged robots
-\cite{Hodgins1991,Raibert1990,Raibert1986a}.
+\cite{Hodgins1991, Raibert1990, Raibert1986a}.
 %
 
 This body of work gave rise to the Spring-Loaded Inverted Pendulum (SLIP) model,
 which has been shown to approximate the body center-of-mass (CoM) motion during
 \textit{steady-state running gaits} of a wide diversity of terrestrial animals
-\cite{Blickhan1989,Mcmahon1990,Farley1993,Full2000,Dickinson2000,Seyfarth2002}.
+\cite{Blickhan1989, Mcmahon1990, Farley1993, Full2000, Dickinson2000,
+  Seyfarth2002}.
 %
 Successful running robots, such as the Planar Hopper \cite{Raibert1986},
 the ARL-Monopod II \cite{Ahmadi2006}, and the CMU Bowleg Hopper
@@ -433,7 +456,7 @@ torque during stance.
 %
 The inclusion of springs into legged robots with revolute knees seems to have
 started with spring flamingo and spring turkey as described in
-\cite{Hollerbach1992,Pratt1999,Pratt2000,Pratt2001}.
+\cite{Hollerbach1992, Pratt1999, Pratt2000, Pratt2001}.
 %
 These robots used a type of series elastic actuator (SEA) designed for force
 control as opposed to energy storage.
@@ -483,48 +506,50 @@ they cannot climb stairs, pause, turn or run.
 %
 
 Additional work was later done to analyze the properties of passive dynamics
-walkers, for instance, in \cite{Espiau1994,Garcia1998,Borzova2004}.
+walkers, for instance, in \cite{Espiau1994, Garcia1998, Borzova2004}.
 %
 In terms of control, Spong \cite{Spong1999} looked at passive dynamic walking with
 energy-based methods to design passivity-based control strategies such as
 controlled symmetries, introduced in \cite{Spong2005}, which was later used to
-obtain anthropomorphic foot action in \cite{Sinnet2009,Sinnet2009a} and recently
+obtain anthropomorphic foot action in \cite{Sinnet2009, Sinnet2009a} and recently
 extended to underactuated bipeds in \cite{Hu2011}.
 % A thorough analysis of the compass-gait biped and its stability properties was
 % later provided by Espiau and Goswami \cite{ESGO94}.
 % don't really need the above sentence
 Other important contributions to passive dynamic walking are given in
-\cite{Kuo1999,Kuo2002,Anderson2005,Wisse2007}.
+\cite{Kuo1999, Kuo2002, Anderson2005, Wisse2007}.
 %
 
 %\subsection{Foot Placement}
 \subsection{Quadratic Programs and Lyapunov Funnels}
 
-%\textbf{JWG: disucss how early implementations used offline trajectory computation, while more recently, on-line planning via an linear inverted pendulum model and a QP are used (Weiber)?}
+%\textbf{JWG: disucss how early implementations used offline trajectory
+%computation, while more recently, on-line planning via an linear inverted
+%pendulum model and a QP are used (Weiber)?}
 
-Early implementations of ZMP-based controllers used offline trajectory optimization to generate center of mass trajectories on the basis of the LIPM and generally ignored impact dynamics in the control design. Modern methods have achieved improved control by formulating the control problem as a {\em quadratic program} (QP), allowing gait replanning on the fly and improving stability properties \cite{Kudoh2002,Stephens2010,Herdt2010}.
+Early implementations of ZMP-based controllers used offline trajectory
+optimization to generate center of mass trajectories on the basis of the LIPM
+and generally ignored impact dynamics in the control design. Modern methods have
+achieved improved control by formulating the control problem as a {\em quadratic
+  program} (QP), allowing gait replanning on the fly and improving stability
+properties \cite{Kudoh2002, Stephens2010, Herdt2010}.
 %
 
-Similarly, sums of squares methods, also formulate trajectory generation as a convex optimization \cite{Tedrake2010}.
+Similarly, sums of squares methods, also formulate trajectory generation as a
+convex optimization \cite{Tedrake2010}.
 %
-One elegant method which provides formal guarantees on stability is outlined in \cite{Majumdar2013}.
+One elegant method which provides formal guarantees on stability is outlined in
+\cite{Majumdar2013}.
 %
-The procedure investigates the notion of controllability, composing sequential funnels (verified with sum of squares Lyapunov inequalities), which each lead to a predefined goal set.
+The procedure investigates the notion of controllability, composing sequential
+funnels (verified with sum of squares Lyapunov inequalities), which each lead to
+a predefined goal set.
 %
-This allows one to create a trajectory with guaranteed stability properties: at any given point in time, the system is within one of the known funnels (regions of attraction).
+This allows one to create a trajectory with guaranteed stability properties:
 %
-By using the sum of squares formulation, the trajectory optimization becomes more tractable, making verification of stability feasible for low-dimensional models.
-
-
-
-
-
-
-%------------------------------------------
-
-%McGeer was studying passive walking and reported that a compass-gait biped can walk down shallow slopes with no actuation \cite{MCG88,MC90}. A thorough analysis of the compass-gait biped and its stability properties was later provided by Espiau and Goswami \cite{ESGO94}. This idea of passive dynamic walking was later used to \cite{BORZOVAE04}
-
-% \cite{KAMO84}
-%There is a noticeable dichotomy in the field of robotics with some researchers pursuing advanced mechanical designs with humanoid characteristics and others favoring minimalist designs conducive to natural and efficient locomotion.
-
-% Ben's paper, Matt's, TAC CLF in Section 6.4
+at any given point in time, the system is within one of the known funnels
+(regions of attraction).
+%
+By using the sum of squares formulation, the trajectory optimization becomes
+more tractable, making verification of stability feasible for low-dimensional
+models.

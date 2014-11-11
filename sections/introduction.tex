@@ -25,21 +25,41 @@ The method of energy shaping presented herein, in contrast, can improve the
 stability properties of a hybrid periodic orbit while guaranteeing that
 stability is not lost.
 %
-
+This is a valuable extension of existing results which avoided making the
+unreasoned claim that energy shaping does not destabilize a system.
+%
+By the results provided in \thmref{theorem:main-theorem}, this claim can now be
+made with substantiation.
+%
+It is important to note that this method fits into a class of problems which
+attempt to study the stability properties of systems which have zero dynamics
+such as that posed in \cite{Ames2014};
+%
+the differences between the problem posed in \cite{Ames2014} and the problem
+studied in this thesis are presented in depth in \chapref{ch:energy-shaping}.
 
 Numerous methods currently exist for gait design but, aside from specific
 methods which construct a zero dynamics such as human-inspired control
 \cite{Grizzle2014}, many of these methods do not have an intrinsic concept of
-stabilization to a specific gait through gain adjustment.
+stabilization to a specific gait through gain adjustment;
+%
+that is to say that that there is a large class of controllers that are used to
+design periodic orbits (e.g., walking gaits) but, through inherent design
+limitations, cannot stabilize to these orbits arbitrarily fast.
 %
 This is especially true of passivity-based methods such as \csx \cite{Spong2005}
 and other controlled Lagrangian methods \cite{Bloch2001,Bloch2000}.
 %
+These methods rely on shaping a system through control to reproduce the behavior
+of a similar system---in the case of \csx, perhaps shaping a compass-gait biped
+walking on flat ground to induce the gait of the same model passively walking
+down a shallow slope, a phenomenon demonstrated by McGeer \cite{McGeer1990}.
+
 Energy shaping owes its development to the observation that the total energy of
 a system is conserved in the absence of non-conservative forcing.
 %
 For systems which do exhibit non-conservative forcing, the energy added or
-removed can be tracked using a storage functions and the sum of the total energy
+removed can be tracked using a storage function and the sum of the total energy
 of the system and the storage function is conserved;
 %
 systems which demonstrate this property are called passivity-based systems
@@ -54,7 +74,7 @@ constant through the continuous dynamics but experiences jumps due to the
 discrete dynamics.
 %
 As a result, it seems reasonable to conclude that stability is largely a result
-of the discrete dynamics.
+of the discrete dynamics for certain systems.
 %
 An easily digestible example of this phenomenon can be observed in an
 uncontrolled compass-gait biped which, as McGeer observed \cite{McGeer1990}, is
@@ -86,8 +106,8 @@ One advantage of the method which is presented in this thesis is a formal
 guarantee of stability.
 %
 However, the stability which is proven is local exponential stability and
-nothing is formally shown about stability at arbitrary distances from the valid
-operating region; \secref{sec:hsys-stability} discusses stability in more detail
+nothing is formally shown about stability at arbitrary distances from the
+periodic orbit; \secref{sec:hsys-stability} discusses stability in more detail
 and information about historical context can be found in
 \secref{sec:literature-stability}.
 
@@ -131,3 +151,27 @@ through feedback linearization, and is, moreover, invariant through impacts
 %
 Simulations are given to demonstrate human-inspired control in
 \chapref{ch:hic}.
+
+As mentioned, various simulations are given in \chapref{chap:simulations}.
+%
+The first example is a simple cart--spring system which help build intuition
+into energy shaping methods.
+%
+The next example is the simplest possible biped---the compass-gait
+biped---that is used to demonstrate energy shaping for the purpose of improving
+the stability properties of walking gaits.
+%
+Although this is a comparatively simple model, it is still a hybrid system and
+is of small enough dimension that meaningful plots can be created to demonstrate
+the effectiveness of energy shaping.
+%
+In order to test energy shaping on a more complex model, the results of a
+simulation of the seven-link biped with feet from \cite{Grizzle2014} are
+presented.
+%
+This model is much more complex than the compass-gait biped and has a complex
+domain structure.
+%
+Due to high dimensionality, it is difficult to present results with the level of
+clarity as they are presented for the compass-gait biped, but the results
+nonetheless show that energy shaping can be applied to more complex models.
