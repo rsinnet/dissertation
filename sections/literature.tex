@@ -240,9 +240,8 @@ affect control design.
 %
 The book \cite{Westervelt2007} and the review paper \cite{Hurmuzlu2004} provide
 an extensive overview of the state of the art up to early 2006; further
-information is available in \cite{Full1999, Holmes2006, Wisse2007, Kuo2007,
-  Siciliano2008, Chevallereau2009, Sadati2012}
-and the references therein.
+information is available in \cite{Chevallereau2009, Full1999, Holmes2006,
+  Kuo2007, Sadati2012, Siciliano2008, Wisse2007} and the references therein.
 % Remove papers which are not reviews. CHGRSHIH09
 
 \subsection{Zero Moment Point and Linear Inverted Pendulum Models}
@@ -282,15 +281,16 @@ the LIPM.
 %foot in the case of single support (or convex hull of the stance feet, in the
 %case of double support).
 %
+Importantly, this model assumes the height of the center of mass (CoM) and
+angular momentum about the stance foot are constant through a step.
+%
 Because of their simplicity when combined, the ZMP control method and the LIPM
 have historically been tightly connected.
 %
-%One of the more popular models considered for bipedal walking is the Linear
-%Inverted Pendulum Model (LIPM), which represents a robot as a point mass with
-%massless telescoping legs.
+One of the more popular models considered for bipedal walking, the Linear
+Inverted Pendulum Model (LIPM), represents a robot as a point mass with massless
+telescoping legs.
 %
-%Importantly, this model assumes the height of the center of mass (CoM) and
-%angular momentum about the stance foot are constant through a step.
 %
 %
 While the model found its origins in the study of human posture and balance
@@ -399,64 +399,60 @@ additional information on capture points can be found in \cite{Koolen2012,
 The capture point \cite{Pratt2006a} has gained recognition as a convenient
 method for stabilizing a biped.
 %
-%ntuitively, a capture point is a point on the ground where a biped can place
-%its swing foot to be able to avoid falling over---the set of all capture points
-%is called the {\em capture region}.
+Intuitively, a capture point is a point on the ground where a biped can place
+its swing foot to be able to avoid falling over---the set of all capture points
+is called the {\em capture region}.
 %
 This method, which considers a robot as an inverted pendulum with a flywheel,
 has been used not only for standing but for robust walking as well.
 %
-Because the model makes many simplifying assumptions, the capture regions---the
-set of all capture points---can have a large error and this has motivated the
-combining of capture point with learning in, e.g., \cite{Rebula2007}.
+Because the model makes many simplifying assumptions, the capture regions can
+have a large error and this has motivated the combining of capture point with
+learning in, e.g., \cite{Rebula2007}.
 
-\subsection{Raibert Hoppers and SLIP Models}
+%\subsection{Raibert Hoppers and SLIP Models}
 
-Raibert observed that hopping and running can be represented by a
-low-dimensional model with springs and built a pneumatically actuated planar
-monopod with a pogo-stick (springy) leg that was able to run%
+Raibert considered low-dimensional models of hopping and running, testing his
+theory by constructing a monopod with a compliant leg and pneumatic actuation,
+constrained to the sagittal plane.
 %
-\footnote{Roughly speaking, running consists of a stance phase with one foot on
-  the ground followed by a flight phase with no feet on the ground;
-  %
-  hence hopping on one leg and running on two legs are closely related.}\xspace
+This two-dimensional hopper was was able to ``run'' at a speed of 1 m/s
+\cite{Raibert1984, Raibert1986, Raibert1984a}.
 %
-at a speed of 1 m/s \cite{Raibert1984, Raibert1986, Raibert1984a}.
-%
-This was followed by a 3D hopper that was able to run without being constrained
-to the sagittal plane \cite[Chap.~3]{Raibert1986} as well as multi-legged robots
+A later hopper built to analyze three-dimensional motion ``run''
+\cite[Chap.~3]{Raibert1986} followed up by multi-legged robots
 \cite{Hodgins1991, Raibert1990, Raibert1986a}.
 %
 
-This body of work gave rise to the Spring-Loaded Inverted Pendulum (SLIP) model,
-which has been shown to approximate the body center-of-mass (CoM) motion during
-\textit{steady-state running gaits} of a wide diversity of terrestrial animals
-\cite{Blickhan1989, Mcmahon1990, Farley1993, Full2000, Dickinson2000,
-  Seyfarth2002}.
+The mathematical models Raibert had formulated became known as the Spring-Loaded
+Inverted Pendulum (SLIP) model, which has been shown to approximate the body
+center-of-mass (CoM) motion during \textit{steady-state running gaits} of a wide
+diversity of terrestrial animals \cite{Blickhan1989, Mcmahon1990, Farley1993,
+  Full2000, Dickinson2000, Seyfarth2002}.
 %
 Successful running robots, such as the Planar Hopper \cite{Raibert1986},
 the ARL-Monopod II \cite{Ahmadi2006}, and the CMU Bowleg Hopper
 \cite{Zeglin1998}, also exhibit SLIP model behavior.
 %
 
-The control of these robots has been based on Raibert's original control ideas,
-which can be decomposed into three subtasks dedicated to (a) forward propulsion
-of the robot at the desired speed, (b) regulation of the vertical hopping height
-of the body, and (c) keeping the body at a desired posture (\cite{Raibert1984},
-\cite[Ch. 2]{Raibert1986}).
-%
-To control the forward speed, the controller places the toe at a desired
-position with respect to the center of mass during flight.
-%
-To regulate the hopping height, the length of the leg at the bottom of the
-stance phase is adjusted by giving a fixed amount of thrust.
-%
-Finally, to control the pitch attitude of the body, the controller employs hip
-torque during stance.
-%
-The inclusion of springs into legged robots with revolute knees seems to have
-started with spring flamingo and spring turkey as described in
-\cite{Hollerbach1992, Pratt1999, Pratt2000, Pratt2001}.
+%The control of these robots has been based on Raibert's original control ideas,
+%which can be decomposed into three subtasks dedicated to (a) forward propulsion
+%of the robot at the desired speed, (b) regulation of the vertical hopping height
+%of the body, and (c) keeping the body at a desired posture (\cite{Raibert1984},
+%\cite[Ch. 2]{Raibert1986}).
+%%
+%To control the forward speed, the controller places the toe at a desired
+%position with respect to the center of mass during flight.
+%%
+%To regulate the hopping height, the length of the leg at the bottom of the
+%stance phase is adjusted by giving a fixed amount of thrust.
+%%
+%Finally, to control the pitch attitude of the body, the controller employs hip
+%torque during stance.
+%%
+This eventually led to legged robots with knees and compliance including the
+Spring Flamingo and Spring Turkey \cite{Hollerbach1992, Pratt1999, Pratt2000,
+  Pratt2001}.
 %
 These robots used a type of series elastic actuator (SEA) designed for force
 control as opposed to energy storage.
