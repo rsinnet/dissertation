@@ -20,10 +20,39 @@
 \pagenumbering{roman} % Roman numerals
 \setcounter{page}{2}
 
-\indent Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer lectus quam, condimentum quis bibendum eu, sollicitudin eget lacus. Praesent non sodales odio. Class aptent taciti sociosqu ad litora torquent per conubia nostra, per inceptos himenaeos. Nulla ac luctus sapien. Morbi cursus sapien eget lorem fermentum hendrerit. Nam ac erat dui, in cursus velit. Vivamus hendrerit porttitor nisi, ut porttitor lorem volutpat eget. In ligula ligula, euismod ut condimentum sit amet, pulvinar sit amet diam. Pellentesque interdum, ipsum ullamcorper consequat dignissim, sem arcu egestas mauris, vitae interdum sem tortor ut ante. Nunc blandit laoreet nisi, non rutrum lorem hendrerit quis. Cras nunc diam, convallis et feugiat at, auctor id libero. Nunc facilisis massa eu eros imperdiet vestibulum. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec non velit vitae tortor blandit semper.
+\indent This thesis presents a method which attempts to improve the stability
+properties of periodic orbits in hybrid dynamical systems by shaping the
+energy.
+%
+By taking advantage of conservation of energy and the existence of invariant
+level sets of a conserved quantity of energy corresponding to periodic orbits,
+energy shaping drives a system to a desired level set.
+%
+This energy shaping method is similar to existing methods but improves upon them
+by utilizing control Lyapunov functions, allowing for formal results on
+stability.
+%
+The main theoretical result, \thmref{theorem:main-theorem}, states that, given
+an exponentially-stable limit cycle in a hybrid dynamical system, application of
+the presented energy shaping controller results in a closed-loop system which is
+exponentially stable
 
-Etiam vitae dolor nulla. Ut eros odio, rhoncus eget placerat vitae, elementum ac ante. Proin vitae odio eu nisl pharetra mattis. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Phasellus fermentum lacus consectetur neque consequat ullamcorper. Cras blandit urna non dui consequat molestie. Curabitur viverra nibh at nisi semper faucibus. Nam egestas mauris a enim dignissim nec consectetur tortor rutrum. Mauris at nisi in est luctus congue ut mattis est. Ut pretium, mi quis elementum cursus, ante eros suscipit ligula, ut porttitor elit leo sed turpis. Nam sed dui ligula.
-
- 
+The method can be applied to a wide class of problems including bipedal
+locomotion;
+%
+because the optimization problem can be formulated as a quadratic program
+operating on a convex set, existing methods can be used to rapidly obtain
+the optimal solution.
+%
+As illustrated through numerical simulations, this method turns out to be useful
+in practice, taking an existing behavior which corresponds to a periodic orbit
+of a hybrid system, such as steady state locomotion, and providing an
+improvement in convergence properties and robustness with respect to
+perturbations in initial conditions without destabilizing the behavior.
+%
+The method is even shown to work on complex multi-domain hybrid systems;
+%
+an example is provided of bipedal locomotion for a robot with non-trivial foot
+contact which results in a multi-phase gait.
 
 \pagebreak{}
