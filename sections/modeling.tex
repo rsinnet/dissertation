@@ -149,8 +149,11 @@ open subset of $\R^{n}$, namely the domain, $\D \subset \R^{n}$.
 The vector field is assumed to be continuously differentiable viz. $\xf \in
 C^{1}(\D)$.
 %
-For an initial condition $\x_{0} \in \D$, define the {\em flow} of the
-differential equation as
+For an initial condition $\x_{0} \in \D$, the solution $\x\argt$ will evolve
+according to \eqref{eq:xdot} until it reaches the edge of $D$, intersecting
+the guard $\Guard$ by assumption (transversality).
+
+Define the {\em flow} of the differential equation as
 \begin{align*}
   \flowt(t_{0}, \x_{0}) = \x_{0} + \int_{t_{0}}^{t} \! \xf(\x\argtau) \ d\tau.
 \end{align*}
@@ -159,15 +162,68 @@ This function represents a trajectory of the differential equation
 \eqref{eq:xdot} which starts at time $t_{0}$ with initial value $\x_{0}$ and
 flows until time $t$ with final state $\arx\argt$.
 %
-A solution $\flowt(t_{0}, x_{0})$ is {\em periodic} if there exists a $T > 0$
+From this expression, it is clear also that there is a {\em time-to-impact} function
+$\TI : \D \to \Rnn$ guaranteed by the implicit function theorem as follows:
+%
+using the unilateral constraint $h$ associated with the hybrid system, define
+the function
+\begin{align*}
+  N(t, \x) = h(\flowt\arx).
+\end{align*}
+%
+This function is continuous in $\x$.
+%
+By the implicit function theorem and the assumption of
+transversality---specifically, valid solutions do not travel along the guard
+viz. $\dot h\arx \ne 0$---there exists a unique function $\TI(\x)$ defined and
+continuous for any given point in $\D$.
+%
+This function maps a given state $\x$ to the time until that solution crosses
+the guard.
+%
+
+Stability analysis of hybrid systems often involves a method attributable to
+\Poincare{}.
+%
+This method is widely used in various types of systems including continuous
+systems, discrete systems, and hybrid systems; for some examples, see
+\cite{Guckenheimer1983, Parker1989, Perko2001, Grizzle2014}.
+%
+The method of \Poincare{} sections allows one to select a \Poincare{} section
+at which the system is sampled.
+%
+The \Poincare{} section can be chosen such that a discrete system is created by
+sampling with either a time-based or event-based rule.
+%
+For mechanical systems with impacts, an event-based rule is constructed by
+choosing the \Poincare{} section to correspond to impact events.
+%
+More specifics about the \Poincare{} are introduced in
+\chapref{ch:energy-shaping}.
+
+Using the time-to-impact function, one can define the {\em \Poincare{} first
+  return} map, $\P : \Guard \to \Guard$, as the following partial map:
+%
+\begin{align}
+  \label{eq:poincare-map}
+  \P\arx  = \Delta(\flow_{\TI\arx}\arx), \ \forall \x \in \Guard.
+\end{align}
+%
+One can see that the \Poincare{} map is also continuous.
+%
+Stability of the hybrid system can then be analyzed by examining stability of
+the discrete system \cite{Morris2009} defined by the \Poincare{} map
+\eqref{eq:poincare-map}.
+%
+A solution $\flowt(t_{0}, \x_{0})$ is {\em periodic} if there exists a $T > 0$
 such that
 \begin{align*}
-  \flow_{t}(t_{0}, x_{0}) = \flow_{t + T}(t_{0}, x_{0}), \ \forall \, t \in [t_{0}, \infty).
+  \x\argzero = \flow_{T}(\x(0)),
 \end{align*}
 %
 A set $\Orbit \subset \D$ is a {\em periodic orbit} if
 \begin{align*}
-  \Orbit = \{ \flowt(t_{0}, \x_{0}) : t \geq t_{0} \}
+  \Orbit = \{ \Delta(\flowt(\x)) : 0 < t < \TI(\x\argzero) \}
 \end{align*}
 for some periodic solution $\flowt(t_{0}, x_{0})$.
 
@@ -232,7 +288,7 @@ Further details about solutions of hybrid systems also appears in
 For additional notions of solutions in hybrid systems, see \cite{Filippov1988,
   Goebel2009, Haddad2001, Lygeros2003, Ye1998}.
 
-\section{Stability of Hybrid Systems} \label{sec:hsys-stability}
+\section{Stability Definitions} \label{sec:hsys-stability}
 
 Because of the unique nature of hybrid systems, analysis of stability requires
 special treatment which is distinct from continuous-time systems and more
@@ -346,34 +402,6 @@ Exponential stability for discrete systems is formally defined as follows:
 \end{definition}
 %
 These definitions will tie into the work later in \chapref{ch:energy-shaping}.
-
-\subsection{Hybrid Systems}
-
-Stability analysis of hybrid systems often involves a method attributable to
-\Poincare{}.
-%
-This method is widely used in various types of systems including continuous
-systems, discrete systems, and hybrid systems; for some examples, see
-\cite{Guckenheimer1983, Parker1989, Perko2001, Grizzle2014}.
-%
-The method of \Poincare{} sections allows one to select a \Poincare{} section
-at which the system is sampled.
-%
-The \Poincare{} section can be chosen such that a discrete system is created by
-sampling with either a time-based or event-based rule.
-%
-This system is called the \Poincare{} map, $P : \Guard \to \Guard$.
-
-
-For mechanical systems with impacts, an event-based rule is constructed by
-choosing the \Poincare{} section to correspond to impact events.
-%
-Stability of the hybrid system can then be analyzed by examining stability of
-the discrete system \cite{Morris2009}.
-%
-More specifics about the \Poincare{} are introduced in
-\chapref{ch:energy-shaping}.\todo{Add a few definitions.}
-
 
 
 \section{Rigid Body Kinematics}
