@@ -46,6 +46,8 @@
 
 % Reference frame
 \newcommand{\Rb}{R_{b}}
+\newcommand{\Rc}{R_{c}}
+\newcommand{\Rnaught}{R_{0}}
 
 % zero dynamics vector fields
 \newcommand{\zdf}{f}
@@ -99,12 +101,22 @@
 \newcommand{\xf}{F}
 \newcommand{\xg}{G}
 
+% Indexed system vector fields
+\newcommand{\xfv}{\xf_{v}}
+\newcommand{\xgv}{\xg_{v}}
+
+% Indexed reset map
+\newcommand{\Deltav}{\Delta_{v}}
+
 \newcommand{\xfbar}{{\bar \xf}}
 \newcommand{\xgbar}{{\bar \xg}}
 
 % Zero dynamics vector fields
 \newcommand{\bigF}{\Phi}
 \newcommand{\bigG}{\Gamma}
+
+% Rotational velocity
+\newcommand{\wc}{\omega_{c}}
 
 
 % RES-CLF control gain
@@ -130,6 +142,8 @@
 \newcommand{\HCor}{H}
 \newcommand{\CCor}{C}
 \newcommand{\G}{G}
+
+\newcommand{\Br}{\mathcal{B}}
 
 % Admissible control sets
 \newcommand{\K}{K}
@@ -196,6 +210,9 @@
 \newcommand{\Guard}{S}
 \newcommand{\Orbit}{{\mathscr O}}
 
+\newcommand{\Guardv}{\Guard_{v}}
+\newcommand{\Dv}{\D_{v}}
+
 \newcommand{\Transition}[3]{#1^{#2 \to #3}}
 
 \newcommand{\GuardTransition}[2]{\Transition{\Guard}{#1}{#2}}
@@ -259,6 +276,8 @@
 \newcommand{\Fnc}{F_{\mathrm{nc}}}
 \newcommand{\Fnca}{\Fnc^{\mathrm{a}}}
 
+\newcommand{\Fv}{W_{v}}
+
 \newcommand{\orbit}{\mathscr{O}}
 
 % More coordinates
@@ -285,6 +304,12 @@
 \newcommand{\uu}{u}
 \newcommand{\vv}{v}
 
+\newcommand{\uum}{\uu^{-}}
+
+\newcommand{\argsxuu}{(\x, \uu)}
+\newcommand{\argsxuum}{(\xm, \uum)}
+
+
 \newcommand{\limeps}{\lim_{\resclfparam \nearrow +\infty}}
 
 \newcommand{\Poincare}{Poincar{\'e}}
@@ -295,7 +320,9 @@
 
 % Hybrid systems and hybrid control systems
 \newcommand{\HS}{\Sigma}
-\newcommand{\HCS}{\HS_{c}}
+\newcommand{\HSv}{\HS_{v}}
+\newcommand{\HCS}{\HS^{c}}
+\newcommand{\HCSv}{\HCS_{v}}
 
 \newcommand{\HSbar}{{\overline \HS}}
 \newcommand{\HCSbar}{\HSbar_{c}}

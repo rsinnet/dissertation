@@ -484,7 +484,7 @@ each rigid body separately and solve for the appropriate reaction forces which
 can be applied through $F$ and $M$ to maintain the proper contact (this is
 typically called the Newton--Euler method \cite{Hollerbach1980}).
 %
-For robotic motion, holonomic constraints act to reduce the allowable motion
+For robotic motion, non-holonomic constraints act to reduce the allowable motion
 and, as a consequence, there exists a minimal set of coordinates which can be
 used to describe a robot's dynamics.
 %
@@ -507,7 +507,7 @@ Begin with a bipedal robot in either two or three dimensions---the discussions
 herein are applicable to either case.
 %
 Then construct a Lagrangian for the biped in a general position---specifically,
-no assumptions are made on ground contact---and use holonomic constraints to
+no assumptions are made on ground contact---and use non-holonomic constraints to
 enforce ground contact conditions.
 
 Let $R_{0}$ be a fixed inertial or world frame and let $\Rb$ be a reference
@@ -853,7 +853,7 @@ to different walking phases.
 %
 Therefore, when studying walking, one should consider multi-domain hybrid
 systems with a temporal ordering of events, i.e., systems in which the domain
-graph is a {\em directed cycle}.
+graph is a {\em directed cycle}:
 
 \begin{figure}[t]
   \centering
@@ -871,7 +871,7 @@ graph is a {\em directed cycle}.
 \end{figure}
 
 \begin{definition}
-  A {\em directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of
+  A {\bf directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of
   vertices and $E$ a set of edges---for an edge $e \in E$, denote the source by
   $\sor(e)$ and the target by $\tar(e)$---in which the edges and vertices can be
   written
@@ -899,12 +899,11 @@ in \chapref{ch:hic}:
   %
   In particular, there are four vertices and four edges with
   %
-  \begin{align}
-    \nonumber
+  \begin{align*}
     V_u &= \left\{\DA, \DB, \DC, \DD\right\},\\
     E_u &= \left\{\{\DA, \DB\}, \{\DB, \DC\}, \{\DC, \DD\}, \{\DD,
       \DA\}\right\}.
-  \end{align}
+  \end{align*}
 \end{exmp}
 
 The concept of a directed cycle is a fundamental component in the formulation
@@ -912,40 +911,73 @@ of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
 
 \begin{definition} A {\em hybrid control system in a cycle} is a tuple,
   %
-  \begin{align}
+  \begin{align*}
     \HCS = (\Gamma, \D, U, S, \Delta, FG),
-  \end{align}
+  \end{align*}
   %
   where
   \begin{itemize}
-  \item $\Gamma = (V,E)$ is a {\em directed cycle},
-  \item $\D = \{\D_{v}\}_{v \in V}$ is a set of {\em domains} with $\D_{v}
-    \subseteq \mathcal{X}_{v} \times U_v$ a smooth submanifold, where
+  \item $\Gamma = (V, E)$ is a {\em directed cycle},
+  \item $\D = \{\Dv\}_{v \in V}$ is a set of {\em domains} with $\Dv
+    \subseteq \mathcal{X}_{v} \times U_{v}$ a smooth submanifold, where
     $\mathcal{X}_{v}$ represents the state space,
   \item $U = \{U_{v}\}_{v \in V}$ with $U_{v} \subseteq \R^{m_{v}}$ a set of
     {\em admissible control sets},
-  \item $S = \{S_{e}\}_{e \in E}$ is a set of {\em guards} or {\em switching
-      surfaces}, with $S_{e} \subseteq \D_{\sor(e)}$,
+  \item $\Guard = \{\Guard_{e}\}_{e \in E}$ is a set of {\em guards} or {\em
+      switching surfaces}, with $\Guard_{e} \subseteq \D_{\sor(e)}$,
   \item $\Delta = \{\Delta_{e}\}_{e \in E}$ is a set of {\em reset maps}, with
     $\Delta_{e} : S_{e} \to \mathcal{X}_{\tar(e)}$ a smooth map,
-  \item $FG = \{(f_{v}, g_{v})\}_{v \in E}$ with $(f_v,g_v)$ a {\em control
-      system} on $D_{v}$, i.e., $\dot{x} = f_{v}(\x) + g_{v}(\x) u$ $\forall$
-    $(\x^{T}, \uu^{T})^{T} \in \D_{v}$.
+  \item $FG = \{(\xfv, \xgv)\}_{v \in E}$ with $(\xfv, \xgv)$ a {\em control
+      system} on $\Dv$, i.e., $\dx = \xfv\arx + \xgv\arx \uu$ $\forall$
+    $\argsxuu \in \Dv$.
   \end{itemize}
+  This can also be described as an indexed system with impulse effects:
+  \begin{align}
+    \label{eq:HCSi}
+    \HCSv = \left\{
+      \begin{array}{l l}
+        \dx = \xfv\arx + \xgv\arx \, \uu, & \argsxuum \in \Dv \setminus
+        \Guardv,\\
+        \xp = \Deltav(\xm), & \argsxuum \in \Guardv,
+      \end{array}\right.
+  \end{align}
+  for $v \in V$.
+  % 
+  The set of all domains can be written $\HCS = \{\HCSv\}_{v \in V}$.
 \end{definition}
 
 \begin{definition}
   A {\em hybrid system} is a hybrid control system with $U_v = \emptyset$
-  $\forall$ $v \in V$, e.g., any applicable feedback controllers have been
+  $\forall$ $v \in V$, e.g., any relevant feedback controllers have been
   applied, making the system closed-loop:
-  \begin{align}
+  \begin{align*}
     \HS = (\Gamma, \D, S, \Delta, F),
-  \end{align}
+  \end{align*}
   %
-  where $F = \{f_{v}\}_{v \in E}$, with $f_{v}$ a (possibly non-autonomous) {\em
-    dynamical system} on $\mathcal{X} \subseteq \D_{v}$, i.e., $\dx =
-  f_{v}(\x,t)$.
+  where $F = \{\xfv\}_{v \in E}$, with $\xfv$ a (possibly non-autonomous) {\em
+    dynamical system} on $\mathcal{X} \subseteq \Dv$, i.e., $\dx =
+  \xfv(\x, t)$.
+  %
+  This corresponds to the following system with impulse effects:
+  \begin{align}
+    \label{eq:HSi}
+    \HSv = \left\{
+      \begin{array}{l l}
+        \dx = \xfv\arx & \xm \in \Dv \setminus \Guardv,\\
+        \xp = \Deltav(\xm), & \xm \in \Guardv,
+      \end{array}\right.
+  \end{align}
+  for $v \in V$.
+  %
+  The set of all domains can be written $\HS = \{\HSv\}_{v \in V}$.
 \end{definition}
+
+Comparing the above definitions and \eqref{eq:HCSi} and \eqref{eq:HSi}, it is
+clear that the domain of admissibility, $\D$, and the guard, $\Guard$, may
+depend on control, if present.
+%
+This dependence is a result of considering the dynamic moment of the system and
+will be clarified further in \secref{sec:discrete-dynamics}.
 
 \subsection{Obtaining Hybrid Systems from Constraints}
 The remainder of this section is devoted to discussing how the Lagrangian for a
@@ -960,26 +992,28 @@ Examples can be found throughout the literature; see, for example,
 %\begin{figure}
 %\centering
 %  \includegraphics[width=.7 \columnwidth]{figures/bipede_parametrisation_new}
-%  \caption{A three-dimensional bipedal robot, together with world ($R_0$), body ($R_b$) and reference ($R_c$) coordinate frames} \label{biped}
+%  \caption{A three-dimensional bipedal robot, together with world ($R_0$), body
+%  ($R_b$) and reference ($R_c$) coordinate frames} \label{biped}
 %\end{figure}
 
 \subsubsection{Constraints}
-The continuous dynamics of the system depend on which constraints are enforced
-at any given time while the discrete dynamics depend on the change in constraints.
+The continuous dynamics of the system depends on which constraints are enforced
+at any given time while the discrete dynamics depends on the change in
+constraints.
 %
-Constraints and their enforcement are dictated by the number of contact points
-between the system and the ground.
+Constraints and their enforcement are dictated by the configuration of contact
+points between the system and the ground.
 %
 Specifically, one can define a {\em contact set} $\C = \{c_{1}, c_{2}, \ldots,
-c_{k}\}$, with each $c_i$ a specific type of foot/ground contact
+c_{k}\}$, with each $c_{i}$ a specific type of foot/ground contact
 possible in the biped.
 %
 Assuming that foot contact is restricted to edges parallel to the $y$-axis
 (i.e., the toe edge or the heel edge)---and this is the case in 2D as in this
 work---there are four contact points of interest:
-\begin{align}
+\begin{align*}
   \C =  \{\csh, \cst, \cnsh , \cnst\},
-\end{align}
+\end{align*}
 where these constraints physically represent the stance heel, stance toe,
 non-stance heel, and non-stance toe, respectively.
 %
@@ -992,14 +1026,14 @@ analysis.
   This is an artifact of point-foot bipedal models which have only single
   support and instantaneous double support (at impact).
   %
-  This paper instead uses the term non-stance due to the existence of
+  This thesis instead uses the term non-stance due to the existence of
   noninstantaneous double support phases where there are periods with no free
   swinging behavior.
   %
-  In this case the naming of stance/non-stance legs is arbitrary;
+  In this case the naming of the stance/non-stance legs is arbitrary;
   %
-  in this thesis, the stance leg is defined as the leg holding most of the weight
-  of the robot.
+  in this thesis, the stance leg is defined as the leg holding most of the
+  weight of the robot.
 \end{remark}
 
 %%%% FIX
@@ -1008,84 +1042,88 @@ analysis.
 
 
 %%%% FIX
-%%%% Need to treat the following section in a more correct manner, e.g., flat foot vs. toe roll
-Contact points introduce {\it holonomic constraints}, $\eta_{c}$ for $c \in \C$,
-on the system; this vector must be held constant for the contact point to be
+%%%% Need to treat the following section in a more correct manner, e.g., flat
+%%%% foot vs. toe roll
+Contact points introduce {\em non-holonomic constraints}, $\eta_{c}$ for $c \in
+\C$, on the system; this vector must be held constant for contact to be
 maintained.
 %
 To construct these constraints, consider a reference frame $R_{c}$ at the
 contact point $c$ such that the axis of rotation about this point (either the
 heel or toe) is along $y$-axis.
 %
-Let $R_0^c\argsq$ be a rotation matrix between reference frames from $R_{0}$ and
-$R_{c}$.
+Let $\Rnaught^{c}\argsq$ be a rotation matrix between reference frames from
+$\Rnaught$ and $\Rc$.
 %
-Let $p_{c} : Q \to \R^{3}$ represent the position of the frame and let $v_{c}\argsqdq = {\dot p}_{c}\argsqdq$ represent the velocity.
+Let $p_{c} : \Q \to \R^{3}$ represent the position of the frame and let
+$v_{c}\argsqdq = {\dot p}_{c}\argsqdq$ represent the velocity.
 %
 The body-fixed angular velocity of the frame can then be found:
 %
 \begin{align}
   \label{eq:angvelmat}
-  \Omega_{c}\argsqdq &= (R_{0}^{c}\argsq)^{T} \, \pd{R_{0}^{c}\argsq}{\q} \dq\\
+  \Omega_{c}\argsqdq &= (\Rnaught^{c}\argsq)^{T} \, \pd{\Rnaught^{c}\argsq}{\q}
+  \, \dq\\
   \nonumber
   &= \left[\begin{array}{c c c}
-      0 & -\omega_{c}^{z}\argsqdq & \omega_{c}^{y}\argsqdq\\
-      \omega_{c}^{z}\argsqdq & 0 & -\omega_{c}^{x}\argsqdq\\
-      -\omega_{c}^{y}\argsqdq & \omega_{c}^{x}\argsqdq & 0
+      0 & -\wc^{z}\argsqdq & \wc^{y}\argsqdq\\
+      \wc^{z}\argsqdq & 0 & -\wc^{x}\argsqdq\\
+      -\wc^{y}\argsqdq & \wc^{x}\argsqdq & 0
     \end{array}\right].
-\end{align}
+\end{align}the number
+%
 The angular velocity vector
-\begin{align}
-  \omega_{c}\argsqdq = (\omega_{c}^{x}\argsqdq, \omega_{c}^{y}\argsqdq, \omega_{c}^{z}\argsqdq)
-\end{align}
+\begin{align*}
+  \wc\argsqdq = (\wc^{x}\argsqdq, \wc^{y}\argsqdq, \wc^{z}\argsqdq)
+\end{align*}
 is dual to the skew-symmetric matrix $\Omega\argsqdq$.
 %
-Using the linear and angular velocities, the holonomic constraint can be written
-\begin{align}
+Using the linear and angular velocities, the non-holonomic constraint can be written
+\begin{align*}
   \eta_{c}\argsqdq = \left[\begin{array}{c}
       v_{c}\argsqdq\\
-      \omega_{c}^{x}\argsqdq\\
-      \omega_{c}^{z}\argsqdq
+      \wc^{x}\argsqdq\\
+      \wc^{z}\argsqdq
     \end{array}\right] =
-  J_{c}\argsq \dq.
-\end{align}
+  J_{c}\argsq \, \dq.
+\end{align*}
 It is apparent from \eqref{eq:angvelmat} that $v_{c}\argsqdq$ and
 $\omega_{c}\argsqdq$ are linearly dependent on $\dq$.
 %
 Furthermore,
 \begin{align*}
-  v_{c}\argsqdq = \pd{p_{c}\argsq}{\q} \dq
+  v_{c}\argsqdq = \pd{p_{c}\argsq}{\q} \, \dq
 \end{align*}
 with $p_{c}\argsq$ the Cartesian position of the contact point $c$.
 %
-Therefore, it is possible to find the associated Jacobian matrix:
+%Therefore, it is possible to find the associated Jacobian matrix:
 %
-\begin{align*}
-  J_{c}\argsq = \pd{\eta_{c}\argsqdq}{\dq}.
-\end{align*}
-
+%\begin{align*}
+%  J_{c}\argsq = \pd{\eta_{c}\argsqdq}{\dq}.
+%\end{align*}
+%
 In the case of a 2D biped, the treatment is exactly the same but
 \begin{align*}
   \eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, v_{c}^{z}\argsqdq)^T.
 \end{align*}
 %
-The end result of this choice of coordinates is a holonomic constraint which
+The end result of this choice of coordinates is a non-holonomic constraint which
 enforces the condition $\eta_{c}\argsqdq = \mathrm{constant}$---this fixes the
 contact point to the ground but allows rotation about the heel or toe depending
 on the specific type of contact.
 %
-It is useful to express the collection of all holonomic constraints in a single
-matrix $\eta\argsqdq \in \R^{20 \times 4}$ as:
-\begin{align}
+It is useful to express the collection of all non-holonomic constraints in a
+single matrix $\eta\argsqdq \in \R^{20 \times 4}$ as:
+\begin{align*}
   \eta\argsqdq \!\! = \!\!\! \left[\!\!\begin{array}{c c c c}
     \! \eta_{\sth}\argsqdq \! & 0 & 0 & 0 \\
     0 & \! \eta_{\stt}\argsqdq \! & 0 & 0 \\
     0 & 0 & \! \eta_{\nsh}\argsqdq \! & 0 \\
     0 & 0 & 0 & \! \eta_{\nst}\argsqdq \!
     \end{array}\!\!\right]
-\end{align}
+\end{align*}
 
-Another class of constraints that is important is the class of {\it unilateral
+Another class of constraints that is important is the class of {\em unilateral
   constraints}, $h_{c}\argsq$ for $c \in \C$, since they dictate the set of
 admissible configurations of the system.
 %
@@ -1105,24 +1143,20 @@ that is,
 \subsubsection{Domain Breakdowns}
 
 A domain breakdown is a directed cycle together with a specific choice of
-contact points on every vertex of the graph.
+contact points for each vertex of the graph.
 %
 To define this formally, assign to each vertex a binary vector describing which
 contact points are enforced on each domain.
-
-\gap
 
 \begin{definition}
   \label{def:domainbreakdown}
   Let $\C = \{c_{1}, c_{2}, \ldots, c_{k}\}$ be a set of contact points and $\Gamma$ be a directed cycle.
   %
-  A {\it domain breakdown} is a binary map $\B : V \to \Z_{2}^{k}$ such that $\B_{i}(v) = 1$ if $c_{i}$ is in contact on $v$ and $\B_{i}(v) = 0$ otherwise.
+  A {\bf domain breakdown} is a binary map $\Br : V \to \Z_{2}^{k}$ such that $\Br_{i}(v) = 1$ if $c_{i}$ is in contact on $v$ and $\Br_{i}(v) = 0$ otherwise.
 \end{definition}
 
-\gap
-
 \begin{exmp} \label{ex:domainbreakdown}
-  In the case of the graph $\Gamma_{u}$ given in \exmpref{universalgraph} and the set of contact points $\C =  \{\csh, \cst, \cnsh, \cnst\}$, for the graph shown in \figref{fig:domaingraph}, the domain breakdown is formally given by $\B_{u} : V_{u} \to \Z_{2}^{4}$ where $\B_{u}(ts)$, $\B_{u}(tl)$, $\B_{u}(hl)$ and $\B_{u}(hs)$ are given by
+  In the case of the graph $\Gamma_{u}$ given in \exmpref{universalgraph} and the set of contact points $\C =  \{\csh, \cst, \cnsh, \cnst\}$, for the graph shown in \figref{fig:domaingraph}, the domain breakdown is formally given by $\B_{u} : V_{u} \to \Z_{2}^{4}$ where $\Br_{u}(ts)$, $\Br_{u}(tl)$, $\Br_{u}(hl)$ and $\Br_{u}(hs)$ are given by
   \begin{align}
     \left[ \begin{array}{c} 1  \\ 0 \\ 0 \\ 1 \end{array} \right], \:\:
     \left[ \begin{array}{c} 1  \\ 1 \\ 0 \\ 1 \end{array} \right], \:\:
@@ -1145,24 +1179,24 @@ Since the Lagrangian is intrinsic to the robot being considered, a domain breakd
 
 The control system
 \begin{align*}
-  \dx = f_v(\x) + g_v(\x) \, \uu
+  \dx = \xfv\arx + \xgv\arx \, \uu
 \end{align*}
 can be explicity constructed through the constraints imposed on each domain by
 the domain breakdown.
 %
 For the domain $v \in V$, the imposed holonomic constraints are given by:
 %
-\begin{align}
-  \eta_{v}\argsqdq = \eta\argsqdq \, \B(v),
-\end{align}
+\begin{align*}
+  \eta_{v}\argsqdq = \eta\argsqdq \, \Br(v),
+\end{align*}
 %
 where the domain breakdown dictates which constraints are enforced.
 %
 One can calculate the Jacobian matrix used to enforce the constraints by differentiating the holonomic constraint and removing redundancies as follows:
 %
-\begin{align}
+\begin{align*}
   J_{v}\argsq = \mathrm{Basis}\left( \mathrm{RowSp}\left( \pd{\eta_{v}\argsqdq}{{\dq}} \right) \right).
-\end{align}
+\end{align*}
 %
 By taking a basis for the row space of the Jacobian, redundant constraints are removed so that $J_v\argsq$ has full row rank.
 %
@@ -1170,66 +1204,69 @@ Using this Jacobian, the constrained dynamic model is given by
 %
 \begin{align}
   \label{eq:constraineddynamics}
-  \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \uu + J_v^T\argsq F_v\argsqdqu.
+  \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \uu + J_v^T\argsq \Fv\argsqdqu.
 \end{align}
 %
-where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eq:eom} and $F_v\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $R_c$ (see \cite{Murray1994}).
+where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eq:eom} and $\Fv\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $\Rc$ (see \cite{Murray1994}).
 %
 Because the robot is modeled in a generalized position with ground contact enforced through constraints, the matrices $\M\argsq$, $\HCor\argsqdq$, and $\B\argsq$ are identical in every domain.
 %
-To determine the wrench $F_v\argsqdqu$, one differentiates the kinematic constraint $J_v\argsq \, \dq = \mathrm{constant}$ to obtain
+To determine the wrench $\Fv\argsqdqu$, one differentiates the kinematic constraint $J_v\argsq \, \dq = \mathrm{constant}$ to obtain
 %
-\begin{align}
+\begin{align*}
   J_{v}\argsq \, \ddq + {\dot J}_{v}\argsqdq \, \dq = 0
-\end{align}
+\end{align*}
 %
 and combine this equation with \eqref{eq:constraineddynamics}.
 %
-Doing so results in an expression for the wrench $F_v\argsqdqu$:
+Doing so results in an expression for the wrench $\Fv\argsqdqu$:
 %
 \begin{align}
   \label{eq:wrench}
-  \lefteqn{F_{v}\argsqdqu = -\left( J_{v}\argsq \M^{-1}\argsq J_{v}^{T}\argsq \right)^{-1} }\\
+  \lefteqn{\Fv\argsqdqu = -\left( J_{v}\argsq \M^{-1}\argsq J_{v}^{T}\argsq \right)^{-1} }\\
   \nonumber
   &&\left( {\dot J}_{v}\argsqdq \, \dq + J_{v}\argsq \M^{-1}\argsq \left( \B\argsq \, \uu - \HCor\argsqdq \right) \right).
 \end{align}
 %
 This is sometimes referred to in the literature as a Lagrange multiplier.
 %
-Combining \eqref{eq:constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $F_{v}\argsqdqu$ and obtain the fields associated to the control system $\dx = f_{v}\arx + g_{v}\arx \, \uu$. For $\x = \argsqdq$,
+Combining \eqref{eq:constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $\Fv\argsqdqu$ and obtain the fields associated to the control system $\dx = \xfv\arx + \xgv\arx \, \uu$. For $\x = \argsqdq$,
 %
 \begin{align}
-  f_{v}\arx \!\! &= \!\!\! \left[\!\!\!\begin{array}{c}
+  \nonumber
+  \xfv\arx &= \left[\begin{array}{c}
     \dq\\
-    \M^{-1}\argsq\Big( \big(J_{v}^{T}\argsq \Xi\argsq J_{v}\argsq \M^{-1}\argsq - I \big) \HCor\argsqdq \\
-    \hspace{1cm}- J_{v}^{T}\argsq \Xi\argsq {\dot J}_{v}^{T}\argsqdq \, \dq \Big)
-    \end{array}\!\!\!\right],\\
+    \M^{-1}\argsq\Big( \big(J_{v}^{T}\argsq \, \Xi\argsq \, J_{v}\argsq \, \M^{-1}\argsq
+    - I \big) \, \HCor\argsqdq \\
+    \hspace{3em}- J_{v}^{T}\argsq \, \Xi\argsq \, {\dot J}_{v}^{T}\argsqdq \, \dq \Big)
+    \end{array}\right],\\
   \label{eq:controlsystem}
-  g_{v}\arx \!\! &= \!\!\! \left[\!\!\!\begin{array}{c}
+  \xgv\arx &= \left[\begin{array}{c}
     0\\
-    \M^{-1}\argsq \big(I - J_{v}^{T}\argsq \Xi\argsq J_{v}\argsq \M^{-1}\argsq \big) \B\argsq
-    \end{array}\!\!\!\right],
+    \M^{-1}\argsq \big(I - J_{v}^{T}\argsq \, \Xi\argsq \, J_{v}\argsq \, \M^{-1}\argsq
+    \big) \, \B\argsq
+    \end{array}\right],
 \end{align}
 %
-where, for simplicity, $\Xi\argsq := \big( J_{v}\argsq \M^{-1}\argsq J_{v}^{T}\argsq \big)^{-1}$.
+where, for simplicity, $\Xi\argsq := \big( J_{v}\argsq \, \M^{-1}\argsq \, J_{v}^{T}\argsq \big)^{-1}$.
 
 
-\subsubsection{Discrete Dynamics}
+\subsubsection{Discrete Dynamics} \label{sec:discrete-dynamics}
 
 The discrete dynamics consist of the domains, guards and reset maps for a hybrid
 system and are related to the domain breakdown.
 
-Given a vertex $v \in V$, the domain $\D$ is the set of admissible
+Given a vertex $v \in V$, the domain $\Dv$ is the set of admissible
 configurations of the system factoring in both friction and a unilateral
 constraint.
 %
-Specifically, from the wrench $F_{v}\argsqdqu$, one can ensure that the foot
+Specifically, from the wrench $\Fv\argsqdqu$, one can ensure that the foot
 does not slip by considering inequalities on the friction which can be stated in
 the form:
 %
 \begin{align}
   \label{eq:constmu}
-  \mu_{v}\argsq F_{v}\argsqdqu \geq 0,
+  \mu_{v}\argsq \, \Fv\argsqdqu \geq 0,
 \end{align}
 %
 with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the
@@ -1241,7 +1278,7 @@ written in the form:
 %
 \begin{align}
   \label{eq:constnu}
-  \nu_{v}\argsq F_{v}\argsqdqu \geq 0,
+  \nu_{v}\argsq \, \Fv\argsqdqu \geq 0,
 \end{align}
 %
 where $\nu_{v}\argsq$ depends on the physical parameters and state of the
@@ -1254,8 +1291,8 @@ coupled with the unilateral constraint on the domain, $h_{v}\argsq = h\argsq
 \begin{align}
   \label{admissible}
   A_{v}\argsqdqu = \left[ \begin{array}{c}
-      \mu_{v}\argsq F_{v}\argsqdqu\\
-      \nu_{v}\argsq F_{v}\argsqdqu\\
+      \mu_{v}\argsq \, \Fv\argsqdqu\\
+      \nu_{v}\argsq \, \Fv\argsqdqu\\
       h_{v}\argsq
     \end{array} \right] \geq 0.
 \end{align}
@@ -1264,28 +1301,27 @@ Thus, the domain is given by
 %
 \begin{align}
   \label{eq:domain}
-  \D_{v} \! = \! \left\{ \! (q^{T}, \! \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q
-    \times \R^{m_{v}} : A_{v}\argsqdqu \! \geq \! 0 \! \right\}.
+  \Dv = \left\{ (q, \dq, \uu) \in T\Q
+    \times \R^{m_{v}} : A_{v}\argsqdqu \geq 0 \right\}.
 \end{align}
 %
 The guard is just the boundary of this domain with the additional assumption
 that the set of admissible configurations is decreasing, i.e., the vector field
 is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
 %
-\begin{align}
-  S_{e} \! = \! \Bigl\{ \!(\q^{T}, \dq^{T}, \! \uu^{T})^{T} \! \in \! T\Q \times
-  \R^{m_v} : \ &A_{v}\argsqdqu \! = \! 0 \\
-  \nonumber
-  \mathrm{and} \ &{\dot A}_{v}\argsqdqu \! \leq \! 0 \! \Bigl\}.
-\end{align}
+\begin{align*}
+  S_{e} = \Bigl\{ (\q, \dq, \uu) \in T\Q \times
+  \R^{m_v} : \ &A_{v}\argsqdqu = 0 \\
+  \mbox{and } &{\dot A}_{v}\argsqdqu \leq 0 \Bigl\}.
+\end{align*}
 
 The impact equations are obtained by considering the constraints enforced on the
 subsequent domain;
 %
 denote the Jacobian associated to these constraints by $J_{e'}$.
 %
-For an edge $e = \{v, v'\} \in E$, the post-impact velocity $\dq^+$ is given in
-terms of the pre-impact velocity $\dq^-$ by balancing angular momentum
+For an edge $e = \{v, v'\} \in E$, the post-impact velocity $\dqp$ is given in
+terms of the pre-impact velocity $\dqm$ by balancing angular momentum
 \cite{Hurmuzlu1994}.
 %
 Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be
@@ -1347,7 +1383,7 @@ For transitions in which no relabeling occurs, $\mathcal{R}_{e} = I$.
 %
 The reset map is expressed as follows:
 %
-\begin{align}
+\begin{align*}
   \Delta_{e}\argsqdq =
   \left[ \begin{array}{c c}
       \mathcal{R}_{e} & \boldzero\\
@@ -1357,7 +1393,7 @@ The reset map is expressed as follows:
       \q\\
       P_{e}\argsqdq
     \end{array} \right].
-\end{align}
+\end{align*}
 %
 This reset map takes a point on the guard of a domain and maps it into the next
 domain specified by the domain breakdown.
