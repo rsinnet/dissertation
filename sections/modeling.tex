@@ -872,7 +872,7 @@ graph is a {\em directed cycle}:
 
 \begin{definition}
   A {\bf directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of
-  vertices and $E$ a set of edges---for an edge $e \in E$, denote the source by
+  vertices and $E$ a set of edges---for an edge $\einE$, denote the source by
   $\sor(e)$ and the target by $\tar(e)$---in which the edges and vertices can be
   written
   %
@@ -918,16 +918,16 @@ of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
   where
   \begin{itemize}
   \item $\Gamma = (V, E)$ is a {\em directed cycle},
-  \item $\D = \{\Dv\}_{v \in V}$ is a set of {\em domains} with $\Dv
+  \item $\D = \{\Dv\}_{\vinV}$ is a set of {\em domains} with $\Dv
     \subseteq \mathcal{X}_{v} \times U_{v}$ a smooth submanifold, where
     $\mathcal{X}_{v}$ represents the state space,
-  \item $U = \{U_{v}\}_{v \in V}$ with $U_{v} \subseteq \R^{m_{v}}$ a set of
+  \item $\U = \{\Uv\}_{\vinV}$ with $\Uv \subseteq \R^{m_{v}}$ a set of
     {\em admissible control sets},
-  \item $\Guard = \{\Guard_{e}\}_{e \in E}$ is a set of {\em guards} or {\em
-      switching surfaces}, with $\Guard_{e} \subseteq \D_{\sor(e)}$,
-  \item $\Delta = \{\Delta_{e}\}_{e \in E}$ is a set of {\em reset maps}, with
-    $\Delta_{e} : S_{e} \to \mathcal{X}_{\tar(e)}$ a smooth map,
-  \item $FG = \{(\xfv, \xgv)\}_{v \in E}$ with $(\xfv, \xgv)$ a {\em control
+  \item $\Guard = \{\Guarde\}_{\einE}$ is a set of {\em guards} or {\em
+      switching surfaces}, with $\Guarde \subseteq \D_{\sor(e)}$,
+  \item $\Delta = \{\Deltae\}_{\einE}$ is a set of {\em reset maps}, with
+    $\Deltae : \Guarde \to \mathcal{X}_{\tar(e)}$ a smooth map,
+  \item $FG = \{(\xfv, \xgv)\}_{\vinV}$ with $(\xfv, \xgv)$ a {\em control
       system} on $\Dv$, i.e., $\dx = \xfv\arx + \xgv\arx \uu$ $\forall$
     $\argsxuu \in \Dv$.
   \end{itemize}
@@ -941,17 +941,17 @@ of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
         \xp = \Deltav(\xm), & \argsxuum \in \Guardv,
       \end{array}\right.
   \end{align}
-  for $v \in V$.
+  for $\vinV$.
   % 
-  The set of all domains can be written $\HCS = \{\HCSv\}_{v \in V}$.
+  The set of all domains can be written $\HCS = \{\HCSv\}_{\vinV}$.
 \end{definition}
 
 \begin{definition}
   A {\em hybrid system} is a hybrid control system with $U_v = \emptyset$
-  $\forall$ $v \in V$, e.g., any relevant feedback controllers have been
+  $\forall$ $\vinV$, e.g., any relevant feedback controllers have been
   applied, making the system closed-loop:
   \begin{align*}
-    \HS = (\Gamma, \D, S, \Delta, F),
+    \HS = (\Gamma, \D, \Guard, \Delta, F),
   \end{align*}
   %
   where $F = \{\xfv\}_{v \in E}$, with $\xfv$ a (possibly non-autonomous) {\em
@@ -967,9 +967,9 @@ of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
         \xp = \Deltav(\xm), & \xm \in \Guardv,
       \end{array}\right.
   \end{align}
-  for $v \in V$.
+  for $\vinV$.
   %
-  The set of all domains can be written $\HS = \{\HSv\}_{v \in V}$.
+  The set of all domains can be written $\HS = \{\HSv\}_{\vinV}$.
 \end{definition}
 
 Comparing the above definitions and \eqref{eq:HCSi} and \eqref{eq:HSi}, it is
@@ -1104,7 +1104,7 @@ with $p_{c}\argsq$ the Cartesian position of the contact point $c$.
 %
 In the case of a 2D biped, the treatment is exactly the same but
 \begin{align*}
-  \eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, v_{c}^{z}\argsqdq)^T.
+  \eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, v_{c}^{z}\argsqdq).
 \end{align*}
 %
 The end result of this choice of coordinates is a non-holonomic constraint which
@@ -1184,7 +1184,7 @@ The control system
 can be explicity constructed through the constraints imposed on each domain by
 the domain breakdown.
 %
-For the domain $v \in V$, the imposed holonomic constraints are given by:
+For the domain $\vinV$, the imposed holonomic constraints are given by:
 %
 \begin{align*}
   \eta_{v}\argsqdq = \eta\argsqdq \, \Br(v),
@@ -1256,7 +1256,7 @@ where, for simplicity, $\Xi\argsq := \big( J_{v}\argsq \, \M^{-1}\argsq \, J_{v}
 The discrete dynamics consist of the domains, guards and reset maps for a hybrid
 system and are related to the domain breakdown.
 
-Given a vertex $v \in V$, the domain $\Dv$ is the set of admissible
+Given a vertex $\vinV$, the domain $\Dv$ is the set of admissible
 configurations of the system factoring in both friction and a unilateral
 constraint.
 %
@@ -1301,8 +1301,8 @@ Thus, the domain is given by
 %
 \begin{align}
   \label{eq:domain}
-  \Dv = \left\{ (q, \dq, \uu) \in T\Q
-    \times \R^{m_{v}} : A_{v}\argsqdqu \geq 0 \right\}.
+  \Dv = \left\{ \argsqdqu \in T\Q
+    \times \Uv : A_{v}\argsqdqu \geq 0 \right\}.
 \end{align}
 %
 The guard is just the boundary of this domain with the additional assumption
@@ -1310,7 +1310,7 @@ that the set of admissible configurations is decreasing, i.e., the vector field
 is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
 %
 \begin{align*}
-  S_{e} = \Bigl\{ (\q, \dq, \uu) \in T\Q \times
+  \Guard_{e} = \Bigl\{ \argsqdqu \in T\Q \times
   \R^{m_v} : \ &A_{v}\argsqdqu = 0 \\
   \mbox{and } &{\dot A}_{v}\argsqdqu \leq 0 \Bigl\}.
 \end{align*}
