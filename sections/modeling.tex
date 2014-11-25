@@ -797,21 +797,38 @@ This will be done in the next section.
 
 \section{Complex Domain Structure} \label{sec:complex-models}
 
-Bipedal robotic walking exhibits both discrete and continuous behavior; it is,
-therefore, natural to model bipedal robots as hybrid systems.\todo{Move parts of
-  this to earlier sections.}\xspace
+%Bipedal robotic walking exhibits both discrete and continuous behavior; it is,
+%therefore, natural to model bipedal robots as hybrid systems.
 %
-A human walking gait will be shown to consist of multiple domains---on each
-domain, the system evolves in a continuous fashion according to a dynamic model
-derived from a Lagrangian modeling the mechanical system on that domain.
+A large portion of the research on bipedal robotic walking focuses on models of
+robots with point feet or flat-foot walking.
 %
-This dynamic model will vary depending on which points on the robot are in
+This results in a simple hybrid model with a single domain which can be treated
+using the methods described earlier in this chapter.
+%
+This idealization results in walking gaits which lack some of the distinguishing
+characteristics of human locomotion.
+%
+In particular, the foot behavior of human walking is highly recognizable and
+sets human walking apart from the flat-footed gaits seen on many of the early
+bipedal robots.
+
+Under a more general view, a human walking gait can be seen to consist of
+multiple {\em phases} or {\em domains}---in each domain, the system evolves in a
+continuous fashion according to a dynamic model derived from a Lagrangian
+modeling the mechanical system on that domain.
+%
+The dynamic model will vary depending on which points on the robot are in
 contact with the ground---having points in contact with the ground introduces
 kinematic constraints on the system.
 %
 At a certain point in each domain, i.e., when the contact points change, the
 model will discretely change to another phase of walking with a different
 dynamic model and different control.
+%
+In the case of an end-effector on the robot coming into contact with the
+environment, impulsive forces act on the contact point which instantaneously
+alter the velocity of the system.
 %
 %This combination of continuous and discrete phenomena is the fundamental
 %concept underlying hybrid systems.
