@@ -31,6 +31,9 @@
 \DeclareMathOperator*{\lambdamin}{\lambda_{\mathrm{min}}}
 \DeclareMathOperator*{\blockdiag}{blk\,diag}
 
+\DeclareMathOperator*{\Basis}{Basis}
+\DeclareMathOperator*{\RowSp}{Row\,Sp}
+
 % Set of cyclical coordinates (Taurus)
 \newcommand{\T}{\mathbb{T}}
 
@@ -43,6 +46,9 @@
 \newcommand{\Rnn}{\R_{\geq 0}}
 \newcommand{\Rpd}{\R_{> 0}}
 \newcommand{\Rn}{\R^{n}}
+
+\newcommand{\mv}{\ncv_{\vo}}
+\newcommand{\Rmv}{\R^{\mv}}
 
 % Reference frame
 \newcommand{\Rb}{R_{b}}
@@ -106,7 +112,6 @@
 \newcommand{\xgv}{\xg_{v}}
 
 % Indexed reset map
-\newcommand{\Deltav}{\Delta_{v}}
 \newcommand{\Deltae}{\Delta_{e}}
 
 \newcommand{\xfbar}{{\bar \xf}}
@@ -115,9 +120,6 @@
 % Zero dynamics vector fields
 \newcommand{\bigF}{\Phi}
 \newcommand{\bigG}{\Gamma}
-
-% Rotational velocity
-\newcommand{\wc}{\omega_{c}}
 
 
 % RES-CLF control gain
@@ -152,6 +154,7 @@
 \newcommand{\Keps}{\K_{\resclfparam}}
 
 % Various dependent coordinate macros
+\newcommand{\argsxtau}{(\x\argtau)}
 \newcommand{\argsq}{(\q)}
 \newcommand{\argsqt}{(\q\argt)}
 \newcommand{\argsqtau}{(\q\argtau)}
@@ -214,7 +217,6 @@
 \newcommand{\Orbit}{{\mathscr O}}
 
 \newcommand{\Dv}{\D_{v}}
-\newcommand{\Guardv}{\Guard_{v}}
 \newcommand{\Guarde}{\Guard_{e}}
 
 \newcommand{\Transition}[3]{#1^{#2 \to #3}}
@@ -475,6 +477,7 @@
 \newcommand{\csthh}{\ensuremath{\mathit{sthh}}}
 
 \newcommand{\vo}{v}
+\newcommand{\vop}{\vo'}
 
 
 % Unused macros
@@ -539,7 +542,7 @@
 \newcommand{\cI}{\mathscr{I}}
 \newcommand{\cC}{\mathscr{C}}
 
-\newcommand{\vinV}{v \in V}
+\newcommand{\vinV}{\vo \in V}
 \newcommand{\einE}{e \in E}
 
 \newcommand{\Uv}{\U_{v}}
@@ -547,3 +550,44 @@
 
 \newcommand{\F}{\mathcal{F}}
 \newcommand{\FG}{\mathcal{FG}}
+
+\newcommand{\pos}{p}
+\newcommand{\pc}{\pos_{c}}
+
+\newcommand{\pcx}{\pc^{x}}
+\newcommand{\pcy}{\pc^{y}}
+\newcommand{\pcz}{\pc^{z}}
+
+\newcommand{\dpc}{{\dot \pos}_{c}}
+
+\newcommand{\vel}{v}
+\newcommand{\vc}{\vel_{c}}
+
+\newcommand{\vcx}{\vc^{x}}
+\newcommand{\vcy}{\vc^{y}}
+\newcommand{\vcz}{\vc^{z}}
+
+% Rotational velocity
+\newcommand{\wc}{\omega_{c}}
+\newcommand{\wcx}{\wc^{x}}
+\newcommand{\wcy}{\wc^{y}}
+\newcommand{\wcz}{\wc^{z}}
+
+\newcommand{\J}{J}
+\newcommand{\Jc}{\J_{c}}
+\newcommand{\Jv}{\J_{\vo}}
+\newcommand{\Jvp}{\J_{\vop}}
+
+\newcommand{\Je}{\J_{e}}
+\newcommand{\Jep}{\J_{e'}}
+
+\newcommand{\dJ}{{\dot \J}}
+
+\newcommand{\argv}{(\vo)}
+\newcommand{\Av}{A_{\vo}}
+\newcommand{\dAv}{{\dot A}_{\vo}}
+
+\newcommand{\h}{h}
+\newcommand{\hc}{\h_{c}}
+\newcommand{\hv}{\h_{\vo}}
+\newcommand{\doth}{{\dot \h}}

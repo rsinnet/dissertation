@@ -54,7 +54,7 @@ The evolution of the system depends on a {\em unilateral constraint}, $h :
   surface}.
 %
 In the case of a bipedal robot with simple foot behavior, a common selection for
-the unilateral constraint is the height of the swing foot, i.e., $h\arx =
+the unilateral constraint is the height of the swing foot, i.e., $\h\arx =
 \hnsf\argsq$.
 %
 Through definition of an appropriate unilateral constraint on a hybrid system
@@ -65,18 +65,18 @@ Defining a unilateral constraint to be non-negative leads a definition of the
 %
 \begin{align}
   \label{eq:domain}
-  \D = \left\{ \x \in T\Q : h\arx \geq 0 \right\},
+  \D = \left\{ \x \in T\Q : \h\arx \geq 0 \right\},
 \end{align}
 %
 which describes the admissible states of the system.
 %
-The boundary at the zero level set of $h\arx$ naturally gives rise to the
+The boundary at the zero level set of $\h\arx$ naturally gives rise to the
 switching surface,
 %
 \begin{align}
   \label{eq:guard}
-  \Guard &= \left\{ \x \in \D \subset T\Q : h\argsx = 0 \mbox{ and } {\dot h}\argsx < 0
-  \right\}.
+  \Guard &= \left\{ \x \in \D \subset T\Q : \h\arx = 0 \mbox{ and } \doth\arx <
+    0 \right\}.
 \end{align}
 %
 Using these spaces, an uncontrolled hybrid system can be expressed as
@@ -90,8 +90,8 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
   \label{eq:hsys}
 \end{align}
 %
-where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : S \to D
-\setminus S$ is a smooth map called the reset map (see, e.g.,
+where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : \Guard \to \D
+\setminus \Guard$ is a smooth map called the reset map (see, e.g.,
 \cite{Morris2005}).
 %
 In addition, $\xm\argt = \lim_{\tau \nearrow t} \x\argtau$ and $\xp\argt =
@@ -150,7 +150,7 @@ The vector field is assumed to be continuously differentiable viz. $\xf \in
 C^{1}(\D)$.
 %
 For an initial condition $\x_{0} \in \D$, the solution $\x\argt$ will evolve
-according to \eqref{eq:xdot} until it reaches the edge of $D$, intersecting
+according to \eqref{eq:xdot} until it reaches the edge of $\D$, intersecting
 the guard $\Guard$ by assumption (transversality).
 
 Define the {\em flow} of the differential equation as
@@ -165,17 +165,17 @@ flows until time $t$ with final state $\arx\argt$.
 From this expression, it is clear also that there is a {\em time-to-impact} function
 $\TI : \D \to \Rnn$ guaranteed by the implicit function theorem as follows:
 %
-using the unilateral constraint $h$ associated with the hybrid system, define
+using the unilateral constraint $\h$ associated with the hybrid system, define
 the function
 \begin{align*}
-  N(t, \x) = h(\flowt\arx).
+  N(t, \x) = \h(\flowt\arx).
 \end{align*}
 %
 This function is continuous in $\x$.
 %
 By the implicit function theorem and the assumption of
 transversality---specifically, valid solutions do not travel along the guard
-viz. $\dot h\arx \ne 0$---there exists a unique function $\TI(\x)$ defined and
+viz. $\doth\arx \ne 0$---there exists a unique function $\TI(\x)$ defined and
 continuous for any given point in $\D$.
 %
 This function maps a given state $\x$ to the time until that solution crosses
@@ -225,7 +225,7 @@ A set $\Orbit \subset \D$ is a {\em periodic orbit} if
 \begin{align*}
   \Orbit = \{ \Delta(\flowt(\x)) : 0 < t < \TI(\x\argzero) \}
 \end{align*}
-for some periodic solution $\flowt(t_{0}, x_{0})$.
+for some periodic solution $\flowt(t_{0}, \x_{0})$.
 
 For hybrid systems, a discrete event may occur periodically throughout the flow
 leading to discontinuities.
@@ -299,8 +299,8 @@ understand not only the stability of hybrid systems but also the stability of
 continuous systems and discrete systems which partly comprise hybrid systems.
 %
 This section presents formal definitions of stability (based on
-those found in \cite[Ch. 4]{Khalil2002}) which are key to understanding the results presented in this
-work.
+those found in \cite[Ch. 4]{Khalil2002}) which are key to understanding the
+results presented in this work.
 %
 For more on stability, see, e.g., \cite{Khalil2002, Teschl2012,
   Vidyasagar1993}.
@@ -348,8 +348,7 @@ Further, an even stronger form of stability is of interest in this work:
   The equilibrium point $\x = \boldzero$ is {\bf exponentially stable} if there
   exist real constants $c, k, \lambda > 0$ such that
   \begin{align*}
-    \nxt \leq k \nxtnaught e^{-\lambda (t - t_{0})} \ \forall \ \nxtnaught
-    < c.
+    \nxt \leq k \nxtnaught e^{-\lambda (t - t_{0})} \ \forall \ \nxtnaught < c.
   \end{align*}
 \end{definition}
 
@@ -360,7 +359,7 @@ In analogy to continuous systems, consider the autonomous system which satisfies
 the difference equation
 \begin{align}
   \label{eq:disc-sys}
-  x_{k+1} = f(x_{k}).
+  \x_{k+1} = f(\x_{k}).
 \end{align}
 where $f : \D \to \D$ is a locally Lipschitz vector field valid on some domain
 $\D \subset \Rn$.
@@ -410,7 +409,7 @@ At its core, the modeling of complex mechanical systems involves a
 straightforward, if often complicated, application of Newton's Second Law (see
 \cite{Feynman1964}), namely,
 \begin{align*}
-  F = m a,
+  F = m \, a,
 \end{align*}
 which expresses the basic property of physics that applying a force to a massive
 object induces a particular acceleration.
@@ -472,7 +471,8 @@ of mass and oriented along the principal axes of inertia; it is straightforward
 to redefine the base coordinates but this form---the simplest form ---is given
 for clarity of presentation.
 %
-For the full development of the above, see, for example, \cite[Ch. 8]{Baruh1998}.
+For the full development of the above, see, for example,
+\cite[Ch. 8]{Baruh1998}.
 
 %\section{Kinematic Chains}
 
@@ -494,11 +494,16 @@ This minimal set is referred to as the {\em generalized coordinates}.
 \section{Langrangian Formulation}
 
 %\section{Spatial Vector Algebra}
-%While a Lagrangian-based approach to modeling is useful for theoretical applications and smaller systems, its shortcomings quickly emerge as systems grow in complexity.
+%While a Lagrangian-based approach to modeling is useful for theoretical
+%applications and smaller systems, its shortcomings quickly emerge as systems
+%grow in complexity.
 %
-%Perhaps more than anything else, this poor scalability stems from the need to successively multiply rotation matrices in symbolic form resulting in progressively larger expressions.
+%Perhaps more than anything else, this poor scalability stems from the need to
+%successively multiply rotation matrices in symbolic form resulting in
+%progressively larger expressions.
 %
-%Moreover, as complexity grows, it becomes is increasingly difficult to glean any useful bit of intuition from examining the expressions in symbolic form.
+%Moreover, as complexity grows, it becomes is increasingly difficult to glean
+%any useful bit of intuition from examining the expressions in symbolic form.
 
 With the basic understanding provided in the previous section, some additional
 details will now be provided.
@@ -656,17 +661,17 @@ The modeling of constraints necessary for robots can generally be handled by
 considering only non-holonomic constraints, which have the form
 \begin{align}
   \label{eq:holocon}
-  J\argsq \, \dq = \mathit{constant},
+  \J\argsq \, \dq = \mathit{constant},
 \end{align}
-where $J\argsq$ can be thought of as a Jacobian matrix.
+where $\J\argsq$ can be thought of as a Jacobian matrix.
 %
-It is assumed that the constraints are linearly independent and thus $J\argsq$
+It is assumed that the constraints are linearly independent and thus $\J\argsq$
 has full row rank.
 %
-Intuitively, the rows of $J\argsq$ represent maps to velocities of the
-system---i.e., for $J_{i}\argsq$ which is the $i^{\mathrm{th}}$ row of $J\argsq$,
-the quantity $J_{i}\argsq \, \dq$ represents an output velocity---which are to
-be restricted to a constant.
+Intuitively, the rows of $\J\argsq$ represent maps to velocities of the
+system---i.e., for $\J_{i}\argsq$ which is the $i^{\mathrm{th}}$ row of
+$\J\argsq$, the quantity $\J_{i}\argsq \, \dq$ represents an output
+velocity---which are to be restricted to a constant.
 %
 Generally and all throughout this thesis, the constant is zero; that is, the
 constraints are designed to prevent any motion rather than enforce constant,
@@ -677,35 +682,35 @@ additional forces for imposing non-holonomic constraints:
 %
 \begin{align}
   \label{eq:eom-lambda}
-  \M\argsq \, \ddq + \HCor\argsqdq + J^{T}\argsq \, \lambda = \B\argsq \, \uu.
+  \M\argsq \, \ddq + \HCor\argsqdq + \J^{T}\argsq \, \lambda = \B\argsq \, \uu.
 \end{align}
 %
 In the literature, $\lambda$ is often referred to as a Lagrange multiplier
-\cite[\S 4.10]{Baruh1998} and $J^{T}\argsq$ is a map from the space in which the
-output velocity constraints are represented (output space) to joint space and
-thus the constraining forces in joint space are given by
+\cite[\S 4.10]{Baruh1998} and $\J^{T}\argsq$ is a map from the space in which
+the output velocity constraints are represented (output space) to joint space
+and thus the constraining forces in joint space are given by
 %
 \begin{align*}
-  F_{\mathit{c}} = J^{T}\argsq \lambda.
+  F_{\mathit{c}} = \J^{T}\argsq \lambda.
 \end{align*}
 The idea is to solve \eqref{eq:eom-lambda} for $\lambda$ in terms of $\q$,
 $\dq$, and $u$ such that \eqref{eq:holocon} is satisfied.
 %
 Differentiating \eqref{eq:holocon} results in
 \begin{align*}
- {\dot J}\argsqdq \, \dq + J\argsqdq \, \ddq = 0.
+ \dJ\argsqdq \, \dq + \J\argsqdq \, \ddq = 0.
 \end{align*}
 %
 Then solving \eqref{eq:eom-lambda} for $\ddq$ and substituting into the above
 results in
 \begin{align*}
-  {\dot J}\argsqdq \, \dq + J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
-    -\HCor\argsqdq - J^{T}\argsq \, \lambda \right) = 0.
+  \dJ\argsqdq \, \dq + \J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
+    -\HCor\argsqdq - \J^{T}\argsq \, \lambda \right) = 0.
 \end{align*}
 Finally, solving for $\lambda$ gives
 \begin{align*}
-   \lambda = \left( J\argsqdq \, \M^{-1}\argsq \, J^{T}\argsq \right)^{-1}
-   \left( {\dot J}\argsqdq \dq + J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
+   \lambda = \left( \J\argsqdq \, \M^{-1}\argsq \, \J^{T}\argsq \right)^{-1}
+   \left( \dJ\argsqdq \dq + \J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
     -\HCor\argsqdq\right) \right).
 \end{align*}
 %
@@ -759,11 +764,11 @@ Assuming actuators do not produce impulsive forces and integrating the model
 \eqref{eq:eom-lambda} results in
 \begin{align}
   \label{eq:impulse}
-  \D\argsq(\dqp - \dqm) = J^{T}\argsq \lambda\argsqdqm
+  \M\argsq(\dqp - \dqm) = \J^{T}\argsq \lambda\argsqdqm
 \end{align}
 where
 \begin{align*}
-  \int_{t^{-}}^{t^{+}} \! \lambda(\q(\tau), \dq(\tau)) \, d\tau.
+  \int_{t^{-}}^{t^{+}} \! \lambda\argsqdqtau \, d\tau.
 \end{align*}
 %
 Based on the desired constraints, one can construct a Jacobian matrix,
@@ -772,15 +777,15 @@ $J\argsq$, whose rows contain individual constraints.
 Combining \eqref{eq:eom-lambda} with \eqref{eq:impulse} results in the impact model:
 \begin{align*}
   \left(\begin{array}{c c}
-      \D\argsq & -J^{T}\argsq\\
-      J\argsq & \boldzero
+      \M\argsq & -\J^{T}\argsq\\
+      \J\argsq & \boldzero
     \end{array}\right)
   \left(\begin{array}{c}
       \dqp\\
       \lambda\argsqdqp
     \end{array}\right) =
   \left(\begin{array}{c}
-      \D\argsq \dqm\\
+      \M\argsq \, \dqm\\
       \boldzero
     \end{array}\right)
 \end{align*}
@@ -878,10 +883,10 @@ graph is a {\em directed cycle}:
   %
   \begin{align}
     \nonumber
-    V &= \left\{v_{1}, \, v_{2}, \, \ldots, \, v_{p}\right\},\\
+    V &= \left\{\vo_{1}, \, \vo_{2}, \, \ldots, \, \vo_{p}\right\},\\
     \label{eq:directedcyclep}
-    E &= \left\{e_{1} = \{v_{1}, v_{2}\}, \, e_{2} = \{v_{2}, v_{3}\}, \,
-      \ldots, \, e_{p} = \{v_{p}, v_{1}\}\right\},
+    E &= \left\{e_{1} = \{\vo_{1}, \vo_{2}\}, \, e_{2} = \{\vo_{2}, \vo_{3}\}, \,
+      \ldots, \, e_{p} = \{\vo_{p}, \vo_{1}\}\right\},
   \end{align}
   %
   where $p$ is the number of discrete domains in the corresponding hybrid
@@ -922,17 +927,17 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
   \item $\D = \{\Dv\}_{\vinV}$ is a set of {\bf domains} with $\Dv
     \subseteq \Xv \times \Uv$ a smooth submanifold, where $\Xv$ represents the
     state space,
-  \item $\U = \{\Uv\}_{\vinV}$ with $\Uv \subseteq \R^{m_{v}}$ a set of
+  \item $\U = \{\Uv\}_{\vinV}$ with $\Uv \subseteq \Rmv$ a set of
     {\bf admissible controls},
   \item $\Guard = \{\Guarde\}_{\einE}$ is a set of {\bf guards} or {\bf
       switching surfaces}, with $\Guarde \subseteq \D_{\sor(e)}$,
   \item $\Delta = \{\Deltae\}_{\einE}$ is a set of {\bf reset maps}, with
     $\Deltae : \Guarde \to \X_{\tar(e)}$ a smooth map,
   \item $\FG = \{(\xfv, \, \xgv)\}_{\vinV}$ with $(\xfv, \, \xgv)$ a {\bf control
-      system} on $\Dv$, i.e., $\dx = \xfv\arx + \xgv\arx \uu$ $\forall$
+      system} on $\Dv$, i.e., $\dx = \xfv\arx + \xgv\arx \, \uu$ $\forall$
     $\argsxuu \in \Dv$,
   \end{itemize}
-  for $\vinV$ with edge $\einE$ satisfying $v = \sor(e)$.
+  for $\vinV$ with edge $\einE$ satisfying $\vo = \sor(e)$.
   %
   This can also be described as an indexed system with impulse effects:
   \begin{align}
@@ -940,8 +945,8 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
     \HCSv = \left\{
       \begin{array}{l l}
         \dx = \xfv\arx + \xgv\arx \, \uu, & \argsxuum \in \Dv \setminus
-        \Guardv,\\
-        \xp = \Deltav(\xm), & \argsxuum \in \Guardv,
+        \Guarde,\\
+        \xp = \Deltae(\xm), & \argsxuum \in \Guarde,
       \end{array}\right.
   \end{align}
   The set of hybrid control systems for all domains in $V$ can be written $\HCS
@@ -958,7 +963,7 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
   %
   where $\F = \{\xfv\}_{\vinV}$, with $\xfv$ a (possibly non-autonomous) {\bf
     dynamical system} on $\X \subseteq \Dv$, i.e., $\dx = \xfv(\x, t)$ for
-  $\vinV$ with edge $\einE$ satisfying $v = \sor(e)$.
+  $\vinV$ with edge $\einE$ satisfying $\vo = \sor(e)$.
   %
   The other elements are the same as those defined for hybrid control systems.
   %
@@ -967,8 +972,8 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
     \label{eq:HSi}
     \HSv = \left\{
       \begin{array}{l l}
-        \dx = \xfv\arx & \xm \in \Dv \setminus \Guardv,\\
-        \xp = \Deltav(\xm), & \xm \in \Guardv.
+        \dx = \xfv\arx & \xm \in \Dv \setminus \Guarde,\\
+        \xp = \Deltae(\xm), & \xm \in \Guarde.
       \end{array}\right.
   \end{align}
   %
@@ -1055,8 +1060,8 @@ heel or toe) is along the $y$-axis.
 Let $\Rnaught^{c}\argsq$ be a rotation matrix between reference frames from
 $\Rnaught$ and $\Rc$.
 %
-Let $p_{c} : \Q \to \R^{3}$ represent the position of the frame and let
-$v_{c}\argsqdq = {\dot p}_{c}\argsqdq$ represent the velocity.
+Let $\pc : \Q \to \R^{3}$ represent the position of the frame and let
+$\vc\argsqdq = \dpc\argsqdq$ represent the velocity.
 %
 The body-fixed angular velocity of the frame can then be found:
 %
@@ -1066,34 +1071,34 @@ The body-fixed angular velocity of the frame can then be found:
   \, \dq\\
   \nonumber
   &= \left[\begin{array}{c c c}
-      0 & -\wc^{z}\argsqdq & \wc^{y}\argsqdq\\
-      \wc^{z}\argsqdq & 0 & -\wc^{x}\argsqdq\\
-      -\wc^{y}\argsqdq & \wc^{x}\argsqdq & 0
+      0 & -\wcz\argsqdq & \wcy\argsqdq\\
+      \wcz\argsqdq & 0 & -\wcx\argsqdq\\
+      -\wcy\argsqdq & \wcx\argsqdq & 0
     \end{array}\right].
 \end{align}
 %
 The angular velocity vector
 \begin{align*}
-  \wc\argsqdq = (\wc^{x}\argsqdq, \wc^{y}\argsqdq, \wc^{z}\argsqdq)
+  \wc\argsqdq = (\wcx\argsqdq, \, \wcy\argsqdq, \, \wcz\argsqdq)
 \end{align*}
 is dual to the skew-symmetric matrix $\Omega\argsqdq$.
 %
 Furthermore,
 \begin{align}
   \label{eq:linearvel}
-  v_{c}\argsqdq = \pd{p_{c}\argsq}{\q} \, \dq
+  \vc\argsqdq = \pd{\pc\argsq}{\q} \, \dq
 \end{align}
-with $p_{c}\argsq$ the Cartesian position of the contact point $c$.
+with $\pc\argsq$ the Cartesian position of the contact point $c$.
 %
 It is apparent from \eqref{eq:angvelmat} and \eqref{eq:linearvel} that
-$v_{c}\argsqdq$ and $\wc\argsqdq$ are linearly dependent on $\dq$.
+$\vc\argsqdq$ and $\wc\argsqdq$ are linearly dependent on $\dq$.
 %
 Thus, the non-holonomic constraint can be written
 \begin{align*}
   \eta_{c}\argsqdq = \left[\begin{array}{c}
-      v_{c}\argsqdq\\
-      \wc^{x}\argsqdq\\
-      \wc^{z}\argsqdq
+      \vc\argsqdq\\
+      \wcx\argsqdq\\
+      \wcz\argsqdq
     \end{array}\right] =
   J_{c}\argsq \, \dq.
 \end{align*}
@@ -1102,12 +1107,12 @@ Therefore, it is possible to find the associated Jacobian matrix through
 differentiation:
 %
 \begin{align*}
-  J_{c}\argsq = \pd{\eta_{c}\argsqdq}{\dq}.
+  \Jc\argsq = \pd{\eta_{c}\argsqdq}{\dq}.
 \end{align*}
 %
 In the case of a 2D biped, the treatment is exactly the same but
 \begin{align*}
-  \eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, \, v_{c}^{z}\argsqdq).
+  \eta_{c}\argsqdq = (\vcx\argsqdq, \, \vcz\argsqdq).
 \end{align*}
 %
 The end result of this choice of coordinates is a non-holonomic constraint which
@@ -1127,18 +1132,18 @@ single matrix $\eta\argsqdq \in \R^{20 \times 4}$ as:
 \end{align*}
 
 Another class of constraints that is important is the class of {\em unilateral
-  constraints}, $h_{c}\argsq$ for $c \in \C$, since they dictate the set of
+  constraints}, $\hc\argsq$ for $c \in \C$, since they dictate the set of
 admissible configurations of the system.
 %
 Assuming that the knees do not lock, these constraints represent the height of a
-contact point above the ground, $h_{c}\argsq = p_{c}^{z}\argsq$, and can be put
-in the form of a matrix $h\argsq \in \R^{4 \times 4}$ in the same manner as
+contact point above the ground, $\hc\argsq = \pcz\argsq$, and can be put
+in the form of a matrix $\h\argsq \in \R^{4 \times 4}$ in the same manner as
 holonomic constraints;
 %
 that is,
 \begin{align*}
-  h\argsq = \blockdiag(h_{\sth}\argsq, \, h_{\stt}\argsq, \,  h_{\nsh}\argsq, \,
-  h_{\nst}\argsq).
+  \h\argsq = \blockdiag(\h_{\sth}\argsq, \, \h_{\stt}\argsq, \,  \h_{\nsh}\argsq, \,
+  \h_{\nst}\argsq).
 \end{align*}
 
 
@@ -1156,7 +1161,7 @@ contact points are enforced on each domain.
   and $\Gamma$ be a directed cycle.
   %
   A {\bf domain breakdown} is a binary map $\Br : V \to \Z_{2}^{k}$ such that
-  $\Br_{i}(v) = 1$ if $c_{i}$ is in contact on $v$ and $\Br_{i}(v) = 0$
+  $\Br_{i}\argv = 1$ if $c_{i}$ is in contact on $\vo$ and $\Br_{i}\argv = 0$
   otherwise.
 \end{definition}
 
@@ -1198,7 +1203,7 @@ the domain breakdown.
 For the domain $\vinV$, the imposed holonomic constraints are given by:
 %
 \begin{align*}
-  \eta_{v}\argsqdq = \eta\argsqdq \, \Br(v),
+  \eta_{\vo}\argsqdq = \eta\argsqdq \, \Br\argv,
 \end{align*}
 %
 where the domain breakdown dictates which constraints are enforced.
@@ -1207,12 +1212,12 @@ One can calculate the Jacobian matrix used to enforce the constraints by
 differentiating the holonomic constraint and removing redundancies as follows:
 %
 \begin{align*}
-  J_{v}\argsq = \mathrm{Basis}\left( \mathrm{RowSp}\left(
-      \pd{\eta_{v}\argsqdq}{{\dq}} \right) \right).
+  \Jv\argsq = \Basis\left( \RowSp\left( \pd{\eta_{\vo}\argsqdq}{\dq} \right)
+  \right).
 \end{align*}
 %
 By taking a basis for the row space of the Jacobian, redundant constraints are
-removed so that $J_v\argsq$ has full row rank.
+removed so that $\Jv\argsq$ has full row rank.
 %
 Using this Jacobian, the constrained dynamic model is given by
 \eqref{eq:eom-lambda}.
@@ -1240,10 +1245,10 @@ the form:
 %
 \begin{align}
   \label{eq:constmu}
-  \mu_{v}\argsq \, \Fv\argsqdqu \geq 0,
+  \mu_{\vo}\argsq \, \Fv\argsqdqu \geq 0,
 \end{align}
 %
-with $\mu_{v}\argsq$ a matrix of friction parameters and constants defining the
+with $\mu_{\vo}\argsq$ a matrix of friction parameters and constants defining the
 geometry of the foot \cite{Grizzle2010}.
 %
 Additionally, it has been shown in \cite{Chevallereau2009, Vukobratovic1990}
@@ -1252,22 +1257,22 @@ written in the form:
 %
 \begin{align}
   \label{eq:constnu}
-  \nu_{v}\argsq \, \Fv\argsqdqu \geq 0,
+  \nu_{\vo}\argsq \, \Fv\argsqdqu \geq 0,
 \end{align}
 %
-where $\nu_{v}\argsq$ depends on the physical parameters and state of the
+where $\nu_{\vo}\argsq$ depends on the physical parameters and state of the
 system.
 %
 Equations \eqref{eq:constmu} and \eqref{eq:constnu} for a given domain can be
-coupled with the unilateral constraint on the domain, $h_{v}\argsq = h\argsq
-\B(v)$, if present, to yield the set of admissible configurations:
+coupled with the unilateral constraint on the domain, $\hv\argsq = \h\argsq
+\B\argv$, if present, to yield the set of admissible configurations:
 %
 \begin{align}
   \label{admissible}
-  A_{v}\argsqdqu = \left[ \begin{array}{c}
-      \mu_{v}\argsq \, \Fv\argsqdqu\\
-      \nu_{v}\argsq \, \Fv\argsqdqu\\
-      h_{v}\argsq
+  \Av\argsqdqu = \left[ \begin{array}{c}
+      \mu_{\vo}\argsq \, \Fv\argsqdqu\\
+      \nu_{\vo}\argsq \, \Fv\argsqdqu\\
+      \hv\argsq
     \end{array} \right] \geq 0.
 \end{align}
 %
@@ -1275,27 +1280,26 @@ Thus, the domain is given by
 %
 \begin{align}
   \label{eq:domain}
-  \Dv = \left\{ \argsqdqu \in T\Q
-    \times \Uv : A_{v}\argsqdqu \geq 0 \right\}.
+  \Dv = \left\{ \argsqdqu \in T\Q \times \Uv : \Av\argsqdqu \geq 0 \right\}.
 \end{align}
 %
 The guard is just the boundary of this domain with the additional assumption
 that the set of admissible configurations is decreasing, i.e., the vector field
-is pointed outside of the domain, or, for an edge $e = (v, v') \in E$,
+is pointed outside of the domain, or, for an edge $e = (\vo, \vo') \in E$,
 %
 \begin{align*}
-  \Guard_{e} = \Bigl\{ \argsqdqu \in T\Q \times
-  \R^{m_v} : \ &A_{v}\argsqdqu = 0 \\
-  \mbox{and } &{\dot A}_{v}\argsqdqu \leq 0 \Bigl\}.
+  \Guarde = \Bigl\{ \argsqdqu \in T\Q \times \Rmv : \ & \Av\argsqdqu =
+  0\\
+  \mbox{and } & \dAv\argsqdqu \leq 0 \Bigl\}.
 \end{align*}
 
 The impact equations are obtained by considering the constraints enforced on the
 subsequent domain;
 %
-denote the Jacobian associated to these constraints by $J_{e'}$.
+denote the Jacobian associated to these constraints by $\Jep$.
 %
-For an edge $e = \{v, v'\} \in E$, the post-impact velocity $\dqp$ is given in
-terms of the pre-impact velocity $\dqm$ by balancing angular momentum
+For an edge $e = \{\vo, \vop\} \in E$, the post-impact velocity $\dqp$ is given
+in terms of the pre-impact velocity $\dqm$ by balancing angular momentum
 \cite{Hurmuzlu1994}.
 %
 Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be
@@ -1303,11 +1307,12 @@ written:
 %
 \begin{align}
   \label{eq:pmap}
-  \dq^{+} = P_{e}(\q, \dq^{-}) = (I - \M^{-1} J_{v'}^T(J_{v'} \M^{-1}
-  J_{v'})^{-1} J_{v'})\dq^{-}
+  \dq^{+} = P_{e}\argsqdqm = \left(I - \M^{-1}\argsq \, \Jvp^{T}\argsq \,
+    (\Jvp\argsq \, \M^{-1}\argsq \, \Jvp\argsq)^{-1} \, \Jvp\argsq \right) \,
+  \dqm.
 \end{align}
 %
-with $I$ the identity matrix and $J_{v'}$ the Jacobian matrix associated with
+with $I$ the identity matrix and $\Jvp$ the Jacobian matrix associated with
 the holonomic constraints of the next domain expressed in the coordinates of
 this domain.
 %
@@ -1334,7 +1339,7 @@ For the sake of clarification, consider the following example:
   In order to properly achieve this transition, holonomic constraints on the
   velocities of stance toe, stance heel, and non-stance toe must be;
   %
-  these constraints lead to the Jacobian matix $J_{\DC}$ which is used in
+  these constraints lead to the Jacobian matrix $\J_{\DC}$ which is used in
   \eqref{eq:pmap};
   %
   and, in fact, these are the same constraints present in the domain breakdown
@@ -1358,12 +1363,12 @@ For transitions in which no relabeling occurs, $\mathcal{R}_{e} = I$.
 The reset map is expressed as follows:
 %
 \begin{align*}
-  \Delta_{e}\argsqdq =
-  \left[ \begin{array}{c c}
+  \Deltae\argsqdq =
+  \left[\begin{array}{c c}
       \mathcal{R}_{e} & \boldzero\\
       \boldzero & \mathcal{R}_{e}
     \end{array} \right]
-  \left[ \begin{array}{c}
+  \left[\begin{array}{c}
       \q\\
       P_{e}\argsqdq
     \end{array} \right].

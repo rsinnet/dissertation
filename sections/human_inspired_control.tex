@@ -29,8 +29,8 @@ This result is a significant step toward understanding human walking.
 Accordingly, this universal domain breakdown will be considered when
 constructing the hybrid model of the biped of interest.
 %
-This domain breakdown has been used by the authors to formulate a metric on the
-humanlike nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
+This domain breakdown has been used to formulate a metric on the human-like
+nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
 
 \begin{figure}[t!]
   \centering
@@ -67,7 +67,8 @@ humanlike nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
 \end{figure}
 
 \subsection{Walking Experiment}
-The data used in this work taken from \cite{Ames2011a}.
+The data used in this work are taken from an experiment described in
+\cite{Ames2011a}.
 %
 A summary of the collection procedure is provided for reference:
 %
@@ -343,7 +344,10 @@ previous studies \cite{Ackermann2007}.
 \begin{figure}[t]
   \centering
   \includegraphics[width=1.0\columnwidth]{test_subject_4}
-  \caption[The domain breakdown for subject four]{The domain breakdown for subject four together with the amount of time spent in each domain. Each illustration is a snapshot of the subject's configuration at the beginning of the domain together with the contact points enforced.}
+  \caption[The domain breakdown for subject four]{The domain breakdown for
+    subject four together with the amount of time spent in each domain. Each
+    illustration is a snapshot of the subject's configuration at the beginning
+    of the domain together with the contact points enforced.}
   \label{fred}
 \end{figure}
 
@@ -351,37 +355,75 @@ previous studies \cite{Ackermann2007}.
 
 The goal of this section is to find functions that are ``canonical'' to human
 walking, i.e., outputs on the configuration of the human, such as the angle of
-the knee, that seem to be intrinsic to walking. These functions will be used in
-the design of control laws, for a bipedal robot with anthropomorphic
-measurements, using the standard method of input/output linearization
-\cite{Sastry1999}. This control design strategy results in anthropomorphic
-walking behavior.
+the knee, that seem to be intrinsic to walking.
+%
+These functions will be used in the design of control laws, for a bipedal robot
+with anthropomorphic measurements, using the standard method of input/output
+linearization \cite{Sastry1999}.
+%
+This control design strategy results in anthropomorphic walking behavior.
 
 \subsection{``Canonical'' Walking Functions} \label{sec:functions}
 
-Rather than just using trajectories from the human data, functions are sought which have both ``simple'' representations (much like in the case of heel and toe height discussed in \secref{sec:domainbreakdown}) and appear to be intrinsic to human walking. From the perspective of control, these functions must not conflict with the constraints of the system on each domain resulting from the enforced contact points as dictated by the domain breakdown. That is, the system must not be overconstrained.
+Rather than just using trajectories from the human data, functions are sought
+which have both ``simple'' representations (much like in the case of heel and
+toe height discussed in \secref{sec:domainbreakdown}) and appear to be intrinsic
+to human walking.
+%
+From the perspective of control, these functions must not conflict with the
+constraints of the system on each domain resulting from the enforced contact
+points as dictated by the domain breakdown.
+%
+That is, the system must not be overconstrained.
 
-Data is considered from subject four; this data is obtained through the process outlined in \secref{sec:domainbreakdown}. (Subject four's data was selected as it contains the least noise.) A variety of functions are inspected --- these represent different fundamental behaviors of human walking, e.g., the movement of the torso or of the legs. Examination of the human data, reveals that functions describing the behavior of the torso, the hip, the non-stance leg slope (the slope of the line connecting the non-stance ankle to the hip), the knee angles, and the heel and toe heights seem to encode the most fundamental behaviors related to walking, as dictated by the correlation between the data and the fitted functions. The human behavior of these different functions throughout the course of the walking gait can be seen in \figref{fig:constraints-fitting}, with the data beginning at the start of domain $ts$.
+Data is considered from subject four; these data are obtained through the
+process outlined in \secref{sec:domainbreakdown}.
+%
+(Subject four's data were selected as they contain the least noise.)
+%
+A variety of functions are inspected---these represent different fundamental
+behaviors of human walking, e.g., the movement of the torso or of the legs.
+%
+Examination of the human data, reveals that functions describing the behavior of
+the torso, the hip, the non-stance leg slope (the slope of the line connecting
+the non-stance ankle to the hip), the knee angles, and the heel and toe heights
+seem to encode the most fundamental behaviors related to walking, as dictated by
+the correlation between the data and the fitted functions.
+%
+The human behavior of these different functions throughout the course of the
+walking gait can be seen in \figref{fig:constraints-fitting}, with the data
+beginning at the start of domain $ts$.
 
-\begin{figure}[t!]
+\begin{figure}[ht!]
   \centering
   \subfloat[Angular constraints]{
-    \includegraphics[width=0.32\textwidth]{constraints_angles}
+    \includegraphics[width=0.48\textwidth]{constraints_angles}
     \label{fig:constraints-knees}
   }
   \subfloat[Slope constraints]{
-   \includegraphics[width=0.32\textwidth]{constraints_slopes}
+   \includegraphics[width=0.48\textwidth]{constraints_slopes}
     \label{fig:constraints-legs}
-  }
+  }\\
   \subfloat[Height constraints]{
-    \includegraphics[width=0.32\textwidth]{constraints_heights}
+    \includegraphics[width=0.48\textwidth]{constraints_heights}
     \label{fig:constraints-heights}
   }
-  \caption[Human data over the course of one step with one leg]{Human data over the course of one step with one leg and the ``canonical'' functions that are fitted to these data. $d$ superscripts represent the data and $f$ superscripts represent the fits. The plots start at the beginning of the domain {\DA}, with vertical lines indicating when transitions between domains occur. The specific variables that are plotted can be seen in \figref{fig:robotconstraints}.}
+  \caption{Human data over the course of one step with one leg and the
+    ``canonical'' functions that are fitted to these data.
+    %
+    $d$ superscripts represent the data and $f$ superscripts represent the fits.
+    %
+    The plots start at the beginning of the domain {\DA}, with vertical lines
+    indicating when transitions between domains occur.
+    %
+    The specific variables that are plotted can be seen in
+    \figref{fig:robotconstraints}.}
   \label{fig:constraints-fitting}
 \end{figure}
 
-Before further detail is given, a remark on the choice of constraints is in order:
+Before further detail is given, a remark on the choice of constraints is in
+order:
+%
 \begin{remark} \label{rmk:actuation}
   When choosing which functions to track, it is important to consider which
   joints will have actuation and which actuators will do most of the work
@@ -406,42 +448,148 @@ Before further detail is given, a remark on the choice of constraints is in orde
   kinematic chain.
 \end{remark}
 
-\subsubsection{Knee} Inspecting the behavior of the human knee over the course of the gait (see \figref{fig:constraints-knees}) reveals that the angle of the human knee appears to follow a Gaussian when it is swinging (the non-stance leg) and a second order system response (i.e., the step response of a spring damper system) when the weight of the person is on the leg (i.e., when the leg is the stance leg). With this in mind, the following functions are fit to the human data for the knee angles of the stance and non-stance legs:
-\begin{align*}
-  y_{d,\cnsk}(t) &= A_{5,1} \, \exp\left(\frac{-(t-A_{5,2})^2}{2 (A_{5,3})^2}\right) + A_{5,4},\\
-  y_{d,\cstk}(t) &= -A_{2,1} \, \frac{\cos(A_{2,2}\,t)-A_{2,3} \sin(A_{2,2}\,t)}{\exp(A_{2,4} \, t)} + A_{2,5}.
-\end{align*}
-An intuitive explanation of this is as follows: when the leg is in ``stance'' mode, the human knee acts like a spring-damper system responding to the impulse of the human as he or she puts his or her body weight on the stance leg---that is, the human tries to prevent the leg from collapsing by stiffening it, resulting in a spring-damper effect. When the human leg is in ``non-stance'' mode, the weight of the human is primarily not on it, so the knee is free to swing---there is no reason to keep the leg stiff.
+\subsubsection{Knee}
 
-\subsubsection{Leg} In the data for the slope of the non-stance leg as seen in \figref{fig:constraints-legs}---here, leg is defined as the straight line connecting the ankle to the hip--- the slope appears to follow a sinusoid; thus the following function is fit:
+Inspecting the behavior of the human knee over the course of the gait (see
+\figref{fig:constraints-knees}) reveals that the angle of the human knee appears
+to follow a Gaussian when it is swinging (the non-stance leg) and a second order
+system response (i.e., the step response of a spring damper system) when the
+weight of the person is on the leg (i.e., when the leg is the stance leg).
+%
+With this in mind, the following functions are fit to the human data for the
+knee angles of the stance and non-stance legs:
+%
+\begin{align*}
+  y_{d,\cnsk}(t) &= A_{5,1} \, \exp\left(\frac{-(t-A_{5,2})^2}{2
+      (A_{5,3})^2}\right) + A_{5,4},\\
+  y_{d,\cstk}(t) &= -A_{2,1} \, \frac{\cos(A_{2,2}\,t)-A_{2,3}
+    \sin(A_{2,2}\,t)}{\exp(A_{2,4} \, t)} + A_{2,5}. 
+\end{align*}
+%
+
+An intuitive explanation of this is as follows:
+%
+when the leg is in ``stance'' mode, the human knee acts like a spring-damper
+system responding to the impulse of the human as he or she puts his or her body
+weight on the stance leg---that is, the human tries to prevent the leg from
+collapsing by stiffening it, resulting in a spring-damper effect. When the human
+leg is in ``non-stance'' mode, the weight of the human is primarily not on it,
+so the knee is free to swing---there is no reason to keep the leg stiff.
+
+\subsubsection{Leg}
+
+In the data for the slope of the non-stance leg as seen in
+\figref{fig:constraints-legs}---here, leg is defined as the straight line
+connecting the ankle to the hip--- the slope appears to follow a sinusoid; thus
+the following function is fit:
+%
 \begin{align*}
   y_{d,nslm}(t) &= A_{6,1} \, \sin(A_{6,2} \, t + A_{6,3}) + A_{6,4}.
 \end{align*}
-Intuitively, this just means that the non-stance leg swings freely much like the non-stance knee. Note: while it is possible to choose the slope of the stance leg as a constraint to track---indeed, a simple function can be fitted to the slope of the stance leg---the forward velocity of the hip is instead chosen. In terms of time-control this will not make much of a difference, but the reader will see that, when the control is migrated to pure feedback, tracking the hip velocity will allow for direct control over walking speed.
+%
+Intuitively, this just means that the non-stance leg swings freely much like the
+non-stance knee.
+%
+Note that while it is possible to choose the slope of the stance leg as a
+constraint to track---indeed, a simple function can be fitted to the slope of
+the stance leg---the forward velocity of the hip is instead chosen.
+%
+In terms of time-control this will not make much of a difference, but the reader
+will see that, when the control is migrated to pure feedback, tracking the hip
+velocity will allow for direct control over walking speed.
 
-\subsubsection{Hip} The behavior of the hip is quite simple. Examination of the data reveals that the hip moves forward monotically in time at an approximately constant rate. However, instead of tracking the position of the hip, the velocity of the hip is instead tracked, thus motivating the following function:
+\subsubsection{Hip}
+
+The behavior of the hip is quite simple.
+%
+Examination of the data reveals that the hip moves forward monotically in time
+at an approximately constant rate.
+%
+However, instead of tracking the position of the hip, the velocity of the hip is
+instead tracked, thus motivating the following function:
+%
 \begin{align*}
   y_{d,hv} = A_{3,1}.
 \end{align*}
-The reason for tracking the velocity instead of the position is related to the method used to impose feedback control on the system and requires some explanation; however, due to the level of detail, this discussion will be deferred until later. It is of interest, however, to note that, as mentioned previously, tracking hip velocity allows for direct control over the walking speed of the robot.
+%
+The reason for tracking the velocity instead of the position is related to the
+method used to impose feedback control on the system and requires some
+explanation; however, due to the level of detail, this discussion will be
+deferred until later.
+%
+It is of interest, however, to note that, as mentioned previously, tracking hip
+velocity allows for direct control over the walking speed of the robot.
 
-\subsubsection{Torso} The data show that a human tends to keep his or her torso upright throughout his or her walking gait. Specifically, the data indicates that the absolute angle of the torso with respect to the world frame closely follows a sine wave, but the amplitude is small, so it is approximated with a constant:
+\subsubsection{Torso}
+
+The data show that a human tends to keep his or her torso upright throughout his
+or her walking gait.
+%
+Specifically, the data indicates that the absolute angle of the torso with
+respect to the world frame closely follows a sine wave, but the amplitude is
+small, so it is approximated with a constant:
+%
 \begin{align*}
   y_{d,T\angle} &= A_{4,1}.
 \end{align*}
-Note that, the choice of tracking a constant results in a poor correlation between the function and data; however, one can argue that the tiny amount of motion from the torso has very little effect on the overall gait.
+%
+Note that, the choice of tracking a constant results in a poor correlation
+between the function and data; however, one can argue that the tiny amount of
+motion from the torso has very little effect on the overall gait.
 
-\subsubsection{Ankle} When the non-stance leg is swinging, to prevent the non-stance ankle from rotating freely, the behavior of the ankle angle is approximated by a constant:
+\subsubsection{Ankle}
+
+When the non-stance leg is swinging, to prevent the non-stance ankle from
+rotating freely, the behavior of the ankle angle is approximated by a constant:
+%
 \begin{align*}
   y_{d,nsa\angle} &= A_{8,1}.
 \end{align*}
-One can justify this choice by claiming that the motion of the ankle has only a marginal effect on the overall gait provided that ground clearance is not an issue. As in the case of the torso, the correlation between this fit and the data will not be good but, again, this does not have a large effect on the gait.
+%
+One can justify this choice by claiming that the motion of the ankle has only a
+marginal effect on the overall gait provided that ground clearance is not an
+issue.
+%
+As in the case of the torso, the correlation between this fit and the data will
+not be good but, again, this does not have a large effect on the gait.
 
-\subsubsection{Foot} Finally, the behaviors of the heel and toe are found to be significantly more complicated than the previously discussed behaviors, as can be seen in \figref{fig:constraints-heights}. Although the actual functions describing these heights are quite simple (see \figref{fig:heeltoefit}), it is generally not effective to follow these functions---see \rmkref{rmk:dimconst}. Since the foot is constrained during certain phases of the gait, it would not make sense to track the constrained points during these phases. Therefore, the behavior of the feet is segmented based on the domain breakdown of the human gait. In particular, the transition from domain {\DA} to domain {\DB} occurs when the stance toe strikes the ground, and, in fact, it is found that the height of the toe approximately follows a constant as it approaches the ground in domain {\DA}. In order to satisfy this local objective, an attempt is made to track the height of the toe using the following function:
+\subsubsection{Foot}
+
+Finally, the behaviors of the heel and toe are found to be significantly more
+complicated than the previously discussed behaviors, as can be seen in
+\figref{fig:constraints-heights}.
+%
+Although the actual functions describing these heights are quite simple (see
+\figref{fig:heeltoefit}), it is generally not effective to follow these
+functions---see \rmkref{rmk:dimconst}.
+%
+Since the foot is constrained during certain phases of the gait, it would not
+make sense to track the constrained points during these phases.
+%
+Therefore, the behavior of the feet is segmented based on the domain breakdown
+of the human gait.
+%
+In particular, the transition from domain {\DA} to domain {\DB} occurs when the
+stance toe strikes the ground, and, in fact, it is found that the height of the
+toe approximately follows a constant as it approaches the ground in domain
+{\DA}.
+%
+In order to satisfy this local objective, an attempt is made to track the height
+of the toe using the following function:
+%
 \begin{align*}
   y_{d,\cstth}(t) = A_{7,1} \, t + A_{7,2}.
 \end{align*}
-After domain {\DA}, the toe is fixed to the ground and thus, is no longer tracked. In a similar light, when domain {\DC} is reached, the goal is to effect heel lift. As such, analysis of the data reveals that non-stance heel begins to lift approximately according to a Gaussian, thus motivating the following function:
+%
+After domain {\DA}, the toe is fixed to the ground and thus, is no longer
+tracked.
+%
+In a similar light, when domain {\DC} is reached, the goal is to effect heel
+lift.
+%
+As such, analysis of the data reveals that non-stance heel begins to lift
+approximately according to a Gaussian, thus motivating the following function:
+%
 \begin{align*}
   y_{d,\csthh}(t) &= A_{1,1} \, \exp\left(\frac{-(t-A_{1,2})^2}{2 (A_{1,3})^2}\right) + A_{1,4}.
 \end{align*}
@@ -680,7 +828,8 @@ variables.
 %        D^{-1}(q) B(q)
 %    \end{array}\right]
 %\end{align}
-%with $B(q)$ a torque distribution matrix specific to each domain. These are omitted but can be found online at \cite{SUP_online}.
+%with $B(q)$ a torque distribution matrix specific to each domain. These are
+%omitted but can be found online at \cite{SUP_online}.
 Applying the given control law yields the non-autonomous closed-loop dynamical
 system
 \begin{align}
