@@ -100,7 +100,7 @@ $\x\argt$, respectively.
 %
 For compactness of notation, a hybrid system is sometimes written as
 \begin{align*}
-  \HS = (\D, \Guard, \Delta, \xf).
+  \HS = (\D, \, \Guard, \, \Delta, \, \xf).
 \end{align*}
 as in \cite{Sinnet2009}.
 %
@@ -121,7 +121,7 @@ for control values in a set of {\em admissible controls}, $\U \subseteq \R^{m}$.
 As with hybrid systems, hybrid control systems are sometimes written more
 compactly:
 \begin{align*}
-  \HCS = (\D, \Guard, \U, \Delta, \xf, \xg).
+  \HCS = (\D, \, \Guard, \, \U, \, \Delta, \, \xf, \, \xg).
 \end{align*}
 
 Using these basic formalisms of hybrid systems, the next three sections describe
@@ -833,7 +833,7 @@ alter the velocity of the system.
 %This combination of continuous and discrete phenomena is the fundamental
 %concept underlying hybrid systems.
 
-In this section, a formalism for multidomain hybrid systems is introduced and a
+In this section, a formalism for multi-domain hybrid systems is introduced and a
 discussion of how the equations of motion of a robot together with a temporal
 ordering of discrete events, i.e., change in contact points, completely
 determine the hybrid model of a system.
@@ -871,17 +871,17 @@ graph is a {\em directed cycle}:
 \end{figure}
 
 \begin{definition}
-  A {\bf directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of
-  vertices and $E$ a set of edges---for an edge $\einE$, denote the source by
-  $\sor(e)$ and the target by $\tar(e)$---in which the edges and vertices can be
-  written
+  A {\bf directed cycle} is a graph $\Gamma = (V, E)$, with $V$ a set of {\bf
+    vertices} and $E$ a set of {\bf edges}---for an edge $\einE$, denote the
+  {\bf source} by $\sor(e)$ and the {\bf target} by $\tar(e)$---in which the
+  vertices and edges can be written
   %
   \begin{align}
     \nonumber
-    V &= \left\{v_{1}, v_{2}, \ldots, v_{p}\right\},\\
+    V &= \left\{v_{1}, \, v_{2}, \, \ldots, \, v_{p}\right\},\\
     \label{eq:directedcyclep}
-    E &= \left\{e_{1} = \{v_{1}, v_{2}\}, e_{2} = \{v_{2}, v_{3}\}, \ldots,
-      e_{p} = \{v_{p}, v_{1}\}\right\},
+    E &= \left\{e_{1} = \{v_{1}, v_{2}\}, \, e_{2} = \{v_{2}, v_{3}\}, \,
+      \ldots, \, e_{p} = \{v_{p}, v_{1}\}\right\},
   \end{align}
   %
   where $p$ is the number of discrete domains in the corresponding hybrid
@@ -895,42 +895,45 @@ in \chapref{ch:hic}:
   The domain breakdown pictured in \figref{fig:domaingraph} has an underlying
   graph that is a directed cycle;
   %
-  the graph is given by $\Gamma_{u} = (V_{u}, E_{u})$.
+  the graph is given by $\Gamma = (V, \, E)$.
   %
   In particular, there are four vertices and four edges with
   %
   \begin{align*}
-    V_u &= \left\{\DA, \DB, \DC, \DD\right\},\\
-    E_u &= \left\{\{\DA, \DB\}, \{\DB, \DC\}, \{\DC, \DD\}, \{\DD,
-      \DA\}\right\}.
+    V &= \left\{\DA, \, \DB, \, \DC, \, \DD\right\},\\
+    E &= \left\{\{\DA, \, \DB\}, \, \{\DB, \, \DC\}, \, \{\DC, \, \DD\}, \,
+      \{\DD, \, \DA\}\right\}.
   \end{align*}
 \end{exmp}
 
 The concept of a directed cycle is a fundamental component in the formulation
-of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
+of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
 
-\begin{definition} A {\em hybrid control system in a cycle} is a tuple,
+\begin{definition} \label{def:hcs}
+  A {\bf hybrid control system in a cycle} is a tuple,
   %
   \begin{align*}
-    \HCS = (\Gamma, \D, U, S, \Delta, FG),
+    \HCS = (\Gamma, \, \D, \, \U, \, \Guard, \, \Delta, \, \FG),
   \end{align*}
   %
   where
   \begin{itemize}
-  \item $\Gamma = (V, E)$ is a {\em directed cycle},
-  \item $\D = \{\Dv\}_{\vinV}$ is a set of {\em domains} with $\Dv
-    \subseteq \mathcal{X}_{v} \times U_{v}$ a smooth submanifold, where
-    $\mathcal{X}_{v}$ represents the state space,
+  \item $\Gamma = (V, \, E)$ is a {\bf directed cycle},
+  \item $\D = \{\Dv\}_{\vinV}$ is a set of {\bf domains} with $\Dv
+    \subseteq \Xv \times \Uv$ a smooth submanifold, where $\Xv$ represents the
+    state space,
   \item $\U = \{\Uv\}_{\vinV}$ with $\Uv \subseteq \R^{m_{v}}$ a set of
-    {\em admissible control sets},
-  \item $\Guard = \{\Guarde\}_{\einE}$ is a set of {\em guards} or {\em
+    {\bf admissible controls},
+  \item $\Guard = \{\Guarde\}_{\einE}$ is a set of {\bf guards} or {\bf
       switching surfaces}, with $\Guarde \subseteq \D_{\sor(e)}$,
-  \item $\Delta = \{\Deltae\}_{\einE}$ is a set of {\em reset maps}, with
-    $\Deltae : \Guarde \to \mathcal{X}_{\tar(e)}$ a smooth map,
-  \item $FG = \{(\xfv, \xgv)\}_{\vinV}$ with $(\xfv, \xgv)$ a {\em control
+  \item $\Delta = \{\Deltae\}_{\einE}$ is a set of {\bf reset maps}, with
+    $\Deltae : \Guarde \to \X_{\tar(e)}$ a smooth map,
+  \item $\FG = \{(\xfv, \, \xgv)\}_{\vinV}$ with $(\xfv, \, \xgv)$ a {\bf control
       system} on $\Dv$, i.e., $\dx = \xfv\arx + \xgv\arx \uu$ $\forall$
-    $\argsxuu \in \Dv$.
+    $\argsxuu \in \Dv$,
   \end{itemize}
+  for $\vinV$ with edge $\einE$ satisfying $v = \sor(e)$.
+  %
   This can also be described as an indexed system with impulse effects:
   \begin{align}
     \label{eq:HCSi}
@@ -941,22 +944,23 @@ of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
         \xp = \Deltav(\xm), & \argsxuum \in \Guardv,
       \end{array}\right.
   \end{align}
-  for $\vinV$.
-  % 
-  The set of all domains can be written $\HCS = \{\HCSv\}_{\vinV}$.
+  The set of hybrid control systems for all domains in $V$ can be written $\HCS
+  = \{\HCSv\}_{\vinV}$.
 \end{definition}
 
 \begin{definition}
-  A {\em hybrid system} is a hybrid control system with $U_v = \emptyset$
+  A {\bf hybrid system} is a hybrid control system with $\Uv = \emptyset$
   $\forall$ $\vinV$, e.g., any relevant feedback controllers have been
   applied, making the system closed-loop:
   \begin{align*}
-    \HS = (\Gamma, \D, \Guard, \Delta, F),
+    \HS = (\Gamma, \, \D, \, \Guard, \, \Delta, \, \F),
   \end{align*}
   %
-  where $F = \{\xfv\}_{v \in E}$, with $\xfv$ a (possibly non-autonomous) {\em
-    dynamical system} on $\mathcal{X} \subseteq \Dv$, i.e., $\dx =
-  \xfv(\x, t)$.
+  where $\F = \{\xfv\}_{\vinV}$, with $\xfv$ a (possibly non-autonomous) {\bf
+    dynamical system} on $\X \subseteq \Dv$, i.e., $\dx = \xfv(\x, t)$ for
+  $\vinV$ with edge $\einE$ satisfying $v = \sor(e)$.
+  %
+  The other elements are the same as those defined for hybrid control systems.
   %
   This corresponds to the following system with impulse effects:
   \begin{align}
@@ -964,22 +968,24 @@ of multidomain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
     \HSv = \left\{
       \begin{array}{l l}
         \dx = \xfv\arx & \xm \in \Dv \setminus \Guardv,\\
-        \xp = \Deltav(\xm), & \xm \in \Guardv,
+        \xp = \Deltav(\xm), & \xm \in \Guardv.
       \end{array}\right.
   \end{align}
-  for $\vinV$.
   %
-  The set of all domains can be written $\HS = \{\HSv\}_{\vinV}$.
+  The set of hybrid systems for all domains in $V$ can be written $\HS =
+  \{\HSv\}_{\vinV}$.
 \end{definition}
 
 Comparing the above definitions and \eqref{eq:HCSi} and \eqref{eq:HSi}, it is
-clear that the domain of admissibility, $\D$, and the guard, $\Guard$, may
-depend on control, if present.
+clear that the domain of admissibility and the guard are dependent on control.
 %
-This dependence is a result of considering the dynamic moment of the system and
-will be clarified further in \secref{sec:discrete-dynamics}.
+This dependence is a result of considering the dynamic moment of the system in
+formulating these particular spaces and will be clarified further in
+\secref{sec:discrete-dynamics}.
+
 
 \subsection{Obtaining Hybrid Systems from Constraints}
+
 The remainder of this section is devoted to discussing how the Lagrangian for a
 biped, together with a domain breakdown (which determines the constraints at
 each vertex of the associated cycle), allows one to explicitly construct a
@@ -989,30 +995,24 @@ Examples can be found throughout the literature; see, for example,
 \cite{Grizzle2010, Grizzle2014, Sinnet2009}.
 
 
-%\begin{figure}
-%\centering
-%  \includegraphics[width=.7 \columnwidth]{figures/bipede_parametrisation_new}
-%  \caption{A three-dimensional bipedal robot, together with world ($R_0$), body
-%  ($R_b$) and reference ($R_c$) coordinate frames} \label{biped}
-%\end{figure}
-
 \subsubsection{Constraints}
-The continuous dynamics of the system depends on which constraints are enforced
-at any given time while the discrete dynamics depends on the change in
+
+The continuous dynamics of a system depends on which constraints are enforced at
+any given time while the discrete dynamics depends on the change in
 constraints.
 %
 Constraints and their enforcement are dictated by the configuration of contact
 points between the system and the ground.
 %
-Specifically, one can define a {\em contact set} $\C = \{c_{1}, c_{2}, \ldots,
-c_{k}\}$, with each $c_{i}$ a specific type of foot/ground contact
+Specifically, one can define a {\em contact set} $\C = \{c_{1}, \, c_{2}, \,
+\ldots, \, c_{k}\}$, with each $c_{i}$ a specific type of foot/ground contact
 possible in the biped.
 %
 Assuming that foot contact is restricted to edges parallel to the $y$-axis
 (i.e., the toe edge or the heel edge)---and this is the case in 2D as in this
 work---there are four contact points of interest:
 \begin{align*}
-  \C =  \{\csh, \cst, \cnsh , \cnst\},
+  \C =  \{\csh, \, \cst, \, \cnsh, \, \cnst\},
 \end{align*}
 where these constraints physically represent the stance heel, stance toe,
 non-stance heel, and non-stance toe, respectively.
@@ -1050,7 +1050,7 @@ maintained.
 %
 To construct these constraints, consider a reference frame $R_{c}$ at the
 contact point $c$ such that the axis of rotation about this point (either the
-heel or toe) is along $y$-axis.
+heel or toe) is along the $y$-axis.
 %
 Let $\Rnaught^{c}\argsq$ be a rotation matrix between reference frames from
 $\Rnaught$ and $\Rc$.
@@ -1070,7 +1070,7 @@ The body-fixed angular velocity of the frame can then be found:
       \wc^{z}\argsqdq & 0 & -\wc^{x}\argsqdq\\
       -\wc^{y}\argsqdq & \wc^{x}\argsqdq & 0
     \end{array}\right].
-\end{align}the number
+\end{align}
 %
 The angular velocity vector
 \begin{align*}
@@ -1078,7 +1078,17 @@ The angular velocity vector
 \end{align*}
 is dual to the skew-symmetric matrix $\Omega\argsqdq$.
 %
-Using the linear and angular velocities, the non-holonomic constraint can be written
+Furthermore,
+\begin{align}
+  \label{eq:linearvel}
+  v_{c}\argsqdq = \pd{p_{c}\argsq}{\q} \, \dq
+\end{align}
+with $p_{c}\argsq$ the Cartesian position of the contact point $c$.
+%
+It is apparent from \eqref{eq:angvelmat} and \eqref{eq:linearvel} that
+$v_{c}\argsqdq$ and $\wc\argsqdq$ are linearly dependent on $\dq$.
+%
+Thus, the non-holonomic constraint can be written
 \begin{align*}
   \eta_{c}\argsqdq = \left[\begin{array}{c}
       v_{c}\argsqdq\\
@@ -1087,24 +1097,17 @@ Using the linear and angular velocities, the non-holonomic constraint can be wri
     \end{array}\right] =
   J_{c}\argsq \, \dq.
 \end{align*}
-It is apparent from \eqref{eq:angvelmat} that $v_{c}\argsqdq$ and
-$\omega_{c}\argsqdq$ are linearly dependent on $\dq$.
 %
-Furthermore,
+Therefore, it is possible to find the associated Jacobian matrix through
+differentiation:
+%
 \begin{align*}
-  v_{c}\argsqdq = \pd{p_{c}\argsq}{\q} \, \dq
+  J_{c}\argsq = \pd{\eta_{c}\argsqdq}{\dq}.
 \end{align*}
-with $p_{c}\argsq$ the Cartesian position of the contact point $c$.
-%
-%Therefore, it is possible to find the associated Jacobian matrix:
-%
-%\begin{align*}
-%  J_{c}\argsq = \pd{\eta_{c}\argsqdq}{\dq}.
-%\end{align*}
 %
 In the case of a 2D biped, the treatment is exactly the same but
 \begin{align*}
-  \eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, v_{c}^{z}\argsqdq).
+  \eta_{c}\argsqdq = (v_{c}^{x}\argsqdq, \, v_{c}^{z}\argsqdq).
 \end{align*}
 %
 The end result of this choice of coordinates is a non-holonomic constraint which
@@ -1134,10 +1137,9 @@ holonomic constraints;
 %
 that is,
 \begin{align*}
-  h\argsq = \blockdiag(h_{\sth}\argsq, h_{\stt}\argsq, h_{\nsh}\argsq,
+  h\argsq = \blockdiag(h_{\sth}\argsq, \, h_{\stt}\argsq, \,  h_{\nsh}\argsq, \,
   h_{\nst}\argsq).
 \end{align*}
-
 
 
 \subsubsection{Domain Breakdowns}
@@ -1150,13 +1152,20 @@ contact points are enforced on each domain.
 
 \begin{definition}
   \label{def:domainbreakdown}
-  Let $\C = \{c_{1}, c_{2}, \ldots, c_{k}\}$ be a set of contact points and $\Gamma$ be a directed cycle.
+  Let $\C = \{c_{1}, \, c_{2}, \, \ldots, \, c_{k}\}$ be a set of contact points
+  and $\Gamma$ be a directed cycle.
   %
-  A {\bf domain breakdown} is a binary map $\Br : V \to \Z_{2}^{k}$ such that $\Br_{i}(v) = 1$ if $c_{i}$ is in contact on $v$ and $\Br_{i}(v) = 0$ otherwise.
+  A {\bf domain breakdown} is a binary map $\Br : V \to \Z_{2}^{k}$ such that
+  $\Br_{i}(v) = 1$ if $c_{i}$ is in contact on $v$ and $\Br_{i}(v) = 0$
+  otherwise.
 \end{definition}
 
 \begin{exmp} \label{ex:domainbreakdown}
-  In the case of the graph $\Gamma_{u}$ given in \exmpref{universalgraph} and the set of contact points $\C =  \{\csh, \cst, \cnsh, \cnst\}$, for the graph shown in \figref{fig:domaingraph}, the domain breakdown is formally given by $\B_{u} : V_{u} \to \Z_{2}^{4}$ where $\Br_{u}(ts)$, $\Br_{u}(tl)$, $\Br_{u}(hl)$ and $\Br_{u}(hs)$ are given by
+  In the case of the graph $\Gamma_{u}$ given in \exmpref{universalgraph} and
+  the set of contact points $\C =  \{\csh, \, \cst, \, \cnsh, \, \cnst\}$, for
+  the graph shown in \figref{fig:domaingraph}, the domain breakdown is formally
+  given by  $\B_{u} : V_{u} \to \Z_{2}^{4}$ where $\Br_{u}(ts)$, $\Br_{u}(tl)$,
+  $\Br_{u}(hl)$ and $\Br_{u}(hs)$ are given by
   \begin{align}
     \left[ \begin{array}{c} 1  \\ 0 \\ 0 \\ 1 \end{array} \right], \:\:
     \left[ \begin{array}{c} 1  \\ 1 \\ 0 \\ 1 \end{array} \right], \:\:
@@ -1170,9 +1179,11 @@ contact points are enforced on each domain.
 
 \subsection{Hybrid System Construction}
 
-It will now be shown that, given a Lagrangian, a directed cycle, and a domain breakdown, a hybrid system can be explicitly constructed.
+It will now be shown that, given a Lagrangian, a directed cycle, and a domain
+breakdown, a hybrid system can be explicitly constructed.
 %
-Since the Lagrangian is intrinsic to the robot being considered, a domain breakdown alone dictates the mathematical model of the biped.
+Since the Lagrangian is intrinsic to the robot being considered, a domain
+breakdown alone dictates the mathematical model of the biped.
 
 
 \subsubsection{Continuous Dynamics}
@@ -1192,63 +1203,26 @@ For the domain $\vinV$, the imposed holonomic constraints are given by:
 %
 where the domain breakdown dictates which constraints are enforced.
 %
-One can calculate the Jacobian matrix used to enforce the constraints by differentiating the holonomic constraint and removing redundancies as follows:
+One can calculate the Jacobian matrix used to enforce the constraints by
+differentiating the holonomic constraint and removing redundancies as follows:
 %
 \begin{align*}
-  J_{v}\argsq = \mathrm{Basis}\left( \mathrm{RowSp}\left( \pd{\eta_{v}\argsqdq}{{\dq}} \right) \right).
+  J_{v}\argsq = \mathrm{Basis}\left( \mathrm{RowSp}\left(
+      \pd{\eta_{v}\argsqdq}{{\dq}} \right) \right).
 \end{align*}
 %
-By taking a basis for the row space of the Jacobian, redundant constraints are removed so that $J_v\argsq$ has full row rank.
+By taking a basis for the row space of the Jacobian, redundant constraints are
+removed so that $J_v\argsq$ has full row rank.
 %
 Using this Jacobian, the constrained dynamic model is given by
+\eqref{eq:eom-lambda}.
+where the wrench contains forces and moments expressed in the reference frame
+$\Rc$.
 %
-\begin{align}
-  \label{eq:constraineddynamics}
-  \M\argsq \, \ddq + \HCor\argsqdq = \B\argsq \, \uu + J_v^T\argsq \Fv\argsqdqu.
-\end{align}
+Because the robot is modeled in a generalized position with ground contact
+enforced through constraints, the matrices $\M\argsq$, $\HCor\argsqdq$, and
+$\B\argsq$ are identical in every domain.
 %
-where $\M\argsq$, $\HCor\argsqdq$ and $\B\argsq$ are as in \eqref{eq:eom} and $\Fv\argsqdqu$ is a {\em wrench} containing forces and moments expressed in the reference frame $\Rc$ (see \cite{Murray1994}).
-%
-Because the robot is modeled in a generalized position with ground contact enforced through constraints, the matrices $\M\argsq$, $\HCor\argsqdq$, and $\B\argsq$ are identical in every domain.
-%
-To determine the wrench $\Fv\argsqdqu$, one differentiates the kinematic constraint $J_v\argsq \, \dq = \mathrm{constant}$ to obtain
-%
-\begin{align*}
-  J_{v}\argsq \, \ddq + {\dot J}_{v}\argsqdq \, \dq = 0
-\end{align*}
-%
-and combine this equation with \eqref{eq:constraineddynamics}.
-%
-Doing so results in an expression for the wrench $\Fv\argsqdqu$:
-%
-\begin{align}
-  \label{eq:wrench}
-  \lefteqn{\Fv\argsqdqu = -\left( J_{v}\argsq \M^{-1}\argsq J_{v}^{T}\argsq \right)^{-1} }\\
-  \nonumber
-  &&\left( {\dot J}_{v}\argsqdq \, \dq + J_{v}\argsq \M^{-1}\argsq \left( \B\argsq \, \uu - \HCor\argsqdq \right) \right).
-\end{align}
-%
-This is sometimes referred to in the literature as a Lagrange multiplier.
-%
-Combining \eqref{eq:constraineddynamics} and \eqref{eq:wrench} allows one to eliminate $\Fv\argsqdqu$ and obtain the fields associated to the control system $\dx = \xfv\arx + \xgv\arx \, \uu$. For $\x = \argsqdq$,
-%
-\begin{align}
-  \nonumber
-  \xfv\arx &= \left[\begin{array}{c}
-    \dq\\
-    \M^{-1}\argsq\Big( \big(J_{v}^{T}\argsq \, \Xi\argsq \, J_{v}\argsq \, \M^{-1}\argsq
-    - I \big) \, \HCor\argsqdq \\
-    \hspace{3em}- J_{v}^{T}\argsq \, \Xi\argsq \, {\dot J}_{v}^{T}\argsqdq \, \dq \Big)
-    \end{array}\right],\\
-  \label{eq:controlsystem}
-  \xgv\arx &= \left[\begin{array}{c}
-    0\\
-    \M^{-1}\argsq \big(I - J_{v}^{T}\argsq \, \Xi\argsq \, J_{v}\argsq \, \M^{-1}\argsq
-    \big) \, \B\argsq
-    \end{array}\right],
-\end{align}
-%
-where, for simplicity, $\Xi\argsq := \big( J_{v}\argsq \, \M^{-1}\argsq \, J_{v}^{T}\argsq \big)^{-1}$.
 
 
 \subsubsection{Discrete Dynamics} \label{sec:discrete-dynamics}
@@ -1401,4 +1375,6 @@ domain specified by the domain breakdown.
 The end result is that, given a domain breakdown and a bipedal robot, the hybrid
 model for the biped is completely determined.
 %
-%One of the goals of this thesis is to determine the domain breakdowns that humans use and this section demonstrated the importance of the domain breakdown in determining the unique mathematical model of the system.
+%One of the goals of this thesis is to determine the domain breakdowns that
+%humans use and this section demonstrated the importance of the domain breakdown
+%in determining the unique mathematical model of the system.

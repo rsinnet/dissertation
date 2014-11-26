@@ -532,7 +532,10 @@ the parameters generated as well as the tweaked parameters can be found in
 
 \subsection{Robotic Hybrid Model \& Controllers}
 
-Consider the robotic walker shown in \figref{fig:robotconstraints}. The goal is to use the human-inspired domain breakdown and ``canonical'' walking functions to design controllers for this robot.
+Consider the robotic walker shown in \figref{fig:robotconstraints}.
+%
+The goal is to use the human-inspired domain breakdown and ``canonical'' walking
+functions to design controllers for this robot.
 
 \subsubsection{Robotic Model}
 
@@ -540,9 +543,9 @@ It was shown in \secref{sec:complex-models} that, given a collection of contact
 points and a domain breakdown (defined on a cycle graph), one can explicitly
 construct a hybrid control system.
 %
-In particular, using the procedure discussed, a domain breakdown $\B_u$ is
+In particular, using the procedure discussed, a domain breakdown $\B$ is
 obtained, which is associated to human walking (see
-\exmpref{ex:domainbreakdown}) defined on the cycle $\Gamma_u = (Q_u,V_u)$ (given
+\exmpref{ex:domainbreakdown}) defined on the cycle $\Gamma_u = (V, \, E)$ (given
 in \exmpref{universalgraph}).
 %
 As a result of the construction in \secref{sec:complex-models}, one obtains a
@@ -550,7 +553,7 @@ hybrid control system describing this robot:
 %
 \begin{align}
   \label{eq:hcstime}
-  \HCS = (\Gamma, \D, U, S, \Delta, FG).
+  \HCS = (\Gamma, \D, \U, \Guard, \Delta, \FG).
 \end{align}
 %
 \begin{figure}[t!]
@@ -569,16 +572,16 @@ hybrid control system describing this robot:
   \label{fig:shapecoords}
 \end{figure}
 %
-As discussed previously, attach a reference frame $R_b$ to the hip. Let $\phi_b$
-be the orientation of $R_b$ (with respect to the $y$-axis for a two-dimensional
-model) and let $p_b^x, p_b^z$ be the Cartesian position of $R_b$.
+As discussed previously, attach a reference frame $\Rb$ to the hip. Let $\phi_b$
+be the orientation of $\Rb$ (with respect to the $y$-axis for a two-dimensional
+model) and let $p_b^x, p_b^z$ be the Cartesian position of $\Rb$.
 %
-The shape coordinates $q$ for the biped are chosen to be the relative angles
+The shape coordinates $\qs$ for the biped are chosen to be the relative angles
 between any two successive links starting at the stance foot as shown in
 \figref{fig:shapecoords}.
 %
-Combining $\phi_b$, $p_b^x$, $p_b^z$, and $q$ gives the configuration space for
-the biped.
+Combining $\phi_b$, $p_b^x$, $p_b^z$, and $\qs$ gives the configuration space
+for the biped.
 %
 The only unknowns for the model are the physical parameters of the system;
 %
@@ -598,26 +601,26 @@ Before discussing which of these functions are tracked on each domain, a
 description technique used to track the desired functions, input/output
 linearization \cite[Ch.~9]{Sastry1999}, is given. % Sastry, pp. 407
 
-Consider a control system of the form $(f_{v},g_{v})$, $v \in V_{u}$ as given in
-\eqref{eq:controlsystem} for an arbitrary domain in the domain breakdown.
+Consider a control system of the form $(\xfv, \, \xgv)$, $\vinV$ as given in
+\defref{def:hcs} for an arbitrary domain in the domain breakdown.
 %
-Let $y^{a}_{v}(q)$ represent the vector of ``actual'' outputs on the system
+Let $y^{a}_{v}\argsq$ represent the vector of ``actual'' outputs on the system
 (e.g., the height of the stance heel)---these can be found by computation of
 forward kinematics \cite{Murray1994}.
 %
-Let $y^{d}_{v}(t)$ represent the vector of ``desired'' output functions to be
+Let $y^{d}_{v}\argt$ represent the vector of ``desired'' output functions to be
 tracked, which consists of combinations of the human-based ``canonical''
 constraint functions.
 %
 Let $n = \dim(Q)$ and let $m$ be the number of constraint functions being
 tracked on a given domain.
 %
-Motivated by the desire to drive $y^{a}_{v}(q(t)) \to y^{d}_{v}(t)$ as $t \to
-\infty$, a definition is given for the following virtual output vector:
+Motivated by the desire to drive $y^{a}_{v}(\q\argt) \to y^{d}_{v}\argt$ as $t
+\to \infty$, a definition is given for the following virtual output vector:
 %
 \begin{align}
   \label{eq:virtout}
-  y_v(q,t) = y^a_v(q) - y^d_v(t).
+  y_v(\q, t) = y^a_v\argsq - y^d_v\argt.
 \end{align}
 As the functions tracked consists of both positions and velocities, the system
 has mixed relative degree.
@@ -629,7 +632,7 @@ two.
 Reorder the outputs as follows:
 \begin{align}
   \label{eq:vouts}
-  y_v(q, {\dot q}, t) = (y_{v,1}^T(q, {\dot q}, t),y_{v,2}^T(q, t))^T
+  y_v(\q, \dq, t) = (y_{v,1}(\q, \dq, t), y_{v,2}(\q, t))
 \end{align}
 with $y_{v,1}$ a vector containing the relative-degree-one outputs and $y_{v,2}$
 a vector containing the relative-degree-two outputs.
@@ -638,35 +641,37 @@ a vector containing the relative-degree-two outputs.
 %
 A control law which drives \eqref{eq:vouts} to zero is
 \begin{align*}
-  u(q, {\dot q}, t) = -\mathcal{A}_{v}^{-1}(q, {\dot q}, t)
+  u(\q, \dq, t) = -\mathcal{A}_{v}^{-1}(\q, \dq, t)
   \left(\left[\!\!\begin{array}{c}
       0\\
-      L_{f_{v}} L_{f_{v}} y_{v,2}(q, t)
+      L_{\xfv} L_{\xfv} y_{v,2}(\q, t)
     \end{array}\!\!\right]
   + \left[\!\!\begin{array}{c}
-      L_{f_{v}} y_{v,1}(q, {\dot q}, t)\\
-      2 \varepsilon L_{f_{v}} y_{v,2}(q, t)
+      L_{\xfv} y_{v,1}(\q, \dq, t)\\
+      2 \varepsilon L_{\xfv} y_{v,2}(\q, t)
     \end{array}\!\!\right] +
   \left[\!\!\begin{array}{c}
-      \varepsilon y_{v,1}(q, {\dot q}, t)\\
-      \varepsilon^2 y_{v,2}(q, t)
+      \varepsilon y_{v,1}(\q, \dq, t)\\
+      \varepsilon^2 y_{v,2}(\q, t)
     \end{array}\!\!\right]\right),
 \end{align*}
-with $\mathcal{A}_{v}(q, {\dot q},t)$ the decoupling matrix given by
+with $\mathcal{A}_{v}(\q, \dq, t)$ the decoupling matrix given by\todo{Fix
+  alignment}
 \begin{align*}
-  \mathcal{A}_{v}(q, {\dot q},t) =
+  \mathcal{A}_{v}(\q, \dq, t) =
   \left[\begin{array}{c}
-      L_{g_{v}} y_{v,1} (q, {\dot q}, t)\\
-      L_{g_{v}} L_{f_{v}} y_{v,2}(q,t)
+      L_{\xgv} y_{v,1} (\q, \dq, t)\\
+      L_{\xgv} L_{\xfv} y_{v,2}(\q, t)
     \end{array}\right],
 \end{align*}
-where, again, $(f_{v},g_{v})$ is given in \eqref{eq:controlsystem}.
+where, again, $(\xfv, \, \xgv)$ is given in \defref{def:hcs}.
 %
 In the above,
-\begin{align}
-  L_{f} y(q, {\dot q}, t) = \pd{y(q, {\dot q}, t)}{(q^T, {\dot q}^T, t)^T} \cdot f(q, \dot q, t)
-\end{align}
-represents the Lie derivative with $q, {\dot q}, t$ representing independent
+\begin{align*}
+  L_{\xfv} y(\q, \dq, t) = \pd{y(\q, \dq, t)}{(\q, \dq, t)} \cdot
+  \xfv(\q, \dq, t)
+\end{align*}
+represents the Lie derivative with $\q, \dq, t$ representing independent
 variables.
 %the control field $g_v(q)$ is given by
 %\begin{align}
@@ -680,7 +685,7 @@ Applying the given control law yields the non-autonomous closed-loop dynamical
 system
 \begin{align}
   \label{eq:clsys}
-  f_\mathit{cl,v}(q, {\dot q},t) = f_v(q, {\dot q}) + g_v(q) u(q, {\dot q}, t).
+  \xf_\mathit{cl,v}(\q, \dq, t) = \xfv(\q, \dq) + \xgv\argsq \, \uu(\q, \dq, t).
 \end{align}
 %The corresponding hybrid system is then
 %\begin{align}
@@ -688,7 +693,7 @@ system
 %\end{align}
 
 Completion of the controller construction requires the specification of the
-vectors $y^{a}_{v}$ and $y^{d}_{v}$ for $v \in V_u$ which are specific to each
+vectors $y^{a}_{v}$ and $y^{d}_{v}$ for $\vinV$ which are specific to each
 of the four domains in \figref{fig:domaingraph}.
 %
 As mentioned previously, the vector $y^a_v$ consists of the robotic constraints
@@ -711,7 +716,7 @@ Applying these collections of controllers to the hybrid control system
 %
 \begin{align}
   \label{eq:hstime}
-  \HS_t = (\Gamma, \D, S, \Delta, F).
+  \HS_t = (\Gamma, \D, \Guard, \Delta, \F).
 \end{align}
 
 \begin{remark}
@@ -719,12 +724,12 @@ Applying these collections of controllers to the hybrid control system
   impact, i.e., contact point becomes unconstrained.
   %
   Looking at equations, \eqref{eq:controlsystem} and \eqref{eq:wrench}, it is
-  apparent that one can achieve lift by simply solving for a value of $u$ which
-  will cause the heel to lift.
+  apparent that one can achieve lift by simply solving for a value of $\uu$
+  which will cause the heel to lift.
   %
   Such a value would be outside the domain as defined in \eqref{eq:domain};
   %
-  specifically, this value of $u$ will violate \eqref{eq:constnu}.
+  specifically, this value of $\uu$ will violate \eqref{eq:constnu}.
   %
   Provided that \eqref{eq:constnu} is satisfied during the a given phase, it
   becomes a control decision when to lift the heel or toe.
@@ -791,7 +796,7 @@ stable periodic orbit implies stable walking.
 It is, therefore, desirable to show that the system has a stable limit cycle.
 %
 This is achieved by examining the Jacobian of the \Poincare{} map linearized
-about the fixed point $((q^*)^T, ({\dot q}^*)^T)^T$ \cite{Parker1989}.
+about the fixed point $(\qst, \dqst)$ \cite{Parker1989}.
 %
 This \Poincare{} map will be stable if all the eigenvalues of the Jacobian have
 magnitude below unity.
@@ -805,7 +810,8 @@ A numerical approximation yields eigenvalues of the following magnitudes:
 %
 \begin{align}
   \label{eq:time-eigs}
-  |\lambda_t| \in \{0.2640, 0.2492, 0.0337, 0.0337, 0.0011, \ldots\},
+  |\lambda_{t}| \in \{0.2640, \, 0.2492, \, 0.0337, \, 0.0337, \, 0.0011, \,
+  \ldots\},
 \end{align}
 where, for the sake of space, only the five eigenvalues with the largest
 magnitudes are included.
@@ -912,49 +918,49 @@ this results in an autonomous feedback control strategy.
 \subsection{State-Based Trajectory Parameterization}
 
 Recall that the functions discussed in the previous section are directly
-dependent on time, i.e., they can be written $y_{\vo}^{d}(t)$.
+dependent on time, i.e., they can be written $y_{\vo}^{d}\argt$.
 %
-Furthermore, these functions are all defined on some interval $[t^- = 0, t^+ =
-P] = \mathcal{I} \subset \R_{0}^{+}$ with $P$ the period of the gait (that is,
+Furthermore, these functions are all defined on some interval $[t^{-} = 0, t^{+}
+= P] = \mathcal{I} \subset \R_{0}^{+}$ with $P$ the period of the gait (that is,
 one step with one leg);
 %
 in other words, a given tracking function can be written as a map $y_{\vo}^{d} :
 \mathcal{I} \to \R$.
 %
 Autonomous state feedback can be achieved by simply choosing a state-based
-parameterization $\varsigma : Q \to \mathcal{I}$ and substituting for time,
-i.e., $y_{\vo}^{d}(\varsigma(q))$.
+parameterization $\varsigma : \Q \to \mathcal{I}$ and substituting for time,
+i.e., $y_{\vo}^{d}(\varsigma\argsq)$.
 
-When choosing a parameterization, $\varsigma(q)$, it is important to consider
+When choosing a parameterization, $\varsigma\argsq$, it is important to consider
 its role in the system.
 %
-Since $\varsigma(q)$ is a parameterization for time $t$, the relationship
-between $\varsigma(q)$ and $t$ should be as linear as possible.
+Since $\varsigma\argsq$ is a parameterization for time $t$, the relationship
+between $\varsigma\argsq$ and $t$ should be as linear as possible.
 %
 Examination of the human hip data, as shown in \figref{fig:hip-pos}, reveals
 that the hip velocity $v_{\mathit{hip}}^{x}$ is constant throughout the gait;
 %
 as a result, the hip position approximately satisfies
-$p_{\mathit{hip}}^{x}(q(t)) = v_{\mathit{hip}}^x t + p_\mathit{hip}^x(q^-)$,
-with $q^-$ the state at the beginning of a step.
+$p_{\mathit{hip}}^{x}(\q\argt) = v_{\mathit{hip}}^x t + p_\mathit{hip}^x(\qm)$,
+with $\qm$ the state at the beginning of a step.
 %
 Here, the assumption can be made, without loss of generality, that time starts
 at zero at the beginning of any given step.
 %
-The linearity of the hip position, $p_{\mathit{hip}}^{x}(q(t))$, with respect to
-time, makes it a good candidate for time parameterization;
+The linearity of the hip position, $p_{\mathit{hip}}^{x}(\q\argt)$, with respect
+to time, makes it a good candidate for time parameterization;
 %
-substituting $\varsigma(q) \to t$ and solving for $\varsigma(q)$ gives the
+substituting $\varsigma\argsq \to t$ and solving for $\varsigma\argsq$ gives the
 parameterization
 \begin{align}
   \label{eq:prm}
-  \varsigma(q) = \frac{p_{\mathit{hip}}^{x}(q) -
-    p_{\mathit{hip}}^{x}(q^-)}{v_{\mathit{hip}}^{x}}.
+  \varsigma\argsq = \frac{p_{\mathit{hip}}^{x}\argsq -
+    p_{\mathit{hip}}^{x}\argsqm}{v_{\mathit{hip}}^{x}}.
 \end{align}
 %
-The parameters $p_{\mathit{hip}}^{x}(q^-)$ and $v_{\mathit{hip}}^{x}$ should be
+The parameters $p_{\mathit{hip}}^{x}\argsqm$ and $v_{\mathit{hip}}^{x}$ should be
 chosen based on the quantities they represent (i.e., $v_{\mathit{hip}}^{x}$
-should be the average velocity of the hip and $p_{\mathit{hip}}^{x}(q^-)$ should
+should be the average velocity of the hip and $p_{\mathit{hip}}^{x}\argsqm$ should
 be the $x$-position of the hip at the beginning of a step).
 %
 In this work, these values were found by examining the simulation of the
@@ -964,9 +970,10 @@ Specifically, a good choice for $v_{\mathit{hip}}^{x}$ is the parameter for the
 hip velocity constraint, $A_{3,1}$ (found in \tabref{tab:funcparam}).
 %
 Using the parameterization \eqref{eq:prm}, the desired trajectories can be
-expressed by substituting the parameterization $\varsigma(q)$ for time $t$;
+expressed by substituting the parameterization $\varsigma\argsq$ for time $t$;
 %
-that is, the desired trajectories will be given by $y_{\vo}^{d}(\varsigma(q))$.
+that is, the desired trajectories will be given by
+$y_{\vo}^{d}(\varsigma\argsq)$.
 
 \subsubsection{Control Design Modification}
 Implementation of state feedback allows for the removal of time from the virtual
@@ -974,54 +981,55 @@ outputs, that is, the control law is no longer time-dependent.
 %
 Therefore, the virtual output of \eqref{eq:virtout} becomes
 \begin{align*}
-  y_{\vo}(q, {\dot q}) = y_{\vo}^a(q, {\dot q}) - y_{\vo}^{d}(\varsigma(q))
+  y_{\vo}\argsqdq = y_{\vo}^a\argsqdq - y_{\vo}^{d}(\varsigma\argsq)
 \end{align*}
-with $\varsigma(q)$ the parameterization given in \eqref{eq:prm}.
+with $\varsigma\argsq$ the parameterization given in \eqref{eq:prm}.
 %
 Following the derivation of the time-based controller, the outputs are grouped
 based on relative degree:
 \begin{align*}
-  y_{\vo}(q, {\dot q}) = (y_{\vo,1}^{T}(q, {\dot q}), y_{\vo,2}^{T}(q))^{T}.
+  y_{\vo}\argsqdq = (y_{\vo,1}\argsqdq, y_{\vo,2}\argsq).
 \end{align*}
-The control law which drives $y_{\vo}(q, {\dot q}) \to 0$ is then given by
+The control law which drives $y_{\vo}\argsqdq \to 0$ is then given by
 \begin{align*}
-  u(q, {\dot q}) = -\mathcal{A}_{\vo}^{-1}(q, {\dot q}) \left(
+  \uu\argsqdq = -\mathcal{A}_{\vo}^{-1}\argsqdq \left(
   \left[ \begin{array}{c}
       0\\
-      L_{f_{\vo}} L_{f_{\vo}} y_{\vo,2}(q)
+      L_{\xf_{\vo}} L_{\xf_{\vo}} y_{\vo,2}\argsq
     \end{array} \right] +
   \left[ \begin{array}{c}
-      L_{f_{\vo}} y_{\vo,1}(q, {\dot q})\\
-      2 \varepsilon L_{f_{\vo}} y_{\vo,2}(q)
+      L_{\xf_{\vo}} y_{\vo,1}\argsqdq\\
+      2 \varepsilon L_{\xf_{\vo}} y_{\vo,2}\argsq
     \end{array} \right] +
   \left[ \begin{array}{c}
-      \varepsilon y_{\vo,1}(q, {\dot q})\\
-      \varepsilon^2 y_{\vo,2}(q)
+      \varepsilon y_{\vo,1}\argsqdq\\
+      \varepsilon^2 y_{\vo,2}\argsq
     \end{array} \right]\right),
 \end{align*}
 with $A_{\vo}(q)$ the decoupling matrix given by
 \begin{align}
-  \mathcal{A}_{\vo}(q, {\dot q}) =
+  \mathcal{A}_{\vo}\argsqdq =
   \left[\begin{array}{c}
-      L_{g_{\vo}} y_{\vo,1} (q, {\dot q})\\
-      L_{g_{\vo}} L_{f_{\vo}} y_{{\vo},2}(q)
+      L_{\xg_{\vo}} y_{\vo,1} \argsqdq\\
+      L_{\xg_{\vo}} L_{\xf_{\vo}} y_{{\vo},2}\argsq
     \end{array}\right]
 \end{align}
-and $(f_{\vo}, g_{\vo})$ the control system given in \eqref{eq:controlsystem}.
+and $(\xf_{\vo}, \xg_{\vo})$ the control system given in
+\eqref{eq:controlsystem}.
 %
 Application of this control law to the control system yields the closed-loop
 system:
 \begin{align}
-  f_{cl,\vo} = f_{\vo}(q, {\dot q}) + g_{\vo}(q) u(q, {\dot q}).
+  \xf_{cl,\vo} = \xf_{\vo}\argsqdq + \xg_{\vo}\argsq \, \uu\argsqdq.
 \end{align}
 The virtual outputs are chosen to be the same as those in the time-based
 controller, specified in \tabref{tab:fitcor}.
 %
 The end result is an autonomous hybrid system specified by
 \begin{align}
-  \HS_{a} = (\Gamma, \D, S, \Delta, F_a).
+  \HS_{a} = (\Gamma, \D, \Guard, \Delta, \F_{a}).
 \end{align}
-with $F_a$ the set of vector fields $\{f_{cl,\vo}\}_{\vo \in V}$.
+with $\F_{a}$ the set of vector fields $\{\xf_{cl,\vo}\}_{\vo \in V}$.
 
 
 \begin{figure*}[tp!]
@@ -1042,7 +1050,7 @@ with $F_a$ the set of vector fields $\{f_{cl,\vo}\}_{\vo \in V}$.
     \includegraphics[width=0.24\textwidth]{pp-auto-4-s}
     \label{fig:pp-a-hip}
   }
-  \caption{Phase portraits of simulation of autonomous system $\HS_a$.}
+  \caption{Phase portraits of simulation of autonomous system $\HS_{a}$.}
   \label{fig:pp-a}
 \end{figure*} 
 
@@ -1057,12 +1065,12 @@ The parameters are tweaked, as before, by multiplying row six by $1.25$.
 This simulation results in the fixed point:
 %
 \begin{align*}
-  q_{s,t}^{*} &=
+  \qst_{s,t} &=
   \left(\begin{array}{r r r r r r}
       -\hphantom{1}.404 & .245 & \hphantom{1}.208 & -\hphantom{0}.488 &
       \hphantom{-2}.388 & \hphantom{-}.088
   \end{array}\right)\\
-  {\dot q}_{s,t}^{*} &=
+  \dqst_{s,t} &=
   \left(\begin{array}{r r r r r r}
     -1.287 & .282 & 1.078 & \hphantom{-}0.711 & -2.452 & -.076
   \end{array}\right)
@@ -1073,10 +1081,11 @@ Only the shape coordinates are shown, as in the analysis of the time-based
 feedback controller.
 %
 The Jacobian matrix of a linearization of the \Poincare{} map about the fixed
-point $((q^*_s)^T, ({\dot q}^*_s)^T)^T$ yields eigenvalues of the following
+point $(\qst_{s}, \dqst_{s})$ yields eigenvalues of the following
 magnitudes:
 \begin{align*}
-  |\lambda_a| \in \{0.1902, 0.0680, 0.0680, 0.504, 0.0058, \ldots\},
+  |\lambda_{a}| \in \{0.1902, \, 0.0680, \, 0.0680, \, 0.504, \, 0.0058, \,
+  \ldots\},
 \end{align*}
 where, again, only the five eigenvalues with the largest magnitudes are shown.
 %
