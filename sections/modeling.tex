@@ -14,7 +14,7 @@ The combination of continuous and discrete dynamics motivates the use of hybrid
 systems methods for modeling and controlling bipeds.
 %
 This chapter presents a development of modeling for hybrid systems which is
-sufficient to understand the theory and examples present in this thesis.
+sufficient to understand the theory and examples presented.
 %
 
 \section{Hybrid Dynamical Systems}
@@ -58,25 +58,29 @@ the unilateral constraint is the height of the swing foot, i.e., $\h\arx =
 \hnsf\argsq$.
 %
 Through definition of an appropriate unilateral constraint on a hybrid system
-whose zero crossings correspond to discrete transitions certain properties of
+whose zero crossings correspond to discrete transitions, certain properties of
 the system follow.
+%
 Defining a unilateral constraint to be non-negative leads a definition of the
 {\em domain of admissibility} as
 %
 \begin{align}
   \label{eq:domain}
-  \D = \left\{ \x \in T\Q : \h\arx \geq 0 \right\},
+  \D = \left\{ \q \in \Q : \h\arx \geq 0 \right\},
 \end{align}
 %
 which describes the admissible states of the system.
+%
+This is the simplest definition and can be expanded to include additional
+considerations such as friction; this is shown later for more complex models.
 %
 The boundary at the zero level set of $\h\arx$ naturally gives rise to the
 switching surface,
 %
 \begin{align}
   \label{eq:guard}
-  \Guard &= \left\{ \x \in \D \subset T\Q : \h\arx = 0 \mbox{ and } \doth\arx <
-    0 \right\}.
+  \Guard &= \left\{ \x \in \D  : \h\arx = 0 \mbox{ and } \doth\arx < 0
+  \right\}.
 \end{align}
 %
 Using these spaces, an uncontrolled hybrid system can be expressed as
@@ -90,9 +94,8 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
   \label{eq:hsys}
 \end{align}
 %
-where $\xf\arx$ and $\xg\arx$ are smooth vector fields and $\Delta : \Guard \to \D
-\setminus \Guard$ is a smooth map called the reset map (see, e.g.,
-\cite{Morris2005}).
+where $\xf\arx$ is a smooth vector field and $\Delta : \Guard \to \D \setminus
+\Guard$ is a smooth map called the reset map (see, e.g., \cite{Morris2005}).
 %
 In addition, $\xm\argt = \lim_{\tau \nearrow t} \x\argtau$ and $\xp\argt =
 \lim_{\tau \searrow t} \x\argtau$ are the left and right limits of the solution
@@ -118,6 +121,8 @@ system has the form
 %
 for control values in a set of {\em admissible controls}, $\U \subseteq \R^{m}$.
 %
+Here, $\xg\arx$ is a smooth vector field.
+%
 As with hybrid systems, hybrid control systems are sometimes written more
 compactly:
 \begin{align*}
@@ -125,7 +130,7 @@ compactly:
 \end{align*}
 
 Using these basic formalisms of hybrid systems, the next three sections describe
-how to construct hybrid system formulations for mechanical systems.
+how to construct hybrid systems for mechanical systems.
 
 \section{Solutions to Hybrid Systems} \label{sec:hsys-sol}
 Consider the hybrid system $\HS$ given in \eqref{eq:hsys}.
@@ -160,7 +165,7 @@ Define the {\em flow} of the differential equation as
 %
 This function represents a trajectory of the differential equation
 \eqref{eq:xdot} which starts at time $t_{0}$ with initial value $\x_{0}$ and
-flows until time $t$ with final state $\arx\argt$.
+flows until time $t$ with final state $\x\argt$.
 %
 From this expression, it is clear also that there is a {\em time-to-impact} function
 $\TI : \D \to \Rnn$ guaranteed by the implicit function theorem as follows:
@@ -176,7 +181,7 @@ This function is continuous in $\x$.
 By the implicit function theorem and the assumption of
 transversality---specifically, valid solutions do not travel along the guard
 viz. $\doth\arx \ne 0$---there exists a unique function $\TI(\x)$ defined and
-continuous for any given point in $\D$.
+continuous for any given point in $\D$.\todo{More about IFT.}\xspace
 %
 This function maps a given state $\x$ to the time until that solution crosses
 the guard.
@@ -193,12 +198,13 @@ The method of \Poincare{} sections allows one to select a \Poincare{} section
 at which the system is sampled.
 %
 The \Poincare{} section can be chosen such that a discrete system is created by
-sampling with either a time-based or event-based rule.
+sampling with either a time-based or an event-based rule.
 %
 For mechanical systems with impacts, an event-based rule is constructed by
-choosing the \Poincare{} section to correspond to impact events.
+choosing the \Poincare{} section to correspond to impact events.\todo{Mention
+  Zeno.}\xspace
 %
-More specifics about the \Poincare{} are introduced in
+More specifics about the \Poincare{} method are introduced in
 \chapref{ch:energy-shaping}.
 
 Using the time-to-impact function, one can define the {\em \Poincare{} first
@@ -241,7 +247,7 @@ At this point, the reset map instantaneously alters the state according to
 in a discrete state update law which yields a new initial condition, $\xp(t_{1})
 = \Delta(\xm(t_{1})).$
 %
-From this new initial condition, the solution then continues to evolve from
+From this new initial condition, the solution then continues to evolve based on
 \eqref{eq:xdot}.
 
 Because the discrete dynamics is considered to operate on the solution
@@ -282,7 +288,7 @@ In order to maintain consistency, the following conditions must be met:
 \item $\Delta(c_{k}(t_{k+1})) = c_{k+1}(t_{i+1})$
 \end{enumerate}
 
-Further details about solutions of hybrid systems also appears in
+Further details about solutions of hybrid systems also appear in
 \chapref{ch:energy-shaping}.
 %
 For additional notions of solutions in hybrid systems, see \cite{Filippov1988,
@@ -691,7 +697,7 @@ the output velocity constraints are represented (output space) to joint space
 and thus the constraining forces in joint space are given by
 %
 \begin{align*}
-  F_{\mathit{c}} = \J^{T}\argsq \lambda.
+  F_{\mathit{c}} = \J^{T}\argsq \, \lambda.
 \end{align*}
 The idea is to solve \eqref{eq:eom-lambda} for $\lambda$ in terms of $\q$,
 $\dq$, and $u$ such that \eqref{eq:holocon} is satisfied.
@@ -710,7 +716,7 @@ results in
 Finally, solving for $\lambda$ gives
 \begin{align*}
    \lambda = \left( \J\argsqdq \, \M^{-1}\argsq \, \J^{T}\argsq \right)^{-1}
-   \left( \dJ\argsqdq \dq + \J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
+   \left( \dJ\argsqdq \, \dq + \J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
     -\HCor\argsqdq\right) \right).
 \end{align*}
 %
@@ -764,7 +770,7 @@ Assuming actuators do not produce impulsive forces and integrating the model
 \eqref{eq:eom-lambda} results in
 \begin{align}
   \label{eq:impulse}
-  \M\argsq(\dqp - \dqm) = \J^{T}\argsq \lambda\argsqdqm
+  \M\argsq(\dqp - \dqm) = \J^{T}\argsq \, \lambda\argsqdqm
 \end{align}
 where
 \begin{align*}
@@ -1123,12 +1129,8 @@ on the specific type of contact.
 It is useful to express the collection of all non-holonomic constraints in a
 single matrix $\eta\argsqdq \in \R^{20 \times 4}$ as:
 \begin{align*}
-  \eta\argsqdq \!\! = \!\!\! \left[\!\!\begin{array}{c c c c}
-    \! \eta_{\sth}\argsqdq \! & 0 & 0 & 0 \\
-    0 & \! \eta_{\stt}\argsqdq \! & 0 & 0 \\
-    0 & 0 & \! \eta_{\nsh}\argsqdq \! & 0 \\
-    0 & 0 & 0 & \! \eta_{\nst}\argsqdq \!
-    \end{array}\!\!\right]
+  \eta\argsqdq = \blockdiag(\eta_{\sth}\argsqdq, \, \eta_{\stt}\argsqdq, \,
+  \eta_{\nsh}\argsqdq, \, \eta_{\nst}\argsqdq)
 \end{align*}
 
 Another class of constraints that is important is the class of {\em unilateral
@@ -1138,11 +1140,11 @@ admissible configurations of the system.
 Assuming that the knees do not lock, these constraints represent the height of a
 contact point above the ground, $\hc\argsq = \pcz\argsq$, and can be put
 in the form of a matrix $\h\argsq \in \R^{4 \times 4}$ in the same manner as
-holonomic constraints;
+non-holonomic constraints;
 %
 that is,
 \begin{align*}
-  \h\argsq = \blockdiag(\h_{\sth}\argsq, \, \h_{\stt}\argsq, \,  \h_{\nsh}\argsq, \,
+  \h\argsq = \diag(\h_{\sth}\argsq, \, \h_{\stt}\argsq, \,  \h_{\nsh}\argsq, \,
   \h_{\nst}\argsq).
 \end{align*}
 
@@ -1169,16 +1171,17 @@ contact points are enforced on each domain.
   In the case of the graph $\Gamma_{u}$ given in \exmpref{universalgraph} and
   the set of contact points $\C =  \{\csh, \, \cst, \, \cnsh, \, \cnst\}$, for
   the graph shown in \figref{fig:domaingraph}, the domain breakdown is formally
-  given by  $\B_{u} : V_{u} \to \Z_{2}^{4}$ where $\Br_{u}(ts)$, $\Br_{u}(tl)$,
-  $\Br_{u}(hl)$ and $\Br_{u}(hs)$ are given by
+  given by  $\B_{u} : V_{u} \to \Z_{2}^{4}$ where
   \begin{align}
-    \left[ \begin{array}{c} 1  \\ 0 \\ 0 \\ 1 \end{array} \right], \:\:
-    \left[ \begin{array}{c} 1  \\ 1 \\ 0 \\ 1 \end{array} \right], \:\:
-    \left[ \begin{array}{c} 1  \\ 1 \\ 0 \\ 0 \end{array} \right], \:\:
-    \left[ \begin{array}{c} 0  \\ 1 \\ 0 \\ 0 \end{array} \right],
+    \nonumber
+    \Bru(\DA) &= (1, 0, 0, 1)^{T},\\
+    \nonumber
+    \Bru(\DB) &= (1, 1, 0, 1)^{T},\\
+    \nonumber
+    \Bru(\DC) &= (1, 1, 0, 0)^{T},\\
+    \Bru(\DD) &= (0, 1, 0, 0)^{T}.
     \label{eq:domainbreakdownvectors}
   \end{align}
-  respectively.
 \end{exmp}
 
 
@@ -1200,7 +1203,7 @@ The control system
 can be explicity constructed through the constraints imposed on each domain by
 the domain breakdown.
 %
-For the domain $\vinV$, the imposed holonomic constraints are given by:
+For the domain $\vinV$, the imposed non-holonomic constraints are given by:
 %
 \begin{align*}
   \eta_{\vo}\argsqdq = \eta\argsqdq \, \Br\argv,
@@ -1209,7 +1212,7 @@ For the domain $\vinV$, the imposed holonomic constraints are given by:
 where the domain breakdown dictates which constraints are enforced.
 %
 One can calculate the Jacobian matrix used to enforce the constraints by
-differentiating the holonomic constraint and removing redundancies as follows:
+differentiating the non-holonomic constraint and removing redundancies as follows:
 %
 \begin{align*}
   \Jv\argsq = \Basis\left( \RowSp\left( \pd{\eta_{\vo}\argsqdq}{\dq} \right)
@@ -1288,9 +1291,8 @@ that the set of admissible configurations is decreasing, i.e., the vector field
 is pointed outside of the domain, or, for an edge $e = (\vo, \vo') \in E$,
 %
 \begin{align*}
-  \Guarde = \Bigl\{ \argsqdqu \in T\Q \times \Rmv : \ & \Av\argsqdqu =
-  0\\
-  \mbox{and } & \dAv\argsqdqu \leq 0 \Bigl\}.
+  \Guarde = \Bigl\{ \argsqdqu \in T\Q \times \Rmv : \ \Av\argsqdqu =
+  0 \mbox{ and } \dAv\argsqdqu \leq 0 \Bigl\}.
 \end{align*}
 
 The impact equations are obtained by considering the constraints enforced on the
@@ -1313,7 +1315,7 @@ written:
 \end{align}
 %
 with $I$ the identity matrix and $\Jvp$ the Jacobian matrix associated with
-the holonomic constraints of the next domain expressed in the coordinates of
+the non-holonomic constraints of the next domain expressed in the coordinates of
 this domain.
 %
 The above equation can be used for any discrete transition.
@@ -1336,7 +1338,7 @@ For the sake of clarification, consider the following example:
   %
   The stance heel and non-stance toe both remains on the ground.
   %
-  In order to properly achieve this transition, holonomic constraints on the
+  In order to properly achieve this transition, non-holonomic constraints on the
   velocities of stance toe, stance heel, and non-stance toe must be;
   %
   these constraints lead to the Jacobian matrix $\J_{\DC}$ which is used in

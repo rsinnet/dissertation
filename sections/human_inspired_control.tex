@@ -1,12 +1,28 @@
 \chapter{\uppercase{Human-Inspired Control}} \label{ch:hic}
 
+The human-inspired control framework is based on the idea of designing robotic
+behaviors based on kinematic analysis of human motion.
+%
+Originally applied to a four-domain hybrid model of a robot with feet and knees
+\cite{Sinnet2011b} in two dimensions, the method was later found to apply to a
+wide range of models including the compass-gait biped \cite{Sinnet2011a} and
+hybrid human--robot simulations of a human with a transfemoral prosthesis
+\cite{Sinnet2011}.
+%
+By combining human-inspired control with functional Routhian reduction,
+three-dimensional walking was also achieved \cite{Sinnet2012a, Sinnet2012}.
+%
+This chapter discusses the basics of human-inspired control method.
+
 \section{Domain Breakdown from Human Data} \label{sec:domainbreakdown}
 
-This section shows how to determine the domain breakdown for the walking of nine
-human subjects.
+This section shows how to determine the domain breakdown for human walking.
+%
+The procedure provided is a data-driven approach based on a prior experiment
+involving human test subjects documented in \cite{Ames2011a}.
 %
 First, a discussion is given on the human experiment and how the data were
-handled.
+handled. 
 %
 Then a method is presented for determining the domain breakdown by finding the
 times when the constraint for a given contact point is enforced through a method
@@ -30,7 +46,7 @@ Accordingly, this universal domain breakdown will be considered when
 constructing the hybrid model of the biped of interest.
 %
 This domain breakdown has been used to formulate a metric on the human-like
-nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
+nature of robotic walking gaits \cite{Ames2011, Vasudevan2013}.
 
 \begin{figure}[t!]
   \centering
@@ -49,8 +65,8 @@ nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
     %
     The same sensors drawn from different views are connected with red arrows.
     %
-    The blue arrows illustrate the leg segment lengths of interest, i.e. $L_1$,
-    $L_2$, $L_3$, $L_4$.
+    The blue arrows illustrate the leg segment lengths of interest,
+    i.e. $L_{1}$, $L_{2}$, $L_{3}$, $L_{4}$.
     %
     The diversity of the subjects with respect to these lengths can be seen in
     \tabref{tab:measurements}.}
@@ -67,6 +83,7 @@ nature of robotic walking gaits \cite{Ames2011,Vasudevan2013}.
 \end{figure}
 
 \subsection{Walking Experiment}
+
 The data used in this work are taken from an experiment described in
 \cite{Ames2011a}.
 %
@@ -109,7 +126,6 @@ placed on the umbilicus.
   \label{fig:heeltoefit}
 \end{figure}
 
-
 Each trial of the experiment required the subject to walk three meters along a
 straight line drawn on the floor.
 %
@@ -126,14 +142,14 @@ The data for each individual were rotated so the walking occurs in the
 $x$-direction and, for each subject, the $12$ walking trials were averaged
 (after appropriately shifting the data in time) which resulted in a single
 trajectory for each constraint for each subject for at least two steps (one step
-per leg);
-%
-the resulting data can be seen in \figref{fig:heeltoefit}.
+per leg); the resulting data can be seen in \figref{fig:heeltoefit}.
+
 
 \subsection{Function Fitting}
+
 In order to determine the domain breakdowns for the subjects in the walking
-experiment, it is necessary to determine the times when the robot-ground contact
-points change, i.e., the {\em event times}.
+experiment, it is necessary to determine the times when the human--ground
+contact points change, i.e., the {\em event times}.
 %
 Rather than looking for when the contact point is constrained (through
 thresholds), one can look for the ``simplest'' function that the contact point
@@ -159,7 +175,6 @@ This is an optimization problem which can be stated as follows:
 \item Minimize the cost function by choosing a new guess for the event times
   and then repeating steps 2--4.
 \end{enumerate}
-
 
 To formalize the idea of function fitting to determine event times, given a set
 of contact points $\C$, let $s_{c}(t, a_{c})$ be the ``simplest'' function that
@@ -197,11 +212,12 @@ After the construction of the $f_{c}$ functions in this chapter, the optimizatio
 parameters are supressed---i.e., $f_{c}(t) = f_{c}(t, k_{c}^{\ell}, k_{c}^{s},
 a_{c})$---but it is assumed they have been determined.
 %
-To calculate the event times as they best fit the data, one must solve the following optimization problem
+To calculate the event times as they best fit the data, one must solve the
+following optimization problem
 \begin{align*}
   \min_{k_{c}^{\ell}, k_{c}^{s} \in \{1, \ldots, T\}} \ \min_{a_{c} \in
-    \R^{n_{c}}} \ \sum_{k = 1}^{T} \left( f_{c}(t,k_{c}^{\ell},k_{c}^{s},a_{c})
-    - y_{c}(t) \right)^2
+    \R^{n_{c}}} \ \sum_{k = 1}^{T} \left( f_{c}(t, k_{c}^{\ell}, k_{c}^{s},
+    a_{c}) - y_{c}(t) \right)^2
 \end{align*}
 for each $c \in \C$.
 %
@@ -245,7 +261,9 @@ functions chosen;
 to quantify this, the coefficients of correlatation are $0.9968$ for the heel
 and $0.9699$ for the toe.
 
+
 \subsection{Determining the Domain Breakdown}
+
 Given the data for a contact point $c \in \C$, the lift and strike times are
 determined for each contact point, $\tau[k_{c}^{\ell}]$ and $\tau[k_{c}^{s}]$
 for $c \in \C =  \{c_{1},c_{2},c_{3},c_{4}\} = \{\clh, \clt, \crh, \crt\}$, over
@@ -305,6 +323,7 @@ for $n \in \{1, \ldots, N-p\}$ with $I$ the identity matrix and $\boldzero, I
     are drawn in green circles.}
   \label{fig:domainbreakdown}
 \end{figure}
+%
 Note: if the data constitute multiple steps, there will be more than one
 possible value for $p$;
 %
@@ -327,29 +346,41 @@ The corresponding domain breakdown $\B$ is given by $\B(v_{n}) = d[n]$ for $n
 The application of this procedure to a single subject can be seen in
 \figref{fig:domainbreakdown}.
 
-\subsection{Results} The outlined process is performed on the set of contact
-points $\C =  \{\clh, \clt, \crh , \crt\}$ for the nine test subjects that
-performed the walking experiment. The end result showed that each subject had
-the same, {\em universal}, domain breakdown; this can be seen in
-\figref{fig:domaingraph}. In the context of this work, a single subject was
-chosen for study based upon the completeness of the sensor data, which, in this
-case, was subject four; the domain breakdown and the time spent in each domain
-for the subject can be seen in \figref{fred}. It is important to note that the
-results are consistent with those found in the biomechanics
-literature. Specifically, performing the breakdown process on data from the
-literature \cite{Winter2009} resulted in the same domain breakdown. Additionally,
-the amount of time spent having single and double support are similar to
-previous studies \cite{Ackermann2007}.
+
+\subsection{Results}
+
+The outlined process is performed on the set of contact points $\C =  \{\clh,
+\clt, \crh , \crt\}$ for the nine test subjects that performed the walking
+experiment.
+%
+The end result showed that each subject had the same, {\em universal}, domain
+breakdown; this can be seen in \figref{fig:domaingraph}.
+%
+In the context of this work, a single subject was chosen for study based upon
+the completeness of the sensor data, which, in this case, was subject four; the
+domain breakdown and the time spent in each domain for the subject can be seen
+in \figref{fred}.
+%
+It is important to note that the results are consistent with those found in the biomechanics
+literature.
+%
+Specifically, performing the breakdown process on data from the literature
+\cite{Winter2009} resulted in the same domain breakdown.
+%
+Additionally, the amount of time spent having single and double support are
+similar to previous studies \cite{Ackermann2007}.
 
 \begin{figure}[t]
   \centering
   \includegraphics[width=1.0\columnwidth]{test_subject_4}
-  \caption[The domain breakdown for subject four]{The domain breakdown for
-    subject four together with the amount of time spent in each domain. Each
-    illustration is a snapshot of the subject's configuration at the beginning
-    of the domain together with the contact points enforced.}
+  \caption{The domain breakdown for subject four together with the amount of
+    time spent in each domain.
+    %
+    Each illustration is a snapshot of the subject's configuration at the
+    beginning of the domain together with the contact points enforced.}
   \label{fred}
 \end{figure}
+
 
 \section{Human-Inspired Controller Design}
 
@@ -362,6 +393,7 @@ with anthropomorphic measurements, using the standard method of input/output
 linearization \cite{Sastry1999}.
 %
 This control design strategy results in anthropomorphic walking behavior.
+
 
 \subsection{``Canonical'' Walking Functions} \label{sec:functions}
 
@@ -446,7 +478,10 @@ order:
   %
   This same argument extends to the specified robot, which is a multi-link
   kinematic chain.
+  %
+  Examples of reasonable output choices can be found in \cite{Sinnet2014}.
 \end{remark}
+
 
 \subsubsection{Knee}
 
@@ -472,15 +507,18 @@ An intuitive explanation of this is as follows:
 when the leg is in ``stance'' mode, the human knee acts like a spring-damper
 system responding to the impulse of the human as he or she puts his or her body
 weight on the stance leg---that is, the human tries to prevent the leg from
-collapsing by stiffening it, resulting in a spring-damper effect. When the human
-leg is in ``non-stance'' mode, the weight of the human is primarily not on it,
-so the knee is free to swing---there is no reason to keep the leg stiff.
+collapsing by stiffening it, resulting in a spring-damper effect.
+%
+When the human leg is in ``non-stance'' mode, the weight of the human is
+primarily not on it, so the knee is free to swing---there is no reason to keep
+the leg stiff.
+
 
 \subsubsection{Leg}
 
 In the data for the slope of the non-stance leg as seen in
 \figref{fig:constraints-legs}---here, leg is defined as the straight line
-connecting the ankle to the hip--- the slope appears to follow a sinusoid; thus
+connecting the ankle to the hip---the slope appears to follow a sinusoid; thus
 the following function is fit:
 %
 \begin{align*}
@@ -497,6 +535,7 @@ the stance leg---the forward velocity of the hip is instead chosen.
 In terms of time-control this will not make much of a difference, but the reader
 will see that, when the control is migrated to pure feedback, tracking the hip
 velocity will allow for direct control over walking speed.
+
 
 \subsubsection{Hip}
 
@@ -520,6 +559,7 @@ deferred until later.
 It is of interest, however, to note that, as mentioned previously, tracking hip
 velocity allows for direct control over the walking speed of the robot.
 
+
 \subsubsection{Torso}
 
 The data show that a human tends to keep his or her torso upright throughout his
@@ -537,6 +577,7 @@ Note that, the choice of tracking a constant results in a poor correlation
 between the function and data; however, one can argue that the tiny amount of
 motion from the torso has very little effect on the overall gait.
 
+
 \subsubsection{Ankle}
 
 When the non-stance leg is swinging, to prevent the non-stance ankle from
@@ -552,6 +593,7 @@ issue.
 %
 As in the case of the torso, the correlation between this fit and the data will
 not be good but, again, this does not have a large effect on the gait.
+
 
 \subsubsection{Foot}
 
@@ -644,7 +686,9 @@ approximately according to a Gaussian, thus motivating the following function:
   \label{fig:robotconstraints}
 \end{figure}
 
+
 \subsubsection{Fitting}
+
 The paramaters of the ``canonical'' functions can be found by minimizing the
 error between the human data and the corresponding functions.
 %
@@ -678,12 +722,14 @@ the parameters generated as well as the tweaked parameters can be found in
 \input{inc/fit_correlations_table}
 \input{inc/func_param_table}
 
+
 \subsection{Robotic Hybrid Model \& Controllers}
 
 Consider the robotic walker shown in \figref{fig:robotconstraints}.
 %
 The goal is to use the human-inspired domain breakdown and ``canonical'' walking
 functions to design controllers for this robot.
+
 
 \subsubsection{Robotic Model}
 
@@ -741,7 +787,9 @@ robot (as seen in \figref{fig:robotconstraints}) is estimated from the overall
 mass of the person using a standard mass distribution of a human from the
 literature \cite{Winter2009}.
 
+
 \subsubsection{Controller Design}
+
 The goal now is to design a controller to track the desired functions given in
 \secref{sec:functions}.
 %
@@ -789,7 +837,8 @@ a vector containing the relative-degree-two outputs.
 %
 A control law which drives \eqref{eq:vouts} to zero is
 \begin{align*}
-  u(\q, \dq, t) = -\mathcal{A}_{v}^{-1}(\q, \dq, t)
+  \lefteqn{u(\q, \dq, t) = }\\
+  &&-\mathcal{A}_{v}^{-1}(\q, \dq, t)
   \left(\left[\!\!\begin{array}{c}
       0\\
       L_{\xfv} L_{\xfv} y_{v,2}(\q, t)
@@ -803,8 +852,7 @@ A control law which drives \eqref{eq:vouts} to zero is
       \varepsilon^2 y_{v,2}(\q, t)
     \end{array}\!\!\right]\right),
 \end{align*}
-with $\mathcal{A}_{v}(\q, \dq, t)$ the decoupling matrix given by\todo{Fix
-  alignment}
+with $\mathcal{A}_{v}(\q, \dq, t)$ the decoupling matrix given by
 \begin{align*}
   \mathcal{A}_{v}(\q, \dq, t) =
   \left[\begin{array}{c}
@@ -865,7 +913,7 @@ Applying these collections of controllers to the hybrid control system
 %
 \begin{align}
   \label{eq:hstime}
-  \HS_t = (\Gamma, \D, \Guard, \Delta, \F).
+  \HS_{t} = (\Gamma, \, \D, \, \Guard, \, \Delta, \, \F).
 \end{align}
 
 \begin{remark}
@@ -889,6 +937,7 @@ Applying these collections of controllers to the hybrid control system
   In the domain that follows, the control laws implicit in \eqref{eq:clsys} will
   be responsible for causing the toe or heel to continue to lift.
 \end{remark}
+
 
 \subsection{Simulation of Time-Based Feedback Controller} \label{sec:timesim}
 
@@ -1035,6 +1084,7 @@ biped.
 The humanlike nature of the simulated gait can best be seen in a video of the
 walking available online.\fnref{fn:rwsinnet}
 
+
 \section{Autonomous Feedback Controller Design}
 
 In general, autonomous control is preferred over non-autonomous, time-based
@@ -1124,7 +1174,9 @@ expressed by substituting the parameterization $\varsigma\argsq$ for time $t$;
 that is, the desired trajectories will be given by
 $y_{\vo}^{d}(\varsigma\argsq)$.
 
+
 \subsubsection{Control Design Modification}
+
 Implementation of state feedback allows for the removal of time from the virtual
 outputs, that is, the control law is no longer time-dependent.
 %
@@ -1136,9 +1188,11 @@ with $\varsigma\argsq$ the parameterization given in \eqref{eq:prm}.
 %
 Following the derivation of the time-based controller, the outputs are grouped
 based on relative degree:
+%
 \begin{align*}
   y_{\vo}\argsqdq = (y_{\vo,1}\argsqdq, y_{\vo,2}\argsq).
 \end{align*}
+%
 The control law which drives $y_{\vo}\argsqdq \to 0$ is then given by
 \begin{align*}
   \uu\argsqdq = -\mathcal{A}_{\vo}^{-1}\argsqdq \left(
@@ -1163,20 +1217,22 @@ with $A_{\vo}(q)$ the decoupling matrix given by
       L_{\xg_{\vo}} L_{\xf_{\vo}} y_{{\vo},2}\argsq
     \end{array}\right]
 \end{align}
-and $(\xf_{\vo}, \xg_{\vo})$ the control system given in
+and $(\xf_{\vo}, \, \xg_{\vo})$ the control system given in
 \eqref{eq:controlsystem}.
 %
 Application of this control law to the control system yields the closed-loop
 system:
+%
 \begin{align}
   \xf_{cl,\vo} = \xf_{\vo}\argsqdq + \xg_{\vo}\argsq \, \uu\argsqdq.
 \end{align}
+%
 The virtual outputs are chosen to be the same as those in the time-based
 controller, specified in \tabref{tab:fitcor}.
 %
 The end result is an autonomous hybrid system specified by
 \begin{align}
-  \HS_{a} = (\Gamma, \D, \Guard, \Delta, \F_{a}).
+  \HS_{a} = (\Gamma, \, \D, \, \Guard, \, \Delta, \, \F_{a}).
 \end{align}
 with $\F_{a}$ the set of vector fields $\{\xf_{cl,\vo}\}_{\vo \in V}$.
 
@@ -1203,7 +1259,9 @@ with $\F_{a}$ the set of vector fields $\{\xf_{cl,\vo}\}_{\vo \in V}$.
   \label{fig:pp-a}
 \end{figure*} 
 
+
 \subsection{Simulation of Autonomous Feedback Controller}
+
 The analysis of the stability of the autonomous system is analogous to that
 shown in \secref{sec:timesim}.
 %
@@ -1232,6 +1290,7 @@ feedback controller.
 The Jacobian matrix of a linearization of the \Poincare{} map about the fixed
 point $(\qst_{s}, \dqst_{s})$ yields eigenvalues of the following
 magnitudes:
+%
 \begin{align*}
   |\lambda_{a}| \in \{0.1902, \, 0.0680, \, 0.0680, \, 0.504, \, 0.0058, \,
   \ldots\},
