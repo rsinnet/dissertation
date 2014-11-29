@@ -15,7 +15,7 @@ systems methods for modeling and controlling bipeds.
 %
 This chapter presents a development of modeling for hybrid systems which is
 sufficient to understand the theory and examples presented.
-%
+
 
 \section{Hybrid Dynamical Systems}
 
@@ -66,7 +66,7 @@ Defining a unilateral constraint to be non-negative leads a definition of the
 %
 \begin{align}
   \label{eq:domain}
-  \D = \left\{ \q \in \Q : \h\arx \geq 0 \right\},
+  \D = \left\{  \q \in \Q : \h\argsq \geq 0 \right\},
 \end{align}
 %
 which describes the admissible states of the system.
@@ -74,13 +74,13 @@ which describes the admissible states of the system.
 This is the simplest definition and can be expanded to include additional
 considerations such as friction; this is shown later for more complex models.
 %
-The boundary at the zero level set of $\h\arx$ naturally gives rise to the
+The boundary at the zero level set of $\h\argsq$ naturally gives rise to the
 switching surface,
 %
 \begin{align}
   \label{eq:guard}
-  \Guard &= \left\{ \x \in \D  : \h\arx = 0 \mbox{ and } \doth\arx < 0
-  \right\}.
+  \Guard &= \left\{ \argsqdq \in \D  : \h\argsq = 0 \mbox{ and } \doth\argsqdq <
+    0 \right\}.
 \end{align}
 %
 Using these spaces, an uncontrolled hybrid system can be expressed as
@@ -88,7 +88,7 @@ Using these spaces, an uncontrolled hybrid system can be expressed as
 \begin{align}
   \HS = \left\{
   \begin{array}{l l}
-    \dx = \xf(\x), & \xm \in \D \setminus \Guard,\\
+    \dx\hphantom{^{+}} = \xf(\x), & \xm \in \D \setminus \Guard,\\
     \xp = \Delta(\xm), & \xm \in \Guard,
   \end{array}\right.
   \label{eq:hsys}
@@ -113,18 +113,20 @@ system has the form
 \begin{align}
   \HCS = \left\{
   \begin{array}{l l}
-    \dx = \xf\arx + \xg\arx \, \uu, & \xm \in \D \setminus \Guard,\\
+    \dx\hphantom{^{+}} = \xf\arx + \xg\arx \, \uu, & \xm \in \D \setminus \Guard,\\
     \xp = \Delta(\xm), & \xm \in \Guard,
   \end{array}\right.
   \label{eq:hcsys}
 \end{align}
 %
-for control values in a set of {\em admissible controls}, $\U \subseteq \R^{m}$.
+for control values in a set of {\em admissible controls}, $\U \subseteq
+\Rm$.
 %
 Here, $\xg\arx$ is a smooth vector field.
 %
 As with hybrid systems, hybrid control systems are sometimes written more
 compactly:
+%
 \begin{align*}
   \HCS = (\D, \, \Guard, \, \U, \, \Delta, \, \xf, \, \xg).
 \end{align*}
@@ -132,7 +134,9 @@ compactly:
 Using these basic formalisms of hybrid systems, the next three sections describe
 how to construct hybrid systems for mechanical systems.
 
+
 \section{Solutions to Hybrid Systems} \label{sec:hsys-sol}
+
 Consider the hybrid system $\HS$ given in \eqref{eq:hsys}.
 %
 The solution involves the differential equation
@@ -149,7 +153,7 @@ map
 which defines the discrete dynamics.
 %
 Solutions to the differential equation governing the dynamics are valid on an
-open subset of $\R^{n}$, namely the domain, $\D \subset \R^{n}$.
+open subset of $\Rn$, namely the domain, $\D \subset \Rn$.
 %
 The vector field is assumed to be continuously differentiable viz. $\xf \in
 C^{1}(\D)$.
@@ -192,10 +196,10 @@ Stability analysis of hybrid systems often involves a method attributable to
 %
 This method is widely used in various types of systems including continuous
 systems, discrete systems, and hybrid systems; for some examples, see
-\cite{Guckenheimer1983, Parker1989, Perko2001, Grizzle2014}.
+\cite{Grizzle2014, Guckenheimer1983, Parker1989, Perko2001}.
 %
-The method of \Poincare{} sections allows one to select a \Poincare{} section
-at which the system is sampled.
+The method of \Poincare{} sections allows one to select a transverse hypersurface,
+called a \Poincare{} section, at which the system is sampled.
 %
 The \Poincare{} section can be chosen such that a discrete system is created by
 sampling with either a time-based or an event-based rule.
@@ -244,8 +248,10 @@ $t_{1}$.
 %
 At this point, the reset map instantaneously alters the state according to
 \eqref{eq:rmap} which causes a discontinuity in the solution $\x\argt$ resulting
-in a discrete state update law which yields a new initial condition, $\xp(t_{1})
-= \Delta(\xm(t_{1})).$
+in a discrete state update law which yields a new initial condition,
+\begin{align*}
+  \xp(t_{1}) = \Delta(\xm(t_{1})).
+\end{align*}
 %
 From this new initial condition, the solution then continues to evolve based on
 \eqref{eq:xdot}.
@@ -261,7 +267,7 @@ which occurs at time $t^{-}$, and the post-impact state,
 \end{align*}
 which occurs at time $t^{+}$.
 %
-The discrepancy in left- and right-hand limits is due to the discontinuity in
+The discrepancy in left- and right-hand limits is due to the discontinuities in
 solutions introduced by the reset map.
 %
 
@@ -294,6 +300,7 @@ Further details about solutions of hybrid systems also appear in
 For additional notions of solutions in hybrid systems, see \cite{Filippov1988,
   Goebel2009, Haddad2001, Lygeros2003, Ye1998}.
 
+
 \section{Stability Definitions} \label{sec:hsys-stability}
 
 Because of the unique nature of hybrid systems, analysis of stability requires
@@ -313,7 +320,9 @@ For more on stability, see, e.g., \cite{Khalil2002, Teschl2012,
 %
 For comments on the literature, see \secref{sec:literature-stability}.
 
+
 \subsection{Continuous Systems}
+
 This work is chiefly concerned with autonomous systems of the form
 \begin{align}
   \label{eq:autsys}
@@ -377,7 +386,7 @@ in other words, $f\argbzero = \boldzero$.
 %
 \begin{definition}
   The equilibrium point $\x = \boldzero$ of \eqref{eq:disc-sys} is stable if,
-  for each $\epsilon > 0$, $\exists \delta > 0$ such that
+  for each $\epsilon > 0$, $\exists \ \delta > 0$ such that
   \begin{align*}
     \nxkzero < \delta \Rightarrow \nxk < \epsilon \ \forall \ k
     \geq 0.
@@ -558,8 +567,8 @@ For robots, the kinetic energy has the form
 where $\M\argsq$ is a manipulator inertia matrix which has the property of
 being symmetric and positive definite.
 %
-The Euler--Lagrange equation can be used to find the equations of motion, which,
-for robotic systems \cite[pp.~171]{Murray1994}, are written:
+The Euler--Lagrange equation can be used to find the dynamics, which, for
+robotic systems \cite[pp.~171]{Murray1994}, is written:
 %
 \begin{align}
   \label{eq:eom}
@@ -592,7 +601,7 @@ See \cite[pp.~170]{Murray1994} for more information.
 Equation \eqref{eq:eom} is the simplest dynamic model of robotic motion and does
 not include any contact constraints.
 % 
-This is not necessary a problem if one reduces the coordinates $\q$ by locating
+This is not necessarily a problem if one reduces the coordinates $\q$ by locating
 the body-fixed reference frame $\Rb$ at a stationary point fixing certain
 degrees of freedom, thereby factoring in ground contact constraints.
 %
@@ -726,6 +735,7 @@ with non-holonomic constraints such as ground contact.
 Using the developments in this section, the next section will show how to treat
 impacts which require constraining forces.
 
+
 \section{Discrete Impacts}
 
 When studying bipedal walking, it is important for the sake of thoroughness, to
@@ -778,10 +788,13 @@ where
 \end{align*}
 %
 Based on the desired constraints, one can construct a Jacobian matrix,
-$J\argsq$, whose rows contain individual constraints.
+$J\argsq$, whose rows contain individual constraints.\todo{Missing
+  something.}\xspace
 %
-Combining \eqref{eq:eom-lambda} with \eqref{eq:impulse} results in the impact model:
-\begin{align*}
+Combining \eqref{eq:eom-lambda} with \eqref{eq:impulse} results in the impact
+model:
+%
+\begin{align}
   \left(\begin{array}{c c}
       \M\argsq & -\J^{T}\argsq\\
       \J\argsq & \boldzero
@@ -794,16 +807,46 @@ Combining \eqref{eq:eom-lambda} with \eqref{eq:impulse} results in the impact mo
       \M\argsq \, \dqm\\
       \boldzero
     \end{array}\right)
-\end{align*}
+  \label{eq:impact-model}
+\end{align}
 %
 This model is used throughout this thesis wherever impacts arise.
+
+Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be
+written more simply as
+%
+\begin{align}
+  \label{eq:pmap}
+  \dq^{+} = P\argsqdqm = \left(I - \M^{-1}\argsq \, \J^{T}\argsq \,
+    (\J\argsq \, \M^{-1}\argsq \, \J\argsq)^{-1} \, \J\argsq \right) \,
+  \dqm.
+\end{align}
+%
+with $I$ the identity matrix of the appropriate dimension.
+%
+The above equation can be used for any discrete transition.
+
+In an attempt to simplify the model and obtain bi-periodic behavior in the
+walking, the ``left'' and ``right'' leg must be ``swapped'';
+%
+this ``trick'' is common throughout the literature \cite{Grizzle2001}.
+%
+This is done with a coordinate transformation, switching the role of the left
+and right leg, i.e., a state relabeling procedure, which is included in the
+calculation of the reset map.
+%
+For the shape coordinates, this will be a linear map, but for reference frame
+coordinates, one may need to solve an inverse kinematics problem if the
+reference frame is relocated as part of the reset map.
+%
+This problem can be avoided by locating the reference frame on the torso as
+opposed to on the stance foot.
 
 The information provided thus far is sufficient to handle simple bipeds with
 point feet but for more complex models, the definitions for hybrid systems must
 be expanded.
 %
 This will be done in the next section.
-
 
 
 \section{Complex Domain Structure} \label{sec:complex-models}
@@ -817,7 +860,7 @@ robots with point feet or flat-foot walking.
 This results in a simple hybrid model with a single domain which can be treated
 using the methods described earlier in this chapter.
 %
-This idealization results in walking gaits which lack some of the distinguishing
+This idealization leads to walking gaits which lack some of the distinguishing
 characteristics of human locomotion.
 %
 In particular, the foot behavior of human walking is highly recognizable and
@@ -831,7 +874,7 @@ modeling the mechanical system on that domain.
 %
 The dynamic model will vary depending on which points on the robot are in
 contact with the ground---having points in contact with the ground introduces
-kinematic constraints on the system.
+kinematic constraints on the system.\todo{Also non-holonomic.}\xspace
 %
 At a certain point in each domain, i.e., when the contact points change, the
 model will discretely change to another phase of walking with a different
@@ -845,9 +888,9 @@ alter the velocity of the system.
 %concept underlying hybrid systems.
 
 In this section, a formalism for multi-domain hybrid systems is introduced and a
-discussion of how the equations of motion of a robot together with a temporal
-ordering of discrete events, i.e., change in contact points, completely
-determine the hybrid model of a system.
+discussion is given explaining how the equations of motion of a robot together
+with a temporal ordering of discrete events, i.e., change in contact points,
+completely determine the hybrid model of a system.
 %
 More specifically, to model bipedal robots, one need only consider the domain
 breakdown and the Lagrangian on each domain.
@@ -857,7 +900,12 @@ kinematic constraints imposed on the system throughout the course of a step.
 
 
 \subsection{Formal Definitions}
-%{\em Hybrid systems} or {\em systems with impulse effects}\cite{GAP01}\xspace have been studied extensively in a wide variety of contexts and have been used to model a wide range of bipedal robotic systems.\cite{GCAS10}\xspace This section introduces a definition of hybrid systems applicable to bipedal walking.
+
+% {\em Hybrid systems} or {\em systems with impulse effects}\cite{GAP01}\xspace
+%have been studied extensively in a wide variety of contexts and have been used
+%to model a wide range of bipedal robotic systems.\cite{GCAS10}\xspace This
+%section introduces a definition of hybrid systems applicable to bipedal
+%walking.
 
 Steady state bipedal walking is naturally periodic with discrete impacts leading
 to different walking phases.
@@ -946,6 +994,7 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
   for $\vinV$ with edge $\einE$ satisfying $\vo = \sor(e)$.
   %
   This can also be described as an indexed system with impulse effects:
+  %
   \begin{align}
     \label{eq:HCSi}
     \HCSv = \left\{
@@ -955,6 +1004,7 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
         \xp = \Deltae(\xm), & \argsxuum \in \Guarde,
       \end{array}\right.
   \end{align}
+  %
   The set of hybrid control systems for all domains in $V$ can be written $\HCS
   = \{\HCSv\}_{\vinV}$.
 \end{definition}
@@ -963,6 +1013,7 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
   A {\bf hybrid system} is a hybrid control system with $\Uv = \emptyset$
   $\forall$ $\vinV$, e.g., any relevant feedback controllers have been
   applied, making the system closed-loop:
+  %
   \begin{align*}
     \HS = (\Gamma, \, \D, \, \Guard, \, \Delta, \, \F),
   \end{align*}
@@ -974,6 +1025,7 @@ of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
   The other elements are the same as those defined for hybrid control systems.
   %
   This corresponds to the following system with impulse effects:
+  %
   \begin{align}
     \label{eq:HSi}
     \HSv = \left\{
@@ -1128,6 +1180,7 @@ on the specific type of contact.
 %
 It is useful to express the collection of all non-holonomic constraints in a
 single matrix $\eta\argsqdq \in \R^{20 \times 4}$ as:
+%
 \begin{align*}
   \eta\argsqdq = \blockdiag(\eta_{\sth}\argsqdq, \, \eta_{\stt}\argsqdq, \,
   \eta_{\nsh}\argsqdq, \, \eta_{\nst}\argsqdq)
@@ -1230,7 +1283,6 @@ $\Rc$.
 Because the robot is modeled in a generalized position with ground contact
 enforced through constraints, the matrices $\M\argsq$, $\HCor\argsqdq$, and
 $\B\argsq$ are identical in every domain.
-%
 
 
 \subsubsection{Discrete Dynamics} \label{sec:discrete-dynamics}
@@ -1267,7 +1319,7 @@ where $\nu_{\vo}\argsq$ depends on the physical parameters and state of the
 system.
 %
 Equations \eqref{eq:constmu} and \eqref{eq:constnu} for a given domain can be
-coupled with the unilateral constraint on the domain, $\hv\argsq = \h\argsq
+coupled with the unilateral constraint on the domain, $\hv\argsq = \h\argsq \,
 \B\argv$, if present, to yield the set of admissible configurations:
 %
 \begin{align}
@@ -1288,7 +1340,7 @@ Thus, the domain is given by
 %
 The guard is just the boundary of this domain with the additional assumption
 that the set of admissible configurations is decreasing, i.e., the vector field
-is pointed outside of the domain, or, for an edge $e = (\vo, \vo') \in E$,
+is pointed outside of the domain, or, for an edge $e = (\vo, \, \vo') \in E$,
 %
 \begin{align*}
   \Guarde = \Bigl\{ \argsqdqu \in T\Q \times \Rmv : \ \Av\argsqdqu =
@@ -1298,27 +1350,11 @@ is pointed outside of the domain, or, for an edge $e = (\vo, \vo') \in E$,
 The impact equations are obtained by considering the constraints enforced on the
 subsequent domain;
 %
-denote the Jacobian associated to these constraints by $\Jep$.
+denote the Jacobian associated to these constraints by $\Jvp$.
 %
-For an edge $e = \{\vo, \vop\} \in E$, the post-impact velocity $\dqp$ is given
-in terms of the pre-impact velocity $\dqm$ by balancing angular momentum
-\cite{Hurmuzlu1994}.
-%
-Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be
-written:
-%
-\begin{align}
-  \label{eq:pmap}
-  \dq^{+} = P_{e}\argsqdqm = \left(I - \M^{-1}\argsq \, \Jvp^{T}\argsq \,
-    (\Jvp\argsq \, \M^{-1}\argsq \, \Jvp\argsq)^{-1} \, \Jvp\argsq \right) \,
-  \dqm.
-\end{align}
-%
-with $I$ the identity matrix and $\Jvp$ the Jacobian matrix associated with
-the non-holonomic constraints of the next domain expressed in the coordinates of
-this domain.
-%
-The above equation can be used for any discrete transition.
+For an edge $e = \{\vo, \, \vop\} \in E$, the post-impact velocity $\dqp$ is given
+in terms of the pre-impact velocity $\dqm$ using the impact model given in
+\eqref{eq:impact-model}.
 %
 For transitions where a contact point strikes the ground, there will be a
 discrete change in velocities given by \eqref{eq:pmap}.
@@ -1326,7 +1362,16 @@ discrete change in velocities given by \eqref{eq:pmap}.
 For transitions where a contact point lifts from the ground, there will not be a
 discrete change;
 %
-thus $P$ will be the identity map.
+thus the impact map will be the identity map.
+%
+The reset map is then constructed using the impact map and factoring in
+coordinate relabeling if necessary.
+%
+For multi-domain walking, one selects an edge at which relabeling occurs each
+step.
+
+The reset map then takes a point on the guard of a domain and maps it into the next domain
+specified by the domain breakdown.
 %
 For the sake of clarification, consider the following example:
 %
@@ -1348,36 +1393,6 @@ For the sake of clarification, consider the following example:
   in \eqref{eq:domainbreakdownvectors}.
 \end{exmp}
 
-In an attempt to simplify the model and obtain biperiodic behavior in the
-walking, the ``left'' and ``right'' leg must be ``swapped'' at one of the domain
-transitions;
-%
-this ``trick'' is common throughout the literature \cite{Grizzle2001}.
-%
-This is done with a coordinate transformation (applied to $\q$), switching the
-role of the left and right leg, i.e., a state relabeling procedure, which is
-included in the calculation of the reset map for that edge.
-%
-This coordinate transformation can be expressed as a linear map $\mathcal{R}$.
-%
-For transitions in which no relabeling occurs, $\mathcal{R}_{e} = I$.
-%
-The reset map is expressed as follows:
-%
-\begin{align*}
-  \Deltae\argsqdq =
-  \left[\begin{array}{c c}
-      \mathcal{R}_{e} & \boldzero\\
-      \boldzero & \mathcal{R}_{e}
-    \end{array} \right]
-  \left[\begin{array}{c}
-      \q\\
-      P_{e}\argsqdq
-    \end{array} \right].
-\end{align*}
-%
-This reset map takes a point on the guard of a domain and maps it into the next
-domain specified by the domain breakdown.
 
 The end result is that, given a domain breakdown and a bipedal robot, the hybrid
 model for the biped is completely determined.

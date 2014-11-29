@@ -584,13 +584,13 @@ After impact, it is desired that the stance knee be locked, that the stance foot
 be flat on the ground, and that the swing toe remain fixed to the ground.
 % 
 These requirements dictate an apropos choice of kinematic constraints for
-constructing a Jacobian for the impact map \eqref{eq:model:impact_generic}.
+constructing a Jacobian for the impact map \eqref{eq:impact-model}.
 % 
 Using toe strike as the transition leads to the switching surface
-$\GuardTransition{1}{2}$ given in \eqref{eq:model:guardgeneric}.
+$\GuardTransition{1}{2}$ given in \eqref{eq:guard}.
 % 
 
-\subsubsection{Phase 2 -- Toe Lift ($tl$).}
+\subsubsection{Phase 2 -- Toe Lift ($\DB$).}
 % 
 As the stance foot experiences heel roll from the previous phase and the toe
 rolls into the ground causing an impact, the stance foot enters a state of flat
@@ -608,7 +608,7 @@ As the force reaches zero, the toe leaves the ground and, as there is no impact,
 there is no impulsive change in momentum and thus the reset map simplifies to
 the identity map, as previously mentioned.
 
-\subsubsection{Phase 3 -- Knee Lock ($kl$).}
+\subsubsection{Phase 3 -- Knee Lock ($\DE$).}
 % 
 After the swing toe lifts, the biped continues to locomote with flat foot
 contact between the stance foot and the ground until the swing knee reaches full
@@ -629,7 +629,7 @@ number of actuators.
 Thus the robot can be made to move anywhere within the domain of admissibility
 providing the appropriate constraints aren't violated.
 
-\subsubsection{Phase 4 -- Heel Strike ($hs$).}
+\subsubsection{Phase 4 -- Heel Strike ($\DD$).}
 The locking of the stance knee which represents the transition to this domain
 means that both knees are locked in this domain, but the system still has full
 actuation.
@@ -653,8 +653,8 @@ base coordinates is simply the identity map.
 The transformation can then be written as a linear map, $\mathcal{T} =
 \blockdiag(I_{6}, {\mathcal{T}_q})$ which induces pushforward $\mathcal{T}^*$.
 % 
-The post-impact state is thus given, as in \eqref{eq:model:impact_generic}, by
-$\blockdiag({\cal T}, {\cal T}^*) \cdot \DeltaTransition{4}{1}$.
+The post-impact state is thus given, as in \eqref{eq:impact-model}, by
+$\blockdiag({\mathcal T}, {\mathcal T}^*) \cdot \DeltaTransition{4}{1}$.
 % 
 Finally, it should be noted that there are certain choices of control which
 could result in a bi-periodic orbits due to poor control design.
@@ -774,7 +774,7 @@ where $b_{\qs, j}$ is the $j$\textsuperscript{th} basis vector for the coordinat
 Applying these controllers to \eqref{eq:frig} gives
 \begin{align}
   \label{eq:frigt}
-  \frigt\argsqdq = \frig\argsqdq + \gri\argsq \Krti\argsq,
+  \frigt\argsqdq = \frig\argsqdq + \gri\argsq \, \Krti\argsq,
 \end{align}
 where gains (\tabref{tab:pdgains}) are lumped into superscripts.
 
@@ -834,10 +834,10 @@ appropriate application leads to the following vector fields:
 Applying the feedback control laws as shown above to the hybrid control system
 $\HCS$ gives the hybrid system
 \begin{align*}
-  \HS^{\gCS, \gSD, \gSP} = (\Gamma, \D, \Guard, \Delta, \mathcal{F}^{\gCS, \gSD,
-    \gSP}),
+  \HS^{\gCS, \gSD, \gSP} = (\Gamma, \, \D, \, \Guard, \, \Delta, \,
+  \F^{\gCS, \gSD, \gSP}),
 \end{align*}
-where $\mathcal{F}^{\gCS, \gSD, \gSP} = \{\frigtm\}_{i = 1}^{4}$.
+where $\F^{\gCS, \gSD, \gSP} = \{\frigtm\}_{i = 1}^{4}$.
 %
 This hybrid system was simulated with model parameters given in
 \tabref{tab:reduction:model-parameters} and control parameters given in
