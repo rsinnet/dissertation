@@ -600,7 +600,7 @@ The system continues under these conditions until the vertical constraining
 force on the back (swing) toe reaches zero, at which point, the ground is no
 longer undergoing a force interaction with the toe.
 % 
-This force thus represents a holonomic constraint on the system which can be
+This force thus represents a non-holonomic constraint on the system which can be
 used to define both the switching surface and domain of admissibility (which
 must always be checked).
 % 
@@ -843,9 +843,30 @@ This hybrid system was simulated with model parameters given in
 \tabref{tab:reduction:model-parameters} and control parameters given in
 \tabref{tab:pdgains}.
 %
+\begin{figure}[tp!]
+  \centering
+  \includegraphics[width=.45\columnwidth]{7link_joint_q1}
+  \includegraphics[width=.45\columnwidth]{7link_torque_u1}\\
+  \includegraphics[width=.45\columnwidth]{7link_joint_q3}
+  \includegraphics[width=.45\columnwidth]{7link_torque_u3}\\
+  \includegraphics[width=.45\columnwidth]{7link_joint_q4}
+  \includegraphics[width=.45\columnwidth]{7link_torque_u4}\\
+  \includegraphics[width=.45\columnwidth]{7link_joint_q5}
+  \includegraphics[width=.45\columnwidth]{7link_torque_u5}\\
+  \includegraphics[width=.45\columnwidth]{7link_joint_q6}
+  \includegraphics[width=.45\columnwidth]{7link_torque_u6}
+  \caption[Joint and torque profiles for the seven-link biped gait over two
+  steps.]{Joint and torque profiles for the seven-link biped gait over two
+    steps.
+  %
+  The small circles represent the points where the discrete transitions occur.
+  %
+  }
+  \label{fig:7link-noes-angles}
+\end{figure}
+%
 The joint angles and torques resulting from this walking simulation are shown in
-\figref{fig:reduction-angles} and \figref{fig:reduction-torques} as dashed lines
-alongside their counterparts from the later 3D simulation.
+\figref{fig:7link-noes-angles}.
 %
 The stability of the gait can be examined by considering the codimension-one
 \Poincare{} section $\Guard_{4}^{1}$, which is the guard of domain 4 (i.e., heel
@@ -853,8 +874,8 @@ strike) and involves switching legs.
 %
 To minimize the perturbations necessary to examine the \Poincare{} map, one can
 perturb along a minimal set of bases that span the \Poincare{} map locally.
-%
-Holonomic constraints represent restrictions on the degrees of freedom of a
+
+Non-holonomic constraints represent restrictions on the degrees of freedom of a
 system and this shows up in a dropping of rank in the \Poincare{} map.
 %
 For this particular model, these minimal bases can be found by moving the fixed
