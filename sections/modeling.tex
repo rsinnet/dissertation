@@ -139,13 +139,13 @@ how to construct hybrid systems for mechanical systems.
 
 Consider the hybrid system $\HS$ given in \eqref{eq:hsys}.
 %
-The solution involves the differential equation
+The solution involves the {\em dynamical system}
 \begin{align}
   \label{eq:xdot}
-  \dx = \xf\arx
+  \dx = \xf\arx.
 \end{align}
-which defines the continuous dynamics of \eqref{eq:hsys} as well as the reset
-map
+This differential equation defines the continuous dynamics of \eqref{eq:hsys} as
+well as the reset map
 \begin{align}
   \label{eq:rmap}
   \dxp = \Delta\arxm
@@ -597,6 +597,20 @@ symbols of $\M\argsq$:
 \end{align*}
 %
 See \cite[pp.~170]{Murray1994} for more information.
+%
+The dynamics of \eqref{eq:eom} can be expressed as the control system $(\xf,
+\xg)$ where
+\begin{align}
+  \label{eq:simple-control-system}
+  \xf\argsqdq = \left(\begin{array}{c}
+      \dq\\
+      -\M^{-1}\argsq \, \HCor\argsqdq
+    \end{array}\right), \quad
+  \xg\argsq = \left(\begin{array}{c}
+      \boldzero\\
+      -\M^{-1}\argsq \, \B\argsq
+    \end{array}\right)
+\end{align}
 
 Equation \eqref{eq:eom} is the simplest dynamic model of robotic motion and does
 not include any contact constraints.
@@ -723,14 +737,32 @@ results in
     -\HCor\argsqdq - \J^{T}\argsq \, \lambda \right) = 0.
 \end{align*}
 Finally, solving for $\lambda$ gives
-\begin{align*}
-   \lambda = \left( \J\argsqdq \, \M^{-1}\argsq \, \J^{T}\argsq \right)^{-1}
-   \left( \dJ\argsqdq \, \dq + \J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
-    -\HCor\argsqdq\right) \right).
-\end{align*}
+\begin{align}
+  \label{eq:wrench}
+  \lambda = \left( \J\argsqdq \, \M^{-1}\argsq \, \J^{T}\argsq \right)^{-1}
+  \left( \dJ\argsqdq \, \dq + \J\argsqdq \, \M^{-1}\argsq \left(\B\argsq \, \uu
+      -\HCor\argsqdq\right) \right).
+\end{align}
 %
 This formulation can be used to treat robots in a generalized configuration
 with non-holonomic constraints such as ground contact.
+%
+The dynamic model \eqref{eq:eom-lambda} corresponds to the control system $(\xf,
+\xg)$ where
+\begin{align}
+\nonumber
+  \xf\argsqdq &= \left(\begin{array}{c}
+      \dq\\
+      \left( \J\argsqdq \, \M^{-1}\argsq \, \J^{T}\argsq \right)^{-1}
+      \left( \dJ\argsqdq \, \dq - \J\argsqdq \, \M^{-1}\argsq \, \HCor\argsqdq \right)
+    \end{array}\right),\\
+    \label{eq:controlsystem}
+  \xg\argsq &= \left(\begin{array}{c}
+      \boldzero\\
+      \left( \J\argsqdq \, \M^{-1}\argsq \, \J^{T}\argsq \right)^{-1}
+      \J\argsqdq \, \M^{-1}\argsq \, \B\argsq \, \uu.
+    \end{array}\right).
+\end{align}
 
 Using the developments in this section, the next section will show how to treat
 impacts which require constraining forces.
@@ -811,15 +843,15 @@ model:
 \end{align}
 %
 This model is used throughout this thesis wherever impacts arise.
-
+%
 Using the Schur complement \cite{Zhang2005}, the post-impact velocity can be
-written more simply as
+written as
 %
 \begin{align}
   \label{eq:pmap}
   \dq^{+} = P\argsqdqm = \left(I - \M^{-1}\argsq \, \J^{T}\argsq \,
     (\J\argsq \, \M^{-1}\argsq \, \J\argsq)^{-1} \, \J\argsq \right) \,
-  \dqm.
+  \dqm
 \end{align}
 %
 with $I$ the identity matrix of the appropriate dimension.
