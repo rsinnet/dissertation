@@ -535,11 +535,14 @@ gait.
 
 \section{Seven-Link Biped}
 
+This section describes simulations of the seven-link biped shown in
+\figref{fig:7link-model} with parameters in \tabref{tab:7link-model-parameters}
 \begin{figure}
   \centering
   \def\svgwidth{0.5\columnwidth}
   \input{figs/cg2d-7link-model.eps_latex}
   \caption{Seven-link biped configuration.}
+  \label{fig:7link-model}
 \end{figure}
 
 \begin{table}[t!]
@@ -547,7 +550,7 @@ gait.
     \caption[Physical model parameters of the seven-link biped.]{Physical model
       parameters of the seven-link biped. Masses and lengths are given in
       kilograms and meters, respectively.}
-    \label{tab:reduction:model-parameters}
+    \label{tab:7link-model-parameters}
     \begin{tabular}{|c|c|c|c|c|c|}
       \hline
       $M$ & $m_{t}$ & $m_{c}$ &
@@ -857,7 +860,7 @@ $\HCS$ gives the hybrid system
 where $\F^{\gCS, \gSD, \gSP} = \{\frigtm\}_{i = 1}^{4}$.
 %
 This hybrid system was simulated with model parameters given in
-\tabref{tab:reduction:model-parameters} and control parameters given in
+\tabref{tab:7link-model-parameters} and control parameters given in
 \tabref{tab:pdgains}.
 %
 \begin{figure}[tp!]
@@ -936,8 +939,8 @@ non-zero eigenvalues for the reasons alluded to above.
 \begin{figure}[t!]
   \centering
   \includegraphics[width=1.0\columnwidth]{7link_energy_conserved}
-  \caption[Energy exchange in Seven-Link Biped Simulation.]{Energy exchange in
-    Seven-Link Biped Simulation.}
+  \caption[Energy exchange in seven-link biped simulation.]{Energy exchange in
+    seven-link biped simulation.}
   \label{fig:7link_energy_conserved}
 \end{figure}
 
@@ -972,10 +975,14 @@ for each given phase of walking.
 In order to demonstrate the effect of energy shaping, two simulations were conducted
 from the starting point
 \begin{align*}
-  .
+  \q &= (0, -0.0859, \, 0, \, 0.1106, \, -0.0916, \, 0, \, -0.0073),\\
+  \dq &= (0, -0.5339, \, 0, \, 0.6401, \, \hphantom{-}0.3758, \, 0, \, \hphantom{-}0.0886).
 \end{align*}
 %
-
+These coordinates correspond to those shown as $\q_{1}$ through $\q_{7}$ in
+\figref{fig:7link-model}.
+%
+It is clear that both knees are straight on the switching surface.
 %
 The effect of energy shaping can be clearly seen in
 \figref{fig:7link_energy_comparison} where the error in conserved energy is
