@@ -172,20 +172,27 @@ This function represents a trajectory of the differential equation
 flows until time $t$ with final state $\x\argt$.
 %
 From this expression, it is clear also that there is a {\em time-to-impact} function
-$\TI : \D \to \Rnn$ guaranteed by the implicit function theorem as follows:
+$\TI : \D \to \Rnn$ guaranteed by the implicit function theorem around an
+invariant orbit $\Orbit$ as follows:
 %
 using the unilateral constraint $\h$ associated with the hybrid system, define
 the function
 \begin{align*}
-  N(t, \x) = \h(\flowt\arx).
+  N(t, \x) = \h(\flowt(\Delta(\xst))).
 \end{align*}
 %
-This function is continuous in $\x$.
+This function is continuous in $\x$ as it involves a smooth vector field.
 %
-By the implicit function theorem and the assumption of
-transversality---specifically, valid solutions do not travel along the guard
-viz. $\doth\arx \ne 0$---there exists a unique function $\TI(\x)$ defined and
-continuous for any given point in $\D$.\todo{More about IFT.}\xspace
+By the assumption of transversality solutions do not travel along the guard and
+thus it follows that
+\begin{align*}
+  \pd{N(T, \xst)}{t} = {\dot \h}(\flowt(\Delta\arxst)) \ne 0.
+\end{align*}
+%
+By the implicit function theorem, there exists a $\delta > 0$ and a unique
+function $\TI\arx$ defined and locally continuous for all $\x \in
+\B_{\delta}\arxst$ such that $\TI\arxst = T$ where $T$ is the period of the
+invariant orbit, which will be defined shortly.
 %
 This function maps a given state $\x$ to the time until that solution crosses
 the guard.
@@ -205,11 +212,13 @@ The \Poincare{} section can be chosen such that a discrete system is created by
 sampling with either a time-based or an event-based rule.
 %
 For mechanical systems with impacts, an event-based rule is constructed by
-choosing the \Poincare{} section to correspond to impact events.\todo{Mention
-  Zeno.}\xspace
+choosing the \Poincare{} section to correspond to impact events.
 %
 More specifics about the \Poincare{} method are introduced in
 \chapref{ch:energy-shaping}.
+%
+Note that the methods discussed ignore Zeno phenomena; see \cite{Lamperski2013,
+  Or2011} for more information.
 
 Using the time-to-impact function, one can define the {\em \Poincare{} first
   return} map, $\P : \Guard \to \Guard$, as the following partial map:
@@ -1002,7 +1011,7 @@ in \chapref{ch:hic}:
 \end{exmp}
 
 The concept of a directed cycle is a fundamental component in the formulation
-of multi-domain hybrid systems:\todo{notation of \cite{Guckenheimer1995}}
+of multi-domain hybrid systems:
 
 \begin{definition} \label{def:hcs}
   A {\bf hybrid control system in a cycle} is a tuple,
