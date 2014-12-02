@@ -812,16 +812,15 @@ Assuming actuators do not produce impulsive forces and integrating the model
 \eqref{eq:eom-lambda} results in
 \begin{align}
   \label{eq:impulse}
-  \M\argsq(\dqp - \dqm) = \J^{T}\argsq \, \lambda\argsqdqm
+  \M\argsq(\dqp - \dqm) = \J^{T}\argsq \, \Fimp
 \end{align}
-where
+where the impulsive force $\Fimp$ is given by
 \begin{align*}
-  \int_{t^{-}}^{t^{+}} \! \lambda\argsqdqtau \, d\tau.
+  \Fimp = \int_{t^{-}}^{t^{+}} \! \lambda\argsqdqtau \, d\tau.
 \end{align*}
 %
 Based on the desired constraints, one can construct a Jacobian matrix,
-$J\argsq$, whose rows contain individual constraints.\todo{Missing
-  something.}\xspace
+$J\argsq$, whose rows contain individual constraints.
 %
 Combining \eqref{eq:eom-lambda} with \eqref{eq:impulse} results in the impact
 model:
@@ -833,12 +832,12 @@ model:
     \end{array}\right)
   \left(\begin{array}{c}
       \dqp\\
-      \lambda\argsqdqp
+      \Fimp
     \end{array}\right) =
   \left(\begin{array}{c}
       \M\argsq \, \dqm\\
       \boldzero
-    \end{array}\right)
+    \end{array}\right).
   \label{eq:impact-model}
 \end{align}
 %
@@ -857,6 +856,11 @@ written as
 with $I$ the identity matrix of the appropriate dimension.
 %
 The above equation can be used for any discrete transition.
+%
+The forces in $\Fimp$ are reactionary impulsive forces and must satisfy
+realistic conditions, e.g., the floor must not pull on the robot.
+%
+More on this for robot with feet is given in the next section.
 
 In an attempt to simplify the model and obtain bi-periodic behavior in the
 walking, the ``left'' and ``right'' leg must be ``swapped'';
@@ -905,8 +909,8 @@ continuous fashion according to a dynamic model derived from a Lagrangian
 modeling the mechanical system on that domain.
 %
 The dynamic model will vary depending on which points on the robot are in
-contact with the ground---having points in contact with the ground introduces
-kinematic constraints on the system.\todo{Also non-holonomic.}\xspace
+contact with the ground---having these fixed points introduces non-holonomic
+constraints on the system.
 %
 At a certain point in each domain, i.e., when the contact points change, the
 model will discretely change to another phase of walking with a different

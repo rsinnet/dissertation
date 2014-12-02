@@ -570,10 +570,14 @@ gait.
 
 \subsection{Domain Structure}
 
+This gait has a graph $\Gamma = (V, \, E)$, with vertices and edges
+\begin{align*}
+  V = \{\DA, \, \DB, \, \DE, \, \DD\}, \quad  E = \{\{\DA, \, \DB\}, \, \{\DB, \DE\}, \, \{\DE, \DD\}, \, \{\DD, \,
+  \DA\}\}.
+\end{align*}
 By convention, the phases are numbered such that the transition from the last
 domain to the first domain (i.e., $4 \to 1$) corresponds to heel strike as this
-event signifies that the stance and swing legs should be swapped.\todo{Finish
-  this section.}\xspace
+event signifies that the stance and swing legs should be swapped.
 % 
 For the proper choice of gains, the walking controllers applied in this example
 can generate a gait for which the hybrid dynamics $h_{1}(\q) = p_{stt}^{z}(\q)$,
@@ -588,10 +592,22 @@ constructing a Jacobian for the impact map \eqref{eq:impact-model}.
 % 
 Using toe strike as the transition leads to the switching surface
 $\GuardTransition{1}{2}$ given in \eqref{eq:guard}.
-% 
+%
+
+
+\subsubsection{Phase 1 -- Toe Strike ($\DA$)}
+
+For simplicity, let the first phase of the gait be $\DA$.
+%
+This phase starts right after the non-stance heel impacts the ground.
+%
+After the impact, the weight shifts mostly to the impacting leg as the robot
+moves forward.
+
+
 
 \subsubsection{Phase 2 -- Toe Lift ($\DB$).}
-% 
+ 
 As the stance foot experiences heel roll from the previous phase and the toe
 rolls into the ground causing an impact, the stance foot enters a state of flat
 foot contact while the swing toe remains on the ground.
@@ -608,8 +624,9 @@ As the force reaches zero, the toe leaves the ground and, as there is no impact,
 there is no impulsive change in momentum and thus the reset map simplifies to
 the identity map, as previously mentioned.
 
+
 \subsubsection{Phase 3 -- Knee Lock ($\DE$).}
-% 
+ 
 After the swing toe lifts, the biped continues to locomote with flat foot
 contact between the stance foot and the ground until the swing knee reaches full
 extension, resulting in an impact which locks the knee.
@@ -916,19 +933,77 @@ one may no longer solve for $\qsn{1}$ and $\dqsn{5}$ becomes arbitrary.
 By taking this \Poincare{} section and performing analysis, one would find seven
 non-zero eigenvalues for the reasons alluded to above.
 
-\subsection{Simulation of Shaped System}
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=1.0\columnwidth]{7link_energy_conserved}
+  \caption[Energy exchange in Seven-Link Biped Simulation.]{Energy exchange in
+    Seven-Link Biped Simulation.}
+  \label{fig:7link_energy_conserved}
+\end{figure}
 
-In order to demonstrate the effect of energy shaping, a simulation was conducted
-with the closed form solution to the quadratic program \eqref{eq:min-norm}.
-%
-The main purpose of this simulation is to demonstrate the application of energy
+The main purpose of this section is to demonstrate the application of energy
 shaping to a multi-domain hybrid system.
 %
-This four-domain model has a different energy level at each phase of the
-walking; for the given parameters, those energies are
+This four-phase gait has a different energy level at each phase of the
+walking; that is, the conserved energy of the system, $\Ec$, has a different
+value of $\Eref$ depending on the phase of walking.
+%
+For a phase $v$ which is a vertex in the domain graph $\Gamma$, the $\Eref^v$
+value is selected to be the energy level of the system at the beginning of the
+domain:
+%
 \begin{align*}
-  \to \E_{0, 1} = 331.91 \to
-  \E_{0, 2} = 327.96 \to
-  \E_{0, 3} = 328.78 \to
-  \E_{0, 4} = 331.22 \to \E_{0, 1} \to
+  \Eref^{\DA} = 331.91, \quad
+  \Eref^{\DB} = 327.96, \quad
+  \Eref^{\DE} = 328.78, \quad
+  \Eref^{\DD} = 331.22.
 \end{align*}
+%
+The interplay between kinetic, potential, and exchanged energy can be seen in
+\figref{fig:7link_energy_comparison}.
+%
+This figure shows that these three components sum to a constant reference level
+for each given phase of walking.
+
+
+\subsection{Simulation of Shaped System}
+
+
+In order to demonstrate the effect of energy shaping, two simulations were conducted
+from the starting point
+\begin{align*}
+  .
+\end{align*}
+%
+
+%
+The effect of energy shaping can be clearly seen in
+\figref{fig:7link_energy_comparison} where the error in conserved energy is
+plotted for both the unshaped and shaped simulations.
+%
+In comparison to the previous examples, this system admits a much lesser degree
+of energy shaping.
+%
+This is due to the nature of the gait and in particular the foot behavior:
+%
+Large energy shaping can cause the feet to behavior undesirably resulting in
+falling.
+%
+However, this also demonstrates the limitations of energy shaping as the theorem
+only guarantees that energy shaping works for $\resclfparam$ above a certain
+threshold.
+%
+Moreover, this comparison highlights the stabilizing effect that the discrete
+dynamics can provide to a biped.
+
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=.9\columnwidth]{7link_energy_comparison}
+  \caption[Comparison of shaped and unshaped seven-link biped
+  simulations.]{Comparison of unshaped and shaped seven-link biped
+    simulations.
+    %
+    Shown is the distance of the conserved quantity from the reference, i.e.,
+    $\Ec - \Eref$.}
+  \label{fig:7link_energy_comparison}
+\end{figure}
