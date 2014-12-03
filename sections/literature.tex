@@ -1,8 +1,8 @@
 \chapter{\uppercase{Literature Overview}}
 
-This chapter describes the literature related which pertains to bipedal robotic
-walking, reviewing work from different fields and perspectives such as
-biomechanics and dynamical systems.
+This chapter describes the literature which pertains to bipedal robotic walking,
+reviewing work from different fields and perspectives such as biomechanics and
+dynamical systems.
 %
 Bipedal robotic walking is inherently interdisciplinary including theoretical
 and experimental components and drawing inspiration from locomotion found in
@@ -10,10 +10,11 @@ nature.
 %
 The exposition is divided by field:
 %
-Research on the stability of dynamical systems is discussed first followed by
+research on the stability of dynamical systems is discussed first followed by
 modeling of hybrid systems.
 %
-The chapter ends with a review of bipedal robots from the literature.
+The chapter ends with a review of bipedal robots and control methods from the
+literature.
 
 \section{Stability of Dynamical Systems} \label{sec:literature-stability}
 
@@ -221,33 +222,30 @@ Hooman \cite{Hooman1993} and Benveniste, Borgne and Guernic \cite{Benveniste1993
   \label{fig:biped-models}
 \end{figure}
 
-Over the past fifty years, research into bipedal robots has come from a variety
-of perspectives: from passive walkers with simple mechanical designs to advanced
-multifunctional humanoids.
+Bipedal robotics has been approaches in numerous different ways from the
+analysis of passive walkers based on simple mechanical design principles to
+advanced multifunctional humanoids.
 %
-Myriad control designs have been introduced using models which vary from the
-simplified representations shown in \figref{fig:biped-models} to
-full-dimensional dynamic models as developed in \chapref{ch:modeling}.
+Control designs have been proposed based on models which vary from the
+low-dimensional representations shown in \figref{fig:biped-models} to
+higher-dimensional dynamic models as developed in \chapref{ch:modeling}.
 %
-Proponents of simplified models point to the benefits of more tractable
-analysis, enhanced insight, and faster control law computation, whereas
-proponents of more complex models point to enhanced predictive ability and
-formal guarantees on stability.
+While simpler models offer the benefits of faster control law computation and
+easier-to-understand analyses, more complex models can provide tighter control
+and formal guarantees on stability.
 %
-In this section, some of the more common approaches to bipedal gait generation
-are examined with a particular emphasis on how the underlying modeling paradigms
-affect control design.
+In this section, some well-known approaches to bipedal gait generation
+are discussed emphasizing the effect of modeling on control design.
 %
-The book \cite{Westervelt2007} and the review paper \cite{Hurmuzlu2004} provide
-an extensive overview of the state of the art up to early 2006; further
-information is available in \cite{Chevallereau2009, Full1999, Holmes2006,
-  Kuo2007, Sadati2012, Siciliano2008, Wisse2007} and the references therein.
-% Remove papers which are not reviews. CHGRSHIH09
+Further information is available in \cite{Chevallereau2009, Full1999,
+  Holmes2006, Hurmuzlu2004, Kuo2007, Sadati2012, Siciliano2008, Westervelt2007,
+  Wisse2007} and the references therein.
+
 
 \subsection{Zero Moment Point and Linear Inverted Pendulum Models}
 
-One of the most common control methods for bipedal locomotion is the ZMP control
-strategy as described in \cite{Vukobratovic2004, Vukobratovic1990}.
+The ZMP control strategy \cite{Vukobratovic2004, Vukobratovic1990} is extremely
+common in control of bipeds.
 %
 The ZMP is the point on the ground at which the reaction forces acting between
 the ground and the foot produce no horizontal moment.
@@ -265,74 +263,63 @@ In the special case of the Linear Inverted Pendulum Model (LIPM),
 %
 %When the height of the CoM is constant as in the LIPM,
 %
-the ZMP can be expressed explicitly in terms of the dynamics of the CoM via a
-linear ordinary differential equation (ODE).
+the ZMP can be treated with an ordinary differential equation modeling the
+center-of-mass (CoM) dynamics.
 %
-There are key assumptions permitting this simplification, including representing
-a robot as a point mass with massless telescoping legs.
+This treatment assumes representation of a robot as a point mass with massless telescoping legs.
 %
-Additionally, the height of the CoM is assumed constant throughout a step.
+Moreover, the height of the CoM is assumed to be constant.
 %
-Under these conditions, \cite{Kajita1991} showed that the robot model reduces to
-the LIPM.
+Under these conditions, \cite{Kajita1991} proved that a model reduces to the LIPM.
 %
 %The ZMP control strategy uses the linear ODE to plan the motion of a robot's
 %CoM such that the ZMP remains strictly within the convex hull of the stance
 %foot in the case of single support (or convex hull of the stance feet, in the
 %case of double support).
+
+The LIPM assumes the height of the center of mass (CoM) and angular momentum
+about the stance foot are constant through a step.
 %
-Importantly, this model assumes the height of the center of mass (CoM) and
-angular momentum about the stance foot are constant through a step.
+Because they share some key assumptions, the ZMP control method and the LIPM
+have historically been coupled.
 %
-Because of their simplicity when combined, the ZMP control method and the LIPM
-have historically been tightly connected.
-%
-One of the more popular models considered for bipedal walking, the Linear
-Inverted Pendulum Model (LIPM), represents a robot as a point mass with massless
-telescoping legs.
-%
-%
-%
-While the model found its origins in the study of human posture and balance
-(e.g., \cite{Geursen1976, Winter1995, Patton1999}), it has also been the subject
-of much attention in bipedal walking; see, for example, \cite{Miura1984,
-  Kajita2001, Kajita2010}.
+While the LIPM originated in the study of human posture and balance (e.g.,
+\cite{Geursen1976, Winter1995, Patton1999}), it has also been the focus of much
+research in bipedal locomotion; see, for example, \cite{Miura1984, Kajita2001,
+  Kajita2010}.
 %
 %This simplified model is often used with control methods that generate walking
 %gaits by controlling the ZMP.
 
 
 
-Many of the early experimental results of bipedal robotic walking came from
-Japan, where Kato began working on the WABOT series of humanoid robots around
-1970.
+Early experimental work on bipedal robots came from Japan, where Kato began
+building the WABOT series of humanoid robots circa 1970.
 %
-A full-scale anthropomorphic robot, WABOT-1, was reported in \cite{Kato1974} and
-it demonstrated primitive, statically stable walking while transporting objects
-with its hands.
-% might be the first
+A full-scale anthropomorphic robot, WABOT-1, was described in \cite{Kato1974} and
+it was capable of primitive, statically stable walking while carry objects with
+its hands.
 %
-Over a decade later, the ZMP technique was first demonstrated in practice on the
+Years later, the ZMP technique was first demonstrated in experiment on the
 WL10-RD biped in \cite{Takanishi1985}.
 %
-Interest in walking humanoid robots has continued to grow with researchers from
-around the world frequently developing newer generations like WABIAN-2
-\cite{Ogura2006}, ASIMO \cite{Sakagami2002}, HRP-4 \cite{Kaneko2011}, KHR-3
-\cite{Park2005}, and Johnnie \cite{Pfeiffer2002}.
-%
+The study of walking humanoid robots has increased in pace with researchers from
+designing newer generations of robots like WABIAN-2 \cite{Ogura2006}, ASIMO
+\cite{Sakagami2002}, HRP-4 \cite{Kaneko2011}, KHR-3 \cite{Park2005}, and Johnnie
+\cite{Pfeiffer2002}.n
 
 
-In spite of the widespread success of ZMP methods, there are recognized
-limitations.
+Though ZMP methods have been vastly successful, a number of drawbacks still
+presents challenges.
 %
-Gaits designed using this method generally do not take impacts into account, and
-thus the swing foot trajectory must be designed so that it will impact the
-ground with minimal velocity, which can be hard to achieve.
+By the nature of the models, ZMP gaits usually do not consider impacts and so
+the swing foot trajectory must be specified such that ground impact is minimal.
 %
-In addition, it is known that meeting the ZMP condition is not sufficient for
-asymptotic stability of a periodic walking motion \cite{Choi2005}.
+Moreover, ZMP condition alone is not sufficient for asymptotic stability of
+periodic walking \cite{Choi2005}.
 %
-Gait generation using ZMP has taken many forms:
+Despite this, researchers have pursued numerous methods of gait generation using
+ZMP:
 %
 Kurazume et al \cite{Kurazume2003} used analytical solutions to the ZMP
 dynamics;

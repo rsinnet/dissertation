@@ -55,8 +55,8 @@ context of energy shaping and control Lyapunov functions in a wider context.
 Such discussions are spread throughout the literature; see, e.g.,
 \cite{Freeman1996}.
 %
-Open questions about the domain of attraction and robustness are pervasive
-throughout the literature and are not unique to energy shaping;
+Open questions about the domain of attraction and robustness are pervasive and
+are not unique to energy shaping;
 %
 however, their answers are left as the subject of future exploration.
 
@@ -169,7 +169,7 @@ of a robot.
 %
 By improving the internal model, model-based methods such as energy shaping see
 improved robustness; this is particularly helpful for MPC.
-%
+
 
 The models studied in this paper involve traditional actuation schemes rather
 than SEA.
@@ -188,4 +188,21 @@ Can energy shaping be formulated in a tractable way on systems with SEA?
 The answer to this question is not likely be straightforward as SEA requires the
 addition of double integrators in the model which would change the nature of an
 optimization problem like \eqref{eq:es-qp}.
+
+
+One clear benefit provided by control Lyapunov functions is the guarantee of
+exponential stability.
+%
+And this guarantee holds provided given an ideal system model and ideal actuator
+response.
+%
+Though these assumptions are often violated in practice, the deviation from
+ideality is not so severe as to render effective stabilization impractical.
+%
+As a rule of thumb, the more accurate the model, the better the control.
+%
+At a certain level of accuracy, these controllers become highly effective and
+thus the development of these methods is intertwined with the development of
+methods in system identification.
+
 
