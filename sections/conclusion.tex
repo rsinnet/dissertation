@@ -13,19 +13,21 @@ destabilized.
 This formal guarantee is a novel contribution that provides a significant
 improvement over existing results which lacked this consideration.
 
+
 As demonstrated, the methods, in some cases, may increase the domain of
 attraction thereby increasing robust with respect to perturbations in initial
 condition.
 %
 Simulation results also demonstrated that energy shaping appears to drive
 systems to faster convergence.
-%%
+%
 The method was demonstrated on simple models to provide intuition and then on
 more complex models to show versatility.
 %
 Simulations results and modeling for a multi-phase human gait for a biped with
 feet were also provided to demonstrate energy shaping on a multi-domain hybrid
 system.
+
 
 When proving energy shaping, it was shown that a Lyapunov function exists
 locally in the \Poincare{} map.
@@ -39,6 +41,10 @@ that could be used to analytically examine the domain of attraction?
 In doing so, one would likely obtain a more complete understanding of robustness
 properties.
 %
+Despite the lack of formal claims with respect to global properties, the local
+stability properties are practically useful when using energy shaping as a
+stabilizing controller in operating regions around the desired behavior.
+
 
 In addition, this thesis does not make any claims about robustness with respect
 to model uncertainties and measurement uncertainties.
@@ -54,4 +60,132 @@ throughout the literature and are not unique to energy shaping;
 %
 however, their answers are left as the subject of future exploration.
 
-%{\bf Need to tie in human-inspired control.}
+
+When it comes to implementing formal algorithms on cyber-physical systems, there
+is a number of pertinent considerations which determine the viability and
+efficacy of a given controller.
+%
+A control algorithm which updates its commands too slowly will cause shaky
+motion which in itself is indicative of imprecise control.
+%
+In addition, a slow loop rate means the system is slow to react to external
+disturbances which makes it more difficult to reject them, thereby decreasing
+the robustness of the system.
+%
+With bipeds this concern is of the utmost importance as the stability of a biped
+depends on balancing the dynamic moment to keep the robot from toppling over.
+%
+Because feet tend to be narrow, stability in the coronal plane is a challenge
+that frequently plagues roboticists.
+
+
+In order to achieve smooth behavior in dynamic robots, it is therefore necessary
+to have a relatively fast control loop and thus researchers seek to design
+controllers which are computationally tractable.
+%
+Nonlinear controllers often give superior behavior in simulation but
+their complexity renders them impractical for real-time implementation.
+%
+Oftentimes, controllers for robots are formulated as optimization problems which
+use internal models to determine the appropriate control values.
+%
+The idea is to constrain the optimization problem to achieve the desired
+behavior; typical formulations might take into consideration control of the zero
+moment point to guarantee the system remains standing.
+
+
+Considerations such as these generally lead to nonlinear optimization problems
+which are problematic for a variety of reasons.
+%
+While a complex nonlinear formulation may represent a rigorous model of known
+physical phenomena and may therefore match up very well with reality, the
+computation cost may be prohibitive rendering such a formulation useful only in
+simulation.
+%
+To overcome this problem, some researchers are turning quadratic programs for
+which there exist efficient algorithms to quickly find solutions.
+%
+If one can formulate the constraints as a convex set, the solution can be found
+easily and one can guarantee optimality whereas with nonlinear optimizations,
+there is no guarantee on optimality over a given region.
+
+
+The formulation presented in this paper is in the form of a quadratic program
+whose optimization variables are joint torques and ground reaction wrenches.
+%
+This has great value because one can approximate friction cones with friction
+pyramids (see \cite{Grizzle2014}) which are convex sets rendering friction
+constraints amenable to the optimization problem.
+%
+Since the zero-moment point has a linear dependence on joint torques and ground
+reaction wrench, this can also be factored into a quadratic program.
+%
+In addition, it is straightforward to impose bounds on torque.
+%
+Any of the above constraints or their combination may destroy the
+feasibility of the optimization posed in \eqref{eq:es-qp}.
+%
+This potential issue with feasibility, however, can be addressed by relaxing the
+constraints of the control Lyapunov function although this mitigates the formal
+guarantee on stability.
+%
+Yet this leads to an interesting question:
+%
+is it possible to relax the constraints of a control Lyapunov function given in
+\defref{def:lyap-func} and still guarantee stability?
+
+
+A recent trend has found researchers formulating model predictive controllers
+which attempt to determine control values by predicting their effect on the
+behavior of the system over a future time window.
+%
+Energy shaping fits right into model predictive control (MPC) and could be used
+to provide controllers which exhibit the benefits of energy shaping.
+%
+With MPC in particular, it is extremely important to have tractable controllers
+as such controllers require multiple evaluations as the algorithm must integrate
+forward to solve the relevant optimization problem.
+%
+The growth of computers is changing this paradigm but effective and robust
+bipeds generally have fast control loops and this trend will likely continue for
+some time.
+%
+
+
+Another area of interest which is seeing recent growth is precision control of
+series elastic actuators (SEA), particularly in systems such as bipeds which
+experience a wide range of dynamic forces.
+%
+While control of SEA is more challenging than control of traditional actuators,
+the potential benefits make it an important phenomenon to understand.
+%
+The addition of series compliance not only allows for force sensing at joints
+but also for energy storage which can be utilized through design methods like
+energy shaping.
+%
+Force sensing leads to additional possibilities such as online system
+identification which can provide vital information about the mass distribution
+of a robot.
+%
+By improving the internal model, model-based methods such as energy shaping see
+improved robustness; this is particularly helpful for MPC.
+%
+
+The models studied in this paper involve traditional actuation schemes rather
+than SEA.
+%
+This decision choice was instrumental in achieving formal results but it is
+important to recognize that SEA is seeing increasing use in robot design and
+this trend is likely to continue.
+%
+In order to handle SEA formally, new control schemes have to be formulated which
+take the compliance into account.
+%
+This naturally begs the question:
+%
+Can energy shaping be formulated in a tractable way on systems with SEA?
+%
+The answer to this question is not likely be straightforward as SEA requires the
+addition of double integrators in the model which would change the nature of an
+optimization problem like \eqref{eq:es-qp}.
+
