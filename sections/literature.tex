@@ -505,30 +505,32 @@ Other important contributions to passive dynamic walking are given in
 
 \subsection{Quadratic Programs and Lyapunov Funnels}
 
-Early implementations of ZMP-based controllers used off-line trajectory
-optimization to generate center of mass trajectories on the basis of the LIPM
-and generally ignored impact dynamics in the control design.
+Early implementations of ZMP methods would generally rely on center-of-mass
+trajectories generated offline using the LIPM.
 %
-Modern methods have achieved improved control by formulating the control problem
-as a {\em quadratic  program} (QP), allowing gait replanning on the fly and
-improving stability properties \cite{Kudoh2002, Stephens2010, Herdt2010}.
+In addition, these implementations usually ignored impact dynamics.
+%
+Contemporary methods have achieved better results by structuring the control
+problem as a {\em quadratic program} (QP), thereby allowing on-line updating of
+gaits for improved robustness and stability properties \cite{Kudoh2002,
+  Stephens2010, Herdt2010}.
 %
 
-Similarly, sums of squares methods, also formulate trajectory generation as a
-convex optimization \cite{Tedrake2010}.
+In a similar fashion, sums of squares methods, also consider trajectory
+generation using convex optimization \cite{Tedrake2010}.
 %
-One elegant method which provides formal guarantees on stability is outlined in
-\cite{Majumdar2013}.
+As an added benefit, these methods can produce formal guarantees on stability as
+in \cite{Majumdar2013}.
 %
-The procedure investigates the notion of controllability, composing sequential
-funnels (verified with sum of squares Lyapunov inequalities), which each lead to
-a predefined goal set.
+The idea is to investigate controllability by composing sequential funnels
+(verified with sum of squares Lyapunov inequalities), each leading to predefined
+goals.
 %
-This allows one to create a trajectory with guaranteed stability properties:
+This can result in the creation of a trajectory with guaranteed stability
+properties:
 %
-at any given point in time, the system is within one of the known funnels
-(regions of attraction).
+at any given time, the state of the system is within one of the known domains
+(regions of attraction) and can thus be funneled into the desired state.
 %
-By using the sum of squares formulation, the trajectory optimization becomes
-more tractable, making verification of stability feasible for low-dimensional
-models.
+The sum of squares formulation renders the trajectory optimization more
+tractable, easing the verification of stability for low-dimensional models.

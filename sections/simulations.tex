@@ -476,8 +476,10 @@ condition and quickly converges to the limit cycle.
   \centering 
   \includegraphics[width=0.75\columnwidth]{cg-energy-comp}
   \caption[Convergence has more desirable behavior with energy
-  shaping.]{Convergence has more desirable behavior with energy shaping. Smaller
-    values of $\resclfparam$ offer better convergence.}
+  shaping.]{%
+    Convergence has more desirable behavior with energy shaping.
+    %
+    Smaller values of $\resclfparam$ offer better convergence.}
   \label{fig:energy-comp}
   \vspace{-1em}
 \end{figure}
@@ -524,6 +526,7 @@ arises.
   \vspace{-1em}
 \end{figure}
 
+
 More comprehensive evidence for the expansion of the domain of attraction can be
 seen in \figref{fig:point-cloud} which provides a comparison of the stable
 region on the guard for both the passive and shaped systems.
@@ -533,17 +536,7 @@ into the region of low energy (small steps, small angular velocities) for which
 states the passive biped would simply lack the energy necessary to fall into a
 gait.
 
-\section{Seven-Link Biped}
 
-This section describes simulations of the seven-link biped shown in
-\figref{fig:7link-model} with parameters in \tabref{tab:7link-model-parameters}
-\begin{figure}
-  \centering
-  \def\svgwidth{0.5\columnwidth}
-  \input{figs/cg2d-7link-model.eps_latex}
-  \caption{Seven-link biped configuration.}
-  \label{fig:7link-model}
-\end{figure}
 
 \begin{table}[t!]
   \begin{center}
@@ -570,6 +563,16 @@ This section describes simulations of the seven-link biped shown in
   \end{center}
 \end{table}
 
+\section{Seven-Link Biped}
+
+This section describes simulations of the seven-link biped shown in
+\figref{fig:7link-model} with parameters in
+\tabref{tab:7link-model-parameters}.\footnote{%
+  %
+  Reprinted from Automatica, Volume 50, Issue 8, Jessy W. Grizzle, Christine
+  Chevallereau, Ryan W. Sinnet and Aaron D. Ames,  {\em Models, feedback
+    control, and open problems of 3D bipedal robotic walking}, pp.~1955--1988,
+  2014, with permission from Elsevier.}
 
 \subsection{Domain Structure}
 
@@ -596,6 +599,13 @@ constructing a Jacobian for the impact map \eqref{eq:impact-model}.
 Using toe strike as the transition leads to the switching surface
 $\GuardTransition{1}{2}$ given in \eqref{eq:guard}.
 %
+\begin{figure}[t!]
+  \centering
+  \def\svgwidth{0.5\columnwidth}
+  \input{figs/cg2d-7link-model.eps_latex}
+  \caption{Seven-link biped configuration.}
+  \label{fig:7link-model}
+\end{figure}
 
 
 \subsubsection{Phase 1 -- Toe Strike ($\DA$)}
