@@ -73,15 +73,6 @@ nature of robotic walking gaits \cite{Ames2011, Vasudevan2013}.
   \label{fig:Sensors}
 \end{figure}
 
-\input{inc/subject_data}
-
-\begin{figure}[t!]
-  \centering
-  \includegraphics[width=0.7\textwidth]{subject_range_graph}
-  \caption{The ranges of age, height, and mass of the test subjects.}
-  \label{fig:subject-ranges}
-\end{figure}
-
 \subsection{Walking Experiment}
 
 The data used in this work are taken from an experiment described in
@@ -105,26 +96,7 @@ as shown in \figref{fig:Sensors}, one LED sensor was placed on the sternum, one
 LED sensor was placed on the back behind the sternum, and one LED sensor was
 placed on the umbilicus.
 
-\begin{figure}[t!]
-  \centering
-  \subfloat[Heel height]{
-    \includegraphics[width=0.48\columnwidth]{LeftHeel}
-    \label{fig:heelheight}
-  }
-  \subfloat[Toe height]{
-    \includegraphics[width=0.48\columnwidth]{LeftToe}
-    \label{fig:toeheight}
-  }
-  \caption[The data for the heights of the heel and toe.]{The data for the
-    heights of the heel and toe.
-    %
-    Also shown are the fittings of a constant$\to$Gaussian$\to$constant for the
-    heel and a constant$\to$fourth-order polynomial$\to$constant for the toe.
-    %
-    The vertical lines on the left and right indicate the lift and strike times,
-    respectively.}
-  \label{fig:heeltoefit}
-\end{figure}
+\input{inc/subject_data}
 
 Each trial of the experiment required the subject to walk three meters along a
 straight line drawn on the floor.
@@ -144,6 +116,12 @@ $x$-direction and, for each subject, the $12$ walking trials were averaged
 trajectory for each constraint for each subject for at least two steps (one step
 per leg); the resulting data can be seen in \figref{fig:heeltoefit}.
 
+\begin{figure}[t!]
+  \centering
+  \includegraphics[width=0.7\textwidth]{subject_range_graph}
+  \caption{The ranges of age, height, and mass of the test subjects.}
+  \label{fig:subject-ranges}
+\end{figure}
 
 \subsection{Function Fitting}
 
@@ -175,6 +153,27 @@ This is an optimization problem which can be stated as follows:
 \item Minimize the cost function by choosing a new guess for the event times
   and then repeating steps 2--4.
 \end{enumerate}
+
+\begin{figure}[t!]
+  \centering
+  \subfloat[Heel height]{
+    \includegraphics[width=0.48\columnwidth]{LeftHeel}
+    \label{fig:heelheight}
+  }
+  \subfloat[Toe height]{
+    \includegraphics[width=0.48\columnwidth]{LeftToe}
+    \label{fig:toeheight}
+  }
+  \caption[The data for the heights of the heel and toe.]{The data for the
+    heights of the heel and toe.
+    %
+    Also shown are the fittings of a constant$\to$Gaussian$\to$constant for the
+    heel and a constant$\to$fourth-order polynomial$\to$constant for the toe.
+    %
+    The vertical lines on the left and right indicate the lift and strike times,
+    respectively.}
+  \label{fig:heeltoefit}
+\end{figure}
 
 To formalize the idea of function fitting to determine event times, given a set
 of contact points $\C$, let $s_{c}(t, a_{c})$ be the ``simplest'' function that
@@ -427,6 +426,9 @@ the correlation between the data and the fitted functions.
 The human behavior of these different functions throughout the course of the
 walking gait can be seen in \figref{fig:constraints-fitting}, with the data
 beginning at the start of domain $ts$.
+%
+The specific constraints that are plotted can be seen in \figref{fig:robotconstraints}.
+
 
 \begin{figure}[t!]
   \centering
@@ -451,11 +453,8 @@ beginning at the start of domain $ts$.
     fits.
     %
     The plots start at the beginning of the domain {\DA}, with vertical lines
-    indicating when transitions between domains occur.
-    %
-    The specific variables that are plotted can be seen in
-    \figref{fig:robotconstraints}.}
-  \label{fig:constraints-fitting}
+    indicating when transitions between domains occur.}
+    \label{fig:constraints-fitting}
 \end{figure}
 
 Before further detail is given, a remark on the choice of constraints is in
@@ -486,6 +485,28 @@ order:
   %
   Examples of reasonable output choices can be found in \cite{Sinnet2014}.
 \end{remark}
+
+
+\begin{figure}[t!]
+  \centering
+  \subfloat[Robot configuration]{
+    \includegraphics[width=.4\columnwidth]{robot_config}
+    \label{fig:roboconf}
+  }
+  \hspace{.2cm}
+  \subfloat[Tracking outputs]{
+    \includegraphics[width=.4\columnwidth]{robot_const}
+    \label{fig:trackingoutputs}
+  }
+  \caption[Kinematic and dynamic model of the 2D bipedal robot.]{Kinematic and
+    dynamic model of the 2D bipedal robot:
+    % 
+    (a) The general configuration of the 2D bipedal robot with knees and feet;
+    % 
+    (b) The different configuration-based outputs considered in the fitting of
+    the ``canonical'' functions.}
+  \label{fig:robotconstraints}
+\end{figure}
 
 
 \subsubsection{Knee}
@@ -669,27 +690,6 @@ approximately according to a Gaussian, thus motivating the following function:
   only the heel is pinned to the ground so tracking the toe's height is
   equivalent to tracking the angle or slope of the foot.
 \end{remark}
-
-\begin{figure}[t!]
-  \centering
-  \subfloat[Robot configuration]{
-    \includegraphics[width=.4\columnwidth]{robot_config}
-    \label{fig:roboconf}
-  }
-  \hspace{.2cm}
-  \subfloat[Tracking outputs]{
-    \includegraphics[width=.4\columnwidth]{robot_const}
-    \label{fig:trackingoutputs}
-  }
-  \caption[Kinematic and dynamic model of the 2D bipedal robot.]{Kinematic and
-    dynamic model of the 2D bipedal robot:
-    % 
-    (a) The general configuration of the 2D bipedal robot with knees and feet;
-    % 
-    (b) The different configuration-based outputs considered in the fitting of
-    the ``canonical'' functions.}
-  \label{fig:robotconstraints}
-\end{figure}
 
 
 \subsubsection{Fitting}
@@ -1242,29 +1242,6 @@ The end result is an autonomous hybrid system specified by
 with $\F_{a}$ the set of vector fields $\{\xf_{cl,\vo}\}_{\vo \in V}$.
 
 
-\begin{figure*}[tp!]
-  \centering
-  \subfloat[Body frame angle]{
-    \includegraphics[width=0.24\textwidth]{pp-auto-1-s}
-    \label{fig:pp-a-ref}
-  }
-  \subfloat[Ankle angles]{
-    \includegraphics[width=0.24\textwidth]{pp-auto-2-s}
-    \label{fig:pp-a-ankles}
-  }
-  \subfloat[Knee angles]{
-    \includegraphics[width=0.24\textwidth]{pp-auto-3-s}
-    \label{fig:pp-a-knee}
-  }
-  \subfloat[Hip angles]{
-    \includegraphics[width=0.24\textwidth]{pp-auto-4-s}
-    \label{fig:pp-a-hip}
-  }
-  \caption{Phase portraits of simulation of autonomous system $\HS_{a}$.}
-  \label{fig:pp-a}
-\end{figure*} 
-
-
 \subsection{Simulation of Autonomous Feedback Controller}
 
 The analysis of the stability of the autonomous system is analogous to that
@@ -1288,6 +1265,28 @@ This simulation results in the fixed point:
   \end{array}\right)
 \end{align*}
 on the guard of domain {\DC}.
+%
+\begin{figure*}[tp!]
+  \centering
+  \subfloat[Body frame angle]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-1-s}
+    \label{fig:pp-a-ref}
+  }
+  \subfloat[Ankle angles]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-2-s}
+    \label{fig:pp-a-ankles}
+  }
+  \subfloat[Knee angles]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-3-s}
+    \label{fig:pp-a-knee}
+  }
+  \subfloat[Hip angles]{
+    \includegraphics[width=0.24\textwidth]{pp-auto-4-s}
+    \label{fig:pp-a-hip}
+  }
+  \caption{Phase portraits of simulation of autonomous system $\HS_{a}$.}
+  \label{fig:pp-a}
+\end{figure*} 
 %
 Only the shape coordinates are shown, as in the analysis of the time-based
 feedback controller.
