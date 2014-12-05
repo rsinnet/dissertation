@@ -201,24 +201,26 @@ Hooman \cite{Hooman1993} and Benveniste, Borgne and Guernic \cite{Benveniste1993
 \begin{figure}
   \centering
   \def\svgwidth{1.0\columnwidth}
-  \input{figs/biped-models.eps_latex}
-  \caption[Four low-dimensional models]{Four low-dimensional models that are
-    frequently used as approximate representations of walking robots. From left
-    to right:
+  \input{figs/biped-models-2.eps_latex}
+  \caption[Four low-dimensional models]{%
+    Low-dimensional models are often as approximations of walking robots.
+    %
+    From left to right:
     %
     Linear Inverted Pendulum, Inverted Pendulum with Flywheel, Spring-Loaded
     Inverted Pendulum, Compass-Gait Biped
     % 
-    the Linear Inverted Pendulum Model (LIPM) lumps the mass of the robot at a
-    point moving at a constant height and assumes massless legs;
+    the Linear Inverted Pendulum Model (LIPM) assumes a lumped center-of-mass
+    with constant height and massless legs;
     %
-    the Inverted Pendulum with Flywheel (IPF) relaxes the assumption on constant
-    height and adds a flywheel to account for internal angular momentum;
+    the Inverted Pendulum with Flywheel (IPF) adds a flywheel at the CoM to
+    model angular momentum and allows for varying height;
     %
-    the Spring-Loaded Inverted Pendulum (SLIP) adds a spring to model a robot's
-    legs as a massless pogo stick;
-    and the Compass-Gait Biped (CG) treats a robot as a double pendulum with
-    lumped masses on the stance and swing legs.}
+    the Spring-Loaded Inverted Pendulum (SLIP) considers a spring to model the
+    legs as massless pogo sticks;
+    %
+    and the Compass-Gait Biped (CG) is essentially a double pendulum with
+    lumped masses on the stance and swing legs and one at the hip.}
   \label{fig:biped-models}
 \end{figure}
 
@@ -321,22 +323,22 @@ periodic walking \cite{Choi2005}.
 Despite this, researchers have pursued numerous methods of gait generation using
 ZMP:
 %
-Kurazume et al \cite{Kurazume2003} used analytical solutions to the ZMP
-dynamics;
-%
 Nagasaka et al \cite{Nagasaka1999} used the optimal gradient method;
 %
 Kajita et al \cite{Kajita1992} examined potential energy conserving orbits;
 %
-Lim et al \cite{Lim2002} computed ZMP-consistent trajectories offline and
+Lim et al \cite{Lim2002} computed ZMP-consistent trajectories off-line and
 stabilized them using trunk motion;
 %
-and Nishiwaki et al \cite{Nishiwaki2002} generated ZMP-consistent trajectories
-in real-time while walking.
+Nishiwaki et al \cite{Nishiwaki2002} generated ZMP-consistent trajectories
+in real-time while walking;
+%
+and Kurazume et al \cite{Kurazume2003} used analytical solutions to the ZMP
+dynamics;
 %
 Additional information on ZMP-based methods and related ground reference points
 is given in \cite{Goswami1999, Vukobratovic2004, Vukobratovic2006,
-  Popovic2005}.\todo{Change wording.}
+  Popovic2005}.
 
 %Other contributions include \cite{Yamaguchi1999}.
 %BHR-2 \cite{Jarfi2006}, SURALP \cite{Taskiran2010}.    china and turkey!!!
@@ -397,29 +399,30 @@ Because the model makes many simplifying assumptions, the capture regions can
 have a large error and this has motivated the combining of capture point with
 learning in, e.g., \cite{Rebula2007}.
 
-%\subsection{Raibert Hoppers and SLIP Models}
+\subsection{Spring-Loaded Inverted Pendulum Models}
 
-Raibert considered low-dimensional models of hopping and running, testing his
-theory by constructing a monopod with a compliant leg and pneumatic actuation,
-constrained to the sagittal plane.
+In the 1980's, a large amount of pioneering work was done at MIT by Marc
+Raibert.
 %
-This two-dimensional hopper was was able to ``run'' at a speed of 1 m/s
+Raibert constructed a spring-loaded leg and tested new ideas using
+low-dimensional models for hopping and running
+%
+His two-dimensional hopper could ``run'' at a speed of 1 m/s
 \cite{Raibert1984, Raibert1986, Raibert1984a}.
 %
-A later hopper built to analyze three-dimensional motion ``run''
+A three-dimensional version of the origin hopper was also successful
 \cite[Chap.~3]{Raibert1986} followed up by multi-legged robots
 \cite{Hodgins1991, Raibert1990, Raibert1986a}.
 %
-
-The mathematical models Raibert had formulated became known as the Spring-Loaded
-Inverted Pendulum (SLIP) model, which has been shown to approximate the body
-center-of-mass (CoM) motion during \textit{steady-state running gaits} of a wide
-diversity of terrestrial animals \cite{Blickhan1989, Mcmahon1990, Farley1993,
+This work led the way for researchers studying the Spring-Loaded Inverted
+Pendulum (SLIP) model, which has been shown to approximate the center-of-mass
+dynamics of \textit{steady-state running gaits} on a numerous animals from
+insects all the way to humans \cite{Blickhan1989, Mcmahon1990, Farley1993,
   Full2000, Dickinson2000, Seyfarth2002}.
 %
-Successful running robots, such as the Planar Hopper \cite{Raibert1986},
-the ARL-Monopod II \cite{Ahmadi2006}, and the CMU Bowleg Hopper
-\cite{Zeglin1998}, also exhibit SLIP model behavior.
+Using Raibert's principles, other simple robots have achieved running such as
+the ARL-Monopod II \cite{Ahmadi2006} and the CMU Bowleg Hopper
+\cite{Zeglin1998}.
 %
 
 %The control of these robots has been based on Raibert's original control ideas,
@@ -437,7 +440,7 @@ the ARL-Monopod II \cite{Ahmadi2006}, and the CMU Bowleg Hopper
 %Finally, to control the pitch attitude of the body, the controller employs hip
 %torque during stance.
 %%
-This eventually led to legged robots with knees and compliance including the
+More complex robots were later build with knees and compliance including the
 Spring Flamingo and Spring Turkey \cite{Hollerbach1992, Pratt1999, Pratt2000,
   Pratt2001}.
 %
@@ -450,72 +453,65 @@ compliance to reduce energy consumption during walking.
 
 \subsection{Passive Walkers and the Compass-Gait Biped} \label{sec:literature-passive-walkers}
 
-At the other end of the spectrum, instead of approximating complex bipeds with
-simplified models, some researchers have opted to design robots with dynamics
-that approximately realize a simplified model.
+In contrast to the minimalist models just discussed, some researchers create
+robots with dynamics designed to realize a simplified model and thus, in such
+cases, mechanical design plays an important role in dynamic stability.
 %
-For these bipeds, dynamic stability is achieved as much as possible through
-mechanical design instead of feedback control.
+Even these complex designs, however, often achieve walking through controllers
+designed for low-dimensional models such as the ZMP strategy.
 %
-Though comparatively less complex in terms of the models studied, many of the
-formal methods developed on simple bipeds still enjoy use in complex systems.
+Low-dimensional models are generally easier to model and it is more straightforward
+to take into account impact dynamics.
 %
-However, the simpler design facilitates more complete modeling and, indeed,
-control researchers who follow this path often consider impact dynamics, thereby
-taking into account the full hybrid model which is generally omitted from
-analysis of controllers designed using the LIPM.
+As impacts play an important role in dynamic stability, this confers a valuable
+advantage over gaits designed with simpler methods such as LIPM methods.
 %
 
-Mochon and McMahon \cite{Mochon1980} concluded that the swing phase of human
-walking is similar to a double pendulum, pointing to the passive nature of human
-walking and the importance of mechanism design.
+In 1980, Mochon and McMahon \cite{Mochon1980} pointed out that human walking is
+similar to a double pendulum thereby hinting at the passive nature of human
+walking and the importance of mechanical design.
 %
-In the late 80's, McGeer analyzed and built planar, passive bipedal walkers,
-i.e., {\em no actuation}, which could walk stably down shallow slopes, starting
-with the compass gait walker (which is simply an inverted pendulum) in
-\cite{McGeer1990} and later adding knees in \cite{McGeer1990a}.
+In the late 80's, McGeer built planar, passive bipedal walkers which helped to
+validate the claims of Mochon and McMahon.
 %
-This gave rise to the terminology {\em passive dynamic walking}.
+His bipeds which included a compass-gait walker \cite{McGeer1990} and kneed version \cite{McGeer1990a} could walk stably down shallow slopes with no actuation.
 %
-Subsequently, robots with this general principle at their core have been
-constructed, as described in \cite{Collins2005}, based on injecting small
-amounts of energy into passive-type bipeds.
+This began a trend of studying {\em passive dynamic walking}.
 %
-The result is very ``human-looking'' walking, but the remarkable elegance and
+Based on McGeer's original ideas, researchers have constructed minimalist bipeds
+which achieve walking by injecting and removing small amounts of energy as described in \cite{Collins2005}
+%
+The result is ``human-looking'' walking, but the remarkable elegance and
 economy of these walkers comes at the cost of poor ability in achieving tasks
 other than walking at a fixed speed;
 %
 they cannot climb stairs, pause, turn or run.
 %
 
-Additional work was later done to analyze the properties of passive dynamics
-walkers, for instance, in \cite{Espiau1994, Garcia1998, Borzova2004}.
+More in-depth work was later done to analyze the properties of passive walkers,
+for instance, in \cite{Espiau1994, Garcia1998, Borzova2004}.
 %
-In terms of control, Spong \cite{Spong1999} looked at passive dynamic walking with
-energy-based methods to design passivity-based control strategies such as
-controlled symmetries, introduced in \cite{Spong2005}, which was later used to
-obtain anthropomorphic foot action in \cite{Sinnet2009, Sinnet2009a} and recently
+Spong \cite{Spong1999} looked at passive dynamic walking with energy-based
+methods to design passivity-based control strategies such as controlled
+symmetries, introduced in \cite{Spong2005}, which was later used to obtain
+anthropomorphic foot action in \cite{Sinnet2009, Sinnet2009a} and recently
 extended to underactuated bipeds in \cite{Hu2011}.
-% A thorough analysis of the compass-gait biped and its stability properties was
-% later provided by Espiau and Goswami \cite{ESGO94}.
-% don't really need the above sentence
-Other important contributions to passive dynamic walking are given in
-\cite{Kuo1999, Kuo2002, Anderson2005, Wisse2007}.
 %
+Spong's work on energy shaping methods such as controlled symmetries provides a
+starting point for the methods provided in this thesis.
+Other important contributions to passive dynamic walking are given in
+\cite{Anderson2005, Kuo1999, Kuo2002, Wisse2007}.
 
-%\subsection{Foot Placement}
+
 \subsection{Quadratic Programs and Lyapunov Funnels}
 
-%\textbf{JWG: disucss how early implementations used offline trajectory
-%computation, while more recently, on-line planning via an linear inverted
-%pendulum model and a QP are used (Weiber)?}
-
-Early implementations of ZMP-based controllers used offline trajectory
+Early implementations of ZMP-based controllers used off-line trajectory
 optimization to generate center of mass trajectories on the basis of the LIPM
-and generally ignored impact dynamics in the control design. Modern methods have
-achieved improved control by formulating the control problem as a {\em quadratic
-  program} (QP), allowing gait replanning on the fly and improving stability
-properties \cite{Kudoh2002, Stephens2010, Herdt2010}.
+and generally ignored impact dynamics in the control design.
+%
+Modern methods have achieved improved control by formulating the control problem
+as a {\em quadratic  program} (QP), allowing gait replanning on the fly and
+improving stability properties \cite{Kudoh2002, Stephens2010, Herdt2010}.
 %
 
 Similarly, sums of squares methods, also formulate trajectory generation as a
