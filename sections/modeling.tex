@@ -13,7 +13,7 @@ impacts.
 The combination of continuous and discrete dynamics motivates the use of hybrid
 systems methods for modeling and controlling bipeds.
 %
-This chapter presents a development of modeling for hybrid systems which is
+This section presents a development of modeling for hybrid systems which is
 sufficient to understand the theory and examples presented.
 
 
@@ -131,8 +131,8 @@ compactly:
   \HCS = (\D, \, \Guard, \, \U, \, \Delta, \, \xf, \, \xg).
 \end{align*}
 
-Using these basic formalisms of hybrid systems, the next three sections describe
-how to construct hybrid systems for mechanical systems.
+Using these basic formalisms of hybrid systems, the next three subsections
+describe how to construct hybrid systems for mechanical systems.
 
 
 \section{Solutions to Hybrid Systems} \label{sec:hsys-sol}
@@ -320,9 +320,9 @@ In order to understand the theory presented in this work, it is necessary to
 understand not only the stability of hybrid systems but also the stability of
 continuous systems and discrete systems which partly comprise hybrid systems.
 %
-This section presents formal definitions of stability (based on
-those found in \cite[Ch. 4]{Khalil2002}) which are key to understanding the
-results presented in this work.
+This subsection presents formal definitions of stability (based on those found
+in \cite[Ch. 4]{Khalil2002}) which are key to understanding the results
+presented in this work.
 %
 For more on stability, see, e.g., \cite{Khalil2002, Teschl2012,
   Vidyasagar1993}.
@@ -529,8 +529,8 @@ This minimal set is referred to as the {\em generalized coordinates}.
 %Moreover, as complexity grows, it becomes is increasingly difficult to glean
 %any useful bit of intuition from examining the expressions in symbolic form.
 
-With the basic understanding provided in the previous section, some additional
-details will now be provided.
+With the basic understanding provided in the previous subsection, some
+additional details will now be provided.
 %
 Begin with a bipedal robot in either two or three dimensions---the discussions
 herein are applicable to either case.
@@ -683,7 +683,7 @@ impulsive constraining forces.
 For these reasons and others, it is important to consider a more generalized
 model that, at the very least, includes reaction forces at the feet.
 
-This section will show how constraints can be added to the standard robotic
+This subsection will show how constraints can be added to the standard robotic
 model.
 %
 There are two different types of constraints which should be distinguished; see
@@ -773,7 +773,7 @@ The dynamic model \eqref{eq:eom-lambda} corresponds to the control system $(\xf,
     \end{array}\right).
 \end{align}
 
-Using the developments in this section, the next section will show how to treat
+Using the developments in this subsection, the next subsection will show how to treat
 impacts which require constraining forces.
 
 
@@ -903,7 +903,7 @@ A large portion of the research on bipedal robotic walking focuses on models of
 robots with point feet or flat-foot walking.
 %
 This results in a simple hybrid model with a single domain which can be treated
-using the methods described earlier in this chapter.
+using the methods described earlier in this section.
 %
 This idealization leads to walking gaits which lack some of the distinguishing
 characteristics of human locomotion.
@@ -932,7 +932,7 @@ alter the velocity of the system.
 %This combination of continuous and discrete phenomena is the fundamental
 %concept underlying hybrid systems.
 
-In this section, a formalism for multi-domain hybrid systems is introduced and a
+In this subsection, a formalism for multi-domain hybrid systems is introduced and a
 discussion is given explaining how the equations of motion of a robot together
 with a temporal ordering of discrete events, i.e., change in contact points,
 completely determine the hybrid model of a system.
@@ -1094,8 +1094,8 @@ formulating these particular spaces and will be clarified further in
 
 \subsection{Obtaining Hybrid Systems from Constraints}
 
-The remainder of this section is devoted to discussing how the Lagrangian for a
-biped, together with a domain breakdown (which determines the constraints at
+The remainder of this subsection is devoted to discussing how the Lagrangian for
+a biped, together with a domain breakdown (which determines the constraints at
 each vertex of the associated cycle), allows one to explicitly construct a
 hybrid model of the system.
 %

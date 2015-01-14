@@ -1,6 +1,6 @@
 \chapter{\uppercase{Literature Overview}}
 
-This chapter describes the literature which pertains to bipedal robotic walking,
+This section describes the literature which pertains to bipedal robotic walking,
 reviewing work from different fields and perspectives such as biomechanics and
 dynamical systems.
 %
@@ -13,7 +13,7 @@ The exposition is divided by field:
 research on the stability of dynamical systems is discussed first followed by
 modeling of hybrid systems.
 %
-The chapter ends with a review of bipedal robots and control methods from the
+The section ends with a review of bipedal robots and control methods from the
 literature.
 
 \section{Stability of Dynamical Systems} \label{sec:literature-stability}
@@ -202,23 +202,25 @@ Hooman \cite{Hooman1993} and Benveniste, Borgne and Guernic \cite{Benveniste1993
   \centering
   \def\svgwidth{1.0\columnwidth}
   \input{figs/biped-models-2.eps_latex}
-  \caption[Four low-dimensional models]{%
-    Low-dimensional models are often as approximations of walking robots.
-    %
+  \caption[Example low-dimensional models.]{%
+    Example low-dimensional models.
+    % 
+    Such models are often used as approximations of walking robots.
+    % 
     From left to right:
-    %
+    % 
     Linear Inverted Pendulum, Inverted Pendulum with Flywheel, Spring-Loaded
     Inverted Pendulum, Compass-Gait Biped
     % 
     the Linear Inverted Pendulum Model (LIPM) assumes a lumped center-of-mass
     with constant height and massless legs;
-    %
+    % 
     the Inverted Pendulum with Flywheel (IPF) adds a flywheel at the CoM to
     model angular momentum and allows for varying height;
-    %
+    % 
     the Spring-Loaded Inverted Pendulum (SLIP) considers a spring to model the
     legs as massless pogo sticks;
-    %
+    % 
     and the Compass-Gait Biped (CG) is essentially a double pendulum with
     lumped masses on the stance and swing legs and one at the hip.}
   \label{fig:biped-models}
@@ -227,7 +229,7 @@ Hooman \cite{Hooman1993} and Benveniste, Borgne and Guernic \cite{Benveniste1993
 Bipedal robotics has been approaches in numerous different ways from the
 analysis of passive walkers based on simple mechanical design principles to
 advanced multifunctional humanoids.
-%
+% 
 Control designs have been proposed based on models which vary from the
 low-dimensional representations shown in \figref{fig:biped-models} to
 higher-dimensional dynamic models as developed in \chapref{ch:modeling}.
@@ -236,7 +238,7 @@ While simpler models offer the benefits of faster control law computation and
 easier-to-understand analyses, more complex models can provide tighter control
 and formal guarantees on stability.
 %
-In this section, some well-known approaches to bipedal gait generation
+In this subsection, some well-known approaches to bipedal gait generation
 are discussed emphasizing the effect of modeling on control design.
 %
 Further information is available in \cite{Chevallereau2009, Full1999,

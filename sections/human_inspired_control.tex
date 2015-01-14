@@ -12,11 +12,11 @@ hybrid human--robot simulations of a human with a transfemoral prosthesis
 By combining human-inspired control with functional Routhian reduction,
 three-dimensional walking was also achieved \cite{Sinnet2012a, Sinnet2012}.
 %
-This chapter discusses the basics of human-inspired control method.
+This section discusses the basics of human-inspired control method.
 
 \section{Domain Breakdown from Human Data} \label{sec:domainbreakdown}
 
-This section shows how to determine the domain breakdown for human walking.
+This subsection shows how to determine the domain breakdown for human walking.
 %
 The procedure provided is a data-driven approach based on a prior experiment
 involving human test subjects documented in \cite{Ames2011a}.
@@ -209,9 +209,9 @@ It is assumed that $k_{c}^{\ell} < k_{c}^{s}$.
 If this is not the case, then $f_{c}$ would consist of the ``simplest''
 function, followed by a constant, followed by the ``simplest'' function.
 %
-After the construction of the $f_{c}$ functions in this chapter, the optimization
-parameters are supressed---i.e., $f_{c}(t) = f_{c}(t, k_{c}^{\ell}, k_{c}^{s},
-a_{c})$---but it is assumed they have been determined.
+After the construction of the $f_{c}$ functions in this section, the
+optimization parameters are supressed---i.e., $f_{c}(t) = f_{c}(t, k_{c}^{\ell},
+k_{c}^{s}, a_{c})$---but it is assumed they have been determined.
 %
 To calculate the event times as they best fit the data, one must solve the
 following optimization problem
@@ -387,7 +387,7 @@ similar to previous studies \cite{Ackermann2007}.
 
 \section{Human-Inspired Controller Design}
 
-The goal of this section is to find functions that are ``canonical'' to human
+The goal of this subsection is to find functions that are ``canonical'' to human
 walking, i.e., outputs on the configuration of the human, such as the angle of
 the knee, that seem to be intrinsic to walking.
 %
@@ -1095,8 +1095,9 @@ walking available online.\fnref{fn:rwsinnet}
 In general, autonomous control is preferred over non-autonomous, time-based
 control as autonomous controllers tend to be more robust.
 %
-In this section, a method is given which shows how to remove the time-dependence
-from the ``canonical'' functions described in the previous section.
+In this subsection, a method is given which shows how to remove the
+time-dependence from the ``canonical'' functions described in the previous
+subsection.
 %
 A common trick in the literature \cite{Westervelt2007} for converting time-based
 trajectories into state-based trajectories is to parameterize time by a
@@ -1121,7 +1122,7 @@ this results in an autonomous feedback control strategy.
 
 \subsection{State-Based Trajectory Parameterization}
 
-Recall that the functions discussed in the previous section are directly
+Recall that the functions discussed in the previous subsection are directly
 dependent on time, i.e., they can be written $y_{\vo}^{d}\argt$.
 %
 Furthermore, these functions are all defined on some interval $[t^{-} = 0, t^{+}
@@ -1168,7 +1169,7 @@ should be the average velocity of the hip and $p_{\mathit{hip}}^{x}\argsqm$ shou
 be the $x$-position of the hip at the beginning of a step).
 %
 In this work, these values were found by examining the simulation of the
-time-based controller from the previous section.
+time-based controller from the previous subsection.
 %
 Specifically, a good choice for $v_{\mathit{hip}}^{x}$ is the parameter for the
 hip velocity constraint, $A_{3,1}$ (found in \tabref{tab:funcparam}).
