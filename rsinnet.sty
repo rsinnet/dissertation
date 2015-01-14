@@ -26,6 +26,9 @@
 \newcommand{\rmkref}[1]{Remark~\ref{#1}}
 \newcommand{\fnref}[1]{\textsuperscript{\ref{#1}}}
 
+% Footnote without a mark
+\def\blfootnote{\gdef\@thefnmark{}\@footnotetext}
+
 % Math operations
 \DeclareMathOperator*{\argmin}{arg\,min}
 \DeclareMathOperator*{\lambdamax}{\lambda_{\mathrm{max}}}
@@ -500,10 +503,10 @@
 
 \usepackage[labelformat=simple]{subfig}
 \renewcommand{\thesubfigure}{(\alph{subfigure})}
-\makeatletter
+
 \renewcommand{\p@subfigure}{\thefigure}
 \renewcommand\@biblabel[1]{#1.}
-\makeatother
+
 
 % From IFAC
 \newcommand{\csx}{\cs\xspace}

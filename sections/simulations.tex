@@ -1,4 +1,16 @@
-\chapter{\uppercase{Simulation Results}} \label{chap:simulations}
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\chapter[\uppercase{Simulation Results}]{%  
+  \uppercase{Simulation Results}%
+  \footnote{%
+    A portion of this section is reprinted from
+    J.~W. Grizzle, Christine Chevallereau, R.~W.
+    Sinnet and A~.D. Ames, ``Models, feedback
+    control, and open problems of 3D bipedal
+    robotic walking,'' {\em Automatica}, vol. 50,
+    no. 8, pp.~1955--1988, 2014, with permission
+    from Elsevier.}%
+} \label{chap:simulations}
 
 This section provides example systems to help provide intuition into energy
 shaping procedures and to demonstrate the outcome of applying energy shaping to
@@ -567,12 +579,7 @@ gait.
 
 This section describes simulations of the seven-link biped shown in
 \figref{fig:7link-model} with parameters in
-\tabref{tab:7link-model-parameters}.\footnote{%
-  %
-  Reprinted from Automatica, Volume 50, Issue 8, Jessy W. Grizzle, Christine
-  Chevallereau, Ryan W. Sinnet and Aaron D. Ames,  {\em Models, feedback
-    control, and open problems of 3D bipedal robotic walking}, pp.~1955--1988,
-  2014, with permission from Elsevier.}
+\tabref{tab:7link-model-parameters}.
 
 \subsection{Domain Structure}
 
@@ -1024,3 +1031,5 @@ dynamics can provide to a biped.
     $\Ec - \Eref$.}
   \label{fig:7link_energy_comparison}
 \end{figure}
+
+\renewcommand*{\thefootnote}{\arabic{footnote}}
