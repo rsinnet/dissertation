@@ -32,16 +32,16 @@ $(PROJNAME).pdf: $(PROJNAME).ps
 $(PROJNAME).ps: $(PROJNAME).dvi
 	dvips $<
 
-$(PROJNAME).dvi: $(PROJNAME).aux
-	$(LATEX_CMD) $(basename $<)
-	$(LATEX_CMD) $(basename $<)
-
-$(PROJNAME).aux: $(PROJNAME).tex abstract.tex acknowledgements.tex \
+$(PROJNAME).dvi: $(PROJNAME).tex abstract.tex acknowledgements.tex \
 appendices.tex appendix1.tex appendix2.tex bibliography.tex dedication.tex \
 lists.tex nomenclature.tex titlepage.tex tamuconfig.sty rsinnet.sty \
 sections/*.tex inc/*.tex myrefs.bib $(EPS_LATEX) $(EPS_NO_LATEX)
-	$(LATEX_CMD) $<
+	$(LATEX_CMD) $(basename $<)
 	bibtex $(basename $<)
+	$(LATEX_CMD) $(basename $<)
+	$(LATEX_CMD) $(basename $<)
+	$(LATEX_CMD) $(basename $<)
+
 
 myrefs.bib: refs.bib format_bibtex_months
 	./format_bibtex_months refs.bib myrefs.bib
